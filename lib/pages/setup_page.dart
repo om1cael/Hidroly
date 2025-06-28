@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hidroly/widgets/setup/setup_header.dart';
 
 class SetupPage extends StatefulWidget {
   const SetupPage({super.key});
@@ -16,10 +17,14 @@ class _SetupPageState extends State<SetupPage> {
       ),
       backgroundColor: Color(0xff242530),
       body: Center(
-        child: Column(
-          children: [
-            
-          ],
+        child: Padding(
+          padding: const EdgeInsets.only(left: 20.0, right: 20),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SetupHeader(),
+            ],
+          ),
         ),
       ),
     );
