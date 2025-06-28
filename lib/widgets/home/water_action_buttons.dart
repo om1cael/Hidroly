@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:hidroly/controller/home_controller.dart';
+import 'package:hidroly/database/database_helper.dart';
+import 'package:hidroly/model/User.dart';
 import 'package:hidroly/model/water_button.dart';
 
 class WaterActionButtons extends StatelessWidget {
+  HomeController homeController;
+  final VoidCallback onUpdate;
 
   List<WaterButton> get defaultButtons => [
     WaterButton(amount: 250),
@@ -20,7 +25,9 @@ class WaterActionButtons extends StatelessWidget {
 
   WaterActionButtons({
     super.key,
+    required this.homeController,
     required this.customCups,
+    required this.onUpdate,
   });
 
   @override
@@ -35,8 +42,15 @@ class WaterActionButtons extends StatelessWidget {
           var button = allButtons[index];
 
           return ElevatedButton.icon(
-            onPressed: () {
-              if(button.isCustomOption) print('custom button');
+            onPressed: () async {
+              if(button.isCustomOption) {
+                return;
+              }
+
+              User currentUser = homeController.user!;
+              User updatedUser = User(id: currentUser.id, dailyGoal: currentUser.dailyGoal, currentAmount: currentUser.currentAmount + button.amount);
+              await homeController.updateUser(updatedUser);
+              onUpdate();
             },
             style: ElevatedButton.styleFrom(
               backgroundColor: Color(0xff31333A),

@@ -3,11 +3,19 @@ import 'package:hidroly/model/User.dart';
 import 'package:hidroly/model/water_button.dart';
 
 class HomeController {
-  Future<User?> loadUser() async {
-    return await DatabaseHelper.instance.getUser(1);
+  User? user;
+  List<WaterButton>? customCups = [];
+
+  Future<void> loadUser() async {
+    user = await DatabaseHelper.instance.getUser(1);
+  }
+  
+  Future<void> updateUser(User updatedUser) async {
+    await DatabaseHelper.instance.updateUser(updatedUser);
+    await loadUser();
   }
 
-  Future<List<WaterButton>> loadCustomCups() async {
-    return await DatabaseHelper.instance.getAllCustomCups();
+  Future<void> loadCustomCups() async {
+    customCups = await DatabaseHelper.instance.getAllCustomCups();
   }
 }

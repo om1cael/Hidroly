@@ -41,6 +41,16 @@ class DatabaseHelper {
     );
   }
 
+  Future<void> updateUser(User user) async {
+    final db = await database;
+    await db.update(
+      'users', 
+      user.toMap(),
+      where: 'id = ?',
+      whereArgs: [user.id] 
+    );
+  }
+
   Future<User?> getUser(int userId) async {
     final db = await database;
     final List<Map<String, Object?>> usersList = await db.query('users', where: 'id = ?', whereArgs: [userId], limit: 1);

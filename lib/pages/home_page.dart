@@ -16,8 +16,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   HomeController homeController = HomeController();
-  User? user;
-  List<WaterButton>? customCups = [];
 
   @override
   void initState() {
@@ -28,7 +26,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    if(user == null) {
+    if(homeController.user == null) {
       return Scaffold(
         backgroundColor: Color(0xff1E1E1E),
         body: Center(child: CircularProgressIndicator(),),
@@ -44,8 +42,12 @@ class _HomePageState extends State<HomePage> {
           spacing: 50,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            WaterProgressCircle(user: user!,),
-            WaterActionButtons(customCups: customCups ?? [],)
+            WaterProgressCircle(user: homeController.user!,),
+            WaterActionButtons(
+              homeController: homeController,
+              customCups: homeController.customCups ?? [],
+              onUpdate: () => setState(() {}),
+            )
           ],
         ),
       ),
@@ -75,9 +77,8 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _loadUser() async {
-    user = await homeController.loadUser();
-    if(user == null) {
-      if(!mounted) return;
+    await homeController.loadUser();
+    if(homeController.user == null) {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => SetupPage()),
@@ -89,7 +90,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _loadCustomCups() async {
-    customCups = await homeController.loadCustomCups();
+    await homeController.loadCustomCups();
     setState(() {});
   }
 }
