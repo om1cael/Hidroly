@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class NumberInputField extends StatelessWidget {
+class FormNumberInputField extends StatelessWidget {
   final String label;
   final TextEditingController controller;
   String? Function(String?)? validator;
 
-  NumberInputField({
+  FormNumberInputField({
     super.key,
     required this.label,
     required this.controller,
@@ -18,6 +18,7 @@ class NumberInputField extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
       spacing: 8,
       children: [
         Text(

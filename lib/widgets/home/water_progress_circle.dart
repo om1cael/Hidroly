@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:hidroly/controller/home_controller.dart';
+import 'package:hidroly/model/User.dart';
 
 class WaterProgressCircle extends StatelessWidget {
-  const WaterProgressCircle({
+  User user;
+
+  WaterProgressCircle({
     super.key,
+    required this.user,
   });
 
   @override
@@ -14,7 +19,7 @@ class WaterProgressCircle extends StatelessWidget {
             width: 280,
             height: 280,
             child: CircularProgressIndicator(
-              value: 1,
+              value: (user.currentAmount / user.dailyGoal).clamp(0, 1),
               backgroundColor: Color(0xff31333A),
               strokeWidth: 20,
               strokeCap: StrokeCap.round,
@@ -24,7 +29,7 @@ class WaterProgressCircle extends StatelessWidget {
         Column(
           children: [
             Text(
-              '2.000ml',
+              '${user.currentAmount}ml',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 40,
@@ -32,7 +37,7 @@ class WaterProgressCircle extends StatelessWidget {
               ),
             ),
             Text(
-              'of 2.000ml',
+              'of ${user.dailyGoal}ml',
               style: TextStyle(
                 fontWeight: FontWeight.w300,
                 fontSize: 20,

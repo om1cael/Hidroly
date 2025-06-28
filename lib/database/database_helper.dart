@@ -1,4 +1,5 @@
 import 'package:hidroly/model/User.dart';
+import 'package:hidroly/model/water_button.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -19,9 +20,12 @@ class DatabaseHelper {
     String path = join(await getDatabasesPath(), 'hidroly.db');
     return await openDatabase(
       path,
-      onCreate: (db, version) {
-        return db.execute(
+      onCreate: (db, version) async {
+        await db.execute(
           'CREATE TABLE users(id INTEGER PRIMARY KEY, dailyGoal INTEGER, currentAmount INTEGER)'
+        );
+        await db.execute(
+          'CREATE TABLE custom_cups(id INTEGER PRIMARY KEY AUTOINCREMENT, amount INTEGER NOT NULL)'
         );
       },
       version: 1,
@@ -34,6 +38,16 @@ class DatabaseHelper {
       'users',
       user.toMap(),
       conflictAlgorithm: ConflictAlgorithm.replace,
+    );
+  }
+
+  Future<void> updateUser(User user) async {
+    final db = await database;
+    await db.update(
+      'users', 
+      user.toMap(),
+      where: 'id = ?',
+      whereArgs: [user.id] 
     );
   }
 
@@ -51,5 +65,26 @@ class DatabaseHelper {
     );
 
     return user;
+  }
+
+  Future<void> createCustomCup(WaterButton waterButton) async {
+    final db = await database;
+    await db.insert(
+      'custom_cups', 
+      waterButton.toMap(),
+      conflictAlgorithm: ConflictAlgorithm.replace,
+    );
+  }
+
+  Future<List<WaterButton>> getAllCustomCups() async {
+    final db = await database;
+    List<Map<String, Object?>> customCups = await db.query(
+      'custom_cups'
+    );
+
+    return [
+      for(final { 'id': id as int, 'amount': amount as int } in customCups)
+        WaterButton(id: id, amount: amount, isCustomOption: false),
+    ];
   }
 }

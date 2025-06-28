@@ -1,8 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:hidroly/controller/home_controller.dart';
+import 'package:hidroly/database/database_helper.dart';
+import 'package:hidroly/model/User.dart';
+import 'package:hidroly/model/water_button.dart';
+import 'package:hidroly/widgets/input/form_number_input_field.dart';
 
 class WaterActionButtons extends StatelessWidget {
-  const WaterActionButtons({
+  HomeController homeController;
+  final VoidCallback onUpdate;
+
+  List<WaterButton> get defaultButtons => [
+    WaterButton(amount: 250),
+    WaterButton(amount: 350)
+  ];
+
+  List<WaterButton> customCups;
+
+  WaterButton get customAddButton => WaterButton(amount: 0, isCustomOption: true);
+
+  List<WaterButton> get allButtons => [
+    ...defaultButtons,
+    ...customCups,
+    customAddButton,
+  ];
+
+  WaterActionButtons({
     super.key,
+    required this.homeController,
+    required this.customCups,
+    required this.onUpdate,
   });
 
   @override
@@ -14,8 +40,17 @@ class WaterActionButtons extends StatelessWidget {
         shrinkWrap: true,
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
+          var button = allButtons[index];
+
           return ElevatedButton.icon(
-            onPressed: () => {},
+            onPressed: () async {
+              if(button.isCustomOption) {
+                _showCustomCupPopUp(context);
+                return;
+              }
+
+              await _updateWaterIntake(button);
+            },
             style: ElevatedButton.styleFrom(
               backgroundColor: Color(0xff31333A),
               shape: RoundedRectangleBorder(
@@ -23,11 +58,13 @@ class WaterActionButtons extends StatelessWidget {
               ),
             ),
             icon: Icon(
-              Icons.add,
+              button.isCustomOption == false 
+              ? Icons.ac_unit : Icons.add,
               color: Color(0xffF9F9F9),
             ),
             label: Text(
-              '300ml',
+              button.isCustomOption == false 
+              ? '${button.amount}ml' : 'Custom',
               style: TextStyle(
                 color: Color(0xffF9F9F9),
               ),
@@ -35,8 +72,69 @@ class WaterActionButtons extends StatelessWidget {
           );
         }, 
         separatorBuilder: (context, index) => SizedBox(width: 10,), 
-        itemCount: 3
+        itemCount: allButtons.length
       ),
     );
+  }
+
+  void _showCustomCupPopUp(context) {
+    showDialog(
+      context: context, 
+      builder: (context) => AlertDialog(
+        title: Text(
+          'Add Custom Cup',
+          style: TextStyle(
+            color: Color(0xffBEC0C5),
+          ),
+        ),
+        content: Form(
+          key: homeController.formKey,
+          child: FormNumberInputField(
+            label: 'Amount', 
+            controller: homeController.customCupAmountController, 
+            validator: (value) {
+              int? amount = int.tryParse(value ?? '');
+              if(amount == null || amount <= 0) return 'Invalid amount.';
+              return null;
+            }
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () async {
+              await homeController.onSubmitCustomCup(context);
+              onUpdate();
+            }, 
+            child: Text(
+              'Add',
+              style: TextStyle(
+                color: Color(0xffBEC0C5)
+              ),
+            ),
+          ),
+          TextButton(
+            onPressed: () => Navigator.pop(context), 
+            child: Text(
+              'Cancel',
+              style: TextStyle(
+                color: Color(0xffBEC0C5)
+              ),
+            ),
+          ),
+        ],
+        backgroundColor: Color(0xff1E1E1E),
+      )
+    );
+  }
+
+  Future<void> _updateWaterIntake(WaterButton button) async {
+    User currentUser = homeController.user!;
+    User updatedUser = User(
+      id: currentUser.id, 
+      dailyGoal: currentUser.dailyGoal, 
+      currentAmount: currentUser.currentAmount + button.amount
+    );
+    await homeController.updateUser(updatedUser);
+    onUpdate();
   }
 }
