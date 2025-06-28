@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:hidroly/controller/setup_controller.dart';
 import 'package:hidroly/widgets/setup/setup_header.dart';
+import 'package:hidroly/widgets/setup/setup_interactable.dart';
 
 class SetupPage extends StatefulWidget {
   const SetupPage({super.key});
@@ -9,23 +11,49 @@ class SetupPage extends StatefulWidget {
 }
 
 class _SetupPageState extends State<SetupPage> {
+  SetupController setupController = SetupController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       appBar: AppBar(
         backgroundColor: Color(0xff242530),
       ),
       backgroundColor: Color(0xff242530),
       body: Center(
-        child: Padding(
-          padding: const EdgeInsets.only(left: 20.0, right: 20),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SetupHeader(),
-            ],
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.only(left: 30.0, right: 30.0, bottom: 64),
+            child: Form(
+              key: setupController.formKey,
+              child: Column(
+                children: [
+                  SetupHeader(),
+                  SetupInteractable(setupController: setupController ,),
+                  Text(
+                    'Your data is stored on your device.',
+                    style: TextStyle(
+                      color: Color(0xffBEC0C5),
+                      fontWeight: FontWeight.w300,
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ),
         ),
+      ),
+      floatingActionButton: IconButton.filled(
+        onPressed: () => setupController.onSubmit(context),
+        icon: Icon(
+          Icons.arrow_forward,
+          color: Color(0xff1B1E26),
+        ),
+        style: IconButton.styleFrom(
+          backgroundColor: Color(0xffF9F9F9)
+        ),
+        padding: EdgeInsets.all(18),
       ),
     );
   }
