@@ -1,6 +1,6 @@
 class WaterButton {
   final int? id;
-  final int   amount;
+  final int amount;
   final bool isCustomOption;
 
   const WaterButton({
@@ -14,7 +14,7 @@ class WaterButton {
     if(id != null) {
       map['id'] = id as int;
     };
-    
+
     return map;
   }
 }

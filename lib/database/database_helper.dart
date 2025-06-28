@@ -1,4 +1,5 @@
 import 'package:hidroly/model/User.dart';
+import 'package:hidroly/model/water_button.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -54,5 +55,26 @@ class DatabaseHelper {
     );
 
     return user;
+  }
+
+  Future<void> createCustomCup(WaterButton waterButton) async {
+    final db = await database;
+    await db.insert(
+      'custom_cups', 
+      waterButton.toMap(),
+      conflictAlgorithm: ConflictAlgorithm.replace,
+    );
+  }
+
+  Future<List<WaterButton>> getAllCustomCups() async {
+    final db = await database;
+    List<Map<String, Object?>> customCups = await db.query(
+      'custom_cups'
+    );
+
+    return [
+      for(final { 'id': id as int, 'amount': amount as int } in customCups)
+        WaterButton(id: id, amount: amount, isCustomOption: false),
+    ];
   }
 }
