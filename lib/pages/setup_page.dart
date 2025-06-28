@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:hidroly/widgets/input/number_input_field.dart';
 import 'package:hidroly/widgets/setup/setup_header.dart';
+import 'package:hidroly/widgets/setup/setup_interactable.dart';
 
 class SetupPage extends StatefulWidget {
   const SetupPage({super.key});
@@ -14,6 +13,7 @@ class _SetupPageState extends State<SetupPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       appBar: AppBar(
         backgroundColor: Color(0xff242530),
       ),
@@ -21,24 +21,33 @@ class _SetupPageState extends State<SetupPage> {
       body: Center(
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.only(left: 30.0, right: 30.0),
+            padding: const EdgeInsets.only(left: 30.0, right: 30.0, bottom: 64),
             child: Column(
               children: [
                 SetupHeader(),
-                Padding(
-                  padding: const EdgeInsets.all(30.0),
-                  child: Column(
-                    spacing: 10,
-                    children: [
-                      NumberInputField(label: 'Your age'),
-                      NumberInputField(label: 'Your weight'),
-                    ],
+                SetupInteractable(),
+                Text(
+                  'Your data is stored on your device.',
+                  style: TextStyle(
+                    color: Color(0xffBEC0C5),
+                    fontWeight: FontWeight.w300,
                   ),
                 ),
               ],
             ),
           ),
         ),
+      ),
+      floatingActionButton: IconButton.filled(
+        onPressed: () {}, 
+        icon: Icon(
+          Icons.arrow_forward,
+          color: Color(0xff1B1E26),
+        ),
+        style: IconButton.styleFrom(
+          backgroundColor: Color(0xffF9F9F9)
+        ),
+        padding: EdgeInsets.all(18),
       ),
     );
   }
