@@ -3,6 +3,7 @@ import 'package:hidroly/controller/home_controller.dart';
 import 'package:hidroly/database/database_helper.dart';
 import 'package:hidroly/model/User.dart';
 import 'package:hidroly/model/water_button.dart';
+import 'package:hidroly/widgets/input/form_number_input_field.dart';
 
 class WaterActionButtons extends StatelessWidget {
   HomeController homeController;
@@ -44,13 +45,11 @@ class WaterActionButtons extends StatelessWidget {
           return ElevatedButton.icon(
             onPressed: () async {
               if(button.isCustomOption) {
+                _showCustomCupPopUp(context);
                 return;
               }
 
-              User currentUser = homeController.user!;
-              User updatedUser = User(id: currentUser.id, dailyGoal: currentUser.dailyGoal, currentAmount: currentUser.currentAmount + button.amount);
-              await homeController.updateUser(updatedUser);
-              onUpdate();
+              await _updateWaterIntake(button);
             },
             style: ElevatedButton.styleFrom(
               backgroundColor: Color(0xff31333A),
@@ -76,5 +75,66 @@ class WaterActionButtons extends StatelessWidget {
         itemCount: allButtons.length
       ),
     );
+  }
+
+  void _showCustomCupPopUp(context) {
+    showDialog(
+      context: context, 
+      builder: (context) => AlertDialog(
+        title: Text(
+          'Add Custom Cup',
+          style: TextStyle(
+            color: Color(0xffBEC0C5),
+          ),
+        ),
+        content: Form(
+          key: homeController.formKey,
+          child: FormNumberInputField(
+            label: 'Amount', 
+            controller: homeController.customCupAmountController, 
+            validator: (value) {
+              int? amount = int.tryParse(value ?? '');
+              if(amount == null || amount <= 0) return 'Invalid amount.';
+              return null;
+            }
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () async {
+              await homeController.onSubmitCustomCup(context);
+              onUpdate();
+            }, 
+            child: Text(
+              'Add',
+              style: TextStyle(
+                color: Color(0xffBEC0C5)
+              ),
+            ),
+          ),
+          TextButton(
+            onPressed: () => Navigator.pop(context), 
+            child: Text(
+              'Cancel',
+              style: TextStyle(
+                color: Color(0xffBEC0C5)
+              ),
+            ),
+          ),
+        ],
+        backgroundColor: Color(0xff1E1E1E),
+      )
+    );
+  }
+
+  Future<void> _updateWaterIntake(WaterButton button) async {
+    User currentUser = homeController.user!;
+    User updatedUser = User(
+      id: currentUser.id, 
+      dailyGoal: currentUser.dailyGoal, 
+      currentAmount: currentUser.currentAmount + button.amount
+    );
+    await homeController.updateUser(updatedUser);
+    onUpdate();
   }
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hidroly/controller/setup_controller.dart';
-import 'package:hidroly/widgets/input/number_input_field.dart';
+import 'package:hidroly/widgets/input/form_number_input_field.dart';
 
 class SetupInteractable extends StatelessWidget {
   final SetupController setupController;
@@ -17,7 +17,7 @@ class SetupInteractable extends StatelessWidget {
       child: Column(
         spacing: 10,
         children: [
-          NumberInputField(
+          FormNumberInputField(
             controller: setupController.ageController, 
             label: 'Your age',
             validator: (value) {
@@ -26,7 +26,7 @@ class SetupInteractable extends StatelessWidget {
               return null;
             },
           ),
-          NumberInputField(
+          FormNumberInputField(
             controller: setupController.weightController, 
             label: 'Your weight',
             validator: (value) {
