@@ -5,7 +5,7 @@ import 'package:hidroly/widgets/input/number_input_field.dart';
 class SetupInteractable extends StatelessWidget {
   final SetupController setupController;
 
-  SetupInteractable({
+  const SetupInteractable({
     super.key,
     required this.setupController,
   });
