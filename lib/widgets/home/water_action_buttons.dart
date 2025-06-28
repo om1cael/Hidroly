@@ -1,6 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:hidroly/model/water_button.dart';
 
 class WaterActionButtons extends StatelessWidget {
+
+  List<WaterButton> get defaultButtons => [
+    WaterButton(amount: 250),
+    WaterButton(amount: 350)
+  ];
+
+  WaterButton get customAddButton => WaterButton(amount: 0, isCustomOption: true);
+
+  List<WaterButton> get allButtons => [
+    ...defaultButtons,
+    customAddButton,
+  ];
+
   const WaterActionButtons({
     super.key,
   });
@@ -14,8 +28,12 @@ class WaterActionButtons extends StatelessWidget {
         shrinkWrap: true,
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
+          var button = allButtons[index];
+
           return ElevatedButton.icon(
-            onPressed: () => {},
+            onPressed: () {
+              if(button.isCustomOption) print('custom button');
+            },
             style: ElevatedButton.styleFrom(
               backgroundColor: Color(0xff31333A),
               shape: RoundedRectangleBorder(
@@ -23,11 +41,13 @@ class WaterActionButtons extends StatelessWidget {
               ),
             ),
             icon: Icon(
-              Icons.add,
+              button.isCustomOption == false 
+              ? Icons.ac_unit : Icons.add,
               color: Color(0xffF9F9F9),
             ),
             label: Text(
-              '300ml',
+              button.isCustomOption == false 
+              ? '${allButtons[index].amount}ml' : 'Custom',
               style: TextStyle(
                 color: Color(0xffF9F9F9),
               ),
@@ -35,7 +55,7 @@ class WaterActionButtons extends StatelessWidget {
           );
         }, 
         separatorBuilder: (context, index) => SizedBox(width: 10,), 
-        itemCount: 3
+        itemCount: allButtons.length
       ),
     );
   }
