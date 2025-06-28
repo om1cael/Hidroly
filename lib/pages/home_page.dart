@@ -11,7 +11,30 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(child: Text('Hello World'),),
+      appBar: appBar(),
+      backgroundColor: Color(0xff1E1E1E),
+    );
+  }
+
+  AppBar appBar() {
+    return AppBar(
+      title: Text(
+        'Today',
+        style: TextStyle(
+          color: Color(0xffF9F9F9),
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+      actions: [
+        IconButton(
+          onPressed: () {}, 
+          icon: Icon(
+            Icons.settings, 
+            color: Color(0xffF9F9F9),
+          ),
+        )
+      ],
+      backgroundColor: Color(0xff1E1E1E),
     );
   }
 }
