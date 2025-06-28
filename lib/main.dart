@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hidroly/pages/home_page.dart';
+import 'package:hidroly/pages/setup_page.dart';
 
 void main() {
   runApp(const MainApp());
@@ -14,7 +15,7 @@ class MainApp extends StatelessWidget {
       theme: ThemeData(
         fontFamily: 'Poppins',
       ),
-      home: HomePage(),
+      home: SetupPage(),
     );
   }
 }
