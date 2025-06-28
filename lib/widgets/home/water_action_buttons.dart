@@ -8,15 +8,19 @@ class WaterActionButtons extends StatelessWidget {
     WaterButton(amount: 350)
   ];
 
+  List<WaterButton> customCups;
+
   WaterButton get customAddButton => WaterButton(amount: 0, isCustomOption: true);
 
   List<WaterButton> get allButtons => [
     ...defaultButtons,
+    ...customCups,
     customAddButton,
   ];
 
-  const WaterActionButtons({
+  WaterActionButtons({
     super.key,
+    required this.customCups,
   });
 
   @override
@@ -47,7 +51,7 @@ class WaterActionButtons extends StatelessWidget {
             ),
             label: Text(
               button.isCustomOption == false 
-              ? '${allButtons[index].amount}ml' : 'Custom',
+              ? '${button.amount}ml' : 'Custom',
               style: TextStyle(
                 color: Color(0xffF9F9F9),
               ),
