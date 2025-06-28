@@ -21,7 +21,7 @@ class DatabaseHelper {
       path,
       onCreate: (db, version) {
         return db.execute(
-          'CREATE TABLE user(id INTEGER PRIMARY KEY, dailyGoal INTEGER, currentAmount INTEGER)'
+          'CREATE TABLE users(id INTEGER PRIMARY KEY, dailyGoal INTEGER, currentAmount INTEGER)'
         );
       },
       version: 1,

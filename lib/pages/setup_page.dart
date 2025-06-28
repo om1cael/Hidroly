@@ -45,7 +45,7 @@ class _SetupPageState extends State<SetupPage> {
         ),
       ),
       floatingActionButton: IconButton.filled(
-        onPressed: setupController.onSubmit,
+        onPressed: () => setupController.onSubmit(context),
         icon: Icon(
           Icons.arrow_forward,
           color: Color(0xff1B1E26),
