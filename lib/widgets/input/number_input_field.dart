@@ -25,7 +25,7 @@ class NumberInputField extends StatelessWidget {
             fontSize: 16,
           ),
         ),
-        TextField(
+        TextFormField(
           controller: controller,
           maxLength: 3,
           keyboardType: TextInputType.number,
