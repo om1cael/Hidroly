@@ -11,6 +11,8 @@ class SetupPage extends StatefulWidget {
 }
 
 class _SetupPageState extends State<SetupPage> {
+  SetupController setupController = SetupController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,24 +25,27 @@ class _SetupPageState extends State<SetupPage> {
         child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.only(left: 30.0, right: 30.0, bottom: 64),
-            child: Column(
-              children: [
-                SetupHeader(),
-                SetupInteractable(),
-                Text(
-                  'Your data is stored on your device.',
-                  style: TextStyle(
-                    color: Color(0xffBEC0C5),
-                    fontWeight: FontWeight.w300,
+            child: Form(
+              key: setupController.formKey,
+              child: Column(
+                children: [
+                  SetupHeader(),
+                  SetupInteractable(setupController: setupController ,),
+                  Text(
+                    'Your data is stored on your device.',
+                    style: TextStyle(
+                      color: Color(0xffBEC0C5),
+                      fontWeight: FontWeight.w300,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
       ),
       floatingActionButton: IconButton.filled(
-        onPressed: () {}, 
+        onPressed: setupController.onSubmit,
         icon: Icon(
           Icons.arrow_forward,
           color: Color(0xff1B1E26),

@@ -3,13 +3,13 @@ import 'package:flutter/widgets.dart';
 class SetupController {
   final TextEditingController ageController = TextEditingController();
   final TextEditingController weightController = TextEditingController();
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-  bool validate() {
-    int ageValue = int.parse(ageController.text);
-    int weightValue = int.parse(weightController.text);
-
-    if(ageValue < 10 || weightValue > 200) return false;
-    return true;
+  void onSubmit() {
+    if(formKey.currentState!.validate()) {
+      // save things
+      print('Age: ${ageController.text}, Weight: ${weightController.text}');
+    }
   }
 
   void dispose() {

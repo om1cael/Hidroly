@@ -4,11 +4,13 @@ import 'package:flutter/services.dart';
 class NumberInputField extends StatelessWidget {
   final String label;
   final TextEditingController controller;
+  String? Function(String?)? validator;
 
-  const NumberInputField({
+  NumberInputField({
     super.key,
     required this.label,
     required this.controller,
+    required this.validator,
   });
 
   @override
@@ -43,6 +45,7 @@ class NumberInputField extends StatelessWidget {
           style: TextStyle(
             color: Color(0xffF9F9F9),
           ),
+          validator: validator,
         ),
       ],
     );
