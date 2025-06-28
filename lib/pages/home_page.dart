@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hidroly/widgets/home_bottom_nav.dart';
+import 'package:hidroly/widgets/water_progress_circle.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -15,6 +16,14 @@ class _HomePageState extends State<HomePage> {
       appBar: appBar(),
       bottomNavigationBar: HomeBottomNav(),
       backgroundColor: Color(0xff1E1E1E),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            WaterProgressCircle()
+          ],
+        ),
+      ),
     );
   }
 
