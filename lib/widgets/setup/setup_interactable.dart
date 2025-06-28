@@ -23,6 +23,7 @@ class SetupInteractable extends StatelessWidget {
             validator: (value) {
               final age = int.tryParse(value ?? '');
               if(age == null || age < 10 || age > 120) return 'Age between 10 and 120';
+              return null;
             },
           ),
           NumberInputField(
@@ -31,6 +32,7 @@ class SetupInteractable extends StatelessWidget {
             validator: (value) {
               final weight = int.tryParse(value ?? '');
               if(weight == null || weight < 30 || weight > 200) return 'Weight between 30 and 200';
+              return null;
             },
           ),
         ],
