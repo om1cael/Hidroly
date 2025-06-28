@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hidroly/widgets/home_bottom_nav.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -12,6 +13,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appBar(),
+      bottomNavigationBar: HomeBottomNav(),
       backgroundColor: Color(0xff1E1E1E),
     );
   }
