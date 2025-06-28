@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:hidroly/widgets/home_bottom_nav.dart';
-import 'package:hidroly/widgets/water_action_buttons.dart';
-import 'package:hidroly/widgets/water_progress_circle.dart';
+import 'package:hidroly/widgets/home/home_bottom_nav.dart';
+import 'package:hidroly/widgets/home/water_action_buttons.dart';
+import 'package:hidroly/widgets/home/water_progress_circle.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
