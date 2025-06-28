@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:hidroly/pages/home_page.dart';
 import 'package:hidroly/pages/setup_page.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MainApp());
 }
 
