@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hidroly/controller/setup_controller.dart';
 import 'package:hidroly/widgets/setup/setup_header.dart';
 import 'package:hidroly/widgets/setup/setup_interactable.dart';
 

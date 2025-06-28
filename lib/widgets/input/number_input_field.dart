@@ -3,10 +3,12 @@ import 'package:flutter/services.dart';
 
 class NumberInputField extends StatelessWidget {
   final String label;
+  final TextEditingController controller;
 
   const NumberInputField({
     super.key,
     required this.label,
+    required this.controller,
   });
 
   @override
@@ -24,6 +26,7 @@ class NumberInputField extends StatelessWidget {
           ),
         ),
         TextField(
+          controller: controller,
           maxLength: 3,
           keyboardType: TextInputType.number,
           inputFormatters: [FilteringTextInputFormatter.digitsOnly],
