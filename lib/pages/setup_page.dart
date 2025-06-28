@@ -17,7 +17,9 @@ class _SetupPageState extends State<SetupPage> {
       backgroundColor: Color(0xff242530),
       body: Center(
         child: Column(
-          children: [],
+          children: [
+            
+          ],
         ),
       ),
     );
