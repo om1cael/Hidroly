@@ -58,6 +58,7 @@ We welcome contributions! Here’s how you can get involved:
 
 ## License ⚖️
 
-This project is licensed under the [GPLv3](https://github.com/om1cael/Hidroly/blob/main/LICENSE) License
+This project is licensed under the [GPLv3](https://github.com/om1cael/Hidroly/blob/main/LICENSE) license.
 
+⭐ Star this repo if you find it useful!
 > Made with ❤️ and Flutter.
