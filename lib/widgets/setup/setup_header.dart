@@ -14,23 +14,15 @@ class SetupHeader extends StatelessWidget {
           'assets/images/water-drop.svg',
           height: 136,
           width: 126,
-          colorFilter: ColorFilter.mode(Color(0xff8097D3), BlendMode.srcIn),
+          colorFilter: ColorFilter.mode(Theme.of(context).primaryColor, BlendMode.srcIn),
         ),
         Text(
           'Welcome',
-          style: TextStyle(
-            color: Color(0xffF9F9F9),
-            fontSize: 48,
-            fontWeight: FontWeight.bold,
-          ),
+          style: Theme.of(context).textTheme.headlineLarge,
         ),
         Text(
           'We just need to set things up. It will be quick and easy!',
-          style: TextStyle(
-            color: Color(0xffBEC0C5),
-            fontSize: 20,
-            fontWeight: FontWeight.w300,
-          ),
+          style: Theme.of(context).textTheme.bodyMedium,
           textAlign: TextAlign.center,
         ),
       ],

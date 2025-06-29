@@ -3,6 +3,7 @@ import 'package:hidroly/controller/home_controller.dart';
 import 'package:hidroly/model/User.dart';
 import 'package:hidroly/model/water_button.dart';
 import 'package:hidroly/pages/setup_page.dart';
+import 'package:hidroly/theme/app_colors.dart';
 import 'package:hidroly/widgets/home/home_bottom_nav.dart';
 import 'package:hidroly/widgets/home/water_action_buttons.dart';
 import 'package:hidroly/widgets/home/water_progress_circle.dart';
@@ -28,7 +29,6 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     if(homeController.user == null) {
       return Scaffold(
-        backgroundColor: Color(0xff1E1E1E),
         body: Center(child: CircularProgressIndicator(),),
       );
     }
@@ -36,7 +36,6 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: appBar(),
       bottomNavigationBar: HomeBottomNav(),
-      backgroundColor: Color(0xff1E1E1E),
       body: Center(
         child: Column(
           spacing: 50,
@@ -58,21 +57,19 @@ class _HomePageState extends State<HomePage> {
     return AppBar(
       title: Text(
         'Today',
-        style: TextStyle(
-          color: Color(0xffF9F9F9),
-          fontWeight: FontWeight.bold,
-        ),
       ),
       actions: [
         IconButton(
           onPressed: () {}, 
           icon: Icon(
             Icons.settings, 
-            color: Color(0xffF9F9F9),
+            color: AppColors.primaryText,
+          ),
+          style: IconButton.styleFrom(
+            backgroundColor: Colors.transparent,
           ),
         )
       ],
-      backgroundColor: Color(0xff1E1E1E),
     );
   }
 

@@ -17,14 +17,10 @@ class _SetupPageState extends State<SetupPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,
-      appBar: AppBar(
-        backgroundColor: Color(0xff242530),
-      ),
-      backgroundColor: Color(0xff242530),
       body: Center(
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.only(left: 30.0, right: 30.0, bottom: 64),
+            padding: const EdgeInsets.only(top: 32, left: 30.0, right: 30.0, bottom: 64),
             child: Form(
               key: setupController.formKey,
               child: Column(
@@ -33,10 +29,7 @@ class _SetupPageState extends State<SetupPage> {
                   SetupInteractable(setupController: setupController ,),
                   Text(
                     'Your data is stored on your device.',
-                    style: TextStyle(
-                      color: Color(0xffBEC0C5),
-                      fontWeight: FontWeight.w300,
-                    ),
+                    style: Theme.of(context).textTheme.bodySmall,
                   ),
                 ],
               ),
@@ -48,10 +41,6 @@ class _SetupPageState extends State<SetupPage> {
         onPressed: () => setupController.onSubmit(context),
         icon: Icon(
           Icons.arrow_forward,
-          color: Color(0xff1B1E26),
-        ),
-        style: IconButton.styleFrom(
-          backgroundColor: Color(0xffF9F9F9)
         ),
         padding: EdgeInsets.all(18),
       ),

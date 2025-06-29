@@ -20,29 +20,21 @@ class WaterProgressCircle extends StatelessWidget {
             height: 280,
             child: CircularProgressIndicator(
               value: (user.currentAmount / user.dailyGoal).clamp(0, 1),
-              backgroundColor: Color(0xff31333A),
+              backgroundColor: Theme.of(context).colorScheme.onSurface,
               strokeWidth: 20,
               strokeCap: StrokeCap.round,
-              color: Color(0xff8097D3),
+              color: Theme.of(context).primaryColor,
             ),
         ),
         Column(
           children: [
             Text(
               '${user.currentAmount}ml',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 40,
-                color: Color(0xffF9F9F9),
-              ),
+              style: Theme.of(context).textTheme.headlineLarge,
             ),
             Text(
               'of ${user.dailyGoal}ml',
-              style: TextStyle(
-                fontWeight: FontWeight.w300,
-                fontSize: 20,
-                color: Color(0xffBEC0C5),
-              ),
+              style: Theme.of(context).textTheme.bodyMedium,
             ),
           ],
         )
