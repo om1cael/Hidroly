@@ -37,17 +37,22 @@ class _HomePageState extends State<HomePage> {
       appBar: appBar(),
       bottomNavigationBar: HomeBottomNav(),
       body: Center(
-        child: Column(
-          spacing: 50,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            WaterProgressCircle(user: homeController.user!,),
-            WaterActionButtons(
-              homeController: homeController,
-              customCups: homeController.customCups ?? [],
-              onUpdate: () => setState(() {}),
-            )
-          ],
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.only(top: 16, bottom: 16),
+            child: Column(
+              spacing: 50,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                WaterProgressCircle(user: homeController.user!,),
+                WaterActionButtons(
+                  homeController: homeController,
+                  customCups: homeController.customCups ?? [],
+                  onUpdate: () => setState(() {}),
+                )
+              ],
+            ),
+          ),
         ),
       ),
     );
