@@ -3,6 +3,7 @@ import 'package:hidroly/controller/home_controller.dart';
 import 'package:hidroly/database/database_helper.dart';
 import 'package:hidroly/model/User.dart';
 import 'package:hidroly/model/water_button.dart';
+import 'package:hidroly/theme/app_colors.dart';
 import 'package:hidroly/widgets/input/form_number_input_field.dart';
 
 class WaterActionButtons extends StatelessWidget {
@@ -60,13 +61,12 @@ class WaterActionButtons extends StatelessWidget {
             icon: Icon(
               button.isCustomOption == false 
               ? Icons.ac_unit : Icons.add,
-              color: Color(0xffF9F9F9),
             ),
             label: Text(
               button.isCustomOption == false 
               ? '${button.amount}ml' : 'Custom',
               style: TextStyle(
-                color: Color(0xffF9F9F9),
+                color: AppColors.secondaryText
               ),
             ),
           );
