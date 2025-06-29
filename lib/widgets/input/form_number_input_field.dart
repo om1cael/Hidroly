@@ -33,19 +33,7 @@ class FormNumberInputField extends StatelessWidget {
           maxLength: 3,
           keyboardType: TextInputType.number,
           inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-          decoration: InputDecoration(
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(16),
-            ),
-            filled: true,
-            fillColor: Color(0xff31333A),
-            counterStyle: TextStyle(
-              color: Color(0xffBEC0C5),
-            ),
-          ),
-          style: TextStyle(
-            color: Color(0xffF9F9F9),
-          ),
+          style: Theme.of(context).textTheme.bodyLarge,
           validator: validator,
         ),
       ],

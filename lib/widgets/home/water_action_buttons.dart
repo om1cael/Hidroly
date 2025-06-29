@@ -83,9 +83,7 @@ class WaterActionButtons extends StatelessWidget {
       builder: (context) => AlertDialog(
         title: Text(
           'Add Custom Cup',
-          style: TextStyle(
-            color: Color(0xffBEC0C5),
-          ),
+          style: Theme.of(context).textTheme.titleLarge,
         ),
         content: Form(
           key: homeController.formKey,
@@ -107,22 +105,16 @@ class WaterActionButtons extends StatelessWidget {
             }, 
             child: Text(
               'Add',
-              style: TextStyle(
-                color: Color(0xffBEC0C5)
-              ),
             ),
           ),
           TextButton(
             onPressed: () => Navigator.pop(context), 
             child: Text(
               'Cancel',
-              style: TextStyle(
-                color: Color(0xffBEC0C5)
-              ),
             ),
           ),
         ],
-        backgroundColor: Color(0xff1E1E1E),
+        backgroundColor: Theme.of(context).colorScheme.surface,
       )
     );
   }

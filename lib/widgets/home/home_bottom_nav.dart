@@ -10,12 +10,9 @@ class HomeBottomNav extends StatelessWidget {
     return Theme(
       data: Theme.of(context).copyWith(
         splashFactory: NoSplash.splashFactory,
-        highlightColor: Color(0xff31333A),
+        highlightColor: Theme.of(context).colorScheme.surface,
       ), 
       child: BottomNavigationBar(
-        backgroundColor: Color(0xff1B1E26),
-        selectedItemColor: Colors.white,
-        unselectedItemColor: Color.fromARGB(255, 87, 91, 105),
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(

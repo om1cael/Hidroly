@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hidroly/pages/home_page.dart';
 import 'package:hidroly/pages/setup_page.dart';
+import 'package:hidroly/theme/app_theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -13,10 +14,8 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(
-        fontFamily: 'Poppins',
-      ),
-      home: HomePage(),
+      theme: AppTheme.darkTheme,
+      home: SetupPage(),
     );
   }
 }
