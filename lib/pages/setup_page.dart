@@ -16,11 +16,11 @@ class _SetupPageState extends State<SetupPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: true,
+      appBar: AppBar(),
       body: Center(
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.only(top: 32, left: 30.0, right: 30.0, bottom: 64),
+            padding: const EdgeInsets.only(left: 30.0, right: 30.0, bottom: 64),
             child: Form(
               key: setupController.formKey,
               child: Column(
