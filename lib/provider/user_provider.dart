@@ -22,6 +22,5 @@ class UserProvider extends ChangeNotifier {
     );
 
     await updateUser(updatedUser);
-    notifyListeners();
   }
 }
