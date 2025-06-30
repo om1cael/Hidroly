@@ -27,6 +27,12 @@ class _HomePageState extends State<HomePage> {
   }
 
   @override
+  void dispose() {
+    customCupAmountController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     if(context.watch<UserProvider>().user == null) {
       return Scaffold(
