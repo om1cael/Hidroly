@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:hidroly/controller/setup_controller.dart';
 import 'package:hidroly/widgets/input/form_number_input_field.dart';
 
 class SetupInteractable extends StatelessWidget {
-  final SetupController setupController;
+  final TextEditingController ageController;
+  final TextEditingController weightController;
 
   const SetupInteractable({
     super.key,
-    required this.setupController,
+    required this.ageController,
+    required this.weightController,
   });
 
   @override
@@ -18,7 +19,7 @@ class SetupInteractable extends StatelessWidget {
         spacing: 10,
         children: [
           FormNumberInputField(
-            controller: setupController.ageController, 
+            controller: ageController, 
             label: 'Your age',
             validator: (value) {
               final age = int.tryParse(value ?? '');
@@ -27,7 +28,7 @@ class SetupInteractable extends StatelessWidget {
             },
           ),
           FormNumberInputField(
-            controller: setupController.weightController, 
+            controller: weightController, 
             label: 'Your weight',
             validator: (value) {
               final weight = int.tryParse(value ?? '');
