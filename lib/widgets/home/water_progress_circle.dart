@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hidroly/controller/home_controller.dart';
 import 'package:hidroly/model/User.dart';
 
 class WaterProgressCircle extends StatelessWidget {
