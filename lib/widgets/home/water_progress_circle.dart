@@ -13,6 +13,7 @@ class WaterProgressCircle extends StatelessWidget {
       builder: (context, provider, child) {
         final user = provider.user;
 
+        // TODO: This should be better handled.
         if(user == null) {
           return const CircularProgressIndicator();
         }

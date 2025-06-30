@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:hidroly/controller/home_controller.dart';
 import 'package:hidroly/pages/setup_page.dart';
+import 'package:hidroly/provider/user_provider.dart';
 import 'package:hidroly/theme/app_colors.dart';
 import 'package:hidroly/widgets/home/home_bottom_nav.dart';
 import 'package:hidroly/widgets/home/water_action_buttons.dart';
 import 'package:hidroly/widgets/home/water_progress_circle.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -28,7 +30,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    if(homeController.user == null) {
+    if(context.watch<UserProvider>().userStatus == UserStatus.loading) {
       return Scaffold(
         body: Center(child: CircularProgressIndicator(),),
       );
@@ -82,16 +84,16 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _loadUser() async {
-    await homeController.loadUser();
-    if(homeController.user == null) {
+    final userProvider = context.read<UserProvider>();
+
+    await userProvider.loadUser();
+    if(userProvider.user == null && mounted) {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => SetupPage()),
       );
       return;
     }
-
-    setState(() {});
   }
 
   void _loadCustomCups() async {
