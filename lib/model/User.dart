@@ -17,4 +17,12 @@ class User {
   String toString() {
     return 'User{id: $id, dailyGoal: $dailyGoal, currentAmount: $currentAmount}';
   }
+
+  User copyWith({int? id, int? dailyGoal, int? currentAmount}) {
+    return User(
+      id: id ?? this.id,
+      dailyGoal: dailyGoal ?? this.dailyGoal,
+      currentAmount: currentAmount ?? this.currentAmount,
+    );
+  }
 }
