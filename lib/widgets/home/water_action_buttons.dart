@@ -104,6 +104,8 @@ class WaterActionButtons extends StatelessWidget {
         actions: [
           TextButton(
             onPressed: () async {
+              if(!formKey.currentState!.validate()) return;
+
               bool created = await homeController.createCustomCup(
                 customCupAmountController.text
               );
