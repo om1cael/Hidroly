@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hidroly/controller/home_controller.dart';
-import 'package:hidroly/model/User.dart';
+import 'package:hidroly/model/user.dart';
 import 'package:hidroly/model/water_button.dart';
 import 'package:hidroly/theme/app_colors.dart';
 import 'package:hidroly/widgets/input/form_number_input_field.dart';

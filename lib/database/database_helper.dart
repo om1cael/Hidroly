@@ -1,4 +1,4 @@
-import 'package:hidroly/model/User.dart';
+import 'package:hidroly/model/user.dart';
 import 'package:hidroly/model/water_button.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
