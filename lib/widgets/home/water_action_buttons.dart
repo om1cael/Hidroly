@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hidroly/controller/home_controller.dart';
 import 'package:hidroly/model/water_button.dart';
+import 'package:hidroly/provider/custom_cups_provider.dart';
 import 'package:hidroly/provider/user_provider.dart';
 import 'package:hidroly/theme/app_colors.dart';
 import 'package:hidroly/widgets/input/form_number_input_field.dart';
@@ -10,35 +10,26 @@ class WaterActionButtons extends StatelessWidget {
   final TextEditingController customCupAmountController;
   final GlobalKey<FormState> formKey;
 
-  final HomeController homeController;
-  final VoidCallback onUpdate;
-
-  List<WaterButton> get defaultButtons => [
-    WaterButton(amount: 250),
-    WaterButton(amount: 350)
-  ];
-
-  List<WaterButton> customCups;
-
-  WaterButton get customAddButton => WaterButton(amount: 0, isCustomOption: true);
-
-  List<WaterButton> get allButtons => [
-    ...defaultButtons,
-    ...customCups,
-    customAddButton,
-  ];
+  final _defaultButtons = [WaterButton(amount: 250), WaterButton(amount: 350)];
+  final _addCustomCupButton = WaterButton(amount: 0, isCustomOption: true);
 
   WaterActionButtons({
     super.key,
-    required this.homeController,
     required this.customCupAmountController,
     required this.formKey,
-    required this.customCups,
-    required this.onUpdate,
   });
 
   @override
   Widget build(BuildContext context) {
+    final List<WaterButton> customCups = 
+      context.watch<CustomCupsProvider>().customCups;
+    
+    List<WaterButton> allButtons = [
+      ..._defaultButtons,
+      ...customCups,
+      _addCustomCupButton,
+    ];
+
     return Container(
       height: 45,
       margin: EdgeInsets.only(left: 15, right: 15),
@@ -107,14 +98,13 @@ class WaterActionButtons extends StatelessWidget {
             onPressed: () async {
               if(!formKey.currentState!.validate()) return;
 
-              bool created = await homeController.createCustomCup(
+              bool created = await context.read<CustomCupsProvider>().createCustomCup(
                 customCupAmountController.text
               );
 
               if(created && context.mounted) {
                 Navigator.of(context).pop();
                 customCupAmountController.clear();
-                onUpdate();
               }
             }, 
             child: Text(

@@ -1,11 +1,14 @@
+import 'package:flutter/material.dart';
 import 'package:hidroly/database/database_helper.dart';
 import 'package:hidroly/model/water_button.dart';
 
-class HomeController {
-  List<WaterButton>? customCups = [];
+class CustomCupsProvider extends ChangeNotifier {
+  List<WaterButton> _customCups = [];
+  List<WaterButton> get customCups => _customCups;
 
   Future<void> loadCustomCups() async {
-    customCups = await DatabaseHelper.instance.getAllCustomCups();
+    _customCups = await DatabaseHelper.instance.getAllCustomCups();
+    notifyListeners();
   }
 
   Future<bool> createCustomCup(String amountText) async {

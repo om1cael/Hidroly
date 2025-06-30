@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hidroly/controller/home_controller.dart';
 import 'package:hidroly/pages/setup_page.dart';
+import 'package:hidroly/provider/custom_cups_provider.dart';
 import 'package:hidroly/provider/user_provider.dart';
 import 'package:hidroly/theme/app_colors.dart';
 import 'package:hidroly/widgets/home/home_bottom_nav.dart';
@@ -18,8 +18,6 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final TextEditingController customCupAmountController = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-
-  final HomeController homeController = HomeController();
 
   @override
   void initState() {
@@ -49,11 +47,8 @@ class _HomePageState extends State<HomePage> {
               children: [
                 WaterProgressCircle(),
                 WaterActionButtons(
-                  homeController: homeController,
                   customCupAmountController: customCupAmountController,
                   formKey: formKey,
-                  customCups: homeController.customCups ?? [],
-                  onUpdate: () => setState(() {}),
                 )
               ],
             ),
@@ -97,7 +92,6 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _loadCustomCups() async {
-    await homeController.loadCustomCups();
-    setState(() {});
+    await context.read<CustomCupsProvider>().loadCustomCups();
   }
 }
