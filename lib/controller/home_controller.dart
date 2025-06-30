@@ -6,9 +6,6 @@ import 'package:hidroly/model/water_button.dart';
 class HomeController {
   User? user;
   List<WaterButton>? customCups = [];
-  
-  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  final TextEditingController customCupAmountController = TextEditingController();
 
   Future<void> loadUser() async {
     user = await DatabaseHelper.instance.getUser(1);
@@ -23,17 +20,16 @@ class HomeController {
     customCups = await DatabaseHelper.instance.getAllCustomCups();
   }
 
-  Future<void> onSubmitCustomCup(context) async {
-    if(formKey.currentState!.validate()) {
-      int customCupAmount = int.parse(customCupAmountController.text);
+  Future<bool> createCustomCup(String amountText) async {
+    int? customCupAmount = int.tryParse(amountText);
 
-      await DatabaseHelper.instance.createCustomCup(
-        WaterButton(amount: customCupAmount),
-      );
+    if(customCupAmount == null) return false;
 
-      await loadCustomCups();
-      customCupAmountController.clear();
-      Navigator.pop(context);
-    }
+    await DatabaseHelper.instance.createCustomCup(
+      WaterButton(amount: customCupAmount),
+    );
+
+    await loadCustomCups();
+    return true;
   }
 }

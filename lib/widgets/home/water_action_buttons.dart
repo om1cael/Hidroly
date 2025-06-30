@@ -6,7 +6,10 @@ import 'package:hidroly/theme/app_colors.dart';
 import 'package:hidroly/widgets/input/form_number_input_field.dart';
 
 class WaterActionButtons extends StatelessWidget {
-  HomeController homeController;
+  final TextEditingController customCupAmountController;
+  final GlobalKey<FormState> formKey;
+
+  final HomeController homeController;
   final VoidCallback onUpdate;
 
   List<WaterButton> get defaultButtons => [
@@ -27,6 +30,8 @@ class WaterActionButtons extends StatelessWidget {
   WaterActionButtons({
     super.key,
     required this.homeController,
+    required this.customCupAmountController,
+    required this.formKey,
     required this.customCups,
     required this.onUpdate,
   });
@@ -85,10 +90,10 @@ class WaterActionButtons extends StatelessWidget {
           style: Theme.of(context).textTheme.titleLarge,
         ),
         content: Form(
-          key: homeController.formKey,
+          key: formKey,
           child: FormNumberInputField(
             label: 'Amount', 
-            controller: homeController.customCupAmountController, 
+            controller: customCupAmountController, 
             validator: (value) {
               int? amount = int.tryParse(value ?? '');
               if(amount == null || amount <= 0) return 'Invalid amount.';
@@ -99,8 +104,13 @@ class WaterActionButtons extends StatelessWidget {
         actions: [
           TextButton(
             onPressed: () async {
-              await homeController.onSubmitCustomCup(context);
-              onUpdate();
+              bool created = await homeController.createCustomCup(
+                customCupAmountController.text
+              );
+
+              if(created) {
+                onUpdate();
+              }
             }, 
             child: Text(
               'Add',

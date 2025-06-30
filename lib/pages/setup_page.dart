@@ -16,7 +16,7 @@ class _SetupPageState extends State<SetupPage> {
   final TextEditingController weightController = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-  SetupController setupController = SetupController();
+  final SetupController setupController = SetupController();
 
   @override
   void dispose() {

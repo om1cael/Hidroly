@@ -14,7 +14,10 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  HomeController homeController = HomeController();
+  final TextEditingController customCupAmountController = TextEditingController();
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
+  final HomeController homeController = HomeController();
 
   @override
   void initState() {
@@ -45,6 +48,8 @@ class _HomePageState extends State<HomePage> {
                 WaterProgressCircle(user: homeController.user!,),
                 WaterActionButtons(
                   homeController: homeController,
+                  customCupAmountController: customCupAmountController,
+                  formKey: formKey,
                   customCups: homeController.customCups ?? [],
                   onUpdate: () => setState(() {}),
                 )
