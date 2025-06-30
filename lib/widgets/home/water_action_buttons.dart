@@ -108,7 +108,8 @@ class WaterActionButtons extends StatelessWidget {
                 customCupAmountController.text
               );
 
-              if(created) {
+              if(created && context.mounted) {
+                Navigator.of(context).pop();
                 onUpdate();
               }
             }, 
