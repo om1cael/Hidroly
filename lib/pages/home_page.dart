@@ -45,7 +45,7 @@ class _HomePageState extends State<HomePage> {
               spacing: 50,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                WaterProgressCircle(user: homeController.user!,),
+                WaterProgressCircle(),
                 WaterActionButtons(
                   homeController: homeController,
                   customCupAmountController: customCupAmountController,
