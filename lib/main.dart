@@ -18,7 +18,7 @@ class MainApp extends StatelessWidget {
       theme: AppTheme.darkTheme,
       home: ChangeNotifierProvider(
         create: (context) => UserProvider(),
-        child: const HomePage(),
+        builder: (context, child) => const HomePage(),
       )
     );
   }

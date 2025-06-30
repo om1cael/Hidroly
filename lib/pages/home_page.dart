@@ -30,7 +30,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    if(context.watch<UserProvider>().userStatus == UserStatus.loading) {
+    if(context.watch<UserProvider>().user == null) {
       return Scaffold(
         body: Center(child: CircularProgressIndicator(),),
       );

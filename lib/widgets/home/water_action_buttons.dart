@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:hidroly/controller/home_controller.dart';
-import 'package:hidroly/model/user.dart';
 import 'package:hidroly/model/water_button.dart';
+import 'package:hidroly/provider/user_provider.dart';
 import 'package:hidroly/theme/app_colors.dart';
 import 'package:hidroly/widgets/input/form_number_input_field.dart';
+import 'package:provider/provider.dart';
 
 class WaterActionButtons extends StatelessWidget {
   final TextEditingController customCupAmountController;
@@ -54,7 +55,7 @@ class WaterActionButtons extends StatelessWidget {
                 return;
               }
 
-              await _updateWaterIntake(button);
+              await context.read<UserProvider>().addWater(button.amount);
             },
             style: ElevatedButton.styleFrom(
               backgroundColor: Color(0xff31333A),
@@ -130,16 +131,5 @@ class WaterActionButtons extends StatelessWidget {
         backgroundColor: Theme.of(context).colorScheme.surface,
       )
     );
-  }
-
-  Future<void> _updateWaterIntake(WaterButton button) async {
-    User currentUser = homeController.user!;
-    User updatedUser = User(
-      id: currentUser.id, 
-      dailyGoal: currentUser.dailyGoal, 
-      currentAmount: currentUser.currentAmount + button.amount
-    );
-    await homeController.updateUser(updatedUser);
-    onUpdate();
   }
 }

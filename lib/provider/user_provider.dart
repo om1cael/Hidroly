@@ -25,6 +25,15 @@ class UserProvider extends ChangeNotifier {
     await DatabaseHelper.instance.updateUser(updatedUser);
     await loadUser();
   }
+
+  Future<void> addWater(int amount) async {
+    User updatedUser = _user!.copyWith(
+      currentAmount: _user!.currentAmount + amount,
+    );
+
+    await updateUser(updatedUser);
+    notifyListeners();
+  }
 }
 
 enum UserStatus {loading, loaded, empty}
