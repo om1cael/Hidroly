@@ -4,9 +4,9 @@ import 'package:flutter/services.dart';
 class FormNumberInputField extends StatelessWidget {
   final String label;
   final TextEditingController controller;
-  String? Function(String?)? validator;
+  final String? Function(String?)? validator;
 
-  FormNumberInputField({
+  const FormNumberInputField({
     super.key,
     required this.label,
     required this.controller,

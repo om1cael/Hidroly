@@ -1,29 +1,16 @@
-import 'package:flutter/material.dart';
 import 'package:hidroly/database/database_helper.dart';
-import 'package:hidroly/model/User.dart';
-import 'package:hidroly/pages/home_page.dart';
+import 'package:hidroly/model/user.dart';
 import 'package:hidroly/utils/calculate_dailygoal.dart';
 
 class SetupController {
-  final TextEditingController ageController = TextEditingController();
-  final TextEditingController weightController = TextEditingController();
-  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  Future<bool> save(String ageText, String weightText) async {
+    int? age = int.tryParse(ageText);
+    int? weight = int.tryParse(weightText);
 
-  void onSubmit(context) async {
-    if(formKey.currentState!.validate()) {
-      int age = int.parse(ageController.text);
-      int weight = int.parse(weightController.text);
+    if(age == null || weight == null) return false;
 
-      int dailyGoal = CalculateDailyGoal().calculate(age, weight);
-      await DatabaseHelper.instance.createUser(User(id: 1, dailyGoal: dailyGoal, currentAmount: 0));
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (BuildContext context) => const HomePage())
-      );
-    }
-  }
-
-  void dispose() {
-    ageController.dispose();
-    weightController.dispose();
+    int dailyGoal = CalculateDailyGoal().calculate(age, weight);
+    await DatabaseHelper.instance.createUser(User(id: 1, dailyGoal: dailyGoal, currentAmount: 0));
+    return true;
   }
 }

@@ -1,38 +1,35 @@
 import 'package:flutter/material.dart';
-import 'package:hidroly/controller/home_controller.dart';
-import 'package:hidroly/model/User.dart';
 import 'package:hidroly/model/water_button.dart';
+import 'package:hidroly/provider/custom_cups_provider.dart';
+import 'package:hidroly/provider/user_provider.dart';
 import 'package:hidroly/theme/app_colors.dart';
 import 'package:hidroly/widgets/input/form_number_input_field.dart';
+import 'package:provider/provider.dart';
 
 class WaterActionButtons extends StatelessWidget {
-  HomeController homeController;
-  final VoidCallback onUpdate;
+  final TextEditingController customCupAmountController;
+  final GlobalKey<FormState> formKey;
 
-  List<WaterButton> get defaultButtons => [
-    WaterButton(amount: 250),
-    WaterButton(amount: 350)
-  ];
-
-  List<WaterButton> customCups;
-
-  WaterButton get customAddButton => WaterButton(amount: 0, isCustomOption: true);
-
-  List<WaterButton> get allButtons => [
-    ...defaultButtons,
-    ...customCups,
-    customAddButton,
-  ];
+  final _defaultButtons = [WaterButton(amount: 250), WaterButton(amount: 350)];
+  final _addCustomCupButton = WaterButton(amount: 0, isCustomOption: true);
 
   WaterActionButtons({
     super.key,
-    required this.homeController,
-    required this.customCups,
-    required this.onUpdate,
+    required this.customCupAmountController,
+    required this.formKey,
   });
 
   @override
   Widget build(BuildContext context) {
+    final List<WaterButton> customCups = 
+      context.watch<CustomCupsProvider>().customCups;
+    
+    List<WaterButton> allButtons = [
+      ..._defaultButtons,
+      ...customCups,
+      _addCustomCupButton,
+    ];
+
     return Container(
       height: 45,
       margin: EdgeInsets.only(left: 15, right: 15),
@@ -49,7 +46,7 @@ class WaterActionButtons extends StatelessWidget {
                 return;
               }
 
-              await _updateWaterIntake(button);
+              await context.read<UserProvider>().addWater(button.amount);
             },
             style: ElevatedButton.styleFrom(
               backgroundColor: Color(0xff31333A),
@@ -85,10 +82,10 @@ class WaterActionButtons extends StatelessWidget {
           style: Theme.of(context).textTheme.titleLarge,
         ),
         content: Form(
-          key: homeController.formKey,
+          key: formKey,
           child: FormNumberInputField(
             label: 'Amount', 
-            controller: homeController.customCupAmountController, 
+            controller: customCupAmountController, 
             validator: (value) {
               int? amount = int.tryParse(value ?? '');
               if(amount == null || amount <= 0) return 'Invalid amount.';
@@ -99,8 +96,16 @@ class WaterActionButtons extends StatelessWidget {
         actions: [
           TextButton(
             onPressed: () async {
-              await homeController.onSubmitCustomCup(context);
-              onUpdate();
+              if(!formKey.currentState!.validate()) return;
+
+              bool created = await context.read<CustomCupsProvider>().createCustomCup(
+                customCupAmountController.text
+              );
+
+              if(created && context.mounted) {
+                Navigator.of(context).pop();
+                customCupAmountController.clear();
+              }
             }, 
             child: Text(
               'Add',
@@ -116,16 +121,5 @@ class WaterActionButtons extends StatelessWidget {
         backgroundColor: Theme.of(context).colorScheme.surface,
       )
     );
-  }
-
-  Future<void> _updateWaterIntake(WaterButton button) async {
-    User currentUser = homeController.user!;
-    User updatedUser = User(
-      id: currentUser.id, 
-      dailyGoal: currentUser.dailyGoal, 
-      currentAmount: currentUser.currentAmount + button.amount
-    );
-    await homeController.updateUser(updatedUser);
-    onUpdate();
   }
 }
