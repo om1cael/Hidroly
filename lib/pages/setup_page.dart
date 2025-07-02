@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:hidroly/controller/setup_controller.dart';
 import 'package:hidroly/pages/home_page.dart';
+import 'package:hidroly/provider/user_provider.dart';
 import 'package:hidroly/widgets/setup/setup_header.dart';
 import 'package:hidroly/widgets/setup/setup_interactable.dart';
+import 'package:provider/provider.dart';
 
 class SetupPage extends StatefulWidget {
   const SetupPage({super.key});
@@ -15,8 +16,6 @@ class _SetupPageState extends State<SetupPage> {
   final TextEditingController ageController = TextEditingController();
   final TextEditingController weightController = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-
-  final SetupController setupController = SetupController();
 
   @override
   void dispose() {
@@ -56,7 +55,7 @@ class _SetupPageState extends State<SetupPage> {
         onPressed: () async {
           if(!formKey.currentState!.validate()) return;
 
-          bool created = await setupController.save(
+          bool created = await context.read<UserProvider>().createUser(
             ageController.text,
             weightController.text,
           );

@@ -1,6 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:hidroly/data/model/user.dart';
 import 'package:hidroly/data/repository/user_repository.dart';
+import 'package:hidroly/utils/calculate_dailygoal.dart';
 
 class UserProvider extends ChangeNotifier {
   UserRepository? _userRepository;
@@ -11,6 +12,23 @@ class UserProvider extends ChangeNotifier {
 
   void setRepository(UserRepository repository) {
     _userRepository = repository;
+  }
+
+  Future<bool> createUser(String ageText, String weightText) async {
+    int? age = int.tryParse(ageText);
+    int? weight = int.tryParse(weightText);
+
+    if(age == null || weight == null) return false;
+
+    int dailyGoal = CalculateDailyGoal().calculate(age, weight);
+    await _userRepository!.createUser(
+      User(
+        id: 1, 
+        dailyGoal: dailyGoal, 
+        currentAmount: 0
+      )
+    );
+    return true;
   }
 
   Future<void> loadUser(int id) async {
