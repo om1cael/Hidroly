@@ -1,19 +1,44 @@
 import 'package:flutter/widgets.dart';
-import 'package:hidroly/database/database_helper.dart';
-import 'package:hidroly/model/user.dart';
+import 'package:hidroly/data/model/user.dart';
+import 'package:hidroly/data/repository/user_repository.dart';
+import 'package:hidroly/utils/calculate_dailygoal.dart';
 
 class UserProvider extends ChangeNotifier {
+  UserRepository? _userRepository;
+
   User? _user;
   User? get user => _user;
 
-  Future<void> loadUser() async {
-    _user = await DatabaseHelper.instance.getUser(1);
+
+  void setRepository(UserRepository repository) {
+    _userRepository = repository;
+  }
+
+  Future<bool> createUser(String ageText, String weightText) async {
+    int? age = int.tryParse(ageText);
+    int? weight = int.tryParse(weightText);
+
+    if(age == null || weight == null) return false;
+
+    int dailyGoal = CalculateDailyGoal().calculate(age, weight);
+    await _userRepository!.createUser(
+      User(
+        id: 1, 
+        dailyGoal: dailyGoal, 
+        currentAmount: 0
+      )
+    );
+    return true;
+  }
+
+  Future<void> loadUser(int id) async {
+    _user = await _userRepository!.loadUser(id);
     notifyListeners();
   }
   
   Future<void> updateUser(User updatedUser) async {
-    await DatabaseHelper.instance.updateUser(updatedUser);
-    await loadUser();
+    await _userRepository!.updateUser(updatedUser);
+    await loadUser(updatedUser.id);
   }
 
   Future<void> addWater(int amount) async {

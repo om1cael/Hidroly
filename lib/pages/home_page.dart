@@ -87,7 +87,7 @@ class _HomePageState extends State<HomePage> {
   void _loadUser() async {
     final userProvider = context.read<UserProvider>();
 
-    await userProvider.loadUser();
+    await userProvider.loadUser(1);
     if(userProvider.user == null && mounted) {
       Navigator.pushReplacement(
         context,

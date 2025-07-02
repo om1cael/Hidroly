@@ -13,7 +13,7 @@ class WaterButton {
     final map = {'amount': amount};
     if(id != null) {
       map['id'] = id as int;
-    };
+    }
 
     return map;
   }
