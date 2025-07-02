@@ -6,6 +6,8 @@ class UserRepository {
 
   const UserRepository(this._userLocalDataSourceImpl);
 
+  Future<void> createUser(User user) async => await _userLocalDataSourceImpl.createUser(user);
+
   Future<User?> loadUser(int id) async => await _userLocalDataSourceImpl.getUser(1);
   
   Future<void> updateUser(User updatedUser) async => await _userLocalDataSourceImpl.updateUser(updatedUser);
