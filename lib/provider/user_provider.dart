@@ -3,20 +3,23 @@ import 'package:hidroly/data/model/user.dart';
 import 'package:hidroly/data/repository/user_repository.dart';
 
 class UserProvider extends ChangeNotifier {
-  final UserRepository _userRepository;
+  UserRepository? _userRepository;
 
   User? _user;
   User? get user => _user;
 
-  UserProvider(this._userRepository);
+
+  void setRepository(UserRepository repository) {
+    _userRepository = repository;
+  }
 
   Future<void> loadUser(int id) async {
-    _user = await _userRepository.loadUser(id);
+    _user = await _userRepository!.loadUser(id);
     notifyListeners();
   }
   
   Future<void> updateUser(User updatedUser) async {
-    await _userRepository.updateUser(updatedUser);
+    await _userRepository!.updateUser(updatedUser);
     await loadUser(updatedUser.id);
   }
 
