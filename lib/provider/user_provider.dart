@@ -1,19 +1,23 @@
 import 'package:flutter/widgets.dart';
-import 'package:hidroly/data/database/database_helper.dart';
+import 'package:hidroly/data/repository/user_repository.dart';
 import 'package:hidroly/model/user.dart';
 
 class UserProvider extends ChangeNotifier {
+  final UserRepository _userRepository;
+
   User? _user;
   User? get user => _user;
 
-  Future<void> loadUser() async {
-    _user = await DatabaseHelper.instance.getUser(1);
+  UserProvider(this._userRepository);
+
+  Future<void> loadUser(int id) async {
+    _user = await _userRepository.loadUser(id);
     notifyListeners();
   }
   
   Future<void> updateUser(User updatedUser) async {
-    await DatabaseHelper.instance.updateUser(updatedUser);
-    await loadUser();
+    await _userRepository.updateUser(updatedUser);
+    await loadUser(updatedUser.id);
   }
 
   Future<void> addWater(int amount) async {
