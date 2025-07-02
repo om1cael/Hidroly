@@ -1,5 +1,5 @@
 import 'package:hidroly/data/database/database_helper.dart';
-import 'package:hidroly/model/water_button.dart';
+import 'package:hidroly/data/model/water_button.dart';
 import 'package:sqflite/sqflite.dart';
 
 class CustomCupsLocalDataSourceImpl {

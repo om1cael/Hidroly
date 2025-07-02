@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hidroly/data/repository/custom_cups_repository.dart';
-import 'package:hidroly/model/water_button.dart';
+import 'package:hidroly/data/model/water_button.dart';
 
 class CustomCupsProvider extends ChangeNotifier {
   final CustomCupsRepository _customCupsRepository;

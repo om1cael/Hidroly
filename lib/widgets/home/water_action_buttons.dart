@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hidroly/model/water_button.dart';
+import 'package:hidroly/data/model/water_button.dart';
 import 'package:hidroly/provider/custom_cups_provider.dart';
 import 'package:hidroly/provider/user_provider.dart';
 import 'package:hidroly/theme/app_colors.dart';
