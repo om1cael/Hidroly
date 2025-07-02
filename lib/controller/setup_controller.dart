@@ -1,5 +1,5 @@
 import 'package:hidroly/data/datasource/user_local_datasource_impl.dart';
-import 'package:hidroly/model/user.dart';
+import 'package:hidroly/data/model/user.dart';
 import 'package:hidroly/utils/calculate_dailygoal.dart';
 
 class SetupController {

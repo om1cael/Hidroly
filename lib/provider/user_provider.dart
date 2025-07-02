@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
+import 'package:hidroly/data/model/user.dart';
 import 'package:hidroly/data/repository/user_repository.dart';
-import 'package:hidroly/model/user.dart';
 
 class UserProvider extends ChangeNotifier {
   final UserRepository _userRepository;

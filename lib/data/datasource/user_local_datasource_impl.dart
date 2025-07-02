@@ -1,6 +1,6 @@
 import 'package:hidroly/data/database/database_helper.dart';
 import 'package:hidroly/data/datasource/user_local_datasource.dart';
-import 'package:hidroly/model/user.dart';
+import 'package:hidroly/data/model/user.dart';
 import 'package:sqflite/sqflite.dart';
 
 class UserLocalDataSourceImpl implements UserLocalDataSource {
