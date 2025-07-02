@@ -4,9 +4,13 @@ import 'package:hidroly/model/user.dart';
 import 'package:sqflite/sqflite.dart';
 
 class UserLocalDataSourceImpl implements UserLocalDataSource {
+  final DatabaseHelper _databaseHelper;
+
+  UserLocalDataSourceImpl(this._databaseHelper);
+
   @override
   Future<void> createUser(User user) async {
-    final db = await DatabaseHelper.instance.database;
+    final db = await _databaseHelper.database;
     await db.insert(
       'users',
       user.toMap(),
@@ -16,7 +20,7 @@ class UserLocalDataSourceImpl implements UserLocalDataSource {
 
   @override
   Future<void> updateUser(User user) async {
-    final db = await DatabaseHelper.instance.database;
+    final db = await _databaseHelper.database;
     await db.update(
       'users', 
       user.toMap(),
@@ -27,7 +31,7 @@ class UserLocalDataSourceImpl implements UserLocalDataSource {
 
   @override
   Future<User?> getUser(int userId) async {
-    final db = await DatabaseHelper.instance.database;
+    final db = await _databaseHelper.database;
     final List<Map<String, Object?>> usersList = await db.query(
       'users', 
       where: 'id = ?', 

@@ -1,12 +1,7 @@
-import 'package:hidroly/model/user.dart';
-import 'package:hidroly/model/water_button.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
 class DatabaseHelper {
-  static final DatabaseHelper instance = DatabaseHelper._internal();
-  DatabaseHelper._internal();
-
   Database? _database;
 
   Future<Database> get database async {
