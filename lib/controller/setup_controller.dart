@@ -1,4 +1,4 @@
-import 'package:hidroly/database/database_helper.dart';
+import 'package:hidroly/data/database/database_helper.dart';
 import 'package:hidroly/model/user.dart';
 import 'package:hidroly/utils/calculate_dailygoal.dart';
 

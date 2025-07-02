@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:hidroly/database/database_helper.dart';
+import 'package:hidroly/data/database/database_helper.dart';
 import 'package:hidroly/model/user.dart';
 
 class UserProvider extends ChangeNotifier {

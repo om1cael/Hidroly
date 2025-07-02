@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hidroly/database/database_helper.dart';
+import 'package:hidroly/data/database/database_helper.dart';
 import 'package:hidroly/model/water_button.dart';
 
 class CustomCupsProvider extends ChangeNotifier {
