@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:hidroly/data/model/history_entry.dart';
 import 'package:hidroly/data/model/water_button.dart';
 import 'package:hidroly/provider/custom_cups_provider.dart';
+import 'package:hidroly/provider/daily_history_provider.dart';
 import 'package:hidroly/provider/day_provider.dart';
 import 'package:hidroly/theme/app_colors.dart';
 import 'package:hidroly/widgets/input/form_number_input_field.dart';
@@ -47,6 +49,11 @@ class WaterActionButtons extends StatelessWidget {
               }
 
               await context.read<DayProvider>().addWater(button.amount);
+
+              if(!context.mounted) return;
+              await context.read<DailyHistoryProvider>().create(
+                HistoryEntry(dayId: 1, amount: button.amount, dateTime: DateTime.now().toUtc())
+              );
             },
             style: ElevatedButton.styleFrom(
               backgroundColor: Color(0xff31333A),
