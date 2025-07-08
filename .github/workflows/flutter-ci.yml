@@ -4,9 +4,15 @@ on:
   push:
     branches:
       - main
+    paths:
+      - 'lib/**'
+      - 'pubspec.*'
   pull_request:
     branches:
       - main
+    paths:
+      - 'lib/**'
+      - 'pubspec.*'
 
 permissions:
   contents: read
@@ -41,8 +47,8 @@ jobs:
       - name: Analyze code
         run: flutter analyze
 
-      #- name: Run tests
-      #  run: flutter test
+      # - name: Run tests
+      #   run: flutter test
 
       - name: Build APK (debug)
         run: flutter build apk --debug
