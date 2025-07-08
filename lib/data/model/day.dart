@@ -1,9 +1,9 @@
-class User {
+class Day {
   final int id;
   final int dailyGoal;
   final int currentAmount;
 
-  const User({
+  const Day({
     required this.id,
     required this.dailyGoal,
     required this.currentAmount,
@@ -15,11 +15,11 @@ class User {
 
   @override
   String toString() {
-    return 'User{id: $id, dailyGoal: $dailyGoal, currentAmount: $currentAmount}';
+    return 'Day{id: $id, dailyGoal: $dailyGoal, currentAmount: $currentAmount}';
   }
 
-  User copyWith({int? id, int? dailyGoal, int? currentAmount}) {
-    return User(
+  Day copyWith({int? id, int? dailyGoal, int? currentAmount}) {
+    return Day(
       id: id ?? this.id,
       dailyGoal: dailyGoal ?? this.dailyGoal,
       currentAmount: currentAmount ?? this.currentAmount,

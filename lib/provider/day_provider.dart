@@ -1,16 +1,16 @@
 import 'package:flutter/widgets.dart';
-import 'package:hidroly/data/model/user.dart';
-import 'package:hidroly/data/repository/user_repository.dart';
+import 'package:hidroly/data/model/day.dart';
+import 'package:hidroly/data/repository/day_repository.dart';
 import 'package:hidroly/utils/calculate_dailygoal.dart';
 
-class UserProvider extends ChangeNotifier {
-  UserRepository? _userRepository;
+class DayProvider extends ChangeNotifier {
+  DayRepository? _userRepository;
 
-  User? _user;
-  User? get user => _user;
+  Day? _user;
+  Day? get user => _user;
 
 
-  void setRepository(UserRepository repository) {
+  void setRepository(DayRepository repository) {
     _userRepository = repository;
   }
 
@@ -22,7 +22,7 @@ class UserProvider extends ChangeNotifier {
 
     int dailyGoal = CalculateDailyGoal().calculate(age, weight);
     await _userRepository!.createUser(
-      User(
+      Day(
         id: 1, 
         dailyGoal: dailyGoal, 
         currentAmount: 0
@@ -36,13 +36,13 @@ class UserProvider extends ChangeNotifier {
     notifyListeners();
   }
   
-  Future<void> updateUser(User updatedUser) async {
+  Future<void> updateUser(Day updatedUser) async {
     await _userRepository!.updateUser(updatedUser);
     await loadUser(updatedUser.id);
   }
 
   Future<void> addWater(int amount) async {
-    User updatedUser = _user!.copyWith(
+    Day updatedUser = _user!.copyWith(
       currentAmount: _user!.currentAmount + amount,
     );
 

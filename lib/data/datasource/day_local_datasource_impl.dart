@@ -1,15 +1,15 @@
 import 'package:hidroly/data/database/database_helper.dart';
 import 'package:hidroly/data/datasource/user_local_datasource.dart';
-import 'package:hidroly/data/model/user.dart';
+import 'package:hidroly/data/model/day.dart';
 import 'package:sqflite/sqflite.dart';
 
-class UserLocalDataSourceImpl implements UserLocalDataSource {
+class DayLocalDataSourceImpl implements DayLocalDataSource {
   final DatabaseHelper _databaseHelper;
 
-  UserLocalDataSourceImpl(this._databaseHelper);
+  DayLocalDataSourceImpl(this._databaseHelper);
 
   @override
-  Future<void> createUser(User user) async {
+  Future<void> createUser(Day user) async {
     final db = await _databaseHelper.database;
     await db.insert(
       'users',
@@ -19,7 +19,7 @@ class UserLocalDataSourceImpl implements UserLocalDataSource {
   }
 
   @override
-  Future<void> updateUser(User user) async {
+  Future<void> updateUser(Day user) async {
     final db = await _databaseHelper.database;
     await db.update(
       'users', 
@@ -30,7 +30,7 @@ class UserLocalDataSourceImpl implements UserLocalDataSource {
   }
 
   @override
-  Future<User?> getUser(int userId) async {
+  Future<Day?> getUser(int userId) async {
     final db = await _databaseHelper.database;
     final List<Map<String, Object?>> usersList = await db.query(
       'users', 
@@ -42,7 +42,7 @@ class UserLocalDataSourceImpl implements UserLocalDataSource {
     if(usersList.isEmpty) return null;
     Map<String, Object?> userMap = usersList.first;
 
-    User user = User(
+    Day user = Day(
       id: userMap['id'] as int,
       dailyGoal: userMap['dailyGoal'] as int,
       currentAmount: userMap['currentAmount'] as int,
