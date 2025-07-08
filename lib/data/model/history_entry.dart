@@ -18,7 +18,7 @@ class HistoryEntry {
       'id': id,
       'dayId': dayId,
       'amount': amount,
-      'dateTime': dateTime,
+      'dateTime': dateTime.toString(),
     };
   }
 
