@@ -17,7 +17,7 @@ class DatabaseHelper {
       path,
       onCreate: (db, version) async {
         await db.execute(
-          'CREATE TABLE users(id INTEGER PRIMARY KEY, dailyGoal INTEGER, currentAmount INTEGER)'
+          'CREATE TABLE days(id INTEGER PRIMARY KEY, dailyGoal INTEGER, currentAmount INTEGER)'
         );
         await db.execute(
           'CREATE TABLE custom_cups(id INTEGER PRIMARY KEY AUTOINCREMENT, amount INTEGER NOT NULL)'
