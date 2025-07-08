@@ -1,4 +1,5 @@
 import 'package:hidroly/data/database/database_helper.dart';
+import 'package:hidroly/data/database/db_constants.dart';
 import 'package:hidroly/data/model/water_button.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -10,7 +11,7 @@ class CustomCupsLocalDataSourceImpl {
   Future<void> createCustomCup(WaterButton waterButton) async {
     final db = await _databaseHelper.database;
     await db.insert(
-      'custom_cups', 
+      DBConstants.customCupsTable, 
       waterButton.toMap(),
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
@@ -19,7 +20,7 @@ class CustomCupsLocalDataSourceImpl {
   Future<List<WaterButton>> getAllCustomCups() async {
     final db = await _databaseHelper.database;
     List<Map<String, Object?>> customCups = await db.query(
-      'custom_cups'
+      DBConstants.customCupsTable
     );
 
     return [

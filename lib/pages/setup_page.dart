@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hidroly/pages/home_page.dart';
-import 'package:hidroly/provider/user_provider.dart';
+import 'package:hidroly/provider/day_provider.dart';
 import 'package:hidroly/widgets/setup/setup_header.dart';
 import 'package:hidroly/widgets/setup/setup_interactable.dart';
 import 'package:provider/provider.dart';
@@ -55,7 +55,7 @@ class _SetupPageState extends State<SetupPage> {
         onPressed: () async {
           if(!formKey.currentState!.validate()) return;
 
-          bool created = await context.read<UserProvider>().createUser(
+          bool created = await context.read<DayProvider>().create(
             ageController.text,
             weightController.text,
           );

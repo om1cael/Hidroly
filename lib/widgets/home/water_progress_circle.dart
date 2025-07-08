@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hidroly/provider/user_provider.dart';
+import 'package:hidroly/provider/day_provider.dart';
 import 'package:provider/provider.dart';
 
 class WaterProgressCircle extends StatelessWidget {
@@ -9,7 +9,7 @@ class WaterProgressCircle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<UserProvider>(
+    return Consumer<DayProvider>(
       builder: (context, provider, child) {
         final user = provider.user;
 

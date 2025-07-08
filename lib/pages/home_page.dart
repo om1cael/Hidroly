@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hidroly/pages/setup_page.dart';
 import 'package:hidroly/provider/custom_cups_provider.dart';
-import 'package:hidroly/provider/user_provider.dart';
+import 'package:hidroly/provider/day_provider.dart';
 import 'package:hidroly/theme/app_colors.dart';
 import 'package:hidroly/widgets/home/home_bottom_nav.dart';
 import 'package:hidroly/widgets/home/water_action_buttons.dart';
@@ -22,7 +22,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    _loadUser();
+    _loadDay();
     _loadCustomCups();
   }
 
@@ -34,7 +34,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    if(context.watch<UserProvider>().user == null) {
+    if(context.watch<DayProvider>().user == null) {
       return Scaffold(
         body: Center(child: CircularProgressIndicator(),),
       );
@@ -84,11 +84,11 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  void _loadUser() async {
-    final userProvider = context.read<UserProvider>();
+  void _loadDay() async {
+    final provider = context.read<DayProvider>();
 
-    await userProvider.loadUser(1);
-    if(userProvider.user == null && mounted) {
+    await provider.read(1);
+    if(provider.user == null && mounted) {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => SetupPage()),
