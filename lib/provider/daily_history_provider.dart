@@ -18,12 +18,7 @@ class DailyHistoryProvider extends ChangeNotifier {
   }
 
   Future<void> getAll(int day) async {
-    List<HistoryEntry> list = await _repository!.getAll(day);
-    
-    if(list.isNotEmpty) {
-      _history = list;
-    }
-
+    _history = await _repository!.getAll(day);
     notifyListeners();
   }
 
