@@ -6,9 +6,9 @@ class DayRepository {
 
   const DayRepository(this._userLocalDataSourceImpl);
 
-  Future<void> createUser(Day user) async => await _userLocalDataSourceImpl.createUser(user);
+  Future<void> create(Day user) async => await _userLocalDataSourceImpl.create(user);
 
-  Future<Day?> loadUser(int id) async => await _userLocalDataSourceImpl.getUser(1);
+  Future<Day?> read(int id) async => await _userLocalDataSourceImpl.read(1);
   
-  Future<void> updateUser(Day updatedUser) async => await _userLocalDataSourceImpl.updateUser(updatedUser);
+  Future<void> update(Day updatedUser) async => await _userLocalDataSourceImpl.update(updatedUser);
 }

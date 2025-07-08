@@ -9,45 +9,45 @@ class DayLocalDataSourceImpl implements DayLocalDataSource {
   DayLocalDataSourceImpl(this._databaseHelper);
 
   @override
-  Future<void> createUser(Day user) async {
+  Future<void> create(Day day) async {
     final db = await _databaseHelper.database;
     await db.insert(
-      'users',
-      user.toMap(),
+      'days',
+      day.toMap(),
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
   }
 
   @override
-  Future<void> updateUser(Day user) async {
+  Future<void> update(Day day) async {
     final db = await _databaseHelper.database;
     await db.update(
-      'users', 
-      user.toMap(),
+      'days', 
+      day.toMap(),
       where: 'id = ?',
-      whereArgs: [user.id] 
+      whereArgs: [day.id] 
     );
   }
 
   @override
-  Future<Day?> getUser(int userId) async {
+  Future<Day?> read(int id) async {
     final db = await _databaseHelper.database;
-    final List<Map<String, Object?>> usersList = await db.query(
-      'users', 
+    final List<Map<String, Object?>> daysList = await db.query(
+      'days', 
       where: 'id = ?', 
-      whereArgs: [userId], 
+      whereArgs: [id], 
       limit: 1
     );
 
-    if(usersList.isEmpty) return null;
-    Map<String, Object?> userMap = usersList.first;
+    if(daysList.isEmpty) return null;
+    Map<String, Object?> dayMap = daysList.first;
 
-    Day user = Day(
-      id: userMap['id'] as int,
-      dailyGoal: userMap['dailyGoal'] as int,
-      currentAmount: userMap['currentAmount'] as int,
+    Day day = Day(
+      id: dayMap['id'] as int,
+      dailyGoal: dayMap['dailyGoal'] as int,
+      currentAmount: dayMap['currentAmount'] as int,
     );
 
-    return user;
+    return day;
   }
 }

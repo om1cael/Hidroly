@@ -55,7 +55,7 @@ class _SetupPageState extends State<SetupPage> {
         onPressed: () async {
           if(!formKey.currentState!.validate()) return;
 
-          bool created = await context.read<DayProvider>().createUser(
+          bool created = await context.read<DayProvider>().create(
             ageController.text,
             weightController.text,
           );

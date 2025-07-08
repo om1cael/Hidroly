@@ -1,7 +1,7 @@
 import 'package:hidroly/data/model/day.dart';
 
 abstract class DayLocalDataSource {
-  Future<void> createUser(Day user);
-  Future<void> updateUser(Day user);
-  Future<Day?> getUser(int userId);
+  Future<void> create(Day day);
+  Future<void> update(Day day);
+  Future<Day?> read(int id);
 }

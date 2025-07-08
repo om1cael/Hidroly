@@ -4,24 +4,24 @@ import 'package:hidroly/data/repository/day_repository.dart';
 import 'package:hidroly/utils/calculate_dailygoal.dart';
 
 class DayProvider extends ChangeNotifier {
-  DayRepository? _userRepository;
+  DayRepository? _repository;
 
-  Day? _user;
-  Day? get user => _user;
+  Day? _day;
+  Day? get user => _day;
 
 
   void setRepository(DayRepository repository) {
-    _userRepository = repository;
+    _repository = repository;
   }
 
-  Future<bool> createUser(String ageText, String weightText) async {
+  Future<bool> create(String ageText, String weightText) async {
     int? age = int.tryParse(ageText);
     int? weight = int.tryParse(weightText);
 
     if(age == null || weight == null) return false;
 
     int dailyGoal = CalculateDailyGoal().calculate(age, weight);
-    await _userRepository!.createUser(
+    await _repository!.create(
       Day(
         id: 1, 
         dailyGoal: dailyGoal, 
@@ -31,21 +31,21 @@ class DayProvider extends ChangeNotifier {
     return true;
   }
 
-  Future<void> loadUser(int id) async {
-    _user = await _userRepository!.loadUser(id);
+  Future<void> read(int id) async {
+    _day = await _repository!.read(id);
     notifyListeners();
   }
   
-  Future<void> updateUser(Day updatedUser) async {
-    await _userRepository!.updateUser(updatedUser);
-    await loadUser(updatedUser.id);
+  Future<void> update(Day updatedUser) async {
+    await _repository!.update(updatedUser);
+    await read(updatedUser.id);
   }
 
   Future<void> addWater(int amount) async {
-    Day updatedUser = _user!.copyWith(
-      currentAmount: _user!.currentAmount + amount,
+    Day updatedDay = _day!.copyWith(
+      currentAmount: _day!.currentAmount + amount,
     );
 
-    await updateUser(updatedUser);
+    await update(updatedDay);
   }
 }
