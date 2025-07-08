@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hidroly/pages/setup_page.dart';
 import 'package:hidroly/provider/custom_cups_provider.dart';
+import 'package:hidroly/provider/daily_history_provider.dart';
 import 'package:hidroly/provider/day_provider.dart';
 import 'package:hidroly/theme/app_colors.dart';
 import 'package:hidroly/widgets/home/daily_history_bottom_sheet.dart';
@@ -25,6 +26,7 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     _loadDay();
     _loadCustomCups();
+    _loadDailyHistory();
   }
 
   @override
@@ -117,5 +119,9 @@ class _HomePageState extends State<HomePage> {
 
   void _loadCustomCups() async {
     await context.read<CustomCupsProvider>().loadCustomCups();
+  }
+
+  void _loadDailyHistory() async {
+    await context.read<DailyHistoryProvider>().getAll(1);
   }
 }
