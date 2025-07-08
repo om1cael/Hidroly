@@ -1,3 +1,4 @@
+import 'package:hidroly/data/database/db_constants.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -17,13 +18,38 @@ class DatabaseHelper {
       path,
       onCreate: (db, version) async {
         await db.execute(
-          'CREATE TABLE days(id INTEGER PRIMARY KEY, dailyGoal INTEGER, currentAmount INTEGER)'
+          '''
+          CREATE TABLE ${DBConstants.daysTable} (
+              id INTEGER PRIMARY KEY AUTOINCREMENT, 
+              dailyGoal INTEGER, 
+              currentAmount INTEGER
+          )
+          '''
         );
         await db.execute(
-          'CREATE TABLE custom_cups(id INTEGER PRIMARY KEY AUTOINCREMENT, amount INTEGER NOT NULL)'
+          '''
+          CREATE TABLE ${DBConstants.customCupsTable} (
+            id INTEGER PRIMARY KEY AUTOINCREMENT, 
+            amount INTEGER NOT NULL
+          )
+          '''
         );
       },
-      version: 1,
+      onUpgrade: (db, oldVersion, newVersion) async {
+        if(oldVersion < 2) {
+          await db.execute('DROP TABLE IF EXISTS users');
+          await db.execute(
+            '''
+            CREATE TABLE ${DBConstants.daysTable} (
+                id INTEGER PRIMARY KEY AUTOINCREMENT, 
+                dailyGoal INTEGER, 
+                currentAmount INTEGER
+            )
+            '''
+          );
+        }
+      },
+      version: 2,
     );
   }
 }

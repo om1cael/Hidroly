@@ -22,7 +22,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    _loadUser();
+    _loadDay();
     _loadCustomCups();
   }
 
@@ -84,11 +84,11 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  void _loadUser() async {
-    final userProvider = context.read<DayProvider>();
+  void _loadDay() async {
+    final provider = context.read<DayProvider>();
 
-    await userProvider.read(1);
-    if(userProvider.user == null && mounted) {
+    await provider.read(1);
+    if(provider.user == null && mounted) {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => SetupPage()),

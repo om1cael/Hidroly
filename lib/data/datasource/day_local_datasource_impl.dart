@@ -1,4 +1,5 @@
 import 'package:hidroly/data/database/database_helper.dart';
+import 'package:hidroly/data/database/db_constants.dart';
 import 'package:hidroly/data/datasource/user_local_datasource.dart';
 import 'package:hidroly/data/model/day.dart';
 import 'package:sqflite/sqflite.dart';
@@ -12,7 +13,7 @@ class DayLocalDataSourceImpl implements DayLocalDataSource {
   Future<void> create(Day day) async {
     final db = await _databaseHelper.database;
     await db.insert(
-      'days',
+      DBConstants.daysTable,
       day.toMap(),
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
@@ -22,7 +23,7 @@ class DayLocalDataSourceImpl implements DayLocalDataSource {
   Future<void> update(Day day) async {
     final db = await _databaseHelper.database;
     await db.update(
-      'days', 
+      DBConstants.daysTable, 
       day.toMap(),
       where: 'id = ?',
       whereArgs: [day.id] 
@@ -33,7 +34,7 @@ class DayLocalDataSourceImpl implements DayLocalDataSource {
   Future<Day?> read(int id) async {
     final db = await _databaseHelper.database;
     final List<Map<String, Object?>> daysList = await db.query(
-      'days', 
+      DBConstants.daysTable, 
       where: 'id = ?', 
       whereArgs: [id], 
       limit: 1
