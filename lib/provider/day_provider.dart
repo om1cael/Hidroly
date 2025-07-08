@@ -48,4 +48,15 @@ class DayProvider extends ChangeNotifier {
 
     await update(updatedDay);
   }
+
+  Future<bool> removeWater(int amount) async {
+    if(_day!.currentAmount < amount || amount <= 0) return false;
+
+    Day updatedDay = _day!.copyWith(
+      currentAmount: _day!.currentAmount - amount,
+    );
+
+    await update(updatedDay);
+    return true;
+  }
 }
