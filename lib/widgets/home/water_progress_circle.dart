@@ -11,14 +11,14 @@ class WaterProgressCircle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<DayProvider>(
       builder: (context, provider, child) {
-        final user = provider.user;
+        final day = provider.day;
 
         // TODO: This should be better handled.
-        if(user == null) {
+        if(day == null) {
           return const CircularProgressIndicator();
         }
 
-        final double progress = (user.currentAmount / user.dailyGoal).clamp(0, 1);
+        final double progress = (day.currentAmount / day.dailyGoal).clamp(0, 1);
 
         return Stack(
           alignment: AlignmentGeometry.xy(0, 0),
@@ -37,11 +37,11 @@ class WaterProgressCircle extends StatelessWidget {
             Column(
               children: [
                 Text(
-                  '${user.currentAmount}ml',
+                  '${day.currentAmount}ml',
                   style: Theme.of(context).textTheme.headlineLarge,
                 ),
                 Text(
-                  'of ${user.dailyGoal}ml',
+                  'of ${day.dailyGoal}ml',
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
               ],

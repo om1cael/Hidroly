@@ -7,7 +7,7 @@ class DayProvider extends ChangeNotifier {
   DayRepository? _repository;
 
   Day? _day;
-  Day? get user => _day;
+  Day? get day => _day;
 
 
   void setRepository(DayRepository repository) {
@@ -36,9 +36,9 @@ class DayProvider extends ChangeNotifier {
     notifyListeners();
   }
   
-  Future<void> update(Day updatedUser) async {
-    await _repository!.update(updatedUser);
-    await read(updatedUser.id);
+  Future<void> update(Day updatedDay) async {
+    await _repository!.update(updatedDay);
+    await read(updatedDay.id);
   }
 
   Future<void> addWater(int amount) async {

@@ -35,7 +35,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    if(context.watch<DayProvider>().user == null) {
+    if(context.watch<DayProvider>().day == null) {
       return Scaffold(
         body: Center(child: CircularProgressIndicator(),),
       );
@@ -106,7 +106,7 @@ class _HomePageState extends State<HomePage> {
     final provider = context.read<DayProvider>();
 
     await provider.read(1);
-    if(provider.user == null && mounted) {
+    if(provider.day == null && mounted) {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => SetupPage()),
