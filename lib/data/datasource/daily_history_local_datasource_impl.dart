@@ -29,7 +29,7 @@ class DailyHistoryLocalDataSourceImpl extends DailyHistoryLocalDataSource {
     );
 
     return [
-      for(final {'id: ': id as int, 'dayId': dayId as int, 'amount': amount as int, 'dateTime': dateTime as String} in dailyHistoryList)
+      for(final {'id': id as int, 'dayId': dayId as int, 'amount': amount as int, 'dateTime': dateTime as String} in dailyHistoryList)
         HistoryEntry(id: id, dayId: dayId, amount: amount, dateTime: DateTime.parse(dateTime))
     ];
   }
