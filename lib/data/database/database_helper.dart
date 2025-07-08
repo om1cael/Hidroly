@@ -34,20 +34,20 @@ class DatabaseHelper {
           )
           '''
         );
+        await db.execute(
+          '''
+          CREATE TABLE ${DBConstants.dailyHistoryEntryTable} (
+            id INTEGER PRIMARY KEY AUTOINCREMENT, 
+            dayId INTEGER NOT NULL,
+            amount INTEGER NOT NULL,
+            dateTime TEXT NOT NULL,
+            FOREIGN KEY (dayId) REFERENCES ${DBConstants.daysTable}(id)
+          )
+          '''
+        );
       },
-      onUpgrade: (db, oldVersion, newVersion) async {
-        if(oldVersion < 2) {
-          await db.execute('DROP TABLE IF EXISTS users');
-          await db.execute(
-            '''
-            CREATE TABLE ${DBConstants.daysTable} (
-                id INTEGER PRIMARY KEY AUTOINCREMENT, 
-                dailyGoal INTEGER, 
-                currentAmount INTEGER
-            )
-            '''
-          );
-        }
+      onConfigure: (db) async {
+        await db.execute('PRAGMA foreign_keys = ON');
       },
       version: 2,
     );
