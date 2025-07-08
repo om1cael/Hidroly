@@ -1,15 +1,13 @@
-import 'package:hidroly/data/model/day.dart';
-
 class HistoryEntry {
   final int id;
-  final Day day;
+  final int dayId;
   final int amount;
   final DateTime dateTime;
 
   const HistoryEntry(
     {
       required this.id,
-      required this.day,
+      required this.dayId,
       required this.amount,
       required this.dateTime,
     }
@@ -18,7 +16,7 @@ class HistoryEntry {
   Map<String, Object> toMap() {
     return {
       'id': id,
-      'day': day,
+      'dayId': dayId,
       'amount': amount,
       'dateTime': dateTime,
     };
@@ -27,7 +25,7 @@ class HistoryEntry {
   @override
   String toString() {
     return (
-      'HistoryEntry(id: $id, day: $day, amount: $amount, dateTime: $dateTime)'
+      'HistoryEntry(id: $id, dayId: $dayId, amount: $amount, dateTime: $dateTime)'
     );
   }
 }
