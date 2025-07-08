@@ -1,12 +1,12 @@
 class HistoryEntry {
-  final int id;
+  final int? id;
   final int dayId;
   final int amount;
   final DateTime dateTime;
 
   const HistoryEntry(
     {
-      required this.id,
+      this.id,
       required this.dayId,
       required this.amount,
       required this.dateTime,
@@ -14,12 +14,12 @@ class HistoryEntry {
   );
   
   Map<String, Object> toMap() {
-    return {
-      'id': id,
-      'dayId': dayId,
-      'amount': amount,
-      'dateTime': dateTime.toString(),
-    };
+    final map = { 'dayId': dayId,'amount': amount,'dateTime': dateTime.toString() };
+    if(id != null) {
+      map['id'] = id as int;
+    }
+
+    return map;
   }
 
   @override
