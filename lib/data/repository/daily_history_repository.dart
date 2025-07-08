@@ -9,7 +9,7 @@ class DailyHistoryRepository {
   Future<void> create(HistoryEntry historyEntry) async => 
     _dataSource.create(historyEntry);
   
-  Future<List<HistoryEntry>?> getAll(int day) async =>
+  Future<List<HistoryEntry>> getAll(int day) async =>
     _dataSource.getAll(day);
 
   Future<void> delete(int id) async =>
