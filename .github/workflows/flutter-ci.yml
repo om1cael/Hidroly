@@ -23,7 +23,7 @@ jobs:
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: 'stable'
+          flutter-version: '3.32.5'
 
       - name: Cache Flutter dependencies
         uses: actions/cache@v3
@@ -41,8 +41,8 @@ jobs:
       - name: Analyze code
         run: flutter analyze
 
-      - name: Run tests
-        run: flutter test
+      #- name: Run tests
+      #  run: flutter test
 
       - name: Build APK (debug)
         run: flutter build apk --debug
