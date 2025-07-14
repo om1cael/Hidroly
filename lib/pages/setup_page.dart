@@ -55,9 +55,12 @@ class _SetupPageState extends State<SetupPage> {
         onPressed: () async {
           if(!formKey.currentState!.validate()) return;
 
+          int? age = int.tryParse(ageController.text);
+          int? weight = int.tryParse(weightController.text);
+
           bool created = await context.read<DayProvider>().create(
-            ageController.text,
-            weightController.text,
+            age,
+            weight,
           );
 
           if(created && context.mounted) {

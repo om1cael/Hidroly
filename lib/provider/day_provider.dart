@@ -14,10 +14,7 @@ class DayProvider extends ChangeNotifier {
     _repository = repository;
   }
 
-  Future<bool> create(String ageText, String weightText) async {
-    int? age = int.tryParse(ageText);
-    int? weight = int.tryParse(weightText);
-
+  Future<bool> create(int? age, int? weight) async {
     if(age == null || weight == null) return false;
 
     int dailyGoal = CalculateDailyGoal().calculate(age, weight);
