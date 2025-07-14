@@ -133,6 +133,12 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<void> _loadDailyHistory() async {
-    await context.read<DailyHistoryProvider>().getAll(1);
+    final currentDay = context.read<DayProvider>().day;
+
+    // TODO: Maybe return to the setup page?
+    if(currentDay == null) return;
+    
+    final dayId = currentDay.id!;
+    await context.read<DailyHistoryProvider>().getAll(dayId);
   }
 }
