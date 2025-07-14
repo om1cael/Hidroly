@@ -1,6 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:hidroly/data/model/day.dart';
 import 'package:hidroly/data/repository/day_repository.dart';
+import 'package:path/path.dart';
 
 class DayProvider extends ChangeNotifier {
   late DayRepository _repository;
@@ -12,14 +13,7 @@ class DayProvider extends ChangeNotifier {
     _repository = repository;
   }
 
-  Future<bool> create(int dailyGoal) async {
-    DateTime now = DateTime.now();
-    DateTime date = DateTime.utc(
-      now.year,
-      now.month,
-      now.day,
-    );
-
+  Future<bool> create(DateTime date, int dailyGoal) async {
     await _repository.create(
       Day(
         dailyGoal: dailyGoal,
@@ -53,7 +47,7 @@ class DayProvider extends ChangeNotifier {
     );
 
     if (appDate != currentDate) {
-      await create(_day!.dailyGoal);
+      await create(currentDate, _day!.dailyGoal);
       await findLatest();
     }
   }

@@ -62,8 +62,16 @@ class _SetupPageState extends State<SetupPage> {
           if(age == null || weight == null) return;
           
           int dailyGoal = CalculateDailyGoal().calculate(age, weight);
+          
+          DateTime now = DateTime.now();
+          DateTime date = DateTime.utc(
+            now.year,
+            now.month,
+            now.day,
+          );
 
           bool created = await context.read<DayProvider>().create(
+            date,
             dailyGoal,
           );
 
