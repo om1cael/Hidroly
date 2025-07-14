@@ -9,7 +9,6 @@ class DayProvider extends ChangeNotifier {
   Day? _day;
   Day? get day => _day;
 
-
   void setRepository(DayRepository repository) {
     _repository = repository;
   }
@@ -20,9 +19,7 @@ class DayProvider extends ChangeNotifier {
     int dailyGoal = CalculateDailyGoal().calculate(age, weight);
     await _repository!.create(
       Day(
-        id: 1, 
-        dailyGoal: dailyGoal, 
-        currentAmount: 0
+        dailyGoal: dailyGoal,
       )
     );
     return true;
@@ -35,7 +32,7 @@ class DayProvider extends ChangeNotifier {
   
   Future<void> update(Day updatedDay) async {
     await _repository!.update(updatedDay);
-    await read(updatedDay.id);
+    await read(updatedDay.id!);
   }
 
   Future<void> addWater(int amount) async {

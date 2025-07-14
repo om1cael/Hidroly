@@ -1,16 +1,22 @@
 class Day {
-  final int id;
+  final int? id;
   final int dailyGoal;
   final int currentAmount;
 
   const Day({
-    required this.id,
+    this.id,
     required this.dailyGoal,
-    required this.currentAmount,
+    this.currentAmount = 0,
   });
 
   Map<String, Object?> toMap() {
-    return {'id': id, 'dailyGoal': dailyGoal, 'currentAmount': currentAmount};
+    final map = {'dailyGoal': dailyGoal, 'currentAmount': currentAmount};
+
+    if(id != null) {
+      map['id'] = id as int;
+    }
+
+    return map;
   }
 
   @override
