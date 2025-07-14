@@ -24,9 +24,9 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    _loadDay();
-    _loadCustomCups();
-    _loadDailyHistory();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _initializeHome();
+    });
   }
 
   @override
@@ -104,7 +104,18 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  void _loadDay() async {
+  Future<void> _initializeHome() async {
+    await _loadDay();
+    await _createDayIfNewDate();
+    await _loadCustomCups();
+    await _loadDailyHistory();
+  }
+
+  Future<void> _createDayIfNewDate() async {
+    await context.read<DayProvider>().createAndLoadIfNewDay();
+  }
+
+  Future<void> _loadDay() async {
     final provider = context.read<DayProvider>();
 
     await provider.findLatest();
@@ -117,11 +128,11 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
-  void _loadCustomCups() async {
+  Future<void> _loadCustomCups() async {
     await context.read<CustomCupsProvider>().loadCustomCups();
   }
 
-  void _loadDailyHistory() async {
+  Future<void> _loadDailyHistory() async {
     await context.read<DailyHistoryProvider>().getAll(1);
   }
 }
