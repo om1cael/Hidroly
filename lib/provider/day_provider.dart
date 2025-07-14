@@ -13,11 +13,11 @@ class DayProvider extends ChangeNotifier {
     _repository = repository;
   }
 
-  Future<bool> create(DateTime date, int dailyGoal) async {
+  Future<bool> create(DateTime localDate, int dailyGoal) async {
     await _repository.create(
       Day(
         dailyGoal: dailyGoal,
-        date: date,
+        date: localDate.toUtc(),
       )
     );
     return true;
