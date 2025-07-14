@@ -55,25 +55,11 @@ class _SetupPageState extends State<SetupPage> {
       floatingActionButton: IconButton.filled(
         onPressed: () async {
           if(!formKey.currentState!.validate()) return;
-
-          int? age = int.tryParse(ageController.text);
-          int? weight = int.tryParse(weightController.text);
-
-          if(age == null || weight == null) return;
           
-          int dailyGoal = CalculateDailyGoal().calculate(age, weight);
-          
-          DateTime now = DateTime.now();
-          DateTime date = DateTime.utc(
-            now.year,
-            now.month,
-            now.day,
-          );
+          int? dailyGoal = _getDailyGoal();
+          if(dailyGoal == null) return;
 
-          bool created = await context.read<DayProvider>().create(
-            date,
-            dailyGoal,
-          );
+          final created = await _createDay(context, dailyGoal);
 
           if(created && context.mounted) {
             Navigator.of(context).pushReplacement(
@@ -88,5 +74,24 @@ class _SetupPageState extends State<SetupPage> {
         padding: EdgeInsets.all(18),
       ),
     );
+  }
+
+  Future<bool> _createDay(BuildContext context, int dailyGoal) async {
+    final localDate = DateTime.now();
+    
+    bool created = await context.read<DayProvider>().create(
+      localDate,
+      dailyGoal,
+    );
+    return created;
+  }
+
+  int? _getDailyGoal() {
+    int? age = int.tryParse(ageController.text);
+    int? weight = int.tryParse(weightController.text);
+
+    if(age == null || weight == null) return null;
+    
+    return CalculateDailyGoal().calculate(age, weight);
   }
 }
