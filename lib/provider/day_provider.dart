@@ -20,6 +20,7 @@ class DayProvider extends ChangeNotifier {
     await _repository!.create(
       Day(
         dailyGoal: dailyGoal,
+        date: DateTime.now().toUtc(),
       )
     );
     return true;
