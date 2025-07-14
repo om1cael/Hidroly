@@ -31,12 +31,11 @@ class DayLocalDataSourceImpl implements DayLocalDataSource {
   }
 
   @override
-  Future<Day?> read(int id) async {
+  Future<Day?> findLatest() async {
     final db = await _databaseHelper.database;
     final List<Map<String, Object?>> daysList = await db.query(
       DBConstants.daysTable, 
-      where: 'id = ?', 
-      whereArgs: [id], 
+      orderBy: 'date DESC',
       limit: 1
     );
 

@@ -4,7 +4,7 @@ import 'package:hidroly/data/repository/day_repository.dart';
 import 'package:hidroly/utils/calculate_dailygoal.dart';
 
 class DayProvider extends ChangeNotifier {
-  DayRepository? _repository;
+  late DayRepository _repository;
 
   Day? _day;
   Day? get day => _day;
@@ -17,7 +17,7 @@ class DayProvider extends ChangeNotifier {
     if(age == null || weight == null) return false;
 
     int dailyGoal = CalculateDailyGoal().calculate(age, weight);
-    await _repository!.create(
+    await _repository.create(
       Day(
         dailyGoal: dailyGoal,
         date: DateTime.now().toUtc(),
@@ -26,14 +26,19 @@ class DayProvider extends ChangeNotifier {
     return true;
   }
 
-  Future<void> read(int id) async {
-    _day = await _repository!.read(id);
+  Future<void> findLatest() async {
+    Day? latestDay = await _repository.findLatest();
+
+    if(latestDay != null) {
+      _day = latestDay;
+    }
+
     notifyListeners();
   }
   
   Future<void> update(Day updatedDay) async {
-    await _repository!.update(updatedDay);
-    await read(updatedDay.id!);
+    await _repository.update(updatedDay);
+    await findLatest();
   }
 
   Future<void> addWater(int amount) async {

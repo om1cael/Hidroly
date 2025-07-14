@@ -107,7 +107,7 @@ class _HomePageState extends State<HomePage> {
   void _loadDay() async {
     final provider = context.read<DayProvider>();
 
-    await provider.read(1);
+    await provider.findLatest();
     if(provider.day == null && mounted) {
       Navigator.pushReplacement(
         context,
