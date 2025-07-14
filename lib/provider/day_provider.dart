@@ -13,10 +13,7 @@ class DayProvider extends ChangeNotifier {
     _repository = repository;
   }
 
-  Future<bool> create(int? age, int? weight) async {
-    if(age == null || weight == null) return false;
-
-    int dailyGoal = CalculateDailyGoal().calculate(age, weight);
+  Future<bool> create(int dailyGoal) async {
     await _repository.create(
       Day(
         dailyGoal: dailyGoal,

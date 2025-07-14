@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hidroly/pages/home_page.dart';
 import 'package:hidroly/provider/day_provider.dart';
+import 'package:hidroly/utils/calculate_dailygoal.dart';
 import 'package:hidroly/widgets/setup/setup_header.dart';
 import 'package:hidroly/widgets/setup/setup_interactable.dart';
 import 'package:provider/provider.dart';
@@ -58,9 +59,12 @@ class _SetupPageState extends State<SetupPage> {
           int? age = int.tryParse(ageController.text);
           int? weight = int.tryParse(weightController.text);
 
+          if(age == null || weight == null) return;
+          
+          int dailyGoal = CalculateDailyGoal().calculate(age, weight);
+
           bool created = await context.read<DayProvider>().create(
-            age,
-            weight,
+            dailyGoal,
           );
 
           if(created && context.mounted) {
