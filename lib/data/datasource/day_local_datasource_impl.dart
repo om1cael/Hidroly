@@ -47,6 +47,7 @@ class DayLocalDataSourceImpl implements DayLocalDataSource {
       id: dayMap['id'] as int,
       dailyGoal: dayMap['dailyGoal'] as int,
       currentAmount: dayMap['currentAmount'] as int,
+      date: DateTime.parse(dayMap['date'] as String),
     );
 
     return day;
