@@ -4,4 +4,5 @@ abstract class DayLocalDataSource {
   Future<void> create(Day day);
   Future<void> update(Day day);
   Future<Day?> findLatest();
+  Future<Day?> findByDate(DateTime date);
 }
