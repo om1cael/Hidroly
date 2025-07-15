@@ -97,7 +97,10 @@ class _HomePageState extends State<HomePage> {
           if(loadedDay == null && mounted) {
             ScaffoldMessenger.of(context)
               .showSnackBar(SnackBar(
-                content: Text('Day not found'),
+                content: Text(
+                  'Day not found',
+                  style: AppTheme.darkTheme.textTheme.bodyLarge,
+                ),
               )
             );
             return;
