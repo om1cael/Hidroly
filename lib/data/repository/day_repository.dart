@@ -12,7 +12,12 @@ class DayRepository {
 
   Future<Day?> findLatest() async => await _userLocalDataSourceImpl.findLatest();
 
-  Future<Day?> findByDate(DateTime date) async => await _userLocalDataSourceImpl.findByDate(date);
+  Future<Day?> findByDate(DateTime date) async {
+    final startUtc = date.toUtc();
+    final endUtc = startUtc.add(Duration(days: 1));
+
+    return await _userLocalDataSourceImpl.findByDate(startUtc.toIso8601String(), endUtc.toIso8601String());
+  }
   
   Future<void> update(Day updatedUser) async => await _userLocalDataSourceImpl.update(updatedUser);
 }

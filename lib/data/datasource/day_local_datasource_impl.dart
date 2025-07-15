@@ -75,14 +75,12 @@ class DayLocalDataSourceImpl implements DayLocalDataSource {
   }
   
   @override
-  Future<Day?> findByDate(DateTime date) async {
-    final iso = date.toIso8601String();
-
+  Future<Day?> findByDate(String start, String end) async {
     final db = await _databaseHelper.database;
     final List<Map<String, Object?>> dayList = await db.query(
       DBConstants.daysTable,
-      where: 'date = ?',
-      whereArgs: [iso],
+      where: 'date >= ? AND date < ?',
+      whereArgs: [start, end],
       orderBy: 'date DESC',
       limit: 1,
     );
@@ -92,8 +90,8 @@ class DayLocalDataSourceImpl implements DayLocalDataSource {
     
     return Day(
       id: dayMap['id'] as int,
-      dailyGoal: dayMap['daily_goal'] as int,
-      currentAmount: dayMap['current_amount'] as int,
+      dailyGoal: dayMap['dailyGoal'] as int,
+      currentAmount: dayMap['currentAmount'] as int,
       date: DateTime.parse(dayMap['date'] as String),
     );
   }

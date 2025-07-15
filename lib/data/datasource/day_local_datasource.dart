@@ -5,5 +5,5 @@ abstract class DayLocalDataSource {
   Future<void> update(Day day);
   Future<Day?> findFirst();
   Future<Day?> findLatest();
-  Future<Day?> findByDate(DateTime date);
+  Future<Day?> findByDate(String start, String end);
 }
