@@ -8,6 +8,10 @@ class DayProvider extends ChangeNotifier {
 
   Day? _day;
   Day? get day => _day;
+  set day(Day? value) {
+    _day = value;
+    notifyListeners();
+  }
 
   void setRepository(DayRepository repository) {
     _repository = repository;
@@ -35,7 +39,7 @@ class DayProvider extends ChangeNotifier {
 
     final localDate = DateTime.now();
 
-    final currentAppDate = AppDateUtils.normalizedLocal(day!.date.toLocal());
+    final currentAppDate = AppDateUtils.normalizedLocal(_day!.date.toLocal());
     final currentDate = AppDateUtils.normalizedLocal(localDate);
 
     if (currentAppDate != currentDate) {
@@ -44,19 +48,13 @@ class DayProvider extends ChangeNotifier {
     }
   }
 
-  Future<void> findLatest() async {
-    Day? latestDay = await _repository.findLatest();
-
-    if(latestDay != null) {
-      _day = latestDay;
-    }
-
-    notifyListeners();
+  Future<Day?> findLatest() async {
+    return await _repository.findLatest();
   }
   
   Future<void> update(Day updatedDay) async {
     await _repository.update(updatedDay);
-    await findLatest();
+    day = updatedDay;
   }
 
   Future<void> addWater(int amount) async {

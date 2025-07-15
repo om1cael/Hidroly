@@ -140,15 +140,17 @@ class _HomePageState extends State<HomePage> {
 
   Future<void> _loadDay() async {
     final provider = context.read<DayProvider>();
+    final latestDay = await provider.findLatest();
 
-    await provider.findLatest();
-    if(provider.day == null && mounted) {
+    if(latestDay == null && mounted) {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => SetupPage()),
       );
       return;
     }
+
+    provider.day = latestDay;
   }
 
   Future<void> _loadCustomCups() async {
