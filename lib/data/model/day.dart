@@ -23,7 +23,7 @@ class Day {
 
   @override
   String toString() {
-    return 'Day{id: $id, dailyGoal: $dailyGoal, currentAmount: $currentAmount}';
+    return 'Day{id: $id, dailyGoal: $dailyGoal, currentAmount: $currentAmount, date: $date}';
   }
 
   Day copyWith({int? id, int? dailyGoal, int? currentAmount, DateTime? date}) {

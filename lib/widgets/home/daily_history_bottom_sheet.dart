@@ -39,7 +39,7 @@ class DailyHistoryBottomSheet extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        'Today\'s history',
+                        'Day history',
                         style: TextStyle(
                           color: AppColors.primaryText
                         ),
@@ -60,7 +60,7 @@ class DailyHistoryBottomSheet extends StatelessWidget {
                               color: AppColors.secondaryText,
                               size: 48,
                             ),
-                            Text('No entries today.')
+                            Text('Nothing here :(')
                           ],
                         ),
                       ),
