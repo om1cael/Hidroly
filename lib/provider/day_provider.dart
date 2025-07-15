@@ -48,6 +48,10 @@ class DayProvider extends ChangeNotifier {
     }
   }
 
+  Future<Day?> findByDate(DateTime date) async {
+    return await _repository.findByDate(date);
+  }
+
   Future<Day?> findFirst() async {
     return await _repository.findFirst();
   }
