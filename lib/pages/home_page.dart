@@ -84,12 +84,27 @@ class _HomePageState extends State<HomePage> {
 
           if(!mounted || firstDate == null || latestDate == null) return;
 
-          showDatePicker(
+          final DateTime? pickedDate = await showDatePicker(
             context: context,
             initialDate: latestDate.date.toLocal(),
-            firstDate: firstDate.date.toLocal(), 
+            firstDate: firstDate.date.toLocal(),
             lastDate: latestDate.date.toLocal(),
           );
+
+          if(pickedDate == null) return;
+
+          final loadedDay = await provider.findByDate(pickedDate);
+          if(loadedDay == null && mounted) {
+            ScaffoldMessenger.of(context)
+              .showSnackBar(SnackBar(
+                content: Text('Day not found!'),
+              )
+            );
+            return;
+          }
+
+          provider.day = loadedDay;
+          _loadDailyHistory(currentDay: provider.day);
         },
         style: TextButton.styleFrom(
           padding: EdgeInsets.zero,
@@ -171,8 +186,8 @@ class _HomePageState extends State<HomePage> {
     await context.read<CustomCupsProvider>().loadCustomCups();
   }
 
-  Future<void> _loadDailyHistory() async {
-    final currentDay = context.read<DayProvider>().day;
+  Future<void> _loadDailyHistory({Day? currentDay}) async {
+    currentDay ??= context.read<DayProvider>().day;
 
     // TODO: Maybe return to the setup page?
     if(currentDay == null) return;
