@@ -95,6 +95,8 @@ class AppTheme {
         dayForegroundColor: WidgetStateProperty.resolveWith<Color>((state) {
           if(state.contains(WidgetState.disabled)) {
             return AppColors.unselectedItem;
+          } else if(state.contains(WidgetState.selected)) {
+            return AppColors.onBackground;
           } else {
             return AppColors.secondaryText;
           }
