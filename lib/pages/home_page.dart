@@ -6,11 +6,11 @@ import 'package:hidroly/provider/daily_history_provider.dart';
 import 'package:hidroly/provider/day_provider.dart';
 import 'package:hidroly/theme/app_colors.dart';
 import 'package:hidroly/theme/app_theme.dart';
+import 'package:hidroly/utils/app_date_utils.dart';
 import 'package:hidroly/widgets/home/daily_history_bottom_sheet.dart';
 import 'package:hidroly/widgets/home/home_bottom_nav.dart';
 import 'package:hidroly/widgets/home/water_action_buttons.dart';
 import 'package:hidroly/widgets/home/water_progress_circle.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
@@ -97,7 +97,7 @@ class _HomePageState extends State<HomePage> {
           if(loadedDay == null && mounted) {
             ScaffoldMessenger.of(context)
               .showSnackBar(SnackBar(
-                content: Text('Day not found!'),
+                content: Text('Day not found'),
               )
             );
             return;
@@ -113,7 +113,7 @@ class _HomePageState extends State<HomePage> {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              DateFormat.yMMMMd().format(currentDay.date.toLocal()),
+              AppDateUtils.formatDayTitle(currentDay.date.toLocal()),
               style: AppTheme.darkTheme.appBarTheme.titleTextStyle,
             ),
             Icon(
