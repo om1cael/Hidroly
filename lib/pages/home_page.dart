@@ -5,6 +5,7 @@ import 'package:hidroly/provider/custom_cups_provider.dart';
 import 'package:hidroly/provider/daily_history_provider.dart';
 import 'package:hidroly/provider/day_provider.dart';
 import 'package:hidroly/theme/app_colors.dart';
+import 'package:hidroly/theme/app_theme.dart';
 import 'package:hidroly/widgets/home/daily_history_bottom_sheet.dart';
 import 'package:hidroly/widgets/home/home_bottom_nav.dart';
 import 'package:hidroly/widgets/home/water_action_buttons.dart';
@@ -74,8 +75,23 @@ class _HomePageState extends State<HomePage> {
 
   AppBar appBar(int dayId) {
     return AppBar(
-      title: Text(
-        'Today',
+      title: TextButton(
+        onPressed: () {},
+        style: TextButton.styleFrom(
+          padding: EdgeInsets.zero,
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              'Today',
+              style: AppTheme.darkTheme.appBarTheme.titleTextStyle,
+            ),
+            Icon(
+              Icons.arrow_drop_down
+            ),
+          ],
+        ),
       ),
       actions: [
         IconButton(
