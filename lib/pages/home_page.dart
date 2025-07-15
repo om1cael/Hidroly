@@ -10,6 +10,7 @@ import 'package:hidroly/widgets/home/daily_history_bottom_sheet.dart';
 import 'package:hidroly/widgets/home/home_bottom_nav.dart';
 import 'package:hidroly/widgets/home/water_action_buttons.dart';
 import 'package:hidroly/widgets/home/water_progress_circle.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
@@ -49,7 +50,7 @@ class _HomePageState extends State<HomePage> {
     }
 
     return Scaffold(
-      appBar: appBar(dayId),
+      appBar: appBar(currentDay, dayId),
       bottomNavigationBar: HomeBottomNav(),
       body: Center(
         child: SingleChildScrollView(
@@ -73,7 +74,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  AppBar appBar(int dayId) {
+  AppBar appBar(Day currentDay, int dayId) {
     return AppBar(
       title: TextButton(
         onPressed: () async {
@@ -97,7 +98,7 @@ class _HomePageState extends State<HomePage> {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              'Today',
+              DateFormat.yMMMMd().format(currentDay.date.toLocal()),
               style: AppTheme.darkTheme.appBarTheme.titleTextStyle,
             ),
             Icon(
