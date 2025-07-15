@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hidroly/data/model/day.dart';
 import 'package:hidroly/pages/setup_page.dart';
 import 'package:hidroly/provider/custom_cups_provider.dart';
 import 'package:hidroly/provider/daily_history_provider.dart';
@@ -37,14 +38,17 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    if(context.watch<DayProvider>().day == null) {
+    final Day? day = context.watch<DayProvider>().day;
+    final int? dayId = day?.id;
+
+    if(day == null || dayId == null) {
       return Scaffold(
         body: Center(child: CircularProgressIndicator(),),
       );
     }
 
     return Scaffold(
-      appBar: appBar(),
+      appBar: appBar(dayId),
       bottomNavigationBar: HomeBottomNav(),
       body: Center(
         child: SingleChildScrollView(
@@ -56,6 +60,7 @@ class _HomePageState extends State<HomePage> {
               children: [
                 WaterProgressCircle(),
                 WaterActionButtons(
+                  dayId: dayId,
                   customCupAmountController: customCupAmountController,
                   formKey: formKey,
                 )
@@ -67,7 +72,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  AppBar appBar() {
+  AppBar appBar(int dayId) {
     return AppBar(
       title: Text(
         'Today',
@@ -78,7 +83,9 @@ class _HomePageState extends State<HomePage> {
             showModalBottomSheet(
               context: context, 
               builder: (builder) {
-                return DailyHistoryBottomSheet();
+                return DailyHistoryBottomSheet(
+                  dayId: dayId,
+                );
               }
             );
           }, 

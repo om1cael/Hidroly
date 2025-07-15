@@ -11,12 +11,14 @@ import 'package:provider/provider.dart';
 class WaterActionButtons extends StatelessWidget {
   final TextEditingController customCupAmountController;
   final GlobalKey<FormState> formKey;
+  final int dayId;
 
   final _defaultButtons = [WaterButton(amount: 250), WaterButton(amount: 350)];
   final _addCustomCupButton = WaterButton(amount: 0, isCustomOption: true);
 
   WaterActionButtons({
     super.key,
+    required this.dayId,
     required this.customCupAmountController,
     required this.formKey,
   });
@@ -52,7 +54,11 @@ class WaterActionButtons extends StatelessWidget {
 
               if(!context.mounted) return;
               await context.read<DailyHistoryProvider>().create(
-                HistoryEntry(dayId: 1, amount: button.amount, dateTime: DateTime.now().toUtc())
+                HistoryEntry(
+                  dayId: dayId, 
+                  amount: button.amount, 
+                  dateTime: DateTime.now().toUtc()
+                )
               );
             },
             style: ElevatedButton.styleFrom(
