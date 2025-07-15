@@ -87,6 +87,7 @@ class DayLocalDataSourceImpl implements DayLocalDataSource {
       limit: 1,
     );
 
+    if(dayList.isEmpty) return null;
     Map<String, Object?> dayMap = dayList.first;
     
     return Day(
