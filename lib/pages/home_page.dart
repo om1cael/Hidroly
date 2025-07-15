@@ -89,6 +89,17 @@ class _HomePageState extends State<HomePage> {
             initialDate: latestDate.date.toLocal(),
             firstDate: firstDate.date.toLocal(),
             lastDate: latestDate.date.toLocal(),
+            builder:(context, child) {
+              return Theme(
+                data: Theme.of(context).copyWith(
+                  colorScheme: ColorScheme.dark(
+                    primary: AppColors.blueAccent,
+                    onSurface: AppColors.primaryText,
+                  ),
+                ),
+                child: child!,
+              );
+            },
           );
 
           if(pickedDate == null) return;

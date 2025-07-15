@@ -71,6 +71,9 @@ class _SetupPageState extends State<SetupPage> {
         icon: Icon(
           Icons.arrow_forward,
         ),
+        style: IconButton.styleFrom(
+          backgroundColor: Colors.white,
+        ),
         padding: EdgeInsets.all(18),
       ),
     );
