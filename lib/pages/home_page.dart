@@ -49,7 +49,7 @@ class _HomePageState extends State<HomePage> {
     }
 
     return Scaffold(
-      appBar: appBar(currentDay, dayId),
+      appBar: appBar(dayId),
       bottomNavigationBar: HomeBottomNav(),
       body: Center(
         child: SingleChildScrollView(
@@ -73,20 +73,21 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  AppBar appBar(Day currentDay, int dayId) {
+  AppBar appBar(int dayId) {
     return AppBar(
       title: TextButton(
         onPressed: () async {
           final provider = context.read<DayProvider>();
           final firstDate = await provider.findFirst();
+          final latestDate = await provider.findLatest();
 
-          if(!mounted || firstDate == null) return;
+          if(!mounted || firstDate == null || latestDate == null) return;
 
           showDatePicker(
             context: context,
-            initialDate: currentDay.date.toLocal(),
+            initialDate: latestDate.date.toLocal(),
             firstDate: firstDate.date.toLocal(), 
-            lastDate: currentDay.date.toLocal(),
+            lastDate: latestDate.date.toLocal(),
           );
         },
         style: TextButton.styleFrom(
