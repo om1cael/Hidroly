@@ -33,11 +33,13 @@ class DayProvider extends ChangeNotifier {
   Future<void> createAndLoadIfNewDay() async {
     if(_day == null) return;
 
+    final localDate = DateTime.now();
+
     final currentAppDate = AppDateUtils.normalizedLocal(day!.date.toLocal());
-    final currentDate = AppDateUtils.normalizedLocal(DateTime.now());
+    final currentDate = AppDateUtils.normalizedLocal(localDate);
 
     if (currentAppDate != currentDate) {
-      await create(currentDate, _day!.dailyGoal);
+      await create(localDate, _day!.dailyGoal);
       await findLatest();
     }
   }
