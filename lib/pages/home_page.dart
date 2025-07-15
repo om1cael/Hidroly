@@ -39,17 +39,17 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final Day? day = context.watch<DayProvider>().day;
-    final int? dayId = day?.id;
+    final Day? currentDay = context.watch<DayProvider>().day;
+    final int? dayId = currentDay?.id;
 
-    if(day == null || dayId == null) {
+    if(currentDay == null || dayId == null) {
       return Scaffold(
         body: Center(child: CircularProgressIndicator(),),
       );
     }
 
     return Scaffold(
-      appBar: appBar(dayId),
+      appBar: appBar(currentDay, dayId),
       bottomNavigationBar: HomeBottomNav(),
       body: Center(
         child: SingleChildScrollView(
@@ -73,10 +73,22 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  AppBar appBar(int dayId) {
+  AppBar appBar(Day currentDay, int dayId) {
     return AppBar(
       title: TextButton(
-        onPressed: () {},
+        onPressed: () async {
+          final provider = context.read<DayProvider>();
+          final firstDate = await provider.findFirst();
+
+          if(!mounted || firstDate == null) return;
+
+          showDatePicker(
+            context: context,
+            initialDate: currentDay.date.toLocal(),
+            firstDate: firstDate.date.toLocal(), 
+            lastDate: currentDay.date.toLocal(),
+          );
+        },
         style: TextButton.styleFrom(
           padding: EdgeInsets.zero,
         ),
