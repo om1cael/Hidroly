@@ -44,7 +44,11 @@ class DayProvider extends ChangeNotifier {
 
     if (currentAppDate != currentDate) {
       await create(localDate, _day!.dailyGoal);
-      await findLatest();
+
+      final newDay = await findLatest();
+      if(newDay != null) {
+        day = newDay;
+      }
     }
   }
 
