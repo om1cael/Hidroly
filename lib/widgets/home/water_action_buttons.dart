@@ -50,7 +50,19 @@ class WaterActionButtons extends StatelessWidget {
                 return;
               }
 
-              await context.read<DayProvider>().addWater(button.amount);
+              final success = await context
+                  .read<DayProvider>()
+                  .addWater(button.amount);
+              
+              if(!success && context.mounted) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text('Oops! Couldn\'t add your water. Try again?')
+                  )
+                );
+                
+                return;
+              }
 
               if(!context.mounted) return;
               await context.read<DailyHistoryProvider>().create(
