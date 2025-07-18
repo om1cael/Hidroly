@@ -22,7 +22,8 @@ class DatabaseHelper {
           CREATE TABLE ${DBConstants.daysTable} (
               id INTEGER PRIMARY KEY AUTOINCREMENT, 
               dailyGoal INTEGER, 
-              currentAmount INTEGER
+              currentAmount INTEGER,
+              date TEXT NOT NULL UNIQUE
           )
           '''
         );

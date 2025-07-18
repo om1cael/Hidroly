@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hidroly/pages/home_page.dart';
 import 'package:hidroly/provider/day_provider.dart';
+import 'package:hidroly/utils/calculate_dailygoal.dart';
 import 'package:hidroly/widgets/setup/setup_header.dart';
 import 'package:hidroly/widgets/setup/setup_interactable.dart';
 import 'package:provider/provider.dart';
@@ -54,11 +55,11 @@ class _SetupPageState extends State<SetupPage> {
       floatingActionButton: IconButton.filled(
         onPressed: () async {
           if(!formKey.currentState!.validate()) return;
+          
+          int? dailyGoal = _getDailyGoal();
+          if(dailyGoal == null) return;
 
-          bool created = await context.read<DayProvider>().create(
-            ageController.text,
-            weightController.text,
-          );
+          final created = await _createDay(context, dailyGoal);
 
           if(created && context.mounted) {
             Navigator.of(context).pushReplacement(
@@ -70,8 +71,30 @@ class _SetupPageState extends State<SetupPage> {
         icon: Icon(
           Icons.arrow_forward,
         ),
+        style: IconButton.styleFrom(
+          backgroundColor: Colors.white,
+        ),
         padding: EdgeInsets.all(18),
       ),
     );
+  }
+
+  Future<bool> _createDay(BuildContext context, int dailyGoal) async {
+    final localDate = DateTime.now();
+    
+    bool created = await context.read<DayProvider>().create(
+      localDate,
+      dailyGoal,
+    );
+    return created;
+  }
+
+  int? _getDailyGoal() {
+    int? age = int.tryParse(ageController.text);
+    int? weight = int.tryParse(weightController.text);
+
+    if(age == null || weight == null) return null;
+    
+    return CalculateDailyGoal().calculate(age, weight);
   }
 }

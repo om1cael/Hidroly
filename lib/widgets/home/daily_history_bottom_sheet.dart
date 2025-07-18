@@ -6,8 +6,11 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class DailyHistoryBottomSheet extends StatelessWidget {
+  final int dayId;
+
   const DailyHistoryBottomSheet({
     super.key,
+    required this.dayId,
   });
 
   @override
@@ -36,7 +39,7 @@ class DailyHistoryBottomSheet extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        'Today\'s history',
+                        'Day history',
                         style: TextStyle(
                           color: AppColors.primaryText
                         ),
@@ -57,7 +60,7 @@ class DailyHistoryBottomSheet extends StatelessWidget {
                               color: AppColors.secondaryText,
                               size: 48,
                             ),
-                            Text('No entries today.')
+                            Text('Nothing here :(')
                           ],
                         ),
                       ),
@@ -91,7 +94,10 @@ class DailyHistoryBottomSheet extends StatelessWidget {
                                   
                                   if(!context.mounted) return;
                                   await context.read<DailyHistoryProvider>()
-                                    .delete(history.id!, 1);
+                                    .delete(
+                                      history.id!, 
+                                      dayId
+                                    );
                                 },
                                 icon: Icon(
                                   Icons.delete_forever,

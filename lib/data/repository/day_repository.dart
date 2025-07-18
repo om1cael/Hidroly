@@ -8,7 +8,16 @@ class DayRepository {
 
   Future<void> create(Day user) async => await _userLocalDataSourceImpl.create(user);
 
-  Future<Day?> read(int id) async => await _userLocalDataSourceImpl.read(1);
+  Future<Day?> findFirst() async => await _userLocalDataSourceImpl.findFirst();
+
+  Future<Day?> findLatest() async => await _userLocalDataSourceImpl.findLatest();
+
+  Future<Day?> findByDate(DateTime date) async {
+    final startUtc = date.toUtc();
+    final endUtc = startUtc.add(Duration(days: 1));
+
+    return await _userLocalDataSourceImpl.findByDate(startUtc.toIso8601String(), endUtc.toIso8601String());
+  }
   
   Future<void> update(Day updatedUser) async => await _userLocalDataSourceImpl.update(updatedUser);
 }

@@ -11,6 +11,7 @@ class AppTheme {
         primary: AppColors.blueAccent,
         surface: AppColors.background,
         onSurface: AppColors.onBackground,
+        outlineVariant: Colors.transparent,
       ),
       appBarTheme: AppBarTheme(
         backgroundColor: AppColors.background,
@@ -43,11 +44,6 @@ class AppTheme {
         ),
       ),
       iconTheme: IconThemeData(color: AppColors.icon),
-      iconButtonTheme: IconButtonThemeData(
-        style: IconButton.styleFrom(
-          backgroundColor: Colors.white,
-        )
-      ),
       inputDecorationTheme: InputDecorationTheme(
         fillColor: AppColors.onBackground,
         filled: true,
@@ -76,6 +72,35 @@ class AppTheme {
             borderRadius: BorderRadius.circular(16),
           ),
         ),
+      ),
+      datePickerTheme: DatePickerThemeData(
+        backgroundColor: AppColors.background,
+        headerBackgroundColor: AppColors.onBackground,
+        headerForegroundColor: AppColors.secondaryText,
+
+        weekdayStyle: TextStyle(
+          color: AppColors.secondaryText,
+        ),
+
+        dividerColor: Colors.transparent,
+      
+        yearForegroundColor: WidgetStateProperty.resolveWith<Color>((state) {
+          if(state.contains(WidgetState.disabled)) {
+            return AppColors.unselectedItem;
+          } else {
+            return AppColors.primaryText;
+          }
+        }),
+
+        dayForegroundColor: WidgetStateProperty.resolveWith<Color>((state) {
+          if(state.contains(WidgetState.disabled)) {
+            return AppColors.unselectedItem;
+          } else if(state.contains(WidgetState.selected)) {
+            return AppColors.onBackground;
+          } else {
+            return AppColors.secondaryText;
+          }
+        }),
       ),
       fontFamily: 'Poppins',
     );
