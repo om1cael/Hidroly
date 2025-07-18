@@ -2,8 +2,8 @@
 <p align="center">Hidroly is a hydration tracker app made with Flutter, aiming to be a viable open-source alternative to the countless fitness apps on Play Store.</p>
 
 <div align="center">
-  <img src="https://github.com/user-attachments/assets/e7c079af-9c1b-4274-b65d-1830b1e98a15" width=256>
-  <img src="https://github.com/user-attachments/assets/0840d504-f595-4a73-8eba-61d512b2b78f" width=256>
+  <img src="https://github.com/user-attachments/assets/f248581a-01ef-47e6-ab57-8ffc562fca4d" width=256>
+  <img src="https://github.com/user-attachments/assets/1b19417e-8d3f-42cc-afd1-8905a819fd68" width=256>
 </div>
 
 # Features 🌟
