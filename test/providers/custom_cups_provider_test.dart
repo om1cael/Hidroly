@@ -12,6 +12,10 @@ void main() {
   late CustomCupsRepository repository;
   late MockCustomCupsLocalDataSourceImpl mockDataSource;
 
+  setUpAll(() {
+    registerFallbackValue(WaterButton(amount: 1));
+  });
+
   setUp(() {
     mockDataSource = MockCustomCupsLocalDataSourceImpl();
     repository = CustomCupsRepository(mockDataSource);
@@ -23,7 +27,6 @@ void main() {
   group("Test custom cup creation provider logic", () {
     test('Should create if amount is positive', () async {
       final cups = [WaterButton(id: 1, amount: 300)];
-      registerFallbackValue(WaterButton(amount: 1));
 
       when(() => mockDataSource.createCustomCup(any()))
         .thenAnswer((_) async {});
@@ -31,8 +34,9 @@ void main() {
       when(() => mockDataSource.getAllCustomCups())
         .thenAnswer((_) async => cups);
       
-      await provider.createCustomCup(300);
+      final result = await provider.createCustomCup(300);
 
+      expect(result, true);
       expect(provider.customCups, cups);
       verify(() => mockDataSource.createCustomCup(any())).called(1);
       verify(() => mockDataSource.getAllCustomCups()).called(1);
@@ -40,10 +44,14 @@ void main() {
 
     test('Should not create if amount is zero', () async {
       expect(await provider.createCustomCup(0), false);
+      verifyNever(() => mockDataSource.createCustomCup(any()));
+      verifyNever(() => mockDataSource.getAllCustomCups());
     });
 
     test('Should not create if amount is negative', () async {
       expect(await provider.createCustomCup(-1), false);
+      verifyNever(() => mockDataSource.createCustomCup(any()));
+      verifyNever(() => mockDataSource.getAllCustomCups());
     });
   });
 }
