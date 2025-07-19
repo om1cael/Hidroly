@@ -7,18 +7,18 @@ import 'package:mocktail/mocktail.dart';
 class MockDayRepository extends Mock implements DayRepository {}
 
 void main() {
+  late DayProvider provider;
+  late MockDayRepository mockDayRepository;
+  late Day day;
+
+  final currentAmount = 600;
+
   setUpAll(() {
     registerFallbackValue(Day(
       dailyGoal: 2000, 
       date: DateTime.now().toUtc()
     ));
   });
-
-  late DayProvider provider;
-  late MockDayRepository mockDayRepository;
-  late Day day;
-
-  final currentAmount = 600;
 
   setUp(() {
     provider = DayProvider();
