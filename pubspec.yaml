@@ -9,8 +9,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
   flutter_svg: ^2.2.0
-  intl: ^0.20.2
+  intl: any
   mocktail: ^1.0.4
   path: ^1.9.1
   provider: ^6.1.5
