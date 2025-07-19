@@ -18,7 +18,7 @@ class CustomCupsProvider extends ChangeNotifier {
   }
 
   Future<bool> createCustomCup(int customCupAmount) async {
-    if(customCupAmount < 0) return false;
+    if(customCupAmount <= 0) return false;
 
     await _customCupsRepository.createCustomCup(
       WaterButton(amount: customCupAmount),
