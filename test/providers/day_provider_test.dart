@@ -90,7 +90,7 @@ void main() {
       expect(await provider.removeWater(currentAmount + 100), false);
     });
 
-      test('Should not remove if argument amount is lower than or equals to zero', () async {
+    test('Should not remove if argument amount is lower than or equals to zero', () async {
       provider.day = day;
       expect(await provider.removeWater(0), false);
       expect(await provider.removeWater(-1), false);
