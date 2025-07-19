@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hidroly/l10n/app_localizations.dart';
 import 'package:hidroly/provider/daily_history_provider.dart';
 import 'package:hidroly/provider/day_provider.dart';
 import 'package:hidroly/theme/app_colors.dart';
@@ -39,7 +40,7 @@ class DailyHistoryBottomSheet extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        'Day history',
+                        AppLocalizations.of(context)!.dayHistoryBottomSheetTitle,
                         style: TextStyle(
                           color: AppColors.primaryText
                         ),
@@ -60,7 +61,7 @@ class DailyHistoryBottomSheet extends StatelessWidget {
                               color: AppColors.secondaryText,
                               size: 48,
                             ),
-                            Text('Nothing here :(')
+                            Text(AppLocalizations.of(context)!.dayHistoryBottomSheetNoItems)
                           ],
                         ),
                       ),
@@ -84,7 +85,10 @@ class DailyHistoryBottomSheet extends StatelessWidget {
                                 style: Theme.of(context).textTheme.bodyLarge
                               ),
                               subtitle: Text(
-                                'Added ${DateFormat.Hm().format(history.dateTime.toLocal())}',
+                                AppLocalizations.of(context)!
+                                  .dayHistoryBottomSheetItemSubtitle(
+                                    DateFormat.Hm().format(history.dateTime.toLocal())
+                                  ),
                                 style: Theme.of(context).textTheme.bodySmall
                               ),
                               trailing: IconButton(

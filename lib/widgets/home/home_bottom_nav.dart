@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hidroly/l10n/app_localizations.dart';
 
 class HomeBottomNav extends StatelessWidget {
   const HomeBottomNav({
@@ -18,13 +19,13 @@ class HomeBottomNav extends StatelessWidget {
             icon: Icon(
               Icons.home,
             ),
-            label: 'Home',
+            label: AppLocalizations.of(context)!.bottomNavHomeLabel,
           ),
           BottomNavigationBarItem(
             icon: Icon(
               Icons.history
             ),
-            label: 'History'
+            label: AppLocalizations.of(context)!.bottomNavHistoryLabel,
           )
         ]
       ),

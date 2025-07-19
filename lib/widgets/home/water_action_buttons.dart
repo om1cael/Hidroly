@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hidroly/data/model/history_entry.dart';
 import 'package:hidroly/data/model/water_button.dart';
+import 'package:hidroly/l10n/app_localizations.dart';
 import 'package:hidroly/provider/custom_cups_provider.dart';
 import 'package:hidroly/provider/daily_history_provider.dart';
 import 'package:hidroly/provider/day_provider.dart';
@@ -57,7 +58,7 @@ class WaterActionButtons extends StatelessWidget {
               if(!success && context.mounted) {
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
-                    content: Text('Oops! Couldn\'t add your water. Try again?')
+                    content: Text(AppLocalizations.of(context)!.waterAddFailed)
                   )
                 );
                 
@@ -85,7 +86,7 @@ class WaterActionButtons extends StatelessWidget {
             ),
             label: Text(
               button.isCustomOption == false 
-              ? '${button.amount}ml' : 'Custom',
+              ? '${button.amount}ml' : AppLocalizations.of(context)!.customCupButton,
               style: TextStyle(
                 color: AppColors.secondaryText
               ),
@@ -103,17 +104,17 @@ class WaterActionButtons extends StatelessWidget {
       context: context, 
       builder: (context) => AlertDialog(
         title: Text(
-          'Add Custom Cup',
+          AppLocalizations.of(context)!.customCupDialogTitle,
           style: Theme.of(context).textTheme.titleLarge,
         ),
         content: Form(
           key: formKey,
           child: FormNumberInputField(
-            label: 'Amount', 
+            label: AppLocalizations.of(context)!.customCupDialogTextFieldAmount, 
             controller: customCupAmountController, 
             validator: (value) {
               int? amount = int.tryParse(value ?? '');
-              if(amount == null || amount <= 0) return 'Invalid amount.';
+              if(amount == null || amount <= 0) return AppLocalizations.of(context)!.customCupDialogTextFieldAmountError;
               return null;
             }
           ),
@@ -136,13 +137,13 @@ class WaterActionButtons extends StatelessWidget {
               }
             }, 
             child: Text(
-              'Add',
+              AppLocalizations.of(context)!.customCupDialogAddButton,
             ),
           ),
           TextButton(
             onPressed: () => Navigator.pop(context), 
             child: Text(
-              'Cancel',
+              AppLocalizations.of(context)!.customCupDialogCancelButton,
             ),
           ),
         ],

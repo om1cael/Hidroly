@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hidroly/l10n/app_localizations.dart';
 import 'package:hidroly/pages/home_page.dart';
 import 'package:hidroly/provider/day_provider.dart';
 import 'package:hidroly/utils/calculate_dailygoal.dart';
@@ -43,7 +44,7 @@ class _SetupPageState extends State<SetupPage> {
                     weightController: weightController,
                   ),
                   Text(
-                    'Your data is stored on your device.',
+                    AppLocalizations.of(context)!.setupDataText,
                     style: Theme.of(context).textTheme.bodySmall,
                   ),
                 ],

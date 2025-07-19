@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:hidroly/l10n/app_localizations.dart';
 
 class SetupHeader extends StatelessWidget {
   const SetupHeader({
@@ -17,11 +18,11 @@ class SetupHeader extends StatelessWidget {
           colorFilter: ColorFilter.mode(Theme.of(context).primaryColor, BlendMode.srcIn),
         ),
         Text(
-          'Welcome',
+          AppLocalizations.of(context)!.setupWelcomeTitle,
           style: Theme.of(context).textTheme.headlineLarge,
         ),
         Text(
-          'We just need to set things up. It will be quick and easy!',
+          AppLocalizations.of(context)!.setupWelcomeSubtitle,
           style: Theme.of(context).textTheme.bodyMedium,
           textAlign: TextAlign.center,
         ),

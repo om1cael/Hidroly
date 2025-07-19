@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class AppDateUtils {
@@ -12,7 +13,7 @@ class AppDateUtils {
     );
   }
 
-  static String formatDayTitle(DateTime localDate, { DateTime? now, String todayText = 'Today' }) {
+  static String formatDayTitle(DateTime localDate, { BuildContext? context, DateTime? now, String todayText = 'Today' }) {
     localDate = localDate.toLocal();
     now ??= DateTime.now();
 
@@ -20,6 +21,10 @@ class AppDateUtils {
       return todayText;
     }
 
-    return DateFormat.yMMMMd().format(localDate);
+    final locale = context != null
+      ? Localizations.localeOf(context).toString()
+      : Intl.getCurrentLocale();
+
+    return DateFormat.yMMMMd(locale).format(localDate);
   }
 }

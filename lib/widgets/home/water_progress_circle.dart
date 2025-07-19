@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hidroly/l10n/app_localizations.dart';
 import 'package:hidroly/provider/day_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -41,7 +42,7 @@ class WaterProgressCircle extends StatelessWidget {
                   style: Theme.of(context).textTheme.headlineLarge,
                 ),
                 Text(
-                  'of ${day.dailyGoal}ml',
+                  '${AppLocalizations.of(context)!.progressCircleOf} ${day.dailyGoal}ml',
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
               ],

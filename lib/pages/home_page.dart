@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hidroly/data/model/day.dart';
+import 'package:hidroly/l10n/app_localizations.dart';
 import 'package:hidroly/pages/setup_page.dart';
 import 'package:hidroly/provider/custom_cups_provider.dart';
 import 'package:hidroly/provider/daily_history_provider.dart';
@@ -109,7 +110,7 @@ class _HomePageState extends State<HomePage> {
             ScaffoldMessenger.of(context)
               .showSnackBar(SnackBar(
                 content: Text(
-                  'Day not found',
+                  AppLocalizations.of(context)!.dayLoadingFailed,
                   style: AppTheme.darkTheme.textTheme.bodyLarge,
                 ),
               )
@@ -127,7 +128,11 @@ class _HomePageState extends State<HomePage> {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              AppDateUtils.formatDayTitle(currentDay.date.toLocal()),
+              AppDateUtils.formatDayTitle(
+                currentDay.date.toLocal(),
+                context: context,
+                todayText: AppLocalizations.of(context)!.homePageTodayAppBarTitle
+              ),
               style: AppTheme.darkTheme.appBarTheme.titleTextStyle,
             ),
             Icon(
