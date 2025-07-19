@@ -1,3 +1,32 @@
 {
-    "helloWorld": "Hello World!"
+    "progressCircleOf": "of",
+    "waterAddFailed": "Oops! Couldn't add your water. Try again?",
+    "customCupButton": "Custom",
+    "customCupDialogTitle": "Add Custom Cup",
+    "customCupDialogTextFieldAmount": "Amount",
+    "customCupDialogTextFieldAmountError": "Invalid Amount",
+    "customCupDialogAddButton": "Add",
+    "customCupDialogCancelButton": "Cancel",
+    "dayLoadingFailed": "Day not found",
+    "bottomNavHomeLabel": "Home",
+    "bottomNavHistoryLabel": "History",
+    "dayHistoryBottomSheetTitle": "Day history",
+    "dayHistoryBottomSheetNoItems": "Nothing here :(",
+    "dayHistoryBottomSheetItemSubtitle": "added {time}",
+    "@dayHistoryBottomSheetItemSubtitle": {
+        "placeholders": {
+            "time": {
+                "type": "String",
+                "example": "17:20"
+            }
+        }
+    },
+    "setupWelcomeTitle": "Welcome",
+    "setupWelcomeSubtitle": "We just need to set things up. It will be quick and easy!",
+    "setupDataText": "Your data is stored on your device.",
+    "setupAgeTextFieldLabel": "Your age",
+    "setupAgeTextFieldInvalidValue": "Age between 10 and 120",
+    "setupWeightTextFieldLabel": "Your weight",
+    "setupWeightTextFieldInvalidValue": "Weight between 30 and 200",
+    "homePageTodayAppBarTitle": "Today" 
 }

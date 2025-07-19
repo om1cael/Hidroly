@@ -1,0 +1,32 @@
+{
+  "progressCircleOf": "de",
+  "waterAddFailed": "Ops! Não foi possível adicionar sua água. Tentar novamente?",
+  "customCupButton": "Personalizado",
+  "customCupDialogTitle": "Adicionar Copo Personalizado",
+  "customCupDialogTextFieldAmount": "Quantidade",
+  "customCupDialogTextFieldAmountError": "Quantidade inválida",
+  "customCupDialogAddButton": "Adicionar",
+  "customCupDialogCancelButton": "Cancelar",
+  "dayLoadingFailed": "Dia não encontrado",
+  "bottomNavHomeLabel": "Home",
+  "bottomNavHistoryLabel": "Histórico",
+  "dayHistoryBottomSheetTitle": "Histórico do dia",
+  "dayHistoryBottomSheetNoItems": "Nada por aqui :(",
+  "dayHistoryBottomSheetItemSubtitle": "adicionado às {time}",
+  "@dayHistoryBottomSheetItemSubtitle": {
+    "placeholders": {
+      "time": {
+        "type": "String",
+        "example": "17:20"
+      }
+    }
+  },
+  "setupWelcomeTitle": "Bem-vindo",
+  "setupWelcomeSubtitle": "Só precisamos configurar algumas coisas. Vai ser rápido e fácil!",
+  "setupDataText": "Seus dados são armazenados no seu dispositivo.",
+  "setupAgeTextFieldLabel": "Sua idade",
+  "setupAgeTextFieldInvalidValue": "Idade entre 10 e 120",
+  "setupWeightTextFieldLabel": "Seu peso",
+  "setupWeightTextFieldInvalidValue": "Peso entre 30 e 200",
+  "homePageTodayAppBarTitle": "Hoje"
+}

@@ -6,6 +6,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/intl.dart' as intl;
 
 import 'app_localizations_en.dart';
+import 'app_localizations_pt.dart';
 
 // ignore_for_file: type=lint
 
@@ -92,13 +93,142 @@ abstract class AppLocalizations {
       ];
 
   /// A list of this localizations delegate's supported locales.
-  static const List<Locale> supportedLocales = <Locale>[Locale('en')];
+  static const List<Locale> supportedLocales = <Locale>[
+    Locale('en'),
+    Locale('pt'),
+  ];
 
-  /// No description provided for @helloWorld.
+  /// No description provided for @progressCircleOf.
   ///
   /// In en, this message translates to:
-  /// **'Hello World!'**
-  String get helloWorld;
+  /// **'of'**
+  String get progressCircleOf;
+
+  /// No description provided for @waterAddFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Oops! Couldn\'t add your water. Try again?'**
+  String get waterAddFailed;
+
+  /// No description provided for @customCupButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Custom'**
+  String get customCupButton;
+
+  /// No description provided for @customCupDialogTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Custom Cup'**
+  String get customCupDialogTitle;
+
+  /// No description provided for @customCupDialogTextFieldAmount.
+  ///
+  /// In en, this message translates to:
+  /// **'Amount'**
+  String get customCupDialogTextFieldAmount;
+
+  /// No description provided for @customCupDialogTextFieldAmountError.
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid Amount'**
+  String get customCupDialogTextFieldAmountError;
+
+  /// No description provided for @customCupDialogAddButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Add'**
+  String get customCupDialogAddButton;
+
+  /// No description provided for @customCupDialogCancelButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get customCupDialogCancelButton;
+
+  /// No description provided for @dayLoadingFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Day not found'**
+  String get dayLoadingFailed;
+
+  /// No description provided for @bottomNavHomeLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Home'**
+  String get bottomNavHomeLabel;
+
+  /// No description provided for @bottomNavHistoryLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'History'**
+  String get bottomNavHistoryLabel;
+
+  /// No description provided for @dayHistoryBottomSheetTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Day history'**
+  String get dayHistoryBottomSheetTitle;
+
+  /// No description provided for @dayHistoryBottomSheetNoItems.
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing here :('**
+  String get dayHistoryBottomSheetNoItems;
+
+  /// No description provided for @dayHistoryBottomSheetItemSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'added {time}'**
+  String dayHistoryBottomSheetItemSubtitle(String time);
+
+  /// No description provided for @setupWelcomeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome'**
+  String get setupWelcomeTitle;
+
+  /// No description provided for @setupWelcomeSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'We just need to set things up. It will be quick and easy!'**
+  String get setupWelcomeSubtitle;
+
+  /// No description provided for @setupDataText.
+  ///
+  /// In en, this message translates to:
+  /// **'Your data is stored on your device.'**
+  String get setupDataText;
+
+  /// No description provided for @setupAgeTextFieldLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Your age'**
+  String get setupAgeTextFieldLabel;
+
+  /// No description provided for @setupAgeTextFieldInvalidValue.
+  ///
+  /// In en, this message translates to:
+  /// **'Age between 10 and 120'**
+  String get setupAgeTextFieldInvalidValue;
+
+  /// No description provided for @setupWeightTextFieldLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Your weight'**
+  String get setupWeightTextFieldLabel;
+
+  /// No description provided for @setupWeightTextFieldInvalidValue.
+  ///
+  /// In en, this message translates to:
+  /// **'Weight between 30 and 200'**
+  String get setupWeightTextFieldInvalidValue;
+
+  /// No description provided for @homePageTodayAppBarTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Today'**
+  String get homePageTodayAppBarTitle;
 }
 
 class _AppLocalizationsDelegate
@@ -112,7 +242,7 @@ class _AppLocalizationsDelegate
 
   @override
   bool isSupported(Locale locale) =>
-      <String>['en'].contains(locale.languageCode);
+      <String>['en', 'pt'].contains(locale.languageCode);
 
   @override
   bool shouldReload(_AppLocalizationsDelegate old) => false;
@@ -123,6 +253,8 @@ AppLocalizations lookupAppLocalizations(Locale locale) {
   switch (locale.languageCode) {
     case 'en':
       return AppLocalizationsEn();
+    case 'pt':
+      return AppLocalizationsPt();
   }
 
   throw FlutterError(
