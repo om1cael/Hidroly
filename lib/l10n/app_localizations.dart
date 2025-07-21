@@ -265,6 +265,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'lb'**
   String get lbUnit;
+
+  /// No description provided for @settingsPageTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Settings'**
+  String get settingsPageTitle;
 }
 
 class _AppLocalizationsDelegate

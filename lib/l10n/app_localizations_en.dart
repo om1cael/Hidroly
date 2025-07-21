@@ -94,4 +94,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get lbUnit => 'lb';
+
+  @override
+  String get settingsPageTitle => 'Settings';
 }

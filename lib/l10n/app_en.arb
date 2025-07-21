@@ -34,5 +34,6 @@
     "mlUnit": "ml",
     "flOzUnit": "fl oz",
     "kgUnit": "kg",
-    "lbUnit": "lb"
+    "lbUnit": "lb",
+    "settingsPageTitle": "Settings"
 }
