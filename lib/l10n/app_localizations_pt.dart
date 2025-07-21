@@ -40,7 +40,7 @@ class AppLocalizationsPt extends AppLocalizations {
   String get bottomNavHomeLabel => 'Home';
 
   @override
-  String get bottomNavHistoryLabel => 'Histórico';
+  String get bottomNavSummaryLabel => 'Resumo';
 
   @override
   String get dayHistoryBottomSheetTitle => 'Histórico do dia';

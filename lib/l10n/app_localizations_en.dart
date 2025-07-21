@@ -39,7 +39,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get bottomNavHomeLabel => 'Home';
 
   @override
-  String get bottomNavHistoryLabel => 'History';
+  String get bottomNavSummaryLabel => 'Summary';
 
   @override
   String get dayHistoryBottomSheetTitle => 'Day history';

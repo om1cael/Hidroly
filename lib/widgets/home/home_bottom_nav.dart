@@ -23,9 +23,9 @@ class HomeBottomNav extends StatelessWidget {
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.history
+              Icons.show_chart
             ),
-            label: AppLocalizations.of(context)!.bottomNavHistoryLabel,
+            label: AppLocalizations.of(context)!.bottomNavSummaryLabel,
           )
         ]
       ),
