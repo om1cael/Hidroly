@@ -18,7 +18,7 @@ class SettingsGeneral extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          AppLocalizations.of(context)!.settingsGeneral,
+          AppLocalizations.of(context)!.settingsGeneralSection,
           style: TextStyle(
             color: AppColors.primaryText,
             fontWeight: FontWeight.bold,

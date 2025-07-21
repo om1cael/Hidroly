@@ -35,9 +35,12 @@
     "flOzUnit": "fl oz",
     "kgUnit": "kg",
     "lbUnit": "lb",
-    "settingsPageTitle": "Settings",
-    "settingsGeneral": "General",
-    "settingsUnitSystem": "Unit system",
     "metric": "Metric",
-    "imperial": "Imperial"
+    "imperial": "Imperial",
+    "settingsPageTitle": "Settings",
+    "settingsGeneralSection": "General",
+    "settingsUnitSystem": "Unit system",
+    "settingsYouSection": "You",
+    "settingsUpdateYourDailyGoal": "Update your daily goal",
+    "settingsSetCustomDailyGoal": "Set a custom daily goal"
 }

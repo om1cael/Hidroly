@@ -97,17 +97,26 @@ class AppLocalizationsPt extends AppLocalizations {
   String get lbUnit => 'lb';
 
   @override
+  String get metric => 'Metric';
+
+  @override
+  String get imperial => 'Imperial';
+
+  @override
   String get settingsPageTitle => 'Configurações';
 
   @override
-  String get settingsGeneral => 'General';
+  String get settingsGeneralSection => 'General';
 
   @override
   String get settingsUnitSystem => 'Unit system';
 
   @override
-  String get metric => 'Metric';
+  String get settingsYouSection => 'You';
 
   @override
-  String get imperial => 'Imperial';
+  String get settingsUpdateYourDailyGoal => 'Update your daily goal';
+
+  @override
+  String get settingsSetCustomDailyGoal => 'Set a custom daily goal';
 }

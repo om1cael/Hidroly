@@ -266,24 +266,6 @@ abstract class AppLocalizations {
   /// **'lb'**
   String get lbUnit;
 
-  /// No description provided for @settingsPageTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Settings'**
-  String get settingsPageTitle;
-
-  /// No description provided for @settingsGeneral.
-  ///
-  /// In en, this message translates to:
-  /// **'General'**
-  String get settingsGeneral;
-
-  /// No description provided for @settingsUnitSystem.
-  ///
-  /// In en, this message translates to:
-  /// **'Unit system'**
-  String get settingsUnitSystem;
-
   /// No description provided for @metric.
   ///
   /// In en, this message translates to:
@@ -295,6 +277,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Imperial'**
   String get imperial;
+
+  /// No description provided for @settingsPageTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Settings'**
+  String get settingsPageTitle;
+
+  /// No description provided for @settingsGeneralSection.
+  ///
+  /// In en, this message translates to:
+  /// **'General'**
+  String get settingsGeneralSection;
+
+  /// No description provided for @settingsUnitSystem.
+  ///
+  /// In en, this message translates to:
+  /// **'Unit system'**
+  String get settingsUnitSystem;
+
+  /// No description provided for @settingsYouSection.
+  ///
+  /// In en, this message translates to:
+  /// **'You'**
+  String get settingsYouSection;
+
+  /// No description provided for @settingsUpdateYourDailyGoal.
+  ///
+  /// In en, this message translates to:
+  /// **'Update your daily goal'**
+  String get settingsUpdateYourDailyGoal;
+
+  /// No description provided for @settingsSetCustomDailyGoal.
+  ///
+  /// In en, this message translates to:
+  /// **'Set a custom daily goal'**
+  String get settingsSetCustomDailyGoal;
 }
 
 class _AppLocalizationsDelegate
