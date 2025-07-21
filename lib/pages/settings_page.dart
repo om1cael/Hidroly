@@ -38,16 +38,18 @@ class _SettingsPageState extends State<SettingsPage> {
         ),
         titleSpacing: 0,
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SettingsGeneral(
-                isMetric: isMetric,
-              )
-            ],
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SettingsGeneral(
+                  isMetric: isMetric,
+                )
+              ],
+            ),
           ),
         ),
       ),
