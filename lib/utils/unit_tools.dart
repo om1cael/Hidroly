@@ -13,7 +13,7 @@ class UnitTools {
     return ml * _flOzPerMl;
   }
 
-  static String getVolume(int ml, bool isMetric, {BuildContext? context}) {
+  static String getVolumeWithUnit(int ml, bool isMetric, {BuildContext? context}) {
     final unitLabel = context == null
       ? (isMetric ? 'ml' : 'fl oz')
       : (isMetric ? AppLocalizations.of(context)!.mlUnit : AppLocalizations.of(context)!.flOzUnit);

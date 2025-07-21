@@ -42,11 +42,11 @@ class WaterProgressCircle extends StatelessWidget {
             Column(
               children: [
                 Text(
-                  UnitTools.getVolume(day.currentAmount, isMetric, context: context),
+                  UnitTools.getVolumeWithUnit(day.currentAmount, isMetric, context: context),
                   style: Theme.of(context).textTheme.headlineLarge,
                 ),
                 Text(
-                  '${AppLocalizations.of(context)!.progressCircleOf} ${UnitTools.getVolume(day.dailyGoal, isMetric, context: context)}',
+                  '${AppLocalizations.of(context)!.progressCircleOf} ${UnitTools.getVolumeWithUnit(day.dailyGoal, isMetric, context: context)}',
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
               ],

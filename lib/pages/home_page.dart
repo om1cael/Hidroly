@@ -71,6 +71,7 @@ class _HomePageState extends State<HomePage> {
                   dayId: dayId,
                   customCupAmountController: customCupAmountController,
                   formKey: formKey,
+                  isMetric: isMetric,
                 )
               ],
             ),

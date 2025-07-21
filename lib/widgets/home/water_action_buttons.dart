@@ -6,6 +6,7 @@ import 'package:hidroly/provider/custom_cups_provider.dart';
 import 'package:hidroly/provider/daily_history_provider.dart';
 import 'package:hidroly/provider/day_provider.dart';
 import 'package:hidroly/theme/app_colors.dart';
+import 'package:hidroly/utils/unit_tools.dart';
 import 'package:hidroly/widgets/input/form_number_input_field.dart';
 import 'package:provider/provider.dart';
 
@@ -13,6 +14,8 @@ class WaterActionButtons extends StatelessWidget {
   final TextEditingController customCupAmountController;
   final GlobalKey<FormState> formKey;
   final int dayId;
+
+  final bool isMetric;
 
   final _defaultButtons = [WaterButton(amount: 250), WaterButton(amount: 350)];
   final _addCustomCupButton = WaterButton(amount: 0, isCustomOption: true);
@@ -22,6 +25,7 @@ class WaterActionButtons extends StatelessWidget {
     required this.dayId,
     required this.customCupAmountController,
     required this.formKey,
+    required this.isMetric,
   });
 
   @override
@@ -86,7 +90,8 @@ class WaterActionButtons extends StatelessWidget {
             ),
             label: Text(
               button.isCustomOption == false 
-              ? '${button.amount}ml' : AppLocalizations.of(context)!.customCupButton,
+                ? UnitTools.getVolumeWithUnit(button.amount, isMetric, context: context) 
+                : AppLocalizations.of(context)!.customCupButton,
               style: TextStyle(
                 color: AppColors.secondaryText
               ),
