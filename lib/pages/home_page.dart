@@ -154,7 +154,7 @@ class _HomePageState extends State<HomePage> {
             );
           }, 
           icon: Icon(
-            Icons.list, 
+            Icons.history, 
             color: AppColors.primaryText,
           ),
           style: IconButton.styleFrom(
