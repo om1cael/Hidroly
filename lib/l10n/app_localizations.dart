@@ -296,6 +296,12 @@ abstract class AppLocalizations {
   /// **'You'**
   String get settingsYouSection;
 
+  /// No description provided for @settingsAboutSection.
+  ///
+  /// In en, this message translates to:
+  /// **'About'**
+  String get settingsAboutSection;
+
   /// No description provided for @settingsUpdateYourDailyGoal.
   ///
   /// In en, this message translates to:
@@ -325,6 +331,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Cancel'**
   String get cancelAction;
+
+  /// No description provided for @settingsContribute.
+  ///
+  /// In en, this message translates to:
+  /// **'Contribute'**
+  String get settingsContribute;
+
+  /// No description provided for @settingsContributeDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Access the GitHub repository'**
+  String get settingsContributeDescription;
 }
 
 class _AppLocalizationsDelegate

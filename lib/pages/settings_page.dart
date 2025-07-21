@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hidroly/l10n/app_localizations.dart';
+import 'package:hidroly/widgets/settings/sections/settings_about.dart';
 import 'package:hidroly/widgets/settings/sections/settings_general.dart';
 import 'package:hidroly/widgets/settings/sections/settings_you.dart';
 import 'package:hidroly/provider/settings_provider.dart';
@@ -53,6 +54,8 @@ class _SettingsPageState extends State<SettingsPage> {
                 SettingsYou(
                   isMetric: isMetric
                 ),
+                SizedBox(height: 16,),
+                SettingsAbout(),
               ],
             ),
           ),

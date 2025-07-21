@@ -40,9 +40,12 @@
     "settingsGeneralSection": "General",
     "settingsUnitSystem": "Unit system",
     "settingsYouSection": "You",
+    "settingsAboutSection": "About",
     "settingsUpdateYourDailyGoal": "Update your daily goal",
     "settingsSetCustomDailyGoal": "Set a custom daily goal",
     "dailyGoal": "Daily goal",
     "updateAction": "Update",
-    "cancelAction": "Cancel"
+    "cancelAction": "Cancel",
+    "settingsContribute": "Contribute",
+    "settingsContributeDescription": "Access the GitHub repository"
 }

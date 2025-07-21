@@ -112,6 +112,9 @@ class AppLocalizationsPt extends AppLocalizations {
   String get settingsYouSection => 'You';
 
   @override
+  String get settingsAboutSection => 'About';
+
+  @override
   String get settingsUpdateYourDailyGoal => 'Update your daily goal';
 
   @override
@@ -125,4 +128,10 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get cancelAction => 'Cancel';
+
+  @override
+  String get settingsContribute => 'Contribute';
+
+  @override
+  String get settingsContributeDescription => 'Access the GitHub repository';
 }
