@@ -158,11 +158,11 @@ abstract class AppLocalizations {
   /// **'Home'**
   String get bottomNavHomeLabel;
 
-  /// No description provided for @bottomNavHistoryLabel.
+  /// No description provided for @bottomNavSummaryLabel.
   ///
   /// In en, this message translates to:
-  /// **'History'**
-  String get bottomNavHistoryLabel;
+  /// **'Summary'**
+  String get bottomNavSummaryLabel;
 
   /// No description provided for @dayHistoryBottomSheetTitle.
   ///

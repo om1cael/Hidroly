@@ -9,7 +9,7 @@
   "customCupDialogCancelButton": "Cancelar",
   "dayLoadingFailed": "Dia não encontrado",
   "bottomNavHomeLabel": "Home",
-  "bottomNavHistoryLabel": "Histórico",
+  "bottomNavSummaryLabel": "Resumo",
   "dayHistoryBottomSheetTitle": "Histórico do dia",
   "dayHistoryBottomSheetNoItems": "Nada por aqui :(",
   "dayHistoryBottomSheetItemSubtitle": "adicionado às {time}",
