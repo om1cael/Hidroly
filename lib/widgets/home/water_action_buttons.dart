@@ -116,9 +116,11 @@ class WaterActionButtons extends StatelessWidget {
           key: formKey,
           child: FormNumberInputField(
             label: AppLocalizations.of(context)!.customCupDialogTextFieldAmount, 
+            decimal: true,
+            maxLength: 4,
             controller: customCupAmountController, 
             validator: (value) {
-              int? amount = int.tryParse(value ?? '');
+              double? amount = double.tryParse(value ?? '');
               if(amount == null || amount <= 0) return AppLocalizations.of(context)!.customCupDialogTextFieldAmountError;
               return null;
             }
@@ -129,11 +131,11 @@ class WaterActionButtons extends StatelessWidget {
             onPressed: () async {
               if(!formKey.currentState!.validate()) return;
               
-              int? amount = int.tryParse(customCupAmountController.text);
+              double? amount = double.tryParse(customCupAmountController.text);
               if(amount == null) return;
 
               bool created = await context.read<CustomCupsProvider>().createCustomCup(
-                amount,
+                isMetric ? amount.round() : UnitTools.flOzToMl(amount)
               );
 
               if(created && context.mounted) {
