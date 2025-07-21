@@ -36,15 +36,9 @@ class SettingsGeneral extends StatelessWidget {
               alignment: Alignment.centerLeft,
             ),
             onPressed: () async {
-              final result = await Navigator.of(context).push<bool>(
+              await Navigator.of(context).push(
                 MaterialPageRoute(builder: (context) => const SettingsUnitPage()),
               );
-
-              print(result);
-
-              if(result != null && context.mounted) {
-                context.read<SettingsProvider>().updateIsMetric(result);
-              }
             }, 
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

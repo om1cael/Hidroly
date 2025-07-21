@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hidroly/l10n/app_localizations.dart';
-import 'package:hidroly/pages/settings_page.dart';
 import 'package:hidroly/provider/settings_provider.dart';
 import 'package:hidroly/theme/app_colors.dart';
 import 'package:provider/provider.dart';
@@ -30,7 +29,7 @@ class _SettingsUnitPageState extends State<SettingsUnitPage> {
         title: Text('Unit system'),
         leading: IconButton(
           onPressed: () {
-            Navigator.of(context).pop(selectedMetric);
+            Navigator.of(context).pop();
           }, 
           icon: Icon(
             Icons.arrow_back,
