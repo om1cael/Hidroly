@@ -116,7 +116,7 @@ class WaterActionButtons extends StatelessWidget {
           key: formKey,
           child: FormNumberInputField(
             label: AppLocalizations.of(context)!.customCupDialogTextFieldAmount, 
-            decimal: true,
+            decimal: !isMetric,
             maxLength: 4,
             controller: customCupAmountController, 
             validator: (value) {
