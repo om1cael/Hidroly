@@ -16,8 +16,8 @@ class _SettingsUnitPageState extends State<SettingsUnitPage> {
 
   @override
   void initState() {
-    _loadUnitState();
     super.initState();
+    _loadUnitState();
   }
 
   @override
@@ -26,7 +26,7 @@ class _SettingsUnitPageState extends State<SettingsUnitPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Unit system'),
+        title: Text(AppLocalizations.of(context)!.settingsUnitSystem),
         leading: IconButton(
           onPressed: () {
             Navigator.of(context).pop();
@@ -47,13 +47,7 @@ class _SettingsUnitPageState extends State<SettingsUnitPage> {
             ),
             value: true, 
             groupValue: selectedMetric,
-            onChanged: (val) {
-              setState(() {
-                selectedMetric = val!;
-              });
-
-              provider.updateIsMetric(selectedMetric);
-            },
+            onChanged: (val) => _updateRadioValue(val, provider),
           ),
           RadioListTile(
             title: Text(
@@ -62,17 +56,19 @@ class _SettingsUnitPageState extends State<SettingsUnitPage> {
             ),
             value: false, 
             groupValue: selectedMetric,
-            onChanged: (val) {
-              setState(() {
-                selectedMetric = val!;
-              });
-
-              provider.updateIsMetric(selectedMetric);
-            },
+            onChanged: (val) => _updateRadioValue(val, provider),
           ),
         ],
       ),
     );
+  }
+
+  void _updateRadioValue(bool? val, SettingsProvider provider) {
+    setState(() {
+      selectedMetric = val!;
+    });
+    
+    provider.updateIsMetric(selectedMetric);
   }
 
   void _loadUnitState() {
