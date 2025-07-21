@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hidroly/l10n/app_localizations.dart';
 import 'package:hidroly/theme/app_colors.dart';
 import 'package:hidroly/widgets/settings/settings_text_button.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SettingsAbout extends StatelessWidget {
   const SettingsAbout({
@@ -23,8 +24,12 @@ class SettingsAbout extends StatelessWidget {
         SettingsTextButton(
           title: AppLocalizations.of(context)!.settingsContribute,
           description: AppLocalizations.of(context)!.settingsContributeDescription,
-          onPressed: () {
-            
+          onPressed: () async {
+            final Uri gitHubRepository = Uri.parse('https://github.com/om1cael/Hidroly');
+            await launchUrl(
+              gitHubRepository,
+              mode: LaunchMode.externalApplication,
+            );
           },
         ),
       ],
