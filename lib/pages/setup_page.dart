@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hidroly/service/settings_service.dart';
 import 'package:hidroly/l10n/app_localizations.dart';
 import 'package:hidroly/pages/home_page.dart';
 import 'package:hidroly/provider/day_provider.dart';
@@ -19,6 +20,7 @@ class _SetupPageState extends State<SetupPage> {
   final TextEditingController weightController = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
+  final SettingsService settingsService = SettingsService();
   final ValueNotifier<bool> isMetric = ValueNotifier(true);
 
   @override
@@ -64,6 +66,9 @@ class _SetupPageState extends State<SetupPage> {
           int? dailyGoal = _getDailyGoal();
           if(dailyGoal == null) return;
 
+          await settingsService.updateIsMetric(isMetric.value);
+
+          if(!context.mounted) return;
           final created = await _createDay(context, dailyGoal);
 
           if(created && context.mounted) {
