@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:hidroly/l10n/app_localizations.dart';
+import 'package:hidroly/theme/app_colors.dart';
 import 'package:hidroly/widgets/input/form_number_input_field.dart';
+import 'package:toggle_switch/toggle_switch.dart';
 
 class SetupInteractable extends StatelessWidget {
   final TextEditingController ageController;
   final TextEditingController weightController;
+  final ValueNotifier<bool> isMetric;
 
   const SetupInteractable({
     super.key,
     required this.ageController,
     required this.weightController,
+    required this.isMetric,
   });
 
   @override
@@ -37,6 +41,23 @@ class SetupInteractable extends StatelessWidget {
               return null;
             },
           ),
+          SizedBox(height: 5,),
+          ToggleSwitch(
+            initialLabelIndex: 0,
+            totalSwitches: 2,
+            activeBgColor: [AppColors.blueAccent],
+            activeFgColor: AppColors.primaryText,
+            inactiveBgColor: AppColors.onBackground,
+            inactiveFgColor: AppColors.secondaryText,
+            minWidth: 100,
+            labels: [
+              AppLocalizations.of(context)!.setupUnitMetric,
+              AppLocalizations.of(context)!.setupUnitImperial,
+            ],
+            onToggle: (index) {
+              isMetric.value = (index == 0);
+            },
+          )
         ],
       ),
     );

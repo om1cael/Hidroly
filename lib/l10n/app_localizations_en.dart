@@ -75,5 +75,11 @@ class AppLocalizationsEn extends AppLocalizations {
   String get setupWeightTextFieldInvalidValue => 'Weight between 30 and 200';
 
   @override
+  String get setupUnitMetric => 'kg, ml';
+
+  @override
+  String get setupUnitImperial => 'lb, fl oz';
+
+  @override
   String get homePageTodayAppBarTitle => 'Today';
 }

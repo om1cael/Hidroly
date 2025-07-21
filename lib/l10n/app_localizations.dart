@@ -224,6 +224,18 @@ abstract class AppLocalizations {
   /// **'Weight between 30 and 200'**
   String get setupWeightTextFieldInvalidValue;
 
+  /// No description provided for @setupUnitMetric.
+  ///
+  /// In en, this message translates to:
+  /// **'kg, ml'**
+  String get setupUnitMetric;
+
+  /// No description provided for @setupUnitImperial.
+  ///
+  /// In en, this message translates to:
+  /// **'lb, fl oz'**
+  String get setupUnitImperial;
+
   /// No description provided for @homePageTodayAppBarTitle.
   ///
   /// In en, this message translates to:

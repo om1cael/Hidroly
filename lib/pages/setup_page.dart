@@ -19,10 +19,13 @@ class _SetupPageState extends State<SetupPage> {
   final TextEditingController weightController = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
+  final ValueNotifier<bool> isMetric = ValueNotifier(true);
+
   @override
   void dispose() {
     ageController.dispose();
     weightController.dispose();
+    isMetric.dispose();
     super.dispose();
   }
 
@@ -42,6 +45,7 @@ class _SetupPageState extends State<SetupPage> {
                   SetupInteractable(
                     ageController: ageController,
                     weightController: weightController,
+                    isMetric: isMetric,
                   ),
                   Text(
                     AppLocalizations.of(context)!.setupDataText,
