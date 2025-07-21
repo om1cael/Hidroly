@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hidroly/l10n/app_localizations.dart';
-import 'package:hidroly/pages/settings/settings_general.dart';
-import 'package:hidroly/pages/settings/settings_you.dart';
+import 'package:hidroly/widgets/settings/sections/settings_general.dart';
+import 'package:hidroly/widgets/settings/sections/settings_you.dart';
 import 'package:hidroly/provider/settings_provider.dart';
 import 'package:hidroly/theme/app_colors.dart';
 import 'package:provider/provider.dart';
