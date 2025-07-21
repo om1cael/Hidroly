@@ -3,15 +3,18 @@ import 'package:hidroly/l10n/app_localizations.dart';
 import 'package:hidroly/provider/daily_history_provider.dart';
 import 'package:hidroly/provider/day_provider.dart';
 import 'package:hidroly/theme/app_colors.dart';
+import 'package:hidroly/utils/unit_tools.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class DailyHistoryBottomSheet extends StatelessWidget {
   final int dayId;
+  final bool isMetric;
 
   const DailyHistoryBottomSheet({
     super.key,
     required this.dayId,
+    required this.isMetric,
   });
 
   @override
@@ -81,7 +84,7 @@ class DailyHistoryBottomSheet extends StatelessWidget {
                                 color: AppColors.blueAccent,
                               ),
                               title: Text(
-                                '${history.amount}ml',
+                                UnitTools.getVolumeWithUnit(history.amount, isMetric, context: context),
                                 style: Theme.of(context).textTheme.bodyLarge
                               ),
                               subtitle: Text(

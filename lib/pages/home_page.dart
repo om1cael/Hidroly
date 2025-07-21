@@ -5,6 +5,7 @@ import 'package:hidroly/pages/setup_page.dart';
 import 'package:hidroly/provider/custom_cups_provider.dart';
 import 'package:hidroly/provider/daily_history_provider.dart';
 import 'package:hidroly/provider/day_provider.dart';
+import 'package:hidroly/provider/settings_provider.dart';
 import 'package:hidroly/theme/app_colors.dart';
 import 'package:hidroly/theme/app_theme.dart';
 import 'package:hidroly/utils/app_date_utils.dart';
@@ -44,14 +45,16 @@ class _HomePageState extends State<HomePage> {
     final Day? currentDay = context.watch<DayProvider>().day;
     final int? dayId = currentDay?.id;
 
-    if(currentDay == null || dayId == null) {
+    final bool? isMetric = context.watch<SettingsProvider>().isMetric;
+
+    if(currentDay == null || dayId == null || isMetric == null) {
       return Scaffold(
         body: Center(child: CircularProgressIndicator(),),
       );
     }
 
     return Scaffold(
-      appBar: appBar(currentDay, dayId),
+      appBar: appBar(currentDay, dayId, isMetric),
       bottomNavigationBar: HomeBottomNav(),
       body: Center(
         child: SingleChildScrollView(
@@ -61,11 +64,14 @@ class _HomePageState extends State<HomePage> {
               spacing: 50,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                WaterProgressCircle(),
+                WaterProgressCircle(
+                  isMetric: isMetric,
+                ),
                 WaterActionButtons(
                   dayId: dayId,
                   customCupAmountController: customCupAmountController,
                   formKey: formKey,
+                  isMetric: isMetric,
                 )
               ],
             ),
@@ -75,7 +81,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  AppBar appBar(Day currentDay, int dayId) {
+  AppBar appBar(Day currentDay, int dayId, bool isMetric) {
     return AppBar(
       title: TextButton(
         onPressed: () async {
@@ -149,6 +155,7 @@ class _HomePageState extends State<HomePage> {
               builder: (builder) {
                 return DailyHistoryBottomSheet(
                   dayId: dayId,
+                  isMetric: isMetric,
                 );
               }
             );
@@ -180,6 +187,7 @@ class _HomePageState extends State<HomePage> {
     await _createDayIfNewDate();
     await _loadCustomCups();
     await _loadDailyHistory();
+    await _loadSettings();
   }
 
   Future<void> _createDayIfNewDate() async {
@@ -213,5 +221,9 @@ class _HomePageState extends State<HomePage> {
     
     final dayId = currentDay.id!;
     await context.read<DailyHistoryProvider>().getAll(dayId);
+  }
+  
+  Future<void> _loadSettings() async {
+    await context.read<SettingsProvider>().readIsMetric();
   }
 }

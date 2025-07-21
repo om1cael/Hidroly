@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:hidroly/provider/settings_provider.dart';
 import 'package:hidroly/l10n/app_localizations.dart';
 import 'package:hidroly/pages/home_page.dart';
 import 'package:hidroly/provider/day_provider.dart';
 import 'package:hidroly/utils/calculate_dailygoal.dart';
+import 'package:hidroly/utils/unit_tools.dart';
 import 'package:hidroly/widgets/setup/setup_header.dart';
 import 'package:hidroly/widgets/setup/setup_interactable.dart';
 import 'package:provider/provider.dart';
@@ -19,10 +21,13 @@ class _SetupPageState extends State<SetupPage> {
   final TextEditingController weightController = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
+  final ValueNotifier<bool> isMetric = ValueNotifier(true);
+
   @override
   void dispose() {
     ageController.dispose();
     weightController.dispose();
+    isMetric.dispose();
     super.dispose();
   }
 
@@ -42,6 +47,7 @@ class _SetupPageState extends State<SetupPage> {
                   SetupInteractable(
                     ageController: ageController,
                     weightController: weightController,
+                    isMetric: isMetric,
                   ),
                   Text(
                     AppLocalizations.of(context)!.setupDataText,
@@ -56,10 +62,12 @@ class _SetupPageState extends State<SetupPage> {
       floatingActionButton: IconButton.filled(
         onPressed: () async {
           if(!formKey.currentState!.validate()) return;
-          
+          await context.read<SettingsProvider>().updateIsMetric(isMetric.value);
+
           int? dailyGoal = _getDailyGoal();
           if(dailyGoal == null) return;
 
+          if(!context.mounted) return;
           final created = await _createDay(context, dailyGoal);
 
           if(created && context.mounted) {
@@ -95,6 +103,10 @@ class _SetupPageState extends State<SetupPage> {
     int? weight = int.tryParse(weightController.text);
 
     if(age == null || weight == null) return null;
+
+    if(isMetric.value == false) {
+      weight = UnitTools.lbToKg(weight);
+    }
     
     return CalculateDailyGoal().calculate(age, weight);
   }

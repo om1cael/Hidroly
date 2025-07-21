@@ -28,5 +28,11 @@
     "setupAgeTextFieldInvalidValue": "Age between 10 and 120",
     "setupWeightTextFieldLabel": "Your weight",
     "setupWeightTextFieldInvalidValue": "Weight between 30 and 200",
-    "homePageTodayAppBarTitle": "Today" 
+    "setupUnitMetric": "kg, ml",
+    "setupUnitImperial": "lb, fl oz",
+    "homePageTodayAppBarTitle": "Today",
+    "mlUnit": "ml",
+    "flOzUnit": "fl oz",
+    "kgUnit": "kg",
+    "lbUnit": "lb"
 }

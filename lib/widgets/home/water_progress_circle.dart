@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:hidroly/l10n/app_localizations.dart';
 import 'package:hidroly/provider/day_provider.dart';
+import 'package:hidroly/utils/unit_tools.dart';
 import 'package:provider/provider.dart';
 
 class WaterProgressCircle extends StatelessWidget {
+  final bool isMetric;
+
   const WaterProgressCircle({
     super.key,
+    required this.isMetric,
   });
 
   @override
@@ -38,11 +42,11 @@ class WaterProgressCircle extends StatelessWidget {
             Column(
               children: [
                 Text(
-                  '${day.currentAmount}ml',
+                  UnitTools.getVolumeWithUnit(day.currentAmount, isMetric, context: context),
                   style: Theme.of(context).textTheme.headlineLarge,
                 ),
                 Text(
-                  '${AppLocalizations.of(context)!.progressCircleOf} ${day.dailyGoal}ml',
+                  '${AppLocalizations.of(context)!.progressCircleOf} ${UnitTools.getVolumeWithUnit(day.dailyGoal, isMetric, context: context)}',
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
               ],
