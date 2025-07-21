@@ -82,4 +82,16 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get homePageTodayAppBarTitle => 'Today';
+
+  @override
+  String get mlUnit => 'ml';
+
+  @override
+  String get flOzUnit => 'fl oz';
+
+  @override
+  String get kgUnit => 'kg';
+
+  @override
+  String get lbUnit => 'lb';
 }

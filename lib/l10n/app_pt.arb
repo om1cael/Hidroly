@@ -30,5 +30,9 @@
   "setupWeightTextFieldInvalidValue": "Peso entre 30 e 200",
   "setupUnitMetric": "kg, ml",
   "setupUnitImperial": "lb, fl oz",
-  "homePageTodayAppBarTitle": "Hoje"
+  "homePageTodayAppBarTitle": "Hoje",
+  "mlUnit": "ml",
+  "flOzUnit": "fl oz",
+  "kgUnit": "kg",
+  "lbUnit": "lb"
 }

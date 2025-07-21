@@ -4,7 +4,7 @@ import 'package:hidroly/l10n/app_localizations.dart';
 import 'package:hidroly/pages/home_page.dart';
 import 'package:hidroly/provider/day_provider.dart';
 import 'package:hidroly/utils/calculate_dailygoal.dart';
-import 'package:hidroly/utils/unit_converter.dart';
+import 'package:hidroly/utils/unit_tools.dart';
 import 'package:hidroly/widgets/setup/setup_header.dart';
 import 'package:hidroly/widgets/setup/setup_interactable.dart';
 import 'package:provider/provider.dart';
@@ -106,7 +106,7 @@ class _SetupPageState extends State<SetupPage> {
     if(age == null || weight == null) return null;
 
     if(isMetric.value == false) {
-      weight = UnitConverter.lbToKg(weight);
+      weight = UnitTools.lbToKg(weight);
     }
     
     return CalculateDailyGoal().calculate(age, weight);
