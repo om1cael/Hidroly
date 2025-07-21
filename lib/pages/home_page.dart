@@ -5,6 +5,7 @@ import 'package:hidroly/pages/setup_page.dart';
 import 'package:hidroly/provider/custom_cups_provider.dart';
 import 'package:hidroly/provider/daily_history_provider.dart';
 import 'package:hidroly/provider/day_provider.dart';
+import 'package:hidroly/service/settings_service.dart';
 import 'package:hidroly/theme/app_colors.dart';
 import 'package:hidroly/theme/app_theme.dart';
 import 'package:hidroly/utils/app_date_utils.dart';
@@ -25,6 +26,9 @@ class _HomePageState extends State<HomePage> {
   final TextEditingController customCupAmountController = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
+  final SettingsService _settingsService = SettingsService();
+  bool? isMetric;
+
   @override
   void initState() {
     super.initState();
@@ -44,7 +48,7 @@ class _HomePageState extends State<HomePage> {
     final Day? currentDay = context.watch<DayProvider>().day;
     final int? dayId = currentDay?.id;
 
-    if(currentDay == null || dayId == null) {
+    if(currentDay == null || dayId == null || isMetric == null) {
       return Scaffold(
         body: Center(child: CircularProgressIndicator(),),
       );
@@ -61,7 +65,9 @@ class _HomePageState extends State<HomePage> {
               spacing: 50,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                WaterProgressCircle(),
+                WaterProgressCircle(
+                  isMetric: isMetric!,
+                ),
                 WaterActionButtons(
                   dayId: dayId,
                   customCupAmountController: customCupAmountController,
@@ -180,6 +186,11 @@ class _HomePageState extends State<HomePage> {
     await _createDayIfNewDate();
     await _loadCustomCups();
     await _loadDailyHistory();
+
+    final metric = await _settingsService.readIsMetric();
+    setState(() {
+      isMetric = metric;
+    });
   }
 
   Future<void> _createDayIfNewDate() async {
