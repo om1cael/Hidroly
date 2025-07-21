@@ -35,5 +35,9 @@
     "flOzUnit": "fl oz",
     "kgUnit": "kg",
     "lbUnit": "lb",
-    "settingsPageTitle": "Settings"
+    "settingsPageTitle": "Settings",
+    "settingsGeneral": "General",
+    "settingsUnitSystem": "Unit system",
+    "metric": "Metric",
+    "imperial": "Imperial"
 }

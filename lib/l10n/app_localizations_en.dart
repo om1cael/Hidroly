@@ -97,4 +97,16 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get settingsPageTitle => 'Settings';
+
+  @override
+  String get settingsGeneral => 'General';
+
+  @override
+  String get settingsUnitSystem => 'Unit system';
+
+  @override
+  String get metric => 'Metric';
+
+  @override
+  String get imperial => 'Imperial';
 }

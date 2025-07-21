@@ -271,6 +271,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Settings'**
   String get settingsPageTitle;
+
+  /// No description provided for @settingsGeneral.
+  ///
+  /// In en, this message translates to:
+  /// **'General'**
+  String get settingsGeneral;
+
+  /// No description provided for @settingsUnitSystem.
+  ///
+  /// In en, this message translates to:
+  /// **'Unit system'**
+  String get settingsUnitSystem;
+
+  /// No description provided for @metric.
+  ///
+  /// In en, this message translates to:
+  /// **'Metric'**
+  String get metric;
+
+  /// No description provided for @imperial.
+  ///
+  /// In en, this message translates to:
+  /// **'Imperial'**
+  String get imperial;
 }
 
 class _AppLocalizationsDelegate

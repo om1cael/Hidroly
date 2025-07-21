@@ -102,6 +102,14 @@ class AppTheme {
           }
         }),
       ),
+      radioTheme: RadioThemeData(
+        fillColor: WidgetStateProperty.resolveWith<Color>((state) {
+          if(state.contains(WidgetState.selected)) {
+            return AppColors.blueAccent;
+          }
+          return Colors.white;
+        }),
+      ),
       fontFamily: 'Poppins',
     );
   }

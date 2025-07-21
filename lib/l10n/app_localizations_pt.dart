@@ -98,4 +98,16 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get settingsPageTitle => 'Configurações';
+
+  @override
+  String get settingsGeneral => 'General';
+
+  @override
+  String get settingsUnitSystem => 'Unit system';
+
+  @override
+  String get metric => 'Metric';
+
+  @override
+  String get imperial => 'Imperial';
 }
