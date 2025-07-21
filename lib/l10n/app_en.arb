@@ -4,9 +4,8 @@
     "customCupButton": "Custom",
     "customCupDialogTitle": "Add Custom Cup",
     "customCupDialogTextFieldAmount": "Amount",
-    "customCupDialogTextFieldAmountError": "Invalid Amount",
-    "customCupDialogAddButton": "Add",
-    "customCupDialogCancelButton": "Cancel",
+    "textFieldAmountError": "Invalid Amount",
+    "addAction": "Add",
     "dayLoadingFailed": "Day not found",
     "bottomNavHomeLabel": "Home",
     "bottomNavSummaryLabel": "Summary",
@@ -42,5 +41,8 @@
     "settingsUnitSystem": "Unit system",
     "settingsYouSection": "You",
     "settingsUpdateYourDailyGoal": "Update your daily goal",
-    "settingsSetCustomDailyGoal": "Set a custom daily goal"
+    "settingsSetCustomDailyGoal": "Set a custom daily goal",
+    "dailyGoal": "Daily goal",
+    "updateAction": "Update",
+    "cancelAction": "Cancel"
 }

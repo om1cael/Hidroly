@@ -24,13 +24,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get customCupDialogTextFieldAmount => 'Amount';
 
   @override
-  String get customCupDialogTextFieldAmountError => 'Invalid Amount';
+  String get textFieldAmountError => 'Invalid Amount';
 
   @override
-  String get customCupDialogAddButton => 'Add';
-
-  @override
-  String get customCupDialogCancelButton => 'Cancel';
+  String get addAction => 'Add';
 
   @override
   String get dayLoadingFailed => 'Day not found';
@@ -118,4 +115,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get settingsSetCustomDailyGoal => 'Set a custom daily goal';
+
+  @override
+  String get dailyGoal => 'Daily goal';
+
+  @override
+  String get updateAction => 'Update';
+
+  @override
+  String get cancelAction => 'Cancel';
 }

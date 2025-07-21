@@ -128,23 +128,17 @@ abstract class AppLocalizations {
   /// **'Amount'**
   String get customCupDialogTextFieldAmount;
 
-  /// No description provided for @customCupDialogTextFieldAmountError.
+  /// No description provided for @textFieldAmountError.
   ///
   /// In en, this message translates to:
   /// **'Invalid Amount'**
-  String get customCupDialogTextFieldAmountError;
+  String get textFieldAmountError;
 
-  /// No description provided for @customCupDialogAddButton.
+  /// No description provided for @addAction.
   ///
   /// In en, this message translates to:
   /// **'Add'**
-  String get customCupDialogAddButton;
-
-  /// No description provided for @customCupDialogCancelButton.
-  ///
-  /// In en, this message translates to:
-  /// **'Cancel'**
-  String get customCupDialogCancelButton;
+  String get addAction;
 
   /// No description provided for @dayLoadingFailed.
   ///
@@ -313,6 +307,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Set a custom daily goal'**
   String get settingsSetCustomDailyGoal;
+
+  /// No description provided for @dailyGoal.
+  ///
+  /// In en, this message translates to:
+  /// **'Daily goal'**
+  String get dailyGoal;
+
+  /// No description provided for @updateAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Update'**
+  String get updateAction;
+
+  /// No description provided for @cancelAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get cancelAction;
 }
 
 class _AppLocalizationsDelegate
