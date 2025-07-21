@@ -170,8 +170,8 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
         IconButton(
-          onPressed: () {
-            Navigator.of(context).pushReplacement(
+          onPressed: () async {
+            await Navigator.of(context).push(
               MaterialPageRoute(
                 builder: (context) => const SettingsPage()
               )

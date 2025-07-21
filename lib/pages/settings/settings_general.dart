@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hidroly/l10n/app_localizations.dart';
 import 'package:hidroly/pages/settings/settings_unit_page.dart';
+import 'package:hidroly/provider/settings_provider.dart';
 import 'package:hidroly/theme/app_colors.dart';
+import 'package:provider/provider.dart';
 
 class SettingsGeneral extends StatelessWidget {
   final bool isMetric;
@@ -33,10 +35,16 @@ class SettingsGeneral extends StatelessWidget {
               ),
               alignment: Alignment.centerLeft,
             ),
-            onPressed: () {
-              Navigator.of(context).pushReplacement(
+            onPressed: () async {
+              final result = await Navigator.of(context).push<bool>(
                 MaterialPageRoute(builder: (context) => const SettingsUnitPage()),
               );
+
+              print(result);
+
+              if(result != null && context.mounted) {
+                context.read<SettingsProvider>().updateIsMetric(result);
+              }
             }, 
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

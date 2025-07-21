@@ -30,11 +30,7 @@ class _SettingsPageState extends State<SettingsPage> {
         ),
         leading: IconButton(
           onPressed: () {
-            Navigator.of(context).pushReplacement(
-              MaterialPageRoute(
-                builder: (context) => const HomePage()
-              )
-            );
+            Navigator.of(context).pop();
           }, 
           icon: Icon(
             Icons.arrow_back,

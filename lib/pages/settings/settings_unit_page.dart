@@ -30,10 +30,7 @@ class _SettingsUnitPageState extends State<SettingsUnitPage> {
         title: Text('Unit system'),
         leading: IconButton(
           onPressed: () {
-            provider.updateIsMetric(selectedMetric);
-            Navigator.of(context).pushReplacement(
-              MaterialPageRoute(builder: (context) => SettingsPage())
-            );
+            Navigator.of(context).pop(selectedMetric);
           }, 
           icon: Icon(
             Icons.arrow_back,
@@ -55,6 +52,8 @@ class _SettingsUnitPageState extends State<SettingsUnitPage> {
               setState(() {
                 selectedMetric = val!;
               });
+
+              provider.updateIsMetric(selectedMetric);
             },
           ),
           RadioListTile(
@@ -68,6 +67,8 @@ class _SettingsUnitPageState extends State<SettingsUnitPage> {
               setState(() {
                 selectedMetric = val!;
               });
+
+              provider.updateIsMetric(selectedMetric);
             },
           ),
         ],
