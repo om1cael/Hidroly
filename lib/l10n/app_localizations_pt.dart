@@ -97,5 +97,5 @@ class AppLocalizationsPt extends AppLocalizations {
   String get lbUnit => 'lb';
 
   @override
-  String get settingsPageTitle => 'Settings';
+  String get settingsPageTitle => 'Configurações';
 }
