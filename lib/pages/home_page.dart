@@ -54,7 +54,7 @@ class _HomePageState extends State<HomePage> {
     }
 
     return Scaffold(
-      appBar: appBar(currentDay, dayId),
+      appBar: appBar(currentDay, dayId, isMetric),
       bottomNavigationBar: HomeBottomNav(),
       body: Center(
         child: SingleChildScrollView(
@@ -81,7 +81,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  AppBar appBar(Day currentDay, int dayId) {
+  AppBar appBar(Day currentDay, int dayId, bool isMetric) {
     return AppBar(
       title: TextButton(
         onPressed: () async {
@@ -155,6 +155,7 @@ class _HomePageState extends State<HomePage> {
               builder: (builder) {
                 return DailyHistoryBottomSheet(
                   dayId: dayId,
+                  isMetric: isMetric,
                 );
               }
             );
