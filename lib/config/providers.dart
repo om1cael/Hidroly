@@ -8,12 +8,14 @@ import 'package:hidroly/data/repository/day_repository.dart';
 import 'package:hidroly/provider/custom_cups_provider.dart';
 import 'package:hidroly/provider/daily_history_provider.dart';
 import 'package:hidroly/provider/day_provider.dart';
+import 'package:hidroly/provider/settings_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
 
 final class Providers {
   final providers = <SingleChildWidget>[
     Provider(create: (_) => DatabaseHelper()),
+    ChangeNotifierProvider(create: (_) => SettingsProvider()),
 
     // Data Sources
     ProxyProvider<DatabaseHelper, DayLocalDataSourceImpl>(

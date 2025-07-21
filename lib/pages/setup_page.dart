@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hidroly/service/settings_service.dart';
+import 'package:hidroly/provider/settings_provider.dart';
 import 'package:hidroly/l10n/app_localizations.dart';
 import 'package:hidroly/pages/home_page.dart';
 import 'package:hidroly/provider/day_provider.dart';
@@ -21,7 +21,6 @@ class _SetupPageState extends State<SetupPage> {
   final TextEditingController weightController = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-  final SettingsService settingsService = SettingsService();
   final ValueNotifier<bool> isMetric = ValueNotifier(true);
 
   @override
@@ -63,7 +62,7 @@ class _SetupPageState extends State<SetupPage> {
       floatingActionButton: IconButton.filled(
         onPressed: () async {
           if(!formKey.currentState!.validate()) return;
-          await settingsService.updateIsMetric(isMetric.value);
+          await context.read<SettingsProvider>().updateIsMetric(isMetric.value);
 
           int? dailyGoal = _getDailyGoal();
           if(dailyGoal == null) return;

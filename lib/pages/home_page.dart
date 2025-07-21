@@ -5,7 +5,7 @@ import 'package:hidroly/pages/setup_page.dart';
 import 'package:hidroly/provider/custom_cups_provider.dart';
 import 'package:hidroly/provider/daily_history_provider.dart';
 import 'package:hidroly/provider/day_provider.dart';
-import 'package:hidroly/service/settings_service.dart';
+import 'package:hidroly/provider/settings_provider.dart';
 import 'package:hidroly/theme/app_colors.dart';
 import 'package:hidroly/theme/app_theme.dart';
 import 'package:hidroly/utils/app_date_utils.dart';
@@ -26,9 +26,6 @@ class _HomePageState extends State<HomePage> {
   final TextEditingController customCupAmountController = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-  final SettingsService _settingsService = SettingsService();
-  bool? isMetric;
-
   @override
   void initState() {
     super.initState();
@@ -48,6 +45,8 @@ class _HomePageState extends State<HomePage> {
     final Day? currentDay = context.watch<DayProvider>().day;
     final int? dayId = currentDay?.id;
 
+    final bool? isMetric = context.watch<SettingsProvider>().isMetric;
+
     if(currentDay == null || dayId == null || isMetric == null) {
       return Scaffold(
         body: Center(child: CircularProgressIndicator(),),
@@ -66,7 +65,7 @@ class _HomePageState extends State<HomePage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 WaterProgressCircle(
-                  isMetric: isMetric!,
+                  isMetric: isMetric,
                 ),
                 WaterActionButtons(
                   dayId: dayId,
@@ -186,11 +185,7 @@ class _HomePageState extends State<HomePage> {
     await _createDayIfNewDate();
     await _loadCustomCups();
     await _loadDailyHistory();
-
-    final metric = await _settingsService.readIsMetric();
-    setState(() {
-      isMetric = metric;
-    });
+    await _loadSettings();
   }
 
   Future<void> _createDayIfNewDate() async {
@@ -224,5 +219,9 @@ class _HomePageState extends State<HomePage> {
     
     final dayId = currentDay.id!;
     await context.read<DailyHistoryProvider>().getAll(dayId);
+  }
+  
+  Future<void> _loadSettings() async {
+    await context.read<SettingsProvider>().readIsMetric();
   }
 }
