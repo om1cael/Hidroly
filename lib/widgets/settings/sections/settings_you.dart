@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hidroly/data/model/day.dart';
 import 'package:hidroly/l10n/app_localizations.dart';
+import 'package:hidroly/pages/settings/settings_update_daily_goal_page.dart';
 import 'package:hidroly/provider/day_provider.dart';
 import 'package:hidroly/theme/app_colors.dart';
 import 'package:hidroly/utils/unit_tools.dart';
@@ -54,13 +55,33 @@ class _SettingsYouState extends State<SettingsYou> {
         SettingsTextButton(
           title: AppLocalizations.of(context)!.settingsUpdateYourDailyGoal,
           description: dailyGoalDescription,
-          onPressed: () {},
+          onPressed: () async {
+            final setNewDailyGoal = await Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => const SettingsUpdateDailyGoalPage()),
+            );
+
+            if((setNewDailyGoal != null && setNewDailyGoal) && context.mounted) {
+              _showDailyGoalUpdateSnackBar(context);
+            }
+          },
         ),
         SettingsTextButton(
           title: AppLocalizations.of(context)!.settingsSetCustomDailyGoal,
           onPressed: () => _showCustomDailyGoalDialog(provider, day),
         ),
       ],
+    );
+  }
+
+  void _showDailyGoalUpdateSnackBar(BuildContext context) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          AppLocalizations.of(context)!.dailyGoalUpdated,
+          style: Theme.of(context).textTheme.bodyLarge
+        ),
+        duration: Duration(seconds: 2),
+      ),
     );
   }
 
@@ -101,6 +122,7 @@ class _SettingsYouState extends State<SettingsYou> {
 
               if(!mounted) return;
               _closeAndClearDialog(context, dailyGoalTextController);
+              _showDailyGoalUpdateSnackBar(context);
             }, 
             onCancelPressed: () {
               _closeAndClearDialog(context, dailyGoalTextController);

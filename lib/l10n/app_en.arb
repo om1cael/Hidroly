@@ -39,6 +39,9 @@
     "settingsPageTitle": "Settings",
     "settingsGeneralSection": "General",
     "settingsUnitSystem": "Unit system",
+    "settingsUpdateDailyGoalAppBar": "Update Goal",
+    "settingsUpdateDailyGoalTitle": "Update",
+    "settingsUpdateDailyGoalDescription": "Help us with a few details so we can update your goal",
     "settingsYouSection": "You",
     "settingsAboutSection": "About",
     "settingsUpdateYourDailyGoal": "Update your daily goal",
@@ -49,5 +52,6 @@
     "settingsFeedback": "Send feedback",
     "settingsFeedbackDescription": "Share your thoughts with us",
     "settingsContribute": "Contribute",
-    "settingsContributeDescription": "Access the GitHub repository"
+    "settingsContributeDescription": "Access the GitHub repository",
+    "dailyGoalUpdated": "Daily goal saved successfully"
 }

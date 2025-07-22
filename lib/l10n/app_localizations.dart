@@ -290,6 +290,24 @@ abstract class AppLocalizations {
   /// **'Unit system'**
   String get settingsUnitSystem;
 
+  /// No description provided for @settingsUpdateDailyGoalAppBar.
+  ///
+  /// In en, this message translates to:
+  /// **'Update Goal'**
+  String get settingsUpdateDailyGoalAppBar;
+
+  /// No description provided for @settingsUpdateDailyGoalTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Update'**
+  String get settingsUpdateDailyGoalTitle;
+
+  /// No description provided for @settingsUpdateDailyGoalDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Help us with a few details so we can update your goal'**
+  String get settingsUpdateDailyGoalDescription;
+
   /// No description provided for @settingsYouSection.
   ///
   /// In en, this message translates to:
@@ -355,6 +373,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Access the GitHub repository'**
   String get settingsContributeDescription;
+
+  /// No description provided for @dailyGoalUpdated.
+  ///
+  /// In en, this message translates to:
+  /// **'Daily goal saved successfully'**
+  String get dailyGoalUpdated;
 }
 
 class _AppLocalizationsDelegate

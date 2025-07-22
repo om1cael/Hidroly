@@ -108,6 +108,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settingsUnitSystem => 'Unit system';
 
   @override
+  String get settingsUpdateDailyGoalAppBar => 'Update Goal';
+
+  @override
+  String get settingsUpdateDailyGoalTitle => 'Update';
+
+  @override
+  String get settingsUpdateDailyGoalDescription =>
+      'Help us with a few details so we can update your goal';
+
+  @override
   String get settingsYouSection => 'You';
 
   @override
@@ -139,4 +149,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get settingsContributeDescription => 'Access the GitHub repository';
+
+  @override
+  String get dailyGoalUpdated => 'Daily goal saved successfully';
 }
