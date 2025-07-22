@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:hidroly/l10n/app_localizations.dart';
 
-class SetupHeader extends StatelessWidget {
-  const SetupHeader({
+class IconHeader extends StatelessWidget {
+  final String iconAsset;
+  final String title;
+  final String description;
+
+  const IconHeader({
     super.key,
+    required this.iconAsset,
+    required this.title,
+    required this.description,
   });
 
   @override
@@ -12,17 +18,17 @@ class SetupHeader extends StatelessWidget {
     return Column(
       children: [
         SvgPicture.asset(
-          'assets/images/water-drop.svg',
+          iconAsset,
           height: 136,
           width: 126,
           colorFilter: ColorFilter.mode(Theme.of(context).primaryColor, BlendMode.srcIn),
         ),
         Text(
-          AppLocalizations.of(context)!.setupWelcomeTitle,
+          title,
           style: Theme.of(context).textTheme.headlineLarge,
         ),
         Text(
-          AppLocalizations.of(context)!.setupWelcomeSubtitle,
+          description,
           style: Theme.of(context).textTheme.bodyMedium,
           textAlign: TextAlign.center,
         ),

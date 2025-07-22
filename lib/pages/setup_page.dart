@@ -5,7 +5,7 @@ import 'package:hidroly/pages/home_page.dart';
 import 'package:hidroly/provider/day_provider.dart';
 import 'package:hidroly/utils/calculate_dailygoal.dart';
 import 'package:hidroly/utils/unit_tools.dart';
-import 'package:hidroly/widgets/setup/setup_header.dart';
+import 'package:hidroly/widgets/common/icon_header.dart';
 import 'package:hidroly/widgets/setup/setup_interactable.dart';
 import 'package:provider/provider.dart';
 
@@ -43,7 +43,11 @@ class _SetupPageState extends State<SetupPage> {
               key: formKey,
               child: Column(
                 children: [
-                  SetupHeader(),
+                  IconHeader(
+                    iconAsset: 'assets/images/water-drop.svg', 
+                    title: AppLocalizations.of(context)!.setupWelcomeTitle, 
+                    description: AppLocalizations.of(context)!.setupWelcomeSubtitle,
+                  ),
                   SetupInteractable(
                     ageController: ageController,
                     weightController: weightController,
