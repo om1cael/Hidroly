@@ -10,9 +10,8 @@ import 'package:hidroly/provider/day_provider.dart';
 import 'package:hidroly/utils/app_date_utils.dart';
 import 'package:hidroly/utils/calculate_dailygoal.dart';
 import 'package:hidroly/utils/unit_tools.dart';
-import 'package:hidroly/widgets/common/icon_header.dart';
-import 'package:hidroly/widgets/common/daily_goal_input.dart';
-import 'package:hidroly/widgets/common/notifications_time_input.dart';
+import 'package:hidroly/widgets/setup/setup_step_one.dart';
+import 'package:hidroly/widgets/setup/setup_step_zero.dart';
 import 'package:provider/provider.dart';
 import 'package:workmanager/workmanager.dart';
 
@@ -58,20 +57,10 @@ class _SetupPageState extends State<SetupPage> {
                   weightController: weightController, 
                   isMetric: isMetric
                 )
-                : Column(
-                  spacing: 32,
-                  children: [
-                    IconHeader(
-                      iconAsset: 'assets/images/water-drop.svg', 
-                      title: AppLocalizations.of(context)!.notificationSetupTitle, 
-                      description: AppLocalizations.of(context)!.notificationSetupDescription,
-                    ),
-                    NotificationsTimeInput(
-                      wakeUpTime: wakeUpTime,
-                      sleepTime: sleepTime,
-                    )
-                  ],
-                )
+                : SetupStepOne(
+                  wakeUpTime: wakeUpTime, 
+                  sleepTime: sleepTime
+                ),
             ),
           ),
         ),
@@ -187,40 +176,5 @@ class _SetupPageState extends State<SetupPage> {
     }
     
     return CalculateDailyGoal().calculate(age, weight);
-  }
-}
-
-class SetupStepZero extends StatelessWidget {
-  const SetupStepZero({
-    super.key,
-    required this.ageController,
-    required this.weightController,
-    required this.isMetric,
-  });
-
-  final TextEditingController ageController;
-  final TextEditingController weightController;
-  final ValueNotifier<bool> isMetric;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        IconHeader(
-          iconAsset: 'assets/images/water-drop.svg', 
-          title: AppLocalizations.of(context)!.setupWelcomeTitle, 
-          description: AppLocalizations.of(context)!.setupWelcomeSubtitle,
-        ),
-        DailyGoalInput(
-          ageController: ageController,
-          weightController: weightController,
-          isMetric: isMetric,
-        ),
-        Text(
-          AppLocalizations.of(context)!.setupDataText,
-          style: Theme.of(context).textTheme.bodySmall,
-        ),
-      ],
-    );
   }
 }
