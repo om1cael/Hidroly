@@ -154,6 +154,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get dailyGoalUpdated => 'Daily goal saved successfully';
 
   @override
+  String get notificationSetupTitle => 'Notifications';
+
+  @override
+  String get notificationSetupDescription =>
+      'Let\'s adjust notifications to match your day';
+
+  @override
   String get notificationsSettingsWakeUp => 'You wake up at';
 
   @override

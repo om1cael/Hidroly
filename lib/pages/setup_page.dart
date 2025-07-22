@@ -58,8 +58,8 @@ class _SetupPageState extends State<SetupPage> {
                   children: [
                     IconHeader(
                       iconAsset: 'assets/images/water-drop.svg', 
-                      title: 'Notifications', 
-                      description: 'Let\'s adjust notifications to match your day',
+                      title: AppLocalizations.of(context)!.notificationSetupTitle, 
+                      description: AppLocalizations.of(context)!.notificationSetupDescription,
                     ),
                     NotificationsTimeInput(
                       wakeUpTime: wakeUpTime,

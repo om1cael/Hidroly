@@ -380,6 +380,18 @@ abstract class AppLocalizations {
   /// **'Daily goal saved successfully'**
   String get dailyGoalUpdated;
 
+  /// No description provided for @notificationSetupTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications'**
+  String get notificationSetupTitle;
+
+  /// No description provided for @notificationSetupDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Let\'s adjust notifications to match your day'**
+  String get notificationSetupDescription;
+
   /// No description provided for @notificationsSettingsWakeUp.
   ///
   /// In en, this message translates to:
