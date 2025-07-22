@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:hidroly/data/model/enum/settings.dart';
 import 'package:hidroly/provider/settings_provider.dart';
 import 'package:hidroly/l10n/app_localizations.dart';
@@ -80,6 +83,13 @@ class _SetupPageState extends State<SetupPage> {
             setState(() {
               setupStep = 1;
             });
+
+            if(!Platform.isAndroid) return;
+
+            FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+              FlutterLocalNotificationsPlugin();
+            flutterLocalNotificationsPlugin.resolvePlatformSpecificImplementation<
+                AndroidFlutterLocalNotificationsPlugin>()!.requestNotificationsPermission();
             return;
           }
 
