@@ -63,8 +63,8 @@
     "notificationSetupDescription": "Let's adjust notifications to match your day",
     "notificationsSettingsWakeUp": "You wake up at",
     "notificationsSettingsSleep": "You sleep at",
-    "reminderNotificationTitle": "Time to drink some water",
-    "reminderNotificationBody": "Keep yourself refreshed with a quick sip",
+    "reminderNotificationTitle": "💧 Time to hydrate!",
+    "reminderNotificationBody": "Keep your body happy, take a sip!",
     "sleepScheduleEditFailed": "Could not save your sleep schedule",
     "notificationTaskCreationFailed": "Failed to create the notification task"
 }

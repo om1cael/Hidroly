@@ -183,11 +183,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get notificationsSettingsSleep => 'You sleep at';
 
   @override
-  String get reminderNotificationTitle => 'Time to drink some water';
+  String get reminderNotificationTitle => '💧 Time to hydrate!';
 
   @override
-  String get reminderNotificationBody =>
-      'Keep yourself refreshed with a quick sip';
+  String get reminderNotificationBody => 'Keep your body happy, take a sip!';
 
   @override
   String get sleepScheduleEditFailed => 'Could not save your sleep schedule';

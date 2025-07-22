@@ -437,13 +437,13 @@ abstract class AppLocalizations {
   /// No description provided for @reminderNotificationTitle.
   ///
   /// In en, this message translates to:
-  /// **'Time to drink some water'**
+  /// **'💧 Time to hydrate!'**
   String get reminderNotificationTitle;
 
   /// No description provided for @reminderNotificationBody.
   ///
   /// In en, this message translates to:
-  /// **'Keep yourself refreshed with a quick sip'**
+  /// **'Keep your body happy, take a sip!'**
   String get reminderNotificationBody;
 
   /// No description provided for @sleepScheduleEditFailed.
