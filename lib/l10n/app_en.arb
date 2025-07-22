@@ -39,6 +39,7 @@
     "settingsPageTitle": "Settings",
     "settingsGeneralSection": "General",
     "settingsUnitSystem": "Unit system",
+    "settingsNotifications": "Notifications",
     "settingsUpdateDailyGoalAppBar": "Update Goal",
     "settingsUpdateDailyGoalTitle": "Update",
     "settingsUpdateDailyGoalDescription": "Help us with a few details so we can update your goal",

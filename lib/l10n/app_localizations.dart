@@ -290,6 +290,12 @@ abstract class AppLocalizations {
   /// **'Unit system'**
   String get settingsUnitSystem;
 
+  /// No description provided for @settingsNotifications.
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications'**
+  String get settingsNotifications;
+
   /// No description provided for @settingsUpdateDailyGoalAppBar.
   ///
   /// In en, this message translates to:

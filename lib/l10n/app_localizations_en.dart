@@ -108,6 +108,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settingsUnitSystem => 'Unit system';
 
   @override
+  String get settingsNotifications => 'Notifications';
+
+  @override
   String get settingsUpdateDailyGoalAppBar => 'Update Goal';
 
   @override
