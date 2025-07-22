@@ -296,6 +296,12 @@ abstract class AppLocalizations {
   /// **'Notifications'**
   String get settingsNotifications;
 
+  /// No description provided for @settingsSleepSchedule.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit sleep schedule'**
+  String get settingsSleepSchedule;
+
   /// No description provided for @settingsUpdateDailyGoalAppBar.
   ///
   /// In en, this message translates to:
@@ -313,6 +319,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Help us with a few details so we can update your goal'**
   String get settingsUpdateDailyGoalDescription;
+
+  /// No description provided for @settingsSleepScheduleAppBar.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit sleep schedule'**
+  String get settingsSleepScheduleAppBar;
+
+  /// No description provided for @settingsSleepScheduleTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Update'**
+  String get settingsSleepScheduleTitle;
+
+  /// No description provided for @settingsSleepScheduleDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Help us with a few details so we can update your sleep schedule'**
+  String get settingsSleepScheduleDescription;
 
   /// No description provided for @settingsYouSection.
   ///

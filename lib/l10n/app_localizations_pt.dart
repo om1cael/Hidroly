@@ -112,6 +112,9 @@ class AppLocalizationsPt extends AppLocalizations {
   String get settingsNotifications => 'Notifications';
 
   @override
+  String get settingsSleepSchedule => 'Edit sleep schedule';
+
+  @override
   String get settingsUpdateDailyGoalAppBar => 'Update Goal';
 
   @override
@@ -120,6 +123,16 @@ class AppLocalizationsPt extends AppLocalizations {
   @override
   String get settingsUpdateDailyGoalDescription =>
       'Help us with a few details so we can update your goal';
+
+  @override
+  String get settingsSleepScheduleAppBar => 'Edit sleep schedule';
+
+  @override
+  String get settingsSleepScheduleTitle => 'Update';
+
+  @override
+  String get settingsSleepScheduleDescription =>
+      'Help us with a few details so we can update your sleep schedule';
 
   @override
   String get settingsYouSection => 'You';
