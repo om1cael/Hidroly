@@ -7,6 +7,7 @@ import 'package:hidroly/provider/settings_provider.dart';
 import 'package:hidroly/l10n/app_localizations.dart';
 import 'package:hidroly/pages/home_page.dart';
 import 'package:hidroly/provider/day_provider.dart';
+import 'package:hidroly/services/notification_service.dart';
 import 'package:hidroly/utils/app_date_utils.dart';
 import 'package:hidroly/utils/calculate_dailygoal.dart';
 import 'package:hidroly/utils/unit_tools.dart';
@@ -92,7 +93,12 @@ class _SetupPageState extends State<SetupPage> {
           if(!context.mounted) return;
           final created = await _createDay(context, dailyGoal);
 
-          await _registerPeriodicNotificationTask(settingsProvider);
+          if(!context.mounted) return;
+          await NotificationService().registerPeriodicNotificationTask(
+            context,
+            settingsProvider
+          );
+
           if(created && context.mounted) {
             Navigator.of(context).pushReplacement(
               MaterialPageRoute(builder: (context) => HomePage()),
@@ -107,33 +113,6 @@ class _SetupPageState extends State<SetupPage> {
         ),
         padding: EdgeInsets.all(18),
       ),
-    );
-  }
-
-  Future<void> _registerPeriodicNotificationTask(SettingsProvider settingsProvider) async {
-    final formattedWakeUpTime = AppDateUtils.formatTime(
-      settingsProvider.wakeUpTime!.hour, 
-      settingsProvider.wakeUpTime!.minute
-    );
-
-    final formattedSleepTime = AppDateUtils.formatTime(
-      settingsProvider.sleepTime!.hour, 
-      settingsProvider.sleepTime!.minute
-    );
-    
-    await Workmanager().cancelAll();
-    
-    if(!mounted) return;
-    await Workmanager().registerPeriodicTask(
-      'notification',
-      'notificationTask',
-      frequency: Duration(hours: 2),
-      inputData: {
-        Settings.wakeUpTime.value: formattedWakeUpTime,
-        Settings.sleepTime.value: formattedSleepTime,
-        'title': AppLocalizations.of(context)!.reminderNotificationTitle,
-        'body': AppLocalizations.of(context)!.reminderNotificationBody,
-      }
     );
   }
 
