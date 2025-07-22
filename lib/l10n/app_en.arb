@@ -46,6 +46,8 @@
     "dailyGoal": "Daily goal",
     "updateAction": "Update",
     "cancelAction": "Cancel",
+    "settingsFeedback": "Send feedback",
+    "settingsFeedbackDescription": "Share your thoughts with us",
     "settingsContribute": "Contribute",
     "settingsContributeDescription": "Access the GitHub repository"
 }

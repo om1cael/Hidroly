@@ -332,6 +332,18 @@ abstract class AppLocalizations {
   /// **'Cancel'**
   String get cancelAction;
 
+  /// No description provided for @settingsFeedback.
+  ///
+  /// In en, this message translates to:
+  /// **'Send feedback'**
+  String get settingsFeedback;
+
+  /// No description provided for @settingsFeedbackDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Share your thoughts with us'**
+  String get settingsFeedbackDescription;
+
   /// No description provided for @settingsContribute.
   ///
   /// In en, this message translates to:

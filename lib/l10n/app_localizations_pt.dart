@@ -130,6 +130,12 @@ class AppLocalizationsPt extends AppLocalizations {
   String get cancelAction => 'Cancel';
 
   @override
+  String get settingsFeedback => 'Send feedback';
+
+  @override
+  String get settingsFeedbackDescription => 'Share your thoughts with us';
+
+  @override
   String get settingsContribute => 'Contribute';
 
   @override

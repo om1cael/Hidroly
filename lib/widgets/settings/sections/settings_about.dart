@@ -22,6 +22,17 @@ class SettingsAbout extends StatelessWidget {
           ),
         ),
         SettingsTextButton(
+          title: AppLocalizations.of(context)!.settingsFeedback,
+          description: AppLocalizations.of(context)!.settingsFeedbackDescription,
+          onPressed: () async {
+            final Uri gitHubRepository = Uri.parse('https://github.com/om1cael/Hidroly/issues');
+            await launchUrl(
+              gitHubRepository,
+              mode: LaunchMode.externalApplication,
+            );
+          },
+        ),
+        SettingsTextButton(
           title: AppLocalizations.of(context)!.settingsContribute,
           description: AppLocalizations.of(context)!.settingsContributeDescription,
           onPressed: () async {
