@@ -110,6 +110,12 @@ class AppTheme {
           return Colors.white;
         }),
       ),
+      timePickerTheme: TimePickerThemeData(
+        hourMinuteTextColor: AppColors.primaryText,
+        entryModeIconColor: AppColors.primaryText,
+        dialBackgroundColor: AppColors.onBackground,
+        dialTextColor: AppColors.primaryText
+      ),
       fontFamily: 'Poppins',
     );
   }
