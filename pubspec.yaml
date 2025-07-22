@@ -9,6 +9,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_local_notifications: ^19.3.1
   flutter_localizations:
     sdk: flutter
   flutter_svg: ^2.2.0
