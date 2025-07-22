@@ -19,7 +19,10 @@ class NotificationService {
     );
   }
   
-  Future<void> showNotification() async {
+  Future<void> showNotification(
+    String notificationTitle,
+    String notificationBody,
+  ) async {
     final androidNotificationDetails = AndroidNotificationDetails(
       'water-reminder', 
       'Remind me to drink water',
@@ -34,8 +37,8 @@ class NotificationService {
 
     await flutterLocalNotificationsPlugin.show(
       0, 
-      'Hey, let\'s drink some water!', 
-      'It\'s been at least 2 hours since you last drank water.', 
+      notificationTitle, 
+      notificationBody, 
       notificationDetails
     );
   }

@@ -22,6 +22,9 @@ void callbackDispatcher() {
       TimeOfDay sleepTime = AppDateUtils.parseTime(inputData[Settings.sleepTime.value]);
       TimeOfDay now = TimeOfDay.now();
 
+      String title = inputData['title'];
+      String body = inputData['body'];
+
       bool isOnTimeRange = now.isAfter(wakeUpTime) && now.isBefore(sleepTime);;
       if(sleepTime.hour < wakeUpTime.hour) {
         // When the time range crosses midnight, for example from 10:00 PM to 6:00 AM,
@@ -33,7 +36,10 @@ void callbackDispatcher() {
       if(isOnTimeRange) {
         final notificationService = NotificationService();
         await notificationService.initialize();
-        await notificationService.showNotification();
+        await notificationService.showNotification(
+          title,
+          body,
+        );
       }
     }
     return Future.value(true);

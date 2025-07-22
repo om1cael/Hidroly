@@ -57,5 +57,7 @@
     "notificationSetupTitle": "Notifications",
     "notificationSetupDescription": "Let's adjust notifications to match your day",
     "notificationsSettingsWakeUp": "You wake up at",
-    "notificationsSettingsSleep": "You sleep at"
+    "notificationsSettingsSleep": "You sleep at",
+    "reminderNotificationTitle": "Time to drink some water",
+    "reminderNotificationBody": "Keep yourself refreshed with a quick sip"
 }

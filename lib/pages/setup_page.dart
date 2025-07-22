@@ -133,6 +133,8 @@ class _SetupPageState extends State<SetupPage> {
     );
     
     await Workmanager().cancelAll();
+    
+    if(!mounted) return;
     await Workmanager().registerPeriodicTask(
       'notification',
       'notificationTask',
@@ -140,6 +142,8 @@ class _SetupPageState extends State<SetupPage> {
       inputData: {
         Settings.wakeUpTime.value: formattedWakeUpTime,
         Settings.sleepTime.value: formattedSleepTime,
+        'title': AppLocalizations.of(context)!.reminderNotificationTitle,
+        'body': AppLocalizations.of(context)!.reminderNotificationBody,
       }
     );
   }

@@ -403,6 +403,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'You sleep at'**
   String get notificationsSettingsSleep;
+
+  /// No description provided for @reminderNotificationTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Time to drink some water'**
+  String get reminderNotificationTitle;
+
+  /// No description provided for @reminderNotificationBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Keep yourself refreshed with a quick sip'**
+  String get reminderNotificationBody;
 }
 
 class _AppLocalizationsDelegate

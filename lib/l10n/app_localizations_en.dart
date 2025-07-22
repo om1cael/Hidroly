@@ -165,4 +165,11 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get notificationsSettingsSleep => 'You sleep at';
+
+  @override
+  String get reminderNotificationTitle => 'Time to drink some water';
+
+  @override
+  String get reminderNotificationBody =>
+      'Keep yourself refreshed with a quick sip';
 }
