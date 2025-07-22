@@ -64,5 +64,7 @@
     "notificationsSettingsWakeUp": "You wake up at",
     "notificationsSettingsSleep": "You sleep at",
     "reminderNotificationTitle": "Time to drink some water",
-    "reminderNotificationBody": "Keep yourself refreshed with a quick sip"
+    "reminderNotificationBody": "Keep yourself refreshed with a quick sip",
+    "sleepScheduleEditFailed": "Could not save your sleep schedule",
+    "notificationTaskCreationFailed": "Failed to create the notification task"
 }

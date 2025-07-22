@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hidroly/data/model/enum/settings.dart';
 import 'package:hidroly/l10n/app_localizations.dart';
 import 'package:hidroly/provider/settings_provider.dart';
+import 'package:hidroly/services/notification_service.dart';
 import 'package:hidroly/theme/app_colors.dart';
 import 'package:hidroly/widgets/common/icon_header.dart';
 import 'package:hidroly/widgets/common/notifications_time_input.dart';
@@ -84,21 +85,39 @@ class _SettingsUpdateSleepSchedulePageState extends State<SettingsUpdateSleepSch
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
+        onPressed: () async {
           final settingsProvider = context.read<SettingsProvider>();
 
-          settingsProvider.updateTime(
+          await settingsProvider.updateTime(
             Settings.wakeUpTime, 
             wakeUpTime.value.hour, 
             wakeUpTime.value.minute,
           );
 
-          settingsProvider.updateTime(
+          await settingsProvider.updateTime(
             Settings.sleepTime, 
             sleepTime.value.hour, 
             sleepTime.value.minute,
           );
 
+          if(!context.mounted) return;
+          final saved = await NotificationService().registerPeriodicNotificationTask(
+            context, 
+            settingsProvider
+          );
+
+          if(!saved && context.mounted) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text(
+                AppLocalizations.of(context)!.sleepScheduleEditFailed,
+                style: Theme.of(context).textTheme.bodyLarge,
+              )),
+            );
+
+            return;
+          }
+
+          if(!context.mounted) return;
           Navigator.of(context).pop(true);
         },
         backgroundColor: AppColors.primaryText,

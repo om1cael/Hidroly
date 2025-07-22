@@ -94,10 +94,21 @@ class _SetupPageState extends State<SetupPage> {
           final created = await _createDay(context, dailyGoal);
 
           if(!context.mounted) return;
-          await NotificationService().registerPeriodicNotificationTask(
+          final notificationTaskCreated = await NotificationService().registerPeriodicNotificationTask(
             context,
             settingsProvider
           );
+
+          if(!notificationTaskCreated && context.mounted) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text(
+                AppLocalizations.of(context)!.notificationTaskCreationFailed,
+                style: Theme.of(context).textTheme.bodyLarge,
+              )),
+            );
+
+            return;
+          }
 
           if(created && context.mounted) {
             Navigator.of(context).pushReplacement(

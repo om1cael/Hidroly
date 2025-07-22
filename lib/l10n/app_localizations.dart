@@ -445,6 +445,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Keep yourself refreshed with a quick sip'**
   String get reminderNotificationBody;
+
+  /// No description provided for @sleepScheduleEditFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not save your sleep schedule'**
+  String get sleepScheduleEditFailed;
+
+  /// No description provided for @notificationTaskCreationFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to create the notification task'**
+  String get notificationTaskCreationFailed;
 }
 
 class _AppLocalizationsDelegate

@@ -49,7 +49,11 @@ class NotificationService {
     );
   }
 
-  Future<void> registerPeriodicNotificationTask(BuildContext context, SettingsProvider settingsProvider) async {
+  Future<bool> registerPeriodicNotificationTask(BuildContext context, SettingsProvider settingsProvider) async {
+    if(settingsProvider.wakeUpTime == null || settingsProvider.sleepTime == null) {
+      return false;
+    }
+
     final formattedWakeUpTime = AppDateUtils.formatTime(
       settingsProvider.wakeUpTime!.hour, 
       settingsProvider.wakeUpTime!.minute
@@ -62,7 +66,7 @@ class NotificationService {
     
     await Workmanager().cancelAll();
     
-    if(!context.mounted) return;
+    if(!context.mounted) return false;
     await Workmanager().registerPeriodicTask(
       'notification',
       'notificationTask',
@@ -74,5 +78,7 @@ class NotificationService {
         'body': AppLocalizations.of(context)!.reminderNotificationBody,
       }
     );
+
+    return true;
   }
 }

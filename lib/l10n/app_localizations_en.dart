@@ -188,4 +188,11 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get reminderNotificationBody =>
       'Keep yourself refreshed with a quick sip';
+
+  @override
+  String get sleepScheduleEditFailed => 'Could not save your sleep schedule';
+
+  @override
+  String get notificationTaskCreationFailed =>
+      'Failed to create the notification task';
 }
