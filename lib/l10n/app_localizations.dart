@@ -128,23 +128,17 @@ abstract class AppLocalizations {
   /// **'Amount'**
   String get customCupDialogTextFieldAmount;
 
-  /// No description provided for @customCupDialogTextFieldAmountError.
+  /// No description provided for @textFieldAmountError.
   ///
   /// In en, this message translates to:
   /// **'Invalid Amount'**
-  String get customCupDialogTextFieldAmountError;
+  String get textFieldAmountError;
 
-  /// No description provided for @customCupDialogAddButton.
+  /// No description provided for @addAction.
   ///
   /// In en, this message translates to:
   /// **'Add'**
-  String get customCupDialogAddButton;
-
-  /// No description provided for @customCupDialogCancelButton.
-  ///
-  /// In en, this message translates to:
-  /// **'Cancel'**
-  String get customCupDialogCancelButton;
+  String get addAction;
 
   /// No description provided for @dayLoadingFailed.
   ///
@@ -265,6 +259,126 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'lb'**
   String get lbUnit;
+
+  /// No description provided for @metric.
+  ///
+  /// In en, this message translates to:
+  /// **'Metric'**
+  String get metric;
+
+  /// No description provided for @imperial.
+  ///
+  /// In en, this message translates to:
+  /// **'Imperial'**
+  String get imperial;
+
+  /// No description provided for @settingsPageTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Settings'**
+  String get settingsPageTitle;
+
+  /// No description provided for @settingsGeneralSection.
+  ///
+  /// In en, this message translates to:
+  /// **'General'**
+  String get settingsGeneralSection;
+
+  /// No description provided for @settingsUnitSystem.
+  ///
+  /// In en, this message translates to:
+  /// **'Unit system'**
+  String get settingsUnitSystem;
+
+  /// No description provided for @settingsUpdateDailyGoalAppBar.
+  ///
+  /// In en, this message translates to:
+  /// **'Update Goal'**
+  String get settingsUpdateDailyGoalAppBar;
+
+  /// No description provided for @settingsUpdateDailyGoalTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Update'**
+  String get settingsUpdateDailyGoalTitle;
+
+  /// No description provided for @settingsUpdateDailyGoalDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Help us with a few details so we can update your goal'**
+  String get settingsUpdateDailyGoalDescription;
+
+  /// No description provided for @settingsYouSection.
+  ///
+  /// In en, this message translates to:
+  /// **'You'**
+  String get settingsYouSection;
+
+  /// No description provided for @settingsAboutSection.
+  ///
+  /// In en, this message translates to:
+  /// **'About'**
+  String get settingsAboutSection;
+
+  /// No description provided for @settingsUpdateYourDailyGoal.
+  ///
+  /// In en, this message translates to:
+  /// **'Update your daily goal'**
+  String get settingsUpdateYourDailyGoal;
+
+  /// No description provided for @settingsSetCustomDailyGoal.
+  ///
+  /// In en, this message translates to:
+  /// **'Set a custom daily goal'**
+  String get settingsSetCustomDailyGoal;
+
+  /// No description provided for @dailyGoal.
+  ///
+  /// In en, this message translates to:
+  /// **'Daily goal'**
+  String get dailyGoal;
+
+  /// No description provided for @updateAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Update'**
+  String get updateAction;
+
+  /// No description provided for @cancelAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get cancelAction;
+
+  /// No description provided for @settingsFeedback.
+  ///
+  /// In en, this message translates to:
+  /// **'Send feedback'**
+  String get settingsFeedback;
+
+  /// No description provided for @settingsFeedbackDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Share your thoughts with us'**
+  String get settingsFeedbackDescription;
+
+  /// No description provided for @settingsContribute.
+  ///
+  /// In en, this message translates to:
+  /// **'Contribute'**
+  String get settingsContribute;
+
+  /// No description provided for @settingsContributeDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Access the GitHub repository'**
+  String get settingsContributeDescription;
+
+  /// No description provided for @dailyGoalUpdated.
+  ///
+  /// In en, this message translates to:
+  /// **'Daily goal saved successfully'**
+  String get dailyGoalUpdated;
 }
 
 class _AppLocalizationsDelegate

@@ -25,13 +25,10 @@ class AppLocalizationsPt extends AppLocalizations {
   String get customCupDialogTextFieldAmount => 'Quantidade';
 
   @override
-  String get customCupDialogTextFieldAmountError => 'Quantidade inválida';
+  String get textFieldAmountError => 'Invalid Amount';
 
   @override
-  String get customCupDialogAddButton => 'Adicionar';
-
-  @override
-  String get customCupDialogCancelButton => 'Cancelar';
+  String get addAction => 'Add';
 
   @override
   String get dayLoadingFailed => 'Dia não encontrado';
@@ -95,4 +92,65 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get lbUnit => 'lb';
+
+  @override
+  String get metric => 'Metric';
+
+  @override
+  String get imperial => 'Imperial';
+
+  @override
+  String get settingsPageTitle => 'Configurações';
+
+  @override
+  String get settingsGeneralSection => 'General';
+
+  @override
+  String get settingsUnitSystem => 'Unit system';
+
+  @override
+  String get settingsUpdateDailyGoalAppBar => 'Update Goal';
+
+  @override
+  String get settingsUpdateDailyGoalTitle => 'Update';
+
+  @override
+  String get settingsUpdateDailyGoalDescription =>
+      'Help us with a few details so we can update your goal';
+
+  @override
+  String get settingsYouSection => 'You';
+
+  @override
+  String get settingsAboutSection => 'About';
+
+  @override
+  String get settingsUpdateYourDailyGoal => 'Update your daily goal';
+
+  @override
+  String get settingsSetCustomDailyGoal => 'Set a custom daily goal';
+
+  @override
+  String get dailyGoal => 'Daily goal';
+
+  @override
+  String get updateAction => 'Update';
+
+  @override
+  String get cancelAction => 'Cancel';
+
+  @override
+  String get settingsFeedback => 'Send feedback';
+
+  @override
+  String get settingsFeedbackDescription => 'Share your thoughts with us';
+
+  @override
+  String get settingsContribute => 'Contribute';
+
+  @override
+  String get settingsContributeDescription => 'Access the GitHub repository';
+
+  @override
+  String get dailyGoalUpdated => 'Daily goal saved successfully';
 }

@@ -24,13 +24,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get customCupDialogTextFieldAmount => 'Amount';
 
   @override
-  String get customCupDialogTextFieldAmountError => 'Invalid Amount';
+  String get textFieldAmountError => 'Invalid Amount';
 
   @override
-  String get customCupDialogAddButton => 'Add';
-
-  @override
-  String get customCupDialogCancelButton => 'Cancel';
+  String get addAction => 'Add';
 
   @override
   String get dayLoadingFailed => 'Day not found';
@@ -94,4 +91,65 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get lbUnit => 'lb';
+
+  @override
+  String get metric => 'Metric';
+
+  @override
+  String get imperial => 'Imperial';
+
+  @override
+  String get settingsPageTitle => 'Settings';
+
+  @override
+  String get settingsGeneralSection => 'General';
+
+  @override
+  String get settingsUnitSystem => 'Unit system';
+
+  @override
+  String get settingsUpdateDailyGoalAppBar => 'Update Goal';
+
+  @override
+  String get settingsUpdateDailyGoalTitle => 'Update';
+
+  @override
+  String get settingsUpdateDailyGoalDescription =>
+      'Help us with a few details so we can update your goal';
+
+  @override
+  String get settingsYouSection => 'You';
+
+  @override
+  String get settingsAboutSection => 'About';
+
+  @override
+  String get settingsUpdateYourDailyGoal => 'Update your daily goal';
+
+  @override
+  String get settingsSetCustomDailyGoal => 'Set a custom daily goal';
+
+  @override
+  String get dailyGoal => 'Daily goal';
+
+  @override
+  String get updateAction => 'Update';
+
+  @override
+  String get cancelAction => 'Cancel';
+
+  @override
+  String get settingsFeedback => 'Send feedback';
+
+  @override
+  String get settingsFeedbackDescription => 'Share your thoughts with us';
+
+  @override
+  String get settingsContribute => 'Contribute';
+
+  @override
+  String get settingsContributeDescription => 'Access the GitHub repository';
+
+  @override
+  String get dailyGoalUpdated => 'Daily goal saved successfully';
 }

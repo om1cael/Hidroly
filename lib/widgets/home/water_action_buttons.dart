@@ -121,7 +121,7 @@ class WaterActionButtons extends StatelessWidget {
             controller: customCupAmountController, 
             validator: (value) {
               double? amount = double.tryParse(value ?? '');
-              if(amount == null || amount <= 0) return AppLocalizations.of(context)!.customCupDialogTextFieldAmountError;
+              if(amount == null || amount <= 0) return AppLocalizations.of(context)!.textFieldAmountError;
               return null;
             }
           ),
@@ -144,13 +144,13 @@ class WaterActionButtons extends StatelessWidget {
               }
             }, 
             child: Text(
-              AppLocalizations.of(context)!.customCupDialogAddButton,
+              AppLocalizations.of(context)!.addAction,
             ),
           ),
           TextButton(
             onPressed: () => Navigator.pop(context), 
             child: Text(
-              AppLocalizations.of(context)!.customCupDialogCancelButton,
+              AppLocalizations.of(context)!.cancelAction,
             ),
           ),
         ],

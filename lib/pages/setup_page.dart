@@ -5,8 +5,8 @@ import 'package:hidroly/pages/home_page.dart';
 import 'package:hidroly/provider/day_provider.dart';
 import 'package:hidroly/utils/calculate_dailygoal.dart';
 import 'package:hidroly/utils/unit_tools.dart';
-import 'package:hidroly/widgets/setup/setup_header.dart';
-import 'package:hidroly/widgets/setup/setup_interactable.dart';
+import 'package:hidroly/widgets/common/icon_header.dart';
+import 'package:hidroly/widgets/common/daily_goal_input.dart';
 import 'package:provider/provider.dart';
 
 class SetupPage extends StatefulWidget {
@@ -43,8 +43,12 @@ class _SetupPageState extends State<SetupPage> {
               key: formKey,
               child: Column(
                 children: [
-                  SetupHeader(),
-                  SetupInteractable(
+                  IconHeader(
+                    iconAsset: 'assets/images/water-drop.svg', 
+                    title: AppLocalizations.of(context)!.setupWelcomeTitle, 
+                    description: AppLocalizations.of(context)!.setupWelcomeSubtitle,
+                  ),
+                  DailyGoalInput(
                     ageController: ageController,
                     weightController: weightController,
                     isMetric: isMetric,
