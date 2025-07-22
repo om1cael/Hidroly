@@ -153,4 +153,10 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get dailyGoalUpdated => 'Daily goal saved successfully';
+
+  @override
+  String get notificationsSettingsWakeUp => 'You wake up at';
+
+  @override
+  String get notificationsSettingsSleep => 'You sleep at';
 }

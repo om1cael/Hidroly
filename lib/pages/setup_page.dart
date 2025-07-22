@@ -7,6 +7,7 @@ import 'package:hidroly/utils/calculate_dailygoal.dart';
 import 'package:hidroly/utils/unit_tools.dart';
 import 'package:hidroly/widgets/common/icon_header.dart';
 import 'package:hidroly/widgets/common/daily_goal_input.dart';
+import 'package:hidroly/widgets/common/notifications_time_input.dart';
 import 'package:provider/provider.dart';
 
 class SetupPage extends StatefulWidget {
@@ -22,6 +23,9 @@ class _SetupPageState extends State<SetupPage> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   final ValueNotifier<bool> isMetric = ValueNotifier(true);
+  final wakeUpTime = ValueNotifier(TimeOfDay(hour: 6, minute: 0));
+  final sleepTime = ValueNotifier(TimeOfDay(hour: 22, minute: 0));
+
   int setupStep = 0;
 
   @override
@@ -40,18 +44,34 @@ class _SetupPageState extends State<SetupPage> {
         child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.only(left: 30.0, right: 30.0, bottom: 64),
-            child: SetupStepZero(
-              formKey: formKey, 
-              ageController: ageController, 
-              weightController: weightController, 
-              isMetric: isMetric
-            ),
+            child: setupStep == 0
+              ? SetupStepZero(
+                formKey: formKey, 
+                ageController: ageController, 
+                weightController: weightController, 
+                isMetric: isMetric
+              )
+              : Column(
+                spacing: 32,
+                children: [
+                  IconHeader(
+                    iconAsset: 'assets/images/water-drop.svg', 
+                    title: 'Notifications', 
+                    description: 'Let\'s adjust notifications to match your day',
+                  ),
+                  NotificationsTimeInput(
+                    wakeUpTime: wakeUpTime,
+                    sleepTime: sleepTime,
+                  )
+                ],
+              )
           ),
         ),
       ),
       floatingActionButton: IconButton.filled(
         onPressed: () async {
           if(!formKey.currentState!.validate()) return;
+
           if(setupStep == 0) {
             setState(() {
               setupStep = 1;

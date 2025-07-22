@@ -53,5 +53,7 @@
     "settingsFeedbackDescription": "Share your thoughts with us",
     "settingsContribute": "Contribute",
     "settingsContributeDescription": "Access the GitHub repository",
-    "dailyGoalUpdated": "Daily goal saved successfully"
+    "dailyGoalUpdated": "Daily goal saved successfully",
+    "notificationsSettingsWakeUp": "You wake up at",
+    "notificationsSettingsSleep": "You sleep at"
 }
