@@ -25,7 +25,7 @@ void callbackDispatcher() {
       String title = inputData['title'];
       String body = inputData['body'];
 
-      bool isOnTimeRange = now.isAfter(wakeUpTime) && now.isBefore(sleepTime);;
+      bool isOnTimeRange = now.isAfter(wakeUpTime) && now.isBefore(sleepTime);
       if(sleepTime.hour < wakeUpTime.hour) {
         // When the time range crosses midnight, for example from 10:00 PM to 6:00 AM,
         // we check if the current time is after the wake-up time (10:00 PM)
