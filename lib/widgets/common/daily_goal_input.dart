@@ -7,16 +7,13 @@ import 'package:toggle_switch/toggle_switch.dart';
 class DailyGoalInput extends StatelessWidget {
   final TextEditingController ageController;
   final TextEditingController weightController;
-  final ValueNotifier<bool> isMetric;
-
-  final bool showUnitToggleSwitch;
+  final ValueNotifier<bool>? isMetric;
 
   const DailyGoalInput({
     super.key,
     required this.ageController,
     required this.weightController,
-    required this.isMetric,
-    this.showUnitToggleSwitch = true,
+    this.isMetric,
   });
 
   @override
@@ -44,7 +41,7 @@ class DailyGoalInput extends StatelessWidget {
               return null;
             },
           ),
-          if(showUnitToggleSwitch) ...[
+          if(isMetric != null) ...[
             SizedBox(height: 5,),
             ToggleSwitch(
               initialLabelIndex: 0,
@@ -59,7 +56,7 @@ class DailyGoalInput extends StatelessWidget {
                 AppLocalizations.of(context)!.setupUnitImperial,
               ],
               onToggle: (index) {
-                isMetric.value = (index == 0);
+                isMetric!.value = (index == 0);
               },
             )
           ]
