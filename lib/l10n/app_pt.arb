@@ -4,9 +4,8 @@
   "customCupButton": "Personalizado",
   "customCupDialogTitle": "Adicionar Copo Personalizado",
   "customCupDialogTextFieldAmount": "Quantidade",
-  "customCupDialogTextFieldAmountError": "Quantidade inválida",
-  "customCupDialogAddButton": "Adicionar",
-  "customCupDialogCancelButton": "Cancelar",
+  "textFieldAmountError": "Quantidade inválida",
+  "addAction": "Adicionar",
   "dayLoadingFailed": "Dia não encontrado",
   "bottomNavHomeLabel": "Home",
   "bottomNavSummaryLabel": "Resumo",
@@ -14,12 +13,12 @@
   "dayHistoryBottomSheetNoItems": "Nada por aqui :(",
   "dayHistoryBottomSheetItemSubtitle": "adicionado às {time}",
   "@dayHistoryBottomSheetItemSubtitle": {
-    "placeholders": {
-      "time": {
-        "type": "String",
-        "example": "17:20"
-      }
+  "placeholders": {
+    "time": {
+      "type": "String",
+      "example": "17:20"
     }
+  }
   },
   "setupWelcomeTitle": "Bem-vindo",
   "setupWelcomeSubtitle": "Só precisamos configurar algumas coisas. Vai ser rápido e fácil!",
@@ -35,5 +34,37 @@
   "flOzUnit": "fl oz",
   "kgUnit": "kg",
   "lbUnit": "lb",
-  "settingsPageTitle": "Configurações"
+  "metric": "Métrico",
+  "imperial": "Imperial",
+  "settingsPageTitle": "Configurações",
+  "settingsGeneralSection": "Geral",
+  "settingsUnitSystem": "Sistema de unidades",
+  "settingsNotifications": "Notificações",
+  "settingsSleepSchedule": "Editar horário de sono",
+  "settingsUpdateDailyGoalAppBar": "Atualizar Meta",
+  "settingsUpdateDailyGoalTitle": "Atualizar",
+  "settingsUpdateDailyGoalDescription": "A gente só precisa de alguns detalhes para atualizar sua meta",
+  "settingsSleepScheduleAppBar": "Editar horário de sono",
+  "settingsSleepScheduleTitle": "Atualizar",
+  "settingsSleepScheduleDescription": "A gente só precisa de alguns detalhes para atualizar seu horário de sono",
+  "settingsYouSection": "Você",
+  "settingsAboutSection": "Sobre",
+  "settingsUpdateYourDailyGoal": "Atualizar meta diária",
+  "settingsSetCustomDailyGoal": "Definir meta diária personalizada",
+  "dailyGoal": "Meta diária",
+  "updateAction": "Atualizar",
+  "cancelAction": "Cancelar",
+  "settingsFeedback": "Enviar feedback",
+  "settingsFeedbackDescription": "Compartilhe suas ideias com a gente",
+  "settingsContribute": "Contribuir",
+  "settingsContributeDescription": "Acesse o repositório no GitHub",
+  "dailyGoalUpdated": "Meta diária salva com sucesso",
+  "notificationSetupTitle": "Notificações",
+  "notificationSetupDescription": "Vamos ajustar as notificações para combinar com seu dia",
+  "notificationsSettingsWakeUp": "Você acorda às",
+  "notificationsSettingsSleep": "Você dorme às",
+  "reminderNotificationTitle": "💧 Hora de se hidratar!",
+  "reminderNotificationBody": "Cuide do seu corpo, tome um gole!",
+  "sleepScheduleEditFailed": "Não foi possível salvar seu horário de sono",
+  "notificationTaskCreationFailed": "Falha ao criar a tarefa de notificação"
 }
