@@ -22,6 +22,7 @@ class _SetupPageState extends State<SetupPage> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   final ValueNotifier<bool> isMetric = ValueNotifier(true);
+  int setupStep = 0;
 
   @override
   void dispose() {
@@ -39,26 +40,11 @@ class _SetupPageState extends State<SetupPage> {
         child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.only(left: 30.0, right: 30.0, bottom: 64),
-            child: Form(
-              key: formKey,
-              child: Column(
-                children: [
-                  IconHeader(
-                    iconAsset: 'assets/images/water-drop.svg', 
-                    title: AppLocalizations.of(context)!.setupWelcomeTitle, 
-                    description: AppLocalizations.of(context)!.setupWelcomeSubtitle,
-                  ),
-                  DailyGoalInput(
-                    ageController: ageController,
-                    weightController: weightController,
-                    isMetric: isMetric,
-                  ),
-                  Text(
-                    AppLocalizations.of(context)!.setupDataText,
-                    style: Theme.of(context).textTheme.bodySmall,
-                  ),
-                ],
-              ),
+            child: SetupStepZero(
+              formKey: formKey, 
+              ageController: ageController, 
+              weightController: weightController, 
+              isMetric: isMetric
             ),
           ),
         ),
@@ -66,6 +52,13 @@ class _SetupPageState extends State<SetupPage> {
       floatingActionButton: IconButton.filled(
         onPressed: () async {
           if(!formKey.currentState!.validate()) return;
+          if(setupStep == 0) {
+            setState(() {
+              setupStep = 1;
+            });
+            return;
+          }
+
           await context.read<SettingsProvider>().updateIsMetric(isMetric.value);
 
           int? dailyGoal = _getDailyGoal();
@@ -113,5 +106,45 @@ class _SetupPageState extends State<SetupPage> {
     }
     
     return CalculateDailyGoal().calculate(age, weight);
+  }
+}
+
+class SetupStepZero extends StatelessWidget {
+  const SetupStepZero({
+    super.key,
+    required this.formKey,
+    required this.ageController,
+    required this.weightController,
+    required this.isMetric,
+  });
+
+  final GlobalKey<FormState> formKey;
+  final TextEditingController ageController;
+  final TextEditingController weightController;
+  final ValueNotifier<bool> isMetric;
+
+  @override
+  Widget build(BuildContext context) {
+    return Form(
+      key: formKey,
+      child: Column(
+        children: [
+          IconHeader(
+            iconAsset: 'assets/images/water-drop.svg', 
+            title: AppLocalizations.of(context)!.setupWelcomeTitle, 
+            description: AppLocalizations.of(context)!.setupWelcomeSubtitle,
+          ),
+          DailyGoalInput(
+            ageController: ageController,
+            weightController: weightController,
+            isMetric: isMetric,
+          ),
+          Text(
+            AppLocalizations.of(context)!.setupDataText,
+            style: Theme.of(context).textTheme.bodySmall,
+          ),
+        ],
+      ),
+    );
   }
 }
