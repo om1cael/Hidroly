@@ -27,4 +27,14 @@ class AppDateUtils {
 
     return DateFormat.yMMMMd(locale).format(localDate);
   }
+  
+  static String formatTime(int hour, int minutes) {
+    return '${hour.toString().padLeft(2, '0')}:${minutes.toString().padLeft(2, '0')}';
+  }
+
+  static TimeOfDay parseTime(String formattedTime) {
+    final format = DateFormat.Hm();
+    final dateTime = format.parse(formattedTime);
+    return TimeOfDay.fromDateTime(dateTime);
+  }
 }

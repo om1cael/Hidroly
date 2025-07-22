@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hidroly/data/model/enum/settings.dart';
 import 'package:hidroly/provider/settings_provider.dart';
 import 'package:hidroly/l10n/app_localizations.dart';
 import 'package:hidroly/pages/home_page.dart';
@@ -42,36 +43,37 @@ class _SetupPageState extends State<SetupPage> {
       appBar: AppBar(),
       body: Center(
         child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.only(left: 30.0, right: 30.0, bottom: 64),
-            child: setupStep == 0
-              ? SetupStepZero(
-                formKey: formKey, 
-                ageController: ageController, 
-                weightController: weightController, 
-                isMetric: isMetric
-              )
-              : Column(
-                spacing: 32,
-                children: [
-                  IconHeader(
-                    iconAsset: 'assets/images/water-drop.svg', 
-                    title: 'Notifications', 
-                    description: 'Let\'s adjust notifications to match your day',
-                  ),
-                  NotificationsTimeInput(
-                    wakeUpTime: wakeUpTime,
-                    sleepTime: sleepTime,
-                  )
-                ],
-              )
+          child: Form(
+            key: formKey,
+            child: Padding(
+              padding: const EdgeInsets.only(left: 30.0, right: 30.0, bottom: 64),
+              child: setupStep == 0
+                ? SetupStepZero(
+                  ageController: ageController, 
+                  weightController: weightController, 
+                  isMetric: isMetric
+                )
+                : Column(
+                  spacing: 32,
+                  children: [
+                    IconHeader(
+                      iconAsset: 'assets/images/water-drop.svg', 
+                      title: 'Notifications', 
+                      description: 'Let\'s adjust notifications to match your day',
+                    ),
+                    NotificationsTimeInput(
+                      wakeUpTime: wakeUpTime,
+                      sleepTime: sleepTime,
+                    )
+                  ],
+                )
+            ),
           ),
         ),
       ),
       floatingActionButton: IconButton.filled(
         onPressed: () async {
           if(!formKey.currentState!.validate()) return;
-
           if(setupStep == 0) {
             setState(() {
               setupStep = 1;
@@ -79,7 +81,7 @@ class _SetupPageState extends State<SetupPage> {
             return;
           }
 
-          await context.read<SettingsProvider>().updateIsMetric(isMetric.value);
+          await _saveSettings(context);
 
           int? dailyGoal = _getDailyGoal();
           if(dailyGoal == null) return;
@@ -91,7 +93,6 @@ class _SetupPageState extends State<SetupPage> {
             Navigator.of(context).pushReplacement(
               MaterialPageRoute(builder: (context) => HomePage()),
             );
-            return;
           }
         },
         icon: Icon(
@@ -102,6 +103,24 @@ class _SetupPageState extends State<SetupPage> {
         ),
         padding: EdgeInsets.all(18),
       ),
+    );
+  }
+
+  Future<void> _saveSettings(BuildContext context) async {
+    final settingsProvider = context.read<SettingsProvider>();
+    
+    await settingsProvider.updateIsMetric(isMetric.value);
+    
+    await settingsProvider.updateTime(
+      Settings.wakeUpTime,
+      wakeUpTime.value.hour, 
+      wakeUpTime.value.minute
+    );
+
+    await settingsProvider.updateTime(
+      Settings.sleepTime,
+      sleepTime.value.hour, 
+      sleepTime.value.minute
     );
   }
 
@@ -132,39 +151,34 @@ class _SetupPageState extends State<SetupPage> {
 class SetupStepZero extends StatelessWidget {
   const SetupStepZero({
     super.key,
-    required this.formKey,
     required this.ageController,
     required this.weightController,
     required this.isMetric,
   });
 
-  final GlobalKey<FormState> formKey;
   final TextEditingController ageController;
   final TextEditingController weightController;
   final ValueNotifier<bool> isMetric;
 
   @override
   Widget build(BuildContext context) {
-    return Form(
-      key: formKey,
-      child: Column(
-        children: [
-          IconHeader(
-            iconAsset: 'assets/images/water-drop.svg', 
-            title: AppLocalizations.of(context)!.setupWelcomeTitle, 
-            description: AppLocalizations.of(context)!.setupWelcomeSubtitle,
-          ),
-          DailyGoalInput(
-            ageController: ageController,
-            weightController: weightController,
-            isMetric: isMetric,
-          ),
-          Text(
-            AppLocalizations.of(context)!.setupDataText,
-            style: Theme.of(context).textTheme.bodySmall,
-          ),
-        ],
-      ),
+    return Column(
+      children: [
+        IconHeader(
+          iconAsset: 'assets/images/water-drop.svg', 
+          title: AppLocalizations.of(context)!.setupWelcomeTitle, 
+          description: AppLocalizations.of(context)!.setupWelcomeSubtitle,
+        ),
+        DailyGoalInput(
+          ageController: ageController,
+          weightController: weightController,
+          isMetric: isMetric,
+        ),
+        Text(
+          AppLocalizations.of(context)!.setupDataText,
+          style: Theme.of(context).textTheme.bodySmall,
+        ),
+      ],
     );
   }
 }
