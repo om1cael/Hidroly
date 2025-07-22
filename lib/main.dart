@@ -14,7 +14,6 @@ void callbackDispatcher() {
   Workmanager().executeTask((task, inputData) async {
     if(task == 'notificationTask') {
       if(inputData == null) {
-        print('Input data was null when trying to send notification');
         return Future.value(false);
       }
 
