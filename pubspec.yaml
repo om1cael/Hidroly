@@ -7,6 +7,7 @@ environment:
   sdk: ^3.8.1
 
 dependencies:
+  app_settings: ^6.1.1
   flutter:
     sdk: flutter
   flutter_local_notifications: ^19.3.1
