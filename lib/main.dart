@@ -9,7 +9,7 @@ import 'package:workmanager/workmanager.dart';
 @pragma('vm:entry-point')
 void callbackDispatcher() {
   Workmanager().executeTask((task, inputData) {
-    // TODO: Notification logic
+    // TODO: Notification task
     return Future.value(true);
   });
 }

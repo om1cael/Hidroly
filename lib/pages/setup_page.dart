@@ -4,12 +4,14 @@ import 'package:hidroly/provider/settings_provider.dart';
 import 'package:hidroly/l10n/app_localizations.dart';
 import 'package:hidroly/pages/home_page.dart';
 import 'package:hidroly/provider/day_provider.dart';
+import 'package:hidroly/utils/app_date_utils.dart';
 import 'package:hidroly/utils/calculate_dailygoal.dart';
 import 'package:hidroly/utils/unit_tools.dart';
 import 'package:hidroly/widgets/common/icon_header.dart';
 import 'package:hidroly/widgets/common/daily_goal_input.dart';
 import 'package:hidroly/widgets/common/notifications_time_input.dart';
 import 'package:provider/provider.dart';
+import 'package:workmanager/workmanager.dart';
 
 class SetupPage extends StatefulWidget {
   const SetupPage({super.key});
@@ -81,6 +83,8 @@ class _SetupPageState extends State<SetupPage> {
             return;
           }
 
+          final settingsProvider = context.read<SettingsProvider>();
+
           await _saveSettings(context);
 
           int? dailyGoal = _getDailyGoal();
@@ -90,6 +94,7 @@ class _SetupPageState extends State<SetupPage> {
           final created = await _createDay(context, dailyGoal);
 
           if(created && context.mounted) {
+            _registerPeriodicNotificationTask(settingsProvider);
             Navigator.of(context).pushReplacement(
               MaterialPageRoute(builder: (context) => HomePage()),
             );
@@ -103,6 +108,29 @@ class _SetupPageState extends State<SetupPage> {
         ),
         padding: EdgeInsets.all(18),
       ),
+    );
+  }
+
+  void _registerPeriodicNotificationTask(SettingsProvider settingsProvider) {
+    final formattedWakeUpTime = AppDateUtils.formatTime(
+      settingsProvider.wakeUpTime!.hour, 
+      settingsProvider.wakeUpTime!.minute
+    );
+
+    final formattedSleepTime = AppDateUtils.formatTime(
+      settingsProvider.sleepTime!.hour, 
+      settingsProvider.sleepTime!.minute
+    );
+    
+    Workmanager().registerPeriodicTask(
+      'notification',
+      'notificationTask',
+      frequency: Duration(hours: 2),
+      initialDelay: Duration(minutes: 1),
+      inputData: {
+        Settings.wakeUpTime.value: formattedWakeUpTime,
+        Settings.sleepTime.value: formattedSleepTime,
+      }
     );
   }
 
