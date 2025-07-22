@@ -103,8 +103,8 @@ class _SetupPageState extends State<SetupPage> {
           if(!context.mounted) return;
           final created = await _createDay(context, dailyGoal);
 
+          await _registerPeriodicNotificationTask(settingsProvider);
           if(created && context.mounted) {
-            _registerPeriodicNotificationTask(settingsProvider);
             Navigator.of(context).pushReplacement(
               MaterialPageRoute(builder: (context) => HomePage()),
             );
@@ -121,7 +121,7 @@ class _SetupPageState extends State<SetupPage> {
     );
   }
 
-  void _registerPeriodicNotificationTask(SettingsProvider settingsProvider) {
+  Future<void> _registerPeriodicNotificationTask(SettingsProvider settingsProvider) async {
     final formattedWakeUpTime = AppDateUtils.formatTime(
       settingsProvider.wakeUpTime!.hour, 
       settingsProvider.wakeUpTime!.minute
@@ -132,11 +132,11 @@ class _SetupPageState extends State<SetupPage> {
       settingsProvider.sleepTime!.minute
     );
     
-    Workmanager().registerPeriodicTask(
+    await Workmanager().cancelAll();
+    await Workmanager().registerPeriodicTask(
       'notification',
       'notificationTask',
       frequency: Duration(hours: 2),
-      initialDelay: Duration(minutes: 1),
       inputData: {
         Settings.wakeUpTime.value: formattedWakeUpTime,
         Settings.sleepTime.value: formattedSleepTime,
