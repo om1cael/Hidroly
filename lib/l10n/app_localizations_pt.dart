@@ -25,10 +25,10 @@ class AppLocalizationsPt extends AppLocalizations {
   String get customCupDialogTextFieldAmount => 'Quantidade';
 
   @override
-  String get textFieldAmountError => 'Invalid Amount';
+  String get textFieldAmountError => 'Quantidade inválida';
 
   @override
-  String get addAction => 'Add';
+  String get addAction => 'Adicionar';
 
   @override
   String get dayLoadingFailed => 'Dia não encontrado';
@@ -94,7 +94,7 @@ class AppLocalizationsPt extends AppLocalizations {
   String get lbUnit => 'lb';
 
   @override
-  String get metric => 'Metric';
+  String get metric => 'Métrico';
 
   @override
   String get imperial => 'Imperial';
@@ -103,54 +103,98 @@ class AppLocalizationsPt extends AppLocalizations {
   String get settingsPageTitle => 'Configurações';
 
   @override
-  String get settingsGeneralSection => 'General';
+  String get settingsGeneralSection => 'Geral';
 
   @override
-  String get settingsUnitSystem => 'Unit system';
+  String get settingsUnitSystem => 'Sistema de unidades';
 
   @override
-  String get settingsUpdateDailyGoalAppBar => 'Update Goal';
+  String get settingsNotifications => 'Notificações';
 
   @override
-  String get settingsUpdateDailyGoalTitle => 'Update';
+  String get settingsSleepSchedule => 'Editar horário de sono';
+
+  @override
+  String get settingsUpdateDailyGoalAppBar => 'Atualizar Meta';
+
+  @override
+  String get settingsUpdateDailyGoalTitle => 'Atualizar';
 
   @override
   String get settingsUpdateDailyGoalDescription =>
-      'Help us with a few details so we can update your goal';
+      'A gente só precisa de alguns detalhes para atualizar sua meta';
 
   @override
-  String get settingsYouSection => 'You';
+  String get settingsSleepScheduleAppBar => 'Editar horário de sono';
 
   @override
-  String get settingsAboutSection => 'About';
+  String get settingsSleepScheduleTitle => 'Atualizar';
 
   @override
-  String get settingsUpdateYourDailyGoal => 'Update your daily goal';
+  String get settingsSleepScheduleDescription =>
+      'A gente só precisa de alguns detalhes para atualizar seu horário de sono';
 
   @override
-  String get settingsSetCustomDailyGoal => 'Set a custom daily goal';
+  String get settingsYouSection => 'Você';
 
   @override
-  String get dailyGoal => 'Daily goal';
+  String get settingsAboutSection => 'Sobre';
 
   @override
-  String get updateAction => 'Update';
+  String get settingsUpdateYourDailyGoal => 'Atualizar meta diária';
 
   @override
-  String get cancelAction => 'Cancel';
+  String get settingsSetCustomDailyGoal => 'Definir meta diária personalizada';
 
   @override
-  String get settingsFeedback => 'Send feedback';
+  String get dailyGoal => 'Meta diária';
 
   @override
-  String get settingsFeedbackDescription => 'Share your thoughts with us';
+  String get updateAction => 'Atualizar';
 
   @override
-  String get settingsContribute => 'Contribute';
+  String get cancelAction => 'Cancelar';
 
   @override
-  String get settingsContributeDescription => 'Access the GitHub repository';
+  String get settingsFeedback => 'Enviar feedback';
 
   @override
-  String get dailyGoalUpdated => 'Daily goal saved successfully';
+  String get settingsFeedbackDescription =>
+      'Compartilhe suas ideias com a gente';
+
+  @override
+  String get settingsContribute => 'Contribuir';
+
+  @override
+  String get settingsContributeDescription => 'Acesse o repositório no GitHub';
+
+  @override
+  String get dailyGoalUpdated => 'Meta diária salva com sucesso';
+
+  @override
+  String get notificationSetupTitle => 'Notificações';
+
+  @override
+  String get notificationSetupDescription =>
+      'Vamos ajustar as notificações para combinar com seu dia';
+
+  @override
+  String get notificationsSettingsWakeUp => 'Você acorda às';
+
+  @override
+  String get notificationsSettingsSleep => 'Você dorme às';
+
+  @override
+  String get reminderNotificationTitle => '💧 Hora de se hidratar!';
+
+  @override
+  String get reminderNotificationBody => 'Cuide do seu corpo, tome um gole!';
+
+  @override
+  String get sleepScheduleEditFailed =>
+      'Não foi possível salvar seu horário de sono';
+
+  @override
+  String get notificationTaskCreationFailed =>
+      'Falha ao criar a tarefa de notificação';
 }

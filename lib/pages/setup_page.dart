@@ -1,12 +1,17 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:hidroly/data/model/enum/settings.dart';
 import 'package:hidroly/provider/settings_provider.dart';
 import 'package:hidroly/l10n/app_localizations.dart';
 import 'package:hidroly/pages/home_page.dart';
 import 'package:hidroly/provider/day_provider.dart';
+import 'package:hidroly/services/notification_service.dart';
 import 'package:hidroly/utils/calculate_dailygoal.dart';
 import 'package:hidroly/utils/unit_tools.dart';
-import 'package:hidroly/widgets/common/icon_header.dart';
-import 'package:hidroly/widgets/common/daily_goal_input.dart';
+import 'package:hidroly/widgets/setup/setup_step_one.dart';
+import 'package:hidroly/widgets/setup/setup_step_zero.dart';
 import 'package:provider/provider.dart';
 
 class SetupPage extends StatefulWidget {
@@ -22,6 +27,10 @@ class _SetupPageState extends State<SetupPage> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   final ValueNotifier<bool> isMetric = ValueNotifier(true);
+  final wakeUpTime = ValueNotifier(TimeOfDay(hour: 6, minute: 0));
+  final sleepTime = ValueNotifier(TimeOfDay(hour: 22, minute: 0));
+
+  int setupStep = 0;
 
   @override
   void dispose() {
@@ -37,28 +46,20 @@ class _SetupPageState extends State<SetupPage> {
       appBar: AppBar(),
       body: Center(
         child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.only(left: 30.0, right: 30.0, bottom: 64),
-            child: Form(
-              key: formKey,
-              child: Column(
-                children: [
-                  IconHeader(
-                    iconAsset: 'assets/images/water-drop.svg', 
-                    title: AppLocalizations.of(context)!.setupWelcomeTitle, 
-                    description: AppLocalizations.of(context)!.setupWelcomeSubtitle,
-                  ),
-                  DailyGoalInput(
-                    ageController: ageController,
-                    weightController: weightController,
-                    isMetric: isMetric,
-                  ),
-                  Text(
-                    AppLocalizations.of(context)!.setupDataText,
-                    style: Theme.of(context).textTheme.bodySmall,
-                  ),
-                ],
-              ),
+          child: Form(
+            key: formKey,
+            child: Padding(
+              padding: const EdgeInsets.only(left: 30.0, right: 30.0, bottom: 64),
+              child: setupStep == 0
+                ? SetupStepZero(
+                  ageController: ageController, 
+                  weightController: weightController, 
+                  isMetric: isMetric
+                )
+                : SetupStepOne(
+                  wakeUpTime: wakeUpTime, 
+                  sleepTime: sleepTime
+                ),
             ),
           ),
         ),
@@ -66,7 +67,23 @@ class _SetupPageState extends State<SetupPage> {
       floatingActionButton: IconButton.filled(
         onPressed: () async {
           if(!formKey.currentState!.validate()) return;
-          await context.read<SettingsProvider>().updateIsMetric(isMetric.value);
+          if(setupStep == 0) {
+            setState(() {
+              setupStep = 1;
+            });
+
+            if(!Platform.isAndroid) return;
+
+            FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+              FlutterLocalNotificationsPlugin();
+            flutterLocalNotificationsPlugin.resolvePlatformSpecificImplementation<
+                AndroidFlutterLocalNotificationsPlugin>()!.requestNotificationsPermission();
+            return;
+          }
+
+          final settingsProvider = context.read<SettingsProvider>();
+
+          await _saveSettings(context);
 
           int? dailyGoal = _getDailyGoal();
           if(dailyGoal == null) return;
@@ -74,11 +91,27 @@ class _SetupPageState extends State<SetupPage> {
           if(!context.mounted) return;
           final created = await _createDay(context, dailyGoal);
 
+          if(!context.mounted) return;
+          final notificationTaskCreated = await NotificationService().registerPeriodicNotificationTask(
+            context,
+            settingsProvider
+          );
+
+          if(!notificationTaskCreated && context.mounted) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text(
+                AppLocalizations.of(context)!.notificationTaskCreationFailed,
+                style: Theme.of(context).textTheme.bodyLarge,
+              )),
+            );
+
+            return;
+          }
+
           if(created && context.mounted) {
             Navigator.of(context).pushReplacement(
               MaterialPageRoute(builder: (context) => HomePage()),
             );
-            return;
           }
         },
         icon: Icon(
@@ -89,6 +122,24 @@ class _SetupPageState extends State<SetupPage> {
         ),
         padding: EdgeInsets.all(18),
       ),
+    );
+  }
+
+  Future<void> _saveSettings(BuildContext context) async {
+    final settingsProvider = context.read<SettingsProvider>();
+    
+    await settingsProvider.updateIsMetric(isMetric.value);
+    
+    await settingsProvider.updateTime(
+      Settings.wakeUpTime,
+      wakeUpTime.value.hour, 
+      wakeUpTime.value.minute
+    );
+
+    await settingsProvider.updateTime(
+      Settings.sleepTime,
+      sleepTime.value.hour, 
+      sleepTime.value.minute
     );
   }
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hidroly/data/model/day.dart';
+import 'package:hidroly/data/model/enum/settings.dart';
 import 'package:hidroly/l10n/app_localizations.dart';
 import 'package:hidroly/pages/settings_page.dart';
 import 'package:hidroly/pages/setup_page.dart';
@@ -231,6 +232,10 @@ class _HomePageState extends State<HomePage> {
   }
   
   Future<void> _loadSettings() async {
-    await context.read<SettingsProvider>().readIsMetric();
+    final settingsProvider = context.read<SettingsProvider>();
+
+    await settingsProvider.readIsMetric();
+    await settingsProvider.readTime(Settings.wakeUpTime);
+    await settingsProvider.readTime(Settings.sleepTime);
   }
 }

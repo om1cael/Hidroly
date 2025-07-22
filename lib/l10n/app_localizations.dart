@@ -290,6 +290,18 @@ abstract class AppLocalizations {
   /// **'Unit system'**
   String get settingsUnitSystem;
 
+  /// No description provided for @settingsNotifications.
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications'**
+  String get settingsNotifications;
+
+  /// No description provided for @settingsSleepSchedule.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit sleep schedule'**
+  String get settingsSleepSchedule;
+
   /// No description provided for @settingsUpdateDailyGoalAppBar.
   ///
   /// In en, this message translates to:
@@ -307,6 +319,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Help us with a few details so we can update your goal'**
   String get settingsUpdateDailyGoalDescription;
+
+  /// No description provided for @settingsSleepScheduleAppBar.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit sleep schedule'**
+  String get settingsSleepScheduleAppBar;
+
+  /// No description provided for @settingsSleepScheduleTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Update'**
+  String get settingsSleepScheduleTitle;
+
+  /// No description provided for @settingsSleepScheduleDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Help us with a few details so we can update your sleep schedule'**
+  String get settingsSleepScheduleDescription;
 
   /// No description provided for @settingsYouSection.
   ///
@@ -379,6 +409,54 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Daily goal saved successfully'**
   String get dailyGoalUpdated;
+
+  /// No description provided for @notificationSetupTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications'**
+  String get notificationSetupTitle;
+
+  /// No description provided for @notificationSetupDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Let\'s adjust notifications to match your day'**
+  String get notificationSetupDescription;
+
+  /// No description provided for @notificationsSettingsWakeUp.
+  ///
+  /// In en, this message translates to:
+  /// **'You wake up at'**
+  String get notificationsSettingsWakeUp;
+
+  /// No description provided for @notificationsSettingsSleep.
+  ///
+  /// In en, this message translates to:
+  /// **'You sleep at'**
+  String get notificationsSettingsSleep;
+
+  /// No description provided for @reminderNotificationTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'💧 Time to hydrate!'**
+  String get reminderNotificationTitle;
+
+  /// No description provided for @reminderNotificationBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Keep your body happy, take a sip!'**
+  String get reminderNotificationBody;
+
+  /// No description provided for @sleepScheduleEditFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not save your sleep schedule'**
+  String get sleepScheduleEditFailed;
+
+  /// No description provided for @notificationTaskCreationFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to create the notification task'**
+  String get notificationTaskCreationFailed;
 }
 
 class _AppLocalizationsDelegate

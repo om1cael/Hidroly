@@ -108,6 +108,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settingsUnitSystem => 'Unit system';
 
   @override
+  String get settingsNotifications => 'Notifications';
+
+  @override
+  String get settingsSleepSchedule => 'Edit sleep schedule';
+
+  @override
   String get settingsUpdateDailyGoalAppBar => 'Update Goal';
 
   @override
@@ -116,6 +122,16 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get settingsUpdateDailyGoalDescription =>
       'Help us with a few details so we can update your goal';
+
+  @override
+  String get settingsSleepScheduleAppBar => 'Edit sleep schedule';
+
+  @override
+  String get settingsSleepScheduleTitle => 'Update';
+
+  @override
+  String get settingsSleepScheduleDescription =>
+      'Help us with a few details so we can update your sleep schedule';
 
   @override
   String get settingsYouSection => 'You';
@@ -152,4 +168,30 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get dailyGoalUpdated => 'Daily goal saved successfully';
+
+  @override
+  String get notificationSetupTitle => 'Notifications';
+
+  @override
+  String get notificationSetupDescription =>
+      'Let\'s adjust notifications to match your day';
+
+  @override
+  String get notificationsSettingsWakeUp => 'You wake up at';
+
+  @override
+  String get notificationsSettingsSleep => 'You sleep at';
+
+  @override
+  String get reminderNotificationTitle => '💧 Time to hydrate!';
+
+  @override
+  String get reminderNotificationBody => 'Keep your body happy, take a sip!';
+
+  @override
+  String get sleepScheduleEditFailed => 'Could not save your sleep schedule';
+
+  @override
+  String get notificationTaskCreationFailed =>
+      'Failed to create the notification task';
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hidroly/data/model/day.dart';
 import 'package:hidroly/l10n/app_localizations.dart';
 import 'package:hidroly/pages/settings/settings_update_daily_goal_page.dart';
+import 'package:hidroly/pages/settings/settings_update_sleep_schedule_page.dart';
 import 'package:hidroly/provider/day_provider.dart';
 import 'package:hidroly/theme/app_colors.dart';
 import 'package:hidroly/utils/unit_tools.dart';
@@ -68,6 +69,14 @@ class _SettingsYouState extends State<SettingsYou> {
         SettingsTextButton(
           title: AppLocalizations.of(context)!.settingsSetCustomDailyGoal,
           onPressed: () => _showCustomDailyGoalDialog(provider, day),
+        ),
+        SettingsTextButton(
+          title: AppLocalizations.of(context)!.settingsSleepSchedule,
+          onPressed: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => const SettingsUpdateSleepSchedulePage())
+            );
+          }
         ),
       ],
     );
