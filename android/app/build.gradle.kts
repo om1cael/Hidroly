@@ -57,10 +57,10 @@ android {
 
     buildTypes {
         debug {
-            isDebuggable = false
+            isDebuggable = true
         }
         release {
-            isDebuggable = true
+            isDebuggable = false
             if (hasKeystore) {
                 signingConfig = signingConfigs.getByName("release")
             }
