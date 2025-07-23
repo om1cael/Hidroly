@@ -66,5 +66,7 @@
     "reminderNotificationTitle": "💧 Time to hydrate!",
     "reminderNotificationBody": "Keep your body happy, take a sip!",
     "sleepScheduleEditFailed": "Could not save your sleep schedule",
-    "notificationTaskCreationFailed": "Failed to create the notification task"
+    "notificationTaskCreationFailed": "Failed to create the notification task",
+    "pageNotAvailableTitle": "Not Available",
+    "pageNotAvailableDescription": "Sorry, this page isn't available yet :("
 }

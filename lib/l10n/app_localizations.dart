@@ -457,6 +457,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Failed to create the notification task'**
   String get notificationTaskCreationFailed;
+
+  /// No description provided for @pageNotAvailableTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Not Available'**
+  String get pageNotAvailableTitle;
+
+  /// No description provided for @pageNotAvailableDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Sorry, this page isn\'t available yet :('**
+  String get pageNotAvailableDescription;
 }
 
 class _AppLocalizationsDelegate

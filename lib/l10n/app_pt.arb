@@ -66,5 +66,7 @@
   "reminderNotificationTitle": "💧 Hora de se hidratar!",
   "reminderNotificationBody": "Cuide do seu corpo, tome um gole!",
   "sleepScheduleEditFailed": "Não foi possível salvar seu horário de sono",
-  "notificationTaskCreationFailed": "Falha ao criar a tarefa de notificação"
+  "notificationTaskCreationFailed": "Falha ao criar a tarefa de notificação",
+  "pageNotAvailableTitle": "Indisponível",
+  "pageNotAvailableDescription": "Desculpa, essa página ainda não tá disponível :("
 }

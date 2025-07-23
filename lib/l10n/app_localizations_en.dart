@@ -194,4 +194,11 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get notificationTaskCreationFailed =>
       'Failed to create the notification task';
+
+  @override
+  String get pageNotAvailableTitle => 'Not Available';
+
+  @override
+  String get pageNotAvailableDescription =>
+      'Sorry, this page isn\'t available yet :(';
 }
