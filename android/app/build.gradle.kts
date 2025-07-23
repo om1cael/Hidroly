@@ -20,6 +20,11 @@ android {
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
+    dependenciesInfo {
+        includeInApk = false
+        includeInBundle = false
+    }
+
     compileOptions {
         isCoreLibraryDesugaringEnabled = true
         sourceCompatibility = JavaVersion.VERSION_11
@@ -51,8 +56,11 @@ android {
     }
 
     buildTypes {
-        debug {}
+        debug {
+            isDebuggable = false
+        }
         release {
+            isDebuggable = true
             if (hasKeystore) {
                 signingConfig = signingConfigs.getByName("release")
             }
