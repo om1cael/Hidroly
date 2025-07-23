@@ -15,7 +15,7 @@ if (keystorePropertiesFile.exists()) {
 }
 
 android {
-    namespace = "com.example.hidroly"
+    namespace = "com.om1cael.hidroly"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
