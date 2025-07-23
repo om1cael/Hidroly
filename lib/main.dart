@@ -51,7 +51,7 @@ void main() async {
   await NotificationService().initialize();
   await Workmanager().initialize(
     callbackDispatcher,
-    isInDebugMode: true
+    isInDebugMode: false
   );
 
   runApp(
