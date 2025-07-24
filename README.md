@@ -1,64 +1,66 @@
 <h1 align="center">✨ Hidroly ✨</h1>
-<p align="center">Hidroly is a hydration tracker app made with Flutter, aiming to be a viable open-source alternative to the countless fitness apps on Play Store.</p>
-
+<p align="center">
+Hidroly is a friendly, open-source Flutter app that helps you stay hydrated by tracking your water intake and sending notifications. It’s designed to be easy to use, without all the extra noise of typical fitness apps.
+</p>
 <div align="center">
-  <img src="https://github.com/om1cael/Hidroly/blob/main/metadata/en-US/phoneScreenshots/1.jpeg" width=256>
-  <img src="https://github.com/om1cael/Hidroly/blob/main/metadata/en-US/phoneScreenshots/3.jpeg" width=256>
+  <img alt="GitHub License" src="https://img.shields.io/github/license/om1cael/hidroly">
+  <img src="https://img.shields.io/github/downloads/om1cael/hidroly/total">
+  <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/om1cael/hidroly">
 </div>
 
-# Features 🌟
-- ⏱️ View your daily and monthly intake history
-- ✨ Support for multiple measurement units (kg/lb, ml/fl oz)
-- 🥤 Set your custom cup size
-- 🎯 Enjoy a minimalistic look and feel
-- 🔒 Private and secure by default
+## Table of Contents
+- [Features](#features)
+- [Screenshots](#screenshots)
+- [Building from source](#building-from-source)
+- [Contributing](#contributing)
+- [License](#license)
 
-# Building ⚙️
-Before starting, make sure you have Flutter's latest version: [flutter.dev](https://docs.flutter.dev/get-started/install)
+## Features
+* 🧠 Automatically calculates your daily goal and schedules reminders based on your age, weight, and sleep schedule.
+* 💧 Sends smart notifications throughout the day, paused during sleep hours.
+* 🥤 Log any amount with custom cup sizes tailored to your routine.
+* 🎯 Set a manual goal or let the app adjust it based on your data.
+* 📏 Choose between metric and imperial units.
+* 📅 Track daily intake with the ability to edit or delete entries.
+* 🕓 Access and update past logs to keep your history accurate.
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/om1cael/Hidroly.git
-   ```
+## Screenshots
 
-2. Navigate to the project directory:
-   ```bash
-   cd Hidroly
-   ```
+| <img src="./metadata/en-US/phoneScreenshots/1.jpeg" alt="Setup Page" /> | <img src="./metadata/en-US/phoneScreenshots/2.jpeg" alt="Notifications Setup" />           | <img src="./metadata/en-US/phoneScreenshots/3.jpeg" alt="Home Page" />    |
+| ------------------------------------------------------ | ----------------------------------------------------------------------- | -------------------------------------------------------------------- |
+| <img src="./metadata/en-US/phoneScreenshots/4.jpeg" alt="Day Selection" />   | <img src="./metadata/en-US/phoneScreenshots/5.jpeg" alt="Day history view" /> | <img src="./metadata/en-US/phoneScreenshots/6.jpeg" alt="Settings Page" /> |
 
-3. Setup all dependencies:
-   ```bash
-   flutter pub get
-   ```
+## Building from source
 
-4. Run the app in debug mode:
-   ```bash
-   flutter run
-   ```
-   Be sure to have a working emulator or physical device.
+> [!NOTE]
+> 1. It's very recommended that you build this using a Linux-based OS.
+> 2. Ensure you have at least 8GB of RAM to build and run this project if testing in a physical device. If testing in an emulator, you will need at least 16GB.
 
-## Contributing 🌱
+### Cloning
+1. Run `git clone https://github.com/om1cael/hidroly.git`
+2. Access the repository folder: `cd hidroly` 
 
-We welcome contributions! Here’s how you can get involved:
+### Initializing the Flutter submodule
+3. In the project folder, run `git submodule update --init --recursive`
+4. Set the PATH variable for the submodule: `export PATH="$(pwd)/flutter/bin:$PATH"`
+5. Then, disable Flutter's analytics (optional) and download the project's dependencies:
+```
+./flutter/bin/flutter config --no-analytics && ./flutter/bin/flutter pub get
+```
 
-1. Fork the repository.
-2. Create a feature branch:
-   ```bash
-   git checkout -b feature-name
-   ```
-3. Commit your changes:
-   ```bash
-   git commit -m "Add feature Y"
-   ```
-4. Push your branch:
-   ```bash
-   git push origin feature-name
-   ```
-5. Open a pull request.
+### Building an APK
 
-## License ⚖️
+#### Release
+* Run `./flutter/bin/flutter build apk --release`
 
-This project is licensed under the [GPLv3](https://github.com/om1cael/Hidroly/blob/main/LICENSE) license.
+#### Debug
+* `./flutter/bin/flutter build apk --debug` if you want to build an APK
+* `./flutter/bin/flutter run` to automatically install in an emulator or physical device
 
-⭐ Star this repo if you find it useful!
-> Made with ❤️ and Flutter.
+# Contributing
+Code, translations, bug reports, or feedback are very welcome! See [CONTRIBUTING.md](CONTRIBUTING.md) for details.
+
+# License
+This project is licensed under [GPL-3.0](https://github.com/om1cael/Hidroly/blob/main/LICENSE).
+
+> Did you like the app or the repository? Leave a ⭐ :)
