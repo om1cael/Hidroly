@@ -75,7 +75,7 @@ class NotificationService {
     await workManager.registerPeriodicTask(
       'notification',
       'notificationTask',
-      frequency: Duration(hours: 2),
+      frequency: Duration(hours: 1),
       inputData: {
         Settings.wakeUpTime.value: formattedWakeUpTime,
         Settings.sleepTime.value: formattedSleepTime,
