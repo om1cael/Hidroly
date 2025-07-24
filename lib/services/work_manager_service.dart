@@ -13,7 +13,7 @@ class WorkManagerService {
     );
   }
 
-  Future<void> executeNotificationTask(Map<String, dynamic> inputData) async {
+  static Future<void> executeNotificationTask(Map<String, dynamic> inputData) async {
     final sharedPreferences = SharedPreferencesAsync();
     final now = DateTime.now();
 
@@ -46,15 +46,16 @@ class WorkManagerService {
   }
 
   @pragma('vm:entry-point')
-  void callbackDispatcher() {
+  static void callbackDispatcher() {
     Workmanager().executeTask((task, inputData) async {
       if(task == 'notificationTask') {
         if(inputData == null) {
           return Future.value(false);
         }
 
-        executeNotificationTask(inputData);
+        await executeNotificationTask(inputData);
       }
+      
       return Future.value(true);
     });
   }
