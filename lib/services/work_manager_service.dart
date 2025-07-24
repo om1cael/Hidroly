@@ -13,24 +13,34 @@ class WorkManagerService {
     );
   }
 
-  Future<void> executeNotificationTask(
-    Map<String, dynamic> inputData
-  ) async {
-    TimeOfDay wakeUpTime = AppDateUtils.parseTime(inputData[Settings.wakeUpTime.value]);
-    TimeOfDay sleepTime = AppDateUtils.parseTime(inputData[Settings.sleepTime.value]);
-    TimeOfDay now = TimeOfDay.now();
+  Future<void> executeNotificationTask(Map<String, dynamic> inputData) async {
+    final sharedPreferences = SharedPreferencesAsync();
+    final now = DateTime.now();
 
-    String title = inputData['title'];
-    String body = inputData['body'];
+    final nowTime     = TimeOfDay.fromDateTime(now);
+    final wakeUpTime  = AppDateUtils.parseTime(inputData[Settings.wakeUpTime.value]);
+    final sleepTime   = AppDateUtils.parseTime(inputData[Settings.sleepTime.value]);
 
-    bool isOnTimeRange = AppDateUtils.isWithinTimeRange(now, wakeUpTime, sleepTime);
+    final isOnTimeRange = AppDateUtils.isWithinTimeRange(nowTime, wakeUpTime, sleepTime);
 
-    if(isOnTimeRange) {
+    final String title  = inputData['title'];
+    final String body   = inputData['body'];
+
+    final lastNotificationMillis    = await sharedPreferences.getInt('lastNotificationTime') ?? 0;
+    final lastNotificationDateTime  = DateTime.fromMillisecondsSinceEpoch(lastNotificationMillis);
+    final isNotificationAllowed     = now.difference(lastNotificationDateTime).inHours >= 2;
+
+    if(isOnTimeRange && isNotificationAllowed) {
       final notificationService = NotificationService();
       await notificationService.initialize();
       await notificationService.showNotification(
         title,
         body,
+      );
+
+      await sharedPreferences.setInt(
+        'lastNotificationTime', 
+        DateTime.now().millisecondsSinceEpoch
       );
     }
   }
