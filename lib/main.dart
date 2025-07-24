@@ -3,15 +3,19 @@ import 'package:hidroly/config/providers.dart';
 import 'package:hidroly/l10n/app_localizations.dart';
 import 'package:hidroly/pages/home_page.dart';
 import 'package:hidroly/services/notification_service.dart';
-import 'package:hidroly/services/work_manager_service.dart';
+import 'package:hidroly/services/notification_task_service.dart';
 import 'package:hidroly/theme/app_theme.dart';
 import 'package:provider/provider.dart';
+import 'package:workmanager/workmanager.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  
-  await WorkManagerService().initialize();
+
   await NotificationService().initialize();
+  await Workmanager().initialize(
+    callbackDispatcher,
+    isInDebugMode: false
+  );
 
   runApp(
     MultiProvider(
@@ -34,3 +38,18 @@ class MainApp extends StatelessWidget {
     );
   }
 }
+
+  @pragma('vm:entry-point')
+  void callbackDispatcher() {
+    Workmanager().executeTask((task, inputData) async {
+      if(task == 'notificationTask') {
+        if(inputData == null) {
+          return Future.value(false);
+        }
+
+        await NotificationTaskService.executeNotificationTask(inputData);
+      }
+    
+      return Future.value(true);
+    });
+  }
