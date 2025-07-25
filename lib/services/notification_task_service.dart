@@ -6,15 +6,15 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class NotificationTaskService {
   static Future<void> executeNotificationTask(Map<String, dynamic> inputData) async {
-    final sharedPreferences = SharedPreferencesAsync();
     final now = DateTime.now();
 
     final nowTime     = TimeOfDay.fromDateTime(now);
     final wakeUpTime  = AppDateUtils.parseTime(inputData[Settings.wakeUpTime.value]);
     final sleepTime   = AppDateUtils.parseTime(inputData[Settings.sleepTime.value]);
+    
+    if(!AppDateUtils.isWithinTimeRange(nowTime, wakeUpTime, sleepTime)) return;
 
-    final isOnTimeRange = AppDateUtils.isWithinTimeRange(nowTime, wakeUpTime, sleepTime);
-
+    final sharedPreferences = SharedPreferencesAsync();
     final String title  = inputData['title'];
     final String body   = inputData['body'];
 
@@ -22,7 +22,7 @@ class NotificationTaskService {
     final lastNotificationDateTime  = DateTime.fromMillisecondsSinceEpoch(lastNotificationMillis);
     final isNotificationAllowed     = now.difference(lastNotificationDateTime).inHours >= 2;
 
-    if(isOnTimeRange && isNotificationAllowed) {
+    if(isNotificationAllowed) {
       final notificationService = NotificationService();
       await notificationService.initialize();
       await notificationService.showNotification(
