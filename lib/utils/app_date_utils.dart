@@ -37,4 +37,17 @@ class AppDateUtils {
     final dateTime = format.parse(formattedTime);
     return TimeOfDay.fromDateTime(dateTime);
   }
+
+  static bool isWithinTimeRange(TimeOfDay now, TimeOfDay startTime, TimeOfDay endTime) {
+    bool isOnTimeRange = now.isAfter(startTime) && now.isBefore(endTime);
+
+    // When the time range crosses midnight, for example from 10:00 PM to 6:00 AM,
+    // we check if the current time is after the wake-up time (10:00 PM)
+    // or before the sleep time (6:00 AM) to cover the overnight period.
+    if(endTime.hour < startTime.hour) {
+      isOnTimeRange = now.isAfter(startTime) || now.isBefore(endTime);
+    }
+    
+    return isOnTimeRange;
+  }
 }
