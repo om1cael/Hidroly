@@ -1,31 +1,27 @@
-Hidroly - Hidrate-se, de forma simples
-
 Hidroly é um rastreador de hidratação minimalista e poderoso, feito para te ajudar a alcançar sua meta diária de água sem distrações. Use unidades métricas ou imperiais: o app se adapta facilmente à sua rotina.
 
-🏁 Configuração rápida e fácil
+🏁 <b>Configuração rápida e fácil</b>
 
 Comece a usar em segundos com um setup intuitivo. Escolha suas unidades preferidas e defina sua meta diária sem complicação.
 
-🕐 Notificações inteligentes
+🕐 <b>Notificações inteligentes</b>
 
 Receba lembretes para se hidratar apenas quando estiver acordado. As notificações respeitam os horários que você acorda e dorme.
 
-📊 Progresso diário e histórico
+📊 <b>Progresso diário e histórico</b>
 
 Veja sua ingestão atual em uma linha do tempo clara e acesse facilmente os dias anteriores. Você pode até editá-los.
 
-⚙️ Totalmente personalizável
-<ul> 
-    <li>Defina sua própria meta diária de água</li> 
-    <li>Escolha entre unidades métricas (kg, ml) ou imperiais (lb, oz)</li> 
-    <li>Configure seu horário de sono personalizado</li> 
-    <li>Adicione seus próprios tamanhos de copo para registros rápidos</li>
-</ul>
+⚙️ <b>Totalmente personalizável</b>
+* Defina sua própria meta diária de água
+* Escolha entre unidades métricas (kg, ml) ou imperiais (lb, oz)
+* Configure seu horário de sono personalizado
+* Adicione seus próprios copos para registros rápidos
 
-📡 Offline e privado
+📡 <b>Offline e privado</b>
 
 Todos os dados ficam salvos apenas no seu dispositivo. Sem contas, sem tracking, sem internet.
 
-✨ Interface minimalista
+✨ <b>Interface minimalista</b>
 
 Design limpo, sem distrações, com foco no que realmente importa: sua saúde.
