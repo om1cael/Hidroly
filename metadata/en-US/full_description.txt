@@ -18,10 +18,10 @@ View your current day’s intake in a clear timeline, and easily revisit or edit
 * Define a custom sleep schedule
 * Add your own cup sizes for quick logging
 
-📡 Offline and Private
+📡 <b>Offline and Private</b>
 
 Your data is stored locally on your device. No accounts, no tracking, no internet required.
 
-✨ Minimalist Interface
+✨ <b>Minimalist Interface</b>
 
 A clean, distraction-free design focused on what matters: your hydration.
