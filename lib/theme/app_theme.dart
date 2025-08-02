@@ -116,6 +116,17 @@ class AppTheme {
         dialBackgroundColor: AppColors.onBackground,
         dialTextColor: AppColors.primaryText
       ),
+      snackBarTheme: SnackBarThemeData(
+        behavior: SnackBarBehavior.floating,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadiusGeometry.circular(16),
+        ),
+        contentTextStyle: TextStyle(
+          fontSize: 16,
+        ),
+        closeIconColor: Colors.redAccent,
+        showCloseIcon: true,
+      ),
       fontFamily: 'Poppins',
     );
   }
