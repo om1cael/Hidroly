@@ -56,7 +56,7 @@ class WaterActionButtons extends StatelessWidget {
               }
 
               final int amount = button.amount;
-              bool success = await addWater(context, amount);
+              await addWater(context, amount);
 
               if(!context.mounted) return;
               await saveWaterToHistory(context, amount);
