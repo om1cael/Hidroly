@@ -75,3 +75,21 @@ dependencies {
 flutter {
     source = "../.."
 }
+
+ext.abiCodes = ["x86_64": 1, "armeabi-v7a": 2, "arm64-v8a": 3]
+
+android.applicationVariants.all { variant ->
+  variant.outputs.each { output ->
+    def abi = output.getFilters()
+        .find { it.filterType == com.android.build.OutputFile.ABI }
+        ?.identifier
+
+    def abiVersionCode = abi != null
+        ? project.ext.abiCodes.get(abi)
+        : null
+
+    if (abiVersionCode != null) {
+      output.versionCodeOverride = variant.versionCode * 10 + abiVersionCode
+    }
+  }
+}
