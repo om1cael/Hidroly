@@ -101,7 +101,6 @@ class _SetupPageState extends State<SetupPage> {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(content: Text(
                 AppLocalizations.of(context)!.notificationTaskCreationFailed,
-                style: Theme.of(context).textTheme.bodyLarge,
               )),
             );
 

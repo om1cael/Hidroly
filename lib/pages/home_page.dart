@@ -145,7 +145,6 @@ class _HomePageState extends State<HomePage> {
               .showSnackBar(SnackBar(
                 content: Text(
                   AppLocalizations.of(context)!.dayLoadingFailed,
-                  style: AppTheme.darkTheme.textTheme.bodyLarge,
                 ),
               )
             );
