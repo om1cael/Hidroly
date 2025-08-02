@@ -69,7 +69,7 @@ class WaterActionButtons extends StatelessWidget {
             ),
             icon: Icon(
               button.isCustomOption == false 
-              ? Icons.ac_unit : Icons.add,
+              ? Icons.water_drop : Icons.add,
             ),
             label: Text(
               button.isCustomOption == false 
