@@ -21,6 +21,7 @@ class DailyHistoryBottomSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     return DraggableScrollableSheet(
       expand: false,
+      initialChildSize: 1,
       builder: (context, scrollController) { 
         return Consumer<DailyHistoryProvider>(
           builder: (context, provider, _) {
