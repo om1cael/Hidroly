@@ -29,15 +29,21 @@ class WaterProgressCircle extends StatelessWidget {
           alignment: AlignmentGeometry.xy(0, 0),
           children: [
             SizedBox(
-                width: 280,
-                height: 280,
-                child: CircularProgressIndicator(
-                  value: progress,
-                  backgroundColor: Theme.of(context).colorScheme.onSurface,
-                  strokeWidth: 20,
-                  strokeCap: StrokeCap.round,
-                  color: Theme.of(context).primaryColor,
-                ),
+              width: 280,
+              height: 280,
+              child: TweenAnimationBuilder<double>(
+                tween: Tween<double>(begin: 0.0, end: progress),
+                duration: const Duration(milliseconds: 400),
+                builder: (context, value, _) {
+                  return CircularProgressIndicator(
+                    value: value,
+                    backgroundColor: Theme.of(context).colorScheme.onSurface,
+                    strokeWidth: 20,
+                    strokeCap: StrokeCap.round,
+                    color: Theme.of(context).primaryColor,
+                  );
+                }
+              ),
             ),
             Column(
               children: [
