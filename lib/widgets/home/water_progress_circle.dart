@@ -33,7 +33,7 @@ class WaterProgressCircle extends StatelessWidget {
               height: 280,
               child: TweenAnimationBuilder<double>(
                 tween: Tween<double>(begin: 0.0, end: progress),
-                duration: const Duration(milliseconds: 400),
+                duration: const Duration(milliseconds: 300),
                 builder: (context, value, _) {
                   return CircularProgressIndicator(
                     value: value,
