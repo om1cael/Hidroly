@@ -71,9 +71,8 @@ class DailyHistoryBottomSheet extends StatelessWidget {
                     ),
                   ] else ...[
                     Expanded(
-                    child: ListView.builder(
+                      child: ListView.builder(
                         controller: scrollController,
-                        shrinkWrap: true,
                         itemBuilder: (context, index) {
                           final history = historyList[index];
                           return Card(
