@@ -4,7 +4,7 @@
   "customCupButton": "Personalizado",
   "customCupDialogTitle": "Adicionar Copo Personalizado",
   "customCupDialogTextFieldAmount": "Quantidade",
-  "doNotSaveLabel": "Do not save",
+  "doNotSaveLabel": "Não salvar",
   "textFieldAmountError": "Quantidade inválida",
   "addAction": "Adicionar",
   "dayLoadingFailed": "Dia não encontrado",
