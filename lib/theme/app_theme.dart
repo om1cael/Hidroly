@@ -127,6 +127,19 @@ class AppTheme {
         closeIconColor: Colors.redAccent,
         showCloseIcon: true,
       ),
+      checkboxTheme: CheckboxThemeData(
+        fillColor: WidgetStateProperty.resolveWith<Color>((state) {
+          if(state.contains(WidgetState.selected)) {
+            return AppColors.blueAccent;
+          }
+
+          return Colors.transparent;
+        }),
+        side: BorderSide(color: Colors.white),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadiusGeometry.circular(8),
+        )
+      ),
       fontFamily: 'Poppins',
     );
   }
