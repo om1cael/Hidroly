@@ -87,9 +87,7 @@ class _SettingsYouState extends State<SettingsYou> {
       SnackBar(
         content: Text(
           AppLocalizations.of(context)!.dailyGoalUpdated,
-          style: Theme.of(context).textTheme.bodyLarge
         ),
-        duration: Duration(seconds: 2),
       ),
     );
   }

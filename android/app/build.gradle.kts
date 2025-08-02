@@ -75,3 +75,20 @@ dependencies {
 flutter {
     source = "../.."
 }
+
+val abiCodes = mapOf(
+    "x86_64" to 1,
+    "armeabi-v7a" to 2,
+    "arm64-v8a" to 3
+)
+
+android.applicationVariants.all {
+    outputs.all {
+        val outputImpl = this as com.android.build.gradle.internal.api.ApkVariantOutputImpl
+        val abiFilter = outputImpl.getFilter(com.android.build.OutputFile.ABI)
+        val abiVersionCode = abiFilter?.let { abiCodes[it] }
+        if (abiVersionCode != null) {
+            outputImpl.versionCodeOverride = versionCode * 10 + abiVersionCode
+        }
+    }
+}

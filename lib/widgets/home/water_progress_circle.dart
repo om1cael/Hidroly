@@ -25,19 +25,32 @@ class WaterProgressCircle extends StatelessWidget {
 
         final double progress = (day.currentAmount / day.dailyGoal).clamp(0, 1);
 
+        final primaryColor = Theme.of(context).primaryColor;
+        final completedColor = Color(0xff92D6C4);
+
         return Stack(
           alignment: AlignmentGeometry.xy(0, 0),
           children: [
             SizedBox(
-                width: 280,
-                height: 280,
-                child: CircularProgressIndicator(
-                  value: progress,
-                  backgroundColor: Theme.of(context).colorScheme.onSurface,
-                  strokeWidth: 20,
-                  strokeCap: StrokeCap.round,
-                  color: Theme.of(context).primaryColor,
-                ),
+              width: 280,
+              height: 280,
+              child: TweenAnimationBuilder<double>(
+                tween: Tween<double>(begin: 0.0, end: progress),
+                duration: const Duration(milliseconds: 300),
+                builder: (context, value, _) {
+                  return CircularProgressIndicator(
+                    value: value,
+                    backgroundColor: Theme.of(context).colorScheme.onSurface,
+                    strokeWidth: 20,
+                    strokeCap: StrokeCap.round,
+                    color: Color.lerp(
+                      primaryColor, 
+                      completedColor, 
+                      ((value - 0.7) * (1 / 0.3)).clamp(0.0, 1.0) // Only starts to change if value >= 70%
+                    ),
+                  );
+                }
+              ),
             ),
             Column(
               children: [

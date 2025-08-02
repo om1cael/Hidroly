@@ -128,6 +128,12 @@ abstract class AppLocalizations {
   /// **'Amount'**
   String get customCupDialogTextFieldAmount;
 
+  /// No description provided for @doNotSaveLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Do not save'**
+  String get doNotSaveLabel;
+
   /// No description provided for @textFieldAmountError.
   ///
   /// In en, this message translates to:

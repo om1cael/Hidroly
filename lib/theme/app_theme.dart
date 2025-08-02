@@ -116,6 +116,30 @@ class AppTheme {
         dialBackgroundColor: AppColors.onBackground,
         dialTextColor: AppColors.primaryText
       ),
+      snackBarTheme: SnackBarThemeData(
+        behavior: SnackBarBehavior.floating,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadiusGeometry.circular(16),
+        ),
+        contentTextStyle: TextStyle(
+          fontSize: 16,
+        ),
+        closeIconColor: Colors.redAccent,
+        showCloseIcon: true,
+      ),
+      checkboxTheme: CheckboxThemeData(
+        fillColor: WidgetStateProperty.resolveWith<Color>((state) {
+          if(state.contains(WidgetState.selected)) {
+            return AppColors.blueAccent;
+          }
+
+          return Colors.transparent;
+        }),
+        side: BorderSide(color: Colors.white),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadiusGeometry.circular(8),
+        )
+      ),
       fontFamily: 'Poppins',
     );
   }

@@ -24,6 +24,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get customCupDialogTextFieldAmount => 'Amount';
 
   @override
+  String get doNotSaveLabel => 'Do not save';
+
+  @override
   String get textFieldAmountError => 'Invalid Amount';
 
   @override

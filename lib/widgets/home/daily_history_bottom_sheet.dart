@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hidroly/data/model/history_entry.dart';
 import 'package:hidroly/l10n/app_localizations.dart';
 import 'package:hidroly/provider/daily_history_provider.dart';
 import 'package:hidroly/provider/day_provider.dart';
@@ -21,6 +22,7 @@ class DailyHistoryBottomSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     return DraggableScrollableSheet(
       expand: false,
+      initialChildSize: 1,
       builder: (context, scrollController) { 
         return Consumer<DailyHistoryProvider>(
           builder: (context, provider, _) {
@@ -71,50 +73,49 @@ class DailyHistoryBottomSheet extends StatelessWidget {
                     ),
                   ] else ...[
                     Expanded(
-                    child: ListView.builder(
+                      child: AnimatedList(
                         controller: scrollController,
-                        shrinkWrap: true,
-                        itemBuilder: (context, index) {
+                        itemBuilder: (context, index, animation) {
                           final history = historyList[index];
-                          return Card(
-                            color: AppColors.onBackground,
-                            child: ListTile(
-                              leading: Icon(
-                                Icons.local_drink,
-                                color: AppColors.blueAccent,
-                              ),
-                              title: Text(
-                                UnitTools.getVolumeWithUnit(history.amount, isMetric, context: context),
-                                style: Theme.of(context).textTheme.bodyLarge
-                              ),
-                              subtitle: Text(
-                                AppLocalizations.of(context)!
-                                  .dayHistoryBottomSheetItemSubtitle(
-                                    DateFormat.Hm().format(history.dateTime.toLocal())
-                                  ),
-                                style: Theme.of(context).textTheme.bodySmall
-                              ),
-                              trailing: IconButton(
-                                onPressed: () async {
-                                  await context.read<DayProvider>()
-                                    .removeWater(history.amount);
-                                  
-                                  if(!context.mounted) return;
-                                  await context.read<DailyHistoryProvider>()
-                                    .delete(
-                                      history.id!, 
-                                      dayId
-                                    );
-                                },
-                                icon: Icon(
-                                  Icons.delete_forever,
-                                  color: Colors.redAccent,
-                                ),
-                              ),
-                            ),
+                          return HistoryItem(
+                            history: history, 
+                            isMetric: isMetric,
+                            onRemove: () async {
+                              AnimatedList.of(context).removeItem(
+                                index, 
+                                (_, animation) {
+                                  return SlideTransition(
+                                    position: animation.drive(
+                                      Tween<Offset>(
+                                        begin: Offset(1, 0),
+                                        end: Offset.zero,
+                                      ).chain(CurveTween(curve: Curves.easeOut)),
+                                    ),
+                                    child: FadeTransition(
+                                      opacity: animation,
+                                      child: HistoryItem(
+                                        history: history, 
+                                        isMetric: isMetric, 
+                                        onRemove: () {},
+                                      ),
+                                    ),
+                                  );
+                                }
+                              );
+
+                              await context.read<DayProvider>()
+                                .removeWater(history.amount);
+                              
+                              if(!context.mounted) return;
+                              await context.read<DailyHistoryProvider>()
+                                .delete(
+                                  history.id!, 
+                                  dayId
+                                );
+                            },
                           );
                         }, 
-                        itemCount: historyList.length
+                        initialItemCount: historyList.length
                       ),
                     ),
                   ]
@@ -124,6 +125,50 @@ class DailyHistoryBottomSheet extends StatelessWidget {
           }
         );
       }
+    );
+  }
+}
+
+class HistoryItem extends StatelessWidget {
+  const HistoryItem({
+    super.key,
+    required this.history,
+    required this.isMetric,
+    required this.onRemove,
+  });
+
+  final HistoryEntry history;
+  final bool isMetric;
+  final VoidCallback onRemove;
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      color: AppColors.onBackground,
+      child: ListTile(
+        leading: Icon(
+          Icons.local_drink,
+          color: AppColors.blueAccent,
+        ),
+        title: Text(
+          UnitTools.getVolumeWithUnit(history.amount, isMetric, context: context),
+          style: Theme.of(context).textTheme.bodyLarge
+        ),
+        subtitle: Text(
+          AppLocalizations.of(context)!
+            .dayHistoryBottomSheetItemSubtitle(
+              DateFormat.Hm().format(history.dateTime.toLocal())
+            ),
+          style: Theme.of(context).textTheme.bodySmall
+        ),
+        trailing: IconButton(
+          onPressed: onRemove,
+          icon: Icon(
+            Icons.delete_forever,
+            color: Colors.redAccent,
+          ),
+        ),
+      ),
     );
   }
 }

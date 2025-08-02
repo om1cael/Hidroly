@@ -110,7 +110,6 @@ class _SettingsUpdateSleepSchedulePageState extends State<SettingsUpdateSleepSch
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(content: Text(
                 AppLocalizations.of(context)!.sleepScheduleEditFailed,
-                style: Theme.of(context).textTheme.bodyLarge,
               )),
             );
 
