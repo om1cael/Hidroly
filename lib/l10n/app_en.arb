@@ -4,6 +4,7 @@
     "customCupButton": "Custom",
     "customCupDialogTitle": "Add Custom Cup",
     "customCupDialogTextFieldAmount": "Amount",
+    "doNotSaveLabel": "Do not save",
     "textFieldAmountError": "Invalid Amount",
     "addAction": "Add",
     "dayLoadingFailed": "Day not found",
