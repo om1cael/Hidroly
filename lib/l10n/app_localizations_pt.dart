@@ -76,6 +76,10 @@ class AppLocalizationsPt extends AppLocalizations {
   String get setupWeightTextFieldInvalidValue => 'Peso entre 30 e 200';
 
   @override
+  String get setupFailed =>
+      'Ocorreu um erro. Por favor, crie uma issue no GitHub e mencione o código \'SE01\'.';
+
+  @override
   String get setupUnitMetric => 'kg, ml';
 
   @override

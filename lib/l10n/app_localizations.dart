@@ -224,6 +224,12 @@ abstract class AppLocalizations {
   /// **'Weight between 30 and 200'**
   String get setupWeightTextFieldInvalidValue;
 
+  /// No description provided for @setupFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'An error occurred. Please create a GitHub issue and reference code \'SE01\'.'**
+  String get setupFailed;
+
   /// No description provided for @setupUnitMetric.
   ///
   /// In en, this message translates to:

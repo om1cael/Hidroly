@@ -28,6 +28,7 @@
   "setupAgeTextFieldInvalidValue": "Idade entre 10 e 120",
   "setupWeightTextFieldLabel": "Seu peso",
   "setupWeightTextFieldInvalidValue": "Peso entre 30 e 200",
+  "setupFailed": "Ocorreu um erro. Por favor, crie uma issue no GitHub e mencione o código 'SE01'.",
   "setupUnitMetric": "kg, ml",
   "setupUnitImperial": "lb, fl oz",
   "homePageTodayAppBarTitle": "Hoje",

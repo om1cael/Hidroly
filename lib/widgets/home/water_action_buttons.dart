@@ -10,7 +10,7 @@ import 'package:hidroly/utils/unit_tools.dart';
 import 'package:provider/provider.dart';
 
 class WaterActionButtons extends StatelessWidget {
-  WaterActionButtons({
+  const WaterActionButtons({
     super.key,
     required this.dayId,
     required this.isMetric,
@@ -18,17 +18,11 @@ class WaterActionButtons extends StatelessWidget {
 
   final int dayId;
   final bool isMetric;
-  final _defaultButtons = [WaterButton(amount: 250), WaterButton(amount: 350)];
 
   @override
   Widget build(BuildContext context) {
     final List<WaterButton> customCups = 
       context.watch<CustomCupsProvider>().customCups;
-    
-    List<WaterButton> allButtons = [
-      ..._defaultButtons,
-      ...customCups,
-    ];
 
     return Container(
       height: 45,
@@ -37,7 +31,7 @@ class WaterActionButtons extends StatelessWidget {
         shrinkWrap: true,
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
-          var button = allButtons[index];
+          var button = customCups[index];
 
           return ElevatedButton.icon(
             onPressed: () async {
@@ -63,7 +57,7 @@ class WaterActionButtons extends StatelessWidget {
           );
         }, 
         separatorBuilder: (context, index) => SizedBox(width: 10,), 
-        itemCount: allButtons.length
+        itemCount: customCups.length
       ),
     );
   }
