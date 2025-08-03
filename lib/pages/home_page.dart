@@ -80,7 +80,7 @@ class _HomePageState extends State<HomePage> {
             padding: const EdgeInsets.only(top: 16, bottom: 16),
             child: _selectedIndex == 0 
               ? Column(
-                spacing: 50,
+                spacing: 32,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   WaterProgressCircle(
