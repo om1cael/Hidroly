@@ -31,20 +31,20 @@ class WaterActionButtons extends StatelessWidget {
         shrinkWrap: true,
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
-          var button = customCups[index];
+          var cup = customCups[index];
 
           return ActionChip(
             onPressed: () async {
-              final int amount = button.amount;
+              final int amount = cup.amount;
               await addWater(context, amount);
-
+          
               if(!context.mounted) return;
               await saveWaterToHistory(context, amount);
             },
             avatar: Icon(Icons.water_drop),
             backgroundColor: Theme.of(context).colorScheme.onSurface,
             label: Text(
-              UnitTools.getVolumeWithUnit(button.amount, isMetric, context: context),
+              UnitTools.getVolumeWithUnit(cup.amount, isMetric, context: context),
               style: TextStyle(
                 color: AppColors.secondaryText
               ),
