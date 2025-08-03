@@ -13,9 +13,14 @@ import 'package:provider/provider.dart';
 class WaterActionButtons extends StatelessWidget {
   const WaterActionButtons({
     super.key,
+    required this.formKey,
+    required this.updateDialogTextController,
     required this.dayId,
     required this.isMetric,
   });
+
+  final TextEditingController updateDialogTextController;
+  final GlobalKey<FormState> formKey;
 
   final int dayId;
   final bool isMetric;
@@ -63,24 +68,48 @@ class WaterActionButtons extends StatelessWidget {
                         context: context, 
                         builder: (context) {
                           return Form(
-                            // TODO: Use localized messages
+                            key: formKey,
                             child: NumberInputDialog(
-                              title: 'Edit custom cup', 
-                              inputFieldLabel: 'Amount', 
-                              actionButtonText: 'Update', 
-                              cancelButtonText: 'Cancel', 
+                              title: AppLocalizations.of(context)!.editCustomCupDialogTitle, 
+                              inputFieldLabel: AppLocalizations.of(context)!.customCupDialogTextFieldAmount, 
+                              actionButtonText: AppLocalizations.of(context)!.updateAction, 
+                              cancelButtonText: AppLocalizations.of(context)!.cancelAction, 
                               inputFieldValidator: (value) {
                                 double? amount = double.tryParse(value ?? '');
                                 if(amount == null || amount <= 0) return AppLocalizations.of(context)!.textFieldAmountError;
                                 return null;
                               },
-                              onActionPressed: () {
-                                // TODO: Update custom cup
+                              onActionPressed: () async {
+                                if(!formKey.currentState!.validate()) return;
+
+                                double amount = double.parse(updateDialogTextController.text);
+                                int metricAmount = isMetric 
+                                  ? amount.round()
+                                  : UnitTools.flOzToMl(amount);
+                                
+                                WaterButton updatedCup = cup.copyWith(amount: metricAmount);
+                                bool success = await context.read<CustomCupsProvider>()
+                                  .updateCustomCup(updatedCup);
+
+                                if(!context.mounted) return;
+
+                                String message = success
+                                  ? AppLocalizations.of(context)!.editCustomCupSuccess
+                                  : AppLocalizations.of(context)!.editCustomCupFailed;
+                                
+                                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                    content: Text(message)
+                                  )
+                                );
+
+                                Navigator.of(context).pop();
+                                updateDialogTextController.clear();
                               },
                               onCancelPressed: () {
                                 Navigator.of(context).pop();
+                                updateDialogTextController.clear();
                               }, 
-                              textEditingController: TextEditingController(),
+                              textEditingController: updateDialogTextController,
                             ),
                           );
                         }

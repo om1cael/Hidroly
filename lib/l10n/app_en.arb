@@ -70,5 +70,8 @@
     "sleepScheduleEditFailed": "Could not save your sleep schedule",
     "notificationTaskCreationFailed": "Failed to create the notification task",
     "pageNotAvailableTitle": "Not Available",
-    "pageNotAvailableDescription": "Sorry, this page isn't available yet :("
+    "pageNotAvailableDescription": "Sorry, this page isn't available yet :(",
+    "editCustomCupDialogTitle": "Edit custom cup",
+    "editCustomCupSuccess": "Cup edited successfully!",
+    "editCustomCupFailed": "It was not possible to edit your cup. Please, report it on GitHub and reference code 'ECE01'."
 }

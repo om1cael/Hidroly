@@ -208,4 +208,14 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get pageNotAvailableDescription =>
       'Sorry, this page isn\'t available yet :(';
+
+  @override
+  String get editCustomCupDialogTitle => 'Edit custom cup';
+
+  @override
+  String get editCustomCupSuccess => 'Cup edited successfully!';
+
+  @override
+  String get editCustomCupFailed =>
+      'It was not possible to edit your cup. Please, report it on GitHub and reference code \'ECE01\'.';
 }

@@ -70,5 +70,8 @@
   "sleepScheduleEditFailed": "Não foi possível salvar seu horário de sono",
   "notificationTaskCreationFailed": "Falha ao criar a tarefa de notificação",
   "pageNotAvailableTitle": "Indisponível",
-  "pageNotAvailableDescription": "Desculpa, essa página ainda não tá disponível :("
+  "pageNotAvailableDescription": "Desculpa, essa página ainda não tá disponível :(",
+  "editCustomCupDialogTitle": "Editar copo customizado",
+  "editCustomCupSuccess": "Copo editado com sucesso!",
+  "editCustomCupFailed": "Não foi possível editar o copo. Por favor, reporte o erro no GitHub e mencione o código 'ECE01'."
 }

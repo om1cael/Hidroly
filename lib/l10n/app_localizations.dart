@@ -481,6 +481,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Sorry, this page isn\'t available yet :('**
   String get pageNotAvailableDescription;
+
+  /// No description provided for @editCustomCupDialogTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit custom cup'**
+  String get editCustomCupDialogTitle;
+
+  /// No description provided for @editCustomCupSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Cup edited successfully!'**
+  String get editCustomCupSuccess;
+
+  /// No description provided for @editCustomCupFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'It was not possible to edit your cup. Please, report it on GitHub and reference code \'ECE01\'.'**
+  String get editCustomCupFailed;
 }
 
 class _AppLocalizationsDelegate

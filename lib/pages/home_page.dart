@@ -30,6 +30,9 @@ class _HomePageState extends State<HomePage> {
   final TextEditingController customCupAmountController = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
+  final TextEditingController waterButtonsUpdateDialogTextController = TextEditingController();
+  final GlobalKey<FormState> waterButtonsUpdateDialogFormKey = GlobalKey<FormState>();
+
   int _selectedIndex = 0;
 
   @override
@@ -84,6 +87,8 @@ class _HomePageState extends State<HomePage> {
                     isMetric: isMetric,
                   ),
                   WaterActionButtons(
+                    formKey: waterButtonsUpdateDialogFormKey,
+                    updateDialogTextController: waterButtonsUpdateDialogTextController,
                     dayId: dayId,
                     isMetric: isMetric,
                   )
