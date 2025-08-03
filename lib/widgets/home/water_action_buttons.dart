@@ -33,7 +33,7 @@ class WaterActionButtons extends StatelessWidget {
         itemBuilder: (context, index) {
           var button = customCups[index];
 
-          return ElevatedButton.icon(
+          return ActionChip(
             onPressed: () async {
               final int amount = button.amount;
               await addWater(context, amount);
@@ -41,13 +41,8 @@ class WaterActionButtons extends StatelessWidget {
               if(!context.mounted) return;
               await saveWaterToHistory(context, amount);
             },
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Color(0xff31333A),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadiusGeometry.circular(16)
-              ),
-            ),
-            icon: Icon(Icons.water_drop),
+            avatar: Icon(Icons.water_drop),
+            backgroundColor: Theme.of(context).colorScheme.onSurface,
             label: Text(
               UnitTools.getVolumeWithUnit(button.amount, isMetric, context: context),
               style: TextStyle(
