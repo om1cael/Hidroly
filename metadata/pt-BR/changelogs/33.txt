@@ -1,0 +1,6 @@
+* 💧 O círculo de progresso agora é animado e muda de cor à medida que você se aproxima da sua meta.
+* 🕘 As entradas do histórico agora têm uma animação quando você remove água.
+* 🧪 Agora você pode adicionar um copo personalizado apenas uma vez, sem salvá-lo permanentemente.
+* 🛠️ Os botões de copo ganharam um novo visual com o novo ícone de gota d'água.
+* 📱 Tamanho do aplicativo otimizado com suporte melhorado para diferentes dispositivos (32 bits e 64 bits).
+* 🔧 Pequenas melhorias e limpeza nos bastidores para fazer tudo funcionar melhor.
