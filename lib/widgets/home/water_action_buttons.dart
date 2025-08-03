@@ -26,7 +26,6 @@ class WaterActionButtons extends StatelessWidget {
   });
 
   final _defaultButtons = [WaterButton(amount: 250), WaterButton(amount: 350)];
-  final _addCustomCupButton = WaterButton(amount: 0, isCustomOption: true);
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +35,6 @@ class WaterActionButtons extends StatelessWidget {
     List<WaterButton> allButtons = [
       ..._defaultButtons,
       ...customCups,
-      _addCustomCupButton,
     ];
 
     return Container(
@@ -50,11 +48,6 @@ class WaterActionButtons extends StatelessWidget {
 
           return ElevatedButton.icon(
             onPressed: () async {
-              if(button.isCustomOption) {
-                _showCustomCupPopUp(context);
-                return;
-              }
-
               final int amount = button.amount;
               await addWater(context, amount);
 
@@ -67,14 +60,9 @@ class WaterActionButtons extends StatelessWidget {
                 borderRadius: BorderRadiusGeometry.circular(16)
               ),
             ),
-            icon: Icon(
-              button.isCustomOption == false 
-              ? Icons.water_drop : Icons.add,
-            ),
+            icon: Icon(Icons.water_drop),
             label: Text(
-              button.isCustomOption == false 
-                ? UnitTools.getVolumeWithUnit(button.amount, isMetric, context: context) 
-                : AppLocalizations.of(context)!.customCupButton,
+              UnitTools.getVolumeWithUnit(button.amount, isMetric, context: context),
               style: TextStyle(
                 color: AppColors.secondaryText
               ),
