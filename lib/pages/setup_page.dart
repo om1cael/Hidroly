@@ -168,14 +168,14 @@ class _SetupPageState extends State<SetupPage> {
   }
 
   Future<bool> _createDefaultCups() async {
-    final customCups = [
+    final defaultCups = [
       WaterButton(amount: 250),
       WaterButton(amount: 300),
       WaterButton(amount: 600),
     ];
 
     try {
-      for(WaterButton cup in customCups) {
+      for(WaterButton cup in defaultCups) {
         await context.read<CustomCupsProvider>()
           .createCustomCup(cup.amount);
       }
