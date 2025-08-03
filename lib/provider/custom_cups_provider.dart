@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hidroly/data/repository/custom_cups_repository.dart';
 import 'package:hidroly/data/model/water_button.dart';
+import 'package:sqflite/sqflite.dart';
 
 class CustomCupsProvider extends ChangeNotifier {
   late CustomCupsRepository _customCupsRepository;
@@ -23,6 +24,17 @@ class CustomCupsProvider extends ChangeNotifier {
     await _customCupsRepository.createCustomCup(
       WaterButton(amount: customCupAmount),
     );
+
+    await loadCustomCups();
+    return true;
+  }
+
+  Future<bool> deleteCustomCup(int id) async {
+    try {
+      await _customCupsRepository.deleteCustomCup(id);
+    } on DatabaseException {
+      return false;
+    }
 
     await loadCustomCups();
     return true;

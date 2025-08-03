@@ -9,5 +9,9 @@ class CustomCupsRepository {
   Future<void> createCustomCup(WaterButton waterButton) async => 
     _customCupsLocalDataSourceImpl.createCustomCup(waterButton);
 
-  Future<List<WaterButton>> loadCustomCups() async => _customCupsLocalDataSourceImpl.getAllCustomCups();
+  Future<List<WaterButton>> loadCustomCups() async => 
+    _customCupsLocalDataSourceImpl.getAllCustomCups();
+
+  Future<void> deleteCustomCup(int id) async => 
+    _customCupsLocalDataSourceImpl.deleteCustomCup(id);
 }
