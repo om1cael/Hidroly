@@ -13,6 +13,7 @@ import 'package:hidroly/theme/app_theme.dart';
 import 'package:hidroly/utils/app_date_utils.dart';
 import 'package:hidroly/widgets/common/icon_header.dart';
 import 'package:hidroly/widgets/home/daily_history_bottom_sheet.dart';
+import 'package:hidroly/widgets/home/fab_custom_cup.dart';
 import 'package:hidroly/widgets/home/home_bottom_nav.dart';
 import 'package:hidroly/widgets/home/water_action_buttons.dart';
 import 'package:hidroly/widgets/home/water_progress_circle.dart';
@@ -84,8 +85,6 @@ class _HomePageState extends State<HomePage> {
                   ),
                   WaterActionButtons(
                     dayId: dayId,
-                    customCupAmountController: customCupAmountController,
-                    formKey: formKey,
                     isMetric: isMetric,
                   )
                 ],
@@ -105,6 +104,12 @@ class _HomePageState extends State<HomePage> {
               )
           ),
         ),
+      ),
+      floatingActionButton: FabCustomCup(
+        dayId: dayId,
+        customCupAmountController: customCupAmountController,
+        formKey: formKey,
+        isMetric: isMetric
       ),
     );
   }

@@ -25,7 +25,7 @@ class CustomCupsLocalDataSourceImpl {
 
     return [
       for(final { 'id': id as int, 'amount': amount as int } in customCups)
-        WaterButton(id: id, amount: amount, isCustomOption: false),
+        WaterButton(id: id, amount: amount),
     ];
   }
 }
