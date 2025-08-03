@@ -33,6 +33,17 @@ class CustomCupsLocalDataSourceImpl implements CustomCupsLocalDataSource {
   }
 
   @override
+  Future<void> updateCustomCup(WaterButton waterButton) async {
+    final db = await _databaseHelper.database;
+    await db.update(
+      DBConstants.customCupsTable,
+      waterButton.toMap(),
+      where: 'id = ?',
+      whereArgs: [waterButton.id]
+    );
+  }
+
+  @override
   Future<void> deleteCustomCup(int id) async {
     final db = await _databaseHelper.database;
     await db.delete(

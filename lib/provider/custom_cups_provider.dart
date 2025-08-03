@@ -29,6 +29,17 @@ class CustomCupsProvider extends ChangeNotifier {
     return true;
   }
 
+  Future<bool> updateCustomCup(WaterButton waterButton) async {
+    try {
+      await _customCupsRepository.updateCustomCup(waterButton);
+    } on DatabaseException {
+      return false;
+    }
+
+    await loadCustomCups();
+    return true;
+  }
+
   Future<bool> deleteCustomCup(int id) async {
     try {
       await _customCupsRepository.deleteCustomCup(id);
