@@ -28,6 +28,7 @@
     "setupAgeTextFieldInvalidValue": "Alter zwischen 10 und 120",
     "setupWeightTextFieldLabel": "Dein Gewicht",
     "setupWeightTextFieldInvalidValue": "Gewicht zwischen 30 und 200",
+    "setupFailed": "Ein Fehler ist aufgetreten. Bitte erstelle einen GitHub issue und referenziere den Code 'SE01'.",
     "setupUnitMetric": "kg, ml",
     "setupUnitImperial": "lb, fl oz",
     "homePageTodayAppBarTitle": "Heute",
@@ -55,6 +56,8 @@
     "dailyGoal": "Tagesziel",
     "updateAction": "Aktualisieren",
     "cancelAction": "Abbrechen",
+    "editAction": "Bearbeiten",
+    "deleteAction": "Löschen",
     "settingsFeedback": "Feedback geben",
     "settingsFeedbackDescription": "Teile uns deine Meinung mit",
     "settingsContribute": "Beitragen",
@@ -65,9 +68,12 @@
     "notificationsSettingsWakeUp": "Du wachst auf um",
     "notificationsSettingsSleep": "Du schläfst ein um",
     "reminderNotificationTitle": "💧 Zeit etwas zu trinken!",
-    "reminderNotificationBody": "Machen deinen Körper glücklich, trink einen Schluck!",
+    "reminderNotificationBody": "Machen deinen Körper glücklich, trinke einen Schluck!",
     "sleepScheduleEditFailed": "Schlafplan konnte nicht gespeichert werden",
     "notificationTaskCreationFailed": "Beim erstellen der Benachrichtungsaufgabe ist ein Fehler aufgetreten",
     "pageNotAvailableTitle": "Nicht verfügbar",
-    "pageNotAvailableDescription": "Entschuldigung, diese Seite ist noch nicht verfügbar :("
+    "pageNotAvailableDescription": "Entschuldigung, diese Seite ist noch nicht verfügbar :(",
+    "editCustomCupDialogTitle": "Benutzerdefiniertes Glas bearbeiten",
+    "editCustomCupSuccess": "Glas erfolgreich bearbeitet!",
+    "editCustomCupFailed": "Es war nicht möglich dieses Glas zu bearbeiten. Bitte melde dies auf GitHub und referenziere den Code 'ECE01'."
 }
