@@ -218,12 +218,6 @@ abstract class AppLocalizations {
   /// **'Your weight'**
   String get setupWeightTextFieldLabel;
 
-  /// No description provided for @valueNotSupported.
-  ///
-  /// In en, this message translates to:
-  /// **'Value not supported'**
-  String get valueNotSupported;
-
   /// No description provided for @setupWeightTextFieldInvalidWeight.
   ///
   /// In en, this message translates to:
@@ -481,6 +475,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Sorry, this page isn\'t available yet :('**
   String get pageNotAvailableDescription;
+
+  /// No description provided for @valueNotSupported.
+  ///
+  /// In en, this message translates to:
+  /// **'Value not supported'**
+  String get valueNotSupported;
 }
 
 class _AppLocalizationsDelegate

@@ -40,8 +40,19 @@ class DailyGoalInput extends StatelessWidget {
             validator: (value) {
               final weight = int.tryParse(value ?? '');
 
-              final minWeight = isMetric.value ? 10 : 25;
-              final maxWeight = isMetric.value ? 300 : 665;
+              final minWeightKg = 10;
+              final minWeightLb = 25;
+              
+              final maxWeightKg = 300;
+              final maxWeightLb = 665;
+
+              final minWeight = isMetric.value 
+                ? minWeightKg 
+                : minWeightLb;
+              
+              final maxWeight = isMetric.value 
+                ? maxWeightKg 
+                : maxWeightLb;
 
               if(weight == null) {
                 return AppLocalizations.of(context)!.valueNotSupported;

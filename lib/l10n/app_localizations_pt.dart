@@ -73,9 +73,6 @@ class AppLocalizationsPt extends AppLocalizations {
   String get setupWeightTextFieldLabel => 'Seu peso';
 
   @override
-  String get valueNotSupported => 'Valor não suportado';
-
-  @override
   String setupWeightTextFieldInvalidWeight(String minWeight, String maxWeight) {
     return 'Peso entre $minWeight e $maxWeight';
   }
@@ -212,4 +209,7 @@ class AppLocalizationsPt extends AppLocalizations {
   @override
   String get pageNotAvailableDescription =>
       'Desculpa, essa página ainda não tá disponível :(';
+
+  @override
+  String get valueNotSupported => 'Valor não suportado';
 }
