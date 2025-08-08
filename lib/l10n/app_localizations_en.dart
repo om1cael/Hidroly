@@ -75,6 +75,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get setupWeightTextFieldInvalidValue => 'Weight between 30 and 200';
 
   @override
+  String get setupFailed =>
+      'An error occurred. Please create a GitHub issue and reference code \'SE01\'.';
+
+  @override
   String get setupUnitMetric => 'kg, ml';
 
   @override
@@ -158,6 +162,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get cancelAction => 'Cancel';
 
   @override
+  String get editAction => 'Edit';
+
+  @override
+  String get deleteAction => 'Delete';
+
+  @override
   String get settingsFeedback => 'Send feedback';
 
   @override
@@ -204,4 +214,14 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get pageNotAvailableDescription =>
       'Sorry, this page isn\'t available yet :(';
+
+  @override
+  String get editCustomCupDialogTitle => 'Edit custom cup';
+
+  @override
+  String get editCustomCupSuccess => 'Cup edited successfully!';
+
+  @override
+  String get editCustomCupFailed =>
+      'It was not possible to edit your cup. Please, report it on GitHub and reference code \'ECE01\'.';
 }

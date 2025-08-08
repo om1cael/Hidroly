@@ -224,6 +224,12 @@ abstract class AppLocalizations {
   /// **'Weight between 30 and 200'**
   String get setupWeightTextFieldInvalidValue;
 
+  /// No description provided for @setupFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'An error occurred. Please create a GitHub issue and reference code \'SE01\'.'**
+  String get setupFailed;
+
   /// No description provided for @setupUnitMetric.
   ///
   /// In en, this message translates to:
@@ -386,6 +392,18 @@ abstract class AppLocalizations {
   /// **'Cancel'**
   String get cancelAction;
 
+  /// No description provided for @editAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit'**
+  String get editAction;
+
+  /// No description provided for @deleteAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get deleteAction;
+
   /// No description provided for @settingsFeedback.
   ///
   /// In en, this message translates to:
@@ -475,6 +493,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Sorry, this page isn\'t available yet :('**
   String get pageNotAvailableDescription;
+
+  /// No description provided for @editCustomCupDialogTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit custom cup'**
+  String get editCustomCupDialogTitle;
+
+  /// No description provided for @editCustomCupSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Cup edited successfully!'**
+  String get editCustomCupSuccess;
+
+  /// No description provided for @editCustomCupFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'It was not possible to edit your cup. Please, report it on GitHub and reference code \'ECE01\'.'**
+  String get editCustomCupFailed;
 }
 
 class _AppLocalizationsDelegate
