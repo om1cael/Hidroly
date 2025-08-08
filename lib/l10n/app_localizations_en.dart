@@ -72,10 +72,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get setupWeightTextFieldLabel => 'Your weight';
 
   @override
-  String get setupWeightTextFieldInvalidWeight => 'Value not supported';
+  String get valueNotSupported => 'Value not supported';
 
   @override
-  String setupWeightTextFieldInvalidValue(String minWeight, String maxWeight) {
+  String setupWeightTextFieldInvalidWeight(String minWeight, String maxWeight) {
     return 'Weight between $minWeight and $maxWeight';
   }
 

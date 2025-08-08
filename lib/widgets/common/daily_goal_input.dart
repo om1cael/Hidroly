@@ -44,14 +44,14 @@ class DailyGoalInput extends StatelessWidget {
               final maxWeight = isMetric.value ? 300 : 665;
 
               if(weight == null) {
-                return AppLocalizations.of(context)!.setupWeightTextFieldInvalidWeight;
+                return AppLocalizations.of(context)!.valueNotSupported;
               }
 
               final isWeightValid =
                 weight >= minWeight && weight <= maxWeight;
 
               if(!isWeightValid) {
-                return AppLocalizations.of(context)!.setupWeightTextFieldInvalidValue(
+                return AppLocalizations.of(context)!.setupWeightTextFieldInvalidWeight(
                   minWeight.toString(),
                   maxWeight.toString(),
                 );

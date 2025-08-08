@@ -27,9 +27,9 @@
     "setupAgeTextFieldLabel": "Your age",
     "setupAgeTextFieldInvalidValue": "Age between 10 and 120",
     "setupWeightTextFieldLabel": "Your weight",
-    "setupWeightTextFieldInvalidWeight": "Value not supported",
-    "setupWeightTextFieldInvalidValue": "Weight between {minWeight} and {maxWeight}",
-    "@setupWeightTextFieldInvalidValue": {
+    "valueNotSupported": "Value not supported",
+    "setupWeightTextFieldInvalidWeight": "Weight between {minWeight} and {maxWeight}",
+    "@setupWeightTextFieldInvalidWeight": {
         "placeholders": {
             "minWeight": {
                 "type": "String",
