@@ -3,6 +3,7 @@ import 'package:hidroly/l10n/app_localizations.dart';
 import 'package:hidroly/provider/day_provider.dart';
 import 'package:hidroly/theme/app_colors.dart';
 import 'package:hidroly/utils/calculate_dailygoal.dart';
+import 'package:hidroly/utils/unit_tools.dart';
 import 'package:hidroly/widgets/common/daily_goal_input.dart';
 import 'package:hidroly/widgets/common/icon_header.dart';
 import 'package:provider/provider.dart';
@@ -29,8 +30,7 @@ class _SettingsUpdateDailyGoalPageState extends State<SettingsUpdateDailyGoalPag
   @override
   void initState() {
     super.initState();
-
-    isMetricNotifier.value = widget.isMetric;
+    isMetricNotifier = ValueNotifier<bool>(widget.isMetric);
   }
 
   @override
@@ -67,6 +67,7 @@ class _SettingsUpdateDailyGoalPageState extends State<SettingsUpdateDailyGoalPag
                       ageController: ageController, 
                       weightController: weightController,
                       isMetric: isMetricNotifier,
+                      showUnitToggleSwitch: false,
                     ),
                   ],
                 ),
@@ -84,7 +85,12 @@ class _SettingsUpdateDailyGoalPageState extends State<SettingsUpdateDailyGoalPag
           if(currentDay == null) return;
 
           final age = int.parse(ageController.text);
-          final weight = int.parse(weightController.text);
+          int weight = int.parse(weightController.text);
+
+          if(!isMetricNotifier.value) {
+            weight = UnitTools.lbToKg(weight);
+          }
+
           final newDailyGoal = CalculateDailyGoal().calculate(age, weight);
 
           dayProvider.update(

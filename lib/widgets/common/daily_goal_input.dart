@@ -8,12 +8,14 @@ class DailyGoalInput extends StatelessWidget {
   final TextEditingController ageController;
   final TextEditingController weightController;
   final ValueNotifier<bool> isMetric;
+  final bool showUnitToggleSwitch;
 
   const DailyGoalInput({
     super.key,
     required this.ageController,
     required this.weightController,
     required this.isMetric,
+    this.showUnitToggleSwitch = true,
   });
 
   @override
@@ -59,23 +61,25 @@ class DailyGoalInput extends StatelessWidget {
               return null;
             },
           ),
-          SizedBox(height: 5,),
-          ToggleSwitch(
-            initialLabelIndex: 0,
-            totalSwitches: 2,
-            activeBgColor: [AppColors.blueAccent],
-            activeFgColor: AppColors.primaryText,
-            inactiveBgColor: AppColors.onBackground,
-            inactiveFgColor: AppColors.secondaryText,
-            minWidth: 100,
-            labels: [
-              AppLocalizations.of(context)!.setupUnitMetric,
-              AppLocalizations.of(context)!.setupUnitImperial,
-            ],
-            onToggle: (index) {
-              isMetric.value = (index == 0);
-            },
-          )
+          if(showUnitToggleSwitch) ...[
+            SizedBox(height: 5,),
+            ToggleSwitch(
+              initialLabelIndex: isMetric.value ? 0 : 1,
+              totalSwitches: 2,
+              activeBgColor: [AppColors.blueAccent],
+              activeFgColor: AppColors.primaryText,
+              inactiveBgColor: AppColors.onBackground,
+              inactiveFgColor: AppColors.secondaryText,
+              minWidth: 100,
+              labels: [
+                AppLocalizations.of(context)!.setupUnitMetric,
+                AppLocalizations.of(context)!.setupUnitImperial,
+              ],
+              onToggle: (index) {
+                isMetric.value = (index == 0);
+              },
+            )
+          ]
         ],
       ),
     );
