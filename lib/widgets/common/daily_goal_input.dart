@@ -39,23 +39,22 @@ class DailyGoalInput extends StatelessWidget {
             label: AppLocalizations.of(context)!.setupWeightTextFieldLabel,
             validator: (value) {
               final weight = int.tryParse(value ?? '');
-              
-              final minWeightInKg = 10;
-              final maxWeightInKg = 300;
 
-              final minWeightInLb = 25;
-              final maxWeightInLb = 665;
+              final minWeight = isMetric.value ? 10 : 25;
+              final maxWeight = isMetric.value ? 300 : 665;
 
               if(weight == null) {
-                return AppLocalizations.of(context)!.setupWeightTextFieldInvalidValue;
+                return AppLocalizations.of(context)!.setupWeightTextFieldInvalidWeight;
               }
 
-              final isWeightValid = isMetric.value
-                ? weight >= minWeightInKg && weight <= maxWeightInKg
-                : weight >= minWeightInLb && weight <= maxWeightInLb;
+              final isWeightValid =
+                weight >= minWeight && weight <= maxWeight;
 
               if(!isWeightValid) {
-                return AppLocalizations.of(context)!.setupWeightTextFieldInvalidValue;
+                return AppLocalizations.of(context)!.setupWeightTextFieldInvalidValue(
+                  minWeight.toString(),
+                  maxWeight.toString(),
+                );
               }
               
               return null;

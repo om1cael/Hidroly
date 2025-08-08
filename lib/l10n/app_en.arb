@@ -27,7 +27,20 @@
     "setupAgeTextFieldLabel": "Your age",
     "setupAgeTextFieldInvalidValue": "Age between 10 and 120",
     "setupWeightTextFieldLabel": "Your weight",
-    "setupWeightTextFieldInvalidValue": "Weight between 30 and 200",
+    "setupWeightTextFieldInvalidWeight": "Value not supported",
+    "setupWeightTextFieldInvalidValue": "Weight between {minWeight} and {maxWeight}",
+    "@setupWeightTextFieldInvalidValue": {
+        "placeholders": {
+            "minWeight": {
+                "type": "String",
+                "example": "30"
+            },
+            "maxWeight": {
+                "type": "String",
+                "example": "200"
+            }
+        }
+    },
     "setupUnitMetric": "kg, ml",
     "setupUnitImperial": "lb, fl oz",
     "homePageTodayAppBarTitle": "Today",
