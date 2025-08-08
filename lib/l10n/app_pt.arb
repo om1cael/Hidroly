@@ -27,7 +27,6 @@
   "setupAgeTextFieldLabel": "Sua idade",
   "setupAgeTextFieldInvalidValue": "Idade entre 10 e 120",
   "setupWeightTextFieldLabel": "Seu peso",
-  "valueNotSupported": "Valor não suportado",
   "setupWeightTextFieldInvalidWeight": "Peso entre {minWeight} e {maxWeight}",
   "@setupWeightTextFieldInvalidWeight": {
       "placeholders": {
@@ -82,5 +81,6 @@
   "sleepScheduleEditFailed": "Não foi possível salvar seu horário de sono",
   "notificationTaskCreationFailed": "Falha ao criar a tarefa de notificação",
   "pageNotAvailableTitle": "Indisponível",
-  "pageNotAvailableDescription": "Desculpa, essa página ainda não tá disponível :("
+  "pageNotAvailableDescription": "Desculpa, essa página ainda não tá disponível :(",
+  "valueNotSupported": "Valor não suportado"
 }
