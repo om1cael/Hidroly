@@ -58,7 +58,9 @@ class _SettingsYouState extends State<SettingsYou> {
           description: dailyGoalDescription,
           onPressed: () async {
             final setNewDailyGoal = await Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => const SettingsUpdateDailyGoalPage()),
+              MaterialPageRoute(builder: (context) => SettingsUpdateDailyGoalPage(
+                isMetric: widget.isMetric,
+              )),
             );
 
             if((setNewDailyGoal != null && setNewDailyGoal) && context.mounted) {

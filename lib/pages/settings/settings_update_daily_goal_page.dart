@@ -8,7 +8,12 @@ import 'package:hidroly/widgets/common/icon_header.dart';
 import 'package:provider/provider.dart';
 
 class SettingsUpdateDailyGoalPage extends StatefulWidget {
-  const SettingsUpdateDailyGoalPage({super.key});
+  final bool isMetric;
+
+  const SettingsUpdateDailyGoalPage({
+    super.key,
+    required this.isMetric,
+  });
 
   @override
   State<SettingsUpdateDailyGoalPage> createState() => _SettingsUpdateDailyGoalPageState();
@@ -18,6 +23,15 @@ class _SettingsUpdateDailyGoalPageState extends State<SettingsUpdateDailyGoalPag
   final ageController = TextEditingController();
   final weightController = TextEditingController();
   final formKey = GlobalKey<FormState>();
+
+  late ValueNotifier<bool> isMetricNotifier;
+
+  @override
+  void initState() {
+    super.initState();
+
+    isMetricNotifier.value = widget.isMetric;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,6 +66,7 @@ class _SettingsUpdateDailyGoalPageState extends State<SettingsUpdateDailyGoalPag
                     DailyGoalInput(
                       ageController: ageController, 
                       weightController: weightController,
+                      isMetric: isMetricNotifier,
                     ),
                   ],
                 ),

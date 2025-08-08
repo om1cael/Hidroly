@@ -7,13 +7,13 @@ import 'package:toggle_switch/toggle_switch.dart';
 class DailyGoalInput extends StatelessWidget {
   final TextEditingController ageController;
   final TextEditingController weightController;
-  final ValueNotifier<bool>? isMetric;
+  final ValueNotifier<bool> isMetric;
 
   const DailyGoalInput({
     super.key,
     required this.ageController,
     required this.weightController,
-    this.isMetric,
+    required this.isMetric,
   });
 
   @override
@@ -37,29 +37,45 @@ class DailyGoalInput extends StatelessWidget {
             label: AppLocalizations.of(context)!.setupWeightTextFieldLabel,
             validator: (value) {
               final weight = int.tryParse(value ?? '');
-              if(weight == null || weight < 30 || weight > 200) return AppLocalizations.of(context)!.setupWeightTextFieldInvalidValue;
+              
+              final minWeightInKg = 10;
+              final maxWeightInKg = 300;
+
+              final minWeightInLb = 25;
+              final maxWeightInLb = 665;
+
+              if(weight == null) {
+                return AppLocalizations.of(context)!.setupWeightTextFieldInvalidValue;
+              }
+
+              final isWeightValid = isMetric.value
+                ? weight >= minWeightInKg && weight <= maxWeightInKg
+                : weight >= minWeightInLb && weight <= maxWeightInLb;
+
+              if(!isWeightValid) {
+                return AppLocalizations.of(context)!.setupWeightTextFieldInvalidValue;
+              }
+              
               return null;
             },
           ),
-          if(isMetric != null) ...[
-            SizedBox(height: 5,),
-            ToggleSwitch(
-              initialLabelIndex: 0,
-              totalSwitches: 2,
-              activeBgColor: [AppColors.blueAccent],
-              activeFgColor: AppColors.primaryText,
-              inactiveBgColor: AppColors.onBackground,
-              inactiveFgColor: AppColors.secondaryText,
-              minWidth: 100,
-              labels: [
-                AppLocalizations.of(context)!.setupUnitMetric,
-                AppLocalizations.of(context)!.setupUnitImperial,
-              ],
-              onToggle: (index) {
-                isMetric!.value = (index == 0);
-              },
-            )
-          ]
+          SizedBox(height: 5,),
+          ToggleSwitch(
+            initialLabelIndex: 0,
+            totalSwitches: 2,
+            activeBgColor: [AppColors.blueAccent],
+            activeFgColor: AppColors.primaryText,
+            inactiveBgColor: AppColors.onBackground,
+            inactiveFgColor: AppColors.secondaryText,
+            minWidth: 100,
+            labels: [
+              AppLocalizations.of(context)!.setupUnitMetric,
+              AppLocalizations.of(context)!.setupUnitImperial,
+            ],
+            onToggle: (index) {
+              isMetric.value = (index == 0);
+            },
+          )
         ],
       ),
     );
