@@ -27,7 +27,19 @@
   "setupAgeTextFieldLabel": "Sua idade",
   "setupAgeTextFieldInvalidValue": "Idade entre 10 e 120",
   "setupWeightTextFieldLabel": "Seu peso",
-  "setupWeightTextFieldInvalidValue": "Peso entre 30 e 200",
+  "setupWeightTextFieldInvalidWeight": "Peso entre {minWeight} e {maxWeight}",
+  "@setupWeightTextFieldInvalidWeight": {
+      "placeholders": {
+          "minWeight": {
+              "type": "String",
+              "example": "30"
+          },
+          "maxWeight": {
+              "type": "String",
+              "example": "200"
+          }
+      }
+  },
   "setupUnitMetric": "kg, ml",
   "setupUnitImperial": "lb, fl oz",
   "homePageTodayAppBarTitle": "Hoje",
@@ -69,5 +81,6 @@
   "sleepScheduleEditFailed": "Não foi possível salvar seu horário de sono",
   "notificationTaskCreationFailed": "Falha ao criar a tarefa de notificação",
   "pageNotAvailableTitle": "Indisponível",
-  "pageNotAvailableDescription": "Desculpa, essa página ainda não tá disponível :("
+  "pageNotAvailableDescription": "Desculpa, essa página ainda não tá disponível :(",
+  "valueNotSupported": "Valor não suportado"
 }

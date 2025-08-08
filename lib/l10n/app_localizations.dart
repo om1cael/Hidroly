@@ -218,11 +218,17 @@ abstract class AppLocalizations {
   /// **'Your weight'**
   String get setupWeightTextFieldLabel;
 
-  /// No description provided for @setupWeightTextFieldInvalidValue.
+  /// No description provided for @valueNotSupported.
   ///
   /// In en, this message translates to:
-  /// **'Weight between 30 and 200'**
-  String get setupWeightTextFieldInvalidValue;
+  /// **'Value not supported'**
+  String get valueNotSupported;
+
+  /// No description provided for @setupWeightTextFieldInvalidWeight.
+  ///
+  /// In en, this message translates to:
+  /// **'Weight between {minWeight} and {maxWeight}'**
+  String setupWeightTextFieldInvalidWeight(String minWeight, String maxWeight);
 
   /// No description provided for @setupUnitMetric.
   ///
