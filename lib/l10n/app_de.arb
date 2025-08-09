@@ -1,0 +1,92 @@
+{
+    "progressCircleOf": "von",
+    "waterAddFailed": "Hoppla! Das Wasser konnte nicht hinzugefügt werden. Nochmal versuchen?",
+    "customCupButton": "Benutzerdefiniert",
+    "customCupDialogTitle": "Benutzerdefiniertes Glas Hinzufügen",
+    "customCupDialogTextFieldAmount": "Menge",
+    "doNotSaveLabel": "Nicht speichern",
+    "textFieldAmountError": "Ungültige Menge",
+    "addAction": "Hinzufügen",
+    "dayLoadingFailed": "Tag nicht gefunden",
+    "bottomNavHomeLabel": "Start",
+    "bottomNavSummaryLabel": "Übersicht",
+    "dayHistoryBottomSheetTitle": "Tagesverlauf",
+    "dayHistoryBottomSheetNoItems": "Hier ist nichts :(",
+    "dayHistoryBottomSheetItemSubtitle": "hinzugefügt um {time}Uhr",
+    "@dayHistoryBottomSheetItemSubtitle": {
+        "placeholders": {
+            "time": {
+                "type": "String",
+                "example": "17:20"
+            }
+        }
+    },
+    "setupWelcomeTitle": "Willkommen",
+    "setupWelcomeSubtitle": "Wir müssen nur noch ein paar Einstellungen vornehmen. Das wird schnell und einfach gehen!",
+    "setupDataText": "Deine Daten werden auf deinem Gerät gespeichert.",
+    "setupAgeTextFieldLabel": "Dein Alter",
+    "setupAgeTextFieldInvalidValue": "Alter zwischen 10 und 120",
+    "setupWeightTextFieldLabel": "Dein Gewicht",
+     "setupWeightTextFieldInvalidWeight": "Gewicht zwischen {minWeight} und {maxWeight}", 
+     "@setupWeightTextFieldInvalidWeight": { 
+         "placeholders": { 
+             "minWeight": { 
+                 "type": "String", 
+                 "example": "30" 
+             }, 
+             "maxWeight": { 
+                 "type": "String", 
+                 "example": "200" 
+             } 
+         } 
+     },
+    "setupFailed": "Ein Fehler ist aufgetreten. Bitte erstelle einen GitHub issue und referenziere den Code 'SE01'.",
+    "setupUnitMetric": "kg, ml",
+    "setupUnitImperial": "lb, fl oz",
+    "homePageTodayAppBarTitle": "Heute",
+    "mlUnit": "ml",
+    "flOzUnit": "fl oz",
+    "kgUnit": "kg",
+    "lbUnit": "lb",
+    "metric": "Metrisch",
+    "imperial": "Imperial",
+    "settingsPageTitle": "Einstellungen",
+    "settingsGeneralSection": "Allgemein",
+    "settingsUnitSystem": "Einheitensystem",
+    "settingsNotifications": "Benachrichtigungen",
+    "settingsSleepSchedule": "Schlafplan bearbeiten",
+    "settingsUpdateDailyGoalAppBar": "Tagesziel aktualisieren",
+    "settingsUpdateDailyGoalTitle": "Aktualisieren",
+    "settingsUpdateDailyGoalDescription": "Hilf uns mit ein paar Details, damit wir dein Tagesziel zu aktualisieren können",
+    "settingsSleepScheduleAppBar": "Schlafplan bearbeiten",
+    "settingsSleepScheduleTitle": "Aktualisieren",
+    "settingsSleepScheduleDescription": "Hilf uns mit ein paar Details, damit wir deinen Schlafplan aktualisieren können",
+    "settingsYouSection": "Du",
+    "settingsAboutSection": "Über",
+    "settingsUpdateYourDailyGoal": "Tagesziel aktualisieren",
+    "settingsSetCustomDailyGoal": "Benutzerdefiniertes Tagesziel setzen",
+    "dailyGoal": "Tagesziel",
+    "updateAction": "Aktualisieren",
+    "cancelAction": "Abbrechen",
+    "editAction": "Bearbeiten",
+    "deleteAction": "Löschen",
+    "settingsFeedback": "Feedback geben",
+    "settingsFeedbackDescription": "Teile uns deine Meinung mit",
+    "settingsContribute": "Beitragen",
+    "settingsContributeDescription": "GitHub repository öffnen",
+    "dailyGoalUpdated": "Tagesziel erfolgreich gespeichert",
+    "notificationSetupTitle": "Benachrichtigungen",
+    "notificationSetupDescription": "Lass uns die Benachrichtigungen an deinen Tag anpassen",
+    "notificationsSettingsWakeUp": "Du wachst auf um",
+    "notificationsSettingsSleep": "Du schläfst ein um",
+    "reminderNotificationTitle": "💧 Zeit etwas zu trinken!",
+    "reminderNotificationBody": "Mache deinen Körper glücklich, trink einen Schluck!",
+    "sleepScheduleEditFailed": "Schlafplan konnte nicht gespeichert werden",
+    "notificationTaskCreationFailed": "Beim erstellen der Benachrichtungsaufgabe ist ein Fehler aufgetreten",
+    "pageNotAvailableTitle": "Nicht verfügbar",
+    "pageNotAvailableDescription": "Entschuldigung, diese Seite ist noch nicht verfügbar :(",
+    "editCustomCupDialogTitle": "Benutzerdefiniertes Glas bearbeiten",
+    "editCustomCupSuccess": "Glas erfolgreich bearbeitet!",
+    "editCustomCupFailed": "Es war nicht möglich dieses Glas zu bearbeiten. Bitte melde dies auf GitHub und referenziere den Code 'ECE01'.",
+    "valueNotSupported": "Wert nicht unterstützt"
+}
