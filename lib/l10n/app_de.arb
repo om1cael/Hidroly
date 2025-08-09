@@ -27,7 +27,19 @@
     "setupAgeTextFieldLabel": "Dein Alter",
     "setupAgeTextFieldInvalidValue": "Alter zwischen 10 und 120",
     "setupWeightTextFieldLabel": "Dein Gewicht",
-    "setupWeightTextFieldInvalidValue": "Gewicht zwischen 30 und 200",
+     "setupWeightTextFieldInvalidWeight": "Gewicht zwischen {minWeight} und {maxWeight}", 
+     "@setupWeightTextFieldInvalidWeight": { 
+         "placeholders": { 
+             "minWeight": { 
+                 "type": "String", 
+                 "example": "30" 
+             }, 
+             "maxWeight": { 
+                 "type": "String", 
+                 "example": "200" 
+             } 
+         } 
+     },
     "setupFailed": "Ein Fehler ist aufgetreten. Bitte erstelle einen GitHub issue und referenziere den Code 'SE01'.",
     "setupUnitMetric": "kg, ml",
     "setupUnitImperial": "lb, fl oz",
@@ -75,5 +87,6 @@
     "pageNotAvailableDescription": "Entschuldigung, diese Seite ist noch nicht verfügbar :(",
     "editCustomCupDialogTitle": "Benutzerdefiniertes Glas bearbeiten",
     "editCustomCupSuccess": "Glas erfolgreich bearbeitet!",
-    "editCustomCupFailed": "Es war nicht möglich dieses Glas zu bearbeiten. Bitte melde dies auf GitHub und referenziere den Code 'ECE01'."
+    "editCustomCupFailed": "Es war nicht möglich dieses Glas zu bearbeiten. Bitte melde dies auf GitHub und referenziere den Code 'ECE01'.",
+    "valueNotSupported": "Wert nicht unterstützt"
 }
