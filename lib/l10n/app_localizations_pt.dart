@@ -73,7 +73,9 @@ class AppLocalizationsPt extends AppLocalizations {
   String get setupWeightTextFieldLabel => 'Seu peso';
 
   @override
-  String get setupWeightTextFieldInvalidValue => 'Peso entre 30 e 200';
+  String setupWeightTextFieldInvalidWeight(String minWeight, String maxWeight) {
+    return 'Peso entre $minWeight e $maxWeight';
+  }
 
   @override
   String get setupFailed =>
@@ -218,7 +220,6 @@ class AppLocalizationsPt extends AppLocalizations {
   String get pageNotAvailableDescription =>
       'Desculpa, essa página ainda não tá disponível :(';
 
-  @override
   String get editCustomCupDialogTitle => 'Editar copo customizado';
 
   @override
@@ -227,4 +228,6 @@ class AppLocalizationsPt extends AppLocalizations {
   @override
   String get editCustomCupFailed =>
       'Não foi possível editar o copo. Por favor, reporte o erro no GitHub e mencione o código \'ECE01\'.';
+
+  String get valueNotSupported => 'Valor não suportado';
 }

@@ -218,11 +218,11 @@ abstract class AppLocalizations {
   /// **'Your weight'**
   String get setupWeightTextFieldLabel;
 
-  /// No description provided for @setupWeightTextFieldInvalidValue.
+  /// No description provided for @setupWeightTextFieldInvalidWeight.
   ///
   /// In en, this message translates to:
-  /// **'Weight between 30 and 200'**
-  String get setupWeightTextFieldInvalidValue;
+  /// **'Weight between {minWeight} and {maxWeight}'**
+  String setupWeightTextFieldInvalidWeight(String minWeight, String maxWeight);
 
   /// No description provided for @setupFailed.
   ///
@@ -511,6 +511,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'It was not possible to edit your cup. Please, report it on GitHub and reference code \'ECE01\'.'**
   String get editCustomCupFailed;
+
+  /// No description provided for @valueNotSupported.
+  ///
+  /// In en, this message translates to:
+  /// **'Value not supported'**
+  String get valueNotSupported;
 }
 
 class _AppLocalizationsDelegate

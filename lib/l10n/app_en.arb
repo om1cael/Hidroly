@@ -27,7 +27,19 @@
     "setupAgeTextFieldLabel": "Your age",
     "setupAgeTextFieldInvalidValue": "Age between 10 and 120",
     "setupWeightTextFieldLabel": "Your weight",
-    "setupWeightTextFieldInvalidValue": "Weight between 30 and 200",
+    "setupWeightTextFieldInvalidWeight": "Weight between {minWeight} and {maxWeight}",
+    "@setupWeightTextFieldInvalidWeight": {
+        "placeholders": {
+            "minWeight": {
+                "type": "String",
+                "example": "30"
+            },
+            "maxWeight": {
+                "type": "String",
+                "example": "200"
+            }
+        }
+    },
     "setupFailed": "An error occurred. Please create a GitHub issue and reference code 'SE01'.",
     "setupUnitMetric": "kg, ml",
     "setupUnitImperial": "lb, fl oz",
@@ -75,5 +87,6 @@
     "pageNotAvailableDescription": "Sorry, this page isn't available yet :(",
     "editCustomCupDialogTitle": "Edit custom cup",
     "editCustomCupSuccess": "Cup edited successfully!",
-    "editCustomCupFailed": "It was not possible to edit your cup. Please, report it on GitHub and reference code 'ECE01'."
+    "editCustomCupFailed": "It was not possible to edit your cup. Please, report it on GitHub and reference code 'ECE01'.",
+    "valueNotSupported": "Value not supported"
 }

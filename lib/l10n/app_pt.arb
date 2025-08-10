@@ -29,6 +29,19 @@
   "setupWeightTextFieldLabel": "Seu peso",
   "setupWeightTextFieldInvalidValue": "Peso entre 30 e 200",
   "setupFailed": "Ocorreu um erro. Por favor, crie uma issue no GitHub e mencione o código 'SE01'.",
+  "setupWeightTextFieldInvalidWeight": "Peso entre {minWeight} e {maxWeight}",
+  "@setupWeightTextFieldInvalidWeight": {
+      "placeholders": {
+          "minWeight": {
+              "type": "String",
+              "example": "30"
+          },
+          "maxWeight": {
+              "type": "String",
+              "example": "200"
+          }
+      }
+  },
   "setupUnitMetric": "kg, ml",
   "setupUnitImperial": "lb, fl oz",
   "homePageTodayAppBarTitle": "Hoje",
@@ -74,4 +87,5 @@
   "editCustomCupDialogTitle": "Editar copo customizado",
   "editCustomCupSuccess": "Copo editado com sucesso!",
   "editCustomCupFailed": "Não foi possível editar o copo. Por favor, reporte o erro no GitHub e mencione o código 'ECE01'."
+  "valueNotSupported": "Valor não suportado"
 }
