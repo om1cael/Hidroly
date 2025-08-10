@@ -127,7 +127,7 @@ class WaterActionButtons extends StatelessWidget {
                         Text(
                           AppLocalizations.of(context)!.deleteAction,
                           style: TextStyle(
-                            color: AppColors.secondaryText
+                            color: Colors.redAccent
                           ),
                         ),
                       ],
