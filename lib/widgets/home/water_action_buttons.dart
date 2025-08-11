@@ -156,6 +156,9 @@ class WaterActionButtons extends StatelessWidget {
                 if(!context.mounted) return;
                 await saveWaterToHistory(context, amount);
               },
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadiusGeometry.circular(12)
+              ),
               avatar: Icon(Icons.water_drop),
               backgroundColor: Theme.of(context).colorScheme.onSurface,
               label: Text(
