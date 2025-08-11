@@ -7,28 +7,28 @@ import 'package:hidroly/provider/daily_history_provider.dart';
 import 'package:hidroly/provider/day_provider.dart';
 import 'package:hidroly/theme/app_colors.dart';
 import 'package:hidroly/utils/unit_tools.dart';
+import 'package:hidroly/widgets/input/number_input_dialog.dart';
 import 'package:provider/provider.dart';
 
 class WaterActionButtons extends StatelessWidget {
-  WaterActionButtons({
+  const WaterActionButtons({
     super.key,
+    required this.formKey,
+    required this.updateDialogTextController,
     required this.dayId,
     required this.isMetric,
   });
 
+  final TextEditingController updateDialogTextController;
+  final GlobalKey<FormState> formKey;
+
   final int dayId;
   final bool isMetric;
-  final _defaultButtons = [WaterButton(amount: 250), WaterButton(amount: 350)];
 
   @override
   Widget build(BuildContext context) {
     final List<WaterButton> customCups = 
       context.watch<CustomCupsProvider>().customCups;
-    
-    List<WaterButton> allButtons = [
-      ..._defaultButtons,
-      ...customCups,
-    ];
 
     return Container(
       height: 45,
@@ -37,33 +37,141 @@ class WaterActionButtons extends StatelessWidget {
         shrinkWrap: true,
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
-          var button = allButtons[index];
+          var cup = customCups[index];
 
-          return ElevatedButton.icon(
-            onPressed: () async {
-              final int amount = button.amount;
-              await addWater(context, amount);
+          return GestureDetector(
+            onLongPressStart: (details) async {
+              final RenderBox overlay = Overlay.of(context).context.findRenderObject() as RenderBox;
+              final Offset tapPosition = details.globalPosition;
 
-              if(!context.mounted) return;
-              await saveWaterToHistory(context, amount);
+              await showMenu(
+                context: context, 
+                items: <PopupMenuEntry<String>>[
+                  PopupMenuItem(
+                    child: Row(
+                      spacing: 12,
+                      children: [
+                        Icon(
+                          Icons.edit,
+                          color: AppColors.primaryText,
+                        ),
+                        Text(
+                          AppLocalizations.of(context)!.editAction,
+                          style: TextStyle(
+                            color: AppColors.secondaryText
+                          )
+                        ),
+                      ],
+                    ),
+                    onTap: () async {
+                      await showDialog(
+                        context: context, 
+                        builder: (context) {
+                          return Form(
+                            key: formKey,
+                            child: NumberInputDialog(
+                              title: AppLocalizations.of(context)!.editCustomCupDialogTitle, 
+                              inputFieldLabel: AppLocalizations.of(context)!.customCupDialogTextFieldAmount, 
+                              actionButtonText: AppLocalizations.of(context)!.updateAction, 
+                              cancelButtonText: AppLocalizations.of(context)!.cancelAction, 
+                              inputFieldValidator: (value) {
+                                double? amount = double.tryParse(value ?? '');
+                                if(amount == null || amount <= 0) return AppLocalizations.of(context)!.textFieldAmountError;
+                                return null;
+                              },
+                              onActionPressed: () async {
+                                if(!formKey.currentState!.validate()) return;
+
+                                double amount = double.parse(updateDialogTextController.text);
+                                int metricAmount = isMetric 
+                                  ? amount.round()
+                                  : UnitTools.flOzToMl(amount);
+                                
+                                WaterButton updatedCup = cup.copyWith(amount: metricAmount);
+                                bool success = await context.read<CustomCupsProvider>()
+                                  .updateCustomCup(updatedCup);
+
+                                if(!context.mounted) return;
+
+                                String message = success
+                                  ? AppLocalizations.of(context)!.editCustomCupSuccess
+                                  : AppLocalizations.of(context)!.editCustomCupFailed;
+                                
+                                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                    content: Text(message)
+                                  )
+                                );
+
+                                Navigator.of(context).pop();
+                                updateDialogTextController.clear();
+                              },
+                              onCancelPressed: () {
+                                Navigator.of(context).pop();
+                                updateDialogTextController.clear();
+                              }, 
+                              textEditingController: updateDialogTextController,
+                            ),
+                          );
+                        }
+                      );
+                    },
+                  ),
+                  PopupMenuItem(
+                    child: Row(
+                      spacing: 12,
+                      children: [
+                        Icon(
+                          Icons.delete_forever,
+                          color: Colors.redAccent,
+                        ),
+                        Text(
+                          AppLocalizations.of(context)!.deleteAction,
+                          style: TextStyle(
+                            color: Colors.redAccent
+                          ),
+                        ),
+                      ],
+                    ),
+                    onTap: () async {
+                      await context.read<CustomCupsProvider>()
+                        .deleteCustomCup(cup.id!);
+                    },
+                  ),
+                ],
+                color: Theme.of(context).colorScheme.onSurface,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadiusGeometry.circular(12)
+                ),
+                position: RelativeRect.fromRect(
+                  tapPosition & Size(40, 40), // Size of the menu
+                  Offset.zero & overlay.size,
+                ),
+              );
             },
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Color(0xff31333A),
+            child: ActionChip(
+              onPressed: () async {
+                final int amount = cup.amount;
+                await addWater(context, amount);
+            
+                if(!context.mounted) return;
+                await saveWaterToHistory(context, amount);
+              },
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadiusGeometry.circular(16)
+                borderRadius: BorderRadiusGeometry.circular(12)
               ),
-            ),
-            icon: Icon(Icons.water_drop),
-            label: Text(
-              UnitTools.getVolumeWithUnit(button.amount, isMetric, context: context),
-              style: TextStyle(
-                color: AppColors.secondaryText
+              avatar: Icon(Icons.water_drop),
+              backgroundColor: Theme.of(context).colorScheme.onSurface,
+              label: Text(
+                UnitTools.getVolumeWithUnit(cup.amount, isMetric, context: context),
+                style: TextStyle(
+                  color: AppColors.secondaryText
+                ),
               ),
             ),
           );
         }, 
         separatorBuilder: (context, index) => SizedBox(width: 10,), 
-        itemCount: allButtons.length
+        itemCount: customCups.length
       ),
     );
   }

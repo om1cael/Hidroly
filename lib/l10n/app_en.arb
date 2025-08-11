@@ -1,86 +1,103 @@
 {
-    "progressCircleOf": "of",
-    "waterAddFailed": "Oops! Couldn't add your water. Try again?",
-    "customCupButton": "Custom",
-    "customCupDialogTitle": "Add Custom Cup",
-    "customCupDialogTextFieldAmount": "Amount",
-    "doNotSaveLabel": "Do not save",
-    "textFieldAmountError": "Invalid Amount",
-    "addAction": "Add",
-    "dayLoadingFailed": "Day not found",
-    "bottomNavHomeLabel": "Home",
-    "bottomNavSummaryLabel": "Summary",
-    "dayHistoryBottomSheetTitle": "Day history",
-    "dayHistoryBottomSheetNoItems": "Nothing here :(",
-    "dayHistoryBottomSheetItemSubtitle": "added {time}",
+  "addAction": "Add",
+  "cancelAction": "Cancel",
+  "deleteAction": "Delete",
+  "doNotSaveLabel": "Do not save",
+  "editAction": "Edit",
+  "updateAction": "Update",
+
+  "bottomNavHomeLabel": "Home",
+  "bottomNavSummaryLabel": "Summary",
+
+  "customCupButton": "Custom",
+  "customCupDialogTextFieldAmount": "Amount",
+  "customCupDialogTitle": "Add Custom Cup",
+  "editCustomCupDialogTitle": "Edit custom cup",
+  "editCustomCupFailed": "It was not possible to edit your cup. Please, report it on GitHub and reference code 'ECE01'.",
+  "editCustomCupSuccess": "Cup edited successfully!",
+
+  "dailyGoal": "Daily goal",
+  "dailyGoalUpdated": "Daily goal saved successfully",
+
+  "dayHistoryBottomSheetItemSubtitle": "added {time}",
     "@dayHistoryBottomSheetItemSubtitle": {
-        "placeholders": {
-            "time": {
-                "type": "String",
-                "example": "17:20"
-            }
-        }
-    },
-    "setupWelcomeTitle": "Welcome",
-    "setupWelcomeSubtitle": "We just need to set things up. It will be quick and easy!",
-    "setupDataText": "Your data is stored on your device.",
-    "setupAgeTextFieldLabel": "Your age",
-    "setupAgeTextFieldInvalidValue": "Age between 10 and 120",
-    "setupWeightTextFieldLabel": "Your weight",
-    "setupWeightTextFieldInvalidWeight": "Weight between {minWeight} and {maxWeight}",
+    "placeholders": {
+      "time": {
+        "type": "String",
+        "example": "17:20"
+      }
+    }
+  },
+  "dayHistoryBottomSheetNoItems": "Nothing here :(",
+  "dayHistoryBottomSheetTitle": "Day history",
+  "dayLoadingFailed": "Day not found",
+
+  "notificationTaskCreationFailed": "Failed to create the notification task",
+  "pageNotAvailableDescription": "Sorry, this page isn't available yet :(",
+  "pageNotAvailableTitle": "Not Available",
+  "setupFailed": "An error occurred. Please create a GitHub issue and reference code 'SE01'.",
+  "sleepScheduleEditFailed": "Could not save your sleep schedule",
+  "textFieldAmountError": "Invalid Amount",
+  "valueNotSupported": "Value not supported",
+  "waterAddFailed": "Oops! Couldn't add your water. Try again?",
+
+  "homePageTodayAppBarTitle": "Today",
+
+  "notificationSetupDescription": "Let's adjust notifications to match your day",
+  "notificationSetupTitle": "Notifications",
+  "notificationsSettingsSleep": "You sleep at",
+  "notificationsSettingsWakeUp": "You wake up at",
+  "reminderNotificationBody": "Keep your body happy, take a sip!",
+  "reminderNotificationTitle": "💧 Time to hydrate!",
+
+  "progressCircleOf": "of",
+
+  "settingsAboutSection": "About",
+  "settingsContribute": "Contribute",
+  "settingsContributeDescription": "Access the GitHub repository",
+  "settingsFeedback": "Send feedback",
+  "settingsFeedbackDescription": "Share your thoughts with us",
+  "settingsGeneralSection": "General",
+  "settingsNotifications": "Notifications",
+  "settingsPageTitle": "Settings",
+  "settingsSetCustomDailyGoal": "Set a custom daily goal",
+  "settingsSleepSchedule": "Edit sleep schedule",
+  "settingsSleepScheduleAppBar": "Edit sleep schedule",
+  "settingsSleepScheduleDescription": "Help us with a few details so we can update your sleep schedule",
+  "settingsSleepScheduleTitle": "Update",
+  "settingsUnitSystem": "Unit system",
+  "settingsUpdateDailyGoalAppBar": "Update Goal",
+  "settingsUpdateDailyGoalDescription": "Help us with a few details so we can update your goal",
+  "settingsUpdateDailyGoalTitle": "Update",
+  "settingsUpdateYourDailyGoal": "Update your daily goal",
+  "settingsYouSection": "You",
+
+  "setupAgeTextFieldInvalidValue": "Age between 10 and 120",
+  "setupAgeTextFieldLabel": "Your age",
+  "setupDataText": "Your data is stored on your device.",
+  "setupUnitImperial": "lb, fl oz",
+  "setupUnitMetric": "kg, ml",
+  "setupWeightTextFieldInvalidWeight": "Weight between {minWeight} and {maxWeight}",
     "@setupWeightTextFieldInvalidWeight": {
-        "placeholders": {
-            "minWeight": {
-                "type": "String",
-                "example": "30"
-            },
-            "maxWeight": {
-                "type": "String",
-                "example": "200"
-            }
-        }
-    },
-    "setupUnitMetric": "kg, ml",
-    "setupUnitImperial": "lb, fl oz",
-    "homePageTodayAppBarTitle": "Today",
-    "mlUnit": "ml",
-    "flOzUnit": "fl oz",
-    "kgUnit": "kg",
-    "lbUnit": "lb",
-    "metric": "Metric",
-    "imperial": "Imperial",
-    "settingsPageTitle": "Settings",
-    "settingsGeneralSection": "General",
-    "settingsUnitSystem": "Unit system",
-    "settingsNotifications": "Notifications",
-    "settingsSleepSchedule": "Edit sleep schedule",
-    "settingsUpdateDailyGoalAppBar": "Update Goal",
-    "settingsUpdateDailyGoalTitle": "Update",
-    "settingsUpdateDailyGoalDescription": "Help us with a few details so we can update your goal",
-    "settingsSleepScheduleAppBar": "Edit sleep schedule",
-    "settingsSleepScheduleTitle": "Update",
-    "settingsSleepScheduleDescription": "Help us with a few details so we can update your sleep schedule",
-    "settingsYouSection": "You",
-    "settingsAboutSection": "About",
-    "settingsUpdateYourDailyGoal": "Update your daily goal",
-    "settingsSetCustomDailyGoal": "Set a custom daily goal",
-    "dailyGoal": "Daily goal",
-    "updateAction": "Update",
-    "cancelAction": "Cancel",
-    "settingsFeedback": "Send feedback",
-    "settingsFeedbackDescription": "Share your thoughts with us",
-    "settingsContribute": "Contribute",
-    "settingsContributeDescription": "Access the GitHub repository",
-    "dailyGoalUpdated": "Daily goal saved successfully",
-    "notificationSetupTitle": "Notifications",
-    "notificationSetupDescription": "Let's adjust notifications to match your day",
-    "notificationsSettingsWakeUp": "You wake up at",
-    "notificationsSettingsSleep": "You sleep at",
-    "reminderNotificationTitle": "💧 Time to hydrate!",
-    "reminderNotificationBody": "Keep your body happy, take a sip!",
-    "sleepScheduleEditFailed": "Could not save your sleep schedule",
-    "notificationTaskCreationFailed": "Failed to create the notification task",
-    "pageNotAvailableTitle": "Not Available",
-    "pageNotAvailableDescription": "Sorry, this page isn't available yet :(",
-    "valueNotSupported": "Value not supported"
+    "placeholders": {
+      "minWeight": {
+        "type": "String",
+        "example": "30"
+      },
+      "maxWeight": {
+        "type": "String",
+        "example": "200"
+      }
+    }
+  },
+  "setupWeightTextFieldLabel": "Your weight",
+  "setupWelcomeSubtitle": "We just need to set things up. It will be quick and easy!",
+  "setupWelcomeTitle": "Welcome",
+
+  "flOzUnit": "fl oz",
+  "imperial": "Imperial",
+  "kgUnit": "kg",
+  "lbUnit": "lb",
+  "metric": "Metric",
+  "mlUnit": "ml"
 }

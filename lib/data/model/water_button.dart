@@ -15,4 +15,11 @@ class WaterButton {
 
     return map;
   }
+
+  WaterButton copyWith({int? id, int? amount}) {
+    return WaterButton(
+      id: id ?? this.id,
+      amount: amount ?? this.amount,
+    );
+  }
 }
