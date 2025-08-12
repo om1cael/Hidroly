@@ -13,8 +13,7 @@ void main() async {
 
   await NotificationService().initialize();
   await Workmanager().initialize(
-    callbackDispatcher,
-    isInDebugMode: false
+    callbackDispatcher
   );
 
   runApp(
