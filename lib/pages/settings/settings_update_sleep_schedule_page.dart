@@ -69,7 +69,7 @@ class _SettingsUpdateSleepSchedulePageState extends State<SettingsUpdateSleepSch
               child: Column(
                 children: [
                   IconHeader(
-                    iconAsset: 'assets/images/water-drop.svg', 
+                    iconAsset: 'assets/images/notifications.svg', 
                     title: AppLocalizations.of(context)!.settingsSleepScheduleTitle, 
                     description: AppLocalizations.of(context)!.settingsSleepScheduleDescription
                   ),

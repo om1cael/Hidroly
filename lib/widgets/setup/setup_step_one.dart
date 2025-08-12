@@ -19,7 +19,7 @@ class SetupStepOne extends StatelessWidget {
       spacing: 32,
       children: [
         IconHeader(
-          iconAsset: 'assets/images/water-drop.svg', 
+          iconAsset: 'assets/images/notifications.svg', 
           title: AppLocalizations.of(context)!.notificationSetupTitle, 
           description: AppLocalizations.of(context)!.notificationSetupDescription,
         ),

@@ -389,7 +389,7 @@ abstract class AppLocalizations {
   /// No description provided for @settingsSleepScheduleTitle.
   ///
   /// In en, this message translates to:
-  /// **'Update'**
+  /// **'Sleep Schedule'**
   String get settingsSleepScheduleTitle;
 
   /// No description provided for @settingsUnitSystem.
@@ -413,7 +413,7 @@ abstract class AppLocalizations {
   /// No description provided for @settingsUpdateDailyGoalTitle.
   ///
   /// In en, this message translates to:
-  /// **'Update'**
+  /// **'Daily Goal'**
   String get settingsUpdateDailyGoalTitle;
 
   /// No description provided for @settingsUpdateYourDailyGoal.

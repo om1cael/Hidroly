@@ -161,7 +161,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'Help us with a few details so we can update your sleep schedule';
 
   @override
-  String get settingsSleepScheduleTitle => 'Update';
+  String get settingsSleepScheduleTitle => 'Sleep Schedule';
 
   @override
   String get settingsUnitSystem => 'Unit system';
@@ -174,7 +174,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'Help us with a few details so we can update your goal';
 
   @override
-  String get settingsUpdateDailyGoalTitle => 'Update';
+  String get settingsUpdateDailyGoalTitle => 'Daily Goal';
 
   @override
   String get settingsUpdateYourDailyGoal => 'Update your daily goal';

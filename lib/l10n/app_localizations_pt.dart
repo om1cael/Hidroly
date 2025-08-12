@@ -164,7 +164,7 @@ class AppLocalizationsPt extends AppLocalizations {
       'A gente só precisa de alguns detalhes para atualizar seu horário de sono';
 
   @override
-  String get settingsSleepScheduleTitle => 'Atualizar';
+  String get settingsSleepScheduleTitle => 'Horário de Sono';
 
   @override
   String get settingsUnitSystem => 'Sistema de unidades';
@@ -177,7 +177,7 @@ class AppLocalizationsPt extends AppLocalizations {
       'A gente só precisa de alguns detalhes para atualizar sua meta';
 
   @override
-  String get settingsUpdateDailyGoalTitle => 'Atualizar';
+  String get settingsUpdateDailyGoalTitle => 'Meta Diária';
 
   @override
   String get settingsUpdateYourDailyGoal => 'Atualizar meta diária';

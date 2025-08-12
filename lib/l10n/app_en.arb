@@ -64,11 +64,11 @@
   "settingsSleepSchedule": "Edit sleep schedule",
   "settingsSleepScheduleAppBar": "Edit sleep schedule",
   "settingsSleepScheduleDescription": "Help us with a few details so we can update your sleep schedule",
-  "settingsSleepScheduleTitle": "Update",
+  "settingsSleepScheduleTitle": "Sleep Schedule",
   "settingsUnitSystem": "Unit system",
   "settingsUpdateDailyGoalAppBar": "Update Goal",
   "settingsUpdateDailyGoalDescription": "Help us with a few details so we can update your goal",
-  "settingsUpdateDailyGoalTitle": "Update",
+  "settingsUpdateDailyGoalTitle": "Daily Goal",
   "settingsUpdateYourDailyGoal": "Update your daily goal",
   "settingsYouSection": "You",
 
