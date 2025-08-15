@@ -103,7 +103,7 @@ class _SettingsUpdateSleepSchedulePageState extends State<SettingsUpdateSleepSch
           if(!context.mounted) return;
           final saved = await NotificationService().registerPeriodicNotificationTask(
             context, 
-            settingsProvider
+            settingsProvider,
           );
 
           if(!saved && context.mounted) {

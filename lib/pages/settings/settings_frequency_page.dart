@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hidroly/data/model/enum/frequency.dart';
 import 'package:hidroly/l10n/app_localizations.dart';
 import 'package:hidroly/provider/settings_provider.dart';
+import 'package:hidroly/services/notification_service.dart';
 import 'package:hidroly/theme/app_colors.dart';
 import 'package:provider/provider.dart';
 
@@ -115,12 +116,20 @@ class _SettingsFrequencyPageState extends State<SettingsFrequencyPage> {
   }
 
   void _updateRadioValue(Frequency? newFrequency, SettingsProvider provider) {
+    int frequencyValue = newFrequency!.frequency;
+
     setState(() {
-      frequency = newFrequency!;
+      frequency = newFrequency;
     });
 
     provider.updateFrequency(
-      newFrequency!.frequency
+      frequencyValue
+    );
+
+    NotificationService().registerPeriodicNotificationTask(
+      context, 
+      provider,
+      minutes: frequencyValue,
     );
   }
 
