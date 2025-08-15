@@ -186,6 +186,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settingsNotificationsSection => 'Notifications';
 
   @override
+  String get settingsNotificationsFrequency => 'Frequency';
+
+  @override
   String get setupAgeTextFieldInvalidValue => 'Age between 10 and 120';
 
   @override

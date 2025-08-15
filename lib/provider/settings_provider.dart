@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hidroly/data/model/enum/frequency.dart';
 import 'package:hidroly/data/model/enum/settings.dart';
 import 'package:hidroly/utils/app_date_utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -7,6 +8,7 @@ class SettingsProvider extends ChangeNotifier {
   final _asyncPrefs = SharedPreferencesAsync();
 
   bool? isMetric;
+  int? frequency;
   TimeOfDay? wakeUpTime;
   TimeOfDay? sleepTime;
 
@@ -18,6 +20,18 @@ class SettingsProvider extends ChangeNotifier {
 
   Future<void> readIsMetric() async {
     isMetric = await _asyncPrefs.getBool('isMetric') ?? true;
+    notifyListeners();
+  }
+
+  Future<void> updateFrequency(int value) async {
+    await _asyncPrefs.setInt('frequency', value);
+    frequency = value;
+    notifyListeners();
+  }
+
+  Future<void> readFrequency() async {
+    final defaultFrequency = Frequency.every2Hours;
+    frequency = await _asyncPrefs.getInt('frequency') ?? defaultFrequency.frequency;
     notifyListeners();
   }
 

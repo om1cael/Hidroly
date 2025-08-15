@@ -434,6 +434,12 @@ abstract class AppLocalizations {
   /// **'Notifications'**
   String get settingsNotificationsSection;
 
+  /// No description provided for @settingsNotificationsFrequency.
+  ///
+  /// In en, this message translates to:
+  /// **'Frequency'**
+  String get settingsNotificationsFrequency;
+
   /// No description provided for @setupAgeTextFieldInvalidValue.
   ///
   /// In en, this message translates to:
