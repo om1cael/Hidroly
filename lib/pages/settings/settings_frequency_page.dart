@@ -13,16 +13,31 @@ class SettingsFrequencyPage extends StatefulWidget {
 }
 
 class _SettingsFrequencyPageState extends State<SettingsFrequencyPage> {
-  Frequency frequency = Frequency.every2Hours;
+  Frequency? frequency;
 
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      final loadedFrequency = await _loadFrequency();
+
+      setState(() {
+        frequency = loadedFrequency;
+      });
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     final provider = context.read<SettingsProvider>();
+
+    if(frequency == null) {
+      return Scaffold(
+        body: Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
+    }
 
     return Scaffold(
       appBar: AppBar(
@@ -104,8 +119,23 @@ class _SettingsFrequencyPageState extends State<SettingsFrequencyPage> {
       frequency = newFrequency!;
     });
 
-    context.read<SettingsProvider>().updateFrequency(
+    provider.updateFrequency(
       newFrequency!.frequency
     );
+  }
+
+  Future<Frequency> _loadFrequency() async {
+    int frequencyValue = await _getFrequency();
+
+    return Frequency
+      .values
+      .where((value) => frequencyValue == value.frequency)
+      .first;
+  }
+
+  Future<int> _getFrequency() async {
+    final provider = context.read<SettingsProvider>();
+    await provider.readFrequency();
+    return provider.frequency!;
   }
 }
