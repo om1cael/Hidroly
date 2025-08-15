@@ -106,10 +106,13 @@ class _SettingsUpdateSleepSchedulePageState extends State<SettingsUpdateSleepSch
             sleepTime.value.minute,
           );
 
+          await settingsProvider.updateFrequency(frequency.value.frequency);
+
           if(!context.mounted) return;
           final saved = await NotificationService().registerPeriodicNotificationTask(
             context, 
             settingsProvider,
+            minutes: frequency.value.frequency,
           );
 
           if(!saved && context.mounted) {

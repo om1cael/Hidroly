@@ -125,12 +125,6 @@ class _SettingsFrequencyPageState extends State<SettingsFrequencyPage> {
     provider.updateFrequency(
       frequencyValue
     );
-
-    NotificationService().registerPeriodicNotificationTask(
-      context, 
-      provider,
-      minutes: frequencyValue,
-    );
   }
 
   Future<Frequency> _loadFrequency() async {

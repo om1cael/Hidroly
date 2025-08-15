@@ -103,7 +103,8 @@ class _SetupPageState extends State<SetupPage> {
           if(!context.mounted) return;
           final notificationTaskCreated = await NotificationService().registerPeriodicNotificationTask(
             context,
-            settingsProvider
+            settingsProvider,
+            minutes: frequency.value.frequency,
           );
 
           if(!notificationTaskCreated && context.mounted) {
@@ -158,6 +159,8 @@ class _SetupPageState extends State<SetupPage> {
       sleepTime.value.hour, 
       sleepTime.value.minute
     );
+
+    await settingsProvider.updateFrequency(frequency.value.frequency);
   }
 
   Future<bool> _createDay(BuildContext context, int dailyGoal) async {
