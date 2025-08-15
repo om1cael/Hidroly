@@ -53,6 +53,8 @@ class _SettingsPageState extends State<SettingsPage> {
                 ),
                 SettingsNotifications(),
                 SizedBox(height: 16,),
+                SettingsNotifications(),
+                SizedBox(height: 16,),
                 SettingsYou(
                   isMetric: isMetric
                 ),
