@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hidroly/data/model/enum/frequency.dart';
 import 'package:hidroly/data/model/enum/settings.dart';
 import 'package:hidroly/l10n/app_localizations.dart';
 import 'package:hidroly/provider/settings_provider.dart';
@@ -22,6 +23,10 @@ class _SettingsUpdateSleepSchedulePageState extends State<SettingsUpdateSleepSch
 
   var sleepTime = ValueNotifier(
     TimeOfDay(hour: 22, minute: 0)
+  );
+
+  var frequency = ValueNotifier(
+    Frequency.every2Hours
   );
 
   @override
@@ -76,7 +81,8 @@ class _SettingsUpdateSleepSchedulePageState extends State<SettingsUpdateSleepSch
                   SizedBox(height: 32,),
                   NotificationsTimeInput(
                     wakeUpTime: wakeUpTime, 
-                    sleepTime: sleepTime
+                    sleepTime: sleepTime,
+                    frequency: frequency,
                   )
                 ],
               ),

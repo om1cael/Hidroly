@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hidroly/data/model/enum/frequency.dart';
 import 'package:hidroly/l10n/app_localizations.dart';
 import 'package:hidroly/widgets/common/icon_header.dart';
 import 'package:hidroly/widgets/common/notifications_time_input.dart';
@@ -8,10 +9,12 @@ class SetupStepOne extends StatelessWidget {
     super.key,
     required this.wakeUpTime,
     required this.sleepTime,
+    required this.frequency,
   });
 
   final ValueNotifier<TimeOfDay> wakeUpTime;
   final ValueNotifier<TimeOfDay> sleepTime;
+  final ValueNotifier<Frequency> frequency;
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +29,7 @@ class SetupStepOne extends StatelessWidget {
         NotificationsTimeInput(
           wakeUpTime: wakeUpTime,
           sleepTime: sleepTime,
+          frequency: frequency,
         )
       ],
     );
