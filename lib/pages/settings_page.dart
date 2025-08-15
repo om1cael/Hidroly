@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hidroly/l10n/app_localizations.dart';
 import 'package:hidroly/widgets/settings/sections/settings_about.dart';
 import 'package:hidroly/widgets/settings/sections/settings_general.dart';
+import 'package:hidroly/widgets/settings/sections/settings_notifications.dart';
 import 'package:hidroly/widgets/settings/sections/settings_you.dart';
 import 'package:hidroly/provider/settings_provider.dart';
 import 'package:hidroly/theme/app_colors.dart';
@@ -50,6 +51,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 SettingsGeneral(
                   isMetric: isMetric,
                 ),
+                SettingsNotifications(),
                 SizedBox(height: 16,),
                 SettingsYou(
                   isMetric: isMetric

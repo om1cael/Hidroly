@@ -27,6 +27,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get updateAction => 'Update';
 
   @override
+  String get manageAction => 'Manage';
+
+  @override
   String get bottomNavHomeLabel => 'Home';
 
   @override
@@ -142,9 +145,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settingsGeneralSection => 'General';
 
   @override
-  String get settingsNotifications => 'Notifications';
-
-  @override
   String get settingsPageTitle => 'Settings';
 
   @override
@@ -181,6 +181,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get settingsYouSection => 'You';
+
+  @override
+  String get settingsNotificationsSection => 'Notifications';
 
   @override
   String get setupAgeTextFieldInvalidValue => 'Age between 10 and 120';

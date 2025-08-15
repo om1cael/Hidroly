@@ -1,15 +1,12 @@
+import 'package:app_settings/app_settings.dart';
 import 'package:flutter/material.dart';
 import 'package:hidroly/l10n/app_localizations.dart';
-import 'package:hidroly/pages/settings/settings_unit_page.dart';
 import 'package:hidroly/theme/app_colors.dart';
 import 'package:hidroly/widgets/settings/settings_text_button.dart';
 
-class SettingsGeneral extends StatelessWidget {
-  final bool isMetric;
-
-  const SettingsGeneral({
+class SettingsNotifications extends StatelessWidget {
+  const SettingsNotifications({
     super.key,
-    required this.isMetric,
   });
 
   @override
@@ -18,20 +15,17 @@ class SettingsGeneral extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          AppLocalizations.of(context)!.settingsGeneralSection,
+          AppLocalizations.of(context)!.settingsNotificationsSection,
           style: TextStyle(
             color: AppColors.primaryText,
             fontWeight: FontWeight.bold,
           ),
         ),
         SettingsTextButton(
-          title: AppLocalizations.of(context)!.settingsUnitSystem,
-          description: isMetric
-              ? AppLocalizations.of(context)!.metric
-              : AppLocalizations.of(context)!.imperial,
+          title: AppLocalizations.of(context)!.manageAction,
           onPressed: () async {
-            await Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => const SettingsUnitPage()),
+            AppSettings.openAppSettings(
+              type: AppSettingsType.notification,
             );
           },
         ),
