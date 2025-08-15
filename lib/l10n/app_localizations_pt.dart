@@ -238,4 +238,19 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get mlUnit => 'ml';
+
+  @override
+  String minutes(String time) {
+    return '$time minutes';
+  }
+
+  @override
+  String hour(String time) {
+    return '$time hour';
+  }
+
+  @override
+  String hours(String time) {
+    return '$time hours';
+  }
 }

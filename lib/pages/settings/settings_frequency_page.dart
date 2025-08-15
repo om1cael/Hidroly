@@ -42,7 +42,7 @@ class _SettingsFrequencyPageState extends State<SettingsFrequencyPage> {
         children: [
           RadioListTile(
             title: Text(
-              '15 minutes',
+              AppLocalizations.of(context)!.minutes('15'),
               style: Theme.of(context).textTheme.bodyLarge,
             ),
             value: Frequency.every15Minutes, 
@@ -51,7 +51,7 @@ class _SettingsFrequencyPageState extends State<SettingsFrequencyPage> {
           ),
           RadioListTile(
             title: Text(
-              '30 minutes',
+              AppLocalizations.of(context)!.minutes('30'),
               style: Theme.of(context).textTheme.bodyLarge,
             ),
             value: Frequency.every30Minutes, 
@@ -60,7 +60,7 @@ class _SettingsFrequencyPageState extends State<SettingsFrequencyPage> {
           ),
           RadioListTile(
             title: Text(
-              '1 hour',
+              AppLocalizations.of(context)!.hour('1'),
               style: Theme.of(context).textTheme.bodyLarge,
             ),
             value: Frequency.everyHour, 
@@ -69,7 +69,7 @@ class _SettingsFrequencyPageState extends State<SettingsFrequencyPage> {
           ),
           RadioListTile(
             title: Text(
-              '2 hours',
+              AppLocalizations.of(context)!.hours('2'),
               style: Theme.of(context).textTheme.bodyLarge,
             ),
             value: Frequency.every2Hours, 
@@ -78,7 +78,7 @@ class _SettingsFrequencyPageState extends State<SettingsFrequencyPage> {
           ),
           RadioListTile(
             title: Text(
-              '3 hours',
+              AppLocalizations.of(context)!.hours('3'),
               style: Theme.of(context).textTheme.bodyLarge,
             ),
             value: Frequency.every3Hours, 
@@ -87,10 +87,10 @@ class _SettingsFrequencyPageState extends State<SettingsFrequencyPage> {
           ),
           RadioListTile(
             title: Text(
-              '4 hours',
+              AppLocalizations.of(context)!.hours('4'),
               style: Theme.of(context).textTheme.bodyLarge,
             ),
-            value: Frequency.every4Hours, 
+            value: Frequency.every4Hours,
             groupValue: frequency,
             onChanged: (val) => _updateRadioValue(val, provider),
           ),

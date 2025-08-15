@@ -529,6 +529,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'ml'**
   String get mlUnit;
+
+  /// No description provided for @minutes.
+  ///
+  /// In en, this message translates to:
+  /// **'{time} minutes'**
+  String minutes(String time);
+
+  /// No description provided for @hour.
+  ///
+  /// In en, this message translates to:
+  /// **'{time} hour'**
+  String hour(String time);
+
+  /// No description provided for @hours.
+  ///
+  /// In en, this message translates to:
+  /// **'{time} hours'**
+  String hours(String time);
 }
 
 class _AppLocalizationsDelegate

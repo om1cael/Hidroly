@@ -101,5 +101,33 @@
   "kgUnit": "kg",
   "lbUnit": "lb",
   "metric": "Metric",
-  "mlUnit": "ml"
+  "mlUnit": "ml",
+
+  "minutes": "{time} minutes",
+  "@minutes": {
+    "placeholders": {
+      "time": {
+        "type": "String",
+        "example": "15"
+      }
+    }
+  },
+  "hour": "{time} hour",
+  "@hour": {
+    "placeholders": {
+      "time": {
+        "type": "String",
+        "example": "1"
+      }
+    }
+  },
+  "hours": "{time} hours",
+  "@hours": {
+    "placeholders": {
+      "time": {
+        "type": "String",
+        "example": "2"
+      }
+    }
+  }
 }
