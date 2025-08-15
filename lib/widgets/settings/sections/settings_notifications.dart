@@ -32,42 +32,46 @@ class _SettingsNotificationsState extends State<SettingsNotifications> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          AppLocalizations.of(context)!.settingsNotificationsSection,
-          style: TextStyle(
-            color: AppColors.primaryText,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        SettingsTextButton(
-          title: AppLocalizations.of(context)!.manageAction,
-          onPressed: () async {
-            AppSettings.openAppSettings(
-              type: AppSettingsType.notification,
-            );
-          },
-        ),
-        SettingsTextButton(
-          title: AppLocalizations.of(context)!.settingsNotificationsFrequency,
-          description: TimeUtils.getTimeString(frequency, context),
-          onPressed: () async {
-            Navigator.of(context).push(
-              MaterialPageRoute(builder: (_) => const SettingsFrequencyPage()),
-            );
-          },
-        ),
-        SettingsTextButton(
-          title: AppLocalizations.of(context)!.settingsSleepSchedule,
-          onPressed: () {
-            Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => const SettingsUpdateSleepSchedulePage())
-            );
-          }
-        ),
-      ],
+    return Consumer<SettingsProvider>(
+      builder: (context, provider, child) {
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              AppLocalizations.of(context)!.settingsNotificationsSection,
+              style: TextStyle(
+                color: AppColors.primaryText,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SettingsTextButton(
+              title: AppLocalizations.of(context)!.manageAction,
+              onPressed: () async {
+                AppSettings.openAppSettings(
+                  type: AppSettingsType.notification,
+                );
+              },
+            ),
+            SettingsTextButton(
+              title: AppLocalizations.of(context)!.settingsNotificationsFrequency,
+              description: TimeUtils.getTimeString(provider.frequency!, context),
+              onPressed: () async {
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (_) => const SettingsFrequencyPage()),
+                );
+              },
+            ),
+            SettingsTextButton(
+              title: AppLocalizations.of(context)!.settingsSleepSchedule,
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => const SettingsUpdateSleepSchedulePage())
+                );
+              }
+            ),
+          ],
+        );
+      }
     );
   }
 
