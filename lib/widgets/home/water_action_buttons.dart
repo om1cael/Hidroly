@@ -53,12 +53,12 @@ class WaterActionButtons extends StatelessWidget {
                       children: [
                         Icon(
                           Icons.edit,
-                          color: AppColors.primaryText,
+                          color: Theme.of(context).iconTheme.color
                         ),
                         Text(
                           AppLocalizations.of(context)!.editAction,
                           style: TextStyle(
-                            color: AppColors.secondaryText
+                            color: Theme.of(context).textTheme.labelMedium!.color
                           )
                         ),
                       ],
