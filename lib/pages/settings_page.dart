@@ -52,11 +52,11 @@ class _SettingsPageState extends State<SettingsPage> {
                   isMetric: isMetric,
                 ),
                 SizedBox(height: 16,),
-                SettingsNotifications(),
-                SizedBox(height: 16,),
                 SettingsYou(
                   isMetric: isMetric
                 ),
+                SizedBox(height: 16,),
+                SettingsNotifications(),
                 SizedBox(height: 16,),
                 SettingsAbout(),
               ],
