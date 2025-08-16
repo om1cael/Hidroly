@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hidroly/l10n/app_localizations.dart';
+import 'package:hidroly/pages/settings/settings_theme_page.dart';
 import 'package:hidroly/pages/settings/settings_unit_page.dart';
 import 'package:hidroly/widgets/settings/settings_text_button.dart';
 
@@ -22,6 +23,15 @@ class SettingsGeneral extends StatelessWidget {
             color: Theme.of(context).textTheme.labelLarge!.color,
             fontWeight: FontWeight.bold,
           ),
+        ),
+        SettingsTextButton(
+          title: 'Theme',
+          description: 'System',
+          onPressed: () async {
+            await Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => const SettingsThemePage()),
+            );
+          },
         ),
         SettingsTextButton(
           title: AppLocalizations.of(context)!.settingsUnitSystem,
