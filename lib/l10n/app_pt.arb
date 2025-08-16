@@ -1,73 +1,103 @@
 {
-  "progressCircleOf": "de",
-  "waterAddFailed": "Ops! Não foi possível adicionar sua água. Tentar novamente?",
-  "customCupButton": "Personalizado",
-  "customCupDialogTitle": "Adicionar Copo Personalizado",
-  "customCupDialogTextFieldAmount": "Quantidade",
-  "doNotSaveLabel": "Não salvar",
-  "textFieldAmountError": "Quantidade inválida",
   "addAction": "Adicionar",
-  "dayLoadingFailed": "Dia não encontrado",
+  "cancelAction": "Cancelar",
+  "deleteAction": "Deletar",
+  "doNotSaveLabel": "Não salvar",
+  "editAction": "Editar",
+  "updateAction": "Atualizar",
+
   "bottomNavHomeLabel": "Home",
   "bottomNavSummaryLabel": "Resumo",
-  "dayHistoryBottomSheetTitle": "Histórico do dia",
-  "dayHistoryBottomSheetNoItems": "Nada por aqui :(",
+
+  "customCupButton": "Personalizado",
+  "customCupDialogTextFieldAmount": "Quantidade",
+  "customCupDialogTitle": "Adicionar copo personalizado",
+  "editCustomCupDialogTitle": "Editar copo personalizado",
+  "editCustomCupFailed": "Não foi possível editar o copo. Por favor, reporte o erro no GitHub e mencione o código 'ECE01'.",
+  "editCustomCupSuccess": "Copo editado com sucesso!",
+
+  "dailyGoal": "Meta diária",
+  "dailyGoalUpdated": "Meta diária salva com sucesso",
+
   "dayHistoryBottomSheetItemSubtitle": "adicionado às {time}",
-  "@dayHistoryBottomSheetItemSubtitle": {
-  "placeholders": {
-    "time": {
-      "type": "String",
-      "example": "17:20"
+    "@dayHistoryBottomSheetItemSubtitle": {
+    "placeholders": {
+      "time": {
+        "type": "String",
+        "example": "17:20"
+      }
     }
-  }
   },
-  "setupWelcomeTitle": "Bem-vindo",
-  "setupWelcomeSubtitle": "Só precisamos configurar algumas coisas. Vai ser rápido e fácil!",
-  "setupDataText": "Seus dados são armazenados no seu dispositivo.",
-  "setupAgeTextFieldLabel": "Sua idade",
-  "setupAgeTextFieldInvalidValue": "Idade entre 10 e 120",
-  "setupWeightTextFieldLabel": "Seu peso",
-  "setupWeightTextFieldInvalidValue": "Peso entre 30 e 200",
-  "setupUnitMetric": "kg, ml",
-  "setupUnitImperial": "lb, fl oz",
+  "dayHistoryBottomSheetNoItems": "Nada por aqui :(",
+  "dayHistoryBottomSheetTitle": "Histórico do dia",
+  "dayLoadingFailed": "Dia não encontrado",
+
+  "notificationTaskCreationFailed": "Falha ao criar a tarefa de notificação",
+  "pageNotAvailableDescription": "Desculpa, essa página ainda não está disponível :(",
+  "pageNotAvailableTitle": "Indisponível",
+  "setupFailed": "Ocorreu um erro. Por favor, crie uma issue no GitHub e mencione o código 'SE01'.",
+  "sleepScheduleEditFailed": "Não foi possível salvar seu horário de sono",
+  "textFieldAmountError": "Quantidade inválida",
+  "valueNotSupported": "Valor não suportado",
+  "waterAddFailed": "Ops! Não foi possível adicionar sua água. Tentar novamente?",
+
   "homePageTodayAppBarTitle": "Hoje",
-  "mlUnit": "ml",
+
+  "notificationSetupDescription": "Vamos ajustar as notificações para combinar com seu dia",
+  "notificationSetupTitle": "Notificações",
+  "notificationsSettingsSleep": "Você dorme às",
+  "notificationsSettingsWakeUp": "Você acorda às",
+  "reminderNotificationBody": "Cuide do seu corpo, tome um gole!",
+  "reminderNotificationTitle": "💧 Hora de se hidratar!",
+
+  "progressCircleOf": "de",
+
+  "settingsAboutSection": "Sobre",
+  "settingsContribute": "Contribuir",
+  "settingsContributeDescription": "Acesse o repositório no GitHub",
+  "settingsFeedback": "Enviar feedback",
+  "settingsFeedbackDescription": "Compartilhe suas ideias com a gente",
+  "settingsGeneralSection": "Geral",
+  "settingsNotifications": "Notificações",
+  "settingsPageTitle": "Configurações",
+  "settingsSetCustomDailyGoal": "Definir meta diária personalizada",
+  "settingsSleepSchedule": "Editar horário de sono",
+  "settingsSleepScheduleAppBar": "Editar horário de sono",
+  "settingsSleepScheduleDescription": "A gente só precisa de alguns detalhes para atualizar seu horário de sono",
+  "settingsSleepScheduleTitle": "Horário de Sono",
+  "settingsUnitSystem": "Sistema de unidades",
+  "settingsUpdateDailyGoalAppBar": "Atualizar meta",
+  "settingsUpdateDailyGoalDescription": "A gente só precisa de alguns detalhes para atualizar sua meta",
+  "settingsUpdateDailyGoalTitle": "Meta Diária",
+  "settingsUpdateYourDailyGoal": "Atualizar meta diária",
+  "settingsYouSection": "Você",
+
+  "setupAgeTextFieldInvalidValue": "Idade entre 10 e 120",
+  "setupAgeTextFieldLabel": "Sua idade",
+  "setupDataText": "Seus dados são armazenados no seu dispositivo.",
+  "setupUnitImperial": "lb, fl oz",
+  "setupUnitMetric": "kg, ml",
+  "setupWeightTextFieldInvalidWeight": "Peso entre {minWeight} e {maxWeight}",
+    "@setupWeightTextFieldInvalidWeight": {
+    "placeholders": {
+      "minWeight": {
+        "type": "String",
+        "example": "30"
+      },
+      "maxWeight": {
+        "type": "String",
+        "example": "200"
+      }
+    }
+  },
+  "setupWeightTextFieldLabel": "Seu peso",
+  "setupWelcomeSubtitle": "Só precisamos configurar algumas coisas. Vai ser rápido e fácil!",
+  "setupWelcomeTitle": "Bem-vindo",
+
   "flOzUnit": "fl oz",
+  "imperial": "Imperial",
   "kgUnit": "kg",
   "lbUnit": "lb",
   "metric": "Métrico",
-  "imperial": "Imperial",
-  "settingsPageTitle": "Configurações",
-  "settingsGeneralSection": "Geral",
-  "settingsUnitSystem": "Sistema de unidades",
-  "settingsNotifications": "Notificações",
-  "settingsSleepSchedule": "Editar horário de sono",
-  "settingsUpdateDailyGoalAppBar": "Atualizar Meta",
-  "settingsUpdateDailyGoalTitle": "Atualizar",
-  "settingsUpdateDailyGoalDescription": "A gente só precisa de alguns detalhes para atualizar sua meta",
-  "settingsSleepScheduleAppBar": "Editar horário de sono",
-  "settingsSleepScheduleTitle": "Atualizar",
-  "settingsSleepScheduleDescription": "A gente só precisa de alguns detalhes para atualizar seu horário de sono",
-  "settingsYouSection": "Você",
-  "settingsAboutSection": "Sobre",
-  "settingsUpdateYourDailyGoal": "Atualizar meta diária",
-  "settingsSetCustomDailyGoal": "Definir meta diária personalizada",
-  "dailyGoal": "Meta diária",
-  "updateAction": "Atualizar",
-  "cancelAction": "Cancelar",
-  "settingsFeedback": "Enviar feedback",
-  "settingsFeedbackDescription": "Compartilhe suas ideias com a gente",
-  "settingsContribute": "Contribuir",
-  "settingsContributeDescription": "Acesse o repositório no GitHub",
-  "dailyGoalUpdated": "Meta diária salva com sucesso",
-  "notificationSetupTitle": "Notificações",
-  "notificationSetupDescription": "Vamos ajustar as notificações para combinar com seu dia",
-  "notificationsSettingsWakeUp": "Você acorda às",
-  "notificationsSettingsSleep": "Você dorme às",
-  "reminderNotificationTitle": "💧 Hora de se hidratar!",
-  "reminderNotificationBody": "Cuide do seu corpo, tome um gole!",
-  "sleepScheduleEditFailed": "Não foi possível salvar seu horário de sono",
-  "notificationTaskCreationFailed": "Falha ao criar a tarefa de notificação",
-  "pageNotAvailableTitle": "Indisponível",
-  "pageNotAvailableDescription": "Desculpa, essa página ainda não tá disponível :("
+  "mlUnit": "ml"
 }

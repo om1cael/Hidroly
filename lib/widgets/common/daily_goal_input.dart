@@ -7,13 +7,15 @@ import 'package:toggle_switch/toggle_switch.dart';
 class DailyGoalInput extends StatelessWidget {
   final TextEditingController ageController;
   final TextEditingController weightController;
-  final ValueNotifier<bool>? isMetric;
+  final ValueNotifier<bool> isMetric;
+  final bool showUnitToggleSwitch;
 
   const DailyGoalInput({
     super.key,
     required this.ageController,
     required this.weightController,
-    this.isMetric,
+    required this.isMetric,
+    this.showUnitToggleSwitch = true,
   });
 
   @override
@@ -37,14 +39,42 @@ class DailyGoalInput extends StatelessWidget {
             label: AppLocalizations.of(context)!.setupWeightTextFieldLabel,
             validator: (value) {
               final weight = int.tryParse(value ?? '');
-              if(weight == null || weight < 30 || weight > 200) return AppLocalizations.of(context)!.setupWeightTextFieldInvalidValue;
+
+              final minWeightKg = 10;
+              final minWeightLb = 25;
+              
+              final maxWeightKg = 300;
+              final maxWeightLb = 665;
+
+              final minWeight = isMetric.value 
+                ? minWeightKg 
+                : minWeightLb;
+              
+              final maxWeight = isMetric.value 
+                ? maxWeightKg 
+                : maxWeightLb;
+
+              if(weight == null) {
+                return AppLocalizations.of(context)!.valueNotSupported;
+              }
+
+              final isWeightValid =
+                weight >= minWeight && weight <= maxWeight;
+
+              if(!isWeightValid) {
+                return AppLocalizations.of(context)!.setupWeightTextFieldInvalidWeight(
+                  minWeight.toString(),
+                  maxWeight.toString(),
+                );
+              }
+              
               return null;
             },
           ),
-          if(isMetric != null) ...[
+          if(showUnitToggleSwitch) ...[
             SizedBox(height: 5,),
             ToggleSwitch(
-              initialLabelIndex: 0,
+              initialLabelIndex: isMetric.value ? 0 : 1,
               totalSwitches: 2,
               activeBgColor: [AppColors.blueAccent],
               activeFgColor: AppColors.primaryText,
@@ -56,7 +86,7 @@ class DailyGoalInput extends StatelessWidget {
                 AppLocalizations.of(context)!.setupUnitImperial,
               ],
               onToggle: (index) {
-                isMetric!.value = (index == 0);
+                isMetric.value = (index == 0);
               },
             )
           ]

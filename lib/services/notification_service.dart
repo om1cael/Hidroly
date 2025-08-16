@@ -51,7 +51,8 @@ class NotificationService {
 
   Future<bool> registerPeriodicNotificationTask(
     BuildContext context, 
-    SettingsProvider settingsProvider
+    SettingsProvider settingsProvider,
+    {int minutes = 120}
   ) async {
     if(settingsProvider.wakeUpTime == null || settingsProvider.sleepTime == null) {
       return false;
@@ -75,7 +76,7 @@ class NotificationService {
     await workManager.registerPeriodicTask(
       'notification',
       'notificationTask',
-      frequency: Duration(hours: 1),
+      frequency: Duration(minutes: minutes),
       inputData: {
         Settings.wakeUpTime.value: formattedWakeUpTime,
         Settings.sleepTime.value: formattedSleepTime,

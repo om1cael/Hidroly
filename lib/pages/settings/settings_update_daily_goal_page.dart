@@ -3,12 +3,18 @@ import 'package:hidroly/l10n/app_localizations.dart';
 import 'package:hidroly/provider/day_provider.dart';
 import 'package:hidroly/theme/app_colors.dart';
 import 'package:hidroly/utils/calculate_dailygoal.dart';
+import 'package:hidroly/utils/unit_tools.dart';
 import 'package:hidroly/widgets/common/daily_goal_input.dart';
 import 'package:hidroly/widgets/common/icon_header.dart';
 import 'package:provider/provider.dart';
 
 class SettingsUpdateDailyGoalPage extends StatefulWidget {
-  const SettingsUpdateDailyGoalPage({super.key});
+  final bool isMetric;
+
+  const SettingsUpdateDailyGoalPage({
+    super.key,
+    required this.isMetric,
+  });
 
   @override
   State<SettingsUpdateDailyGoalPage> createState() => _SettingsUpdateDailyGoalPageState();
@@ -18,6 +24,14 @@ class _SettingsUpdateDailyGoalPageState extends State<SettingsUpdateDailyGoalPag
   final ageController = TextEditingController();
   final weightController = TextEditingController();
   final formKey = GlobalKey<FormState>();
+
+  late ValueNotifier<bool> isMetricNotifier;
+
+  @override
+  void initState() {
+    super.initState();
+    isMetricNotifier = ValueNotifier<bool>(widget.isMetric);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,6 +66,8 @@ class _SettingsUpdateDailyGoalPageState extends State<SettingsUpdateDailyGoalPag
                     DailyGoalInput(
                       ageController: ageController, 
                       weightController: weightController,
+                      isMetric: isMetricNotifier,
+                      showUnitToggleSwitch: false,
                     ),
                   ],
                 ),
@@ -69,7 +85,12 @@ class _SettingsUpdateDailyGoalPageState extends State<SettingsUpdateDailyGoalPag
           if(currentDay == null) return;
 
           final age = int.parse(ageController.text);
-          final weight = int.parse(weightController.text);
+          int weight = int.parse(weightController.text);
+
+          if(!isMetricNotifier.value) {
+            weight = UnitTools.lbToKg(weight);
+          }
+
           final newDailyGoal = CalculateDailyGoal().calculate(age, weight);
 
           dayProvider.update(

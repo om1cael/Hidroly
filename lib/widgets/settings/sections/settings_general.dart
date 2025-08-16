@@ -1,4 +1,3 @@
-import 'package:app_settings/app_settings.dart';
 import 'package:flutter/material.dart';
 import 'package:hidroly/l10n/app_localizations.dart';
 import 'package:hidroly/pages/settings/settings_unit_page.dart';
@@ -33,14 +32,6 @@ class SettingsGeneral extends StatelessWidget {
           onPressed: () async {
             await Navigator.of(context).push(
               MaterialPageRoute(builder: (context) => const SettingsUnitPage()),
-            );
-          },
-        ),
-        SettingsTextButton(
-          title: AppLocalizations.of(context)!.settingsNotifications,
-          onPressed: () async {
-            AppSettings.openAppSettings(
-              type: AppSettingsType.notification,
             );
           },
         ),
