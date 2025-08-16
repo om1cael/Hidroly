@@ -43,7 +43,7 @@ class _SettingsFrequencyPageState extends State<SettingsFrequencyPage> {
           }, 
           icon: Icon(
             Icons.arrow_back,
-            color: AppColors.primaryText,
+            color: Theme.of(context).iconTheme.color,
           ),
         ),
         titleSpacing: 0,

@@ -45,7 +45,7 @@ class _SettingsUpdateDailyGoalPageState extends State<SettingsUpdateDailyGoalPag
           }, 
           icon: Icon(
             Icons.arrow_back,
-            color: AppColors.primaryText,
+            color: Theme.of(context).iconTheme.color,
           ),
         ),
       ),
