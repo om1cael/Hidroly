@@ -4,7 +4,6 @@ import 'package:hidroly/data/model/enum/settings.dart';
 import 'package:hidroly/l10n/app_localizations.dart';
 import 'package:hidroly/provider/settings_provider.dart';
 import 'package:hidroly/services/notification_service.dart';
-import 'package:hidroly/theme/app_colors.dart';
 import 'package:hidroly/widgets/common/icon_header.dart';
 import 'package:hidroly/widgets/common/notifications_time_input.dart';
 import 'package:provider/provider.dart';
