@@ -17,6 +17,8 @@ class SettingsUpdateSleepSchedulePage extends StatefulWidget {
 }
 
 class _SettingsUpdateSleepSchedulePageState extends State<SettingsUpdateSleepSchedulePage> {
+  bool isLoading = true;
+
   var wakeUpTime = ValueNotifier(
     TimeOfDay(hour: 6, minute: 0)
   );
@@ -48,12 +50,21 @@ class _SettingsUpdateSleepSchedulePageState extends State<SettingsUpdateSleepSch
         wakeUpTime.value = provider.wakeUpTime!;
         sleepTime.value = provider.sleepTime!;
         frequency.value = Frequency.getFrequency(provider.frequency!);
+        isLoading = false;
       });
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    if(isLoading) {
+      return Scaffold(
+        body: Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: Text(AppLocalizations.of(context)!.settingsSleepScheduleAppBar),
