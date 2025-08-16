@@ -35,10 +35,7 @@ class FormNumberInputField extends StatelessWidget {
       children: [
         Text(
           label,
-          style: TextStyle(
-            color: Color(0xffBEC0C5),
-            fontSize: 16,
-          ),
+          style: Theme.of(context).textTheme.labelLarge
         ),
         TextFormField(
           controller: controller,

@@ -42,8 +42,12 @@ class LightTheme {
           color: AppColorsLight.primaryText,
           fontSize: 24,
         ),
+        labelLarge: TextStyle(
+          color: AppColors.onBackground,
+          fontSize: 16,
+        ),
       ),
-      iconTheme: IconThemeData(color: AppColorsLight.icon),
+      iconTheme: IconThemeData(color: AppColors.onBackground),
       inputDecorationTheme: InputDecorationTheme(
         fillColor: AppColorsLight.onBackground,
         filled: true,

@@ -42,8 +42,12 @@ class DarkTheme {
           color: AppColors.primaryText,
           fontSize: 24,
         ),
+        labelLarge: TextStyle(
+          color: AppColors.onBackground,
+          fontSize: 16,
+        ),
       ),
-      iconTheme: IconThemeData(color: AppColors.icon),
+      iconTheme: IconThemeData(color: AppColors.onBackground),
       inputDecorationTheme: InputDecorationTheme(
         fillColor: AppColors.onBackground,
         filled: true,

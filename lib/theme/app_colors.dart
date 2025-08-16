@@ -7,7 +7,6 @@ class AppColors {
   static const secondaryText = Color(0xffBEC0C5);
   static const blueAccent = Color(0xff8097D3);
   static const unselectedItem = Color.fromARGB(255, 129, 134, 154);
-  static const icon = Color(0xff1B1E26);
 }
 
 class AppColorsLight {
@@ -17,5 +16,4 @@ class AppColorsLight {
   static const secondaryText = Color(0xff5A5C65);
   static const blueAccent = Color(0xff5A75C2);
   static const unselectedItem = Color(0xff9BA0B5);
-  static const icon = Color(0xffFFFFFF);
 }
