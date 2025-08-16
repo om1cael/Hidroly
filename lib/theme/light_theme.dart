@@ -46,6 +46,10 @@ class LightTheme {
           color: AppColors.onBackground,
           fontSize: 16,
         ),
+        labelMedium: TextStyle(
+          color: AppColorsLight.secondaryText,
+          fontSize: 14,
+        ),
       ),
       iconTheme: IconThemeData(color: AppColorsLight.primaryText),
       inputDecorationTheme: InputDecorationTheme(
