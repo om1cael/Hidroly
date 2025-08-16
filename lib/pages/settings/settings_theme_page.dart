@@ -14,7 +14,7 @@ class _SettingsThemePageState extends State<SettingsThemePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.settingsUnitSystem),
+        title: Text(AppLocalizations.of(context)!.settingsTheme),
         leading: IconButton(
           onPressed: () {
             Navigator.of(context).pop();
