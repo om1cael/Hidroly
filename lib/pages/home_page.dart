@@ -9,7 +9,6 @@ import 'package:hidroly/provider/daily_history_provider.dart';
 import 'package:hidroly/provider/day_provider.dart';
 import 'package:hidroly/provider/settings_provider.dart';
 import 'package:hidroly/theme/app_colors.dart';
-import 'package:hidroly/theme/app_theme.dart';
 import 'package:hidroly/utils/app_date_utils.dart';
 import 'package:hidroly/widgets/home/daily_history_bottom_sheet.dart';
 import 'package:hidroly/widgets/home/fab_custom_cup.dart';
@@ -108,11 +107,17 @@ class _HomePageState extends State<HomePage> {
             lastDate: latestDate.date.toLocal(),
             builder:(context, child) {
               return Theme(
-                data: Theme.of(context).copyWith(
-                  colorScheme: ColorScheme.dark(
-                    primary: AppColors.blueAccent,
-                    onSurface: AppColors.primaryText,
-                  ),
+                data: Theme.of(context).brightness == Brightness.dark 
+                  ? Theme.of(context).copyWith(
+                      colorScheme: ColorScheme.dark(
+                        primary: AppColors.blueAccent,
+                        onSurface: AppColors.primaryText,
+                      ))
+                  : Theme.of(context).copyWith(
+                      colorScheme: ColorScheme.light(
+                        primary: AppColorsLight.blueAccent,
+                        onSurface: AppColorsLight.primaryText,
+                    ),
                 ),
                 child: child!,
               );
