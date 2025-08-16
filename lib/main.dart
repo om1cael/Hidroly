@@ -32,7 +32,7 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
-      theme: AppTheme.darkTheme,
+      theme: AppTheme.lightTheme,
       home: const HomePage(),
     );
   }
