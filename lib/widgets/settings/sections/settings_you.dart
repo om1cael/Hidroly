@@ -3,7 +3,6 @@ import 'package:hidroly/data/model/day.dart';
 import 'package:hidroly/l10n/app_localizations.dart';
 import 'package:hidroly/pages/settings/settings_update_daily_goal_page.dart';
 import 'package:hidroly/provider/day_provider.dart';
-import 'package:hidroly/theme/app_colors.dart';
 import 'package:hidroly/utils/unit_tools.dart';
 import 'package:hidroly/widgets/input/number_input_dialog.dart';
 import 'package:hidroly/widgets/settings/settings_text_button.dart';
@@ -48,7 +47,7 @@ class _SettingsYouState extends State<SettingsYou> {
         Text(
           AppLocalizations.of(context)!.settingsYouSection,
           style: TextStyle(
-            color: AppColors.primaryText,
+            color: Theme.of(context).textTheme.labelLarge!.color,
             fontWeight: FontWeight.bold,
           ),
         ),

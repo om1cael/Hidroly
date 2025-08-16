@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:hidroly/data/model/enum/frequency.dart';
 import 'package:hidroly/l10n/app_localizations.dart';
 import 'package:hidroly/pages/settings/settings_frequency_page.dart';
-import 'package:hidroly/theme/app_colors.dart';
 import 'package:hidroly/utils/time_utils.dart';
 
 class NotificationsTimeInput extends StatefulWidget {
@@ -25,7 +24,7 @@ class _NotificationsTimeInputState extends State<NotificationsTimeInput> {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: AppColors.onBackground,
+      color: Theme.of(context).colorScheme.onSurface,
       child: Column(
         children: [
           ListTile(
@@ -39,7 +38,6 @@ class _NotificationsTimeInputState extends State<NotificationsTimeInput> {
               style: Theme.of(context).textTheme.bodySmall,
             ),
             trailing: Icon(Icons.arrow_forward),
-            iconColor: AppColors.primaryText,
             onTap: () async {
               final newTime = await showTimePicker(
                 context: context, 
@@ -64,7 +62,6 @@ class _NotificationsTimeInputState extends State<NotificationsTimeInput> {
               style: Theme.of(context).textTheme.bodySmall,
             ),
             trailing: Icon(Icons.arrow_forward),
-            iconColor: AppColors.primaryText,
             onTap: () async {
               final newTime = await showTimePicker(
                 context: context, 
@@ -89,7 +86,6 @@ class _NotificationsTimeInputState extends State<NotificationsTimeInput> {
               style: Theme.of(context).textTheme.bodySmall,
             ),
             trailing: Icon(Icons.arrow_forward),
-            iconColor: AppColors.primaryText,
             onTap: () async {
               await Navigator.of(context).push(
                 MaterialPageRoute(builder: (_) => SettingsFrequencyPage(frequency: widget.frequency,)),

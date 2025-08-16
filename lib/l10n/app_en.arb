@@ -75,6 +75,7 @@
   "settingsNotificationsManageDescription": "Toggle notifications",
   "settingsNotificationsSleepScheduleDescription": "Wake/sleep times & frequency",
   "settingsNotificationsFrequency": "Frequency",
+  "settingsTheme": "Theme",
 
   "setupAgeTextFieldInvalidValue": "Age between 10 and 120",
   "setupAgeTextFieldLabel": "Your age",
@@ -131,5 +132,9 @@
         "example": "2"
       }
     }
-  }
+  },
+
+  "system": "System",
+  "light": "Light",
+  "dark": "Dark"
 }

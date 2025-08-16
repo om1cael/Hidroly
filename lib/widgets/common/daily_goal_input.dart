@@ -76,10 +76,10 @@ class DailyGoalInput extends StatelessWidget {
             ToggleSwitch(
               initialLabelIndex: isMetric.value ? 0 : 1,
               totalSwitches: 2,
-              activeBgColor: [AppColors.blueAccent],
+              activeBgColor: [Theme.of(context).primaryColor],
               activeFgColor: AppColors.primaryText,
-              inactiveBgColor: AppColors.onBackground,
-              inactiveFgColor: AppColors.secondaryText,
+              inactiveBgColor: Theme.of(context).colorScheme.onSurface,
+              inactiveFgColor: Theme.of(context).colorScheme.primary,
               minWidth: 100,
               labels: [
                 AppLocalizations.of(context)!.setupUnitMetric,

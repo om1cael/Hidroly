@@ -38,7 +38,7 @@ class DailyHistoryBottomSheet extends StatelessWidget {
                         onPressed: () => Navigator.of(context).pop(), 
                         icon: Icon(
                           Icons.arrow_back,
-                          color: AppColors.primaryText,
+                          color: Theme.of(context).iconTheme.color,
                         ),
                         style: IconButton.styleFrom(
                           backgroundColor: Colors.transparent,
@@ -47,7 +47,7 @@ class DailyHistoryBottomSheet extends StatelessWidget {
                       Text(
                         AppLocalizations.of(context)!.dayHistoryBottomSheetTitle,
                         style: TextStyle(
-                          color: AppColors.primaryText
+                          color: Theme.of(context).textTheme.bodyLarge!.color
                         ),
                       )
                     ],
@@ -144,11 +144,11 @@ class HistoryItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: AppColors.onBackground,
+      color: Theme.of(context).colorScheme.onSurface,
       child: ListTile(
         leading: Icon(
           Icons.local_drink,
-          color: AppColors.blueAccent,
+          color: Theme.of(context).primaryColor
         ),
         title: Text(
           UnitTools.getVolumeWithUnit(history.amount, isMetric, context: context),
