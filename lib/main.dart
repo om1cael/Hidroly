@@ -50,7 +50,7 @@ class MainApp extends StatelessWidget {
       supportedLocales: AppLocalizations.supportedLocales,
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
-      home: const SetupPage(),
+      home: const HomePage(),
     );
   }
 }
