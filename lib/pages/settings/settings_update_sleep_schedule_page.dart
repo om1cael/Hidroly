@@ -47,7 +47,7 @@ class _SettingsUpdateSleepSchedulePageState extends State<SettingsUpdateSleepSch
       setState(() {
         wakeUpTime.value = provider.wakeUpTime!;
         sleepTime.value = provider.sleepTime!;
-        frequency.value = _getCurrentFrequency(provider.frequency!);
+        frequency.value = Frequency.getFrequency(provider.frequency!);
       });
     }
   }
@@ -134,12 +134,5 @@ class _SettingsUpdateSleepSchedulePageState extends State<SettingsUpdateSleepSch
         child: Icon(Icons.done), 
       ),
     );
-  }
-
-  Frequency _getCurrentFrequency(int frequency) {
-    return Frequency
-      .values
-      .where((value) => frequency == value.frequency)
-      .first;
   }
 }

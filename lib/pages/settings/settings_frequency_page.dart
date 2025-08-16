@@ -117,11 +117,7 @@ class _SettingsFrequencyPageState extends State<SettingsFrequencyPage> {
 
   Future<Frequency> _loadFrequency() async {
     int frequencyValue = await _getFrequency();
-
-    return Frequency
-      .values
-      .where((value) => frequencyValue == value.frequency)
-      .first;
+    return Frequency.getFrequency(frequencyValue);
   }
 
   Future<int> _getFrequency() async {

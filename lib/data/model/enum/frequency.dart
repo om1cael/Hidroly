@@ -8,4 +8,11 @@ enum Frequency {
 
   const Frequency(this.frequency);
   final int frequency;
+
+  static Frequency getFrequency(int minutes) {
+    return Frequency
+      .values
+      .where((value) => value.frequency == minutes)
+      .first;
+  }
 }
