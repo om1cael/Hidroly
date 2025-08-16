@@ -34,14 +34,6 @@ class _SettingsFrequencyPageState extends State<SettingsFrequencyPage> {
   Widget build(BuildContext context) {
     final provider = context.read<SettingsProvider>();
 
-    if(widget.frequency.value == null) {
-      return Scaffold(
-        body: Center(
-          child: CircularProgressIndicator(),
-        ),
-      );
-    }
-
     return Scaffold(
       appBar: AppBar(
         title: Text(AppLocalizations.of(context)!.settingsNotificationsFrequency),
