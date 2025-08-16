@@ -70,7 +70,7 @@ class _SetupPageState extends State<SetupPage> {
           ),
         ),
       ),
-      floatingActionButton: IconButton.filled(
+      floatingActionButton: FloatingActionButton(
         onPressed: () async {
           if(!formKey.currentState!.validate()) return;
           if(setupStep == 0) {
@@ -132,13 +132,9 @@ class _SetupPageState extends State<SetupPage> {
             MaterialPageRoute(builder: (context) => HomePage()),
           );
         },
-        icon: Icon(
+        child: Icon(
           Icons.arrow_forward,
         ),
-        style: IconButton.styleFrom(
-          backgroundColor: Colors.white,
-        ),
-        padding: EdgeInsets.all(18),
       ),
     );
   }
