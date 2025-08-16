@@ -4,6 +4,9 @@ Hidroly is a friendly, open-source Flutter app that helps you stay hydrated by t
 </p>
 <div align="center">
   <div>
+    <a href="https://f-droid.org/en/packages/com.om1cael.hidroly/">
+      <img src="https://f-droid.org/badge/get-it-on.svg" width="200">
+    </a>
     <a href="https://apt.izzysoft.de/fdroid/index/apk/com.om1cael.hidroly">
       <img src=".github/assets/IzzyOnDroid.png" width="200">
     </a>
