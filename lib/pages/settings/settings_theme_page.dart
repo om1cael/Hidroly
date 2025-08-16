@@ -30,7 +30,7 @@ class _SettingsThemePageState extends State<SettingsThemePage> {
         children: [
           RadioListTile(
             title: Text(
-              'System',
+              AppLocalizations.of(context)!.system,
               style: Theme.of(context).textTheme.bodyLarge,
             ),
             value: ThemeMode.system, 
@@ -39,7 +39,7 @@ class _SettingsThemePageState extends State<SettingsThemePage> {
           ),
           RadioListTile(
             title: Text(
-              'Light',
+              AppLocalizations.of(context)!.light,
               style: Theme.of(context).textTheme.bodyLarge,
             ),
             value: ThemeMode.light, 
@@ -48,7 +48,7 @@ class _SettingsThemePageState extends State<SettingsThemePage> {
           ),
           RadioListTile(
             title: Text(
-              'Dark',
+              AppLocalizations.of(context)!.dark,
               style: Theme.of(context).textTheme.bodyLarge,
             ),
             value: ThemeMode.dark, 
