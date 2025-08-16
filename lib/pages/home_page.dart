@@ -148,7 +148,7 @@ class _HomePageState extends State<HomePage> {
                 context: context,
                 todayText: AppLocalizations.of(context)!.homePageTodayAppBarTitle
               ),
-              style: AppTheme.darkTheme.appBarTheme.titleTextStyle,
+              style: Theme.of(context).appBarTheme.titleTextStyle,
             ),
             Icon(
               Icons.arrow_drop_down
@@ -170,8 +170,8 @@ class _HomePageState extends State<HomePage> {
             );
           }, 
           icon: Icon(
-            Icons.history, 
-            color: AppColors.primaryText,
+            Icons.history,
+            color: Theme.of(context).iconTheme.color,
           ),
           style: IconButton.styleFrom(
             backgroundColor: Colors.transparent,
@@ -186,8 +186,8 @@ class _HomePageState extends State<HomePage> {
             );
           }, 
           icon: Icon(
-            Icons.settings, 
-            color: AppColors.primaryText,
+            Icons.settings,
+            color: Theme.of(context).iconTheme.color,
           ),
           style: IconButton.styleFrom(
             backgroundColor: Colors.transparent,

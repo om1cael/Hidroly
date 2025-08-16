@@ -51,7 +51,7 @@ class DarkTheme {
           fontSize: 14,
         ),
       ),
-      iconTheme: IconThemeData(color: AppColors.onBackground),
+      iconTheme: IconThemeData(color: AppColors.primaryText),
       inputDecorationTheme: InputDecorationTheme(
         fillColor: AppColors.onBackground,
         filled: true,
