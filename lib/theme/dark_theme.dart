@@ -48,7 +48,7 @@ class DarkTheme {
         ),
         labelMedium: TextStyle(
           color: AppColors.secondaryText,
-          fontSize: 12,
+          fontSize: 13,
         ),
       ),
       iconTheme: IconThemeData(color: AppColors.primaryText),

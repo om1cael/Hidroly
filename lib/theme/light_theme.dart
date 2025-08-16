@@ -48,7 +48,7 @@ class LightTheme {
         ),
         labelMedium: TextStyle(
           color: AppColorsLight.secondaryText,
-          fontSize: 12,
+          fontSize: 13,
         ),
       ),
       iconTheme: IconThemeData(color: AppColorsLight.primaryText),

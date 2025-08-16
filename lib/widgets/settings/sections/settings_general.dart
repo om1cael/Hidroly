@@ -20,7 +20,7 @@ class SettingsGeneral extends StatelessWidget {
         Text(
           AppLocalizations.of(context)!.settingsGeneralSection,
           style: TextStyle(
-            color: AppColors.primaryText,
+            color: Theme.of(context).textTheme.labelLarge!.color,
             fontWeight: FontWeight.bold,
           ),
         ),

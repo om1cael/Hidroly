@@ -17,7 +17,7 @@ class SettingsAbout extends StatelessWidget {
         Text(
           AppLocalizations.of(context)!.settingsAboutSection,
           style: TextStyle(
-            color: AppColors.primaryText,
+            color: Theme.of(context).textTheme.labelLarge!.color,
             fontWeight: FontWeight.bold,
           ),
         ),

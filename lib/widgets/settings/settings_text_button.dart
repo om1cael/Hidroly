@@ -36,9 +36,7 @@ class SettingsTextButton extends StatelessWidget {
             if (description != null)
               Text(
                 description!,
-                style: TextStyle(
-                  color: AppColors.secondaryText,
-                ),
+                style: Theme.of(context).textTheme.labelMedium
               ),
           ],
         ),

@@ -48,7 +48,7 @@ class _SettingsYouState extends State<SettingsYou> {
         Text(
           AppLocalizations.of(context)!.settingsYouSection,
           style: TextStyle(
-            color: AppColors.primaryText,
+            color: Theme.of(context).textTheme.labelLarge!.color,
             fontWeight: FontWeight.bold,
           ),
         ),

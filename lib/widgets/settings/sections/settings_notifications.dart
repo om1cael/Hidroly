@@ -23,7 +23,7 @@ class _SettingsNotificationsState extends State<SettingsNotifications> {
         Text(
           AppLocalizations.of(context)!.settingsNotificationsSection,
           style: TextStyle(
-            color: AppColors.primaryText,
+            color: Theme.of(context).textTheme.labelLarge!.color,
             fontWeight: FontWeight.bold,
           ),
         ),
