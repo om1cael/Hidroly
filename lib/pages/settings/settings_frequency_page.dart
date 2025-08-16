@@ -2,20 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:hidroly/data/model/enum/frequency.dart';
 import 'package:hidroly/l10n/app_localizations.dart';
 import 'package:hidroly/provider/settings_provider.dart';
-import 'package:hidroly/services/notification_service.dart';
 import 'package:hidroly/theme/app_colors.dart';
 import 'package:provider/provider.dart';
 
 class SettingsFrequencyPage extends StatefulWidget {
-  const SettingsFrequencyPage({super.key});
+  final ValueNotifier<Frequency> frequency;
+
+  const SettingsFrequencyPage({
+    super.key,
+    required this.frequency,
+  });
 
   @override
   State<SettingsFrequencyPage> createState() => _SettingsFrequencyPageState();
 }
 
 class _SettingsFrequencyPageState extends State<SettingsFrequencyPage> {
-  Frequency? frequency;
-
   @override
   void initState() {
     super.initState();
@@ -23,7 +25,7 @@ class _SettingsFrequencyPageState extends State<SettingsFrequencyPage> {
       final loadedFrequency = await _loadFrequency();
 
       setState(() {
-        frequency = loadedFrequency;
+        widget.frequency.value = loadedFrequency;
       });
     });
   }
@@ -32,7 +34,7 @@ class _SettingsFrequencyPageState extends State<SettingsFrequencyPage> {
   Widget build(BuildContext context) {
     final provider = context.read<SettingsProvider>();
 
-    if(frequency == null) {
+    if(widget.frequency.value == null) {
       return Scaffold(
         body: Center(
           child: CircularProgressIndicator(),
@@ -62,7 +64,7 @@ class _SettingsFrequencyPageState extends State<SettingsFrequencyPage> {
               style: Theme.of(context).textTheme.bodyLarge,
             ),
             value: Frequency.every15Minutes, 
-            groupValue: frequency,
+            groupValue: widget.frequency.value,
             onChanged: (val) => _updateRadioValue(val, provider),
           ),
           RadioListTile(
@@ -71,7 +73,7 @@ class _SettingsFrequencyPageState extends State<SettingsFrequencyPage> {
               style: Theme.of(context).textTheme.bodyLarge,
             ),
             value: Frequency.every30Minutes, 
-            groupValue: frequency,
+            groupValue: widget.frequency.value,
             onChanged: (val) => _updateRadioValue(val, provider),
           ),
           RadioListTile(
@@ -80,7 +82,7 @@ class _SettingsFrequencyPageState extends State<SettingsFrequencyPage> {
               style: Theme.of(context).textTheme.bodyLarge,
             ),
             value: Frequency.everyHour, 
-            groupValue: frequency,
+            groupValue: widget.frequency.value,
             onChanged: (val) => _updateRadioValue(val, provider),
           ),
           RadioListTile(
@@ -89,7 +91,7 @@ class _SettingsFrequencyPageState extends State<SettingsFrequencyPage> {
               style: Theme.of(context).textTheme.bodyLarge,
             ),
             value: Frequency.every2Hours, 
-            groupValue: frequency,
+            groupValue: widget.frequency.value,
             onChanged: (val) => _updateRadioValue(val, provider),
           ),
           RadioListTile(
@@ -98,7 +100,7 @@ class _SettingsFrequencyPageState extends State<SettingsFrequencyPage> {
               style: Theme.of(context).textTheme.bodyLarge,
             ),
             value: Frequency.every3Hours, 
-            groupValue: frequency,
+            groupValue: widget.frequency.value,
             onChanged: (val) => _updateRadioValue(val, provider),
           ),
           RadioListTile(
@@ -107,7 +109,7 @@ class _SettingsFrequencyPageState extends State<SettingsFrequencyPage> {
               style: Theme.of(context).textTheme.bodyLarge,
             ),
             value: Frequency.every4Hours,
-            groupValue: frequency,
+            groupValue: widget.frequency.value,
             onChanged: (val) => _updateRadioValue(val, provider),
           ),
         ],
@@ -116,15 +118,9 @@ class _SettingsFrequencyPageState extends State<SettingsFrequencyPage> {
   }
 
   void _updateRadioValue(Frequency? newFrequency, SettingsProvider provider) {
-    int frequencyValue = newFrequency!.frequency;
-
     setState(() {
-      frequency = newFrequency;
+      widget.frequency.value = newFrequency!;
     });
-
-    provider.updateFrequency(
-      frequencyValue
-    );
   }
 
   Future<Frequency> _loadFrequency() async {

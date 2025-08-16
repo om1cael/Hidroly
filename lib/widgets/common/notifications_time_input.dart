@@ -91,9 +91,13 @@ class _NotificationsTimeInputState extends State<NotificationsTimeInput> {
             trailing: Icon(Icons.arrow_forward),
             iconColor: AppColors.primaryText,
             onTap: () async {
-              Navigator.of(context).push(
-                MaterialPageRoute(builder: (_) => const SettingsFrequencyPage()),
+              await Navigator.of(context).push(
+                MaterialPageRoute(builder: (_) => SettingsFrequencyPage(frequency: widget.frequency,)),
               );
+
+              setState(() {
+                widget.frequency.value;
+              });       
             },
           ),
         ],
