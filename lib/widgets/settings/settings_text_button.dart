@@ -29,7 +29,10 @@ class SettingsTextButton extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(title),
+            Text(
+              title,
+              style: Theme.of(context).textTheme.labelLarge,
+            ),
             if (description != null)
               Text(
                 description!,

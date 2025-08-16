@@ -44,11 +44,11 @@ class DarkTheme {
         ),
         labelLarge: TextStyle(
           color: AppColors.primaryText,
-          fontSize: 16,
+          fontSize: 14,
         ),
         labelMedium: TextStyle(
           color: AppColors.secondaryText,
-          fontSize: 14,
+          fontSize: 12,
         ),
       ),
       iconTheme: IconThemeData(color: AppColors.primaryText),

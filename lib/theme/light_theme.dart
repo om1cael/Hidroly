@@ -43,12 +43,12 @@ class LightTheme {
           fontSize: 24,
         ),
         labelLarge: TextStyle(
-          color: AppColors.onBackground,
-          fontSize: 16,
+          color: AppColorsLight.primaryText,
+          fontSize: 14,
         ),
         labelMedium: TextStyle(
           color: AppColorsLight.secondaryText,
-          fontSize: 14,
+          fontSize: 12,
         ),
       ),
       iconTheme: IconThemeData(color: AppColorsLight.primaryText),

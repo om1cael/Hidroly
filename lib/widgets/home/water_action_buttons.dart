@@ -5,7 +5,6 @@ import 'package:hidroly/l10n/app_localizations.dart';
 import 'package:hidroly/provider/custom_cups_provider.dart';
 import 'package:hidroly/provider/daily_history_provider.dart';
 import 'package:hidroly/provider/day_provider.dart';
-import 'package:hidroly/theme/app_colors.dart';
 import 'package:hidroly/utils/unit_tools.dart';
 import 'package:hidroly/widgets/input/number_input_dialog.dart';
 import 'package:provider/provider.dart';
