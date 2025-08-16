@@ -43,7 +43,7 @@ class DarkTheme {
           fontSize: 24,
         ),
         labelLarge: TextStyle(
-          color: AppColors.onBackground,
+          color: AppColors.primaryText,
           fontSize: 16,
         ),
       ),
