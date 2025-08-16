@@ -27,6 +27,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get updateAction => 'Update';
 
   @override
+  String get manageAction => 'Manage';
+
+  @override
   String get bottomNavHomeLabel => 'Home';
 
   @override
@@ -142,9 +145,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settingsGeneralSection => 'General';
 
   @override
-  String get settingsNotifications => 'Notifications';
-
-  @override
   String get settingsPageTitle => 'Settings';
 
   @override
@@ -181,6 +181,19 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get settingsYouSection => 'You';
+
+  @override
+  String get settingsNotificationsSection => 'Notifications';
+
+  @override
+  String get settingsNotificationsManageDescription => 'Toggle notifications';
+
+  @override
+  String get settingsNotificationsSleepScheduleDescription =>
+      'Wake/sleep times & frequency';
+
+  @override
+  String get settingsNotificationsFrequency => 'Frequency';
 
   @override
   String get setupAgeTextFieldInvalidValue => 'Age between 10 and 120';
@@ -229,4 +242,19 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get mlUnit => 'ml';
+
+  @override
+  String minutes(String time) {
+    return '$time minutes';
+  }
+
+  @override
+  String hour(String time) {
+    return '$time hour';
+  }
+
+  @override
+  String hours(String time) {
+    return '$time hours';
+  }
 }

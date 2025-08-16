@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hidroly/data/model/enum/frequency.dart';
 import 'package:hidroly/data/model/enum/settings.dart';
 import 'package:hidroly/l10n/app_localizations.dart';
 import 'package:hidroly/provider/settings_provider.dart';
@@ -16,12 +17,18 @@ class SettingsUpdateSleepSchedulePage extends StatefulWidget {
 }
 
 class _SettingsUpdateSleepSchedulePageState extends State<SettingsUpdateSleepSchedulePage> {
+  bool isLoading = true;
+
   var wakeUpTime = ValueNotifier(
     TimeOfDay(hour: 6, minute: 0)
   );
 
   var sleepTime = ValueNotifier(
     TimeOfDay(hour: 22, minute: 0)
+  );
+
+  var frequency = ValueNotifier(
+    Frequency.every2Hours
   );
 
   @override
@@ -36,17 +43,28 @@ class _SettingsUpdateSleepSchedulePageState extends State<SettingsUpdateSleepSch
     final provider = context.read<SettingsProvider>();
     await provider.readTime(Settings.wakeUpTime);
     await provider.readTime(Settings.sleepTime);
+    await provider.readFrequency();
 
-    if(provider.wakeUpTime != null && provider.sleepTime != null) {
+    if(provider.wakeUpTime != null && provider.sleepTime != null && provider.frequency != null) {
       setState(() {
         wakeUpTime.value = provider.wakeUpTime!;
         sleepTime.value = provider.sleepTime!;
+        frequency.value = Frequency.getFrequency(provider.frequency!);
+        isLoading = false;
       });
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    if(isLoading) {
+      return Scaffold(
+        body: Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: Text(AppLocalizations.of(context)!.settingsSleepScheduleAppBar),
@@ -76,7 +94,8 @@ class _SettingsUpdateSleepSchedulePageState extends State<SettingsUpdateSleepSch
                   SizedBox(height: 32,),
                   NotificationsTimeInput(
                     wakeUpTime: wakeUpTime, 
-                    sleepTime: sleepTime
+                    sleepTime: sleepTime,
+                    frequency: frequency,
                   )
                 ],
               ),
@@ -100,10 +119,13 @@ class _SettingsUpdateSleepSchedulePageState extends State<SettingsUpdateSleepSch
             sleepTime.value.minute,
           );
 
+          await settingsProvider.updateFrequency(frequency.value.frequency);
+
           if(!context.mounted) return;
           final saved = await NotificationService().registerPeriodicNotificationTask(
             context, 
-            settingsProvider
+            settingsProvider,
+            minutes: frequency.value.frequency,
           );
 
           if(!saved && context.mounted) {

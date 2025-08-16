@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:hidroly/data/model/enum/frequency.dart';
 import 'package:hidroly/data/model/enum/settings.dart';
 import 'package:hidroly/data/model/water_button.dart';
 import 'package:hidroly/provider/custom_cups_provider.dart';
@@ -32,6 +33,7 @@ class _SetupPageState extends State<SetupPage> {
   final ValueNotifier<bool> isMetric = ValueNotifier(true);
   final wakeUpTime = ValueNotifier(TimeOfDay(hour: 6, minute: 0));
   final sleepTime = ValueNotifier(TimeOfDay(hour: 22, minute: 0));
+  final frequency = ValueNotifier(Frequency.every2Hours);
 
   int setupStep = 0;
 
@@ -61,7 +63,8 @@ class _SetupPageState extends State<SetupPage> {
                 )
                 : SetupStepOne(
                   wakeUpTime: wakeUpTime, 
-                  sleepTime: sleepTime
+                  sleepTime: sleepTime,
+                  frequency: frequency,
                 ),
             ),
           ),
@@ -100,7 +103,8 @@ class _SetupPageState extends State<SetupPage> {
           if(!context.mounted) return;
           final notificationTaskCreated = await NotificationService().registerPeriodicNotificationTask(
             context,
-            settingsProvider
+            settingsProvider,
+            minutes: frequency.value.frequency,
           );
 
           if(!notificationTaskCreated && context.mounted) {
@@ -155,6 +159,8 @@ class _SetupPageState extends State<SetupPage> {
       sleepTime.value.hour, 
       sleepTime.value.minute
     );
+
+    await settingsProvider.updateFrequency(frequency.value.frequency);
   }
 
   Future<bool> _createDay(BuildContext context, int dailyGoal) async {

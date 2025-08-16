@@ -134,6 +134,12 @@ abstract class AppLocalizations {
   /// **'Update'**
   String get updateAction;
 
+  /// No description provided for @manageAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Manage'**
+  String get manageAction;
+
   /// No description provided for @bottomNavHomeLabel.
   ///
   /// In en, this message translates to:
@@ -350,12 +356,6 @@ abstract class AppLocalizations {
   /// **'General'**
   String get settingsGeneralSection;
 
-  /// No description provided for @settingsNotifications.
-  ///
-  /// In en, this message translates to:
-  /// **'Notifications'**
-  String get settingsNotifications;
-
   /// No description provided for @settingsPageTitle.
   ///
   /// In en, this message translates to:
@@ -427,6 +427,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'You'**
   String get settingsYouSection;
+
+  /// No description provided for @settingsNotificationsSection.
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications'**
+  String get settingsNotificationsSection;
+
+  /// No description provided for @settingsNotificationsManageDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Toggle notifications'**
+  String get settingsNotificationsManageDescription;
+
+  /// No description provided for @settingsNotificationsSleepScheduleDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Wake/sleep times & frequency'**
+  String get settingsNotificationsSleepScheduleDescription;
+
+  /// No description provided for @settingsNotificationsFrequency.
+  ///
+  /// In en, this message translates to:
+  /// **'Frequency'**
+  String get settingsNotificationsFrequency;
 
   /// No description provided for @setupAgeTextFieldInvalidValue.
   ///
@@ -517,6 +541,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'ml'**
   String get mlUnit;
+
+  /// No description provided for @minutes.
+  ///
+  /// In en, this message translates to:
+  /// **'{time} minutes'**
+  String minutes(String time);
+
+  /// No description provided for @hour.
+  ///
+  /// In en, this message translates to:
+  /// **'{time} hour'**
+  String hour(String time);
+
+  /// No description provided for @hours.
+  ///
+  /// In en, this message translates to:
+  /// **'{time} hours'**
+  String hours(String time);
 }
 
 class _AppLocalizationsDelegate

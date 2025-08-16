@@ -5,6 +5,7 @@
   "doNotSaveLabel": "Do not save",
   "editAction": "Edit",
   "updateAction": "Update",
+  "manageAction": "Manage",
 
   "bottomNavHomeLabel": "Home",
   "bottomNavSummaryLabel": "Summary",
@@ -58,7 +59,6 @@
   "settingsFeedback": "Send feedback",
   "settingsFeedbackDescription": "Share your thoughts with us",
   "settingsGeneralSection": "General",
-  "settingsNotifications": "Notifications",
   "settingsPageTitle": "Settings",
   "settingsSetCustomDailyGoal": "Set a custom daily goal",
   "settingsSleepSchedule": "Edit sleep schedule",
@@ -71,6 +71,10 @@
   "settingsUpdateDailyGoalTitle": "Daily Goal",
   "settingsUpdateYourDailyGoal": "Update your daily goal",
   "settingsYouSection": "You",
+  "settingsNotificationsSection": "Notifications",
+  "settingsNotificationsManageDescription": "Toggle notifications",
+  "settingsNotificationsSleepScheduleDescription": "Wake/sleep times & frequency",
+  "settingsNotificationsFrequency": "Frequency",
 
   "setupAgeTextFieldInvalidValue": "Age between 10 and 120",
   "setupAgeTextFieldLabel": "Your age",
@@ -99,5 +103,33 @@
   "kgUnit": "kg",
   "lbUnit": "lb",
   "metric": "Metric",
-  "mlUnit": "ml"
+  "mlUnit": "ml",
+
+  "minutes": "{time} minutes",
+  "@minutes": {
+    "placeholders": {
+      "time": {
+        "type": "String",
+        "example": "15"
+      }
+    }
+  },
+  "hour": "{time} hour",
+  "@hour": {
+    "placeholders": {
+      "time": {
+        "type": "String",
+        "example": "1"
+      }
+    }
+  },
+  "hours": "{time} hours",
+  "@hours": {
+    "placeholders": {
+      "time": {
+        "type": "String",
+        "example": "2"
+      }
+    }
+  }
 }
