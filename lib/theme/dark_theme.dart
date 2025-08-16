@@ -144,6 +144,9 @@ class DarkTheme {
           borderRadius: BorderRadiusGeometry.circular(8),
         )
       ),
+      listTileTheme: ListTileThemeData(
+        iconColor: AppColors.primaryText,
+      ),
       fontFamily: 'Poppins',
     );
   }

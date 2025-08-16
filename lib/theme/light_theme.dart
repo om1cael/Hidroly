@@ -47,7 +47,7 @@ class LightTheme {
           fontSize: 16,
         ),
       ),
-      iconTheme: IconThemeData(color: AppColors.onBackground),
+      iconTheme: IconThemeData(color: AppColorsLight.primaryText),
       inputDecorationTheme: InputDecorationTheme(
         fillColor: AppColorsLight.onBackground,
         filled: true,
@@ -143,6 +143,9 @@ class LightTheme {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadiusGeometry.circular(8),
         )
+      ),
+      listTileTheme: ListTileThemeData(
+        iconColor: AppColorsLight.primaryText,
       ),
       fontFamily: 'Poppins',
     );
