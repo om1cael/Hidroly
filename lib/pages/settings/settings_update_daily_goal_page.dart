@@ -101,7 +101,6 @@ class _SettingsUpdateDailyGoalPageState extends State<SettingsUpdateDailyGoalPag
 
           Navigator.of(context).pop(true);
         },
-        backgroundColor: AppColors.primaryText,
         child: Icon(Icons.done), 
       ),
     );

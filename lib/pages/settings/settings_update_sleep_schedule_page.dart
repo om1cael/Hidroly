@@ -141,7 +141,6 @@ class _SettingsUpdateSleepSchedulePageState extends State<SettingsUpdateSleepSch
           if(!context.mounted) return;
           Navigator.of(context).pop(true);
         },
-        backgroundColor: AppColors.primaryText,
         child: Icon(Icons.done), 
       ),
     );
