@@ -11,10 +11,8 @@ import 'package:hidroly/provider/settings_provider.dart';
 import 'package:hidroly/theme/app_colors.dart';
 import 'package:hidroly/theme/app_theme.dart';
 import 'package:hidroly/utils/app_date_utils.dart';
-import 'package:hidroly/widgets/common/icon_header.dart';
 import 'package:hidroly/widgets/home/daily_history_bottom_sheet.dart';
 import 'package:hidroly/widgets/home/fab_custom_cup.dart';
-import 'package:hidroly/widgets/home/home_bottom_nav.dart';
 import 'package:hidroly/widgets/home/water_action_buttons.dart';
 import 'package:hidroly/widgets/home/water_progress_circle.dart';
 import 'package:provider/provider.dart';
@@ -33,8 +31,6 @@ class _HomePageState extends State<HomePage> {
   final TextEditingController waterButtonsUpdateDialogTextController = TextEditingController();
   final GlobalKey<FormState> waterButtonsUpdateDialogFormKey = GlobalKey<FormState>();
 
-  int _selectedIndex = 0;
-
   @override
   void initState() {
     super.initState();
@@ -47,12 +43,6 @@ class _HomePageState extends State<HomePage> {
   void dispose() {
     customCupAmountController.dispose();
     super.dispose();
-  }
-
-  void _updateSelectedIndex(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
   }
 
   @override
@@ -70,43 +60,25 @@ class _HomePageState extends State<HomePage> {
 
     return Scaffold(
       appBar: appBar(currentDay, dayId, isMetric),
-      bottomNavigationBar: HomeBottomNav(
-        selectedIndex: _selectedIndex,
-        onTap: _updateSelectedIndex,
-      ),
       body: Center(
         child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.only(top: 16, bottom: 16),
-            child: _selectedIndex == 0 
-              ? Column(
-                spacing: 32,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  WaterProgressCircle(
-                    isMetric: isMetric,
-                  ),
-                  WaterActionButtons(
-                    formKey: waterButtonsUpdateDialogFormKey,
-                    updateDialogTextController: waterButtonsUpdateDialogTextController,
-                    dayId: dayId,
-                    isMetric: isMetric,
-                  )
-                ],
-              )
-              : Padding(
-                padding: const EdgeInsets.only(left: 36, right: 36),
-                child: Column(
-                  children: [
-                    IconHeader(
-                      iconAsset: 'assets/images/building.svg', 
-                      title: AppLocalizations.of(context)!.pageNotAvailableTitle, 
-                      description: AppLocalizations.of(context)!.pageNotAvailableDescription,
-                      paintIcon: false,
-                    )
-                  ],
+            child: Column(
+              spacing: 32,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                WaterProgressCircle(
+                  isMetric: isMetric,
                 ),
-              )
+                WaterActionButtons(
+                  formKey: waterButtonsUpdateDialogFormKey,
+                  updateDialogTextController: waterButtonsUpdateDialogTextController,
+                  dayId: dayId,
+                  isMetric: isMetric,
+                )
+              ],
+            )
           ),
         ),
       ),
