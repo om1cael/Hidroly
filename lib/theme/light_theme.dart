@@ -152,6 +152,10 @@ class LightTheme {
       listTileTheme: ListTileThemeData(
         iconColor: AppColorsLight.primaryText,
       ),
+      floatingActionButtonTheme: FloatingActionButtonThemeData(
+        backgroundColor: AppColorsLight.onBackground,
+        foregroundColor: AppColorsLight.primaryText,
+      ),
       fontFamily: 'Poppins',
     );
   }

@@ -28,10 +28,8 @@ class FabCustomCup extends StatelessWidget {
   Widget build(BuildContext context) {
     return FloatingActionButton(
       onPressed: () => _showCustomCupPopUp(context),
-      backgroundColor: AppColors.onBackground,
       child: Icon(
         Icons.add,
-        color: AppColors.primaryText,
       ),
     );
   }

@@ -151,6 +151,10 @@ class DarkTheme {
       listTileTheme: ListTileThemeData(
         iconColor: AppColors.primaryText,
       ),
+      floatingActionButtonTheme: FloatingActionButtonThemeData(
+        backgroundColor: AppColors.onBackground,
+        foregroundColor: AppColors.primaryText,
+      ),
       fontFamily: 'Poppins',
     );
   }
