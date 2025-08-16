@@ -41,11 +41,13 @@ class _SettingsUpdateSleepSchedulePageState extends State<SettingsUpdateSleepSch
     final provider = context.read<SettingsProvider>();
     await provider.readTime(Settings.wakeUpTime);
     await provider.readTime(Settings.sleepTime);
+    await provider.readFrequency();
 
-    if(provider.wakeUpTime != null && provider.sleepTime != null) {
+    if(provider.wakeUpTime != null && provider.sleepTime != null && provider.frequency != null) {
       setState(() {
         wakeUpTime.value = provider.wakeUpTime!;
         sleepTime.value = provider.sleepTime!;
+        frequency.value = _getCurrentFrequency(provider.frequency!);
       });
     }
   }
@@ -132,5 +134,12 @@ class _SettingsUpdateSleepSchedulePageState extends State<SettingsUpdateSleepSch
         child: Icon(Icons.done), 
       ),
     );
+  }
+
+  Frequency _getCurrentFrequency(int frequency) {
+    return Frequency
+      .values
+      .where((value) => frequency == value.frequency)
+      .first;
   }
 }
