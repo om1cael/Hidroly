@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hidroly/theme/app_colors.dart';
 
 class SettingsTextButton extends StatelessWidget {
   final String title;

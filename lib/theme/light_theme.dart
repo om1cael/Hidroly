@@ -115,7 +115,7 @@ class LightTheme {
           if(state.contains(WidgetState.selected)) {
             return AppColorsLight.blueAccent;
           }
-          return Colors.white;
+          return AppColorsLight.unselectedItem;
         }),
       ),
       timePickerTheme: TimePickerThemeData(

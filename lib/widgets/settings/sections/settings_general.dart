@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hidroly/l10n/app_localizations.dart';
 import 'package:hidroly/pages/settings/settings_unit_page.dart';
-import 'package:hidroly/theme/app_colors.dart';
 import 'package:hidroly/widgets/settings/settings_text_button.dart';
 
 class SettingsGeneral extends StatelessWidget {
