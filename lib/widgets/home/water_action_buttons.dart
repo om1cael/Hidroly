@@ -162,7 +162,7 @@ class WaterActionButtons extends StatelessWidget {
               backgroundColor: Theme.of(context).colorScheme.onSurface,
               label: Text(
                 UnitTools.getVolumeWithUnit(cup.amount, isMetric, context: context),
-                style: Theme.of(context).textTheme.labelMedium
+                style: Theme.of(context).textTheme.labelLarge
               ),
             ),
           );
