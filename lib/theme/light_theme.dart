@@ -130,6 +130,7 @@ class LightTheme {
           borderRadius: BorderRadiusGeometry.circular(16),
         ),
         contentTextStyle: TextStyle(
+          color: AppColorsLight.primaryText,
           fontSize: 16,
         ),
         closeIconColor: Colors.redAccent,
