@@ -189,6 +189,13 @@ class AppLocalizationsPt extends AppLocalizations {
   String get settingsNotificationsSection => 'Notifications';
 
   @override
+  String get settingsNotificationsManageDescription => 'Toggle notifications';
+
+  @override
+  String get settingsNotificationsSleepScheduleDescription =>
+      'Wake/sleep times & frequency';
+
+  @override
   String get settingsNotificationsFrequency => 'Frequency';
 
   @override

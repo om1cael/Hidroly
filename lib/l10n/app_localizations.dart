@@ -434,6 +434,18 @@ abstract class AppLocalizations {
   /// **'Notifications'**
   String get settingsNotificationsSection;
 
+  /// No description provided for @settingsNotificationsManageDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Toggle notifications'**
+  String get settingsNotificationsManageDescription;
+
+  /// No description provided for @settingsNotificationsSleepScheduleDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Wake/sleep times & frequency'**
+  String get settingsNotificationsSleepScheduleDescription;
+
   /// No description provided for @settingsNotificationsFrequency.
   ///
   /// In en, this message translates to:

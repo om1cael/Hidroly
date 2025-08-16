@@ -72,6 +72,8 @@
   "settingsUpdateYourDailyGoal": "Update your daily goal",
   "settingsYouSection": "You",
   "settingsNotificationsSection": "Notifications",
+  "settingsNotificationsManageDescription": "Toggle notifications",
+  "settingsNotificationsSleepScheduleDescription": "Wake/sleep times & frequency",
   "settingsNotificationsFrequency": "Frequency",
 
   "setupAgeTextFieldInvalidValue": "Age between 10 and 120",

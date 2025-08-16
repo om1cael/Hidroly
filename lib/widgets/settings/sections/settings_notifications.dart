@@ -29,6 +29,7 @@ class _SettingsNotificationsState extends State<SettingsNotifications> {
         ),
         SettingsTextButton(
           title: AppLocalizations.of(context)!.manageAction,
+          description: AppLocalizations.of(context)!.settingsNotificationsManageDescription,
           onPressed: () async {
             AppSettings.openAppSettings(
               type: AppSettingsType.notification,
@@ -37,6 +38,7 @@ class _SettingsNotificationsState extends State<SettingsNotifications> {
         ),
         SettingsTextButton(
           title: AppLocalizations.of(context)!.settingsSleepSchedule,
+          description: AppLocalizations.of(context)!.settingsNotificationsSleepScheduleDescription,
           onPressed: () {
             Navigator.of(context).push(
               MaterialPageRoute(builder: (context) => const SettingsUpdateSleepSchedulePage())
