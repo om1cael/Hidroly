@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:hidroly/config/providers.dart';
 import 'package:hidroly/l10n/app_localizations.dart';
 import 'package:hidroly/pages/home_page.dart';
-import 'package:hidroly/pages/setup_page.dart';
 import 'package:hidroly/services/notification_service.dart';
 import 'package:hidroly/services/notification_task_service.dart';
 import 'package:hidroly/theme/app_theme.dart';
