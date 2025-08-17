@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hidroly/l10n/app_localizations.dart';
 import 'package:hidroly/provider/day_provider.dart';
-import 'package:hidroly/theme/app_colors.dart';
 import 'package:hidroly/utils/calculate_dailygoal.dart';
 import 'package:hidroly/utils/unit_tools.dart';
 import 'package:hidroly/widgets/common/daily_goal_input.dart';
@@ -45,7 +44,7 @@ class _SettingsUpdateDailyGoalPageState extends State<SettingsUpdateDailyGoalPag
           }, 
           icon: Icon(
             Icons.arrow_back,
-            color: AppColors.primaryText,
+            color: Theme.of(context).iconTheme.color,
           ),
         ),
       ),
@@ -101,7 +100,6 @@ class _SettingsUpdateDailyGoalPageState extends State<SettingsUpdateDailyGoalPag
 
           Navigator.of(context).pop(true);
         },
-        backgroundColor: AppColors.primaryText,
         child: Icon(Icons.done), 
       ),
     );

@@ -5,7 +5,6 @@ import 'package:hidroly/l10n/app_localizations.dart';
 import 'package:hidroly/provider/custom_cups_provider.dart';
 import 'package:hidroly/provider/daily_history_provider.dart';
 import 'package:hidroly/provider/day_provider.dart';
-import 'package:hidroly/theme/app_colors.dart';
 import 'package:hidroly/utils/unit_tools.dart';
 import 'package:hidroly/widgets/input/number_input_dialog.dart';
 import 'package:provider/provider.dart';
@@ -53,12 +52,12 @@ class WaterActionButtons extends StatelessWidget {
                       children: [
                         Icon(
                           Icons.edit,
-                          color: AppColors.primaryText,
+                          color: Theme.of(context).iconTheme.color
                         ),
                         Text(
                           AppLocalizations.of(context)!.editAction,
                           style: TextStyle(
-                            color: AppColors.secondaryText
+                            color: Theme.of(context).textTheme.labelMedium!.color
                           )
                         ),
                       ],
@@ -163,9 +162,7 @@ class WaterActionButtons extends StatelessWidget {
               backgroundColor: Theme.of(context).colorScheme.onSurface,
               label: Text(
                 UnitTools.getVolumeWithUnit(cup.amount, isMetric, context: context),
-                style: TextStyle(
-                  color: AppColors.secondaryText
-                ),
+                style: Theme.of(context).textTheme.labelLarge
               ),
             ),
           );

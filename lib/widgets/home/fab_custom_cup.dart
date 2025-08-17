@@ -4,7 +4,6 @@ import 'package:hidroly/l10n/app_localizations.dart';
 import 'package:hidroly/provider/custom_cups_provider.dart';
 import 'package:hidroly/provider/daily_history_provider.dart';
 import 'package:hidroly/provider/day_provider.dart';
-import 'package:hidroly/theme/app_colors.dart';
 import 'package:hidroly/utils/unit_tools.dart';
 import 'package:hidroly/widgets/input/form_number_input_field.dart';
 import 'package:provider/provider.dart';
@@ -28,10 +27,8 @@ class FabCustomCup extends StatelessWidget {
   Widget build(BuildContext context) {
     return FloatingActionButton(
       onPressed: () => _showCustomCupPopUp(context),
-      backgroundColor: AppColors.onBackground,
       child: Icon(
         Icons.add,
-        color: AppColors.primaryText,
       ),
     );
   }

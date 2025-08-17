@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hidroly/theme/app_colors.dart';
 
 class SettingsTextButton extends StatelessWidget {
   final String title;
@@ -29,13 +28,14 @@ class SettingsTextButton extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(title),
+            Text(
+              title,
+              style: Theme.of(context).textTheme.labelLarge,
+            ),
             if (description != null)
               Text(
                 description!,
-                style: TextStyle(
-                  color: AppColors.secondaryText,
-                ),
+                style: Theme.of(context).textTheme.labelMedium
               ),
           ],
         ),

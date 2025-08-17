@@ -199,6 +199,9 @@ class AppLocalizationsPt extends AppLocalizations {
   String get settingsNotificationsFrequency => 'Frequency';
 
   @override
+  String get settingsTheme => 'Theme';
+
+  @override
   String get setupAgeTextFieldInvalidValue => 'Idade entre 10 e 120';
 
   @override
@@ -260,4 +263,13 @@ class AppLocalizationsPt extends AppLocalizations {
   String hours(String time) {
     return '$time hours';
   }
+
+  @override
+  String get system => 'System';
+
+  @override
+  String get light => 'Light';
+
+  @override
+  String get dark => 'Dark';
 }
