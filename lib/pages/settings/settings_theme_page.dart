@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hidroly/l10n/app_localizations.dart';
 import 'package:hidroly/main.dart';
+import 'package:hidroly/provider/settings_provider.dart';
+import 'package:provider/provider.dart';
 
 class SettingsThemePage extends StatefulWidget {
   const SettingsThemePage({super.key});
@@ -62,5 +64,6 @@ class _SettingsThemePageState extends State<SettingsThemePage> {
 
   void _updateTheme(ThemeMode? theme) {
     MainApp.themeNotifier.value = theme!;
+    context.read<SettingsProvider>().updateTheme(theme);
   }
 }
