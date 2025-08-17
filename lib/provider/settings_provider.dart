@@ -30,21 +30,20 @@ class SettingsProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> readTheme() async {
+  Future<ThemeMode?> readTheme() async {
     final defaultTheme = ThemeMode.system;
+    theme = defaultTheme;
+
     int? storedThemeIndex = await _asyncPrefs.getInt('theme');
 
-    if(storedThemeIndex == null) {
-      theme = defaultTheme;
-      notifyListeners();
-      return;
+    if(storedThemeIndex != null) {
+      theme = ThemeMode
+        .values
+        .where((value) => value.index == storedThemeIndex)
+        .first;
     }
-
-    theme = ThemeMode
-      .values
-      .where((value) => value.index == storedThemeIndex)
-      .first;
-    notifyListeners();
+    
+    return theme;
   }
 
   Future<void> updateFrequency(int value) async {
