@@ -9,6 +9,7 @@ class SettingsProvider extends ChangeNotifier {
 
   bool? isMetric;
   int? frequency;
+  ThemeMode? theme;
   TimeOfDay? wakeUpTime;
   TimeOfDay? sleepTime;
 
@@ -20,6 +21,29 @@ class SettingsProvider extends ChangeNotifier {
 
   Future<void> readIsMetric() async {
     isMetric = await _asyncPrefs.getBool('isMetric') ?? true;
+    notifyListeners();
+  }
+
+  Future<void> updateTheme(ThemeMode newTheme) async {
+    await _asyncPrefs.setInt('theme', newTheme.index);
+    theme = newTheme;
+    notifyListeners();
+  }
+
+  Future<void> readTheme() async {
+    final defaultTheme = ThemeMode.system;
+    int? storedThemeIndex = await _asyncPrefs.getInt('theme');
+
+    if(storedThemeIndex == null) {
+      theme = defaultTheme;
+      notifyListeners();
+      return;
+    }
+
+    theme = ThemeMode
+      .values
+      .where((value) => value.index == storedThemeIndex)
+      .first;
     notifyListeners();
   }
 
