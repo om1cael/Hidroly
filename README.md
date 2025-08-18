@@ -3,8 +3,17 @@
 Hidroly is a friendly, open-source Flutter app that helps you stay hydrated by tracking your water intake and sending notifications. It’s designed to be easy to use, without all the extra noise of typical fitness apps.
 </p>
 <div align="center">
+  <div>
+    <a href="https://f-droid.org/en/packages/com.om1cael.hidroly/">
+      <img src="https://f-droid.org/badge/get-it-on.svg" width="200">
+    </a>
+    <a href="https://apt.izzysoft.de/fdroid/index/apk/com.om1cael.hidroly">
+      <img src=".github/assets/IzzyOnDroid.png" width="200">
+    </a>
+  </div>
   <img alt="GitHub License" src="https://img.shields.io/github/license/om1cael/hidroly">
   <img src="https://img.shields.io/github/downloads/om1cael/hidroly/total">
+  <img src="https://shields.rbtlog.dev/simple/com.om1cael.hidroly" alt="RB shield">
   <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/om1cael/hidroly">
 </div>
 
