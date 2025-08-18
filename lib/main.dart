@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hidroly/config/providers.dart';
 import 'package:hidroly/l10n/app_localizations.dart';
 import 'package:hidroly/pages/home_page.dart';
+import 'package:hidroly/provider/day_provider.dart';
 import 'package:hidroly/provider/settings_provider.dart';
 import 'package:hidroly/services/notification_service.dart';
 import 'package:hidroly/services/notification_task_service.dart';
@@ -50,17 +51,32 @@ class MainApp extends StatefulWidget {
   State<MainApp> createState() => _MainAppState();
 }
 
-class _MainAppState extends State<MainApp> {
+class _MainAppState extends State<MainApp> with WidgetsBindingObserver {
   @override
   void initState() {
     super.initState();
 
+    WidgetsBinding.instance.addObserver(this);
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       ThemeMode? theme = await context.read<SettingsProvider>().readTheme();
       MainApp.themeNotifier.value = theme!;
     });
   }
 
+  @override
+  void dispose() {
+    super.dispose();
+    WidgetsBinding.instance.removeObserver(this);
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    super.didChangeAppLifecycleState(state);
+    
+    if(state == AppLifecycleState.resumed) {
+      context.read<DayProvider>().createAndLoadIfNewDay();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
