@@ -1,17 +1,25 @@
 {
-    "progressCircleOf": "von",
-    "waterAddFailed": "Hoppla! Das Wasser konnte nicht hinzugefügt werden. Nochmal versuchen?",
-    "customCupButton": "Benutzerdefiniert",
-    "customCupDialogTitle": "Benutzerdefiniertes Glas Hinzufügen",
-    "customCupDialogTextFieldAmount": "Menge",
-    "doNotSaveLabel": "Nicht speichern",
-    "textFieldAmountError": "Ungültige Menge",
     "addAction": "Hinzufügen",
-    "dayLoadingFailed": "Tag nicht gefunden",
+    "cancelAction": "Abbrechen",
+    "deleteAction": "Löschen",
+    "doNotSaveLabel": "Nicht speichern",
+    "editAction": "Bearbeiten",
+    "updateAction": "Aktualisieren",
+    "manageAction": "Verwalten",
+
     "bottomNavHomeLabel": "Start",
     "bottomNavSummaryLabel": "Übersicht",
-    "dayHistoryBottomSheetTitle": "Tagesverlauf",
-    "dayHistoryBottomSheetNoItems": "Hier ist nichts :(",
+
+    "customCupButton": "Benutzerdefiniert",
+    "customCupDialogTextFieldAmount": "Menge",
+    "customCupDialogTitle": "Benutzerdefiniertes Glas Hinzufügen",
+    "editCustomCupDialogTitle": "Benutzerdefiniertes Glas bearbeiten",
+    "editCustomCupFailed": "Es war nicht möglich dieses Glas zu bearbeiten. Bitte melde dies auf GitHub und referenziere den Code 'ECE01'.",
+    "editCustomCupSuccess": "Glas erfolgreich bearbeitet!",
+
+    "dailyGoal": "Tagesziel",
+    "dailyGoalUpdated": "Tagesziel erfolgreich gespeichert",
+
     "dayHistoryBottomSheetItemSubtitle": "hinzugefügt um {time}Uhr",
     "@dayHistoryBottomSheetItemSubtitle": {
         "placeholders": {
@@ -21,12 +29,59 @@
             }
         }
     },
-    "setupWelcomeTitle": "Willkommen",
-    "setupWelcomeSubtitle": "Wir müssen nur noch ein paar Einstellungen vornehmen. Das wird schnell und einfach gehen!",
-    "setupDataText": "Deine Daten werden auf deinem Gerät gespeichert.",
-    "setupAgeTextFieldLabel": "Dein Alter",
+    "dayHistoryBottomSheetNoItems": "Hier ist nichts :(",
+    "dayHistoryBottomSheetTitle": "Tagesverlauf",
+    "dayLoadingFailed": "Tag nicht gefunden",
+
+    "notificationTaskCreationFailed": "Beim erstellen der Benachrichtungsaufgabe ist ein Fehler aufgetreten",
+    "pageNotAvailableDescription": "Entschuldigung, diese Seite ist noch nicht verfügbar :(",
+    "pageNotAvailableTitle": "Nicht verfügbar",
+    "setupFailed": "Ein Fehler ist aufgetreten. Bitte erstelle einen GitHub issue und referenziere den Code 'SE01'.",
+    "sleepScheduleEditFailed": "Schlafplan konnte nicht gespeichert werden",
+    "textFieldAmountError": "Ungültige Menge",
+    "valueNotSupported": "Wert nicht unterstützt",
+    "waterAddFailed": "Hoppla! Das Wasser konnte nicht hinzugefügt werden. Nochmal versuchen?",
+
+    "homePageTodayAppBarTitle": "Heute",
+
+    "notificationSetupDescription": "Lass uns die Benachrichtigungen an deinen Tag anpassen",
+    "notificationSetupTitle": "Benachrichtigungen",
+    "notificationsSettingsSleep": "Du schläfst ein um",
+    "notificationsSettingsWakeUp": "Du wachst auf um",
+    "reminderNotificationBody": "Mache deinen Körper glücklich, trink einen Schluck!",
+    "reminderNotificationTitle": "💧 Zeit etwas zu trinken!",
+
+    "progressCircleOf": "von",
+
+    "settingsAboutSection": "Über",
+    "settingsContribute": "Beitragen",
+    "settingsContributeDescription": "GitHub repository öffnen",
+    "settingsFeedback": "Feedback geben",
+    "settingsFeedbackDescription": "Teile uns deine Meinung mit",
+    "settingsGeneralSection": "Allgemein",
+    "settingsPageTitle": "Einstellungen",
+    "settingsSetCustomDailyGoal": "Benutzerdefiniertes Tagesziel setzen",
+    "settingsSleepSchedule": "Schlafplan bearbeiten",
+    "settingsSleepScheduleAppBar": "Schlafplan bearbeiten",
+    "settingsSleepScheduleDescription": "Hilf uns mit ein paar Details, damit wir deinen Schlafplan aktualisieren können",
+    "settingsSleepScheduleTitle": "Schlafplan",
+    "settingsUpdateDailyGoalAppBar": "Tagesziel aktualisieren",
+    "settingsUpdateDailyGoalDescription": "Hilf uns mit ein paar Details, damit wir dein Tagesziel zu aktualisieren können",
+    "settingsUpdateDailyGoalTitle": "Tagesziel",
+    "settingsUpdateYourDailyGoal": "Tagesziel aktualisieren",
+    "settingsYouSection": "Du",
+    "settingsNotificationsSection": "Benachrichtigungen",
+    "settingsNotificationsManageDescription": "Benachrichtigungen umschalten",
+    "settingsNotificationsSleepScheduleDescription": "Weck-/Schlafzeiten & Regelmäßigkeit",
+    "settingsNotificationsFrequency": "Regelmäßigkeit",
+    "settingsTheme": "Aussehen",
+    
     "setupAgeTextFieldInvalidValue": "Alter zwischen 10 und 120",
-    "setupWeightTextFieldLabel": "Dein Gewicht",
+    "setupAgeTextFieldLabel": "Dein Alter",
+    "setupDataText": "Deine Daten werden auf deinem Gerät gespeichert.",
+    "setupUnitImperial": "lb, fl oz",
+    "setupUnitMetric": "kg, ml",
+    "settingsUnitSystem": "Einheitensystem",
      "setupWeightTextFieldInvalidWeight": "Gewicht zwischen {minWeight} und {maxWeight}", 
      "@setupWeightTextFieldInvalidWeight": { 
          "placeholders": { 
@@ -40,53 +95,47 @@
              } 
          } 
      },
-    "setupFailed": "Ein Fehler ist aufgetreten. Bitte erstelle einen GitHub issue und referenziere den Code 'SE01'.",
-    "setupUnitMetric": "kg, ml",
-    "setupUnitImperial": "lb, fl oz",
-    "homePageTodayAppBarTitle": "Heute",
-    "mlUnit": "ml",
+    "setupWeightTextFieldLabel": "Dein Gewicht",
+    "setupWelcomeSubtitle": "Wir müssen nur noch ein paar Einstellungen vornehmen. Das wird schnell und einfach gehen!",
+    "setupWelcomeTitle": "Willkommen",
+
+    
     "flOzUnit": "fl oz",
+    "imperial": "Imperial",
     "kgUnit": "kg",
     "lbUnit": "lb",
     "metric": "Metrisch",
-    "imperial": "Imperial",
-    "settingsPageTitle": "Einstellungen",
-    "settingsGeneralSection": "Allgemein",
-    "settingsUnitSystem": "Einheitensystem",
-    "settingsNotifications": "Benachrichtigungen",
-    "settingsSleepSchedule": "Schlafplan bearbeiten",
-    "settingsUpdateDailyGoalAppBar": "Tagesziel aktualisieren",
-    "settingsUpdateDailyGoalTitle": "Tagesziel",
-    "settingsUpdateDailyGoalDescription": "Hilf uns mit ein paar Details, damit wir dein Tagesziel zu aktualisieren können",
-    "settingsSleepScheduleAppBar": "Schlafplan bearbeiten",
-    "settingsSleepScheduleTitle": "Schlafplan",
-    "settingsSleepScheduleDescription": "Hilf uns mit ein paar Details, damit wir deinen Schlafplan aktualisieren können",
-    "settingsYouSection": "Du",
-    "settingsAboutSection": "Über",
-    "settingsUpdateYourDailyGoal": "Tagesziel aktualisieren",
-    "settingsSetCustomDailyGoal": "Benutzerdefiniertes Tagesziel setzen",
-    "dailyGoal": "Tagesziel",
-    "updateAction": "Aktualisieren",
-    "cancelAction": "Abbrechen",
-    "editAction": "Bearbeiten",
-    "deleteAction": "Löschen",
-    "settingsFeedback": "Feedback geben",
-    "settingsFeedbackDescription": "Teile uns deine Meinung mit",
-    "settingsContribute": "Beitragen",
-    "settingsContributeDescription": "GitHub repository öffnen",
-    "dailyGoalUpdated": "Tagesziel erfolgreich gespeichert",
-    "notificationSetupTitle": "Benachrichtigungen",
-    "notificationSetupDescription": "Lass uns die Benachrichtigungen an deinen Tag anpassen",
-    "notificationsSettingsWakeUp": "Du wachst auf um",
-    "notificationsSettingsSleep": "Du schläfst ein um",
-    "reminderNotificationTitle": "💧 Zeit etwas zu trinken!",
-    "reminderNotificationBody": "Mache deinen Körper glücklich, trink einen Schluck!",
-    "sleepScheduleEditFailed": "Schlafplan konnte nicht gespeichert werden",
-    "notificationTaskCreationFailed": "Beim erstellen der Benachrichtungsaufgabe ist ein Fehler aufgetreten",
-    "pageNotAvailableTitle": "Nicht verfügbar",
-    "pageNotAvailableDescription": "Entschuldigung, diese Seite ist noch nicht verfügbar :(",
-    "editCustomCupDialogTitle": "Benutzerdefiniertes Glas bearbeiten",
-    "editCustomCupSuccess": "Glas erfolgreich bearbeitet!",
-    "editCustomCupFailed": "Es war nicht möglich dieses Glas zu bearbeiten. Bitte melde dies auf GitHub und referenziere den Code 'ECE01'.",
-    "valueNotSupported": "Wert nicht unterstützt"
+    "mlUnit": "ml",
+
+    "minutes": "{time} Minuten",
+    "@minutes": {
+        "placeholders": {
+        "time": {
+            "type": "String",
+            "example": "15"
+        }
+        }
+    },
+    "hour": "Stunde {time}",
+    "@hour": {
+        "placeholders": {
+        "time": {
+            "type": "String",
+            "example": "1"
+        }
+        }
+    },
+    "hours": "{time} Stunden",
+    "@hours": {
+        "placeholders": {
+        "time": {
+            "type": "String",
+            "example": "2"
+        }
+        }
+    },
+
+    "system": "System",
+    "light": "Hell",
+    "dark": "Dunkel"
 }
