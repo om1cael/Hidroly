@@ -5,6 +5,7 @@
   "doNotSaveLabel": "Não salvar",
   "editAction": "Editar",
   "updateAction": "Atualizar",
+  "manageAction": "Gerenciar",
 
   "bottomNavHomeLabel": "Home",
   "bottomNavSummaryLabel": "Resumo",
@@ -59,6 +60,11 @@
   "settingsFeedbackDescription": "Compartilhe suas ideias com a gente",
   "settingsGeneralSection": "Geral",
   "settingsNotifications": "Notificações",
+  "settingsNotificationsSection": "Notificações",
+  "settingsNotificationsManageDescription": "Ativar/desativar notificações",
+  "settingsNotificationsSleepScheduleDescription": "Horário de acordar/dormir & frequência",
+  "settingsNotificationsFrequency": "Frequência",
+  "settingsTheme": "Tema",
   "settingsPageTitle": "Configurações",
   "settingsSetCustomDailyGoal": "Definir meta diária personalizada",
   "settingsSleepSchedule": "Editar horário de sono",
@@ -99,5 +105,37 @@
   "kgUnit": "kg",
   "lbUnit": "lb",
   "metric": "Métrico",
-  "mlUnit": "ml"
+  "mlUnit": "ml",
+
+  "minutes": "{time} minutos",
+  "@minutes": {
+    "placeholders": {
+      "time": {
+        "type": "String",
+        "example": "15"
+      }
+    }
+  },
+  "hour": "{time} hora",
+  "@hour": {
+    "placeholders": {
+      "time": {
+        "type": "String",
+        "example": "1"
+      }
+    }
+  },
+  "hours": "{time} horas",
+  "@hours": {
+    "placeholders": {
+      "time": {
+        "type": "String",
+        "example": "2"
+      }
+    }
+  },
+
+  "system": "Sistema",
+  "light": "Claro",
+  "dark": "Escuro"
 }
