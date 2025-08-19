@@ -27,7 +27,7 @@ class AppLocalizationsPt extends AppLocalizations {
   String get updateAction => 'Atualizar';
 
   @override
-  String get manageAction => 'Manage';
+  String get manageAction => 'Gerenciar';
 
   @override
   String get bottomNavHomeLabel => 'Home';
@@ -186,20 +186,21 @@ class AppLocalizationsPt extends AppLocalizations {
   String get settingsYouSection => 'Você';
 
   @override
-  String get settingsNotificationsSection => 'Notifications';
+  String get settingsNotificationsSection => 'Notificações';
 
   @override
-  String get settingsNotificationsManageDescription => 'Toggle notifications';
+  String get settingsNotificationsManageDescription =>
+      'Ativar/desativar notificações';
 
   @override
   String get settingsNotificationsSleepScheduleDescription =>
-      'Wake/sleep times & frequency';
+      'Horário de acordar/dormir & frequência';
 
   @override
-  String get settingsNotificationsFrequency => 'Frequency';
+  String get settingsNotificationsFrequency => 'Frequência';
 
   @override
-  String get settingsTheme => 'Theme';
+  String get settingsTheme => 'Tema';
 
   @override
   String get setupAgeTextFieldInvalidValue => 'Idade entre 10 e 120';
@@ -251,25 +252,25 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String minutes(String time) {
-    return '$time minutes';
+    return '$time minutos';
   }
 
   @override
   String hour(String time) {
-    return '$time hour';
+    return '$time hora';
   }
 
   @override
   String hours(String time) {
-    return '$time hours';
+    return '$time horas';
   }
 
   @override
-  String get system => 'System';
+  String get system => 'Sistema';
 
   @override
-  String get light => 'Light';
+  String get light => 'Claro';
 
   @override
-  String get dark => 'Dark';
+  String get dark => 'Escuro';
 }
