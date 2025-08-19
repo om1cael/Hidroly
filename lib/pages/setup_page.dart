@@ -2,7 +2,10 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:hidroly/data/model/enum/frequency.dart';
 import 'package:hidroly/data/model/enum/settings.dart';
+import 'package:hidroly/data/model/water_button.dart';
+import 'package:hidroly/provider/custom_cups_provider.dart';
 import 'package:hidroly/provider/settings_provider.dart';
 import 'package:hidroly/l10n/app_localizations.dart';
 import 'package:hidroly/pages/home_page.dart';
@@ -13,6 +16,7 @@ import 'package:hidroly/utils/unit_tools.dart';
 import 'package:hidroly/widgets/setup/setup_step_one.dart';
 import 'package:hidroly/widgets/setup/setup_step_zero.dart';
 import 'package:provider/provider.dart';
+import 'package:sqflite/sqlite_api.dart';
 
 class SetupPage extends StatefulWidget {
   const SetupPage({super.key});
@@ -29,6 +33,7 @@ class _SetupPageState extends State<SetupPage> {
   final ValueNotifier<bool> isMetric = ValueNotifier(true);
   final wakeUpTime = ValueNotifier(TimeOfDay(hour: 6, minute: 0));
   final sleepTime = ValueNotifier(TimeOfDay(hour: 22, minute: 0));
+  final frequency = ValueNotifier(Frequency.every2Hours);
 
   int setupStep = 0;
 
@@ -58,13 +63,14 @@ class _SetupPageState extends State<SetupPage> {
                 )
                 : SetupStepOne(
                   wakeUpTime: wakeUpTime, 
-                  sleepTime: sleepTime
+                  sleepTime: sleepTime,
+                  frequency: frequency,
                 ),
             ),
           ),
         ),
       ),
-      floatingActionButton: IconButton.filled(
+      floatingActionButton: FloatingActionButton(
         onPressed: () async {
           if(!formKey.currentState!.validate()) return;
           if(setupStep == 0) {
@@ -89,12 +95,16 @@ class _SetupPageState extends State<SetupPage> {
           if(dailyGoal == null) return;
 
           if(!context.mounted) return;
-          final created = await _createDay(context, dailyGoal);
+          final dayCreated = await _createDay(context, dailyGoal);
+
+          if(!context.mounted) return;
+          final defaultCupsCreated = await _createDefaultCups();
 
           if(!context.mounted) return;
           final notificationTaskCreated = await NotificationService().registerPeriodicNotificationTask(
             context,
-            settingsProvider
+            settingsProvider,
+            minutes: frequency.value.frequency,
           );
 
           if(!notificationTaskCreated && context.mounted) {
@@ -107,19 +117,24 @@ class _SetupPageState extends State<SetupPage> {
             return;
           }
 
-          if(created && context.mounted) {
-            Navigator.of(context).pushReplacement(
-              MaterialPageRoute(builder: (context) => HomePage()),
+          if((!dayCreated || !defaultCupsCreated) && context.mounted) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text(
+                AppLocalizations.of(context)!.setupFailed,
+              )),
             );
+
+            return;
           }
+
+          if(!context.mounted) return;
+          Navigator.of(context).pushReplacement(
+            MaterialPageRoute(builder: (context) => HomePage()),
+          );
         },
-        icon: Icon(
+        child: Icon(
           Icons.arrow_forward,
         ),
-        style: IconButton.styleFrom(
-          backgroundColor: Colors.white,
-        ),
-        padding: EdgeInsets.all(18),
       ),
     );
   }
@@ -140,6 +155,8 @@ class _SetupPageState extends State<SetupPage> {
       sleepTime.value.hour, 
       sleepTime.value.minute
     );
+
+    await settingsProvider.updateFrequency(frequency.value.frequency);
   }
 
   Future<bool> _createDay(BuildContext context, int dailyGoal) async {
@@ -150,6 +167,25 @@ class _SetupPageState extends State<SetupPage> {
       dailyGoal,
     );
     return created;
+  }
+
+  Future<bool> _createDefaultCups() async {
+    final defaultCups = [
+      WaterButton(amount: 250),
+      WaterButton(amount: 300),
+      WaterButton(amount: 600),
+    ];
+
+    try {
+      for(WaterButton cup in defaultCups) {
+        await context.read<CustomCupsProvider>()
+          .createCustomCup(cup.amount);
+      }
+    } on DatabaseException {
+      return false;
+    }
+
+    return true;
   }
 
   int? _getDailyGoal() {

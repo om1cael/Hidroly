@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hidroly/l10n/app_localizations.dart';
-import 'package:hidroly/theme/app_colors.dart';
 import 'package:hidroly/widgets/settings/settings_text_button.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -17,7 +16,7 @@ class SettingsAbout extends StatelessWidget {
         Text(
           AppLocalizations.of(context)!.settingsAboutSection,
           style: TextStyle(
-            color: AppColors.primaryText,
+            color: Theme.of(context).textTheme.labelLarge!.color,
             fontWeight: FontWeight.bold,
           ),
         ),

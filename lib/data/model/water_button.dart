@@ -1,12 +1,10 @@
 class WaterButton {
   final int? id;
   final int amount;
-  final bool isCustomOption;
 
   const WaterButton({
     this.id,
     required this.amount,
-    this.isCustomOption = false,
   });
 
   Map<String, Object?> toMap() {
@@ -16,5 +14,12 @@ class WaterButton {
     }
 
     return map;
+  }
+
+  WaterButton copyWith({int? id, int? amount}) {
+    return WaterButton(
+      id: id ?? this.id,
+      amount: amount ?? this.amount,
+    );
   }
 }

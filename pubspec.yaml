@@ -1,7 +1,7 @@
 name: hidroly
 description: "Track your water intake."
 publish_to: 'none'
-version: 1.1.0+3
+version: 1.2.0+4
 
 environment:
   sdk: ^3.8.1
@@ -10,7 +10,7 @@ dependencies:
   app_settings: ^6.1.1
   flutter:
     sdk: flutter
-  flutter_local_notifications: ^19.3.1
+  flutter_local_notifications: ^19.4.0
   flutter_localizations:
     sdk: flutter
   flutter_svg: ^2.2.0
@@ -22,7 +22,7 @@ dependencies:
   sqflite: ^2.4.2
   toggle_switch: ^2.3.0
   url_launcher: ^6.3.2
-  workmanager: ^0.8.0
+  workmanager: ^0.9.0+2
 
 dev_dependencies:
   flutter_test:

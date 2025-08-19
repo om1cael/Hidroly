@@ -5,39 +5,29 @@ import 'package:hidroly/l10n/app_localizations.dart';
 import 'package:hidroly/provider/custom_cups_provider.dart';
 import 'package:hidroly/provider/daily_history_provider.dart';
 import 'package:hidroly/provider/day_provider.dart';
-import 'package:hidroly/theme/app_colors.dart';
 import 'package:hidroly/utils/unit_tools.dart';
-import 'package:hidroly/widgets/input/form_number_input_field.dart';
+import 'package:hidroly/widgets/input/number_input_dialog.dart';
 import 'package:provider/provider.dart';
 
 class WaterActionButtons extends StatelessWidget {
-  final TextEditingController customCupAmountController;
-  final GlobalKey<FormState> formKey;
-  final int dayId;
-
-  final bool isMetric;
-
-  WaterActionButtons({
+  const WaterActionButtons({
     super.key,
-    required this.dayId,
-    required this.customCupAmountController,
     required this.formKey,
+    required this.updateDialogTextController,
+    required this.dayId,
     required this.isMetric,
   });
 
-  final _defaultButtons = [WaterButton(amount: 250), WaterButton(amount: 350)];
-  final _addCustomCupButton = WaterButton(amount: 0, isCustomOption: true);
+  final TextEditingController updateDialogTextController;
+  final GlobalKey<FormState> formKey;
+
+  final int dayId;
+  final bool isMetric;
 
   @override
   Widget build(BuildContext context) {
     final List<WaterButton> customCups = 
       context.watch<CustomCupsProvider>().customCups;
-    
-    List<WaterButton> allButtons = [
-      ..._defaultButtons,
-      ...customCups,
-      _addCustomCupButton,
-    ];
 
     return Container(
       height: 45,
@@ -46,139 +36,140 @@ class WaterActionButtons extends StatelessWidget {
         shrinkWrap: true,
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
-          var button = allButtons[index];
+          var cup = customCups[index];
 
-          return ElevatedButton.icon(
-            onPressed: () async {
-              if(button.isCustomOption) {
-                _showCustomCupPopUp(context);
-                return;
-              }
+          return GestureDetector(
+            onLongPressStart: (details) async {
+              final RenderBox overlay = Overlay.of(context).context.findRenderObject() as RenderBox;
+              final Offset tapPosition = details.globalPosition;
 
-              final int amount = button.amount;
-              await addWater(context, amount);
+              await showMenu(
+                context: context, 
+                items: <PopupMenuEntry<String>>[
+                  PopupMenuItem(
+                    child: Row(
+                      spacing: 12,
+                      children: [
+                        Icon(
+                          Icons.edit,
+                          color: Theme.of(context).iconTheme.color
+                        ),
+                        Text(
+                          AppLocalizations.of(context)!.editAction,
+                          style: TextStyle(
+                            color: Theme.of(context).textTheme.labelMedium!.color
+                          )
+                        ),
+                      ],
+                    ),
+                    onTap: () async {
+                      await showDialog(
+                        context: context, 
+                        builder: (context) {
+                          return Form(
+                            key: formKey,
+                            child: NumberInputDialog(
+                              title: AppLocalizations.of(context)!.editCustomCupDialogTitle, 
+                              inputFieldLabel: AppLocalizations.of(context)!.customCupDialogTextFieldAmount, 
+                              actionButtonText: AppLocalizations.of(context)!.updateAction, 
+                              cancelButtonText: AppLocalizations.of(context)!.cancelAction, 
+                              inputFieldValidator: (value) {
+                                double? amount = double.tryParse(value ?? '');
+                                if(amount == null || amount <= 0) return AppLocalizations.of(context)!.textFieldAmountError;
+                                return null;
+                              },
+                              onActionPressed: () async {
+                                if(!formKey.currentState!.validate()) return;
 
-              if(!context.mounted) return;
-              await saveWaterToHistory(context, amount);
+                                double amount = double.parse(updateDialogTextController.text);
+                                int metricAmount = isMetric 
+                                  ? amount.round()
+                                  : UnitTools.flOzToMl(amount);
+                                
+                                WaterButton updatedCup = cup.copyWith(amount: metricAmount);
+                                bool success = await context.read<CustomCupsProvider>()
+                                  .updateCustomCup(updatedCup);
+
+                                if(!context.mounted) return;
+
+                                String message = success
+                                  ? AppLocalizations.of(context)!.editCustomCupSuccess
+                                  : AppLocalizations.of(context)!.editCustomCupFailed;
+                                
+                                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                    content: Text(message)
+                                  )
+                                );
+
+                                Navigator.of(context).pop();
+                                updateDialogTextController.clear();
+                              },
+                              onCancelPressed: () {
+                                Navigator.of(context).pop();
+                                updateDialogTextController.clear();
+                              }, 
+                              textEditingController: updateDialogTextController,
+                            ),
+                          );
+                        }
+                      );
+                    },
+                  ),
+                  PopupMenuItem(
+                    child: Row(
+                      spacing: 12,
+                      children: [
+                        Icon(
+                          Icons.delete_forever,
+                          color: Colors.redAccent,
+                        ),
+                        Text(
+                          AppLocalizations.of(context)!.deleteAction,
+                          style: TextStyle(
+                            color: Colors.redAccent
+                          ),
+                        ),
+                      ],
+                    ),
+                    onTap: () async {
+                      await context.read<CustomCupsProvider>()
+                        .deleteCustomCup(cup.id!);
+                    },
+                  ),
+                ],
+                color: Theme.of(context).colorScheme.onSurface,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadiusGeometry.circular(12)
+                ),
+                position: RelativeRect.fromRect(
+                  tapPosition & Size(40, 40), // Size of the menu
+                  Offset.zero & overlay.size,
+                ),
+              );
             },
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Color(0xff31333A),
+            child: ActionChip(
+              onPressed: () async {
+                final int amount = cup.amount;
+                await addWater(context, amount);
+            
+                if(!context.mounted) return;
+                await saveWaterToHistory(context, amount);
+              },
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadiusGeometry.circular(16)
+                borderRadius: BorderRadiusGeometry.circular(12)
               ),
-            ),
-            icon: Icon(
-              button.isCustomOption == false 
-              ? Icons.water_drop : Icons.add,
-            ),
-            label: Text(
-              button.isCustomOption == false 
-                ? UnitTools.getVolumeWithUnit(button.amount, isMetric, context: context) 
-                : AppLocalizations.of(context)!.customCupButton,
-              style: TextStyle(
-                color: AppColors.secondaryText
+              avatar: Icon(Icons.water_drop),
+              backgroundColor: Theme.of(context).colorScheme.onSurface,
+              label: Text(
+                UnitTools.getVolumeWithUnit(cup.amount, isMetric, context: context),
+                style: Theme.of(context).textTheme.labelLarge
               ),
             ),
           );
         }, 
         separatorBuilder: (context, index) => SizedBox(width: 10,), 
-        itemCount: allButtons.length
+        itemCount: customCups.length
       ),
-    );
-  }
-
-  void _showCustomCupPopUp(context) {
-    showDialog(
-      context: context, 
-      builder: (context) {
-        bool doNotSaveCup = false;
-
-        return AlertDialog(
-          title: Text(
-            AppLocalizations.of(context)!.customCupDialogTitle,
-            style: Theme.of(context).textTheme.titleLarge,
-          ),
-          content: Form(
-            key: formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                FormNumberInputField(
-                  label: AppLocalizations.of(context)!.customCupDialogTextFieldAmount, 
-                  decimal: !isMetric,
-                  maxLength: 4,
-                  controller: customCupAmountController, 
-                  validator: (value) {
-                    double? amount = double.tryParse(value ?? '');
-                    if(amount == null || amount <= 0) return AppLocalizations.of(context)!.textFieldAmountError;
-                    return null;
-                  }
-                ),
-                Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    StatefulBuilder(
-                      builder: (context, setState) {
-                        return Checkbox(
-                          value: doNotSaveCup, 
-                          onChanged: (value) {
-                            setState(() => doNotSaveCup = value!);
-                          }
-                        );
-                      }
-                    ),
-                    Text(
-                      AppLocalizations.of(context)!.doNotSaveLabel,
-                      style: Theme.of(context).textTheme.bodyMedium,
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-          actions: [
-            TextButton(
-              onPressed: () async {
-                if(!formKey.currentState!.validate()) return;
-                bool success = false;
-                
-                double? amount = double.tryParse(customCupAmountController.text);
-                if(amount == null) return;
-
-                if(doNotSaveCup) {
-                  int formattedAmount = 
-                    isMetric ? amount.round() : UnitTools.flOzToMl(amount);
-                  
-                  success = await addWater(context, formattedAmount);
-                  if(!success || !context.mounted) return;
-
-                  await saveWaterToHistory(context, formattedAmount);
-                } else {
-                  success = await context.read<CustomCupsProvider>().createCustomCup(
-                    isMetric ? amount.round() : UnitTools.flOzToMl(amount)
-                  );
-                }
-
-                if(success && context.mounted) {
-                  Navigator.of(context).pop();
-                  customCupAmountController.clear();
-                }
-              }, 
-              child: Text(
-                AppLocalizations.of(context)!.addAction,
-              ),
-            ),
-            TextButton(
-              onPressed: () => Navigator.pop(context), 
-              child: Text(
-                AppLocalizations.of(context)!.cancelAction,
-              ),
-            ),
-          ],
-          backgroundColor: Theme.of(context).colorScheme.surface,
-        );
-      }
     );
   }
 
