@@ -4,8 +4,6 @@ import 'package:hidroly/data/model/day.dart';
 import 'package:hidroly/l10n/app_localizations.dart';
 import 'package:hidroly/pages/settings_page.dart';
 import 'package:hidroly/pages/setup_page.dart';
-import 'package:hidroly/provider/custom_cups_provider.dart';
-import 'package:hidroly/provider/daily_history_provider.dart';
 import 'package:hidroly/provider/day_provider.dart';
 import 'package:hidroly/provider/settings_provider.dart';
 import 'package:hidroly/theme/app_colors.dart';
