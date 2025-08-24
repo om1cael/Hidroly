@@ -40,9 +40,9 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     final Day? currentDay = context.watch<DayProvider>().day;
-    final int? dayId = currentDay?.id;
-
     final bool isMetric = context.watch<SettingsProvider>().isMetric;
+
+    final int? dayId = currentDay?.id;
 
     if(currentDay == null || dayId == null) {
       return Scaffold(
@@ -93,7 +93,6 @@ class _HomePageState extends State<HomePage> {
             await _selectDateForDayHistory(latestDate, firstDate);
 
           if(pickedDate == null) return;
-
           await _loadSelectedDay(provider, pickedDate);
 
           if(!mounted) return;
@@ -161,7 +160,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<DateTime?> _selectDateForDayHistory(Day latestDate, Day firstDate) async {
-    final DateTime? pickedDate = await showDatePicker(
+    return await showDatePicker(
       context: context,
       initialDate: latestDate.date.toLocal(),
       firstDate: firstDate.date.toLocal(),
@@ -184,8 +183,6 @@ class _HomePageState extends State<HomePage> {
         );
       },
     );
-
-    return pickedDate;
   }
 
   Future<void> _loadSelectedDay(DayProvider provider, DateTime pickedDate) async {
