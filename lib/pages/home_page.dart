@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hidroly/controllers/home_controller.dart';
 import 'package:hidroly/data/model/day.dart';
 import 'package:hidroly/l10n/app_localizations.dart';
 import 'package:hidroly/pages/settings_page.dart';
@@ -23,11 +24,18 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final homeController = HomeController();
+
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _initializeHome();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      bool initialized = await homeController.initializeHome(context);
+      
+      if(!initialized && mounted) {
+        Navigator.of(context)
+          .pushReplacement(MaterialPageRoute(builder: (_) => SetupPage()));
+      }
     });
   }
 
@@ -88,8 +96,10 @@ class _HomePageState extends State<HomePage> {
 
           if(pickedDate == null) return;
 
-          _loadSelectedDay(provider, pickedDate);
-          _loadDailyHistory(currentDay: provider.day);
+          await _loadSelectedDay(provider, pickedDate);
+
+          if(!mounted) return;
+          await homeController.loadDailyHistory(context, currentDay: provider.day);
         },
         style: TextButton.styleFrom(
           padding: EdgeInsets.zero,
@@ -196,43 +206,4 @@ class _HomePageState extends State<HomePage> {
 
     provider.day = selectedDay;
   }
-
-  Future<void> _initializeHome() async {
-    await Future.wait([
-      _loadDay(),
-      _createAndLoadIfNewDay(),
-      _loadCustomCups(),
-      _loadDailyHistory(),
-      _loadAllSettings(),
-    ]);
-  }
-
-  Future<void> _loadDay() async {
-    bool loaded = await context.read<DayProvider>().loadLatestDay();
-
-    if(loaded == false && mounted) {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (_) => SetupPage()),
-      );
-      return;
-    }
-  }
-
-  Future<void> _loadDailyHistory({Day? currentDay}) async {
-    currentDay ??= context.read<DayProvider>().day;
-    if(currentDay == null) return;
-    
-    final dayId = currentDay.id!;
-    await context.read<DailyHistoryProvider>().getAll(dayId);
-  }
-
-  Future<void> _createAndLoadIfNewDay() =>
-    context.read<DayProvider>().createAndLoadIfNewDay();
-
-  Future<void> _loadCustomCups() =>
-    context.read<CustomCupsProvider>().loadCustomCups();
-
-  Future<void> _loadAllSettings() => 
-    context.read<SettingsProvider>().loadAllSettings();
 }
