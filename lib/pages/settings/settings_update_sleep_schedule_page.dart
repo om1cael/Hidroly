@@ -47,7 +47,7 @@ class _SettingsUpdateSleepSchedulePageState extends State<SettingsUpdateSleepSch
     setState(() {
       wakeUpTime.value = provider.wakeUpTime;
       sleepTime.value = provider.sleepTime;
-      frequency.value = Frequency.getFrequency(provider.frequency);
+      frequency.value = provider.frequencyHolder;
       isLoading = false;
     });
   }

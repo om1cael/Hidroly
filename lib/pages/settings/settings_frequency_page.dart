@@ -122,6 +122,6 @@ class _SettingsFrequencyPageState extends State<SettingsFrequencyPage> {
   Future<int> _getFrequency() async {
     final provider = context.read<SettingsProvider>();
     await provider.readFrequency();
-    return provider.frequency;
+    return provider.frequencyHolder.frequency;
   }
 }

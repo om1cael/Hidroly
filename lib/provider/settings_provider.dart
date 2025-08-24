@@ -8,13 +8,14 @@ class SettingsProvider extends ChangeNotifier {
   final _asyncPrefs = SharedPreferencesAsync();
 
   bool isMetric;
-  int frequency = Frequency.every2Hours.frequency;
+  Frequency frequencyHolder;
   ThemeMode theme;
   TimeOfDay wakeUpTime;
   TimeOfDay sleepTime;
 
   SettingsProvider({
     this.isMetric = true,
+    this.frequencyHolder = Frequency.every2Hours,
     this.theme = ThemeMode.system,
     this.wakeUpTime = const TimeOfDay(hour: 6, minute: 0),
     this.sleepTime = const TimeOfDay(hour: 22, minute: 0),
@@ -55,13 +56,13 @@ class SettingsProvider extends ChangeNotifier {
 
   Future<void> updateFrequency(int value) async {
     await _asyncPrefs.setInt('frequency', value);
-    frequency = value;
+    frequencyHolder = Frequency.getFrequency(value);
     notifyListeners();
   }
 
   Future<void> readFrequency() async {
-    final defaultFrequency = Frequency.every2Hours;
-    frequency = await _asyncPrefs.getInt('frequency') ?? defaultFrequency.frequency;
+    int frequencyTime = await _asyncPrefs.getInt('frequency') ?? Frequency.every2Hours.frequency;
+    frequencyHolder = Frequency.getFrequency(frequencyTime);
     notifyListeners();
   }
 
