@@ -25,6 +25,12 @@ class SettingsProvider extends ChangeNotifier {
     this.sleepTime = const TimeOfDay(hour: 22, minute: 0),
   });
 
+  Future<void> loadAllSettings() async {
+    await readIsMetric();
+    await readTime(Settings.wakeUpTime);
+    await readTime(Settings.sleepTime);
+  }
+
   Future<void> updateIsMetric(bool value) async {
     await _asyncPrefs.setBool(_isMetricKey, value);
     isMetric = value;

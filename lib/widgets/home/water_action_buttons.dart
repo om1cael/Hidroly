@@ -9,20 +9,29 @@ import 'package:hidroly/utils/unit_tools.dart';
 import 'package:hidroly/widgets/input/number_input_dialog.dart';
 import 'package:provider/provider.dart';
 
-class WaterActionButtons extends StatelessWidget {
+class WaterActionButtons extends StatefulWidget {
   const WaterActionButtons({
     super.key,
-    required this.formKey,
-    required this.updateDialogTextController,
     required this.dayId,
     required this.isMetric,
   });
 
-  final TextEditingController updateDialogTextController;
-  final GlobalKey<FormState> formKey;
-
   final int dayId;
   final bool isMetric;
+
+  @override
+  State<WaterActionButtons> createState() => _WaterActionButtonsState();
+}
+
+class _WaterActionButtonsState extends State<WaterActionButtons> {
+  final TextEditingController updateDialogTextController = TextEditingController();
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
+  @override
+  void dispose() {
+    updateDialogTextController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -82,7 +91,7 @@ class WaterActionButtons extends StatelessWidget {
                                 if(!formKey.currentState!.validate()) return;
 
                                 double amount = double.parse(updateDialogTextController.text);
-                                int metricAmount = isMetric 
+                                int metricAmount = widget.isMetric 
                                   ? amount.round()
                                   : UnitTools.flOzToMl(amount);
                                 
@@ -161,7 +170,7 @@ class WaterActionButtons extends StatelessWidget {
               avatar: Icon(Icons.water_drop),
               backgroundColor: Theme.of(context).colorScheme.onSurface,
               label: Text(
-                UnitTools.getVolumeWithUnit(cup.amount, isMetric, context: context),
+                UnitTools.getVolumeWithUnit(cup.amount, widget.isMetric, context: context),
                 style: Theme.of(context).textTheme.labelLarge
               ),
             ),
@@ -192,7 +201,7 @@ class WaterActionButtons extends StatelessWidget {
   Future<void> saveWaterToHistory(BuildContext context, int amount) async {
     await context.read<DailyHistoryProvider>().create(
       HistoryEntry(
-        dayId: dayId, 
+        dayId: widget.dayId, 
         amount: amount, 
         dateTime: DateTime.now().toUtc()
       )

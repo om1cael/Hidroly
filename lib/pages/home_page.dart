@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:hidroly/controllers/home_controller.dart';
 import 'package:hidroly/data/model/day.dart';
-import 'package:hidroly/data/model/enum/settings.dart';
 import 'package:hidroly/l10n/app_localizations.dart';
 import 'package:hidroly/pages/settings_page.dart';
 import 'package:hidroly/pages/setup_page.dart';
-import 'package:hidroly/provider/custom_cups_provider.dart';
-import 'package:hidroly/provider/daily_history_provider.dart';
 import 'package:hidroly/provider/day_provider.dart';
 import 'package:hidroly/provider/settings_provider.dart';
 import 'package:hidroly/theme/app_colors.dart';
@@ -24,34 +22,30 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final TextEditingController customCupAmountController = TextEditingController();
-  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-
-  final TextEditingController waterButtonsUpdateDialogTextController = TextEditingController();
-  final GlobalKey<FormState> waterButtonsUpdateDialogFormKey = GlobalKey<FormState>();
+  final homeController = HomeController();
 
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _initializeHome();
-    });
-  }
 
-  @override
-  void dispose() {
-    customCupAmountController.dispose();
-    super.dispose();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      bool initialized = await homeController.initializeHome(context);
+      
+      if(!initialized && mounted) {
+        Navigator.of(context)
+          .pushReplacement(MaterialPageRoute(builder: (_) => SetupPage()));
+      }
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     final Day? currentDay = context.watch<DayProvider>().day;
+    final bool isMetric = context.watch<SettingsProvider>().isMetric;
+
     final int? dayId = currentDay?.id;
 
-    final bool? isMetric = context.watch<SettingsProvider>().isMetric;
-
-    if(currentDay == null || dayId == null || isMetric == null) {
+    if(currentDay == null || dayId == null) {
       return Scaffold(
         body: Center(child: CircularProgressIndicator(),),
       );
@@ -67,12 +61,8 @@ class _HomePageState extends State<HomePage> {
               spacing: 32,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                WaterProgressCircle(
-                  isMetric: isMetric,
-                ),
+                WaterProgressCircle(),
                 WaterActionButtons(
-                  formKey: waterButtonsUpdateDialogFormKey,
-                  updateDialogTextController: waterButtonsUpdateDialogTextController,
                   dayId: dayId,
                   isMetric: isMetric,
                 )
@@ -83,8 +73,6 @@ class _HomePageState extends State<HomePage> {
       ),
       floatingActionButton: FabCustomCup(
         dayId: dayId,
-        customCupAmountController: customCupAmountController,
-        formKey: formKey,
         isMetric: isMetric
       ),
     );
@@ -100,46 +88,14 @@ class _HomePageState extends State<HomePage> {
 
           if(!mounted || firstDate == null || latestDate == null) return;
 
-          final DateTime? pickedDate = await showDatePicker(
-            context: context,
-            initialDate: latestDate.date.toLocal(),
-            firstDate: firstDate.date.toLocal(),
-            lastDate: latestDate.date.toLocal(),
-            builder:(context, child) {
-              return Theme(
-                data: Theme.of(context).brightness == Brightness.dark 
-                  ? Theme.of(context).copyWith(
-                      colorScheme: ColorScheme.dark(
-                        primary: AppColors.blueAccent,
-                        onSurface: AppColors.primaryText,
-                      ))
-                  : Theme.of(context).copyWith(
-                      colorScheme: ColorScheme.light(
-                        primary: AppColorsLight.blueAccent,
-                        onSurface: AppColorsLight.primaryText,
-                    ),
-                ),
-                child: child!,
-              );
-            },
-          );
+          DateTime? pickedDate = 
+            await _selectDateForDayHistory(latestDate, firstDate);
 
           if(pickedDate == null) return;
+          await _loadSelectedDay(provider, pickedDate);
 
-          final loadedDay = await provider.findByDate(pickedDate);
-          if(loadedDay == null && mounted) {
-            ScaffoldMessenger.of(context)
-              .showSnackBar(SnackBar(
-                content: Text(
-                  AppLocalizations.of(context)!.dayLoadingFailed,
-                ),
-              )
-            );
-            return;
-          }
-
-          provider.day = loadedDay;
-          _loadDailyHistory(currentDay: provider.day);
+          if(!mounted) return;
+          await homeController.loadDailyHistory(context, currentDay: provider.day);
         },
         style: TextButton.styleFrom(
           padding: EdgeInsets.zero,
@@ -202,52 +158,46 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Future<void> _initializeHome() async {
-    await _loadDay();
-    await _createDayIfNewDate();
-    await _loadCustomCups();
-    await _loadDailyHistory();
-    await _loadSettings();
+  Future<DateTime?> _selectDateForDayHistory(Day latestDate, Day firstDate) async {
+    return await showDatePicker(
+      context: context,
+      initialDate: latestDate.date.toLocal(),
+      firstDate: firstDate.date.toLocal(),
+      lastDate: latestDate.date.toLocal(),
+      builder:(context, child) {
+        return Theme(
+          data: Theme.of(context).brightness == Brightness.dark 
+            ? Theme.of(context).copyWith(
+                colorScheme: ColorScheme.dark(
+                  primary: AppColors.blueAccent,
+                  onSurface: AppColors.primaryText,
+                ))
+            : Theme.of(context).copyWith(
+                colorScheme: ColorScheme.light(
+                  primary: AppColorsLight.blueAccent,
+                  onSurface: AppColorsLight.primaryText,
+              ),
+          ),
+          child: child!,
+        );
+      },
+    );
   }
 
-  Future<void> _createDayIfNewDate() async {
-    await context.read<DayProvider>().createAndLoadIfNewDay();
-  }
+  Future<void> _loadSelectedDay(DayProvider provider, DateTime pickedDate) async {
+    final selectedDay = await provider.findByDate(pickedDate);
 
-  Future<void> _loadDay() async {
-    final provider = context.read<DayProvider>();
-    final latestDay = await provider.findLatest();
-
-    if(latestDay == null && mounted) {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => SetupPage()),
+    if(selectedDay == null && mounted) {
+      ScaffoldMessenger.of(context)
+        .showSnackBar(SnackBar(
+          content: Text(
+            AppLocalizations.of(context)!.dayLoadingFailed,
+          ),
+        )
       );
       return;
     }
 
-    provider.day = latestDay;
-  }
-
-  Future<void> _loadCustomCups() async {
-    await context.read<CustomCupsProvider>().loadCustomCups();
-  }
-
-  Future<void> _loadDailyHistory({Day? currentDay}) async {
-    currentDay ??= context.read<DayProvider>().day;
-
-    // TODO: Maybe return to the setup page?
-    if(currentDay == null) return;
-    
-    final dayId = currentDay.id!;
-    await context.read<DailyHistoryProvider>().getAll(dayId);
-  }
-  
-  Future<void> _loadSettings() async {
-    final settingsProvider = context.read<SettingsProvider>();
-
-    await settingsProvider.readIsMetric();
-    await settingsProvider.readTime(Settings.wakeUpTime);
-    await settingsProvider.readTime(Settings.sleepTime);
+    provider.day = selectedDay;
   }
 }

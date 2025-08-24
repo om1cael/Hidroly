@@ -8,20 +8,29 @@ import 'package:hidroly/utils/unit_tools.dart';
 import 'package:hidroly/widgets/input/form_number_input_field.dart';
 import 'package:provider/provider.dart';
 
-class FabCustomCup extends StatelessWidget {
+class FabCustomCup extends StatefulWidget {
   const FabCustomCup({
     super.key,
     required this.dayId,
-    required this.customCupAmountController,
-    required this.formKey,
     required this.isMetric,
   });
 
-  final TextEditingController customCupAmountController;
-  final GlobalKey<FormState> formKey;
-  
   final int dayId;
   final bool isMetric;
+
+  @override
+  State<FabCustomCup> createState() => _FabCustomCupState();
+}
+
+class _FabCustomCupState extends State<FabCustomCup> {
+  final TextEditingController customCupAmountController = TextEditingController();
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
+  @override
+  void dispose() {
+    customCupAmountController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +61,7 @@ class FabCustomCup extends StatelessWidget {
               children: [
                 FormNumberInputField(
                   label: AppLocalizations.of(context)!.customCupDialogTextFieldAmount, 
-                  decimal: !isMetric,
+                  decimal: !widget.isMetric,
                   maxLength: 4,
                   controller: customCupAmountController, 
                   validator: (value) {
@@ -94,7 +103,7 @@ class FabCustomCup extends StatelessWidget {
 
                 if(doNotSaveCup) {
                   int formattedAmount = 
-                    isMetric ? amount.round() : UnitTools.flOzToMl(amount);
+                    widget.isMetric ? amount.round() : UnitTools.flOzToMl(amount);
                   
                   success = await context
                     .read<DayProvider>()
@@ -103,14 +112,14 @@ class FabCustomCup extends StatelessWidget {
                   if(!context.mounted) return;
                   await context.read<DailyHistoryProvider>().create(
                     HistoryEntry(
-                      dayId: dayId, 
+                      dayId: widget.dayId, 
                       amount: formattedAmount, 
                       dateTime: DateTime.now().toUtc()
                     )
                   );
                 } else {
                   success = await context.read<CustomCupsProvider>().createCustomCup(
-                    isMetric ? amount.round() : UnitTools.flOzToMl(amount)
+                    widget.isMetric ? amount.round() : UnitTools.flOzToMl(amount)
                   );
                 }
 
