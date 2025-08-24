@@ -7,6 +7,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 class SettingsProvider extends ChangeNotifier {
   final _asyncPrefs = SharedPreferencesAsync();
 
+  final _isMetricKey = 'isMetric';
+  final _themeKey = 'theme';
+  final _frequencyKey = 'frequency';
+
   bool isMetric;
   Frequency frequencyHolder;
   ThemeMode theme;
@@ -22,18 +26,18 @@ class SettingsProvider extends ChangeNotifier {
   });
 
   Future<void> updateIsMetric(bool value) async {
-    await _asyncPrefs.setBool('isMetric', value);
+    await _asyncPrefs.setBool(_isMetricKey, value);
     isMetric = value;
     notifyListeners();
   }
 
   Future<void> readIsMetric() async {
-    isMetric = await _asyncPrefs.getBool('isMetric') ?? true;
+    isMetric = await _asyncPrefs.getBool(_isMetricKey) ?? true;
     notifyListeners();
   }
 
   Future<void> updateTheme(ThemeMode newTheme) async {
-    await _asyncPrefs.setInt('theme', newTheme.index);
+    await _asyncPrefs.setInt(_themeKey, newTheme.index);
     theme = newTheme;
     notifyListeners();
   }
@@ -42,7 +46,7 @@ class SettingsProvider extends ChangeNotifier {
     final defaultTheme = ThemeMode.system;
     theme = defaultTheme;
 
-    int? storedThemeIndex = await _asyncPrefs.getInt('theme');
+    int? storedThemeIndex = await _asyncPrefs.getInt(_themeKey);
 
     if(storedThemeIndex != null) {
       theme = ThemeMode
@@ -55,13 +59,13 @@ class SettingsProvider extends ChangeNotifier {
   }
 
   Future<void> updateFrequency(int value) async {
-    await _asyncPrefs.setInt('frequency', value);
+    await _asyncPrefs.setInt(_frequencyKey, value);
     frequencyHolder = Frequency.getFrequency(value);
     notifyListeners();
   }
 
   Future<void> readFrequency() async {
-    int frequencyTime = await _asyncPrefs.getInt('frequency') ?? Frequency.every2Hours.frequency;
+    int frequencyTime = await _asyncPrefs.getInt(_frequencyKey) ?? Frequency.every2Hours.frequency;
     frequencyHolder = Frequency.getFrequency(frequencyTime);
     notifyListeners();
   }
