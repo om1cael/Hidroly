@@ -7,11 +7,18 @@ import 'package:shared_preferences/shared_preferences.dart';
 class SettingsProvider extends ChangeNotifier {
   final _asyncPrefs = SharedPreferencesAsync();
 
-  bool isMetric = true;
+  bool isMetric;
   int frequency = Frequency.every2Hours.frequency;
-  ThemeMode theme = ThemeMode.system;
-  TimeOfDay wakeUpTime = TimeOfDay(hour: 6, minute: 0);
-  TimeOfDay sleepTime = TimeOfDay(hour: 22, minute: 0);
+  ThemeMode theme;
+  TimeOfDay wakeUpTime;
+  TimeOfDay sleepTime;
+
+  SettingsProvider({
+    this.isMetric = true,
+    this.theme = ThemeMode.system,
+    this.wakeUpTime = const TimeOfDay(hour: 6, minute: 0),
+    this.sleepTime = const TimeOfDay(hour: 22, minute: 0),
+  });
 
   Future<void> updateIsMetric(bool value) async {
     await _asyncPrefs.setBool('isMetric', value);
