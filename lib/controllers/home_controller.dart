@@ -9,8 +9,13 @@ import 'package:provider/provider.dart';
 class HomeController {
   Future<bool> initializeHome(BuildContext context) async {
     try {
+      final wasDayLoaded = await loadLatestDay(context);
+      if(!wasDayLoaded) {
+        return false;
+      }
+
+      if(!context.mounted) return false;
       await Future.wait([
-        loadLatestDay(context),
         createAndLoadIfNewDay(context),
         loadCustomCups(context),
         loadDailyHistory(context),
@@ -31,16 +36,15 @@ class HomeController {
     await context.read<DailyHistoryProvider>().getAll(dayId);
   }
 
-  Future<void> loadLatestDay(BuildContext context) async {
+  Future<bool> loadLatestDay(BuildContext context) async =>
     await context.read<DayProvider>().loadLatestDay();
-  }
 
-  Future<void> createAndLoadIfNewDay(BuildContext context) =>
-    context.read<DayProvider>().createAndLoadIfNewDay();
+  Future<void> createAndLoadIfNewDay(BuildContext context) async =>
+    await context.read<DayProvider>().createAndLoadIfNewDay();
 
-  Future<void> loadCustomCups(BuildContext context) =>
-    context.read<CustomCupsProvider>().loadCustomCups();
+  Future<void> loadCustomCups(BuildContext context) async =>
+    await context.read<CustomCupsProvider>().loadCustomCups();
 
-  Future<void> loadAllSettings(BuildContext context) => 
-    context.read<SettingsProvider>().loadAllSettings();
+  Future<void> loadAllSettings(BuildContext context) async => 
+    await context.read<SettingsProvider>().loadAllSettings();
 }
