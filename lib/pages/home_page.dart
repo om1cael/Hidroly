@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hidroly/data/model/day.dart';
-import 'package:hidroly/data/model/enum/settings.dart';
 import 'package:hidroly/l10n/app_localizations.dart';
 import 'package:hidroly/pages/settings_page.dart';
 import 'package:hidroly/pages/setup_page.dart';
@@ -84,45 +83,12 @@ class _HomePageState extends State<HomePage> {
 
           if(!mounted || firstDate == null || latestDate == null) return;
 
-          final DateTime? pickedDate = await showDatePicker(
-            context: context,
-            initialDate: latestDate.date.toLocal(),
-            firstDate: firstDate.date.toLocal(),
-            lastDate: latestDate.date.toLocal(),
-            builder:(context, child) {
-              return Theme(
-                data: Theme.of(context).brightness == Brightness.dark 
-                  ? Theme.of(context).copyWith(
-                      colorScheme: ColorScheme.dark(
-                        primary: AppColors.blueAccent,
-                        onSurface: AppColors.primaryText,
-                      ))
-                  : Theme.of(context).copyWith(
-                      colorScheme: ColorScheme.light(
-                        primary: AppColorsLight.blueAccent,
-                        onSurface: AppColorsLight.primaryText,
-                    ),
-                ),
-                child: child!,
-              );
-            },
-          );
+          DateTime? pickedDate = 
+            await _selectDateForDayHistory(latestDate, firstDate);
 
           if(pickedDate == null) return;
 
-          final loadedDay = await provider.findByDate(pickedDate);
-          if(loadedDay == null && mounted) {
-            ScaffoldMessenger.of(context)
-              .showSnackBar(SnackBar(
-                content: Text(
-                  AppLocalizations.of(context)!.dayLoadingFailed,
-                ),
-              )
-            );
-            return;
-          }
-
-          provider.day = loadedDay;
+          _loadSelectedDay(provider, pickedDate);
           _loadDailyHistory(currentDay: provider.day);
         },
         style: TextButton.styleFrom(
@@ -184,6 +150,51 @@ class _HomePageState extends State<HomePage> {
         ),
       ],
     );
+  }
+
+  Future<DateTime?> _selectDateForDayHistory(Day latestDate, Day firstDate) async {
+    final DateTime? pickedDate = await showDatePicker(
+      context: context,
+      initialDate: latestDate.date.toLocal(),
+      firstDate: firstDate.date.toLocal(),
+      lastDate: latestDate.date.toLocal(),
+      builder:(context, child) {
+        return Theme(
+          data: Theme.of(context).brightness == Brightness.dark 
+            ? Theme.of(context).copyWith(
+                colorScheme: ColorScheme.dark(
+                  primary: AppColors.blueAccent,
+                  onSurface: AppColors.primaryText,
+                ))
+            : Theme.of(context).copyWith(
+                colorScheme: ColorScheme.light(
+                  primary: AppColorsLight.blueAccent,
+                  onSurface: AppColorsLight.primaryText,
+              ),
+          ),
+          child: child!,
+        );
+      },
+    );
+
+    return pickedDate;
+  }
+
+  Future<void> _loadSelectedDay(DayProvider provider, DateTime pickedDate) async {
+    final selectedDay = await provider.findByDate(pickedDate);
+
+    if(selectedDay == null && mounted) {
+      ScaffoldMessenger.of(context)
+        .showSnackBar(SnackBar(
+          content: Text(
+            AppLocalizations.of(context)!.dayLoadingFailed,
+          ),
+        )
+      );
+      return;
+    }
+
+    provider.day = selectedDay;
   }
 
   Future<void> _initializeHome() async {
