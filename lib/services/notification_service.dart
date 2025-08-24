@@ -54,20 +54,16 @@ class NotificationService {
     SettingsProvider settingsProvider,
     {int minutes = 120}
   ) async {
-    if(settingsProvider.wakeUpTime == null || settingsProvider.sleepTime == null) {
-      return false;
-    }
-
     final workManager = Workmanager();
 
     final formattedWakeUpTime = AppDateUtils.formatTime(
-      settingsProvider.wakeUpTime!.hour, 
-      settingsProvider.wakeUpTime!.minute
+      settingsProvider.wakeUpTime.hour, 
+      settingsProvider.wakeUpTime.minute
     );
 
     final formattedSleepTime = AppDateUtils.formatTime(
-      settingsProvider.sleepTime!.hour, 
-      settingsProvider.sleepTime!.minute
+      settingsProvider.sleepTime.hour, 
+      settingsProvider.sleepTime.minute
     );
     
     await workManager.cancelAll();
