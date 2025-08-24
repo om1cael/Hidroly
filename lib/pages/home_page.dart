@@ -37,9 +37,9 @@ class _HomePageState extends State<HomePage> {
     final Day? currentDay = context.watch<DayProvider>().day;
     final int? dayId = currentDay?.id;
 
-    final bool? isMetric = context.watch<SettingsProvider>().isMetric;
+    final bool isMetric = context.watch<SettingsProvider>().isMetric;
 
-    if(currentDay == null || dayId == null || isMetric == null) {
+    if(currentDay == null || dayId == null) {
       return Scaffold(
         body: Center(child: CircularProgressIndicator(),),
       );
