@@ -24,9 +24,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final TextEditingController customCupAmountController = TextEditingController();
-  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-
   final TextEditingController waterButtonsUpdateDialogTextController = TextEditingController();
   final GlobalKey<FormState> waterButtonsUpdateDialogFormKey = GlobalKey<FormState>();
 
@@ -36,12 +33,6 @@ class _HomePageState extends State<HomePage> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _initializeHome();
     });
-  }
-
-  @override
-  void dispose() {
-    customCupAmountController.dispose();
-    super.dispose();
   }
 
   @override
@@ -83,8 +74,6 @@ class _HomePageState extends State<HomePage> {
       ),
       floatingActionButton: FabCustomCup(
         dayId: dayId,
-        customCupAmountController: customCupAmountController,
-        formKey: formKey,
         isMetric: isMetric
       ),
     );
