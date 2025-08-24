@@ -7,54 +7,58 @@ import 'package:shared_preferences/shared_preferences.dart';
 class SettingsProvider extends ChangeNotifier {
   final _asyncPrefs = SharedPreferencesAsync();
 
-  bool? isMetric;
-  int? frequency;
-  ThemeMode? theme;
-  TimeOfDay? wakeUpTime;
-  TimeOfDay? sleepTime;
+  final _isMetricKey = 'isMetric';
+  final _themeKey = 'theme';
+  final _frequencyKey = 'frequency';
+
+  bool isMetric;
+  Frequency frequencyHolder;
+  ThemeMode theme;
+  TimeOfDay wakeUpTime;
+  TimeOfDay sleepTime;
+
+  SettingsProvider({
+    this.isMetric = true,
+    this.frequencyHolder = Frequency.every2Hours,
+    this.theme = ThemeMode.system,
+    this.wakeUpTime = const TimeOfDay(hour: 6, minute: 0),
+    this.sleepTime = const TimeOfDay(hour: 22, minute: 0),
+  });
 
   Future<void> updateIsMetric(bool value) async {
-    await _asyncPrefs.setBool('isMetric', value);
+    await _asyncPrefs.setBool(_isMetricKey, value);
     isMetric = value;
     notifyListeners();
   }
 
   Future<void> readIsMetric() async {
-    isMetric = await _asyncPrefs.getBool('isMetric') ?? true;
+    isMetric = await _asyncPrefs.getBool(_isMetricKey) ?? true;
     notifyListeners();
   }
 
   Future<void> updateTheme(ThemeMode newTheme) async {
-    await _asyncPrefs.setInt('theme', newTheme.index);
+    await _asyncPrefs.setInt(_themeKey, newTheme.index);
     theme = newTheme;
     notifyListeners();
   }
 
-  Future<ThemeMode?> readTheme() async {
-    final defaultTheme = ThemeMode.system;
-    theme = defaultTheme;
-
-    int? storedThemeIndex = await _asyncPrefs.getInt('theme');
-
-    if(storedThemeIndex != null) {
-      theme = ThemeMode
-        .values
-        .where((value) => value.index == storedThemeIndex)
-        .first;
-    }
+  Future<ThemeMode> readTheme() async {
+    final themeIndex = await _asyncPrefs.getInt(_themeKey) ?? ThemeMode.system.index;
     
+    theme = ThemeMode.values[themeIndex];
+    notifyListeners();
     return theme;
   }
 
   Future<void> updateFrequency(int value) async {
-    await _asyncPrefs.setInt('frequency', value);
-    frequency = value;
+    await _asyncPrefs.setInt(_frequencyKey, value);
+    frequencyHolder = Frequency.getFrequency(value);
     notifyListeners();
   }
 
   Future<void> readFrequency() async {
-    final defaultFrequency = Frequency.every2Hours;
-    frequency = await _asyncPrefs.getInt('frequency') ?? defaultFrequency.frequency;
+    int frequencyTime = await _asyncPrefs.getInt(_frequencyKey) ?? Frequency.every2Hours.frequency;
+    frequencyHolder = Frequency.getFrequency(frequencyTime);
     notifyListeners();
   }
 
