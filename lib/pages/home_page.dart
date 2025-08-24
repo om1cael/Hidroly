@@ -24,9 +24,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final TextEditingController waterButtonsUpdateDialogTextController = TextEditingController();
-  final GlobalKey<FormState> waterButtonsUpdateDialogFormKey = GlobalKey<FormState>();
-
   @override
   void initState() {
     super.initState();
@@ -62,8 +59,6 @@ class _HomePageState extends State<HomePage> {
                   isMetric: isMetric,
                 ),
                 WaterActionButtons(
-                  formKey: waterButtonsUpdateDialogFormKey,
-                  updateDialogTextController: waterButtonsUpdateDialogTextController,
                   dayId: dayId,
                   isMetric: isMetric,
                 )
