@@ -187,15 +187,13 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<void> _initializeHome() async {
-    await _loadDay();
-    await _createDayIfNewDate();
-    await _loadCustomCups();
-    await _loadDailyHistory();
-    await _loadSettings();
-  }
-
-  Future<void> _createDayIfNewDate() async {
-    await context.read<DayProvider>().createAndLoadIfNewDay();
+    await Future.wait([
+      _loadDay(),
+      _createAndLoadIfNewDay(),
+      _loadCustomCups(),
+      _loadDailyHistory(),
+      _loadAllSettings(),
+    ]);
   }
 
   Future<void> _loadDay() async {
@@ -210,21 +208,20 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
-  Future<void> _loadCustomCups() async {
-    await context.read<CustomCupsProvider>().loadCustomCups();
-  }
-
   Future<void> _loadDailyHistory({Day? currentDay}) async {
     currentDay ??= context.read<DayProvider>().day;
-
-    // TODO: Maybe return to the setup page?
     if(currentDay == null) return;
     
     final dayId = currentDay.id!;
     await context.read<DailyHistoryProvider>().getAll(dayId);
   }
-  
-  Future<void> _loadSettings() async {
-    await context.read<SettingsProvider>().loadAllSettings();
-  }
+
+  Future<void> _createAndLoadIfNewDay() =>
+    context.read<DayProvider>().createAndLoadIfNewDay();
+
+  Future<void> _loadCustomCups() =>
+    context.read<CustomCupsProvider>().loadCustomCups();
+
+  Future<void> _loadAllSettings() => 
+    context.read<SettingsProvider>().loadAllSettings();
 }
