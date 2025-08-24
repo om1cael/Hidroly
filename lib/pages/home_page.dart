@@ -199,18 +199,15 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<void> _loadDay() async {
-    final provider = context.read<DayProvider>();
-    final latestDay = await provider.findLatest();
+    bool loaded = await context.read<DayProvider>().loadLatestDay();
 
-    if(latestDay == null && mounted) {
+    if(loaded == false && mounted) {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => SetupPage()),
+        MaterialPageRoute(builder: (_) => SetupPage()),
       );
       return;
     }
-
-    provider.day = latestDay;
   }
 
   Future<void> _loadCustomCups() async {
@@ -228,10 +225,6 @@ class _HomePageState extends State<HomePage> {
   }
   
   Future<void> _loadSettings() async {
-    final settingsProvider = context.read<SettingsProvider>();
-
-    await settingsProvider.readIsMetric();
-    await settingsProvider.readTime(Settings.wakeUpTime);
-    await settingsProvider.readTime(Settings.sleepTime);
+    await context.read<SettingsProvider>().loadAllSettings();
   }
 }
