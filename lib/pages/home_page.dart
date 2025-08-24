@@ -27,6 +27,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
+
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       bool initialized = await homeController.initializeHome(context);
       
@@ -60,9 +61,7 @@ class _HomePageState extends State<HomePage> {
               spacing: 32,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                WaterProgressCircle(
-                  isMetric: isMetric,
-                ),
+                WaterProgressCircle(),
                 WaterActionButtons(
                   dayId: dayId,
                   isMetric: isMetric,
