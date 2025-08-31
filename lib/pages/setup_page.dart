@@ -115,7 +115,7 @@ class _SetupPageState extends State<SetupPage> {
           if(!notificationTaskCreated && context.mounted) {
             _showSnackBar(
               context, 
-              AppLocalizations.of(context)!.setupFailed
+              AppLocalizations.of(context)!.notificationTaskCreationFailed
             );
 
             return;
