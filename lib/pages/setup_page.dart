@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:hidroly/controllers/setup_controller.dart';
 import 'package:hidroly/data/model/enum/frequency.dart';
 import 'package:hidroly/data/model/enum/settings.dart';
 import 'package:hidroly/data/model/water_button.dart';
@@ -29,6 +30,7 @@ class _SetupPageState extends State<SetupPage> {
   final TextEditingController ageController = TextEditingController();
   final TextEditingController weightController = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  final setupController = SetupController();
 
   final ValueNotifier<bool> isMetric = ValueNotifier(true);
   final wakeUpTime = ValueNotifier(TimeOfDay(hour: 6, minute: 0));
@@ -47,6 +49,9 @@ class _SetupPageState extends State<SetupPage> {
 
   @override
   Widget build(BuildContext context) {
+    final settingsProvider = 
+      context.read<SettingsProvider>();
+
     return Scaffold(
       appBar: AppBar(),
       body: Center(
@@ -89,7 +94,14 @@ class _SetupPageState extends State<SetupPage> {
 
           final settingsProvider = context.read<SettingsProvider>();
 
-          await _saveSettings(context);
+          await setupController.saveSettings(
+            context,
+            settingsProvider,
+            isMetric,
+            wakeUpTime,
+            sleepTime,
+            frequency
+          );
 
           int? dailyGoal = _getDailyGoal();
           if(dailyGoal == null) return;
@@ -137,26 +149,6 @@ class _SetupPageState extends State<SetupPage> {
         ),
       ),
     );
-  }
-
-  Future<void> _saveSettings(BuildContext context) async {
-    final settingsProvider = context.read<SettingsProvider>();
-    
-    await settingsProvider.updateIsMetric(isMetric.value);
-    
-    await settingsProvider.updateTime(
-      Settings.wakeUpTime,
-      wakeUpTime.value.hour, 
-      wakeUpTime.value.minute
-    );
-
-    await settingsProvider.updateTime(
-      Settings.sleepTime,
-      sleepTime.value.hour, 
-      sleepTime.value.minute
-    );
-
-    await settingsProvider.updateFrequency(frequency.value.frequency);
   }
 
   Future<bool> _createDay(BuildContext context, int dailyGoal) async {
