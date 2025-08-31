@@ -83,15 +83,9 @@ class _SetupPageState extends State<SetupPage> {
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
           if(!formKey.currentState!.validate()) return;
-          if(setupStep == 0) {
-            setState(() {
-              setupStep = 1;
-            });
 
-            if(!Platform.isAndroid) return;
-            setupController.requestAndroidNotificationPermission();
-            
-            return;
+          if(setupStep == 0) {
+            _changeSetupStep();
           }
 
           final settingsProvider = context.read<SettingsProvider>();
@@ -107,13 +101,10 @@ class _SetupPageState extends State<SetupPage> {
           int? dailyGoal = _getDailyGoal();
           if(dailyGoal == null) return;
 
-          if(!context.mounted) return;
-          final dayCreated = 
-            await setupController.createDay(context, dailyGoal);
 
           if(!context.mounted) return;
-          final defaultCupsCreated = 
-            await setupController.createDefaultCups();
+          final dayCreated = await setupController.createDay(context, dailyGoal);
+          final defaultCupsCreated = await setupController.createDefaultCups();
 
           if(!context.mounted) return;
           final notificationTaskCreated = await NotificationService().registerPeriodicNotificationTask(
@@ -123,20 +114,18 @@ class _SetupPageState extends State<SetupPage> {
           );
 
           if(!notificationTaskCreated && context.mounted) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text(
-                AppLocalizations.of(context)!.notificationTaskCreationFailed,
-              )),
+            _showSnackBar(
+              context, 
+              AppLocalizations.of(context)!.setupFailed
             );
 
             return;
           }
 
           if((!dayCreated || !defaultCupsCreated) && context.mounted) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text(
-                AppLocalizations.of(context)!.setupFailed,
-              )),
+            _showSnackBar(
+              context, 
+              AppLocalizations.of(context)!.setupFailed
             );
 
             return;
@@ -151,6 +140,26 @@ class _SetupPageState extends State<SetupPage> {
           Icons.arrow_forward,
         ),
       ),
+    );
+  }
+
+  void _changeSetupStep() {
+    setState(() {
+      setupStep = 1;
+    });
+    
+    if(Platform.isAndroid) {
+      setupController.requestAndroidNotificationPermission();
+    }
+    
+    return;
+  }
+
+  void _showSnackBar(BuildContext context, String text) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(
+        text,
+      )),
     );
   }
 
