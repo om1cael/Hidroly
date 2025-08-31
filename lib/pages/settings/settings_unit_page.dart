@@ -71,9 +71,6 @@ class _SettingsUnitPageState extends State<SettingsUnitPage> {
   }
 
   void _loadUnitState() {
-    final isMetric = context.read<SettingsProvider>().isMetric;
-    if(isMetric != null) {
-      selectedMetric = isMetric;
-    }
+    selectedMetric = context.read<SettingsProvider>().isMetric;
   }
 }

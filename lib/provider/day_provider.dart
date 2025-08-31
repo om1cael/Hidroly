@@ -53,6 +53,17 @@ class DayProvider extends ChangeNotifier {
     }
   }
 
+  Future<bool> loadLatestDay() async {
+    Day? latestDay = await findLatest();
+    if(latestDay == null) {
+      return false;
+    }
+
+    day = latestDay;
+    notifyListeners();
+    return true;
+  }
+
   Future<Day?> findByDate(DateTime date) async {
     return await _repository.findByDate(date);
   }
