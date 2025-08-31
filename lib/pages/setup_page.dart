@@ -1,11 +1,8 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:hidroly/controllers/setup_controller.dart';
 import 'package:hidroly/data/model/enum/frequency.dart';
-import 'package:hidroly/data/model/enum/settings.dart';
-import 'package:hidroly/data/model/water_button.dart';
 import 'package:hidroly/provider/custom_cups_provider.dart';
 import 'package:hidroly/provider/settings_provider.dart';
 import 'package:hidroly/l10n/app_localizations.dart';
@@ -17,7 +14,6 @@ import 'package:hidroly/utils/unit_tools.dart';
 import 'package:hidroly/widgets/setup/setup_step_one.dart';
 import 'package:hidroly/widgets/setup/setup_step_zero.dart';
 import 'package:provider/provider.dart';
-import 'package:sqflite/sqlite_api.dart';
 
 class SetupPage extends StatefulWidget {
   const SetupPage({super.key});
@@ -93,11 +89,8 @@ class _SetupPageState extends State<SetupPage> {
             });
 
             if(!Platform.isAndroid) return;
-
-            FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-              FlutterLocalNotificationsPlugin();
-            flutterLocalNotificationsPlugin.resolvePlatformSpecificImplementation<
-                AndroidFlutterLocalNotificationsPlugin>()!.requestNotificationsPermission();
+            setupController.requestAndroidNotificationPermission();
+            
             return;
           }
 

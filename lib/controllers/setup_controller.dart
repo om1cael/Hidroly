@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:hidroly/data/model/enum/settings.dart';
 import 'package:hidroly/data/model/water_button.dart';
 import 'package:hidroly/provider/custom_cups_provider.dart';
@@ -67,5 +68,12 @@ class SetupController {
     );
 
     await settingsProvider.updateFrequency(frequency.value.frequency);
+  }
+
+  void requestAndroidNotificationPermission() {
+    FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+      FlutterLocalNotificationsPlugin();
+    flutterLocalNotificationsPlugin.resolvePlatformSpecificImplementation<
+        AndroidFlutterLocalNotificationsPlugin>()!.requestNotificationsPermission();
   }
 }
