@@ -12,7 +12,7 @@ class SetupController {
   final CustomCupsProvider customCupsProvider;
   final SettingsProvider settingsProvider;
 
-  SetupController({
+  const SetupController({
     required this.dayProvider,
     required this.customCupsProvider,
     required this.settingsProvider
