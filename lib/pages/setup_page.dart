@@ -27,10 +27,11 @@ class SetupPage extends StatefulWidget {
 }
 
 class _SetupPageState extends State<SetupPage> {
+  late SetupController setupController;
+
   final TextEditingController ageController = TextEditingController();
   final TextEditingController weightController = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  final setupController = SetupController();
 
   final ValueNotifier<bool> isMetric = ValueNotifier(true);
   final wakeUpTime = ValueNotifier(TimeOfDay(hour: 6, minute: 0));
@@ -38,6 +39,16 @@ class _SetupPageState extends State<SetupPage> {
   final frequency = ValueNotifier(Frequency.every2Hours);
 
   int setupStep = 0;
+
+  @override
+  void initState() {
+    super.initState();
+
+    setupController = SetupController(
+      dayProvider: context.read<DayProvider>(),
+      settingsProvider: context.read<SettingsProvider>(),
+    );
+  }
 
   @override
   void dispose() {
@@ -49,9 +60,6 @@ class _SetupPageState extends State<SetupPage> {
 
   @override
   Widget build(BuildContext context) {
-    final settingsProvider = 
-      context.read<SettingsProvider>();
-
     return Scaffold(
       appBar: AppBar(),
       body: Center(
@@ -96,7 +104,6 @@ class _SetupPageState extends State<SetupPage> {
 
           await setupController.saveSettings(
             context,
-            settingsProvider,
             isMetric,
             wakeUpTime,
             sleepTime,
@@ -107,7 +114,8 @@ class _SetupPageState extends State<SetupPage> {
           if(dailyGoal == null) return;
 
           if(!context.mounted) return;
-          final dayCreated = await _createDay(context, dailyGoal);
+          final dayCreated = 
+            await setupController.createDay(context, dailyGoal);
 
           if(!context.mounted) return;
           final defaultCupsCreated = await _createDefaultCups();
@@ -149,16 +157,6 @@ class _SetupPageState extends State<SetupPage> {
         ),
       ),
     );
-  }
-
-  Future<bool> _createDay(BuildContext context, int dailyGoal) async {
-    final localDate = DateTime.now();
-    
-    bool created = await context.read<DayProvider>().create(
-      localDate,
-      dailyGoal,
-    );
-    return created;
   }
 
   Future<bool> _createDefaultCups() async {
