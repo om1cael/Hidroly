@@ -46,6 +46,7 @@ class _SetupPageState extends State<SetupPage> {
 
     setupController = SetupController(
       dayProvider: context.read<DayProvider>(),
+      customCupsProvider: context.read<CustomCupsProvider>(),
       settingsProvider: context.read<SettingsProvider>(),
     );
   }
@@ -118,7 +119,8 @@ class _SetupPageState extends State<SetupPage> {
             await setupController.createDay(context, dailyGoal);
 
           if(!context.mounted) return;
-          final defaultCupsCreated = await _createDefaultCups();
+          final defaultCupsCreated = 
+            await setupController.createDefaultCups();
 
           if(!context.mounted) return;
           final notificationTaskCreated = await NotificationService().registerPeriodicNotificationTask(
@@ -157,25 +159,6 @@ class _SetupPageState extends State<SetupPage> {
         ),
       ),
     );
-  }
-
-  Future<bool> _createDefaultCups() async {
-    final defaultCups = [
-      WaterButton(amount: 250),
-      WaterButton(amount: 300),
-      WaterButton(amount: 600),
-    ];
-
-    try {
-      for(WaterButton cup in defaultCups) {
-        await context.read<CustomCupsProvider>()
-          .createCustomCup(cup.amount);
-      }
-    } on DatabaseException {
-      return false;
-    }
-
-    return true;
   }
 
   int? _getDailyGoal() {

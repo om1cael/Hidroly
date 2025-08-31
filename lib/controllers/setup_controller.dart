@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:hidroly/data/model/enum/settings.dart';
+import 'package:hidroly/data/model/water_button.dart';
+import 'package:hidroly/provider/custom_cups_provider.dart';
 import 'package:hidroly/provider/day_provider.dart';
 import 'package:hidroly/provider/settings_provider.dart';
+import 'package:sqflite/sqflite.dart';
 
 class SetupController {
   final DayProvider dayProvider;
+  final CustomCupsProvider customCupsProvider;
   final SettingsProvider settingsProvider;
 
   SetupController({
     required this.dayProvider,
+    required this.customCupsProvider,
     required this.settingsProvider
   });
 
@@ -19,6 +24,25 @@ class SetupController {
       localDate,
       dailyGoal,
     );
+  }
+
+  Future<bool> createDefaultCups() async {
+    final defaultCups = [
+      WaterButton(amount: 250),
+      WaterButton(amount: 300),
+      WaterButton(amount: 600),
+    ];
+
+    try {
+      for(WaterButton cup in defaultCups) {
+        await customCupsProvider
+          .createCustomCup(cup.amount);
+      }
+    } on DatabaseException {
+      return false;
+    }
+
+    return true;
   }
 
   Future<void> saveSettings(
