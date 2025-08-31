@@ -29,7 +29,7 @@ class _SetupPageState extends State<SetupPage> {
   final TextEditingController weightController = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-  final ValueNotifier<bool> isMetric = ValueNotifier(true);
+  final isMetric = ValueNotifier(true);
   final wakeUpTime = ValueNotifier(TimeOfDay(hour: 6, minute: 0));
   final sleepTime = ValueNotifier(TimeOfDay(hour: 22, minute: 0));
   final frequency = ValueNotifier(Frequency.every2Hours);
@@ -48,11 +48,16 @@ class _SetupPageState extends State<SetupPage> {
   }
 
   @override
-  void dispose() {
+  void dispose() {    
+    super.dispose();
+
     ageController.dispose();
     weightController.dispose();
+
     isMetric.dispose();
-    super.dispose();
+    wakeUpTime.dispose();
+    sleepTime.dispose();
+    frequency.dispose();
   }
 
   @override
