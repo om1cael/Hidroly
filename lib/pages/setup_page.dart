@@ -86,6 +86,7 @@ class _SetupPageState extends State<SetupPage> {
 
           if(setupStep == 0) {
             _changeSetupStep();
+            return;
           }
 
           await setupController.saveSettings(
@@ -150,8 +151,6 @@ class _SetupPageState extends State<SetupPage> {
     if(Platform.isAndroid) {
       setupController.requestAndroidNotificationPermission();
     }
-    
-    return;
   }
 
   void _showSnackBar(BuildContext context, String text) {
