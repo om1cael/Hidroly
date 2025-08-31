@@ -88,8 +88,6 @@ class _SetupPageState extends State<SetupPage> {
             _changeSetupStep();
           }
 
-          final settingsProvider = context.read<SettingsProvider>();
-
           await setupController.saveSettings(
             context,
             isMetric,
@@ -109,8 +107,9 @@ class _SetupPageState extends State<SetupPage> {
           if(!context.mounted) return;
           final notificationTaskCreated = await NotificationService().registerPeriodicNotificationTask(
             context,
-            settingsProvider,
-            minutes: frequency.value.frequency,
+            wakeUpTime.value,
+            sleepTime.value,
+            frequencyInMinutes: frequency.value.frequency,
           );
 
           if(!notificationTaskCreated && context.mounted) {

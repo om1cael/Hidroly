@@ -51,19 +51,20 @@ class NotificationService {
 
   Future<bool> registerPeriodicNotificationTask(
     BuildContext context, 
-    SettingsProvider settingsProvider,
-    {int minutes = 120}
+    TimeOfDay wakeUpTime,
+    TimeOfDay sleepTime,
+    {int frequencyInMinutes = 120}
   ) async {
     final workManager = Workmanager();
 
     final formattedWakeUpTime = AppDateUtils.formatTime(
-      settingsProvider.wakeUpTime.hour, 
-      settingsProvider.wakeUpTime.minute
+      wakeUpTime.hour, 
+      wakeUpTime.minute
     );
 
     final formattedSleepTime = AppDateUtils.formatTime(
-      settingsProvider.sleepTime.hour, 
-      settingsProvider.sleepTime.minute
+      sleepTime.hour,
+      sleepTime.minute
     );
     
     await workManager.cancelAll();
@@ -72,7 +73,7 @@ class NotificationService {
     await workManager.registerPeriodicTask(
       'notification',
       'notificationTask',
-      frequency: Duration(minutes: minutes),
+      frequency: Duration(minutes: frequencyInMinutes),
       inputData: {
         Settings.wakeUpTime.value: formattedWakeUpTime,
         Settings.sleepTime.value: formattedSleepTime,
