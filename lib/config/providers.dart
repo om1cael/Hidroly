@@ -19,24 +19,24 @@ final class Providers {
 
     // Data Sources
     ProxyProvider<DatabaseHelper, DayLocalDataSourceImpl>(
-      update: (_, db, __) => DayLocalDataSourceImpl(db)
+      update: (_, db, _) => DayLocalDataSourceImpl(db)
     ),
     ProxyProvider<DatabaseHelper, CustomCupsLocalDataSourceImpl>(
-      update: (_, db, __) => CustomCupsLocalDataSourceImpl(db)
+      update: (_, db, _) => CustomCupsLocalDataSourceImpl(db)
     ),
     ProxyProvider<DatabaseHelper, DailyHistoryLocalDataSourceImpl>(
-      update: (_, db, __) => DailyHistoryLocalDataSourceImpl(db),
+      update: (_, db, _) => DailyHistoryLocalDataSourceImpl(db),
     ),
 
     // Repositories
     ProxyProvider<DayLocalDataSourceImpl, DayRepository>(
-      update: (_, datasource, __) => DayRepository(datasource)
+      update: (_, datasource, _) => DayRepository(datasource)
     ),
     ProxyProvider<CustomCupsLocalDataSourceImpl, CustomCupsRepository>(
-      update: (_, datasource, __) => CustomCupsRepository(datasource)
+      update: (_, datasource, _) => CustomCupsRepository(datasource)
     ),
     ProxyProvider<DailyHistoryLocalDataSourceImpl, DailyHistoryRepository>(
-      update: (_, datasource, __) => DailyHistoryRepository(datasource)
+      update: (_, datasource, _) => DailyHistoryRepository(datasource)
     ),
 
     // Providers
