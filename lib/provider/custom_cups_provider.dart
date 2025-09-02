@@ -15,14 +15,18 @@ class CustomCupsProvider extends ChangeNotifier {
 
   Future<void> loadCustomCups() async {
     _customCups = await _customCupsRepository.loadCustomCups();
+    print(_customCups);
     notifyListeners();
   }
 
-  Future<bool> createCustomCup(int customCupAmount) async {
+  Future<bool> createCustomCup(int customCupAmount, { int? position }) async {
     if(customCupAmount <= 0) return false;
 
     await _customCupsRepository.createCustomCup(
-      WaterButton(amount: customCupAmount),
+      WaterButton(
+        amount: customCupAmount, 
+        position: position ?? _customCups.length,
+      ),
     );
 
     await loadCustomCups();
