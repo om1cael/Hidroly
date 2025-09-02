@@ -50,4 +50,9 @@ class CustomCupsProvider extends ChangeNotifier {
     await loadCustomCups();
     return true;
   }
+
+  void reorderCups(int oldPos, int newPos) {
+    final movedCup = customCups.removeAt(oldPos);
+    customCups.insert(newPos, movedCup);
+  }
 }

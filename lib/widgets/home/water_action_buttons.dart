@@ -49,7 +49,8 @@ class _WaterActionButtonsState extends State<WaterActionButtons> {
         shrinkWrap: true,
         scrollDirection: Axis.horizontal,
         onReorder: (oldPos, newPos) {
-          // TODO: Reorder logic
+          context.read<CustomCupsProvider>()
+            .reorderCups(oldPos, newPos);
         },
         itemBuilder: (context, index) {
           var cup = customCups[index];
