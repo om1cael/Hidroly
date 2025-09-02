@@ -1,11 +1,11 @@
-import 'package:hidroly/data/database/database_helper.dart';
-import 'package:hidroly/data/database/db_constants.dart';
+import 'package:hidroly/data/services/database/database_constants.dart';
+import 'package:hidroly/data/services/database/database_service.dart';
 import 'package:hidroly/data/datasource/day_local_datasource.dart';
 import 'package:hidroly/data/model/day.dart';
 import 'package:sqflite/sqflite.dart';
 
 class DayLocalDataSourceImpl implements DayLocalDataSource {
-  final DatabaseHelper _databaseHelper;
+  final DatabaseService _databaseHelper;
 
   DayLocalDataSourceImpl(this._databaseHelper);
 
@@ -13,7 +13,7 @@ class DayLocalDataSourceImpl implements DayLocalDataSource {
   Future<void> create(Day day) async {
     final db = await _databaseHelper.database;
     await db.insert(
-      DBConstants.daysTable,
+      DatabaseConstants.daysTable,
       day.toMap(),
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
@@ -23,7 +23,7 @@ class DayLocalDataSourceImpl implements DayLocalDataSource {
   Future<void> update(Day day) async {
     final db = await _databaseHelper.database;
     await db.update(
-      DBConstants.daysTable, 
+      DatabaseConstants.daysTable, 
       day.toMap(),
       where: 'id = ?',
       whereArgs: [day.id] 
@@ -34,7 +34,7 @@ class DayLocalDataSourceImpl implements DayLocalDataSource {
   Future<Day?> findFirst() async {
     final db = await _databaseHelper.database;
     final List<Map<String, Object?>> daysList = await db.query(
-      DBConstants.daysTable, 
+      DatabaseConstants.daysTable, 
       orderBy: 'date ASC',
       limit: 1
     );
@@ -56,7 +56,7 @@ class DayLocalDataSourceImpl implements DayLocalDataSource {
   Future<Day?> findLatest() async {
     final db = await _databaseHelper.database;
     final List<Map<String, Object?>> daysList = await db.query(
-      DBConstants.daysTable, 
+      DatabaseConstants.daysTable, 
       orderBy: 'date DESC',
       limit: 1
     );
@@ -78,7 +78,7 @@ class DayLocalDataSourceImpl implements DayLocalDataSource {
   Future<Day?> findByDate(String start, String end) async {
     final db = await _databaseHelper.database;
     final List<Map<String, Object?>> dayList = await db.query(
-      DBConstants.daysTable,
+      DatabaseConstants.daysTable,
       where: 'date >= ? AND date < ?',
       whereArgs: [start, end],
       orderBy: 'date DESC',

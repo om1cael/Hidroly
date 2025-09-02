@@ -1,11 +1,11 @@
-import 'package:hidroly/data/database/database_helper.dart';
-import 'package:hidroly/data/database/db_constants.dart';
+import 'package:hidroly/data/services/database/database_constants.dart';
+import 'package:hidroly/data/services/database/database_service.dart';
 import 'package:hidroly/data/datasource/daily_history_local_datasource.dart';
 import 'package:hidroly/data/model/history_entry.dart';
 import 'package:sqflite/sqflite.dart';
 
 class DailyHistoryLocalDataSourceImpl extends DailyHistoryLocalDataSource {
-  final DatabaseHelper _databaseHelper;
+  final DatabaseService _databaseHelper;
 
   DailyHistoryLocalDataSourceImpl(this._databaseHelper);
 
@@ -13,7 +13,7 @@ class DailyHistoryLocalDataSourceImpl extends DailyHistoryLocalDataSource {
   Future<void> create(HistoryEntry historyEntry) async {
     final db = await _databaseHelper.database;
     await db.insert(
-      DBConstants.dailyHistoryEntryTable,
+      DatabaseConstants.dailyHistoryEntryTable,
       historyEntry.toMap(),
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
@@ -23,7 +23,7 @@ class DailyHistoryLocalDataSourceImpl extends DailyHistoryLocalDataSource {
   Future<List<HistoryEntry>> getAll(int day) async {
     final db = await _databaseHelper.database;
     final List<Map<String, Object?>> dailyHistoryList = await db.query(
-      DBConstants.dailyHistoryEntryTable,
+      DatabaseConstants.dailyHistoryEntryTable,
       where: 'dayId = ?',
       whereArgs: [day],
     );
@@ -38,7 +38,7 @@ class DailyHistoryLocalDataSourceImpl extends DailyHistoryLocalDataSource {
   Future<void> delete(int id) async {
     final db = await _databaseHelper.database;
     await db.delete(
-      DBConstants.dailyHistoryEntryTable,
+      DatabaseConstants.dailyHistoryEntryTable,
       where: 'id = ?',
       whereArgs: [id],
     );

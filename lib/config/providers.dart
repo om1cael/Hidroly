@@ -1,4 +1,4 @@
-import 'package:hidroly/data/database/database_helper.dart';
+import 'package:hidroly/data/services/database/database_service.dart';
 import 'package:hidroly/data/datasource/custom_cups_local_datasource_impl.dart';
 import 'package:hidroly/data/datasource/daily_history_local_datasource_impl.dart';
 import 'package:hidroly/data/datasource/day_local_datasource_impl.dart';
@@ -15,18 +15,18 @@ import 'package:provider/single_child_widget.dart';
 
 final class Providers {
   final providers = <SingleChildWidget>[
-    Provider(create: (_) => DatabaseHelper()),
+    Provider(create: (_) => DatabaseService()),
     ChangeNotifierProvider(create: (_) => SettingsProvider()),
     ChangeNotifierProvider(create: (_) => AppStateProvider()),
 
     // Data Sources
-    ProxyProvider<DatabaseHelper, DayLocalDataSourceImpl>(
+    ProxyProvider<DatabaseService, DayLocalDataSourceImpl>(
       update: (_, db, _) => DayLocalDataSourceImpl(db)
     ),
-    ProxyProvider<DatabaseHelper, CustomCupsLocalDataSourceImpl>(
+    ProxyProvider<DatabaseService, CustomCupsLocalDataSourceImpl>(
       update: (_, db, _) => CustomCupsLocalDataSourceImpl(db)
     ),
-    ProxyProvider<DatabaseHelper, DailyHistoryLocalDataSourceImpl>(
+    ProxyProvider<DatabaseService, DailyHistoryLocalDataSourceImpl>(
       update: (_, db, _) => DailyHistoryLocalDataSourceImpl(db),
     ),
 

@@ -1,11 +1,11 @@
-import 'package:hidroly/data/database/database_helper.dart';
-import 'package:hidroly/data/database/db_constants.dart';
+import 'package:hidroly/data/services/database/database_constants.dart';
+import 'package:hidroly/data/services/database/database_service.dart';
 import 'package:hidroly/data/datasource/custom_cups_local_datasource.dart';
 import 'package:hidroly/data/model/water_button.dart';
 import 'package:sqflite/sqflite.dart';
 
 class CustomCupsLocalDataSourceImpl implements CustomCupsLocalDataSource {
-  final DatabaseHelper _databaseHelper;
+  final DatabaseService _databaseHelper;
 
   CustomCupsLocalDataSourceImpl(this._databaseHelper);
 
@@ -13,7 +13,7 @@ class CustomCupsLocalDataSourceImpl implements CustomCupsLocalDataSource {
   Future<void> createCustomCup(WaterButton waterButton) async {
     final db = await _databaseHelper.database;
     await db.insert(
-      DBConstants.customCupsTable, 
+      DatabaseConstants.customCupsTable, 
       waterButton.toMap(),
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
@@ -23,7 +23,7 @@ class CustomCupsLocalDataSourceImpl implements CustomCupsLocalDataSource {
   Future<List<WaterButton>> getAllCustomCups() async {
     final db = await _databaseHelper.database;
     List<Map<String, Object?>> customCups = await db.query(
-      DBConstants.customCupsTable
+      DatabaseConstants.customCupsTable
     );
 
     return [
@@ -36,7 +36,7 @@ class CustomCupsLocalDataSourceImpl implements CustomCupsLocalDataSource {
   Future<void> updateCustomCup(WaterButton waterButton) async {
     final db = await _databaseHelper.database;
     await db.update(
-      DBConstants.customCupsTable,
+      DatabaseConstants.customCupsTable,
       waterButton.toMap(),
       where: 'id = ?',
       whereArgs: [waterButton.id]
@@ -47,7 +47,7 @@ class CustomCupsLocalDataSourceImpl implements CustomCupsLocalDataSource {
   Future<void> deleteCustomCup(int id) async {
     final db = await _databaseHelper.database;
     await db.delete(
-      DBConstants.customCupsTable, 
+      DatabaseConstants.customCupsTable, 
       where: 'id = ?',
       whereArgs: [id]
     );
