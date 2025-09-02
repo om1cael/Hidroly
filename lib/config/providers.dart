@@ -5,6 +5,7 @@ import 'package:hidroly/data/datasource/day_local_datasource_impl.dart';
 import 'package:hidroly/data/repository/custom_cups_repository.dart';
 import 'package:hidroly/data/repository/daily_history_repository.dart';
 import 'package:hidroly/data/repository/day_repository.dart';
+import 'package:hidroly/provider/app_state_provider.dart';
 import 'package:hidroly/provider/custom_cups_provider.dart';
 import 'package:hidroly/provider/daily_history_provider.dart';
 import 'package:hidroly/provider/day_provider.dart';
@@ -16,6 +17,7 @@ final class Providers {
   final providers = <SingleChildWidget>[
     Provider(create: (_) => DatabaseHelper()),
     ChangeNotifierProvider(create: (_) => SettingsProvider()),
+    ChangeNotifierProvider(create: (_) => AppStateProvider()),
 
     // Data Sources
     ProxyProvider<DatabaseHelper, DayLocalDataSourceImpl>(
