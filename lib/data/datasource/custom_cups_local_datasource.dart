@@ -1,4 +1,4 @@
-import 'package:hidroly/data/model/water_button.dart';
+import 'package:hidroly/domain/models/water_button.dart';
 
 abstract class CustomCupsLocalDataSource {
   Future<void> createCustomCup(WaterButton waterButton);

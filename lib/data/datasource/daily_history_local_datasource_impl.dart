@@ -1,7 +1,7 @@
 import 'package:hidroly/data/services/database/database_constants.dart';
 import 'package:hidroly/data/services/database/database_service.dart';
 import 'package:hidroly/data/datasource/daily_history_local_datasource.dart';
-import 'package:hidroly/data/model/history_entry.dart';
+import 'package:hidroly/domain/models/history_entry.dart';
 import 'package:sqflite/sqflite.dart';
 
 class DailyHistoryLocalDataSourceImpl extends DailyHistoryLocalDataSource {

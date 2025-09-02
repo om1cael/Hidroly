@@ -1,5 +1,5 @@
 import 'package:hidroly/data/datasource/daily_history_local_datasource_impl.dart';
-import 'package:hidroly/data/model/history_entry.dart';
+import 'package:hidroly/domain/models/history_entry.dart';
 
 class DailyHistoryRepository {
   final DailyHistoryLocalDataSourceImpl _dataSource;

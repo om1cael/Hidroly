@@ -1,5 +1,5 @@
 import 'package:hidroly/data/datasource/day_local_datasource_impl.dart';
-import 'package:hidroly/data/model/day.dart';
+import 'package:hidroly/domain/models/day.dart';
 
 class DayRepository {
   final DayLocalDataSourceImpl _userLocalDataSourceImpl;

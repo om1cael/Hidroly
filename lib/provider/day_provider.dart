@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:hidroly/data/model/day.dart';
+import 'package:hidroly/domain/models/day.dart';
 import 'package:hidroly/data/repository/day_repository.dart';
 import 'package:hidroly/utils/app_date_utils.dart';
 

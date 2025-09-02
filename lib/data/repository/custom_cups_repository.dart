@@ -1,5 +1,5 @@
 import 'package:hidroly/data/datasource/custom_cups_local_datasource_impl.dart';
-import 'package:hidroly/data/model/water_button.dart';
+import 'package:hidroly/domain/models/water_button.dart';
 
 class CustomCupsRepository {
   final CustomCupsLocalDataSourceImpl _customCupsLocalDataSourceImpl;

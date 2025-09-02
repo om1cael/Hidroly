@@ -1,7 +1,7 @@
 import 'package:hidroly/data/services/database/database_constants.dart';
 import 'package:hidroly/data/services/database/database_service.dart';
 import 'package:hidroly/data/datasource/custom_cups_local_datasource.dart';
-import 'package:hidroly/data/model/water_button.dart';
+import 'package:hidroly/domain/models/water_button.dart';
 import 'package:sqflite/sqflite.dart';
 
 class CustomCupsLocalDataSourceImpl implements CustomCupsLocalDataSource {

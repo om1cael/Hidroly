@@ -1,7 +1,7 @@
 import 'package:hidroly/data/services/database/database_constants.dart';
 import 'package:hidroly/data/services/database/database_service.dart';
 import 'package:hidroly/data/datasource/day_local_datasource.dart';
-import 'package:hidroly/data/model/day.dart';
+import 'package:hidroly/domain/models/day.dart';
 import 'package:sqflite/sqflite.dart';
 
 class DayLocalDataSourceImpl implements DayLocalDataSource {

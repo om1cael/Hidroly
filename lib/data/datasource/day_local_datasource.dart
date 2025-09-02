@@ -1,4 +1,4 @@
-import 'package:hidroly/data/model/day.dart';
+import 'package:hidroly/domain/models/day.dart';
 
 abstract class DayLocalDataSource {
   Future<void> create(Day day);

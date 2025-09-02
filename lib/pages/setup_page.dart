@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:hidroly/controllers/setup_controller.dart';
-import 'package:hidroly/data/model/enum/frequency.dart';
+import 'package:hidroly/domain/models/enum/frequency.dart';
 import 'package:hidroly/provider/custom_cups_provider.dart';
 import 'package:hidroly/provider/settings_provider.dart';
 import 'package:hidroly/l10n/app_localizations.dart';

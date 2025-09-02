@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hidroly/data/datasource/custom_cups_local_datasource_impl.dart';
-import 'package:hidroly/data/model/water_button.dart';
+import 'package:hidroly/domain/models/water_button.dart';
 import 'package:hidroly/data/repository/custom_cups_repository.dart';
 import 'package:hidroly/provider/custom_cups_provider.dart';
 import 'package:mocktail/mocktail.dart';

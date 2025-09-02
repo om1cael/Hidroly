@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:hidroly/data/model/enum/settings.dart';
-import 'package:hidroly/data/model/water_button.dart';
+import 'package:hidroly/domain/models/enum/settings.dart';
+import 'package:hidroly/domain/models/water_button.dart';
 import 'package:hidroly/provider/custom_cups_provider.dart';
 import 'package:hidroly/provider/day_provider.dart';
 import 'package:hidroly/provider/settings_provider.dart';

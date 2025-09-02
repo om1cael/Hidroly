@@ -1,4 +1,4 @@
-import 'package:hidroly/data/model/history_entry.dart';
+import 'package:hidroly/domain/models/history_entry.dart';
 
 abstract class DailyHistoryLocalDataSource {
   Future<void> create(HistoryEntry historyEntry);
