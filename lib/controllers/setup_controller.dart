@@ -29,9 +29,9 @@ class SetupController {
 
   Future<bool> createDefaultCups() async {
     final defaultCups = [
-      WaterButton(amount: 250),
-      WaterButton(amount: 300),
-      WaterButton(amount: 600),
+      WaterButton(amount: 250, position: 0),
+      WaterButton(amount: 300, position: 1),
+      WaterButton(amount: 600, position: 2),
     ];
 
     try {

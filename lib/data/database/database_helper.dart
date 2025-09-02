@@ -31,7 +31,8 @@ class DatabaseHelper {
           '''
           CREATE TABLE ${DBConstants.customCupsTable} (
             id INTEGER PRIMARY KEY AUTOINCREMENT, 
-            amount INTEGER NOT NULL
+            amount INTEGER NOT NULL,
+            position INTEGER NOT NULL
           )
           '''
         );
@@ -50,7 +51,23 @@ class DatabaseHelper {
       onConfigure: (db) async {
         await db.execute('PRAGMA foreign_keys = ON');
       },
-      version: 2,
+      onUpgrade: (db, oldVersion, newVersion) async {
+        if(oldVersion < 3) {
+          await db.execute(
+            '''
+            ALTER TABLE ${DBConstants.customCupsTable}
+            ADD COLUMN position INTEGER DEFAULT 0 NOT NULL
+            '''
+          );
+          await db.execute(
+            '''
+            UPDATE ${DBConstants.customCupsTable}
+            SET position = rowid
+            '''
+          );
+        }
+      },
+      version: 3,
     );
   }
 }

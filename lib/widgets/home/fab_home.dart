@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hidroly/data/model/history_entry.dart';
 import 'package:hidroly/l10n/app_localizations.dart';
+import 'package:hidroly/provider/app_state_provider.dart';
 import 'package:hidroly/provider/custom_cups_provider.dart';
 import 'package:hidroly/provider/daily_history_provider.dart';
 import 'package:hidroly/provider/day_provider.dart';
@@ -8,8 +9,8 @@ import 'package:hidroly/utils/unit_tools.dart';
 import 'package:hidroly/widgets/input/form_number_input_field.dart';
 import 'package:provider/provider.dart';
 
-class FabCustomCup extends StatefulWidget {
-  const FabCustomCup({
+class FabHome extends StatefulWidget {
+  const FabHome({
     super.key,
     required this.dayId,
     required this.isMetric,
@@ -19,10 +20,10 @@ class FabCustomCup extends StatefulWidget {
   final bool isMetric;
 
   @override
-  State<FabCustomCup> createState() => _FabCustomCupState();
+  State<FabHome> createState() => _FabHomeState();
 }
 
-class _FabCustomCupState extends State<FabCustomCup> {
+class _FabHomeState extends State<FabHome> {
   final TextEditingController customCupAmountController = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
@@ -34,11 +35,16 @@ class _FabCustomCupState extends State<FabCustomCup> {
 
   @override
   Widget build(BuildContext context) {
+    final editMode =
+      context.watch<AppStateProvider>().editMode;
+
     return FloatingActionButton(
-      onPressed: () => _showCustomCupPopUp(context),
-      child: Icon(
-        Icons.add,
-      ),
+      onPressed: () => editMode
+        ? _toggleEditMode(editMode)
+        : _showCustomCupPopUp(context),
+      child: editMode 
+        ? Icon(Icons.done)
+        : Icon(Icons.add)
     );
   }
 
@@ -150,5 +156,10 @@ class _FabCustomCupState extends State<FabCustomCup> {
         );
       }
     );
+  }
+
+  void _toggleEditMode(bool editMode) {
+    context.read<AppStateProvider>().editMode = !editMode;
+    context.read<CustomCupsProvider>().loadCustomCups();
   }
 }

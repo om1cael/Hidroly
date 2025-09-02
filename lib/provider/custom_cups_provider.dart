@@ -18,11 +18,14 @@ class CustomCupsProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<bool> createCustomCup(int customCupAmount) async {
+  Future<bool> createCustomCup(int customCupAmount, { int? position }) async {
     if(customCupAmount <= 0) return false;
 
     await _customCupsRepository.createCustomCup(
-      WaterButton(amount: customCupAmount),
+      WaterButton(
+        amount: customCupAmount, 
+        position: position ?? _customCups.length,
+      ),
     );
 
     await loadCustomCups();
@@ -49,5 +52,17 @@ class CustomCupsProvider extends ChangeNotifier {
 
     await loadCustomCups();
     return true;
+  }
+
+  Future<void> reorderCups(int oldPos, int newPos) async {
+    final movedCup = _customCups.removeAt(oldPos);
+    _customCups.insert(newPos, movedCup);
+
+    for(WaterButton waterButton in _customCups) {
+      final modifiedWaterButton =
+        waterButton.copyWith(position: _customCups.indexOf(waterButton));
+      
+      await _customCupsRepository.updateCustomCup(modifiedWaterButton);
+    }
   }
 }

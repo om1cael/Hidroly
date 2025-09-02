@@ -27,8 +27,8 @@ class CustomCupsLocalDataSourceImpl implements CustomCupsLocalDataSource {
     );
 
     return [
-      for(final { 'id': id as int, 'amount': amount as int } in customCups)
-        WaterButton(id: id, amount: amount),
+      for(final { 'id': id as int, 'amount': amount as int, 'position': position as int, } in customCups)
+        WaterButton(id: id, amount: amount, position: position),
     ];
   }
 
