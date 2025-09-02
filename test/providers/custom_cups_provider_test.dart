@@ -9,7 +9,6 @@ class MockCustomCupsRepository extends Mock implements CustomCupsRepository {}
 void main() {
   late CustomCupsProvider provider;
   late CustomCupsRepository repository;
-  late MockCustomCupsRepository mockDataSource;
 
   setUpAll(() {
     registerFallbackValue(WaterButton(amount: 1));
