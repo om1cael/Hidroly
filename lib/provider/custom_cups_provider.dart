@@ -15,7 +15,6 @@ class CustomCupsProvider extends ChangeNotifier {
 
   Future<void> loadCustomCups() async {
     _customCups = await _customCupsRepository.loadCustomCups();
-    print(_customCups);
     notifyListeners();
   }
 
