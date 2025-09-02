@@ -50,6 +50,7 @@ class _WaterActionButtonsState extends State<WaterActionButtons> {
       child: ReorderableListView.builder(
         shrinkWrap: true,
         scrollDirection: Axis.horizontal,
+        proxyDecorator: proxyDecorator,
         onReorder: (oldPos, newPos) {
           if(oldPos < newPos) {
             newPos -= 1;
@@ -222,6 +223,20 @@ class _WaterActionButtonsState extends State<WaterActionButtons> {
         },
         itemCount: customCups.length
       ),
+    );
+  }
+
+  Widget proxyDecorator(Widget child, int index, Animation<double> animation) {
+    return AnimatedBuilder(
+      animation: animation,
+      builder: (BuildContext context, Widget? child) {
+        return Material(
+          elevation: 0,
+          color: Colors.transparent,
+          child: child,
+        );
+      },
+      child: child,
     );
   }
 
