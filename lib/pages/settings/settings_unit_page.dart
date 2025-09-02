@@ -37,27 +37,27 @@ class _SettingsUnitPageState extends State<SettingsUnitPage> {
         ),
         titleSpacing: 0,
       ),
-      body: Column(
-        children: [
-          RadioListTile(
-            title: Text(
-              '${AppLocalizations.of(context)!.metric} (${AppLocalizations.of(context)!.setupUnitMetric})',
-              style: Theme.of(context).textTheme.bodyLarge,
+      body: RadioGroup(
+        groupValue: selectedMetric,
+        onChanged: (value) => _updateRadioValue(value, provider),
+        child: Column(
+          children: [
+            RadioListTile(
+              title: Text(
+                '${AppLocalizations.of(context)!.metric} (${AppLocalizations.of(context)!.setupUnitMetric})',
+                style: Theme.of(context).textTheme.bodyLarge,
+              ),
+              value: true,
             ),
-            value: true, 
-            groupValue: selectedMetric,
-            onChanged: (val) => _updateRadioValue(val, provider),
-          ),
-          RadioListTile(
-            title: Text(
-              '${AppLocalizations.of(context)!.imperial} (${AppLocalizations.of(context)!.setupUnitImperial})',
-              style: Theme.of(context).textTheme.bodyLarge,
+            RadioListTile(
+              title: Text(
+                '${AppLocalizations.of(context)!.imperial} (${AppLocalizations.of(context)!.setupUnitImperial})',
+                style: Theme.of(context).textTheme.bodyLarge,
+              ),
+              value: false,
             ),
-            value: false, 
-            groupValue: selectedMetric,
-            onChanged: (val) => _updateRadioValue(val, provider),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

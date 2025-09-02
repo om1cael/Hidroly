@@ -47,63 +47,55 @@ class _SettingsFrequencyPageState extends State<SettingsFrequencyPage> {
         ),
         titleSpacing: 0,
       ),
-      body: Column(
-        children: [
-          RadioListTile(
-            title: Text(
-              AppLocalizations.of(context)!.minutes('15'),
-              style: Theme.of(context).textTheme.bodyLarge,
+      body: RadioGroup(
+        groupValue: widget.frequency.value,
+        onChanged: (value) => _updateRadioValue(value, provider),
+        child: Column(
+          children: [
+            RadioListTile(
+              title: Text(
+                AppLocalizations.of(context)!.minutes('15'),
+                style: Theme.of(context).textTheme.bodyLarge,
+              ),
+              value: Frequency.every15Minutes, 
             ),
-            value: Frequency.every15Minutes, 
-            groupValue: widget.frequency.value,
-            onChanged: (val) => _updateRadioValue(val, provider),
-          ),
-          RadioListTile(
-            title: Text(
-              AppLocalizations.of(context)!.minutes('30'),
-              style: Theme.of(context).textTheme.bodyLarge,
+            RadioListTile(
+              title: Text(
+                AppLocalizations.of(context)!.minutes('30'),
+                style: Theme.of(context).textTheme.bodyLarge,
+              ),
+              value: Frequency.every30Minutes, 
             ),
-            value: Frequency.every30Minutes, 
-            groupValue: widget.frequency.value,
-            onChanged: (val) => _updateRadioValue(val, provider),
-          ),
-          RadioListTile(
-            title: Text(
-              AppLocalizations.of(context)!.hour('1'),
-              style: Theme.of(context).textTheme.bodyLarge,
+            RadioListTile(
+              title: Text(
+                AppLocalizations.of(context)!.hour('1'),
+                style: Theme.of(context).textTheme.bodyLarge,
+              ),
+              value: Frequency.everyHour, 
             ),
-            value: Frequency.everyHour, 
-            groupValue: widget.frequency.value,
-            onChanged: (val) => _updateRadioValue(val, provider),
-          ),
-          RadioListTile(
-            title: Text(
-              AppLocalizations.of(context)!.hours('2'),
-              style: Theme.of(context).textTheme.bodyLarge,
+            RadioListTile(
+              title: Text(
+                AppLocalizations.of(context)!.hours('2'),
+                style: Theme.of(context).textTheme.bodyLarge,
+              ),
+              value: Frequency.every2Hours, 
             ),
-            value: Frequency.every2Hours, 
-            groupValue: widget.frequency.value,
-            onChanged: (val) => _updateRadioValue(val, provider),
-          ),
-          RadioListTile(
-            title: Text(
-              AppLocalizations.of(context)!.hours('3'),
-              style: Theme.of(context).textTheme.bodyLarge,
+            RadioListTile(
+              title: Text(
+                AppLocalizations.of(context)!.hours('3'),
+                style: Theme.of(context).textTheme.bodyLarge,
+              ),
+              value: Frequency.every3Hours, 
             ),
-            value: Frequency.every3Hours, 
-            groupValue: widget.frequency.value,
-            onChanged: (val) => _updateRadioValue(val, provider),
-          ),
-          RadioListTile(
-            title: Text(
-              AppLocalizations.of(context)!.hours('4'),
-              style: Theme.of(context).textTheme.bodyLarge,
+            RadioListTile(
+              title: Text(
+                AppLocalizations.of(context)!.hours('4'),
+                style: Theme.of(context).textTheme.bodyLarge,
+              ),
+              value: Frequency.every4Hours,
             ),
-            value: Frequency.every4Hours,
-            groupValue: widget.frequency.value,
-            onChanged: (val) => _updateRadioValue(val, provider),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
