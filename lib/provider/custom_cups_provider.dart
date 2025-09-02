@@ -22,7 +22,7 @@ class CustomCupsProvider extends ChangeNotifier {
     if(customCupAmount <= 0) return false;
 
     await _customCupsRepository.createCustomCup(
-      WaterButton(amount: customCupAmount),
+      WaterButton(amount: customCupAmount, position: _customCups.length),
     );
 
     await loadCustomCups();
