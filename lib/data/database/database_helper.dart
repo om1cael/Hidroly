@@ -32,7 +32,7 @@ class DatabaseHelper {
           CREATE TABLE ${DBConstants.customCupsTable} (
             id INTEGER PRIMARY KEY AUTOINCREMENT, 
             amount INTEGER NOT NULL,
-            position INTEGER NOT NULL,
+            position INTEGER NOT NULL
           )
           '''
         );
