@@ -130,6 +130,12 @@ abstract class AppLocalizations {
   /// **'Edit'**
   String get editAction;
 
+  /// No description provided for @rearrangeAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Rearrange'**
+  String get rearrangeAction;
+
   /// No description provided for @updateAction.
   ///
   /// In en, this message translates to:

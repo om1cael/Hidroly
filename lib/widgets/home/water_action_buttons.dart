@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hidroly/data/model/history_entry.dart';
 import 'package:hidroly/data/model/water_button.dart';
 import 'package:hidroly/l10n/app_localizations.dart';
+import 'package:hidroly/provider/app_state_provider.dart';
 import 'package:hidroly/provider/custom_cups_provider.dart';
 import 'package:hidroly/provider/daily_history_provider.dart';
 import 'package:hidroly/provider/day_provider.dart';
@@ -122,6 +123,26 @@ class _WaterActionButtonsState extends State<WaterActionButtons> {
                           );
                         }
                       );
+                    },
+                  ),
+                  PopupMenuItem(
+                    child: Row(
+                      spacing: 12,
+                      children: [
+                        Icon(
+                          Icons.swap_horiz,
+                          color: Theme.of(context).iconTheme.color,
+                        ),
+                        Text(
+                          AppLocalizations.of(context)!.rearrangeAction,
+                          style: TextStyle(
+                            color: Theme.of(context).textTheme.labelMedium!.color
+                          ),
+                        ),
+                      ],
+                    ),
+                    onTap: () async {
+                      context.read<AppStateProvider>().editMode = true;
                     },
                   ),
                   PopupMenuItem(
