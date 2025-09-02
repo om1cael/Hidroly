@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hidroly/data/model/enum/frequency.dart';
+import 'package:hidroly/domain/models/enum/frequency.dart';
 import 'package:hidroly/l10n/app_localizations.dart';
 import 'package:hidroly/provider/settings_provider.dart';
 import 'package:provider/provider.dart';

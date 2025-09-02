@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hidroly/controllers/home_controller.dart';
-import 'package:hidroly/data/model/day.dart';
+import 'package:hidroly/domain/models/day.dart';
 import 'package:hidroly/l10n/app_localizations.dart';
 import 'package:hidroly/pages/settings_page.dart';
 import 'package:hidroly/pages/setup_page.dart';
@@ -185,7 +185,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<void> _loadSelectedDay(DayProvider provider, DateTime pickedDate) async {
-    final selectedDay = await provider.findByDate(pickedDate);
+    final selectedDay = await provider.findByDateRange(pickedDate);
 
     if(selectedDay == null && mounted) {
       ScaffoldMessenger.of(context)

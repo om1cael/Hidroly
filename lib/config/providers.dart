@@ -1,7 +1,4 @@
-import 'package:hidroly/data/database/database_helper.dart';
-import 'package:hidroly/data/datasource/custom_cups_local_datasource_impl.dart';
-import 'package:hidroly/data/datasource/daily_history_local_datasource_impl.dart';
-import 'package:hidroly/data/datasource/day_local_datasource_impl.dart';
+import 'package:hidroly/data/services/database/database_service.dart';
 import 'package:hidroly/data/repository/custom_cups_repository.dart';
 import 'package:hidroly/data/repository/daily_history_repository.dart';
 import 'package:hidroly/data/repository/day_repository.dart';
@@ -15,30 +12,19 @@ import 'package:provider/single_child_widget.dart';
 
 final class Providers {
   final providers = <SingleChildWidget>[
-    Provider(create: (_) => DatabaseHelper()),
+    Provider(create: (_) => DatabaseService()),
     ChangeNotifierProvider(create: (_) => SettingsProvider()),
     ChangeNotifierProvider(create: (_) => AppStateProvider()),
 
-    // Data Sources
-    ProxyProvider<DatabaseHelper, DayLocalDataSourceImpl>(
-      update: (_, db, _) => DayLocalDataSourceImpl(db)
-    ),
-    ProxyProvider<DatabaseHelper, CustomCupsLocalDataSourceImpl>(
-      update: (_, db, _) => CustomCupsLocalDataSourceImpl(db)
-    ),
-    ProxyProvider<DatabaseHelper, DailyHistoryLocalDataSourceImpl>(
-      update: (_, db, _) => DailyHistoryLocalDataSourceImpl(db),
-    ),
-
     // Repositories
-    ProxyProvider<DayLocalDataSourceImpl, DayRepository>(
-      update: (_, datasource, _) => DayRepository(datasource)
+    ProxyProvider<DatabaseService, DayRepository>(
+      update: (_, database, _) => DayRepository(database)
     ),
-    ProxyProvider<CustomCupsLocalDataSourceImpl, CustomCupsRepository>(
-      update: (_, datasource, _) => CustomCupsRepository(datasource)
+    ProxyProvider<DatabaseService, CustomCupsRepository>(
+      update: (_, database, _) => CustomCupsRepository(database)
     ),
-    ProxyProvider<DailyHistoryLocalDataSourceImpl, DailyHistoryRepository>(
-      update: (_, datasource, _) => DailyHistoryRepository(datasource)
+    ProxyProvider<DatabaseService, DailyHistoryRepository>(
+      update: (_, database, _) => DailyHistoryRepository(database)
     ),
 
     // Providers

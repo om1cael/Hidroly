@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hidroly/data/model/enum/settings.dart';
+import 'package:hidroly/domain/models/enum/settings.dart';
 import 'package:hidroly/services/notification_service.dart';
 import 'package:hidroly/utils/app_date_utils.dart';
 

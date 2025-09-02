@@ -1,8 +1,8 @@
-import 'package:hidroly/data/database/db_constants.dart';
+import 'package:hidroly/data/services/database/database_constants.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
-class DatabaseHelper {
+class DatabaseService {
   Database? _database;
 
   Future<Database> get database async {
@@ -19,7 +19,7 @@ class DatabaseHelper {
       onCreate: (db, version) async {
         await db.execute(
           '''
-          CREATE TABLE ${DBConstants.daysTable} (
+          CREATE TABLE ${DatabaseConstants.daysTable} (
               id INTEGER PRIMARY KEY AUTOINCREMENT, 
               dailyGoal INTEGER, 
               currentAmount INTEGER,
@@ -29,7 +29,7 @@ class DatabaseHelper {
         );
         await db.execute(
           '''
-          CREATE TABLE ${DBConstants.customCupsTable} (
+          CREATE TABLE ${DatabaseConstants.customCupsTable} (
             id INTEGER PRIMARY KEY AUTOINCREMENT, 
             amount INTEGER NOT NULL,
             position INTEGER NOT NULL
@@ -38,12 +38,12 @@ class DatabaseHelper {
         );
         await db.execute(
           '''
-          CREATE TABLE ${DBConstants.dailyHistoryEntryTable} (
+          CREATE TABLE ${DatabaseConstants.dailyHistoryEntryTable} (
             id INTEGER PRIMARY KEY AUTOINCREMENT, 
             dayId INTEGER NOT NULL,
             amount INTEGER NOT NULL,
             dateTime TEXT NOT NULL,
-            FOREIGN KEY (dayId) REFERENCES ${DBConstants.daysTable}(id)
+            FOREIGN KEY (dayId) REFERENCES ${DatabaseConstants.daysTable}(id)
           )
           '''
         );
@@ -55,13 +55,13 @@ class DatabaseHelper {
         if(oldVersion < 3) {
           await db.execute(
             '''
-            ALTER TABLE ${DBConstants.customCupsTable}
+            ALTER TABLE ${DatabaseConstants.customCupsTable}
             ADD COLUMN position INTEGER DEFAULT 0 NOT NULL
             '''
           );
           await db.execute(
             '''
-            UPDATE ${DBConstants.customCupsTable}
+            UPDATE ${DatabaseConstants.customCupsTable}
             SET position = rowid
             '''
           );
