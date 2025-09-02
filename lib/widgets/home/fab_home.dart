@@ -160,5 +160,6 @@ class _FabHomeState extends State<FabHome> {
 
   void _toggleEditMode(bool editMode) {
     context.read<AppStateProvider>().editMode = !editMode;
+    context.read<CustomCupsProvider>().loadCustomCups();
   }
 }

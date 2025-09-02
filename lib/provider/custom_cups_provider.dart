@@ -61,7 +61,5 @@ class CustomCupsProvider extends ChangeNotifier {
       
       await _customCupsRepository.updateCustomCup(modifiedWaterButton);
     }
-    
-    await loadCustomCups();
   }
 }
