@@ -19,7 +19,7 @@ class WaterButton {
     if(position != null) {
       map['position'] = position as int;
     }
-
+    
     return map;
   }
 
@@ -29,5 +29,10 @@ class WaterButton {
       amount: amount ?? this.amount,
       position: position ?? this.position,
     );
+  }
+
+  @override
+  String toString() {
+    return '$id : $amount : $position';
   }
 }

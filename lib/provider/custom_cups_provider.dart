@@ -51,8 +51,17 @@ class CustomCupsProvider extends ChangeNotifier {
     return true;
   }
 
-  void reorderCups(int oldPos, int newPos) {
-    final movedCup = customCups.removeAt(oldPos);
-    customCups.insert(newPos, movedCup);
+  Future<void> reorderCups(int oldPos, int newPos) async {
+    final movedCup = _customCups.removeAt(oldPos);
+    _customCups.insert(newPos, movedCup);
+
+    for(WaterButton waterButton in _customCups) {
+      final modifiedWaterButton =
+        waterButton.copyWith(position: _customCups.indexOf(waterButton));
+      
+      await _customCupsRepository.updateCustomCup(modifiedWaterButton);
+    }
+    
+    await loadCustomCups();
   }
 }

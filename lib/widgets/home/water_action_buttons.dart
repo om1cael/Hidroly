@@ -38,9 +38,11 @@ class _WaterActionButtonsState extends State<WaterActionButtons> {
   Widget build(BuildContext context) {
     final List<WaterButton> customCups = 
       context.watch<CustomCupsProvider>().customCups;
-
+    
     final editMode =
       context.watch<AppStateProvider>().editMode;
+
+    customCups.sort((a, b) => a.position!.compareTo(b.position!));
 
     return Container(
       height: 45,
@@ -49,6 +51,10 @@ class _WaterActionButtonsState extends State<WaterActionButtons> {
         shrinkWrap: true,
         scrollDirection: Axis.horizontal,
         onReorder: (oldPos, newPos) {
+          if(oldPos < newPos) {
+            newPos -= 1;
+          }
+
           context.read<CustomCupsProvider>()
             .reorderCups(oldPos, newPos);
         },
