@@ -4,6 +4,7 @@
   "deleteAction": "Delete",
   "doNotSaveLabel": "Do not save",
   "editAction": "Edit",
+  "rearrangeAction": "Rearrange",
   "updateAction": "Update",
   "manageAction": "Manage",
   "bottomNavHomeLabel": "Home",
