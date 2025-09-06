@@ -37,27 +37,27 @@ class _SettingsUnitPageState extends State<SettingsUnitPage> {
         ),
         titleSpacing: 0,
       ),
-      body: RadioGroup(
-        groupValue: selectedMetric,
-        onChanged: (value) => _updateRadioValue(value, provider),
-        child: Column(
-          children: [
-            RadioListTile(
-              title: Text(
-                '${AppLocalizations.of(context)!.metric} (${AppLocalizations.of(context)!.setupUnitMetric})',
-                style: Theme.of(context).textTheme.bodyLarge,
-              ),
-              value: true,
+      body: Column(
+        children: [
+          RadioListTile(
+            title: Text(
+              '${AppLocalizations.of(context)!.metric} (${AppLocalizations.of(context)!.setupUnitMetric})',
+              style: Theme.of(context).textTheme.bodyLarge,
             ),
-            RadioListTile(
-              title: Text(
-                '${AppLocalizations.of(context)!.imperial} (${AppLocalizations.of(context)!.setupUnitImperial})',
-                style: Theme.of(context).textTheme.bodyLarge,
-              ),
-              value: false,
+            value: true, 
+            groupValue: selectedMetric,
+            onChanged: (val) => _updateRadioValue(val, provider),
+          ),
+          RadioListTile(
+            title: Text(
+              '${AppLocalizations.of(context)!.imperial} (${AppLocalizations.of(context)!.setupUnitImperial})',
+              style: Theme.of(context).textTheme.bodyLarge,
             ),
-          ],
-        ),
+            value: false, 
+            groupValue: selectedMetric,
+            onChanged: (val) => _updateRadioValue(val, provider),
+          ),
+        ],
       ),
     );
   }
@@ -71,6 +71,9 @@ class _SettingsUnitPageState extends State<SettingsUnitPage> {
   }
 
   void _loadUnitState() {
-    selectedMetric = context.read<SettingsProvider>().isMetric;
+    final isMetric = context.read<SettingsProvider>().isMetric;
+    if(isMetric != null) {
+      selectedMetric = isMetric;
+    }
   }
 }

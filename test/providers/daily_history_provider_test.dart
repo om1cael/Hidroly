@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:hidroly/domain/models/history_entry.dart';
+import 'package:hidroly/data/model/history_entry.dart';
 import 'package:hidroly/data/repository/daily_history_repository.dart';
 import 'package:hidroly/provider/daily_history_provider.dart';
 import 'package:mocktail/mocktail.dart';

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hidroly/data/repository/custom_cups_repository.dart';
-import 'package:hidroly/domain/models/water_button.dart';
+import 'package:hidroly/data/model/water_button.dart';
 import 'package:sqflite/sqflite.dart';
 
 class CustomCupsProvider extends ChangeNotifier {
@@ -14,18 +14,15 @@ class CustomCupsProvider extends ChangeNotifier {
   }
 
   Future<void> loadCustomCups() async {
-    _customCups = await _customCupsRepository.getAllCustomCups();
+    _customCups = await _customCupsRepository.loadCustomCups();
     notifyListeners();
   }
 
-  Future<bool> createCustomCup(int customCupAmount, { int? position }) async {
+  Future<bool> createCustomCup(int customCupAmount) async {
     if(customCupAmount <= 0) return false;
 
     await _customCupsRepository.createCustomCup(
-      WaterButton(
-        amount: customCupAmount, 
-        position: position ?? _customCups.length,
-      ),
+      WaterButton(amount: customCupAmount),
     );
 
     await loadCustomCups();
@@ -52,17 +49,5 @@ class CustomCupsProvider extends ChangeNotifier {
 
     await loadCustomCups();
     return true;
-  }
-
-  Future<void> reorderCups(int oldPos, int newPos) async {
-    final movedCup = _customCups.removeAt(oldPos);
-    _customCups.insert(newPos, movedCup);
-
-    for(WaterButton waterButton in _customCups) {
-      final modifiedWaterButton =
-        waterButton.copyWith(position: _customCups.indexOf(waterButton));
-      
-      await _customCupsRepository.updateCustomCup(modifiedWaterButton);
-    }
   }
 }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hidroly/domain/models/day.dart';
+import 'package:hidroly/data/model/day.dart';
 import 'package:hidroly/l10n/app_localizations.dart';
 import 'package:hidroly/pages/settings/settings_update_daily_goal_page.dart';
 import 'package:hidroly/provider/day_provider.dart';

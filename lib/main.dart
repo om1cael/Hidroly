@@ -59,7 +59,7 @@ class _MainAppState extends State<MainApp> with WidgetsBindingObserver {
     WidgetsBinding.instance.addObserver(this);
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       ThemeMode? theme = await context.read<SettingsProvider>().readTheme();
-      MainApp.themeNotifier.value = theme;
+      MainApp.themeNotifier.value = theme!;
     });
   }
 
@@ -82,7 +82,7 @@ class _MainAppState extends State<MainApp> with WidgetsBindingObserver {
   Widget build(BuildContext context) {
     return ValueListenableBuilder<ThemeMode>(
       valueListenable: MainApp.themeNotifier,
-      builder: (_, theme, _) {
+      builder: (_, theme, __) {
         return MaterialApp(
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,

@@ -28,34 +28,36 @@ class _SettingsThemePageState extends State<SettingsThemePage> {
         ),
         titleSpacing: 0,
       ),
-      body: RadioGroup(
-        groupValue: MainApp.themeNotifier.value,
-        onChanged: (value) => _updateTheme(value),
-        child: Column(
-          children: [
-            RadioListTile(
-              title: Text(
-                AppLocalizations.of(context)!.system,
-                style: Theme.of(context).textTheme.bodyLarge,
-              ),
-              value: ThemeMode.system, 
+      body: Column(
+        children: [
+          RadioListTile(
+            title: Text(
+              AppLocalizations.of(context)!.system,
+              style: Theme.of(context).textTheme.bodyLarge,
             ),
-            RadioListTile(
-              title: Text(
-                AppLocalizations.of(context)!.light,
-                style: Theme.of(context).textTheme.bodyLarge,
-              ),
-              value: ThemeMode.light, 
+            value: ThemeMode.system, 
+            groupValue: MainApp.themeNotifier.value,
+            onChanged: (val) => _updateTheme(val),
+          ),
+          RadioListTile(
+            title: Text(
+              AppLocalizations.of(context)!.light,
+              style: Theme.of(context).textTheme.bodyLarge,
             ),
-            RadioListTile(
-              title: Text(
-                AppLocalizations.of(context)!.dark,
-                style: Theme.of(context).textTheme.bodyLarge,
-              ),
-              value: ThemeMode.dark, 
+            value: ThemeMode.light, 
+            groupValue: MainApp.themeNotifier.value,
+            onChanged: (val) => _updateTheme(val),
+          ),
+          RadioListTile(
+            title: Text(
+              AppLocalizations.of(context)!.dark,
+              style: Theme.of(context).textTheme.bodyLarge,
             ),
-          ],
-        ),
+            value: ThemeMode.dark, 
+            groupValue: MainApp.themeNotifier.value,
+            onChanged: (val) => _updateTheme(val),
+          ),
+        ],
       ),
     );
   }

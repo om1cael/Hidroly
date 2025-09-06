@@ -1,8 +1,10 @@
-import 'package:hidroly/data/services/database/database_service.dart';
+import 'package:hidroly/data/database/database_helper.dart';
+import 'package:hidroly/data/datasource/custom_cups_local_datasource_impl.dart';
+import 'package:hidroly/data/datasource/daily_history_local_datasource_impl.dart';
+import 'package:hidroly/data/datasource/day_local_datasource_impl.dart';
 import 'package:hidroly/data/repository/custom_cups_repository.dart';
 import 'package:hidroly/data/repository/daily_history_repository.dart';
 import 'package:hidroly/data/repository/day_repository.dart';
-import 'package:hidroly/provider/app_state_provider.dart';
 import 'package:hidroly/provider/custom_cups_provider.dart';
 import 'package:hidroly/provider/daily_history_provider.dart';
 import 'package:hidroly/provider/day_provider.dart';
@@ -12,19 +14,29 @@ import 'package:provider/single_child_widget.dart';
 
 final class Providers {
   final providers = <SingleChildWidget>[
-    Provider(create: (_) => DatabaseService()),
+    Provider(create: (_) => DatabaseHelper()),
     ChangeNotifierProvider(create: (_) => SettingsProvider()),
-    ChangeNotifierProvider(create: (_) => AppStateProvider()),
+
+    // Data Sources
+    ProxyProvider<DatabaseHelper, DayLocalDataSourceImpl>(
+      update: (_, db, __) => DayLocalDataSourceImpl(db)
+    ),
+    ProxyProvider<DatabaseHelper, CustomCupsLocalDataSourceImpl>(
+      update: (_, db, __) => CustomCupsLocalDataSourceImpl(db)
+    ),
+    ProxyProvider<DatabaseHelper, DailyHistoryLocalDataSourceImpl>(
+      update: (_, db, __) => DailyHistoryLocalDataSourceImpl(db),
+    ),
 
     // Repositories
-    ProxyProvider<DatabaseService, DayRepository>(
-      update: (_, database, _) => DayRepository(database)
+    ProxyProvider<DayLocalDataSourceImpl, DayRepository>(
+      update: (_, datasource, __) => DayRepository(datasource)
     ),
-    ProxyProvider<DatabaseService, CustomCupsRepository>(
-      update: (_, database, _) => CustomCupsRepository(database)
+    ProxyProvider<CustomCupsLocalDataSourceImpl, CustomCupsRepository>(
+      update: (_, datasource, __) => CustomCupsRepository(datasource)
     ),
-    ProxyProvider<DatabaseService, DailyHistoryRepository>(
-      update: (_, database, _) => DailyHistoryRepository(database)
+    ProxyProvider<DailyHistoryLocalDataSourceImpl, DailyHistoryRepository>(
+      update: (_, datasource, __) => DailyHistoryRepository(datasource)
     ),
 
     // Providers

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:hidroly/domain/models/enum/settings.dart';
+import 'package:hidroly/data/model/enum/settings.dart';
 import 'package:hidroly/l10n/app_localizations.dart';
+import 'package:hidroly/provider/settings_provider.dart';
 import 'package:hidroly/utils/app_date_utils.dart';
 import 'package:workmanager/workmanager.dart';
 
@@ -50,20 +51,23 @@ class NotificationService {
 
   Future<bool> registerPeriodicNotificationTask(
     BuildContext context, 
-    TimeOfDay wakeUpTime,
-    TimeOfDay sleepTime,
-    {int frequencyInMinutes = 120}
+    SettingsProvider settingsProvider,
+    {int minutes = 120}
   ) async {
+    if(settingsProvider.wakeUpTime == null || settingsProvider.sleepTime == null) {
+      return false;
+    }
+
     final workManager = Workmanager();
 
     final formattedWakeUpTime = AppDateUtils.formatTime(
-      wakeUpTime.hour, 
-      wakeUpTime.minute
+      settingsProvider.wakeUpTime!.hour, 
+      settingsProvider.wakeUpTime!.minute
     );
 
     final formattedSleepTime = AppDateUtils.formatTime(
-      sleepTime.hour,
-      sleepTime.minute
+      settingsProvider.sleepTime!.hour, 
+      settingsProvider.sleepTime!.minute
     );
     
     await workManager.cancelAll();
@@ -72,7 +76,7 @@ class NotificationService {
     await workManager.registerPeriodicTask(
       'notification',
       'notificationTask',
-      frequency: Duration(minutes: frequencyInMinutes),
+      frequency: Duration(minutes: minutes),
       inputData: {
         Settings.wakeUpTime.value: formattedWakeUpTime,
         Settings.sleepTime.value: formattedSleepTime,

@@ -18,6 +18,11 @@ class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
     final isMetric = context.watch<SettingsProvider>().isMetric;
+    if(isMetric == null) {
+      return Scaffold(
+        body: Center(child: CircularProgressIndicator(),),
+      );
+    }
 
     return Scaffold(
       appBar: AppBar(

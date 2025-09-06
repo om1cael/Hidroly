@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:hidroly/domain/models/day.dart';
+import 'package:hidroly/data/model/day.dart';
 import 'package:hidroly/data/repository/day_repository.dart';
 import 'package:hidroly/provider/day_provider.dart';
 import 'package:mocktail/mocktail.dart';

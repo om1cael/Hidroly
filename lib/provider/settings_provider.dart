@@ -1,70 +1,60 @@
 import 'package:flutter/material.dart';
-import 'package:hidroly/domain/models/enum/frequency.dart';
-import 'package:hidroly/domain/models/enum/settings.dart';
+import 'package:hidroly/data/model/enum/frequency.dart';
+import 'package:hidroly/data/model/enum/settings.dart';
 import 'package:hidroly/utils/app_date_utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SettingsProvider extends ChangeNotifier {
   final _asyncPrefs = SharedPreferencesAsync();
 
-  final _isMetricKey = 'isMetric';
-  final _themeKey = 'theme';
-  final _frequencyKey = 'frequency';
-
-  bool isMetric;
-  Frequency frequencyHolder;
-  ThemeMode theme;
-  TimeOfDay wakeUpTime;
-  TimeOfDay sleepTime;
-
-  SettingsProvider({
-    this.isMetric = true,
-    this.frequencyHolder = Frequency.every2Hours,
-    this.theme = ThemeMode.system,
-    this.wakeUpTime = const TimeOfDay(hour: 6, minute: 0),
-    this.sleepTime = const TimeOfDay(hour: 22, minute: 0),
-  });
-
-  Future<void> loadAllSettings() async {
-    await readIsMetric();
-    await readTime(Settings.wakeUpTime);
-    await readTime(Settings.sleepTime);
-  }
+  bool? isMetric;
+  int? frequency;
+  ThemeMode? theme;
+  TimeOfDay? wakeUpTime;
+  TimeOfDay? sleepTime;
 
   Future<void> updateIsMetric(bool value) async {
-    await _asyncPrefs.setBool(_isMetricKey, value);
+    await _asyncPrefs.setBool('isMetric', value);
     isMetric = value;
     notifyListeners();
   }
 
   Future<void> readIsMetric() async {
-    isMetric = await _asyncPrefs.getBool(_isMetricKey) ?? true;
+    isMetric = await _asyncPrefs.getBool('isMetric') ?? true;
     notifyListeners();
   }
 
   Future<void> updateTheme(ThemeMode newTheme) async {
-    await _asyncPrefs.setInt(_themeKey, newTheme.index);
+    await _asyncPrefs.setInt('theme', newTheme.index);
     theme = newTheme;
     notifyListeners();
   }
 
-  Future<ThemeMode> readTheme() async {
-    final themeIndex = await _asyncPrefs.getInt(_themeKey) ?? ThemeMode.system.index;
+  Future<ThemeMode?> readTheme() async {
+    final defaultTheme = ThemeMode.system;
+    theme = defaultTheme;
+
+    int? storedThemeIndex = await _asyncPrefs.getInt('theme');
+
+    if(storedThemeIndex != null) {
+      theme = ThemeMode
+        .values
+        .where((value) => value.index == storedThemeIndex)
+        .first;
+    }
     
-    theme = ThemeMode.values[themeIndex];
-    notifyListeners();
     return theme;
   }
 
   Future<void> updateFrequency(int value) async {
-    await _asyncPrefs.setInt(_frequencyKey, value);
-    frequencyHolder = Frequency.getFrequency(value);
+    await _asyncPrefs.setInt('frequency', value);
+    frequency = value;
     notifyListeners();
   }
 
   Future<void> readFrequency() async {
-    int frequencyTime = await _asyncPrefs.getInt(_frequencyKey) ?? Frequency.every2Hours.frequency;
-    frequencyHolder = Frequency.getFrequency(frequencyTime);
+    final defaultFrequency = Frequency.every2Hours;
+    frequency = await _asyncPrefs.getInt('frequency') ?? defaultFrequency.frequency;
     notifyListeners();
   }
 

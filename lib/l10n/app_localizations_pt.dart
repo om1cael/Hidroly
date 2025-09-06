@@ -24,9 +24,6 @@ class AppLocalizationsPt extends AppLocalizations {
   String get editAction => 'Editar';
 
   @override
-  String get rearrangeAction => 'Reorganizar';
-
-  @override
   String get updateAction => 'Atualizar';
 
   @override

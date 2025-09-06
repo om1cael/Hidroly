@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:hidroly/domain/models/day.dart';
+import 'package:hidroly/data/model/day.dart';
 import 'package:hidroly/data/repository/day_repository.dart';
 import 'package:hidroly/utils/app_date_utils.dart';
 
@@ -53,22 +53,8 @@ class DayProvider extends ChangeNotifier {
     }
   }
 
-  Future<bool> loadLatestDay() async {
-    Day? latestDay = await findLatest();
-    if(latestDay == null) {
-      return false;
-    }
-
-    day = latestDay;
-    notifyListeners();
-    return true;
-  }
-
-  Future<Day?> findByDateRange(DateTime date) async {
-    final start = date.toUtc();
-    final end = start.add(Duration(days: 1));
-
-    return await _repository.findByDateRange(start, end);
+  Future<Day?> findByDate(DateTime date) async {
+    return await _repository.findByDate(date);
   }
 
   Future<Day?> findFirst() async {

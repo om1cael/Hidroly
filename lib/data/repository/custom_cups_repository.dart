@@ -1,50 +1,20 @@
-import 'package:hidroly/data/services/database/database_constants.dart';
-import 'package:hidroly/data/services/database/database_service.dart';
-import 'package:hidroly/domain/models/water_button.dart';
-import 'package:sqflite/sqflite.dart';
+import 'package:hidroly/data/datasource/custom_cups_local_datasource_impl.dart';
+import 'package:hidroly/data/model/water_button.dart';
 
 class CustomCupsRepository {
-  final DatabaseService _databaseService;
+  final CustomCupsLocalDataSourceImpl _customCupsLocalDataSourceImpl;
 
-  CustomCupsRepository(this._databaseService);
+  CustomCupsRepository(this._customCupsLocalDataSourceImpl);
 
-  Future<void> createCustomCup(WaterButton waterButton) async {
-    final db = await _databaseService.database;
-    await db.insert(
-      DatabaseConstants.customCupsTable, 
-      waterButton.toMap(),
-      conflictAlgorithm: ConflictAlgorithm.replace,
-    );
-  }
+  Future<void> createCustomCup(WaterButton waterButton) async => 
+    _customCupsLocalDataSourceImpl.createCustomCup(waterButton);
 
-  Future<List<WaterButton>> getAllCustomCups() async {
-    final db = await _databaseService.database;
-    List<Map<String, Object?>> customCups = await db.query(
-      DatabaseConstants.customCupsTable
-    );
+  Future<List<WaterButton>> loadCustomCups() async => 
+    _customCupsLocalDataSourceImpl.getAllCustomCups();
 
-    return [
-      for(final { 'id': id as int, 'amount': amount as int, 'position': position as int, } in customCups)
-        WaterButton(id: id, amount: amount, position: position),
-    ];
-  }
+  Future<void> updateCustomCup(WaterButton waterButton) async => 
+    _customCupsLocalDataSourceImpl.updateCustomCup(waterButton);
 
-  Future<void> updateCustomCup(WaterButton waterButton) async {
-    final db = await _databaseService.database;
-    await db.update(
-      DatabaseConstants.customCupsTable,
-      waterButton.toMap(),
-      where: 'id = ?',
-      whereArgs: [waterButton.id]
-    );
-  }
-
-  Future<void> deleteCustomCup(int id) async {
-    final db = await _databaseService.database;
-    await db.delete(
-      DatabaseConstants.customCupsTable, 
-      where: 'id = ?',
-      whereArgs: [id]
-    );
-  }
+  Future<void> deleteCustomCup(int id) async => 
+    _customCupsLocalDataSourceImpl.deleteCustomCup(id);
 }

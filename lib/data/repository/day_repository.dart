@@ -1,92 +1,23 @@
-import 'package:hidroly/data/services/database/database_constants.dart';
-import 'package:hidroly/data/services/database/database_service.dart';
-import 'package:hidroly/domain/models/day.dart';
-import 'package:sqflite/sqflite.dart';
+import 'package:hidroly/data/datasource/day_local_datasource_impl.dart';
+import 'package:hidroly/data/model/day.dart';
 
 class DayRepository {
-  final DatabaseService _databaseService;
+  final DayLocalDataSourceImpl _userLocalDataSourceImpl;
 
-  DayRepository(this._databaseService);
+  const DayRepository(this._userLocalDataSourceImpl);
 
-  Future<void> create(Day day) async {
-    final db = await _databaseService.database;
-    await db.insert(
-      DatabaseConstants.daysTable,
-      day.toMap(),
-      conflictAlgorithm: ConflictAlgorithm.replace,
-    );
-  }
+  Future<void> create(Day user) async => await _userLocalDataSourceImpl.create(user);
 
-  Future<void> update(Day day) async {
-    final db = await _databaseService.database;
-    await db.update(
-      DatabaseConstants.daysTable, 
-      day.toMap(),
-      where: 'id = ?',
-      whereArgs: [day.id] 
-    );
-  }
+  Future<Day?> findFirst() async => await _userLocalDataSourceImpl.findFirst();
 
-  Future<Day?> findFirst() async {
-    final db = await _databaseService.database;
-    final List<Map<String, Object?>> daysList = await db.query(
-      DatabaseConstants.daysTable, 
-      orderBy: 'date ASC',
-      limit: 1
-    );
+  Future<Day?> findLatest() async => await _userLocalDataSourceImpl.findLatest();
 
-    if(daysList.isEmpty) return null;
-    Map<String, Object?> dayMap = daysList.first;
+  Future<Day?> findByDate(DateTime date) async {
+    final startUtc = date.toUtc();
+    final endUtc = startUtc.add(Duration(days: 1));
 
-    Day day = Day(
-      id: dayMap['id'] as int,
-      dailyGoal: dayMap['dailyGoal'] as int,
-      currentAmount: dayMap['currentAmount'] as int,
-      date: DateTime.parse(dayMap['date'] as String),
-    );
-
-    return day;
-  }
-
-  Future<Day?> findLatest() async {
-    final db = await _databaseService.database;
-    final List<Map<String, Object?>> daysList = await db.query(
-      DatabaseConstants.daysTable, 
-      orderBy: 'date DESC',
-      limit: 1
-    );
-
-    if(daysList.isEmpty) return null;
-    Map<String, Object?> dayMap = daysList.first;
-
-    Day day = Day(
-      id: dayMap['id'] as int,
-      dailyGoal: dayMap['dailyGoal'] as int,
-      currentAmount: dayMap['currentAmount'] as int,
-      date: DateTime.parse(dayMap['date'] as String),
-    );
-
-    return day;
+    return await _userLocalDataSourceImpl.findByDate(startUtc.toIso8601String(), endUtc.toIso8601String());
   }
   
-  Future<Day?> findByDateRange(DateTime start, DateTime end) async {
-    final db = await _databaseService.database;
-    final List<Map<String, Object?>> dayList = await db.query(
-      DatabaseConstants.daysTable,
-      where: 'date >= ? AND date < ?',
-      whereArgs: [start, end],
-      orderBy: 'date DESC',
-      limit: 1,
-    );
-
-    if(dayList.isEmpty) return null;
-    Map<String, Object?> dayMap = dayList.first;
-    
-    return Day(
-      id: dayMap['id'] as int,
-      dailyGoal: dayMap['dailyGoal'] as int,
-      currentAmount: dayMap['currentAmount'] as int,
-      date: DateTime.parse(dayMap['date'] as String),
-    );
-  }
+  Future<void> update(Day updatedUser) async => await _userLocalDataSourceImpl.update(updatedUser);
 }

@@ -1,8 +1,10 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:hidroly/controllers/setup_controller.dart';
-import 'package:hidroly/domain/models/enum/frequency.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:hidroly/data/model/enum/frequency.dart';
+import 'package:hidroly/data/model/enum/settings.dart';
+import 'package:hidroly/data/model/water_button.dart';
 import 'package:hidroly/provider/custom_cups_provider.dart';
 import 'package:hidroly/provider/settings_provider.dart';
 import 'package:hidroly/l10n/app_localizations.dart';
@@ -14,6 +16,7 @@ import 'package:hidroly/utils/unit_tools.dart';
 import 'package:hidroly/widgets/setup/setup_step_one.dart';
 import 'package:hidroly/widgets/setup/setup_step_zero.dart';
 import 'package:provider/provider.dart';
+import 'package:sqflite/sqlite_api.dart';
 
 class SetupPage extends StatefulWidget {
   const SetupPage({super.key});
@@ -23,13 +26,11 @@ class SetupPage extends StatefulWidget {
 }
 
 class _SetupPageState extends State<SetupPage> {
-  late SetupController setupController;
-
   final TextEditingController ageController = TextEditingController();
   final TextEditingController weightController = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-  final isMetric = ValueNotifier(true);
+  final ValueNotifier<bool> isMetric = ValueNotifier(true);
   final wakeUpTime = ValueNotifier(TimeOfDay(hour: 6, minute: 0));
   final sleepTime = ValueNotifier(TimeOfDay(hour: 22, minute: 0));
   final frequency = ValueNotifier(Frequency.every2Hours);
@@ -37,27 +38,11 @@ class _SetupPageState extends State<SetupPage> {
   int setupStep = 0;
 
   @override
-  void initState() {
-    super.initState();
-
-    setupController = SetupController(
-      dayProvider: context.read<DayProvider>(),
-      customCupsProvider: context.read<CustomCupsProvider>(),
-      settingsProvider: context.read<SettingsProvider>(),
-    );
-  }
-
-  @override
-  void dispose() {    
-    super.dispose();
-
+  void dispose() {
     ageController.dispose();
     weightController.dispose();
-
     isMetric.dispose();
-    wakeUpTime.dispose();
-    sleepTime.dispose();
-    frequency.dispose();
+    super.dispose();
   }
 
   @override
@@ -88,49 +73,55 @@ class _SetupPageState extends State<SetupPage> {
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
           if(!formKey.currentState!.validate()) return;
-
           if(setupStep == 0) {
-            _changeSetupStep();
+            setState(() {
+              setupStep = 1;
+            });
+
+            if(!Platform.isAndroid) return;
+
+            FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+              FlutterLocalNotificationsPlugin();
+            flutterLocalNotificationsPlugin.resolvePlatformSpecificImplementation<
+                AndroidFlutterLocalNotificationsPlugin>()!.requestNotificationsPermission();
             return;
           }
 
-          await setupController.saveSettings(
-            context,
-            isMetric,
-            wakeUpTime,
-            sleepTime,
-            frequency
-          );
+          final settingsProvider = context.read<SettingsProvider>();
+
+          await _saveSettings(context);
 
           int? dailyGoal = _getDailyGoal();
           if(dailyGoal == null) return;
 
+          if(!context.mounted) return;
+          final dayCreated = await _createDay(context, dailyGoal);
 
           if(!context.mounted) return;
-          final dayCreated = await setupController.createDay(context, dailyGoal);
-          final defaultCupsCreated = await setupController.createDefaultCups();
+          final defaultCupsCreated = await _createDefaultCups();
 
           if(!context.mounted) return;
           final notificationTaskCreated = await NotificationService().registerPeriodicNotificationTask(
             context,
-            wakeUpTime.value,
-            sleepTime.value,
-            frequencyInMinutes: frequency.value.frequency,
+            settingsProvider,
+            minutes: frequency.value.frequency,
           );
 
           if(!notificationTaskCreated && context.mounted) {
-            _showSnackBar(
-              context, 
-              AppLocalizations.of(context)!.notificationTaskCreationFailed
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text(
+                AppLocalizations.of(context)!.notificationTaskCreationFailed,
+              )),
             );
 
             return;
           }
 
           if((!dayCreated || !defaultCupsCreated) && context.mounted) {
-            _showSnackBar(
-              context, 
-              AppLocalizations.of(context)!.setupFailed
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text(
+                AppLocalizations.of(context)!.setupFailed,
+              )),
             );
 
             return;
@@ -148,22 +139,53 @@ class _SetupPageState extends State<SetupPage> {
     );
   }
 
-  void _changeSetupStep() {
-    setState(() {
-      setupStep = 1;
-    });
+  Future<void> _saveSettings(BuildContext context) async {
+    final settingsProvider = context.read<SettingsProvider>();
     
-    if(Platform.isAndroid) {
-      setupController.requestAndroidNotificationPermission();
-    }
+    await settingsProvider.updateIsMetric(isMetric.value);
+    
+    await settingsProvider.updateTime(
+      Settings.wakeUpTime,
+      wakeUpTime.value.hour, 
+      wakeUpTime.value.minute
+    );
+
+    await settingsProvider.updateTime(
+      Settings.sleepTime,
+      sleepTime.value.hour, 
+      sleepTime.value.minute
+    );
+
+    await settingsProvider.updateFrequency(frequency.value.frequency);
   }
 
-  void _showSnackBar(BuildContext context, String text) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(
-        text,
-      )),
+  Future<bool> _createDay(BuildContext context, int dailyGoal) async {
+    final localDate = DateTime.now();
+    
+    bool created = await context.read<DayProvider>().create(
+      localDate,
+      dailyGoal,
     );
+    return created;
+  }
+
+  Future<bool> _createDefaultCups() async {
+    final defaultCups = [
+      WaterButton(amount: 250),
+      WaterButton(amount: 300),
+      WaterButton(amount: 600),
+    ];
+
+    try {
+      for(WaterButton cup in defaultCups) {
+        await context.read<CustomCupsProvider>()
+          .createCustomCup(cup.amount);
+      }
+    } on DatabaseException {
+      return false;
+    }
+
+    return true;
   }
 
   int? _getDailyGoal() {

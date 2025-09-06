@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hidroly/domain/models/enum/frequency.dart';
+import 'package:hidroly/data/model/enum/frequency.dart';
 import 'package:hidroly/l10n/app_localizations.dart';
 import 'package:hidroly/provider/settings_provider.dart';
 import 'package:provider/provider.dart';
@@ -47,55 +47,63 @@ class _SettingsFrequencyPageState extends State<SettingsFrequencyPage> {
         ),
         titleSpacing: 0,
       ),
-      body: RadioGroup(
-        groupValue: widget.frequency.value,
-        onChanged: (value) => _updateRadioValue(value, provider),
-        child: Column(
-          children: [
-            RadioListTile(
-              title: Text(
-                AppLocalizations.of(context)!.minutes('15'),
-                style: Theme.of(context).textTheme.bodyLarge,
-              ),
-              value: Frequency.every15Minutes, 
+      body: Column(
+        children: [
+          RadioListTile(
+            title: Text(
+              AppLocalizations.of(context)!.minutes('15'),
+              style: Theme.of(context).textTheme.bodyLarge,
             ),
-            RadioListTile(
-              title: Text(
-                AppLocalizations.of(context)!.minutes('30'),
-                style: Theme.of(context).textTheme.bodyLarge,
-              ),
-              value: Frequency.every30Minutes, 
+            value: Frequency.every15Minutes, 
+            groupValue: widget.frequency.value,
+            onChanged: (val) => _updateRadioValue(val, provider),
+          ),
+          RadioListTile(
+            title: Text(
+              AppLocalizations.of(context)!.minutes('30'),
+              style: Theme.of(context).textTheme.bodyLarge,
             ),
-            RadioListTile(
-              title: Text(
-                AppLocalizations.of(context)!.hour('1'),
-                style: Theme.of(context).textTheme.bodyLarge,
-              ),
-              value: Frequency.everyHour, 
+            value: Frequency.every30Minutes, 
+            groupValue: widget.frequency.value,
+            onChanged: (val) => _updateRadioValue(val, provider),
+          ),
+          RadioListTile(
+            title: Text(
+              AppLocalizations.of(context)!.hour('1'),
+              style: Theme.of(context).textTheme.bodyLarge,
             ),
-            RadioListTile(
-              title: Text(
-                AppLocalizations.of(context)!.hours('2'),
-                style: Theme.of(context).textTheme.bodyLarge,
-              ),
-              value: Frequency.every2Hours, 
+            value: Frequency.everyHour, 
+            groupValue: widget.frequency.value,
+            onChanged: (val) => _updateRadioValue(val, provider),
+          ),
+          RadioListTile(
+            title: Text(
+              AppLocalizations.of(context)!.hours('2'),
+              style: Theme.of(context).textTheme.bodyLarge,
             ),
-            RadioListTile(
-              title: Text(
-                AppLocalizations.of(context)!.hours('3'),
-                style: Theme.of(context).textTheme.bodyLarge,
-              ),
-              value: Frequency.every3Hours, 
+            value: Frequency.every2Hours, 
+            groupValue: widget.frequency.value,
+            onChanged: (val) => _updateRadioValue(val, provider),
+          ),
+          RadioListTile(
+            title: Text(
+              AppLocalizations.of(context)!.hours('3'),
+              style: Theme.of(context).textTheme.bodyLarge,
             ),
-            RadioListTile(
-              title: Text(
-                AppLocalizations.of(context)!.hours('4'),
-                style: Theme.of(context).textTheme.bodyLarge,
-              ),
-              value: Frequency.every4Hours,
+            value: Frequency.every3Hours, 
+            groupValue: widget.frequency.value,
+            onChanged: (val) => _updateRadioValue(val, provider),
+          ),
+          RadioListTile(
+            title: Text(
+              AppLocalizations.of(context)!.hours('4'),
+              style: Theme.of(context).textTheme.bodyLarge,
             ),
-          ],
-        ),
+            value: Frequency.every4Hours,
+            groupValue: widget.frequency.value,
+            onChanged: (val) => _updateRadioValue(val, provider),
+          ),
+        ],
       ),
     );
   }
@@ -114,6 +122,6 @@ class _SettingsFrequencyPageState extends State<SettingsFrequencyPage> {
   Future<int> _getFrequency() async {
     final provider = context.read<SettingsProvider>();
     await provider.readFrequency();
-    return provider.frequencyHolder.frequency;
+    return provider.frequency!;
   }
 }

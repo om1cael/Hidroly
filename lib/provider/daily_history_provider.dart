@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hidroly/domain/models/history_entry.dart';
+import 'package:hidroly/data/model/history_entry.dart';
 import 'package:hidroly/data/repository/daily_history_repository.dart';
 
 class DailyHistoryProvider extends ChangeNotifier {
