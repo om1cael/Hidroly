@@ -13,4 +13,5 @@ Thank you for your interest in contributing to Hidroly! Every contribution, big 
 When opening an issue for a bug or suggestion, please use the provided template. This helps us understand and address the problem more efficiently.
 
 ## Translations
-You can get started by visiting our Crowdin project [here](https://crowdin.com/project/hidroly).
+At the moment, translations can only be added by editing or creating files in the [l10n](https://github.com/om1cael/Hidroly/tree/main/lib/l10n) folder.  
+If you contribute this way, please be sure to follow the [Code Contributions](#code-contributions) guidelines.

@@ -11,10 +11,10 @@ Hidroly is a friendly, open-source Flutter app that helps you stay hydrated by t
       <img src=".github/assets/IzzyOnDroid.png" width="200">
     </a>
   </div>
-  <img src="https://shields.rbtlog.dev/simple/com.om1cael.hidroly" alt="RB shield">
-  <img src="https://img.shields.io/github/downloads/om1cael/hidroly/total">
-  <a title="Crowdin" target="_blank" href="https://crowdin.com/project/hidroly"><img src="https://badges.crowdin.net/hidroly/localized.svg"></a>
   <img alt="GitHub License" src="https://img.shields.io/github/license/om1cael/hidroly">
+  <img src="https://img.shields.io/github/downloads/om1cael/hidroly/total">
+  <img src="https://shields.rbtlog.dev/simple/com.om1cael.hidroly" alt="RB shield">
+  <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/om1cael/hidroly">
 </div>
 
 ## Table of Contents
