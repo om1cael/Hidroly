@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:hidroly/data/model/history_entry.dart';
+import 'package:hidroly/domain/models/history_entry.dart';
 import 'package:hidroly/l10n/app_localizations.dart';
+import 'package:hidroly/provider/app_state_provider.dart';
 import 'package:hidroly/provider/custom_cups_provider.dart';
 import 'package:hidroly/provider/daily_history_provider.dart';
 import 'package:hidroly/provider/day_provider.dart';
@@ -8,32 +9,46 @@ import 'package:hidroly/utils/unit_tools.dart';
 import 'package:hidroly/widgets/input/form_number_input_field.dart';
 import 'package:provider/provider.dart';
 
-class FabCustomCup extends StatelessWidget {
-  const FabCustomCup({
+class FabHome extends StatefulWidget {
+  const FabHome({
     super.key,
     required this.dayId,
-    required this.customCupAmountController,
-    required this.formKey,
     required this.isMetric,
   });
 
-  final TextEditingController customCupAmountController;
-  final GlobalKey<FormState> formKey;
-  
   final int dayId;
   final bool isMetric;
 
   @override
+  State<FabHome> createState() => _FabHomeState();
+}
+
+class _FabHomeState extends State<FabHome> {
+  final TextEditingController customCupAmountController = TextEditingController();
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
+  @override
+  void dispose() {
+    customCupAmountController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final editMode =
+      context.watch<AppStateProvider>().editMode;
+
     return FloatingActionButton(
-      onPressed: () => _showCustomCupPopUp(context),
-      child: Icon(
-        Icons.add,
-      ),
+      onPressed: () => editMode
+        ? _toggleEditMode(editMode)
+        : _showCustomCupPopUp(context),
+      child: editMode 
+        ? Icon(Icons.done)
+        : Icon(Icons.add)
     );
   }
 
-  void _showCustomCupPopUp(context) {
+  void _showCustomCupPopUp(BuildContext context) {
     showDialog(
       context: context, 
       builder: (context) {
@@ -52,7 +67,7 @@ class FabCustomCup extends StatelessWidget {
               children: [
                 FormNumberInputField(
                   label: AppLocalizations.of(context)!.customCupDialogTextFieldAmount, 
-                  decimal: !isMetric,
+                  decimal: !widget.isMetric,
                   maxLength: 4,
                   controller: customCupAmountController, 
                   validator: (value) {
@@ -94,7 +109,7 @@ class FabCustomCup extends StatelessWidget {
 
                 if(doNotSaveCup) {
                   int formattedAmount = 
-                    isMetric ? amount.round() : UnitTools.flOzToMl(amount);
+                    widget.isMetric ? amount.round() : UnitTools.flOzToMl(amount);
                   
                   success = await context
                     .read<DayProvider>()
@@ -103,14 +118,14 @@ class FabCustomCup extends StatelessWidget {
                   if(!context.mounted) return;
                   await context.read<DailyHistoryProvider>().create(
                     HistoryEntry(
-                      dayId: dayId, 
+                      dayId: widget.dayId, 
                       amount: formattedAmount, 
                       dateTime: DateTime.now().toUtc()
                     )
                   );
                 } else {
                   success = await context.read<CustomCupsProvider>().createCustomCup(
-                    isMetric ? amount.round() : UnitTools.flOzToMl(amount)
+                    widget.isMetric ? amount.round() : UnitTools.flOzToMl(amount)
                   );
                 }
 
@@ -141,5 +156,10 @@ class FabCustomCup extends StatelessWidget {
         );
       }
     );
+  }
+
+  void _toggleEditMode(bool editMode) {
+    context.read<AppStateProvider>().editMode = !editMode;
+    context.read<CustomCupsProvider>().loadCustomCups();
   }
 }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hidroly/data/model/history_entry.dart';
+import 'package:hidroly/domain/models/history_entry.dart';
 import 'package:hidroly/l10n/app_localizations.dart';
 import 'package:hidroly/provider/daily_history_provider.dart';
 import 'package:hidroly/provider/day_provider.dart';

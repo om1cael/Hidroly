@@ -18,7 +18,7 @@ if (hasKeystore) {
 android {
     namespace = "com.om1cael.hidroly"
     compileSdk = flutter.compileSdkVersion
-    ndkVersion = flutter.ndkVersion
+    ndkVersion = "28.2.13676358"
 
     dependenciesInfo {
         includeInApk = false
