@@ -6,7 +6,7 @@ import 'package:hidroly/pages/settings_page.dart';
 import 'package:hidroly/pages/setup_page.dart';
 import 'package:hidroly/provider/day_provider.dart';
 import 'package:hidroly/provider/settings_provider.dart';
-import 'package:hidroly/theme/app_colors.dart';
+import 'package:hidroly/ui/core/theme/app_colors.dart';
 import 'package:hidroly/utils/app_date_utils.dart';
 import 'package:hidroly/widgets/home/daily_history_bottom_sheet.dart';
 import 'package:hidroly/widgets/home/fab_home.dart';

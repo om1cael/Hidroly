@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hidroly/theme/app_colors.dart';
+import 'package:hidroly/ui/core/theme/app_colors.dart';
 
 class DarkTheme {
   static ThemeData get data {

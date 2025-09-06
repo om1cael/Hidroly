@@ -6,7 +6,7 @@ import 'package:hidroly/provider/day_provider.dart';
 import 'package:hidroly/provider/settings_provider.dart';
 import 'package:hidroly/services/notification_service.dart';
 import 'package:hidroly/services/notification_task_service.dart';
-import 'package:hidroly/theme/app_theme.dart';
+import 'package:hidroly/ui/core/theme/app_theme.dart';
 import 'package:provider/provider.dart';
 import 'package:workmanager/workmanager.dart';
 

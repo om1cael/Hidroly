@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hidroly/l10n/app_localizations.dart';
-import 'package:hidroly/theme/app_colors.dart';
+import 'package:hidroly/ui/core/theme/app_colors.dart';
 import 'package:hidroly/widgets/input/form_number_input_field.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 
