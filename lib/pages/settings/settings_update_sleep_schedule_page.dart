@@ -3,7 +3,7 @@ import 'package:hidroly/domain/models/enum/frequency.dart';
 import 'package:hidroly/domain/models/enum/settings.dart';
 import 'package:hidroly/l10n/app_localizations.dart';
 import 'package:hidroly/provider/settings_provider.dart';
-import 'package:hidroly/services/notification_service.dart';
+import 'package:hidroly/data/services/notifications/notification_service.dart';
 import 'package:hidroly/widgets/common/icon_header.dart';
 import 'package:hidroly/widgets/common/notifications_time_input.dart';
 import 'package:provider/provider.dart';
