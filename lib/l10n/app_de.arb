@@ -4,6 +4,7 @@
   "deleteAction": "Löschen",
   "doNotSaveLabel": "Nicht speichern",
   "editAction": "Bearbeiten",
+  "rearrangeAction": "Rearrange",
   "updateAction": "Aktualisieren",
   "manageAction": "Verwalten",
   "bottomNavHomeLabel": "Start",
