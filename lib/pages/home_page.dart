@@ -133,6 +133,7 @@ class _HomePageState extends State<HomePage> {
           icon: Icon(
             Icons.history,
             color: Theme.of(context).iconTheme.color,
+            semanticLabel: AppLocalizations.of(context)!.historyIconSemanticLabel,
           ),
           style: IconButton.styleFrom(
             backgroundColor: Colors.transparent,
@@ -149,6 +150,7 @@ class _HomePageState extends State<HomePage> {
           icon: Icon(
             Icons.settings,
             color: Theme.of(context).iconTheme.color,
+            semanticLabel: AppLocalizations.of(context)!.settingsIconSemanticLabel,
           ),
           style: IconButton.styleFrom(
             backgroundColor: Colors.transparent,

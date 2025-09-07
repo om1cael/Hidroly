@@ -73,6 +73,7 @@ class _SettingsUpdateSleepSchedulePageState extends State<SettingsUpdateSleepSch
           icon: Icon(
             Icons.arrow_back,
             color: Theme.of(context).iconTheme.color,
+            semanticLabel: AppLocalizations.of(context)!.goBackIconSemanticLabel,
           ),
         ),
       ),
@@ -139,7 +140,10 @@ class _SettingsUpdateSleepSchedulePageState extends State<SettingsUpdateSleepSch
           if(!context.mounted) return;
           Navigator.of(context).pop(true);
         },
-        child: Icon(Icons.done), 
+        child: Icon(
+          Icons.done,
+          semanticLabel: AppLocalizations.of(context)!.saveChangesIconSemanticLabel,
+        ), 
       ),
     );
   }

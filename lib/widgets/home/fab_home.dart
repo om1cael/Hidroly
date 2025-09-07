@@ -45,8 +45,14 @@ class _FabHomeState extends State<FabHome> {
         ? _toggleEditMode(editMode)
         : _showCustomCupPopUp(context),
       child: editMode 
-        ? Icon(Icons.done)
-        : Icon(Icons.add)
+        ? Icon(
+          Icons.done,
+          semanticLabel: AppLocalizations.of(context)!.saveChangesIconSemanticLabel,
+        )
+        : Icon(
+          Icons.add,
+          semanticLabel: AppLocalizations.of(context)!.addCupIconSemanticLabel,
+        )
     );
   }
 

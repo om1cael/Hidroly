@@ -597,6 +597,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Dark'**
   String get dark;
+
+  /// No description provided for @historyIconSemanticLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'History'**
+  String get historyIconSemanticLabel;
+
+  /// No description provided for @settingsIconSemanticLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Settings'**
+  String get settingsIconSemanticLabel;
+
+  /// No description provided for @addCupIconSemanticLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Add cup'**
+  String get addCupIconSemanticLabel;
+
+  /// No description provided for @saveChangesIconSemanticLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Save changes'**
+  String get saveChangesIconSemanticLabel;
+
+  /// No description provided for @goBackIconSemanticLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Go back'**
+  String get goBackIconSemanticLabel;
+
+  /// No description provided for @waterRemoveIconSemanticLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove {amount}'**
+  String waterRemoveIconSemanticLabel(String amount);
 }
 
 class _AppLocalizationsDelegate

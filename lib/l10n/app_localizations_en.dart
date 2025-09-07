@@ -275,4 +275,24 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get dark => 'Dark';
+
+  @override
+  String get historyIconSemanticLabel => 'History';
+
+  @override
+  String get settingsIconSemanticLabel => 'Settings';
+
+  @override
+  String get addCupIconSemanticLabel => 'Add cup';
+
+  @override
+  String get saveChangesIconSemanticLabel => 'Save changes';
+
+  @override
+  String get goBackIconSemanticLabel => 'Go back';
+
+  @override
+  String waterRemoveIconSemanticLabel(String amount) {
+    return 'Remove $amount';
+  }
 }

@@ -45,6 +45,7 @@ class _SettingsUpdateDailyGoalPageState extends State<SettingsUpdateDailyGoalPag
           icon: Icon(
             Icons.arrow_back,
             color: Theme.of(context).iconTheme.color,
+            semanticLabel: AppLocalizations.of(context)!.goBackIconSemanticLabel,
           ),
         ),
       ),
@@ -100,7 +101,10 @@ class _SettingsUpdateDailyGoalPageState extends State<SettingsUpdateDailyGoalPag
 
           Navigator.of(context).pop(true);
         },
-        child: Icon(Icons.done), 
+        child: Icon(
+          Icons.done,
+          semanticLabel: AppLocalizations.of(context)!.saveChangesIconSemanticLabel,
+        ), 
       ),
     );
   }

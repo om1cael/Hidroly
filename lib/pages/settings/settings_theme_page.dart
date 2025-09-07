@@ -24,6 +24,7 @@ class _SettingsThemePageState extends State<SettingsThemePage> {
           icon: Icon(
             Icons.arrow_back,
             color: Theme.of(context).iconTheme.color,
+            semanticLabel: AppLocalizations.of(context)!.goBackIconSemanticLabel,
           ),
         ),
         titleSpacing: 0,
