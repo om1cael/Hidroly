@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:haptic_feedback/haptic_feedback.dart';
+import 'package:hidroly/data/services/haptic_feedback/haptic_feedback_service.dart';
 import 'package:hidroly/domain/models/history_entry.dart';
 import 'package:hidroly/l10n/app_localizations.dart';
 import 'package:hidroly/provider/daily_history_provider.dart';
@@ -112,6 +114,11 @@ class DailyHistoryBottomSheet extends StatelessWidget {
                                   history.id!, 
                                   dayId
                                 );
+                              
+                              if(!context.mounted) return;
+                              await HapticFeedbackService(
+                                context: context,
+                              ).vibrate(HapticsType.success);
                             },
                           );
                         }, 

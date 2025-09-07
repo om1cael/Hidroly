@@ -10,8 +10,10 @@ class SettingsProvider extends ChangeNotifier {
   final _isMetricKey = 'isMetric';
   final _themeKey = 'theme';
   final _frequencyKey = 'frequency';
+  final _hapticFeedbackKey = 'hapticFeedback';
 
   bool isMetric;
+  bool hapticFeedback;
   Frequency frequencyHolder;
   ThemeMode theme;
   TimeOfDay wakeUpTime;
@@ -19,6 +21,7 @@ class SettingsProvider extends ChangeNotifier {
 
   SettingsProvider({
     this.isMetric = true,
+    this.hapticFeedback = true,
     this.frequencyHolder = Frequency.every2Hours,
     this.theme = ThemeMode.system,
     this.wakeUpTime = const TimeOfDay(hour: 6, minute: 0),
@@ -39,6 +42,17 @@ class SettingsProvider extends ChangeNotifier {
 
   Future<void> readIsMetric() async {
     isMetric = await _asyncPrefs.getBool(_isMetricKey) ?? true;
+    notifyListeners();
+  }
+
+  Future<void> updateHapticFeedback(bool value) async {
+    await _asyncPrefs.setBool(_hapticFeedbackKey, value);
+    hapticFeedback = value;
+    notifyListeners();
+  }
+
+  Future<void> readHapticFeedback() async {
+    hapticFeedback = await _asyncPrefs.getBool(_hapticFeedbackKey) ?? true;
     notifyListeners();
   }
 

@@ -207,6 +207,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get settingsTheme => 'Aussehen';
 
   @override
+  String get settingsHapticFeedback => 'Haptic Feedback';
+
+  @override
   String get setupAgeTextFieldInvalidValue => 'Alter zwischen 10 und 120';
 
   @override
