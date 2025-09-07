@@ -139,7 +139,10 @@ class _SettingsUpdateSleepSchedulePageState extends State<SettingsUpdateSleepSch
           if(!context.mounted) return;
           Navigator.of(context).pop(true);
         },
-        child: Icon(Icons.done), 
+        child: Icon(
+          Icons.done,
+          semanticLabel: AppLocalizations.of(context)!.saveChangesIconSemanticLabel,
+        ), 
       ),
     );
   }

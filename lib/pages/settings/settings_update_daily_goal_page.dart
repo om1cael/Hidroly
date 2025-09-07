@@ -100,7 +100,10 @@ class _SettingsUpdateDailyGoalPageState extends State<SettingsUpdateDailyGoalPag
 
           Navigator.of(context).pop(true);
         },
-        child: Icon(Icons.done), 
+        child: Icon(
+          Icons.done,
+          semanticLabel: AppLocalizations.of(context)!.saveChangesIconSemanticLabel,
+        ), 
       ),
     );
   }
