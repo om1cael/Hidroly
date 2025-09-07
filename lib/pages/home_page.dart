@@ -7,6 +7,7 @@ import 'package:hidroly/pages/setup_page.dart';
 import 'package:hidroly/provider/day_provider.dart';
 import 'package:hidroly/provider/settings_provider.dart';
 import 'package:hidroly/ui/core/theme/app_colors.dart';
+import 'package:hidroly/ui/summary/widgets/summary_page.dart';
 import 'package:hidroly/utils/app_date_utils.dart';
 import 'package:hidroly/widgets/home/daily_history_bottom_sheet.dart';
 import 'package:hidroly/widgets/home/fab_home.dart';
@@ -22,14 +23,15 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final homeController = HomeController();
+  final _homeController = HomeController();
+  int _currentNavIndex = 0;
 
   @override
   void initState() {
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      bool initialized = await homeController.initializeHome(context);
+      bool initialized = await _homeController.initializeHome(context);
       
       if(!initialized && mounted) {
         Navigator.of(context)
@@ -53,9 +55,33 @@ class _HomePageState extends State<HomePage> {
 
     return Scaffold(
       appBar: appBar(currentDay, dayId, isMetric),
+      bottomNavigationBar: Theme(
+        data: Theme.of(context).copyWith(
+          splashColor: Colors.transparent,
+        ),
+        child: BottomNavigationBar(
+          onTap: (index) => {
+            setState(() {
+              _currentNavIndex = index;
+            }),
+          },
+          items: <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: AppLocalizations.of(context)!.bottomNavHomeLabel,
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.insights),
+              label: AppLocalizations.of(context)!.bottomNavSummaryLabel,
+            ),
+          ],
+          currentIndex: _currentNavIndex,
+        ),
+      ),
       body: Center(
         child: SingleChildScrollView(
-          child: Padding(
+          child: _currentNavIndex == 0
+            ? Padding(
             padding: const EdgeInsets.only(top: 16, bottom: 16),
             child: Column(
               spacing: 32,
@@ -68,7 +94,8 @@ class _HomePageState extends State<HomePage> {
                 )
               ],
             )
-          ),
+          )
+          : SummaryPage(),
         ),
       ),
       floatingActionButton: FabHome(
@@ -95,7 +122,7 @@ class _HomePageState extends State<HomePage> {
           await _loadSelectedDay(provider, pickedDate);
 
           if(!mounted) return;
-          await homeController.loadDailyHistory(context, currentDay: provider.day);
+          await _homeController.loadDailyHistory(context, currentDay: provider.day);
         },
         style: TextButton.styleFrom(
           padding: EdgeInsets.zero,
