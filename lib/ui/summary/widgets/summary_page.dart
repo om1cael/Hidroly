@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hidroly/ui/summary/widgets/summary_card.dart';
 
 class SummaryPage extends StatefulWidget {
   const SummaryPage({super.key});
