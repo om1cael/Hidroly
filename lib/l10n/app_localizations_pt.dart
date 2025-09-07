@@ -279,4 +279,15 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get dark => 'Escuro';
+
+  @override
+  String get historyIconSemanticLabel => 'History';
+
+  @override
+  String get settingsIconSemanticLabel => 'Settings';
+
+  @override
+  String waterRemoveIconSemanticLabel(String amount) {
+    return 'Remove $amount';
+  }
 }

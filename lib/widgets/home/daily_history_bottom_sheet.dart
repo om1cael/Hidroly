@@ -173,6 +173,11 @@ class HistoryItem extends StatelessWidget {
           icon: Icon(
             Icons.delete_forever,
             color: Colors.redAccent,
+            semanticLabel: AppLocalizations
+              .of(context)!
+              .waterRemoveIconSemanticLabel(
+                UnitTools.getVolumeWithUnit(history.amount, isMetric, context: context),
+              ),
           ),
         ),
       ),

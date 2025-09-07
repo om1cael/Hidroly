@@ -138,5 +138,17 @@
 
   "system": "System",
   "light": "Light",
-  "dark": "Dark"
+  "dark": "Dark",
+
+  "historyIconSemanticLabel": "History",
+  "settingsIconSemanticLabel": "Settings",
+  "waterRemoveIconSemanticLabel": "Remove {amount}",
+  "@waterRemoveIconSemanticLabel": {
+    "placeholders": {
+      "amount": {
+        "type": "String",
+        "example": "2ml"
+      }
+    }
+  }
 }
