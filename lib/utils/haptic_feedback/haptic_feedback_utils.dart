@@ -3,10 +3,10 @@ import 'package:haptic_feedback/haptic_feedback.dart';
 import 'package:hidroly/provider/settings_provider.dart';
 import 'package:provider/provider.dart';
 
-class HapticFeedbackService {
+class HapticFeedbackUtils {
   final BuildContext context;
 
-  const HapticFeedbackService({
+  const HapticFeedbackUtils({
     required this.context,
   });
 

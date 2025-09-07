@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:haptic_feedback/haptic_feedback.dart';
-import 'package:hidroly/data/services/haptic_feedback/haptic_feedback_service.dart';
+import 'package:hidroly/utils/haptic_feedback/haptic_feedback_utils.dart';
 import 'package:hidroly/domain/models/history_entry.dart';
 import 'package:hidroly/l10n/app_localizations.dart';
 import 'package:hidroly/provider/app_state_provider.dart';
@@ -140,7 +140,7 @@ class _FabHomeState extends State<FabHome> {
                   );
                 }
 
-                await HapticFeedbackService(
+                await HapticFeedbackUtils(
                   context: context,
                 ).vibrate(HapticsType.success);
 
