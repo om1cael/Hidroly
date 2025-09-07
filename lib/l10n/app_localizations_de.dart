@@ -295,6 +295,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get saveChangesIconSemanticLabel => 'Save changes';
 
   @override
+  String get goBackIconSemanticLabel => 'Go back';
+
+  @override
   String waterRemoveIconSemanticLabel(String amount) {
     return 'Remove $amount';
   }

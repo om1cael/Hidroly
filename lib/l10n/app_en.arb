@@ -144,6 +144,7 @@
   "settingsIconSemanticLabel": "Settings",
   "addCupIconSemanticLabel": "Add cup",
   "saveChangesIconSemanticLabel": "Save changes",
+  "goBackIconSemanticLabel": "Go back",
   "waterRemoveIconSemanticLabel": "Remove {amount}",
   "@waterRemoveIconSemanticLabel": {
     "placeholders": {

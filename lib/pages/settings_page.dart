@@ -31,6 +31,7 @@ class _SettingsPageState extends State<SettingsPage> {
           icon: Icon(
             Icons.arrow_back,
             color: Theme.of(context).iconTheme.color,
+            semanticLabel: AppLocalizations.of(context)!.goBackIconSemanticLabel,
           ),
         ),
         titleSpacing: 0,

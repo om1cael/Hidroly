@@ -73,6 +73,7 @@ class _SettingsUpdateSleepSchedulePageState extends State<SettingsUpdateSleepSch
           icon: Icon(
             Icons.arrow_back,
             color: Theme.of(context).iconTheme.color,
+            semanticLabel: AppLocalizations.of(context)!.goBackIconSemanticLabel,
           ),
         ),
       ),

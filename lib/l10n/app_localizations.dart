@@ -622,6 +622,12 @@ abstract class AppLocalizations {
   /// **'Save changes'**
   String get saveChangesIconSemanticLabel;
 
+  /// No description provided for @goBackIconSemanticLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Go back'**
+  String get goBackIconSemanticLabel;
+
   /// No description provided for @waterRemoveIconSemanticLabel.
   ///
   /// In en, this message translates to:
