@@ -41,6 +41,7 @@ class DailyHistoryBottomSheet extends StatelessWidget {
                         icon: Icon(
                           Icons.arrow_back,
                           color: Theme.of(context).iconTheme.color,
+                          semanticLabel: AppLocalizations.of(context)!.goBackIconSemanticLabel,
                         ),
                         style: IconButton.styleFrom(
                           backgroundColor: Colors.transparent,
