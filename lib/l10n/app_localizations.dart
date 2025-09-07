@@ -610,6 +610,18 @@ abstract class AppLocalizations {
   /// **'Settings'**
   String get settingsIconSemanticLabel;
 
+  /// No description provided for @addCupIconSemanticLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Add cup'**
+  String get addCupIconSemanticLabel;
+
+  /// No description provided for @saveChangesIconSemanticLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Save changes'**
+  String get saveChangesIconSemanticLabel;
+
   /// No description provided for @waterRemoveIconSemanticLabel.
   ///
   /// In en, this message translates to:

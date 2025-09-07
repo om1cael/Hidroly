@@ -142,6 +142,8 @@
 
   "historyIconSemanticLabel": "History",
   "settingsIconSemanticLabel": "Settings",
+  "addCupIconSemanticLabel": "Add cup",
+  "saveChangesIconSemanticLabel": "Save changes",
   "waterRemoveIconSemanticLabel": "Remove {amount}",
   "@waterRemoveIconSemanticLabel": {
     "placeholders": {
