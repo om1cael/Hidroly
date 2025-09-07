@@ -466,6 +466,12 @@ abstract class AppLocalizations {
   /// **'Theme'**
   String get settingsTheme;
 
+  /// No description provided for @settingsHapticFeedback.
+  ///
+  /// In en, this message translates to:
+  /// **'Haptic Feedback'**
+  String get settingsHapticFeedback;
+
   /// No description provided for @setupAgeTextFieldInvalidValue.
   ///
   /// In en, this message translates to:

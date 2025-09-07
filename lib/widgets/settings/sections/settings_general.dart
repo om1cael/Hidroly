@@ -49,9 +49,9 @@ class SettingsGeneral extends StatelessWidget {
           },
         ),
         Consumer<SettingsProvider>(
-          builder: (_, provider, _) {
+          builder: (context, provider, _) {
             return SettingsSwitch(
-              title: 'Haptic Feedback',
+              title: AppLocalizations.of(context)!.settingsHapticFeedback,
               switchValue: provider.hapticFeedback,
               onChanged: (value) {
                 context.read<SettingsProvider>().updateHapticFeedback(value);
