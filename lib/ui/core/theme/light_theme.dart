@@ -38,6 +38,11 @@ class LightTheme {
           fontSize: 40,
           fontWeight: FontWeight.bold
         ),
+        headlineSmall: TextStyle(
+          color: AppColorsLight.primaryText, 
+          fontSize: 22,
+          fontWeight: FontWeight.bold
+        ),
         titleLarge: TextStyle(
           color: AppColorsLight.primaryText,
           fontSize: 24,

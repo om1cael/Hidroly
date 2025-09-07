@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hidroly/ui/summary/widgets/summary_card.dart';
 
 class SummaryPage extends StatefulWidget {
   const SummaryPage({super.key});
@@ -10,6 +11,10 @@ class SummaryPage extends StatefulWidget {
 class _SummaryPageState extends State<SummaryPage> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Column(
+      children: [
+        const Placeholder(),
+      ],
+    );
   }
 }

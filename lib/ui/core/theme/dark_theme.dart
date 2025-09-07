@@ -38,6 +38,11 @@ class DarkTheme {
           fontSize: 40,
           fontWeight: FontWeight.bold
         ),
+        headlineSmall: TextStyle(
+          color: AppColors.primaryText, 
+          fontSize: 22,
+          fontWeight: FontWeight.bold
+        ),
         titleLarge: TextStyle(
           color: AppColors.primaryText,
           fontSize: 24,
