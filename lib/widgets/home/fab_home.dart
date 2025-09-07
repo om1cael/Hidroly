@@ -140,7 +140,9 @@ class _FabHomeState extends State<FabHome> {
                   );
                 }
 
-                await HapticFeedbackService().vibrate(HapticsType.success);
+                await HapticFeedbackService(
+                  context: context,
+                ).vibrate(HapticsType.success);
 
                 if(!context.mounted) return;
                 Navigator.of(context).pop();

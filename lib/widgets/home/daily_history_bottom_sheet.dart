@@ -115,7 +115,10 @@ class DailyHistoryBottomSheet extends StatelessWidget {
                                   dayId
                                 );
                               
-                              await HapticFeedbackService().vibrate(HapticsType.success);
+                              if(!context.mounted) return;
+                              await HapticFeedbackService(
+                                context: context,
+                              ).vibrate(HapticsType.success);
                             },
                           );
                         }, 

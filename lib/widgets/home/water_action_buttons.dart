@@ -185,7 +185,10 @@ class _WaterActionButtonsState extends State<WaterActionButtons> {
                             await context.read<CustomCupsProvider>()
                               .deleteCustomCup(cup.id!);
 
-                            await HapticFeedbackService().vibrate(HapticsType.success);
+                            if(!context.mounted) return;
+                            await HapticFeedbackService(
+                              context: context,
+                            ).vibrate(HapticsType.success);
                           },
                         ),
                       ],
@@ -257,7 +260,11 @@ class _WaterActionButtonsState extends State<WaterActionButtons> {
       );
     }
 
-    await HapticFeedbackService().vibrate(HapticsType.success);
+    if(!context.mounted) return false;
+    await HapticFeedbackService(
+      context: context,
+    ).vibrate(HapticsType.success);
+
     return success;
   }
 
