@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:haptic_feedback/haptic_feedback.dart';
+import 'package:hidroly/data/services/haptic_feedback/haptic_feedback_service.dart';
 import 'package:hidroly/domain/models/history_entry.dart';
 import 'package:hidroly/domain/models/water_button.dart';
 import 'package:hidroly/l10n/app_localizations.dart';
@@ -182,6 +184,8 @@ class _WaterActionButtonsState extends State<WaterActionButtons> {
                           onTap: () async {
                             await context.read<CustomCupsProvider>()
                               .deleteCustomCup(cup.id!);
+
+                            await HapticFeedbackService().vibrate(HapticsType.success);
                           },
                         ),
                       ],
@@ -253,6 +257,7 @@ class _WaterActionButtonsState extends State<WaterActionButtons> {
       );
     }
 
+    await HapticFeedbackService().vibrate(HapticsType.success);
     return success;
   }
 
