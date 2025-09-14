@@ -1,4 +1,5 @@
 import 'package:flutter/widgets.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart' hide Day;
 import 'package:hidroly/domain/models/day.dart';
 import 'package:hidroly/data/repository/day_repository.dart';
 import 'package:hidroly/utils/app_date_utils.dart';
@@ -95,6 +96,7 @@ class DayProvider extends ChangeNotifier {
     );
 
     await update(updatedDay);
+    await FlutterLocalNotificationsPlugin().cancelAll();
     return true;
   }
 
