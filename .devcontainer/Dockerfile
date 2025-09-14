@@ -27,9 +27,8 @@ RUN yes | sdkmanager --licenses && \
                "ndk;28.2.13676358" \
                "cmake;4.1.1"
 
-RUN useradd -m -s /bin/bash flutteruser && \
-    mkdir -p /workspace && \
-    chown -R flutteruser:flutteruser /workspace ${ANDROID_SDK_ROOT}
+RUN mkdir -p /workspace && \
+    chown -R ubuntu:ubuntu /workspace ${ANDROID_SDK_ROOT}
 
-USER flutteruser
+USER ubuntu
 WORKDIR /workspace

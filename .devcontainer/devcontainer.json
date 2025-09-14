@@ -39,5 +39,6 @@
     5037   // adb
   ],
 
-  "remoteUser": "flutteruser"
+  "containerUser": "ubuntu",
+  "remoteUser": "ubuntu"
 }
