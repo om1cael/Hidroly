@@ -16,6 +16,7 @@ dependencies:
   flutter_svg: ^2.2.0
   haptic_feedback: ^0.5.1+1
   intl: any
+  logger: ^2.6.1
   mocktail: ^1.0.4
   path: ^1.9.1
   provider: ^6.1.5
