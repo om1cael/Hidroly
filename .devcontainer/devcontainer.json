@@ -24,9 +24,7 @@
 
   "mounts": [
     "source=${localWorkspaceFolder},target=/workspace/hidroly,type=bind,consistency=cached",
-    
-    // Forward SSH agent socket
-    "source=${localEnv:SSH_AUTH_SOCK},target=/ssh-agent,type=bind"
+    "type=bind,source=${localEnv:HOME}/.ssh,target=${localEnv:HOME}/.ssh,readonly"
   ],
 
   "remoteEnv": {
