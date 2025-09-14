@@ -39,6 +39,8 @@
     5037   // adb
   ],
 
+  "postCreateCommand": "git config --global --add safe.directory /workspace/hidroly && git submodule update --init --recursive",
+
   "containerUser": "ubuntu",
   "remoteUser": "ubuntu"
 }
