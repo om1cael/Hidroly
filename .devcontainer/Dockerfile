@@ -4,7 +4,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
-      curl git unzip zip xz-utils \
+      curl git ssh unzip zip xz-utils \
       openjdk-17-jdk \
       ca-certificates wget pkg-config lsb-release gnupg \
       lib32z1 libbz2-1.0 \
