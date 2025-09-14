@@ -1,5 +1,5 @@
 {
-  "name": "Flutter DevContainer",
+  "name": "Hidroly DevContainer",
 
   "build": {
     "dockerfile": "Dockerfile",
@@ -8,7 +8,7 @@
     }
   },
 
-  "workspaceFolder": "/workspace/flutter",
+  "workspaceFolder": "/workspace/hidroly",
 
   "customizations": {
     "vscode": {
@@ -23,7 +23,7 @@
   },
 
   "mounts": [
-    "source=${localWorkspaceFolder},target=/workspace/flutter,type=bind,consistency=cached",
+    "source=${localWorkspaceFolder},target=/workspace/hidroly,type=bind,consistency=cached",
     
     // Forward SSH agent socket
     "source=${localEnv:SSH_AUTH_SOCK},target=/ssh-agent,type=bind"
@@ -32,7 +32,7 @@
   "remoteEnv": {
     "SSH_AUTH_SOCK": "/ssh-agent",
     "FLUTTER_ROOT": "/workspace/flutter",
-    "PATH": "/workspace/flutter/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+    "PATH": "/workspace/hidroly/flutter/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
   },
 
   "forwardPorts": [
