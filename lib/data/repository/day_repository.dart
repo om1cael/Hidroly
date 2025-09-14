@@ -74,7 +74,7 @@ class DayRepository {
     final List<Map<String, Object?>> dayList = await db.query(
       DatabaseConstants.daysTable,
       where: 'date >= ? AND date < ?',
-      whereArgs: [start.toString(), end.toString()],
+      whereArgs: [start.toIso8601String(), end.toIso8601String()],
       orderBy: 'date DESC',
       limit: 1,
     );
