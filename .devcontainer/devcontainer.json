@@ -1,0 +1,43 @@
+{
+  "name": "Flutter DevContainer",
+
+  "build": {
+    "dockerfile": "Dockerfile",
+    "args": {
+      "FLUTTER_VERSION": "stable"
+    }
+  },
+
+  "workspaceFolder": "/workspace/flutter",
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "dart-code.dart-code",
+        "dart-code.flutter"
+      ]
+    },
+    "settings": {
+        "terminal.integrated.shell.linux": "/bin/bash"
+    }
+  },
+
+  "mounts": [
+    "source=${localWorkspaceFolder},target=/workspace/flutter,type=bind,consistency=cached",
+    
+    // Forward SSH agent socket
+    "source=${localEnv:SSH_AUTH_SOCK},target=/ssh-agent,type=bind"
+  ],
+
+  "remoteEnv": {
+    "SSH_AUTH_SOCK": "/ssh-agent",
+    "FLUTTER_ROOT": "/workspace/flutter",
+    "PATH": "/workspace/flutter/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+  },
+
+  "forwardPorts": [
+    5037   // adb
+  ],
+
+  "remoteUser": "flutteruser"
+}
