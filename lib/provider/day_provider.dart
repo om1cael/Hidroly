@@ -3,9 +3,7 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart' hi
 import 'package:hidroly/data/repository/summary_repository.dart';
 import 'package:hidroly/domain/models/day.dart';
 import 'package:hidroly/data/repository/day_repository.dart';
-import 'package:hidroly/domain/models/global_statistic.dart';
 import 'package:hidroly/utils/app_date_utils.dart';
-import 'package:path/path.dart';
 
 class DayProvider extends ChangeNotifier {
   DayProvider({

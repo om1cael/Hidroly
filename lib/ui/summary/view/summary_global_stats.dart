@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:hidroly/provider/settings_provider.dart';
 import 'package:hidroly/ui/summary/view/summary_card.dart';
 import 'package:hidroly/ui/summary/view_models/summary_global_stats_view_model.dart';
+import 'package:hidroly/utils/unit_tools.dart';
 import 'package:logger/logger.dart';
+import 'package:provider/provider.dart';
 
 class SummaryGlobalStats extends StatefulWidget {
   const SummaryGlobalStats({
@@ -36,30 +39,49 @@ class _SummaryGlobalStatsState extends State<SummaryGlobalStats> {
           return GlobalStatsDataNotAvailable();
         }
 
-        return GridView(
-          shrinkWrap: true,
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            mainAxisExtent: 90,
-          ),
-          children: [
-            SummaryCard(
-              title: 'Current Streak', 
-              data: widget.viewModel.globalStatistic!.currentStreak.toString(),
-            ),
-            SummaryCard(
-              title: 'Best Streak', 
-              data: widget.viewModel.globalStatistic!.bestStreak.toString(),
-            ),
-            SummaryCard(
-              title: 'Total Intake', 
-              data: widget.viewModel.globalStatistic!.totalIntake.toString(),
-            ),
-            SummaryCard(
-              title: 'Avg. Intake',
-              data: widget.viewModel.globalStatistic!.averageIntake.toString(),
-            ),
-          ],
+        final currentStreak = widget.viewModel.globalStatistic!.currentStreak.toString();
+        final bestStreak = widget.viewModel.globalStatistic!.bestStreak.toString();
+
+        return Consumer<SettingsProvider>(
+          builder: (context, provider, _) {
+            final totalIntake = UnitTools.getVolumeWithUnit(
+              widget.viewModel.globalStatistic!.totalIntake,
+              provider.isMetric,
+              context: context,
+            );
+
+            final averageIntake = UnitTools.getVolumeWithUnit(
+              widget.viewModel.globalStatistic!.averageIntake, 
+              provider.isMetric,
+              context: context,
+            );
+
+            return GridView(
+              shrinkWrap: true,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                mainAxisExtent: 90,
+              ),
+              children: [
+                SummaryCard(
+                  title: 'Current Streak', 
+                  data: '$currentStreak days',
+                ),
+                SummaryCard(
+                  title: 'Best Streak', 
+                  data: '$bestStreak days',
+                ),
+                SummaryCard(
+                  title: 'Total Intake', 
+                  data: totalIntake
+                ),
+                SummaryCard(
+                  title: 'Avg. Intake',
+                  data: averageIntake,
+                ),
+              ],
+            );
+          }
         );
       }
     );
