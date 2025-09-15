@@ -38,15 +38,19 @@ class _SummaryWeeklyIntakeGraphicState extends State<SummaryWeeklyIntakeGraphic>
             return Center(
               child: CircularProgressIndicator(),
             );
-          } else if((snapshot.hasData && snapshot.data == false) || !snapshot.hasData || snapshot.hasError) {
+          } else if((snapshot.hasData && snapshot.data == false) || !snapshot.hasData || snapshot.hasError) { 
             return ChartNotReady();
           }
-      
+
           final dayList = widget._viewModel.dayList!;
-      
-          final highestAmountFromDays = dayList
+
+          int highestAmountFromDays = dayList
             .reduce((a, b) => a.currentAmount > b.currentAmount ? a : b)
             .currentAmount;
+          
+          if(highestAmountFromDays == 0) {
+            highestAmountFromDays = 500;
+          }
       
           return Column(
             spacing: 16,
