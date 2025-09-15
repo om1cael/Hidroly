@@ -92,6 +92,33 @@ class DayRepository {
     );
   }
 
+  Future<List<Day>> getMultipleDays(DateTime start, DateTime end, int limit) async {
+    final db = await _databaseService.database;
+    final List<Map<String, Object?>> rawDayList = await db.query(
+      DatabaseConstants.daysTable,
+      where: 'date >= ? AND date < ?',
+      whereArgs: [start.toIso8601String(), end.toIso8601String()],
+      orderBy: 'date DESC',
+      limit: limit,
+    );
+
+    if(rawDayList.isEmpty) return List.empty();
+    List<Day> dayList = List.empty(growable: true);
+
+    for(Map<String, Object?> dayMap in rawDayList) {
+      final day = Day(
+        id: dayMap['id'] as int,
+        dailyGoal: dayMap['dailyGoal'] as int,
+        currentAmount: dayMap['currentAmount'] as int,
+        date: DateTime.parse(dayMap['date'] as String),
+      );
+
+      dayList.add(day);
+    }
+
+    return dayList;
+  }
+
   Future<int> getDaysCount() async {
     try {
       final db = await _databaseService.database;
