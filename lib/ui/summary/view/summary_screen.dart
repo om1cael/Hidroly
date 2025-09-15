@@ -32,7 +32,9 @@ class SummaryScreen extends StatelessWidget {
                 ),
                 SizedBox(height: 32,),
                 SummaryWeeklyIntakeGraphic(
-                  viewModel: SummaryWeeklyGraphicViewModel(dayRepository: context.read()),
+                  viewModel: SummaryWeeklyGraphicViewModel(
+                    dayRepository: context.read()
+                  ),
                 ),
               ],
             ),
