@@ -57,8 +57,6 @@ class _SummaryGlobalStatsState extends State<SummaryGlobalStats> {
               context: context,
             );
 
-            final daysText = AppLocalizations.of(context)!.days;
-
             return GridView(
               shrinkWrap: true,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -68,11 +66,11 @@ class _SummaryGlobalStatsState extends State<SummaryGlobalStats> {
               children: [
                 SummaryCard(
                   title: AppLocalizations.of(context)!.currentStreakStat, 
-                  data: '$currentStreak $daysText',
+                  data: '$currentStreak ${getDayLabel(int.parse(currentStreak))}',
                 ),
                 SummaryCard(
                   title: AppLocalizations.of(context)!.bestStreakStat, 
-                  data: '$bestStreak $daysText',
+                  data: '$bestStreak ${getDayLabel(int.parse(bestStreak))}',
                 ),
                 SummaryCard(
                   title: AppLocalizations.of(context)!.totalIntakeStat, 
@@ -88,6 +86,11 @@ class _SummaryGlobalStatsState extends State<SummaryGlobalStats> {
         );
       }
     );
+  }
+
+  String getDayLabel(int amount) {
+    if(amount > 1) return AppLocalizations.of(context)!.days;
+    return AppLocalizations.of(context)!.day;
   }
 }
 

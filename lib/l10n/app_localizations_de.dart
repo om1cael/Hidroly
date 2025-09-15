@@ -286,6 +286,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get averageIntakeStat => 'Avg. Intake';
 
   @override
+  String get day => 'day';
+
+  @override
   String get days => 'days';
 
   @override

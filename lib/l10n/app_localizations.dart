@@ -604,6 +604,12 @@ abstract class AppLocalizations {
   /// **'Avg. Intake'**
   String get averageIntakeStat;
 
+  /// No description provided for @day.
+  ///
+  /// In en, this message translates to:
+  /// **'day'**
+  String get day;
+
   /// No description provided for @days.
   ///
   /// In en, this message translates to:
