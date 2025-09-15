@@ -63,7 +63,7 @@ class _SummaryWeeklyIntakeGraphicState extends State<SummaryWeeklyIntakeGraphic>
               ),
               IntakeGraphic(
                 highestAmountFromDays: highestAmountFromDays, 
-                dayList: dayList
+                dayList: dayList.reversed.toList(),
               ),
             ]
           );
@@ -179,7 +179,7 @@ class IntakeGraphic extends StatelessWidget {
                 final day = dayList[index];
     
                 return BarChartGroupData(
-                  x: dayList[index].date.weekday,
+                  x: day.date.weekday % 7,
                   barRods: [
                     BarChartRodData(
                       toY: day.currentAmount.toDouble(),

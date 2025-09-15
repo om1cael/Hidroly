@@ -23,9 +23,9 @@ class SummaryWeeklyGraphicViewModel extends ChangeNotifier {
       DateTime latestDate = latestDay.date;
       final weekday = latestDate.weekday % 7;
       
-      final startOfTheWeek = latestDate.subtract(Duration(days: weekday));
+      final startOfTheWeek = DateTime(latestDate.year, latestDate.month, latestDate.day).subtract(Duration(days: weekday));
       final endOfTheWeek = startOfTheWeek.add(Duration(days: 7));
-      
+
       _dayList = 
         await _dayRepository.getMultipleDays(startOfTheWeek, endOfTheWeek, 7);
       
