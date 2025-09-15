@@ -108,8 +108,11 @@ class GlobalStatsDataNotAvailable extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Global Statistics', style: Theme.of(context).textTheme.titleLarge,),
-        Text('Your data will appear here soon!')
+        Text(
+          AppLocalizations.of(context)!.globalStatisticsTitle, 
+          style: Theme.of(context).textTheme.titleLarge,
+        ),
+        Text(AppLocalizations.of(context)!.globalStatisticsNoDataDescription),
       ],
     );
   }

@@ -580,6 +580,18 @@ abstract class AppLocalizations {
   /// **'{time} hours'**
   String hours(String time);
 
+  /// No description provided for @globalStatisticsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Global Statistics'**
+  String get globalStatisticsTitle;
+
+  /// No description provided for @globalStatisticsNoDataDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Your data will appear here soon!'**
+  String get globalStatisticsNoDataDescription;
+
   /// No description provided for @currentStreakStat.
   ///
   /// In en, this message translates to:

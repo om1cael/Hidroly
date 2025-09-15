@@ -272,6 +272,13 @@ class AppLocalizationsPt extends AppLocalizations {
   }
 
   @override
+  String get globalStatisticsTitle => 'Global Statistics';
+
+  @override
+  String get globalStatisticsNoDataDescription =>
+      'Your data will appear here soon!';
+
+  @override
   String get currentStreakStat => 'Current Streak';
 
   @override

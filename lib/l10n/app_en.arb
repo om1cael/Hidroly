@@ -136,6 +136,9 @@
     }
   },
 
+  "globalStatisticsTitle": "Global Statistics",
+  "globalStatisticsNoDataDescription": "Your data will appear here soon!",
+
   "currentStreakStat": "Current Streak",
   "bestStreakStat": "Best Streak",
   "totalIntakeStat": "Total Intake",
