@@ -272,6 +272,21 @@ class AppLocalizationsPt extends AppLocalizations {
   }
 
   @override
+  String get currentStreakStat => 'Current Streak';
+
+  @override
+  String get bestStreakStat => 'Best Streak';
+
+  @override
+  String get totalIntakeStat => 'Total Intake';
+
+  @override
+  String get averageIntakeStat => 'Avg. Intake';
+
+  @override
+  String get days => 'days';
+
+  @override
   String get system => 'Sistema';
 
   @override

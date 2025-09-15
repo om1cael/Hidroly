@@ -580,6 +580,36 @@ abstract class AppLocalizations {
   /// **'{time} hours'**
   String hours(String time);
 
+  /// No description provided for @currentStreakStat.
+  ///
+  /// In en, this message translates to:
+  /// **'Current Streak'**
+  String get currentStreakStat;
+
+  /// No description provided for @bestStreakStat.
+  ///
+  /// In en, this message translates to:
+  /// **'Best Streak'**
+  String get bestStreakStat;
+
+  /// No description provided for @totalIntakeStat.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Intake'**
+  String get totalIntakeStat;
+
+  /// No description provided for @averageIntakeStat.
+  ///
+  /// In en, this message translates to:
+  /// **'Avg. Intake'**
+  String get averageIntakeStat;
+
+  /// No description provided for @days.
+  ///
+  /// In en, this message translates to:
+  /// **'days'**
+  String get days;
+
   /// No description provided for @system.
   ///
   /// In en, this message translates to:

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hidroly/l10n/app_localizations.dart';
 import 'package:hidroly/provider/settings_provider.dart';
 import 'package:hidroly/ui/summary/view/summary_card.dart';
 import 'package:hidroly/ui/summary/view_models/summary_global_stats_view_model.dart';
@@ -56,6 +57,8 @@ class _SummaryGlobalStatsState extends State<SummaryGlobalStats> {
               context: context,
             );
 
+            final daysText = AppLocalizations.of(context)!.days;
+
             return GridView(
               shrinkWrap: true,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -64,19 +67,19 @@ class _SummaryGlobalStatsState extends State<SummaryGlobalStats> {
               ),
               children: [
                 SummaryCard(
-                  title: 'Current Streak', 
-                  data: '$currentStreak days',
+                  title: AppLocalizations.of(context)!.currentStreakStat, 
+                  data: '$currentStreak $daysText',
                 ),
                 SummaryCard(
-                  title: 'Best Streak', 
-                  data: '$bestStreak days',
+                  title: AppLocalizations.of(context)!.bestStreakStat, 
+                  data: '$bestStreak $daysText',
                 ),
                 SummaryCard(
-                  title: 'Total Intake', 
+                  title: AppLocalizations.of(context)!.totalIntakeStat, 
                   data: totalIntake
                 ),
                 SummaryCard(
-                  title: 'Avg. Intake',
+                  title: AppLocalizations.of(context)!.averageIntakeStat,
                   data: averageIntake,
                 ),
               ],

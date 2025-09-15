@@ -136,6 +136,12 @@
     }
   },
 
+  "currentStreakStat": "Current Streak",
+  "bestStreakStat": "Best Streak",
+  "totalIntakeStat": "Total Intake",
+  "averageIntakeStat": "Avg. Intake",
+  "days": "days",
+
   "system": "System",
   "light": "Light",
   "dark": "Dark",
