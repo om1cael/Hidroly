@@ -5,6 +5,7 @@ import 'package:hidroly/domain/models/day.dart';
 import 'package:hidroly/data/repository/day_repository.dart';
 import 'package:hidroly/domain/models/global_statistic.dart';
 import 'package:hidroly/utils/app_date_utils.dart';
+import 'package:path/path.dart';
 
 class DayProvider extends ChangeNotifier {
   DayProvider({
@@ -98,13 +99,20 @@ class DayProvider extends ChangeNotifier {
       return false;
     }
 
+    final newCurrentAmount = currentDay.currentAmount + amount;
+    int streakUpdate = 0;
+
     final updatedDay = currentDay.copyWith(
-      currentAmount: currentDay.currentAmount + amount,
+      currentAmount: newCurrentAmount,
     );
+
+    if(currentDay.currentAmount < currentDay.dailyGoal && updatedDay.currentAmount >= updatedDay.dailyGoal) {
+      streakUpdate = 1;
+    }
 
     await update(updatedDay);
     await FlutterLocalNotificationsPlugin().cancelAll();
-    await updateGlobalStatistics(amount);
+    await updateGlobalStatistics(amount, streakUpdate);
     return true;
   }
 
@@ -114,24 +122,47 @@ class DayProvider extends ChangeNotifier {
       return false;
     }
 
+    final newCurrentAmount = currentDay.currentAmount - amount;
+    int streakUpdate = 0;
+
     final updatedDay = currentDay.copyWith(
-      currentAmount: currentDay.currentAmount - amount,
+      currentAmount: newCurrentAmount,
     );
 
+    if(currentDay.currentAmount >= currentDay.dailyGoal && updatedDay.currentAmount < updatedDay.dailyGoal) {
+      streakUpdate = -1;
+    }
+
     await update(updatedDay);
-    await updateGlobalStatistics(-amount);
+    await updateGlobalStatistics(-amount, streakUpdate);
     return true;
   }
 
-  Future<void> updateGlobalStatistics(int amount) async {
-    GlobalStatistic globalStatistic = await _summaryRepository.readGlobalStatistic();
+  Future<void> updateGlobalStatistics(int amount, int streakUpdate) async {    
+    final globalStatistic = await _summaryRepository.readGlobalStatistic();
     final daysCount = await _repository.getDaysCount();
+    
+    final previousIntake = globalStatistic.currentStreak;
 
     final newTotalIntake = globalStatistic.totalIntake + amount;
+    final newCurrentStreak = globalStatistic.currentStreak + streakUpdate;
+    int bestStreak = globalStatistic.bestStreak;
+
+    if(newCurrentStreak > bestStreak && streakUpdate > 0) {
+      bestStreak = newCurrentStreak;
+    }
+
+    // Decrease bestStreak if water is removed
+    // and intake goes below the daily goal
+    if(previousIntake == bestStreak && streakUpdate < 0) {
+      bestStreak -= 1;
+    }
 
     final newGlobalStatistic = globalStatistic.copyWith(
       totalIntake: newTotalIntake,
       averageIntake: newTotalIntake ~/ daysCount,
+      currentStreak: newCurrentStreak,
+      bestStreak: bestStreak,
     );
 
     await _summaryRepository.saveGlobalStatistic(newGlobalStatistic);
