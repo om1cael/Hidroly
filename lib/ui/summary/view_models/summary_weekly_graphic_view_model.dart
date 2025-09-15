@@ -12,9 +12,9 @@ class SummaryWeeklyGraphicViewModel extends ChangeNotifier {
   List<Day>? _dayList;
   List<Day>? get dayList => _dayList;
 
-  Future<void> loadWeekDays() async {
+  Future<bool> loadWeekDays() async {
     Day? latestDay = await _dayRepository.findLatest();
-    if(latestDay == null) return;
+    if(latestDay == null) return false;
 
     DateTime latestDate = latestDay.date;
     final weekday = latestDate.weekday % 7;
@@ -26,6 +26,6 @@ class SummaryWeeklyGraphicViewModel extends ChangeNotifier {
       await _dayRepository.getMultipleDays(startOfTheWeek, endOfTheWeek, 7);
 
     notifyListeners();
-    print(_dayList);
+    return true;
   }
 }
