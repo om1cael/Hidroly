@@ -125,9 +125,11 @@ class DayProvider extends ChangeNotifier {
 
   Future<void> updateGlobalStatistics(int amount) async {
     GlobalStatistic globalStatistic = await _summaryRepository.readGlobalStatistic();
+    final daysCount = await _repository.getDaysCount();
 
     final newGlobalStatistic = globalStatistic.copyWith(
       totalIntake: globalStatistic.totalIntake + amount,
+      averageIntake: globalStatistic.totalIntake ~/ daysCount,
     );
 
     await _summaryRepository.saveGlobalStatistic(newGlobalStatistic);
