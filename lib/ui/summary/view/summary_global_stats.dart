@@ -36,7 +36,11 @@ class _SummaryGlobalStatsState extends State<SummaryGlobalStats> {
       builder: (context, snapshot) {
         if(snapshot.connectionState == ConnectionState.waiting) {
           return Center(child: CircularProgressIndicator());
-        } else if(snapshot.hasData && snapshot.data == false) {
+        } else if(snapshot.hasData && snapshot.data == false || !snapshot.hasData || snapshot.hasError) {
+          if(snapshot.hasError) {
+            logger.e('Error while loading global stats screen: ${snapshot.error}');
+          }
+
           return GlobalStatsDataNotAvailable();
         }
 
