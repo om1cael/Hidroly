@@ -45,6 +45,10 @@ class DayProvider extends ChangeNotifier {
     final currentDay = _day;
     if(currentDay == null) return;
 
+    if(currentDay.currentAmount < currentDay.dailyGoal) {
+      await resetCurrentStreakStatistic();
+    }
+
     final localDate = DateTime.now();
 
     final currentAppDate = AppDateUtils.normalizedLocal(currentDay.date.toLocal());
@@ -161,6 +165,15 @@ class DayProvider extends ChangeNotifier {
       averageIntake: newTotalIntake ~/ daysCount,
       currentStreak: newCurrentStreak,
       bestStreak: bestStreak,
+    );
+
+    await _summaryRepository.saveGlobalStatistic(newGlobalStatistic);
+  }
+
+  Future<void> resetCurrentStreakStatistic() async {
+    final globalStatistic = await _summaryRepository.readGlobalStatistic();
+    final newGlobalStatistic = globalStatistic.copyWith(
+      currentStreak: 0,
     );
 
     await _summaryRepository.saveGlobalStatistic(newGlobalStatistic);
