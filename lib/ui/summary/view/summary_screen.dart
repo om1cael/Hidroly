@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hidroly/l10n/app_localizations.dart';
 import 'package:hidroly/pages/settings_page.dart';
+import 'package:hidroly/ui/summary/view/summary_card.dart';
 
 class SummaryScreen extends StatelessWidget {
   const SummaryScreen({super.key});
@@ -15,7 +16,19 @@ class SummaryScreen extends StatelessWidget {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                // TODO
+                GridView(
+                  shrinkWrap: true,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    mainAxisExtent: 90,
+                  ),
+                  children: [
+                    SummaryCard(title: 'Current Streak', data: '7 days'),
+                    SummaryCard(title: 'Best Streak', data: '7 days'),
+                    SummaryCard(title: 'Total Intake', data: '500ml'),
+                    SummaryCard(title: 'Avg. Intake', data: '250ml'),
+                  ],
+                ),
               ],
             ),
           )
