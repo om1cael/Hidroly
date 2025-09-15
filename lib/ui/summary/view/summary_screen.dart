@@ -3,6 +3,7 @@ import 'package:hidroly/data/repository/summary_repository.dart';
 import 'package:hidroly/l10n/app_localizations.dart';
 import 'package:hidroly/pages/settings_page.dart';
 import 'package:hidroly/ui/summary/view/summary_global_stats.dart';
+import 'package:hidroly/ui/summary/view/summary_weekly_intake_graphic.dart';
 import 'package:hidroly/ui/summary/view_models/summary_global_stats_view_model.dart';
 import 'package:provider/provider.dart';
 
@@ -20,12 +21,16 @@ class SummaryScreen extends StatelessWidget {
         child: SafeArea(
           child: SingleChildScrollView(
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SummaryGlobalStats(
                   viewModel: SummaryGlobalStatsViewModel(
                     summaryRepository: context.read<SummaryRepository>(),
                   ),
                 ),
+                SizedBox(height: 32,),
+                SummaryWeeklyIntakeGraphic(),
               ],
             ),
           )
