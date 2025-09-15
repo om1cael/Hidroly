@@ -5,6 +5,7 @@ import 'package:hidroly/pages/settings_page.dart';
 import 'package:hidroly/ui/summary/view/summary_global_stats.dart';
 import 'package:hidroly/ui/summary/view/summary_weekly_intake_graphic.dart';
 import 'package:hidroly/ui/summary/view_models/summary_global_stats_view_model.dart';
+import 'package:hidroly/ui/summary/view_models/summary_weekly_graphic_view_model.dart';
 import 'package:provider/provider.dart';
 
 class SummaryScreen extends StatelessWidget {
@@ -30,7 +31,9 @@ class SummaryScreen extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 32,),
-                SummaryWeeklyIntakeGraphic(),
+                SummaryWeeklyIntakeGraphic(
+                  viewModel: SummaryWeeklyGraphicViewModel(dayRepository: context.read()),
+                ),
               ],
             ),
           )
