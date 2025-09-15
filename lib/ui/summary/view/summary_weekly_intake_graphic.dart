@@ -1,8 +1,11 @@
+import 'dart:ui';
+
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:hidroly/domain/models/day.dart';
 import 'package:hidroly/l10n/app_localizations.dart';
 import 'package:hidroly/ui/summary/view_models/summary_weekly_graphic_view_model.dart';
+import 'package:intl/intl.dart';
 
 class SummaryWeeklyIntakeGraphic extends StatefulWidget {
   const SummaryWeeklyIntakeGraphic({
@@ -51,7 +54,7 @@ class _SummaryWeeklyIntakeGraphicState extends State<SummaryWeeklyIntakeGraphic>
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Weekly Intake',
+                AppLocalizations.of(context)!.weeklyIntakeTitle,
                 style: Theme.of(context).textTheme.bodyLarge,
               ),
               IntakeGraphic(
@@ -78,11 +81,11 @@ class ChartNotReady extends StatelessWidget {
       spacing: 4,
       children: [
         Text(
-          'Weekly Intake',
+          AppLocalizations.of(context)!.weeklyIntakeTitle,
           style: Theme.of(context).textTheme.bodyLarge,
         ),
         Text(
-          'We\'re still working on your weekly intake chart. Come back soon to see it!',
+          AppLocalizations.of(context)!.weeklyIntakeNoData,
           style: Theme.of(context).textTheme.bodyLarge!.copyWith(
             fontSize: 14,
             color: Theme.of(context).textTheme.bodySmall!.color,
@@ -149,7 +152,7 @@ class IntakeGraphic extends StatelessWidget {
                     showTitles: true,
                     reservedSize: 28,
                     getTitlesWidget: (value, meta) {
-                      const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+                      final days = getLocalizedWeekdayAbbreviations(PlatformDispatcher.instance.locale.toString());
           
                       int index = value.round();
                       if (index >= 0 && index < days.length) {
@@ -188,5 +191,13 @@ class IntakeGraphic extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  List<String> getLocalizedWeekdayAbbreviations(String locale) {
+    final baseDate = DateTime(2024, 1, 7);
+    return List.generate(7, (index) {
+      final date = baseDate.add(Duration(days: index));
+      return DateFormat.E(locale).format(date).replaceAll('.', '');
+    });
   }
 }

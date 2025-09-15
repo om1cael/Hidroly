@@ -628,6 +628,18 @@ abstract class AppLocalizations {
   /// **'days'**
   String get days;
 
+  /// No description provided for @weeklyIntakeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Weekly Intake'**
+  String get weeklyIntakeTitle;
+
+  /// No description provided for @weeklyIntakeNoData.
+  ///
+  /// In en, this message translates to:
+  /// **'We\'re still working on your weekly intake chart. Come back soon to see it!'**
+  String get weeklyIntakeNoData;
+
   /// No description provided for @system.
   ///
   /// In en, this message translates to:

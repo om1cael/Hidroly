@@ -293,6 +293,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get days => 'days';
 
   @override
+  String get weeklyIntakeTitle => 'Weekly Intake';
+
+  @override
+  String get weeklyIntakeNoData =>
+      'We\'re still working on your weekly intake chart. Come back soon to see it!';
+
+  @override
   String get system => 'System';
 
   @override

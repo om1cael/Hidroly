@@ -146,6 +146,9 @@
   "day": "day",
   "days": "days",
 
+  "weeklyIntakeTitle": "Weekly Intake",
+  "weeklyIntakeNoData": "We're still working on your weekly intake chart. Come back soon to see it!",
+
   "system": "System",
   "light": "Light",
   "dark": "Dark",
