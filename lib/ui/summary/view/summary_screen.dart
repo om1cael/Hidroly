@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:hidroly/data/repository/summary_repository.dart';
 import 'package:hidroly/l10n/app_localizations.dart';
 import 'package:hidroly/pages/settings_page.dart';
 import 'package:hidroly/ui/summary/view/summary_global_stats.dart';
+import 'package:hidroly/ui/summary/view_models/summary_global_stats_view_model.dart';
+import 'package:provider/provider.dart';
 
 class SummaryScreen extends StatelessWidget {
-  const SummaryScreen({super.key});
+  const SummaryScreen({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +21,11 @@ class SummaryScreen extends StatelessWidget {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                SummaryGlobalStats(),
+                SummaryGlobalStats(
+                  viewModel: SummaryGlobalStatsViewModel(
+                    summaryRepository: context.read<SummaryRepository>(),
+                  ),
+                ),
               ],
             ),
           )
