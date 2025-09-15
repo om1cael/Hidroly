@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hidroly/l10n/app_localizations.dart';
+import 'package:hidroly/ui/summary/view/summary_screen.dart';
 import 'package:hidroly/ui/water_tracking/view/water_tracking_screen.dart';
 
 class HomePage extends StatefulWidget {
@@ -10,7 +11,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final List<Widget> _screens = [WaterTrackingScreen()];
+  final List<Widget> _screens = [WaterTrackingScreen(), SummaryScreen()];
   int _currentIndex = 0;
   
   @override
