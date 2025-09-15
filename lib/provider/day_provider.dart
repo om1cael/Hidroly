@@ -127,9 +127,11 @@ class DayProvider extends ChangeNotifier {
     GlobalStatistic globalStatistic = await _summaryRepository.readGlobalStatistic();
     final daysCount = await _repository.getDaysCount();
 
+    final newTotalIntake = globalStatistic.totalIntake + amount;
+
     final newGlobalStatistic = globalStatistic.copyWith(
-      totalIntake: globalStatistic.totalIntake + amount,
-      averageIntake: globalStatistic.totalIntake ~/ daysCount,
+      totalIntake: newTotalIntake,
+      averageIntake: newTotalIntake ~/ daysCount,
     );
 
     await _summaryRepository.saveGlobalStatistic(newGlobalStatistic);
