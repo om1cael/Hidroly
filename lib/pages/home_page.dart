@@ -37,6 +37,13 @@ class _HomePageState extends State<HomePage> {
             ),
           ],
           onTap: (newIndex) => setState(() {
+            if(newIndex == 1) {
+              // Force the SummaryScreen lifecycle to start over
+              // So we can get the last statistics on the initState method
+              _screens.removeAt(1);
+              _screens.insert(1, SummaryScreen(key: UniqueKey(),));
+            }
+
             _currentIndex = newIndex;
           }),
           currentIndex: _currentIndex,
