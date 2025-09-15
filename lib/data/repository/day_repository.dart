@@ -1,10 +1,12 @@
 import 'package:hidroly/data/services/database/database_constants.dart';
 import 'package:hidroly/data/services/database/database_service.dart';
 import 'package:hidroly/domain/models/day.dart';
+import 'package:logger/logger.dart';
 import 'package:sqflite/sqflite.dart';
 
 class DayRepository {
   final DatabaseService _databaseService;
+  final logger = Logger();
 
   DayRepository(this._databaseService);
 
@@ -88,5 +90,17 @@ class DayRepository {
       currentAmount: dayMap['currentAmount'] as int,
       date: DateTime.parse(dayMap['date'] as String),
     );
+  }
+
+  Future<int> getDaysCount() async {
+    try {
+      final db = await _databaseService.database;
+      final daysCount = await db.rawQuery('SELECT COUNT(*) FROM ${DatabaseConstants.daysTable}');
+      
+      return Sqflite.firstIntValue(daysCount) ?? 1;
+    } catch (e) {
+      logger.e('Could not retrieve days count: $e');
+      return 1;
+    }
   }
 }
