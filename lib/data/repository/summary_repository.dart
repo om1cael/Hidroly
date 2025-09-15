@@ -20,18 +20,25 @@ class SummaryRepository {
     }
   }
   
-  Future<GlobalStatistic?> readGlobalStatistic() async {
+  Future<GlobalStatistic> readGlobalStatistic() async {
+    final defaultGlobalStatistic = GlobalStatistic(
+      currentStreak: 0,
+      bestStreak: 0,
+      totalIntake: 0,
+      averageIntake: 0
+    );
+
     try {
       final globalStatisticString = await _asyncPrefs.getString(_globalStatisticsKey);
       if(globalStatisticString == null) {
-        return null;
+        return defaultGlobalStatistic;
       }
 
       final globalStatisticsJson = jsonDecode(globalStatisticString);
       return GlobalStatistic.fromJson(globalStatisticsJson);
     } catch (e) {
       logger.e('Failed to read global statistic: $e');
-      return null;
+      return defaultGlobalStatistic;
     }
   }
 }
