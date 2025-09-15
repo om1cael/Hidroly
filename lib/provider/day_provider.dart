@@ -1,10 +1,17 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart' hide Day;
+import 'package:hidroly/data/repository/summary_repository.dart';
 import 'package:hidroly/domain/models/day.dart';
 import 'package:hidroly/data/repository/day_repository.dart';
+import 'package:hidroly/domain/models/global_statistic.dart';
 import 'package:hidroly/utils/app_date_utils.dart';
 
 class DayProvider extends ChangeNotifier {
+  DayProvider({
+    required SummaryRepository summaryRepository,
+  }) : _summaryRepository = summaryRepository;
+
+  final SummaryRepository _summaryRepository;
   late DayRepository _repository;
 
   Day? _day;
@@ -97,6 +104,7 @@ class DayProvider extends ChangeNotifier {
 
     await update(updatedDay);
     await FlutterLocalNotificationsPlugin().cancelAll();
+    await updateGlobalStatistics(amount);
     return true;
   }
 
@@ -111,6 +119,30 @@ class DayProvider extends ChangeNotifier {
     );
 
     await update(updatedDay);
+    await updateGlobalStatistics(-amount);
     return true;
+  }
+
+  Future<void> updateGlobalStatistics(int amount) async {
+    GlobalStatistic? globalStatistic = await _summaryRepository.readGlobalStatistic();
+    GlobalStatistic newGlobalStatistic;
+
+    if(globalStatistic == null) {
+      newGlobalStatistic = GlobalStatistic(
+        currentStreak: 0, 
+        bestStreak: 0, 
+        totalIntake: amount, 
+        averageIntake: 0,
+      );
+
+      await _summaryRepository.saveGlobalStatistic(newGlobalStatistic);
+      return;
+    }
+
+    newGlobalStatistic = globalStatistic.copyWith(
+      totalIntake: globalStatistic.totalIntake + amount,
+    );
+
+    await _summaryRepository.saveGlobalStatistic(newGlobalStatistic);
   }
 }

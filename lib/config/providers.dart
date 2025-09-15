@@ -32,7 +32,7 @@ final class Providers {
 
     // Providers
     ChangeNotifierProxyProvider<DayRepository, DayProvider>(
-      create: (context) => DayProvider(), 
+      create: (context) => DayProvider(summaryRepository: context.read<SummaryRepository>()), 
       update: (_, repository, provider) => provider!..setRepository(repository)
     ),
     ChangeNotifierProxyProvider<CustomCupsRepository, CustomCupsProvider>(
