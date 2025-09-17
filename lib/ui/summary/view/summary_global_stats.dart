@@ -93,7 +93,7 @@ class _SummaryGlobalStatsState extends State<SummaryGlobalStats> {
   }
 
   String getDayLabel(int amount) {
-    if(amount > 1) return AppLocalizations.of(context)!.days;
+    if(amount > 1 || amount == 0) return AppLocalizations.of(context)!.days;
     return AppLocalizations.of(context)!.day;
   }
 }
