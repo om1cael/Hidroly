@@ -1,44 +1,72 @@
-import 'dart:convert';
-
-import 'package:hidroly/domain/models/global_statistic.dart';
+import 'package:hidroly/data/services/database/database_constants.dart';
+import 'package:hidroly/data/services/database/database_service.dart';
 import 'package:logger/logger.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class SummaryRepository {
+  final DatabaseService _databaseService;
   var logger = Logger();
 
-  final _asyncPrefs = SharedPreferencesAsync();
-  final _globalStatisticsKey = "globalStatistics";
+  SummaryRepository(this._databaseService);
 
-  Future<bool> saveGlobalStatistic(GlobalStatistic globalStatistic) async {
-    try {
-      await _asyncPrefs.setString(_globalStatisticsKey, jsonEncode(globalStatistic));
-      return true;
-    } catch (e) {
-      logger.e('Failed to save global statistic: $e');
-      return false;
-    }
+  Future<int> getStreak() async {
+    final db = await _databaseService.database;
+    var result = await db.rawQuery('''
+      SELECT COUNT(*) AS streak
+      FROM (
+        SELECT currentAmount, dailyGoal
+        FROM ${DatabaseConstants.daysTable}
+        WHERE currentAmount >= dailyGoal
+      ) AS streaks;
+    ''');
+    
+    return result[0]['streak'] as int;
   }
-  
-  Future<GlobalStatistic> readGlobalStatistic() async {
-    final defaultGlobalStatistic = GlobalStatistic(
-      currentStreak: 0,
-      bestStreak: 0,
-      totalIntake: 0,
-      averageIntake: 0
-    );
 
-    try {
-      final globalStatisticString = await _asyncPrefs.getString(_globalStatisticsKey);
-      if(globalStatisticString == null) {
-        return defaultGlobalStatistic;
-      }
+  Future<int> getBestStreak() async {
+    final db = await _databaseService.database;
+    var result = await db.rawQuery('''
+      WITH streaks AS (
+        SELECT
+          currentAmount,
+          dailyGoal,
+          CASE
+            WHEN currentAmount >= dailyGoal THEN 1
+            ELSE 0
+          END AS is_success,
+          ROW_NUMBER() OVER (ORDER BY rowid) - 
+          ROW_NUMBER() OVER (PARTITION BY CASE WHEN currentAmount >= dailyGoal THEN 1 ELSE 0 END ORDER BY rowid) AS streak_group
+        FROM ${DatabaseConstants.daysTable}
+      )
+      SELECT MAX(streak_length) AS best_streak
+      FROM (
+        SELECT streak_group, COUNT(*) AS streak_length
+        FROM streaks
+        WHERE is_success = 1
+        GROUP BY streak_group
+      );
+    ''');
 
-      final globalStatisticsJson = jsonDecode(globalStatisticString);
-      return GlobalStatistic.fromJson(globalStatisticsJson);
-    } catch (e) {
-      logger.e('Failed to read global statistic: $e');
-      return defaultGlobalStatistic;
-    }
+    return (result[0]['best_streak'] ?? 0) as int;
   }
+
+  Future<int> getTotalIntake() async {
+    final db = await _databaseService.database;
+    var result = await db.rawQuery('''
+      SELECT SUM(currentAmount) AS total_intake
+    FROM ${DatabaseConstants.daysTable};
+    ''');
+
+    return (result[0]['total_intake'] ?? 0) as int;
+  }
+
+  Future<double> getAverageIntake() async {
+    final db = await _databaseService.database;
+    var result = await db.rawQuery('''
+      SELECT AVG(currentAmount) AS average_intake
+      FROM ${DatabaseConstants.daysTable};
+    ''');
+
+    return (result[0]['average_intake'] ?? 0) as double;
+  }
+
 }

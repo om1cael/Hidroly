@@ -14,7 +14,6 @@ import 'package:provider/single_child_widget.dart';
 final class Providers {
   final providers = <SingleChildWidget>[
     Provider(create: (_) => DatabaseService()),
-    Provider(create: (_) => SummaryRepository()),
     
     ChangeNotifierProvider(create: (_) => SettingsProvider()),
     ChangeNotifierProvider(create: (_) => AppStateProvider()),
@@ -29,10 +28,13 @@ final class Providers {
     ProxyProvider<DatabaseService, DailyHistoryRepository>(
       update: (_, database, _) => DailyHistoryRepository(database)
     ),
+    ProxyProvider<DatabaseService, SummaryRepository>(
+      update: (_, database, _) => SummaryRepository(database)
+    ),
 
     // Providers
     ChangeNotifierProxyProvider<DayRepository, DayProvider>(
-      create: (context) => DayProvider(summaryRepository: context.read<SummaryRepository>()), 
+      create: (context) => DayProvider(), 
       update: (_, repository, provider) => provider!..setRepository(repository)
     ),
     ChangeNotifierProxyProvider<CustomCupsRepository, CustomCupsProvider>(

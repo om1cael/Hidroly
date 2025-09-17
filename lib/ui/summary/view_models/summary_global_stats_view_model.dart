@@ -16,8 +16,17 @@ class SummaryGlobalStatsViewModel extends ChangeNotifier {
 
   Future<bool> loadGlobalStatistics() async {
     try {
-      _globalStatistic = await _summaryRepository.readGlobalStatistic();
-      if(_globalStatistic == null) return false;
+      int currentStreak = await _summaryRepository.getStreak();
+      int bestStreak = await _summaryRepository.getBestStreak();
+      int totalIntake = await _summaryRepository.getTotalIntake();
+      double averageIntake = await _summaryRepository.getAverageIntake();
+
+      _globalStatistic = GlobalStatistic(
+        currentStreak: currentStreak, 
+        bestStreak: bestStreak, 
+        totalIntake: totalIntake, 
+        averageIntake: averageIntake.round()
+      );
 
       notifyListeners();
       return true; 
