@@ -268,6 +268,38 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String get globalStatisticsTitle => 'Global Statistics';
+
+  @override
+  String get globalStatisticsNoDataDescription =>
+      'Your data will appear here soon!';
+
+  @override
+  String get currentStreakStat => 'Current Streak';
+
+  @override
+  String get bestStreakStat => 'Best Streak';
+
+  @override
+  String get totalIntakeStat => 'Total Intake';
+
+  @override
+  String get averageIntakeStat => 'Avg. Intake';
+
+  @override
+  String get day => 'day';
+
+  @override
+  String get days => 'days';
+
+  @override
+  String get weeklyIntakeTitle => 'Weekly Intake';
+
+  @override
+  String get weeklyIntakeNoData =>
+      'We\'re still working on your weekly intake chart. Come back soon to see it!';
+
+  @override
   String get system => 'System';
 
   @override

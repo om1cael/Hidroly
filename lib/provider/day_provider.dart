@@ -91,8 +91,10 @@ class DayProvider extends ChangeNotifier {
       return false;
     }
 
+    final newCurrentAmount = currentDay.currentAmount + amount;
+
     final updatedDay = currentDay.copyWith(
-      currentAmount: currentDay.currentAmount + amount,
+      currentAmount: newCurrentAmount,
     );
 
     await update(updatedDay);
@@ -106,8 +108,10 @@ class DayProvider extends ChangeNotifier {
       return false;
     }
 
+    final newCurrentAmount = currentDay.currentAmount - amount;
+
     final updatedDay = currentDay.copyWith(
-      currentAmount: currentDay.currentAmount - amount,
+      currentAmount: newCurrentAmount,
     );
 
     await update(updatedDay);

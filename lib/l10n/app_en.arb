@@ -136,6 +136,19 @@
     }
   },
 
+  "globalStatisticsTitle": "Global Statistics",
+  "globalStatisticsNoDataDescription": "Your data will appear here soon!",
+
+  "currentStreakStat": "Current Streak",
+  "bestStreakStat": "Best Streak",
+  "totalIntakeStat": "Total Intake",
+  "averageIntakeStat": "Avg. Intake",
+  "day": "day",
+  "days": "days",
+
+  "weeklyIntakeTitle": "Weekly Intake",
+  "weeklyIntakeNoData": "We're still working on your weekly intake chart. Come back soon to see it!",
+
   "system": "System",
   "light": "Light",
   "dark": "Dark",
