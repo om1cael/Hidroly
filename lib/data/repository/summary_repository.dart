@@ -10,15 +10,38 @@ class SummaryRepository {
 
   Future<int> getStreak() async {
     final db = await _databaseService.database;
+
     var result = await db.rawQuery('''
-      SELECT COUNT(*) AS streak
-      FROM (
-        SELECT currentAmount, dailyGoal
+      WITH ordered_days AS (
+        SELECT 
+          date,
+          currentAmount,
+          dailyGoal,
+          DATE(date) as day
         FROM ${DatabaseConstants.daysTable}
-        WHERE currentAmount >= dailyGoal
-      ) AS streaks;
+        ORDER BY date DESC
+      ),
+      streak_check AS (
+        SELECT
+          day,
+          currentAmount >= dailyGoal AS goalReached,
+          ROW_NUMBER() OVER (ORDER BY day DESC) AS rn
+        FROM ordered_days
+      ),
+      streak_groups AS (
+        SELECT
+          day,
+          goalReached,
+          rn,
+          rn - ROW_NUMBER() OVER (PARTITION BY goalReached ORDER BY day DESC) AS grp
+        FROM streak_check
+      )
+      SELECT COUNT(*) as streak
+      FROM streak_groups
+      WHERE goalReached = 1
+        AND grp = (SELECT grp FROM streak_groups WHERE goalReached = 1 ORDER BY day DESC LIMIT 1);
     ''');
-    
+
     return result[0]['streak'] as int;
   }
 
