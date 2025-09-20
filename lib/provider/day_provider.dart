@@ -3,9 +3,11 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart' hi
 import 'package:hidroly/domain/models/day.dart';
 import 'package:hidroly/data/repository/day_repository.dart';
 import 'package:hidroly/utils/app_date_utils.dart';
+import 'package:logger/logger.dart';
 
 class DayProvider extends ChangeNotifier {
   late DayRepository _repository;
+  final logger = Logger();
 
   Day? _day;
   Day? get day => _day;
@@ -43,11 +45,15 @@ class DayProvider extends ChangeNotifier {
 
     final currentAppDate = AppDateUtils.normalizedLocal(currentDay.date.toLocal());
     final currentDate = AppDateUtils.normalizedLocal(localDate);
+    final dayToBeCreated = await findByDateRange(currentDate);
 
-    if (currentAppDate != currentDate) {
+    logger.i('Method called. dayToBeCreated is $dayToBeCreated.\n\n');
+
+    if (dayToBeCreated == null && currentAppDate != currentDate) {
       await create(localDate, currentDay.dailyGoal);
+      logger.i('Creating new day.\nAppDate: $currentAppDate, UTC: ${currentAppDate.toUtc()}, localDate: $currentDate, UTC: ${currentDate.toUtc()}');
 
-      final newDay = await findLatest();
+      final newDay = await findByDateRange(currentDate);
       if(newDay != null) {
         day = newDay;
       }
@@ -60,7 +66,8 @@ class DayProvider extends ChangeNotifier {
       return false;
     }
 
-    day = latestDay;
+    _day = latestDay;
+    logger.i('loading $latestDay; day is now set to $_day');
     notifyListeners();
     return true;
   }
