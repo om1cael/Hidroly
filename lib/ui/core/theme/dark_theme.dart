@@ -1,128 +1,128 @@
 import 'package:flutter/material.dart';
-import 'package:hidroly/theme/app_colors.dart';
+import 'package:hidroly/ui/core/theme/app_colors.dart';
 
-class LightTheme {
+class DarkTheme {
   static ThemeData get data {
     return ThemeData(
-      brightness: Brightness.light,
-      scaffoldBackgroundColor: AppColorsLight.background,
-      primaryColor: AppColorsLight.blueAccent,
-      colorScheme: ColorScheme.light(
-        primary: AppColorsLight.blueAccent,
-        surface: AppColorsLight.background,
-        onSurface: AppColorsLight.onBackground,
+      brightness: Brightness.dark,
+      scaffoldBackgroundColor: AppColors.background,
+      primaryColor: AppColors.blueAccent,
+      colorScheme: ColorScheme.dark(
+        primary: AppColors.blueAccent,
+        surface: AppColors.background,
+        onSurface: AppColors.onBackground,
         outlineVariant: Colors.transparent,
       ),
       appBarTheme: AppBarTheme(
-        backgroundColor: AppColorsLight.background,
+        backgroundColor: AppColors.background,
         titleTextStyle: TextStyle(
-          color: AppColorsLight.primaryText,
+          color: AppColors.primaryText,
           fontSize: 24,
           fontWeight: FontWeight.bold,
         )
       ),
       textTheme: TextTheme(
-        bodyLarge: TextStyle(color: AppColorsLight.primaryText),
+        bodyLarge: TextStyle(color: AppColors.primaryText),
         bodyMedium: TextStyle(
-          color: AppColorsLight.secondaryText,
+          color: AppColors.secondaryText,
           fontSize: 18,
           fontWeight: FontWeight.w300,
         ),
         bodySmall: TextStyle(
-          color: AppColorsLight.secondaryText,
+          color: AppColors.secondaryText,
           fontSize: 12,
           fontWeight: FontWeight.w300,
         ),
         headlineLarge: TextStyle(
-          color: AppColorsLight.primaryText, 
+          color: AppColors.primaryText, 
           fontSize: 40,
           fontWeight: FontWeight.bold
         ),
         titleLarge: TextStyle(
-          color: AppColorsLight.primaryText,
+          color: AppColors.primaryText,
           fontSize: 24,
         ),
         labelLarge: TextStyle(
-          color: AppColorsLight.primaryText,
+          color: AppColors.primaryText,
           fontSize: 14,
         ),
         labelMedium: TextStyle(
-          color: AppColorsLight.secondaryText,
+          color: AppColors.secondaryText,
           fontSize: 13,
         ),
       ),
-      iconTheme: IconThemeData(color: AppColorsLight.primaryText),
+      iconTheme: IconThemeData(color: AppColors.primaryText),
       inputDecorationTheme: InputDecorationTheme(
-        fillColor: AppColorsLight.onBackground,
+        fillColor: AppColors.onBackground,
         filled: true,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(16),
         ),
         counterStyle: TextStyle(
-          color: AppColorsLight.secondaryText,
+          color: AppColors.secondaryText,
           fontSize: 12,
         )
       ),
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
-          foregroundColor: AppColorsLight.primaryText,
+          foregroundColor: AppColors.primaryText,
         ),
       ),
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
-        backgroundColor: AppColorsLight.onBackground,
+        backgroundColor: AppColors.onBackground,
         selectedItemColor: Colors.white,
-        unselectedItemColor: AppColorsLight.unselectedItem,
+        unselectedItemColor: AppColors.unselectedItem,
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-          backgroundColor: AppColorsLight.onBackground,
+          backgroundColor: AppColors.onBackground,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
           ),
         ),
       ),
       datePickerTheme: DatePickerThemeData(
-        backgroundColor: AppColorsLight.background,
-        headerBackgroundColor: AppColorsLight.onBackground,
-        headerForegroundColor: AppColorsLight.secondaryText,
+        backgroundColor: AppColors.background,
+        headerBackgroundColor: AppColors.onBackground,
+        headerForegroundColor: AppColors.secondaryText,
 
         weekdayStyle: TextStyle(
-          color: AppColorsLight.secondaryText,
+          color: AppColors.secondaryText,
         ),
 
         dividerColor: Colors.transparent,
       
         yearForegroundColor: WidgetStateProperty.resolveWith<Color>((state) {
           if(state.contains(WidgetState.disabled)) {
-            return AppColorsLight.unselectedItem;
+            return AppColors.unselectedItem;
           } else {
-            return AppColorsLight.primaryText;
+            return AppColors.primaryText;
           }
         }),
 
         dayForegroundColor: WidgetStateProperty.resolveWith<Color>((state) {
           if(state.contains(WidgetState.disabled)) {
-            return AppColorsLight.unselectedItem;
+            return AppColors.unselectedItem;
           } else if(state.contains(WidgetState.selected)) {
-            return AppColorsLight.onBackground;
+            return AppColors.onBackground;
           } else {
-            return AppColorsLight.secondaryText;
+            return AppColors.secondaryText;
           }
         }),
       ),
       radioTheme: RadioThemeData(
         fillColor: WidgetStateProperty.resolveWith<Color>((state) {
           if(state.contains(WidgetState.selected)) {
-            return AppColorsLight.blueAccent;
+            return AppColors.blueAccent;
           }
-          return AppColorsLight.unselectedItem;
+          return AppColors.unselectedItem;
         }),
       ),
       timePickerTheme: TimePickerThemeData(
-        hourMinuteTextColor: AppColorsLight.primaryText,
-        entryModeIconColor: AppColorsLight.primaryText,
-        dialBackgroundColor: AppColorsLight.onBackground,
-        dialTextColor: AppColorsLight.primaryText
+        hourMinuteTextColor: AppColors.primaryText,
+        entryModeIconColor: AppColors.primaryText,
+        dialBackgroundColor: AppColors.onBackground,
+        dialTextColor: AppColors.primaryText
       ),
       snackBarTheme: SnackBarThemeData(
         behavior: SnackBarBehavior.floating,
@@ -130,7 +130,6 @@ class LightTheme {
           borderRadius: BorderRadiusGeometry.circular(16),
         ),
         contentTextStyle: TextStyle(
-          color: AppColorsLight.primaryText,
           fontSize: 16,
         ),
         closeIconColor: Colors.redAccent,
@@ -139,7 +138,7 @@ class LightTheme {
       checkboxTheme: CheckboxThemeData(
         fillColor: WidgetStateProperty.resolveWith<Color>((state) {
           if(state.contains(WidgetState.selected)) {
-            return AppColorsLight.blueAccent;
+            return AppColors.blueAccent;
           }
 
           return Colors.transparent;
@@ -150,11 +149,11 @@ class LightTheme {
         )
       ),
       listTileTheme: ListTileThemeData(
-        iconColor: AppColorsLight.primaryText,
+        iconColor: AppColors.primaryText,
       ),
       floatingActionButtonTheme: FloatingActionButtonThemeData(
-        backgroundColor: AppColorsLight.onBackground,
-        foregroundColor: AppColorsLight.primaryText,
+        backgroundColor: AppColors.onBackground,
+        foregroundColor: AppColors.primaryText,
       ),
       fontFamily: 'Poppins',
     );

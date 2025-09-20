@@ -206,6 +206,9 @@ class AppLocalizationsPt extends AppLocalizations {
   String get settingsTheme => 'Tema';
 
   @override
+  String get settingsHapticFeedback => 'Feedback tátil';
+
+  @override
   String get setupAgeTextFieldInvalidValue => 'Idade entre 10 e 120';
 
   @override
@@ -269,6 +272,38 @@ class AppLocalizationsPt extends AppLocalizations {
   }
 
   @override
+  String get globalStatisticsTitle => 'Estatísticas Globais';
+
+  @override
+  String get globalStatisticsNoDataDescription =>
+      'Seus dados aparecerão aqui em breve!';
+
+  @override
+  String get currentStreakStat => 'Sequência atual';
+
+  @override
+  String get bestStreakStat => 'Melhor sequência';
+
+  @override
+  String get totalIntakeStat => 'Consumo total';
+
+  @override
+  String get averageIntakeStat => 'Consumo médio';
+
+  @override
+  String get day => 'dia';
+
+  @override
+  String get days => 'dias';
+
+  @override
+  String get weeklyIntakeTitle => 'Consumo semanal';
+
+  @override
+  String get weeklyIntakeNoData =>
+      'Ainda estamos montando seu gráfico de consumo semanal. Volte em breve para ver!';
+
+  @override
   String get system => 'Sistema';
 
   @override
@@ -276,6 +311,26 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get dark => 'Escuro';
+
+  @override
+  String get historyIconSemanticLabel => 'Histórico';
+
+  @override
+  String get settingsIconSemanticLabel => 'Configurações';
+
+  @override
+  String get addCupIconSemanticLabel => 'Adicionar copo';
+
+  @override
+  String get saveChangesIconSemanticLabel => 'Salvar alterações';
+
+  @override
+  String get goBackIconSemanticLabel => 'Voltar';
+
+  @override
+  String waterRemoveIconSemanticLabel(String amount) {
+    return 'Remover $amount';
+  }
 }
 
 /// The translations for Portuguese, as used in Brazil (`pt_BR`).
@@ -296,6 +351,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get editAction => 'Editar';
+
+  @override
+  String get rearrangeAction => 'Reorganizar';
 
   @override
   String get updateAction => 'Atualizar';
@@ -477,6 +535,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get settingsTheme => 'Tema';
 
   @override
+  String get settingsHapticFeedback => 'Feedback tátil';
+
+  @override
   String get setupAgeTextFieldInvalidValue => 'Idade entre 10 e 120';
 
   @override
@@ -540,6 +601,38 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   }
 
   @override
+  String get globalStatisticsTitle => 'Estatísticas Globais';
+
+  @override
+  String get globalStatisticsNoDataDescription =>
+      'Seus dados aparecerão aqui em breve!';
+
+  @override
+  String get currentStreakStat => 'Sequência atual';
+
+  @override
+  String get bestStreakStat => 'Melhor sequência';
+
+  @override
+  String get totalIntakeStat => 'Consumo total';
+
+  @override
+  String get averageIntakeStat => 'Consumo médio';
+
+  @override
+  String get day => 'dia';
+
+  @override
+  String get days => 'dias';
+
+  @override
+  String get weeklyIntakeTitle => 'Consumo semanal';
+
+  @override
+  String get weeklyIntakeNoData =>
+      'Ainda estamos montando seu gráfico de consumo semanal. Volte em breve para ver!';
+
+  @override
   String get system => 'Sistema';
 
   @override
@@ -547,4 +640,24 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get dark => 'Escuro';
+
+  @override
+  String get historyIconSemanticLabel => 'Histórico';
+
+  @override
+  String get settingsIconSemanticLabel => 'Configurações';
+
+  @override
+  String get addCupIconSemanticLabel => 'Adicionar copo';
+
+  @override
+  String get saveChangesIconSemanticLabel => 'Salvar alterações';
+
+  @override
+  String get goBackIconSemanticLabel => 'Voltar';
+
+  @override
+  String waterRemoveIconSemanticLabel(String amount) {
+    return 'Remover $amount';
+  }
 }

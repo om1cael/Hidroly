@@ -519,6 +519,12 @@ abstract class AppLocalizations {
   /// **'Theme'**
   String get settingsTheme;
 
+  /// No description provided for @settingsHapticFeedback.
+  ///
+  /// In en, this message translates to:
+  /// **'Haptic Feedback'**
+  String get settingsHapticFeedback;
+
   /// No description provided for @setupAgeTextFieldInvalidValue.
   ///
   /// In en, this message translates to:
@@ -627,6 +633,66 @@ abstract class AppLocalizations {
   /// **'{time} hours'**
   String hours(String time);
 
+  /// No description provided for @globalStatisticsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Global Statistics'**
+  String get globalStatisticsTitle;
+
+  /// No description provided for @globalStatisticsNoDataDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Your data will appear here soon!'**
+  String get globalStatisticsNoDataDescription;
+
+  /// No description provided for @currentStreakStat.
+  ///
+  /// In en, this message translates to:
+  /// **'Current Streak'**
+  String get currentStreakStat;
+
+  /// No description provided for @bestStreakStat.
+  ///
+  /// In en, this message translates to:
+  /// **'Best Streak'**
+  String get bestStreakStat;
+
+  /// No description provided for @totalIntakeStat.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Intake'**
+  String get totalIntakeStat;
+
+  /// No description provided for @averageIntakeStat.
+  ///
+  /// In en, this message translates to:
+  /// **'Avg. Intake'**
+  String get averageIntakeStat;
+
+  /// No description provided for @day.
+  ///
+  /// In en, this message translates to:
+  /// **'day'**
+  String get day;
+
+  /// No description provided for @days.
+  ///
+  /// In en, this message translates to:
+  /// **'days'**
+  String get days;
+
+  /// No description provided for @weeklyIntakeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Weekly Intake'**
+  String get weeklyIntakeTitle;
+
+  /// No description provided for @weeklyIntakeNoData.
+  ///
+  /// In en, this message translates to:
+  /// **'We\'re still working on your weekly intake chart. Come back soon to see it!'**
+  String get weeklyIntakeNoData;
+
   /// No description provided for @system.
   ///
   /// In en, this message translates to:
@@ -644,6 +710,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Dark'**
   String get dark;
+
+  /// No description provided for @historyIconSemanticLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'History'**
+  String get historyIconSemanticLabel;
+
+  /// No description provided for @settingsIconSemanticLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Settings'**
+  String get settingsIconSemanticLabel;
+
+  /// No description provided for @addCupIconSemanticLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Add cup'**
+  String get addCupIconSemanticLabel;
+
+  /// No description provided for @saveChangesIconSemanticLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Save changes'**
+  String get saveChangesIconSemanticLabel;
+
+  /// No description provided for @goBackIconSemanticLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Go back'**
+  String get goBackIconSemanticLabel;
+
+  /// No description provided for @waterRemoveIconSemanticLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove {amount}'**
+  String waterRemoveIconSemanticLabel(String amount);
 }
 
 class _AppLocalizationsDelegate

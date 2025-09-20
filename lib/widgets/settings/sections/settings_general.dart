@@ -3,7 +3,10 @@ import 'package:hidroly/l10n/app_localizations.dart';
 import 'package:hidroly/main.dart';
 import 'package:hidroly/pages/settings/settings_theme_page.dart';
 import 'package:hidroly/pages/settings/settings_unit_page.dart';
+import 'package:hidroly/provider/settings_provider.dart';
+import 'package:hidroly/widgets/settings/settings_switch.dart';
 import 'package:hidroly/widgets/settings/settings_text_button.dart';
+import 'package:provider/provider.dart';
 
 class SettingsGeneral extends StatelessWidget {
   final bool isMetric;
@@ -44,6 +47,17 @@ class SettingsGeneral extends StatelessWidget {
               MaterialPageRoute(builder: (context) => const SettingsUnitPage()),
             );
           },
+        ),
+        Consumer<SettingsProvider>(
+          builder: (context, provider, _) {
+            return SettingsSwitch(
+              title: AppLocalizations.of(context)!.settingsHapticFeedback,
+              switchValue: provider.hapticFeedback,
+              onChanged: (value) {
+                context.read<SettingsProvider>().updateHapticFeedback(value);
+              },
+            );
+          }
         ),
       ],
     );

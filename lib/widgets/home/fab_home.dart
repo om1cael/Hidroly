@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:haptic_feedback/haptic_feedback.dart';
+import 'package:hidroly/utils/haptic_feedback/haptic_feedback_utils.dart';
 import 'package:hidroly/domain/models/history_entry.dart';
 import 'package:hidroly/l10n/app_localizations.dart';
 import 'package:hidroly/provider/app_state_provider.dart';
@@ -43,8 +45,14 @@ class _FabHomeState extends State<FabHome> {
         ? _toggleEditMode(editMode)
         : _showCustomCupPopUp(context),
       child: editMode 
-        ? Icon(Icons.done)
-        : Icon(Icons.add)
+        ? Icon(
+          Icons.done,
+          semanticLabel: AppLocalizations.of(context)!.saveChangesIconSemanticLabel,
+        )
+        : Icon(
+          Icons.add,
+          semanticLabel: AppLocalizations.of(context)!.addCupIconSemanticLabel,
+        )
     );
   }
 
@@ -138,6 +146,11 @@ class _FabHomeState extends State<FabHome> {
                   );
                 }
 
+                await HapticFeedbackUtils(
+                  context: context,
+                ).vibrate(HapticsType.success);
+
+                if(!context.mounted) return;
                 Navigator.of(context).pop();
                 customCupAmountController.clear();
               }, 

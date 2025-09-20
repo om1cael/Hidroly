@@ -3,7 +3,7 @@ import 'package:hidroly/domain/models/enum/frequency.dart';
 import 'package:hidroly/domain/models/enum/settings.dart';
 import 'package:hidroly/l10n/app_localizations.dart';
 import 'package:hidroly/provider/settings_provider.dart';
-import 'package:hidroly/services/notification_service.dart';
+import 'package:hidroly/data/services/notifications/notification_service.dart';
 import 'package:hidroly/widgets/common/icon_header.dart';
 import 'package:hidroly/widgets/common/notifications_time_input.dart';
 import 'package:provider/provider.dart';
@@ -73,6 +73,7 @@ class _SettingsUpdateSleepSchedulePageState extends State<SettingsUpdateSleepSch
           icon: Icon(
             Icons.arrow_back,
             color: Theme.of(context).iconTheme.color,
+            semanticLabel: AppLocalizations.of(context)!.goBackIconSemanticLabel,
           ),
         ),
       ),
@@ -139,7 +140,10 @@ class _SettingsUpdateSleepSchedulePageState extends State<SettingsUpdateSleepSch
           if(!context.mounted) return;
           Navigator.of(context).pop(true);
         },
-        child: Icon(Icons.done), 
+        child: Icon(
+          Icons.done,
+          semanticLabel: AppLocalizations.of(context)!.saveChangesIconSemanticLabel,
+        ), 
       ),
     );
   }

@@ -8,7 +8,7 @@ import 'package:hidroly/provider/settings_provider.dart';
 import 'package:hidroly/l10n/app_localizations.dart';
 import 'package:hidroly/pages/home_page.dart';
 import 'package:hidroly/provider/day_provider.dart';
-import 'package:hidroly/services/notification_service.dart';
+import 'package:hidroly/data/services/notifications/notification_service.dart';
 import 'package:hidroly/utils/calculate_dailygoal.dart';
 import 'package:hidroly/utils/unit_tools.dart';
 import 'package:hidroly/widgets/setup/setup_step_one.dart';

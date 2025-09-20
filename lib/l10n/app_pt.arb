@@ -68,6 +68,8 @@
   "settingsNotificationsSleepScheduleDescription": "Horário de acordar/dormir & frequência",
   "settingsNotificationsFrequency": "Frequência",
   "settingsTheme": "Tema",
+  "settingsHapticFeedback": "Feedback tátil",
+
   "setupAgeTextFieldInvalidValue": "Idade entre 10 e 120",
   "setupAgeTextFieldLabel": "Sua idade",
   "setupDataText": "Seus dados são armazenados no seu dispositivo.",
@@ -122,7 +124,36 @@
       }
     }
   },
+
+  "globalStatisticsTitle": "Estatísticas Globais",
+  "globalStatisticsNoDataDescription": "Seus dados aparecerão aqui em breve!",
+
+  "currentStreakStat": "Sequência atual",
+  "bestStreakStat": "Melhor sequência",
+  "totalIntakeStat": "Consumo total",
+  "averageIntakeStat": "Consumo médio",
+  "day": "dia",
+  "days": "dias",
+
+  "weeklyIntakeTitle": "Consumo semanal",
+  "weeklyIntakeNoData": "Ainda estamos montando seu gráfico de consumo semanal. Volte em breve para ver!",
+
   "system": "Sistema",
   "light": "Claro",
-  "dark": "Escuro"
+  "dark": "Escuro",
+
+  "historyIconSemanticLabel": "Histórico",
+  "settingsIconSemanticLabel": "Configurações",
+  "addCupIconSemanticLabel": "Adicionar copo",
+  "saveChangesIconSemanticLabel": "Salvar alterações",
+  "goBackIconSemanticLabel": "Voltar",
+  "waterRemoveIconSemanticLabel": "Remover {amount}",
+  "@waterRemoveIconSemanticLabel": {
+    "placeholders": {
+      "amount": {
+        "type": "String",
+        "example": "2ml"
+      }
+    }
+  }
 }

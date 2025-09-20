@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:haptic_feedback/haptic_feedback.dart';
+import 'package:hidroly/utils/haptic_feedback/haptic_feedback_utils.dart';
 import 'package:hidroly/domain/models/history_entry.dart';
 import 'package:hidroly/l10n/app_localizations.dart';
 import 'package:hidroly/provider/daily_history_provider.dart';
 import 'package:hidroly/provider/day_provider.dart';
-import 'package:hidroly/theme/app_colors.dart';
+import 'package:hidroly/ui/core/theme/app_colors.dart';
 import 'package:hidroly/utils/unit_tools.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -39,6 +41,7 @@ class DailyHistoryBottomSheet extends StatelessWidget {
                         icon: Icon(
                           Icons.arrow_back,
                           color: Theme.of(context).iconTheme.color,
+                          semanticLabel: AppLocalizations.of(context)!.goBackIconSemanticLabel,
                         ),
                         style: IconButton.styleFrom(
                           backgroundColor: Colors.transparent,
@@ -112,6 +115,11 @@ class DailyHistoryBottomSheet extends StatelessWidget {
                                   history.id!, 
                                   dayId
                                 );
+                              
+                              if(!context.mounted) return;
+                              await HapticFeedbackUtils(
+                                context: context,
+                              ).vibrate(HapticsType.success);
                             },
                           );
                         }, 
@@ -166,6 +174,11 @@ class HistoryItem extends StatelessWidget {
           icon: Icon(
             Icons.delete_forever,
             color: Colors.redAccent,
+            semanticLabel: AppLocalizations
+              .of(context)!
+              .waterRemoveIconSemanticLabel(
+                UnitTools.getVolumeWithUnit(history.amount, isMetric, context: context),
+              ),
           ),
         ),
       ),

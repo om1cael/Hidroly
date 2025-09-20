@@ -1,10 +1,12 @@
 import 'package:hidroly/data/services/database/database_constants.dart';
 import 'package:hidroly/data/services/database/database_service.dart';
 import 'package:hidroly/domain/models/day.dart';
+import 'package:logger/logger.dart';
 import 'package:sqflite/sqflite.dart';
 
 class DayRepository {
   final DatabaseService _databaseService;
+  final logger = Logger();
 
   DayRepository(this._databaseService);
 
@@ -74,7 +76,7 @@ class DayRepository {
     final List<Map<String, Object?>> dayList = await db.query(
       DatabaseConstants.daysTable,
       where: 'date >= ? AND date < ?',
-      whereArgs: [start, end],
+      whereArgs: [start.toIso8601String(), end.toIso8601String()],
       orderBy: 'date DESC',
       limit: 1,
     );
@@ -88,5 +90,44 @@ class DayRepository {
       currentAmount: dayMap['currentAmount'] as int,
       date: DateTime.parse(dayMap['date'] as String),
     );
+  }
+
+  Future<List<Day>> getMultipleDays(DateTime start, DateTime end, int limit) async {
+    final db = await _databaseService.database;
+    final List<Map<String, Object?>> rawDayList = await db.query(
+      DatabaseConstants.daysTable,
+      where: 'date >= ? AND date < ?',
+      whereArgs: [start.toIso8601String(), end.toIso8601String()],
+      orderBy: 'date DESC',
+      limit: limit,
+    );
+
+    if(rawDayList.isEmpty) return List.empty();
+    List<Day> dayList = List.empty(growable: true);
+
+    for(Map<String, Object?> dayMap in rawDayList) {
+      final day = Day(
+        id: dayMap['id'] as int,
+        dailyGoal: dayMap['dailyGoal'] as int,
+        currentAmount: dayMap['currentAmount'] as int,
+        date: DateTime.parse(dayMap['date'] as String),
+      );
+
+      dayList.add(day);
+    }
+
+    return dayList;
+  }
+
+  Future<int> getDaysCount() async {
+    try {
+      final db = await _databaseService.database;
+      final daysCount = await db.rawQuery('SELECT COUNT(*) FROM ${DatabaseConstants.daysTable}');
+      
+      return Sqflite.firstIntValue(daysCount) ?? 1;
+    } catch (e) {
+      logger.e('Could not retrieve days count: $e');
+      return 1;
+    }
   }
 }

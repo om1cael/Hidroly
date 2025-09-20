@@ -1,0 +1,45 @@
+{
+  "name": "Hidroly DevContainer",
+
+  "build": {
+    "dockerfile": "Dockerfile",
+    "args": {
+      "FLUTTER_VERSION": "stable"
+    }
+  },
+
+  "workspaceFolder": "/workspace/hidroly",
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "dart-code.dart-code",
+        "dart-code.flutter"
+      ]
+    },
+    "settings": {
+        "terminal.integrated.shell.linux": "/bin/bash"
+    }
+  },
+
+  "mounts": [
+    "source=${localWorkspaceFolder},target=/workspace/hidroly,type=bind,consistency=cached",
+    "source=${localEnv:SSH_AUTH_SOCK},target=/ssh-agent,type=bind",
+    "type=bind,source=${localEnv:HOME}/.ssh,target=${localEnv:HOME}/.ssh,readonly"
+  ],
+
+  "remoteEnv": {
+    "SSH_AUTH_SOCK": "/ssh-agent",
+    "FLUTTER_ROOT": "/workspace/flutter",
+    "PATH": "/workspace/hidroly/flutter/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+  },
+
+  "forwardPorts": [
+    5037   // adb
+  ],
+
+  "postCreateCommand": "git config --global --add safe.directory /workspace/hidroly && git submodule update --init --recursive",
+
+  "containerUser": "ubuntu",
+  "remoteUser": "ubuntu"
+}
