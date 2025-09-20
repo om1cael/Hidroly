@@ -1,0 +1,1 @@
+Essa versão corrige o cálculo de streaks, a criação de dias e adiciona suporte ao sistema de unidade imperial no gráfico semanal.
