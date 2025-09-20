@@ -35,9 +35,9 @@ Hidroly is a friendly, open-source Flutter app that helps you stay hydrated by t
 
 ## Screenshots
 
-| <img src="./metadata/en-US/images/phoneScreenshots/1.jpeg" alt="Setup Page" />        | <img src="./metadata/en-US/images/phoneScreenshots/2.jpeg" alt="Notifications Setup" />     | <img src="./metadata/en-US/images/phoneScreenshots/3.jpeg" alt="Home Page" />        |
+| <img src="./metadata/en-US/images/phoneScreenshots/1.png" alt="Setup Page" />        | <img src="./metadata/en-US/images/phoneScreenshots/2.png" alt="Notifications Setup" />     | <img src="./metadata/en-US/images/phoneScreenshots/3.png" alt="Home Page" />        |
 |----------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------|
-| <img src="./metadata/en-US/images/phoneScreenshots/4.jpeg" alt="Day Selection" />      | <img src="./metadata/en-US/images/phoneScreenshots/5.jpeg" alt="Day history view" />        | <img src="./metadata/en-US/images/phoneScreenshots/6.jpeg" alt="Settings Page" />     |
+| <img src="./metadata/en-US/images/phoneScreenshots/4.png" alt="Day Selection" />      | <img src="./metadata/en-US/images/phoneScreenshots/5.png" alt="Day history view" />
 
 
 ## Building from source
