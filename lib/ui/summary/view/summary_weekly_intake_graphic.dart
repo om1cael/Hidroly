@@ -179,7 +179,7 @@ class IntakeGraphic extends StatelessWidget {
                 final day = dayList[index];
     
                 return BarChartGroupData(
-                  x: day.date.weekday % 7,
+                  x: day.date.toLocal().weekday % 7,
                   barRods: [
                     BarChartRodData(
                       toY: day.currentAmount.toDouble(),
