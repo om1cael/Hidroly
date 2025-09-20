@@ -70,7 +70,7 @@ class LightTheme {
       ),
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
         backgroundColor: AppColorsLight.onBackground,
-        selectedItemColor: Colors.white,
+        selectedItemColor: AppColors.onBackground,
         unselectedItemColor: AppColorsLight.unselectedItem,
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
