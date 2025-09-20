@@ -24,6 +24,9 @@ class AppLocalizationsEl extends AppLocalizations {
   String get editAction => 'Edit';
 
   @override
+  String get rearrangeAction => 'Rearrange';
+
+  @override
   String get updateAction => 'Update';
 
   @override
