@@ -206,7 +206,7 @@ class AppLocalizationsPt extends AppLocalizations {
   String get settingsTheme => 'Tema';
 
   @override
-  String get settingsHapticFeedback => 'Haptic Feedback';
+  String get settingsHapticFeedback => 'Feedback tátil';
 
   @override
   String get setupAgeTextFieldInvalidValue => 'Idade entre 10 e 120';
@@ -272,36 +272,36 @@ class AppLocalizationsPt extends AppLocalizations {
   }
 
   @override
-  String get globalStatisticsTitle => 'Global Statistics';
+  String get globalStatisticsTitle => 'Estatísticas Globais';
 
   @override
   String get globalStatisticsNoDataDescription =>
-      'Your data will appear here soon!';
+      'Seus dados aparecerão aqui em breve!';
 
   @override
-  String get currentStreakStat => 'Current Streak';
+  String get currentStreakStat => 'Sequência atual';
 
   @override
-  String get bestStreakStat => 'Best Streak';
+  String get bestStreakStat => 'Melhor sequência';
 
   @override
-  String get totalIntakeStat => 'Total Intake';
+  String get totalIntakeStat => 'Consumo total';
 
   @override
-  String get averageIntakeStat => 'Avg. Intake';
+  String get averageIntakeStat => 'Consumo médio';
 
   @override
-  String get day => 'day';
+  String get day => 'dia';
 
   @override
-  String get days => 'days';
+  String get days => 'dias';
 
   @override
-  String get weeklyIntakeTitle => 'Weekly Intake';
+  String get weeklyIntakeTitle => 'Consumo semanal';
 
   @override
   String get weeklyIntakeNoData =>
-      'We\'re still working on your weekly intake chart. Come back soon to see it!';
+      'Ainda estamos montando seu gráfico de consumo semanal. Volte em breve para ver!';
 
   @override
   String get system => 'Sistema';
@@ -313,22 +313,22 @@ class AppLocalizationsPt extends AppLocalizations {
   String get dark => 'Escuro';
 
   @override
-  String get historyIconSemanticLabel => 'History';
+  String get historyIconSemanticLabel => 'Histórico';
 
   @override
-  String get settingsIconSemanticLabel => 'Settings';
+  String get settingsIconSemanticLabel => 'Configurações';
 
   @override
-  String get addCupIconSemanticLabel => 'Add cup';
+  String get addCupIconSemanticLabel => 'Adicionar copo';
 
   @override
-  String get saveChangesIconSemanticLabel => 'Save changes';
+  String get saveChangesIconSemanticLabel => 'Salvar alterações';
 
   @override
-  String get goBackIconSemanticLabel => 'Go back';
+  String get goBackIconSemanticLabel => 'Voltar';
 
   @override
   String waterRemoveIconSemanticLabel(String amount) {
-    return 'Remove $amount';
+    return 'Remover $amount';
   }
 }
