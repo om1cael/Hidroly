@@ -4,6 +4,7 @@
   "deleteAction": "Deletar",
   "doNotSaveLabel": "Não salvar",
   "editAction": "Editar",
+  "rearrangeAction": "Rearrange",
   "updateAction": "Atualizar",
   "manageAction": "Gerenciar",
   "bottomNavHomeLabel": "Home",
@@ -67,6 +68,7 @@
   "settingsNotificationsSleepScheduleDescription": "Horário de acordar/dormir & frequência",
   "settingsNotificationsFrequency": "Frequência",
   "settingsTheme": "Tema",
+  "settingsHapticFeedback": "Haptic Feedback",
   "setupAgeTextFieldInvalidValue": "Idade entre 10 e 120",
   "setupAgeTextFieldLabel": "Sua idade",
   "setupDataText": "Seus dados são armazenados no seu dispositivo.",
@@ -121,7 +123,31 @@
       }
     }
   },
+  "globalStatisticsTitle": "Global Statistics",
+  "globalStatisticsNoDataDescription": "Your data will appear here soon!",
+  "currentStreakStat": "Current Streak",
+  "bestStreakStat": "Best Streak",
+  "totalIntakeStat": "Total Intake",
+  "averageIntakeStat": "Avg. Intake",
+  "day": "day",
+  "days": "days",
+  "weeklyIntakeTitle": "Weekly Intake",
+  "weeklyIntakeNoData": "We're still working on your weekly intake chart. Come back soon to see it!",
   "system": "Sistema",
   "light": "Claro",
-  "dark": "Escuro"
+  "dark": "Escuro",
+  "historyIconSemanticLabel": "History",
+  "settingsIconSemanticLabel": "Settings",
+  "addCupIconSemanticLabel": "Add cup",
+  "saveChangesIconSemanticLabel": "Save changes",
+  "goBackIconSemanticLabel": "Go back",
+  "waterRemoveIconSemanticLabel": "Remove {amount}",
+  "@waterRemoveIconSemanticLabel": {
+    "placeholders": {
+      "amount": {
+        "type": "String",
+        "example": "2ml"
+      }
+    }
+  }
 }
