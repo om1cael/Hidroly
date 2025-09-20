@@ -4,8 +4,11 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:hidroly/domain/models/day.dart';
 import 'package:hidroly/l10n/app_localizations.dart';
+import 'package:hidroly/provider/settings_provider.dart';
 import 'package:hidroly/ui/summary/view_models/summary_weekly_graphic_view_model.dart';
+import 'package:hidroly/utils/unit_tools.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 class SummaryWeeklyIntakeGraphic extends StatefulWidget {
   const SummaryWeeklyIntakeGraphic({
@@ -28,6 +31,8 @@ class _SummaryWeeklyIntakeGraphicState extends State<SummaryWeeklyIntakeGraphic>
 
   @override
   Widget build(BuildContext context) {
+    final isMetric = context.watch<SettingsProvider>().isMetric;
+
     return Padding(
       padding: const EdgeInsets.only(left: 8.0),
       child: FutureBuilder(
@@ -48,6 +53,10 @@ class _SummaryWeeklyIntakeGraphicState extends State<SummaryWeeklyIntakeGraphic>
             .reduce((a, b) => a.currentAmount > b.currentAmount ? a : b)
             .currentAmount;
           
+          highestAmountFromDays = isMetric
+            ? highestAmountFromDays
+            : UnitTools.mlToFlOz(highestAmountFromDays).round();
+          
           if(highestAmountFromDays == 0) {
             highestAmountFromDays = 500;
           }
@@ -64,6 +73,7 @@ class _SummaryWeeklyIntakeGraphicState extends State<SummaryWeeklyIntakeGraphic>
               IntakeGraphic(
                 highestAmountFromDays: highestAmountFromDays, 
                 dayList: dayList.reversed.toList(),
+                isMetric: isMetric,
               ),
             ]
           );
@@ -105,10 +115,12 @@ class IntakeGraphic extends StatelessWidget {
     super.key,
     required this.highestAmountFromDays,
     required this.dayList,
+    required this.isMetric,
   });
 
   final int highestAmountFromDays;
   final List<Day> dayList;
+  final bool isMetric;
 
   @override
   Widget build(BuildContext context) {
@@ -177,12 +189,16 @@ class IntakeGraphic extends StatelessWidget {
               borderData: FlBorderData(show: false),
               barGroups: List.generate(dayList.length, (index) {
                 final day = dayList[index];
+
+                final currentAmount = isMetric
+                  ? day.currentAmount
+                  : UnitTools.mlToFlOz(day.currentAmount);
     
                 return BarChartGroupData(
                   x: day.date.toLocal().weekday % 7,
                   barRods: [
                     BarChartRodData(
-                      toY: day.currentAmount.toDouble(),
+                      toY: currentAmount.toDouble(),
                       color: Theme.of(context).primaryColor,
                       width: 16,
                       borderRadius: BorderRadius.circular(4),
