@@ -1,5 +1,6 @@
 import java.util.Properties
 import java.io.FileInputStream
+import com.android.build.gradle.internal.api.ApkVariantOutputImpl
 
 plugins {
     id("com.android.application")
@@ -66,6 +67,18 @@ android {
             }
         }
     }
+
+    flavorDimensions += "release"
+
+    productFlavors {
+        create("fdroid") {
+            dimension = "release"
+            versionNameSuffix = "-fdroid"
+        }
+        create("default") {
+            dimension = "release"
+        }
+    }
 }
 
 dependencies {
@@ -81,13 +94,23 @@ val abiCodes = mapOf(
     "arm64-v8a" to 3
 )
 
-android.applicationVariants.all {
-    outputs.all {
-        val outputImpl = this as com.android.build.gradle.internal.api.ApkVariantOutputImpl
-        val abiFilter = outputImpl.getFilter(com.android.build.OutputFile.ABI)
-        val abiVersionCode = abiFilter?.let { abiCodes[it] }
-        if (abiVersionCode != null) {
-            outputImpl.versionCodeOverride = versionCode * 10 + abiVersionCode
+android.applicationVariants.configureEach {
+    if(flavorName == "fdroid") {
+        val variant = this
+        variant.outputs.forEach { output ->
+            val abiVersionCode = abiCodes[output.filters.find { it.filterType == "ABI" }?.identifier]
+            if (abiVersionCode != null) {
+                (output as ApkVariantOutputImpl).versionCodeOverride = variant.versionCode * 10 + abiVersionCode
+            }
+        }
+    } else {
+        outputs.all {
+            val outputImpl = this as com.android.build.gradle.internal.api.ApkVariantOutputImpl
+            val abiFilter = outputImpl.getFilter(com.android.build.OutputFile.ABI)
+            val abiVersionCode = abiFilter?.let { abiCodes[it] }
+            if (abiVersionCode != null) {
+                outputImpl.versionCodeOverride = versionCode * 10 + abiVersionCode
+            }
         }
     }
 }
