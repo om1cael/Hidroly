@@ -73,7 +73,6 @@ android {
     productFlavors {
         create("fdroid") {
             dimension = "release"
-            versionNameSuffix = "-fdroid"
         }
         create("default") {
             dimension = "release"
