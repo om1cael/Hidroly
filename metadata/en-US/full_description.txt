@@ -1,25 +1,32 @@
 Hidroly is a minimalist and powerful hydration tracker designed to help you meet your daily water goals without distractions. Whether you use metric or imperial units, Hidroly makes it simple to stay on track.
 
 🏁 <b>Simple and Quick Setup</b>
+
 Start using the app in seconds with an intuitive onboarding flow. Choose your preferred units and set your daily goal effortlessly.
 
 🕐 <b>Smart Notifications</b>
+
 Get hydration reminders only when you’re active. Notifications dismiss automatically after logging water and respect your wake-up and sleep times.
 
 📊 <b>Daily Progress and History</b>
+
 View your current day’s intake in a clear timeline, and easily revisit or edit previous days.
 
 📈 <b>Summary Page</b>
+
 Track your overall progress with insights such as current streak, best streak, average intake, total intake, and a weekly intake chart.
 
 ⚙️ <b>Fully Customizable</b>
-* Set your own daily water goal
-* Choose between metric (kg, ml) or imperial (lb, oz) units
-* Define a custom sleep schedule
-* Add and rearrange your own cup sizes for quick logging
+
+• Set your own daily water goal
+• Choose between metric (kg, ml) or imperial (lb, oz) units
+• Define a custom sleep schedule
+• Add and rearrange your own cup sizes for quick logging
 
 📡 <b>Offline and Private</b>
+
 Your data is stored locally on your device. No accounts, no tracking, no internet required.
 
 ✨ <b>Minimalist and Accessible Interface</b>
+
 A clean, distraction-free design focused on what matters: your hydration. Features haptic feedback and accessibility support for an inclusive experience.

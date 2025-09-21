@@ -1,1 +1,0 @@
-Fixes for streak calculation, improved day handling, and imperial support in the weekly chart.
