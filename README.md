@@ -25,13 +25,14 @@ Hidroly is a friendly, open-source Flutter app that helps you stay hydrated by t
 - [License](#license)
 
 ## Features
-* 🧠 Automatically calculates your daily goal and schedules reminders based on your age, weight, and sleep schedule.
-* 💧 Sends smart notifications throughout the day, paused during sleep hours.
-* 🥤 Log any amount with custom cup sizes tailored to your routine.
-* 🎯 Set a manual goal or let the app adjust it based on your data.
-* 📏 Choose between metric and imperial units.
-* 📅 Track daily intake with the ability to edit or delete entries.
-* 🕓 Access and update past logs to keep your history accurate.
+* 🧠 **Smart Daily Goals** - Automatically calculates your ideal daily intake and schedules reminders based on your age, weight, and sleep schedule.
+* 💧 **Intelligent Notifications** - Receive timely reminders throughout the day, automatically paused during your sleep hours.
+* 🥤 **Flexible Logging** - Log any amount with custom cup sizes tailored to your routine.
+* 🎯 **Adaptive Goals** - Set a manual goal or let the app adjust it dynamically based on your data.
+* 📏 **Unit Options** - Choose between metric and imperial measurements.
+* 📅 **Complete Intake Tracking** - Track daily intake with full control to edit or delete entries.
+* 🕓 **History Access** - Review and update past logs to maintain accurate records.
+* 📊 **Weekly Summary & Insights** - See your weekly intake at a glance with a visual chart, total and average intake, current streak, and best streak.
 
 ## Screenshots
 
