@@ -30,6 +30,7 @@ class SettingsProvider extends ChangeNotifier {
 
   Future<void> loadAllSettings() async {
     await readIsMetric();
+    await readHapticFeedback();
     await readTime(Settings.wakeUpTime);
     await readTime(Settings.sleepTime);
   }
