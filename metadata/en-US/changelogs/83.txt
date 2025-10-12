@@ -1,0 +1,1 @@
+• Fixed a bug where the haptic feedback setting was not being saved
