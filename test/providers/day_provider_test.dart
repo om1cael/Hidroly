@@ -1,3 +1,6 @@
+import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart' hide Day;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hidroly/domain/models/day.dart';
 import 'package:hidroly/data/repository/day_repository.dart';
@@ -7,6 +10,10 @@ import 'package:mocktail/mocktail.dart';
 class MockDayRepository extends Mock implements DayRepository {}
 
 void main() {
+  AndroidFlutterLocalNotificationsPlugin.registerWith();
+  TestWidgetsFlutterBinding.ensureInitialized();
+  late FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
+
   late DayProvider provider;
   late MockDayRepository mockDayRepository;
   late Day day;
@@ -30,6 +37,18 @@ void main() {
       dailyGoal: 2000, 
       date: DateTime.now().toUtc()
     );
+
+    const MethodChannel channel =
+      MethodChannel('dexterous.com/flutter/local_notifications');
+    debugDefaultTargetPlatformOverride = TargetPlatform.android;
+    flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+
+    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+      .setMockMethodCallHandler(channel, (MethodCall methodCall) async {
+        if(methodCall.method == "cancelAll") {
+          return true;
+        }
+      });
   });
 
   group("Test water addition", () {
