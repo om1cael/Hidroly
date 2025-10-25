@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hidroly/provider/custom_cups_provider.dart';
 import 'package:hidroly/provider/day_provider.dart';
@@ -32,47 +31,47 @@ void main() {
 
   group('Daily Goal Validation:', () {
     test('Returns null if values are not valid', () {
-      final ageController = TextEditingController(text: null);
-      final weightController = TextEditingController(text: null);
+      final age = 'a';
+      final weight = 'b';
 
-      int? value = viewModel.getDailyGoal(ageController, weightController);
+      int? value = viewModel.getDailyGoal(age, weight);
       expect(value, null);
     });
 
     test('Returns null if one of the values are not valid', () {
-      final ageController = TextEditingController(text: '24');
-      final weightController = TextEditingController(text: null);
+      final age = '24';
+      final weight = 'b';
 
-      int? value = viewModel.getDailyGoal(ageController, weightController);
+      int? value = viewModel.getDailyGoal(age, weight);
       expect(value, null);
     });
 
     test('Returns a valid daily goal if values are valid', () {
-      final ageController = TextEditingController(text: '24');
-      final weightController = TextEditingController(text: '65');
+      final age = '24';
+      final weight = '65';
 
-      final age = int.parse(ageController.text);
-      final weight = int.parse(weightController.text);
+      int expectedDailyGoal = CalculateDailyGoal().calculate(
+        int.parse(age), 
+        int.parse(weight)
+      );
 
-      int dailyGoal = CalculateDailyGoal().calculate(age, weight);
-
-      int? value = viewModel.getDailyGoal(ageController, weightController);
-      expect(value, dailyGoal);
+      int? value = viewModel.getDailyGoal(age, weight);
+      expect(value, expectedDailyGoal);
     });
 
     test('Converts to imperial if necessary', () {
-      final ageController = TextEditingController(text: '24');
-      final weightController = TextEditingController(text: '145');
+      final age = '24';
+      final weight = '145';
 
-      final ageValue = int.parse(ageController.text);
-      final weightValue = int.parse(weightController.text);
-
-      final weightInKg = UnitTools.lbToKg(weightValue);
-      final expectedDailyGoal = CalculateDailyGoal().calculate(ageValue, weightInKg);
+      final expectedWeightInKg = UnitTools.lbToKg(int.parse(weight));
+      final expectedDailyGoal = CalculateDailyGoal().calculate(
+        int.parse(age), 
+        expectedWeightInKg
+      );
 
       final result = viewModel.getDailyGoal(
-        ageController, 
-        weightController, 
+        age, 
+        weight, 
         providedMetricValue: false
       );
 
