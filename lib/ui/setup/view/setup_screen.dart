@@ -1,38 +1,29 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:hidroly/controllers/setup_controller.dart';
-import 'package:hidroly/domain/models/enum/frequency.dart';
+import 'package:hidroly/ui/setup/view_models/setup_view_model.dart';
 import 'package:hidroly/provider/custom_cups_provider.dart';
 import 'package:hidroly/provider/settings_provider.dart';
 import 'package:hidroly/l10n/app_localizations.dart';
 import 'package:hidroly/pages/home_page.dart';
 import 'package:hidroly/provider/day_provider.dart';
-import 'package:hidroly/data/services/notifications/notification_service.dart';
-import 'package:hidroly/utils/calculate_dailygoal.dart';
-import 'package:hidroly/utils/unit_tools.dart';
-import 'package:hidroly/widgets/setup/setup_step_one.dart';
-import 'package:hidroly/widgets/setup/setup_step_zero.dart';
+import 'package:hidroly/ui/setup/view/steps/setup_notifications_step.dart';
+import 'package:hidroly/ui/setup/view/steps/setup_basic_info_step.dart';
 import 'package:provider/provider.dart';
 
-class SetupPage extends StatefulWidget {
-  const SetupPage({super.key});
+class SetupScreen extends StatefulWidget {
+  const SetupScreen({super.key});
 
   @override
-  State<SetupPage> createState() => _SetupPageState();
+  State<SetupScreen> createState() => _SetupScreenState();
 }
 
-class _SetupPageState extends State<SetupPage> {
-  late SetupController setupController;
+class _SetupScreenState extends State<SetupScreen> {
+  late SetupViewModel _viewModel;
 
   final TextEditingController ageController = TextEditingController();
   final TextEditingController weightController = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-
-  final isMetric = ValueNotifier(true);
-  final wakeUpTime = ValueNotifier(TimeOfDay(hour: 6, minute: 0));
-  final sleepTime = ValueNotifier(TimeOfDay(hour: 22, minute: 0));
-  final frequency = ValueNotifier(Frequency.every2Hours);
 
   int setupStep = 0;
 
@@ -40,7 +31,7 @@ class _SetupPageState extends State<SetupPage> {
   void initState() {
     super.initState();
 
-    setupController = SetupController(
+    _viewModel = SetupViewModel(
       dayProvider: context.read<DayProvider>(),
       customCupsProvider: context.read<CustomCupsProvider>(),
       settingsProvider: context.read<SettingsProvider>(),
@@ -54,10 +45,7 @@ class _SetupPageState extends State<SetupPage> {
     ageController.dispose();
     weightController.dispose();
 
-    isMetric.dispose();
-    wakeUpTime.dispose();
-    sleepTime.dispose();
-    frequency.dispose();
+    _viewModel.dispose();
   }
 
   @override
@@ -71,15 +59,15 @@ class _SetupPageState extends State<SetupPage> {
             child: Padding(
               padding: const EdgeInsets.only(left: 30.0, right: 30.0, bottom: 64),
               child: setupStep == 0
-                ? SetupStepZero(
+                ? SetupBasicInfoStep(
                   ageController: ageController, 
                   weightController: weightController, 
-                  isMetric: isMetric
+                  isMetric: _viewModel.isMetricNotifier
                 )
-                : SetupStepOne(
-                  wakeUpTime: wakeUpTime, 
-                  sleepTime: sleepTime,
-                  frequency: frequency,
+                : SetupNotificationsStep(
+                  wakeUpTime: _viewModel.wakeUpTime,
+                  sleepTime: _viewModel.sleepTime,
+                  frequency: _viewModel.frequency,
                 ),
             ),
           ),
@@ -94,29 +82,22 @@ class _SetupPageState extends State<SetupPage> {
             return;
           }
 
-          await setupController.saveSettings(
-            context,
-            isMetric,
-            wakeUpTime,
-            sleepTime,
-            frequency
-          );
+          await _viewModel.saveSettings(context);
 
-          int? dailyGoal = _getDailyGoal();
+          int? dailyGoal = _viewModel.getDailyGoal(
+            ageController.text,
+            weightController.text,
+          );
+          
           if(dailyGoal == null) return;
 
+          if(!context.mounted) return;
+          final dayCreated = await _viewModel.createDay(context, dailyGoal);
+          final defaultCupsCreated = await _viewModel.createDefaultCups();
 
           if(!context.mounted) return;
-          final dayCreated = await setupController.createDay(context, dailyGoal);
-          final defaultCupsCreated = await setupController.createDefaultCups();
-
-          if(!context.mounted) return;
-          final notificationTaskCreated = await NotificationService().registerPeriodicNotificationTask(
-            context,
-            wakeUpTime.value,
-            sleepTime.value,
-            frequencyInMinutes: frequency.value.frequency,
-          );
+          final notificationTaskCreated = 
+            await _viewModel.registerPeriodicNotificationTask(context);
 
           if(!notificationTaskCreated && context.mounted) {
             _showSnackBar(
@@ -154,7 +135,7 @@ class _SetupPageState extends State<SetupPage> {
     });
     
     if(Platform.isAndroid) {
-      setupController.requestAndroidNotificationPermission();
+      _viewModel.requestAndroidNotificationPermission();
     }
   }
 
@@ -164,18 +145,5 @@ class _SetupPageState extends State<SetupPage> {
         text,
       )),
     );
-  }
-
-  int? _getDailyGoal() {
-    int? age = int.tryParse(ageController.text);
-    int? weight = int.tryParse(weightController.text);
-
-    if(age == null || weight == null) return null;
-
-    if(isMetric.value == false) {
-      weight = UnitTools.lbToKg(weight);
-    }
-    
-    return CalculateDailyGoal().calculate(age, weight);
   }
 }

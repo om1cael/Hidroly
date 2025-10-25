@@ -1,18 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:hidroly/data/services/notifications/notification_service.dart';
+import 'package:hidroly/domain/models/enum/frequency.dart';
 import 'package:hidroly/domain/models/enum/settings.dart';
 import 'package:hidroly/domain/models/water_button.dart';
 import 'package:hidroly/provider/custom_cups_provider.dart';
 import 'package:hidroly/provider/day_provider.dart';
 import 'package:hidroly/provider/settings_provider.dart';
+import 'package:hidroly/utils/calculate_dailygoal.dart';
+import 'package:hidroly/utils/unit_tools.dart';
 import 'package:sqflite/sqflite.dart';
 
-class SetupController {
+class SetupViewModel {
   final DayProvider dayProvider;
   final CustomCupsProvider customCupsProvider;
   final SettingsProvider settingsProvider;
 
-  const SetupController({
+  final isMetricNotifier = ValueNotifier(true);
+  final frequency = ValueNotifier(Frequency.every2Hours);
+
+  final wakeUpTime = ValueNotifier(TimeOfDay(hour: 6, minute: 0));
+  final sleepTime = ValueNotifier(TimeOfDay(hour: 22, minute: 0));
+
+  SetupViewModel({
     required this.dayProvider,
     required this.customCupsProvider,
     required this.settingsProvider
@@ -46,14 +56,8 @@ class SetupController {
     return true;
   }
 
-  Future<void> saveSettings(
-    BuildContext context, 
-    ValueNotifier isMetric,
-    ValueNotifier wakeUpTime,
-    ValueNotifier sleepTime,
-    ValueNotifier frequency,
-  ) async {    
-    await settingsProvider.updateIsMetric(isMetric.value);
+  Future<void> saveSettings(BuildContext context) async {    
+    await settingsProvider.updateIsMetric(isMetricNotifier.value);
     
     await settingsProvider.updateTime(
       Settings.wakeUpTime,
@@ -75,5 +79,39 @@ class SetupController {
       FlutterLocalNotificationsPlugin();
     flutterLocalNotificationsPlugin.resolvePlatformSpecificImplementation<
         AndroidFlutterLocalNotificationsPlugin>()!.requestNotificationsPermission();
+  }
+
+  Future<bool> registerPeriodicNotificationTask(BuildContext context) async {
+    return await NotificationService().registerPeriodicNotificationTask(
+      context,
+      wakeUpTime.value,
+      sleepTime.value,
+      frequencyInMinutes: frequency.value.frequency,
+    );
+  }
+
+  int? getDailyGoal(
+    String ageText, 
+    String weightText,
+    { bool? providedMetricValue }
+  ) {
+    int? age = int.tryParse(ageText);
+    int? weight = int.tryParse(weightText);
+
+    if(age == null || weight == null) return null;
+
+    final isMetric = providedMetricValue ?? isMetricNotifier.value;
+    if(!isMetric) {
+      weight = UnitTools.lbToKg(weight);
+    }
+    
+    return CalculateDailyGoal().calculate(age, weight);
+  }
+
+  void dispose() {
+    isMetricNotifier.dispose();
+    frequency.dispose();
+    wakeUpTime.dispose();
+    sleepTime.dispose();
   }
 }

@@ -4,8 +4,8 @@ import 'package:hidroly/l10n/app_localizations.dart';
 import 'package:hidroly/widgets/common/icon_header.dart';
 import 'package:hidroly/widgets/common/notifications_time_input.dart';
 
-class SetupStepOne extends StatelessWidget {
-  const SetupStepOne({
+class SetupNotificationsStep extends StatelessWidget {
+  const SetupNotificationsStep({
     super.key,
     required this.wakeUpTime,
     required this.sleepTime,
