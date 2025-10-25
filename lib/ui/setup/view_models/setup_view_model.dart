@@ -7,12 +7,12 @@ import 'package:hidroly/provider/day_provider.dart';
 import 'package:hidroly/provider/settings_provider.dart';
 import 'package:sqflite/sqflite.dart';
 
-class SetupController {
+class SetupViewModel {
   final DayProvider dayProvider;
   final CustomCupsProvider customCupsProvider;
   final SettingsProvider settingsProvider;
 
-  const SetupController({
+  const SetupViewModel({
     required this.dayProvider,
     required this.customCupsProvider,
     required this.settingsProvider

@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:hidroly/controllers/setup_controller.dart';
+import 'package:hidroly/ui/setup/view_models/setup_view_model.dart';
 import 'package:hidroly/domain/models/enum/frequency.dart';
 import 'package:hidroly/provider/custom_cups_provider.dart';
 import 'package:hidroly/provider/settings_provider.dart';
@@ -11,19 +11,19 @@ import 'package:hidroly/provider/day_provider.dart';
 import 'package:hidroly/data/services/notifications/notification_service.dart';
 import 'package:hidroly/utils/calculate_dailygoal.dart';
 import 'package:hidroly/utils/unit_tools.dart';
-import 'package:hidroly/widgets/setup/setup_step_one.dart';
-import 'package:hidroly/widgets/setup/setup_step_zero.dart';
+import 'package:hidroly/ui/setup/view/steps/setup_step_one.dart';
+import 'package:hidroly/ui/setup/view/steps/setup_step_zero.dart';
 import 'package:provider/provider.dart';
 
-class SetupPage extends StatefulWidget {
-  const SetupPage({super.key});
+class SetupScreen extends StatefulWidget {
+  const SetupScreen({super.key});
 
   @override
-  State<SetupPage> createState() => _SetupPageState();
+  State<SetupScreen> createState() => _SetupScreenState();
 }
 
-class _SetupPageState extends State<SetupPage> {
-  late SetupController setupController;
+class _SetupScreenState extends State<SetupScreen> {
+  late SetupViewModel setupController;
 
   final TextEditingController ageController = TextEditingController();
   final TextEditingController weightController = TextEditingController();
@@ -40,7 +40,7 @@ class _SetupPageState extends State<SetupPage> {
   void initState() {
     super.initState();
 
-    setupController = SetupController(
+    setupController = SetupViewModel(
       dayProvider: context.read<DayProvider>(),
       customCupsProvider: context.read<CustomCupsProvider>(),
       settingsProvider: context.read<SettingsProvider>(),
