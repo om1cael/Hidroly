@@ -2,13 +2,11 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:hidroly/ui/setup/view_models/setup_view_model.dart';
-import 'package:hidroly/domain/models/enum/frequency.dart';
 import 'package:hidroly/provider/custom_cups_provider.dart';
 import 'package:hidroly/provider/settings_provider.dart';
 import 'package:hidroly/l10n/app_localizations.dart';
 import 'package:hidroly/pages/home_page.dart';
 import 'package:hidroly/provider/day_provider.dart';
-import 'package:hidroly/data/services/notifications/notification_service.dart';
 import 'package:hidroly/ui/setup/view/steps/setup_step_one.dart';
 import 'package:hidroly/ui/setup/view/steps/setup_step_zero.dart';
 import 'package:provider/provider.dart';
@@ -26,11 +24,6 @@ class _SetupScreenState extends State<SetupScreen> {
   final TextEditingController ageController = TextEditingController();
   final TextEditingController weightController = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-
-  final isMetric = ValueNotifier(true);
-  final wakeUpTime = ValueNotifier(TimeOfDay(hour: 6, minute: 0));
-  final sleepTime = ValueNotifier(TimeOfDay(hour: 22, minute: 0));
-  final frequency = ValueNotifier(Frequency.every2Hours);
 
   int setupStep = 0;
 
@@ -52,10 +45,10 @@ class _SetupScreenState extends State<SetupScreen> {
     ageController.dispose();
     weightController.dispose();
 
-    isMetric.dispose();
-    wakeUpTime.dispose();
-    sleepTime.dispose();
-    frequency.dispose();
+    _viewModel.isMetric.dispose();
+    _viewModel.frequency.dispose();
+    _viewModel.wakeUpTime.dispose();
+    _viewModel.sleepTime.dispose();
   }
 
   @override
@@ -72,12 +65,12 @@ class _SetupScreenState extends State<SetupScreen> {
                 ? SetupStepZero(
                   ageController: ageController, 
                   weightController: weightController, 
-                  isMetric: isMetric
+                  isMetric: _viewModel.isMetric
                 )
                 : SetupStepOne(
-                  wakeUpTime: wakeUpTime, 
-                  sleepTime: sleepTime,
-                  frequency: frequency,
+                  wakeUpTime: _viewModel.wakeUpTime,
+                  sleepTime: _viewModel.sleepTime,
+                  frequency: _viewModel.frequency,
                 ),
             ),
           ),
@@ -92,34 +85,22 @@ class _SetupScreenState extends State<SetupScreen> {
             return;
           }
 
-          await _viewModel.saveSettings(
-            context,
-            isMetric,
-            wakeUpTime,
-            sleepTime,
-            frequency
-          );
+          await _viewModel.saveSettings(context);
 
           int? dailyGoal = _viewModel.getDailyGoal(
             ageController, 
             weightController, 
-            isMetric
           );
           
           if(dailyGoal == null) return;
-
 
           if(!context.mounted) return;
           final dayCreated = await _viewModel.createDay(context, dailyGoal);
           final defaultCupsCreated = await _viewModel.createDefaultCups();
 
           if(!context.mounted) return;
-          final notificationTaskCreated = await NotificationService().registerPeriodicNotificationTask(
-            context,
-            wakeUpTime.value,
-            sleepTime.value,
-            frequencyInMinutes: frequency.value.frequency,
-          );
+          final notificationTaskCreated = 
+            await _viewModel.registerPeriodicNotificationTask(context);
 
           if(!notificationTaskCreated && context.mounted) {
             _showSnackBar(

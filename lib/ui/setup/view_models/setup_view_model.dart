@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:hidroly/data/services/notifications/notification_service.dart';
+import 'package:hidroly/domain/models/enum/frequency.dart';
 import 'package:hidroly/domain/models/enum/settings.dart';
 import 'package:hidroly/domain/models/water_button.dart';
 import 'package:hidroly/provider/custom_cups_provider.dart';
@@ -14,7 +16,13 @@ class SetupViewModel {
   final CustomCupsProvider customCupsProvider;
   final SettingsProvider settingsProvider;
 
-  const SetupViewModel({
+  final isMetric = ValueNotifier(true);
+  final frequency = ValueNotifier(Frequency.every2Hours);
+
+  final wakeUpTime = ValueNotifier(TimeOfDay(hour: 6, minute: 0));
+  final sleepTime = ValueNotifier(TimeOfDay(hour: 22, minute: 0));
+
+  SetupViewModel({
     required this.dayProvider,
     required this.customCupsProvider,
     required this.settingsProvider
@@ -48,13 +56,7 @@ class SetupViewModel {
     return true;
   }
 
-  Future<void> saveSettings(
-    BuildContext context, 
-    ValueNotifier isMetric,
-    ValueNotifier wakeUpTime,
-    ValueNotifier sleepTime,
-    ValueNotifier frequency,
-  ) async {    
+  Future<void> saveSettings(BuildContext context) async {    
     await settingsProvider.updateIsMetric(isMetric.value);
     
     await settingsProvider.updateTime(
@@ -79,10 +81,18 @@ class SetupViewModel {
         AndroidFlutterLocalNotificationsPlugin>()!.requestNotificationsPermission();
   }
 
+  Future<bool> registerPeriodicNotificationTask(BuildContext context) async {
+    return await NotificationService().registerPeriodicNotificationTask(
+      context,
+      wakeUpTime.value,
+      sleepTime.value,
+      frequencyInMinutes: frequency.value.frequency,
+    );
+  }
+
   int? getDailyGoal(
     TextEditingController ageController, 
     TextEditingController weightController,
-    ValueNotifier<bool> isMetric
   ) {
     int? age = int.tryParse(ageController.text);
     int? weight = int.tryParse(weightController.text);
