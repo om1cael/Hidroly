@@ -5,6 +5,8 @@ import 'package:hidroly/domain/models/water_button.dart';
 import 'package:hidroly/provider/custom_cups_provider.dart';
 import 'package:hidroly/provider/day_provider.dart';
 import 'package:hidroly/provider/settings_provider.dart';
+import 'package:hidroly/utils/calculate_dailygoal.dart';
+import 'package:hidroly/utils/unit_tools.dart';
 import 'package:sqflite/sqflite.dart';
 
 class SetupViewModel {
@@ -75,5 +77,22 @@ class SetupViewModel {
       FlutterLocalNotificationsPlugin();
     flutterLocalNotificationsPlugin.resolvePlatformSpecificImplementation<
         AndroidFlutterLocalNotificationsPlugin>()!.requestNotificationsPermission();
+  }
+
+  int? getDailyGoal(
+    TextEditingController ageController, 
+    TextEditingController weightController,
+    ValueNotifier<bool> isMetric
+  ) {
+    int? age = int.tryParse(ageController.text);
+    int? weight = int.tryParse(weightController.text);
+
+    if(age == null || weight == null) return null;
+
+    if(isMetric.value == false) {
+      weight = UnitTools.lbToKg(weight);
+    }
+    
+    return CalculateDailyGoal().calculate(age, weight);
   }
 }

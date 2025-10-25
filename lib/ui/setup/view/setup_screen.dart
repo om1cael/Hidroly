@@ -9,8 +9,6 @@ import 'package:hidroly/l10n/app_localizations.dart';
 import 'package:hidroly/pages/home_page.dart';
 import 'package:hidroly/provider/day_provider.dart';
 import 'package:hidroly/data/services/notifications/notification_service.dart';
-import 'package:hidroly/utils/calculate_dailygoal.dart';
-import 'package:hidroly/utils/unit_tools.dart';
 import 'package:hidroly/ui/setup/view/steps/setup_step_one.dart';
 import 'package:hidroly/ui/setup/view/steps/setup_step_zero.dart';
 import 'package:provider/provider.dart';
@@ -23,7 +21,7 @@ class SetupScreen extends StatefulWidget {
 }
 
 class _SetupScreenState extends State<SetupScreen> {
-  late SetupViewModel setupController;
+  late SetupViewModel _viewModel;
 
   final TextEditingController ageController = TextEditingController();
   final TextEditingController weightController = TextEditingController();
@@ -40,7 +38,7 @@ class _SetupScreenState extends State<SetupScreen> {
   void initState() {
     super.initState();
 
-    setupController = SetupViewModel(
+    _viewModel = SetupViewModel(
       dayProvider: context.read<DayProvider>(),
       customCupsProvider: context.read<CustomCupsProvider>(),
       settingsProvider: context.read<SettingsProvider>(),
@@ -94,7 +92,7 @@ class _SetupScreenState extends State<SetupScreen> {
             return;
           }
 
-          await setupController.saveSettings(
+          await _viewModel.saveSettings(
             context,
             isMetric,
             wakeUpTime,
@@ -102,13 +100,18 @@ class _SetupScreenState extends State<SetupScreen> {
             frequency
           );
 
-          int? dailyGoal = _getDailyGoal();
+          int? dailyGoal = _viewModel.getDailyGoal(
+            ageController, 
+            weightController, 
+            isMetric
+          );
+          
           if(dailyGoal == null) return;
 
 
           if(!context.mounted) return;
-          final dayCreated = await setupController.createDay(context, dailyGoal);
-          final defaultCupsCreated = await setupController.createDefaultCups();
+          final dayCreated = await _viewModel.createDay(context, dailyGoal);
+          final defaultCupsCreated = await _viewModel.createDefaultCups();
 
           if(!context.mounted) return;
           final notificationTaskCreated = await NotificationService().registerPeriodicNotificationTask(
@@ -154,7 +157,7 @@ class _SetupScreenState extends State<SetupScreen> {
     });
     
     if(Platform.isAndroid) {
-      setupController.requestAndroidNotificationPermission();
+      _viewModel.requestAndroidNotificationPermission();
     }
   }
 
@@ -164,18 +167,5 @@ class _SetupScreenState extends State<SetupScreen> {
         text,
       )),
     );
-  }
-
-  int? _getDailyGoal() {
-    int? age = int.tryParse(ageController.text);
-    int? weight = int.tryParse(weightController.text);
-
-    if(age == null || weight == null) return null;
-
-    if(isMetric.value == false) {
-      weight = UnitTools.lbToKg(weight);
-    }
-    
-    return CalculateDailyGoal().calculate(age, weight);
   }
 }
