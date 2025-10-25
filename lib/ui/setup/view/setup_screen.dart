@@ -62,7 +62,7 @@ class _SetupScreenState extends State<SetupScreen> {
                 ? SetupBasicInfoStep(
                   ageController: ageController, 
                   weightController: weightController, 
-                  isMetric: _viewModel.isMetric
+                  isMetric: _viewModel.isMetricNotifier
                 )
                 : SetupNotificationsStep(
                   wakeUpTime: _viewModel.wakeUpTime,

@@ -16,7 +16,7 @@ class SetupViewModel {
   final CustomCupsProvider customCupsProvider;
   final SettingsProvider settingsProvider;
 
-  final isMetric = ValueNotifier(true);
+  final isMetricNotifier = ValueNotifier(true);
   final frequency = ValueNotifier(Frequency.every2Hours);
 
   final wakeUpTime = ValueNotifier(TimeOfDay(hour: 6, minute: 0));
@@ -57,7 +57,7 @@ class SetupViewModel {
   }
 
   Future<void> saveSettings(BuildContext context) async {    
-    await settingsProvider.updateIsMetric(isMetric.value);
+    await settingsProvider.updateIsMetric(isMetricNotifier.value);
     
     await settingsProvider.updateTime(
       Settings.wakeUpTime,
@@ -93,13 +93,15 @@ class SetupViewModel {
   int? getDailyGoal(
     TextEditingController ageController, 
     TextEditingController weightController,
+    { bool? providedMetricValue }
   ) {
     int? age = int.tryParse(ageController.text);
     int? weight = int.tryParse(weightController.text);
 
     if(age == null || weight == null) return null;
 
-    if(isMetric.value == false) {
+    final isMetric = providedMetricValue ?? isMetricNotifier.value;
+    if(!isMetric) {
       weight = UnitTools.lbToKg(weight);
     }
     
@@ -107,7 +109,7 @@ class SetupViewModel {
   }
 
   void dispose() {
-    isMetric.dispose();
+    isMetricNotifier.dispose();
     frequency.dispose();
     wakeUpTime.dispose();
     sleepTime.dispose();
