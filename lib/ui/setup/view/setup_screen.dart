@@ -7,8 +7,8 @@ import 'package:hidroly/provider/settings_provider.dart';
 import 'package:hidroly/l10n/app_localizations.dart';
 import 'package:hidroly/pages/home_page.dart';
 import 'package:hidroly/provider/day_provider.dart';
-import 'package:hidroly/ui/setup/view/steps/setup_step_one.dart';
-import 'package:hidroly/ui/setup/view/steps/setup_step_zero.dart';
+import 'package:hidroly/ui/setup/view/steps/setup_notifications_step.dart';
+import 'package:hidroly/ui/setup/view/steps/setup_basic_info_step.dart';
 import 'package:provider/provider.dart';
 
 class SetupScreen extends StatefulWidget {
@@ -59,12 +59,12 @@ class _SetupScreenState extends State<SetupScreen> {
             child: Padding(
               padding: const EdgeInsets.only(left: 30.0, right: 30.0, bottom: 64),
               child: setupStep == 0
-                ? SetupStepZero(
+                ? SetupBasicInfoStep(
                   ageController: ageController, 
                   weightController: weightController, 
                   isMetric: _viewModel.isMetric
                 )
-                : SetupStepOne(
+                : SetupNotificationsStep(
                   wakeUpTime: _viewModel.wakeUpTime,
                   sleepTime: _viewModel.sleepTime,
                   frequency: _viewModel.frequency,

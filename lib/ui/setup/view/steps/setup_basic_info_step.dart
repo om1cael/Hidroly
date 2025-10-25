@@ -3,8 +3,8 @@ import 'package:hidroly/l10n/app_localizations.dart';
 import 'package:hidroly/widgets/common/daily_goal_input.dart';
 import 'package:hidroly/widgets/common/icon_header.dart';
 
-class SetupStepZero extends StatelessWidget {
-  const SetupStepZero({
+class SetupBasicInfoStep extends StatelessWidget {
+  const SetupBasicInfoStep({
     super.key,
     required this.ageController,
     required this.weightController,
