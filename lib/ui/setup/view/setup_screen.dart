@@ -45,10 +45,7 @@ class _SetupScreenState extends State<SetupScreen> {
     ageController.dispose();
     weightController.dispose();
 
-    _viewModel.isMetric.dispose();
-    _viewModel.frequency.dispose();
-    _viewModel.wakeUpTime.dispose();
-    _viewModel.sleepTime.dispose();
+    _viewModel.dispose();
   }
 
   @override

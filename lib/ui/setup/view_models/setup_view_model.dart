@@ -105,4 +105,11 @@ class SetupViewModel {
     
     return CalculateDailyGoal().calculate(age, weight);
   }
+
+  void dispose() {
+    isMetric.dispose();
+    frequency.dispose();
+    wakeUpTime.dispose();
+    sleepTime.dispose();
+  }
 }
