@@ -85,8 +85,8 @@ class _SetupScreenState extends State<SetupScreen> {
           await _viewModel.saveSettings(context);
 
           int? dailyGoal = _viewModel.getDailyGoal(
-            ageController, 
-            weightController, 
+            ageController.text,
+            weightController.text,
           );
           
           if(dailyGoal == null) return;

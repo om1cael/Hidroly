@@ -91,12 +91,12 @@ class SetupViewModel {
   }
 
   int? getDailyGoal(
-    TextEditingController ageController, 
-    TextEditingController weightController,
+    String ageText, 
+    String weightText,
     { bool? providedMetricValue }
   ) {
-    int? age = int.tryParse(ageController.text);
-    int? weight = int.tryParse(weightController.text);
+    int? age = int.tryParse(ageText);
+    int? weight = int.tryParse(weightText);
 
     if(age == null || weight == null) return null;
 
