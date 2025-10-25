@@ -59,19 +59,19 @@ void main() {
       expect(value, expectedDailyGoal);
     });
 
-    test('Converts to imperial if necessary', () {
+    test('Converts weight from lb to kg when metric system is disabled', () {
       final age = '24';
-      final weight = '145';
+      final weightInLb = '145';
 
-      final expectedWeightInKg = UnitTools.lbToKg(int.parse(weight));
+      final weightInKg = UnitTools.lbToKg(int.parse(weightInLb));
       final expectedDailyGoal = CalculateDailyGoal().calculate(
         int.parse(age), 
-        expectedWeightInKg
+        weightInKg
       );
 
       final result = viewModel.getDailyGoal(
         age, 
-        weight, 
+        weightInLb,
         providedMetricValue: false
       );
 
