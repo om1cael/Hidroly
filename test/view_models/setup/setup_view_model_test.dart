@@ -5,6 +5,7 @@ import 'package:hidroly/provider/day_provider.dart';
 import 'package:hidroly/provider/settings_provider.dart';
 import 'package:hidroly/ui/setup/view_models/setup_view_model.dart';
 import 'package:hidroly/utils/calculate_dailygoal.dart';
+import 'package:hidroly/utils/unit_tools.dart';
 import 'package:mocktail/mocktail.dart';
 
 class MockDayProvider extends Mock implements DayProvider {}
@@ -57,6 +58,25 @@ void main() {
 
       int? value = viewModel.getDailyGoal(ageController, weightController);
       expect(value, dailyGoal);
+    });
+
+    test('Converts to imperial if necessary', () {
+      final ageController = TextEditingController(text: '24');
+      final weightController = TextEditingController(text: '145');
+
+      final ageValue = int.parse(ageController.text);
+      final weightValue = int.parse(weightController.text);
+
+      final weightInKg = UnitTools.lbToKg(weightValue);
+      final expectedDailyGoal = CalculateDailyGoal().calculate(ageValue, weightInKg);
+
+      final result = viewModel.getDailyGoal(
+        ageController, 
+        weightController, 
+        providedMetricValue: false
+      );
+
+      expect(result, expectedDailyGoal);
     });
   });
 }
