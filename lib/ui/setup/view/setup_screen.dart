@@ -5,7 +5,7 @@ import 'package:hidroly/ui/setup/view_models/setup_view_model.dart';
 import 'package:hidroly/provider/custom_cups_provider.dart';
 import 'package:hidroly/provider/settings_provider.dart';
 import 'package:hidroly/l10n/app_localizations.dart';
-import 'package:hidroly/pages/home_page.dart';
+import 'package:hidroly/ui/home/view/home_screen.dart';
 import 'package:hidroly/provider/day_provider.dart';
 import 'package:hidroly/ui/setup/view/steps/setup_notifications_step.dart';
 import 'package:hidroly/ui/setup/view/steps/setup_basic_info_step.dart';
@@ -119,7 +119,7 @@ class _SetupScreenState extends State<SetupScreen> {
 
           if(!context.mounted) return;
           Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (context) => HomePage()),
+            MaterialPageRoute(builder: (context) => HomeScreen()),
           );
         },
         child: Icon(

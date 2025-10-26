@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hidroly/config/providers.dart';
 import 'package:hidroly/l10n/app_localizations.dart';
-import 'package:hidroly/pages/home_page.dart';
+import 'package:hidroly/ui/home/view/home_screen.dart';
 import 'package:hidroly/provider/day_provider.dart';
 import 'package:hidroly/provider/settings_provider.dart';
 import 'package:hidroly/data/services/notifications/notification_service.dart';
@@ -89,7 +89,7 @@ class _MainAppState extends State<MainApp> with WidgetsBindingObserver {
           themeMode: theme,
           theme: AppTheme.lightTheme,
           darkTheme: AppTheme.darkTheme,
-          home: const HomePage(),
+          home: const HomeScreen(),
         );
       }
     );
