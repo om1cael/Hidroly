@@ -3,7 +3,6 @@ import 'package:hidroly/controllers/home_controller.dart';
 import 'package:hidroly/domain/models/day.dart';
 import 'package:hidroly/l10n/app_localizations.dart';
 import 'package:hidroly/pages/settings_page.dart';
-import 'package:hidroly/ui/setup/view/setup_screen.dart';
 import 'package:hidroly/provider/day_provider.dart';
 import 'package:hidroly/provider/settings_provider.dart';
 import 'package:hidroly/ui/core/theme/app_colors.dart';
@@ -27,15 +26,6 @@ class _WaterTrackingScreenState extends State<WaterTrackingScreen> {
   @override
   void initState() {
     super.initState();
-
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
-      bool initialized = await homeController.initializeHome(context);
-      
-      if(!initialized && mounted) {
-        Navigator.of(context)
-          .pushReplacement(MaterialPageRoute(builder: (_) => SetupScreen()));
-      }
-    });
   }
 
   @override

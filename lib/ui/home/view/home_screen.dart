@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:hidroly/l10n/app_localizations.dart';
+import 'package:hidroly/ui/home/view_models/home_view_model.dart';
+import 'package:hidroly/ui/setup/view/setup_screen.dart';
 import 'package:hidroly/ui/summary/view/summary_screen.dart';
 import 'package:hidroly/ui/water_tracking/view/water_tracking_screen.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  const HomeScreen({
+    super.key,
+  });
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -13,6 +18,23 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final List<Widget> _screens = [WaterTrackingScreen(), SummaryScreen()];
   int _currentIndex = 0;
+
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      final viewModel = HomeViewModel(dayProvider: context.read());
+
+      bool initialized = 
+        await viewModel.initializeDayData();
+      
+      if(!initialized && mounted) {
+        Navigator.of(context)
+          .pushReplacement(MaterialPageRoute(builder: (_) => SetupScreen()));
+      }
+    });
+  }
   
   @override
   Widget build(BuildContext context) {
