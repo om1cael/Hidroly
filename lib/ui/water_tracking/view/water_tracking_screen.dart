@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hidroly/controllers/home_controller.dart';
+import 'package:hidroly/ui/water_tracking/view_models/water_tracking_view_model.dart';
 import 'package:hidroly/domain/models/day.dart';
 import 'package:hidroly/l10n/app_localizations.dart';
 import 'package:hidroly/pages/settings_page.dart';
@@ -21,11 +21,21 @@ class WaterTrackingScreen extends StatefulWidget {
 }
 
 class _WaterTrackingScreenState extends State<WaterTrackingScreen> {
-  final homeController = HomeController();
+  late final WaterTrackingViewModel _viewModel;
 
   @override
   void initState() {
     super.initState();
+
+    _viewModel = WaterTrackingViewModel(
+      dayProvider: context.read(),
+      customCupsProvider: context.read(),
+      dailyHistoryProvider: context.read(),
+    );
+
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await _viewModel.loadTrackingData();
+    });
   }
 
   @override
@@ -85,7 +95,7 @@ class _WaterTrackingScreenState extends State<WaterTrackingScreen> {
           await _loadSelectedDay(provider, pickedDate);
 
           if(!mounted) return;
-          await homeController.loadDailyHistory(context, currentDay: provider.day);
+          await _viewModel.loadDailyHistory(currentDay: provider.day);
         },
         style: TextButton.styleFrom(
           padding: EdgeInsets.zero,
