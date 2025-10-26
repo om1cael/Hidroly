@@ -24,10 +24,13 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      final viewModel = HomeViewModel(dayProvider: context.read());
+      final viewModel = HomeViewModel(
+        dayProvider: context.read(),
+        settingsProvider: context.read(),
+      );
 
       bool initialized = 
-        await viewModel.initializeDayData();
+        await viewModel.initializeData();
       
       if(!initialized && mounted) {
         Navigator.of(context)
