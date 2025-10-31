@@ -11,7 +11,7 @@ dependencies:
   fl_chart: ^1.1.0
   flutter:
     sdk: flutter
-  flutter_local_notifications: ^19.4.0
+  flutter_local_notifications: ^19.5.0
   flutter_localizations:
     sdk: flutter
   flutter_svg: ^2.2.0
