@@ -14,7 +14,7 @@ dependencies:
   flutter_local_notifications: ^19.4.0
   flutter_localizations:
     sdk: flutter
-  flutter_svg: ^2.2.0
+  flutter_svg: ^2.2.2
   haptic_feedback: ^0.5.1+1
   intl: any
   logger: ^2.6.2
