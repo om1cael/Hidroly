@@ -5,7 +5,7 @@ import 'package:hidroly/ui/settings/view/pages/settings_update_daily_goal_page.d
 import 'package:hidroly/provider/day_provider.dart';
 import 'package:hidroly/utils/unit_tools.dart';
 import 'package:hidroly/widgets/input/number_input_dialog.dart';
-import 'package:hidroly/widgets/settings/settings_text_button.dart';
+import 'package:hidroly/ui/settings/view/widgets/settings_text_button.dart';
 import 'package:provider/provider.dart';
 
 class SettingsYou extends StatefulWidget {  

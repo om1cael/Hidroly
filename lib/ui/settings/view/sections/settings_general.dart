@@ -4,8 +4,8 @@ import 'package:hidroly/main.dart';
 import 'package:hidroly/ui/settings/view/pages/settings_theme_page.dart';
 import 'package:hidroly/ui/settings/view/pages/settings_unit_page.dart';
 import 'package:hidroly/provider/settings_provider.dart';
-import 'package:hidroly/widgets/settings/settings_switch.dart';
-import 'package:hidroly/widgets/settings/settings_text_button.dart';
+import 'package:hidroly/ui/settings/view/widgets/settings_switch.dart';
+import 'package:hidroly/ui/settings/view/widgets/settings_text_button.dart';
 import 'package:provider/provider.dart';
 
 class SettingsGeneral extends StatelessWidget {
