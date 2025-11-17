@@ -1,7 +1,7 @@
 import 'package:app_settings/app_settings.dart';
 import 'package:flutter/material.dart';
 import 'package:hidroly/l10n/app_localizations.dart';
-import 'package:hidroly/pages/settings/settings_update_sleep_schedule_page.dart';
+import 'package:hidroly/ui/settings/view/pages/settings_update_sleep_schedule_page.dart';
 import 'package:hidroly/widgets/settings/settings_text_button.dart';
 
 class SettingsNotifications extends StatefulWidget {

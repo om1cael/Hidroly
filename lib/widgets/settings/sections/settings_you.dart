@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hidroly/domain/models/day.dart';
 import 'package:hidroly/l10n/app_localizations.dart';
-import 'package:hidroly/pages/settings/settings_update_daily_goal_page.dart';
+import 'package:hidroly/ui/settings/view/pages/settings_update_daily_goal_page.dart';
 import 'package:hidroly/provider/day_provider.dart';
 import 'package:hidroly/utils/unit_tools.dart';
 import 'package:hidroly/widgets/input/number_input_dialog.dart';
