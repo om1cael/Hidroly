@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hidroly/l10n/app_localizations.dart';
-import 'package:hidroly/widgets/settings/settings_text_button.dart';
+import 'package:hidroly/ui/settings/view/widgets/settings_text_button.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class SettingsAbout extends StatelessWidget {

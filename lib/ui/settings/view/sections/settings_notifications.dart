@@ -1,8 +1,10 @@
 import 'package:app_settings/app_settings.dart';
 import 'package:flutter/material.dart';
 import 'package:hidroly/l10n/app_localizations.dart';
-import 'package:hidroly/pages/settings/settings_update_sleep_schedule_page.dart';
-import 'package:hidroly/widgets/settings/settings_text_button.dart';
+import 'package:hidroly/ui/settings/view/pages/settings_update_sleep_schedule_page.dart';
+import 'package:hidroly/ui/settings/view/widgets/settings_text_button.dart';
+import 'package:hidroly/ui/settings/view_models/pages/settings_update_sleep_schedule_page_view_model.dart';
+import 'package:provider/provider.dart';
 
 class SettingsNotifications extends StatefulWidget {
   const SettingsNotifications({
@@ -40,7 +42,11 @@ class _SettingsNotificationsState extends State<SettingsNotifications> {
           description: AppLocalizations.of(context)!.settingsNotificationsSleepScheduleDescription,
           onPressed: () {
             Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => const SettingsUpdateSleepSchedulePage())
+              MaterialPageRoute(builder: (context) => SettingsUpdateSleepSchedulePage(
+                viewModel: SettingsUpdateSleepSchedulePageViewModel(
+                  settingsProvider: context.read()
+                ),
+              ))
             );
           }
         ),
