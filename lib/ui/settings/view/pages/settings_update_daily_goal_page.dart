@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:hidroly/l10n/app_localizations.dart';
-import 'package:hidroly/provider/day_provider.dart';
-import 'package:hidroly/utils/calculate_dailygoal.dart';
-import 'package:hidroly/utils/unit_tools.dart';
+import 'package:hidroly/ui/settings/view_models/pages/settings_update_daily_goal_page_view_model.dart';
 import 'package:hidroly/widgets/common/daily_goal_input.dart';
 import 'package:hidroly/widgets/common/icon_header.dart';
-import 'package:provider/provider.dart';
 
 class SettingsUpdateDailyGoalPage extends StatefulWidget {
   final bool isMetric;
+  final SettingsUpdateDailyGoalPageViewModel viewModel;
 
   const SettingsUpdateDailyGoalPage({
     super.key,
     required this.isMetric,
+    required this.viewModel,
   });
 
   @override
@@ -80,24 +79,15 @@ class _SettingsUpdateDailyGoalPageState extends State<SettingsUpdateDailyGoalPag
         onPressed: () {
           if(!formKey.currentState!.validate()) return;
 
-          final dayProvider = context.read<DayProvider>();
-          final currentDay = dayProvider.day;
-          if(currentDay == null) return;
-
-          final age = int.parse(ageController.text);
-          int weight = int.parse(weightController.text);
-
-          if(!isMetricNotifier.value) {
-            weight = UnitTools.lbToKg(weight);
-          }
-
-          final newDailyGoal = CalculateDailyGoal().calculate(age, weight);
-
-          dayProvider.update(
-            currentDay.copyWith(
-              dailyGoal: newDailyGoal,
-            ),
+          final isUpdateDone = widget.viewModel.updateDailyGoal(
+            ageController.text,
+            weightController.text,
+            widget.isMetric
           );
+
+          if(!isUpdateDone) {
+            return;
+          }
 
           Navigator.of(context).pop(true);
         },
