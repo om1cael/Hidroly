@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:hidroly/domain/models/enum/frequency.dart';
 import 'package:hidroly/l10n/app_localizations.dart';
+import 'package:hidroly/provider/settings_provider.dart';
 import 'package:hidroly/ui/settings/view/pages/settings_frequency_page.dart';
+import 'package:hidroly/ui/settings/view_models/pages/settings_frequency_page_view_model.dart';
 import 'package:hidroly/utils/time_utils.dart';
+import 'package:provider/provider.dart';
 
 class NotificationsTimeInput extends StatefulWidget {
   final ValueNotifier<TimeOfDay> wakeUpTime;
@@ -88,7 +91,12 @@ class _NotificationsTimeInputState extends State<NotificationsTimeInput> {
             trailing: Icon(Icons.arrow_forward),
             onTap: () async {
               await Navigator.of(context).push(
-                MaterialPageRoute(builder: (_) => SettingsFrequencyPage(frequency: widget.frequency,)),
+                MaterialPageRoute(builder: (_) => SettingsFrequencyPage(
+                  frequency: widget.frequency,
+                  viewModel: SettingsFrequencyPageViewModel(
+                    settingsProvider: context.read<SettingsProvider>()
+                  ),
+                )),
               );
 
               setState(() {

@@ -2,14 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:hidroly/domain/models/enum/frequency.dart';
 import 'package:hidroly/l10n/app_localizations.dart';
 import 'package:hidroly/provider/settings_provider.dart';
+import 'package:hidroly/ui/settings/view_models/pages/settings_frequency_page_view_model.dart';
 import 'package:provider/provider.dart';
 
 class SettingsFrequencyPage extends StatefulWidget {
   final ValueNotifier<Frequency> frequency;
+  final SettingsFrequencyPageViewModel viewModel;
 
   const SettingsFrequencyPage({
     super.key,
     required this.frequency,
+    required this.viewModel,
   });
 
   @override
@@ -21,7 +24,8 @@ class _SettingsFrequencyPageState extends State<SettingsFrequencyPage> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      final loadedFrequency = await _loadFrequency();
+      final loadedFrequency = 
+        await widget.viewModel.loadFrequency();
 
       setState(() {
         widget.frequency.value = loadedFrequency;
@@ -105,16 +109,5 @@ class _SettingsFrequencyPageState extends State<SettingsFrequencyPage> {
     setState(() {
       widget.frequency.value = newFrequency!;
     });
-  }
-
-  Future<Frequency> _loadFrequency() async {
-    int frequencyValue = await _getFrequency();
-    return Frequency.getFrequency(frequencyValue);
-  }
-
-  Future<int> _getFrequency() async {
-    final provider = context.read<SettingsProvider>();
-    await provider.readFrequency();
-    return provider.frequencyHolder.frequency;
   }
 }
