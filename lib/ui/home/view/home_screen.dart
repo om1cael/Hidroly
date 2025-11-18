@@ -27,9 +27,8 @@ class _HomeScreenState extends State<HomeScreen> {
       future: widget.viewModel.initializeData(),
       builder: (context, asyncSnapshot) {
         if(asyncSnapshot.connectionState == ConnectionState.waiting) {
-          return Container(
-            color: Theme.of(context).colorScheme.onSurface,
-            child: Center(child: CircularProgressIndicator(),),
+          return Scaffold(
+            body: Center(child: CircularProgressIndicator(),),
           );
         } else if(asyncSnapshot.hasData && asyncSnapshot.data == false) {
           WidgetsBinding.instance.addPostFrameCallback((_) {
