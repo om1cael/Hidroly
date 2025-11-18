@@ -1,26 +1,25 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hidroly/ui/setup/view_models/setup_view_model.dart';
-import 'package:hidroly/provider/custom_cups_provider.dart';
-import 'package:hidroly/provider/settings_provider.dart';
 import 'package:hidroly/l10n/app_localizations.dart';
-import 'package:hidroly/ui/home/view/home_screen.dart';
-import 'package:hidroly/provider/day_provider.dart';
 import 'package:hidroly/ui/setup/view/steps/setup_notifications_step.dart';
 import 'package:hidroly/ui/setup/view/steps/setup_basic_info_step.dart';
-import 'package:provider/provider.dart';
 
 class SetupScreen extends StatefulWidget {
-  const SetupScreen({super.key});
+  final SetupViewModel viewModel;
+
+  const SetupScreen({
+    super.key,
+    required this.viewModel,
+  });
 
   @override
   State<SetupScreen> createState() => _SetupScreenState();
 }
 
 class _SetupScreenState extends State<SetupScreen> {
-  late SetupViewModel _viewModel;
-
   final TextEditingController ageController = TextEditingController();
   final TextEditingController weightController = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
@@ -28,24 +27,11 @@ class _SetupScreenState extends State<SetupScreen> {
   int setupStep = 0;
 
   @override
-  void initState() {
-    super.initState();
-
-    _viewModel = SetupViewModel(
-      dayProvider: context.read<DayProvider>(),
-      customCupsProvider: context.read<CustomCupsProvider>(),
-      settingsProvider: context.read<SettingsProvider>(),
-    );
-  }
-
-  @override
   void dispose() {    
     super.dispose();
 
     ageController.dispose();
     weightController.dispose();
-
-    _viewModel.dispose();
   }
 
   @override
@@ -62,12 +48,12 @@ class _SetupScreenState extends State<SetupScreen> {
                 ? SetupBasicInfoStep(
                   ageController: ageController, 
                   weightController: weightController, 
-                  isMetric: _viewModel.isMetricNotifier
+                  isMetric: widget.viewModel.isMetricNotifier
                 )
                 : SetupNotificationsStep(
-                  wakeUpTime: _viewModel.wakeUpTime,
-                  sleepTime: _viewModel.sleepTime,
-                  frequency: _viewModel.frequency,
+                  wakeUpTime: widget.viewModel.wakeUpTime,
+                  sleepTime: widget.viewModel.sleepTime,
+                  frequency: widget.viewModel.frequency,
                 ),
             ),
           ),
@@ -82,9 +68,9 @@ class _SetupScreenState extends State<SetupScreen> {
             return;
           }
 
-          await _viewModel.saveSettings(context);
+          await widget.viewModel.saveSettings(context);
 
-          int? dailyGoal = _viewModel.getDailyGoal(
+          int? dailyGoal = widget.viewModel.getDailyGoal(
             ageController.text,
             weightController.text,
           );
@@ -92,12 +78,12 @@ class _SetupScreenState extends State<SetupScreen> {
           if(dailyGoal == null) return;
 
           if(!context.mounted) return;
-          final dayCreated = await _viewModel.createDay(context, dailyGoal);
-          final defaultCupsCreated = await _viewModel.createDefaultCups();
+          final dayCreated = await widget.viewModel.createDay(context, dailyGoal);
+          final defaultCupsCreated = await widget.viewModel.createDefaultCups();
 
           if(!context.mounted) return;
           final notificationTaskCreated = 
-            await _viewModel.registerPeriodicNotificationTask(context);
+            await widget.viewModel.registerPeriodicNotificationTask(context);
 
           if(!notificationTaskCreated && context.mounted) {
             _showSnackBar(
@@ -118,9 +104,7 @@ class _SetupScreenState extends State<SetupScreen> {
           }
 
           if(!context.mounted) return;
-          Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (context) => HomeScreen()),
-          );
+          context.go('/');
         },
         child: Icon(
           Icons.arrow_forward,
@@ -135,7 +119,7 @@ class _SetupScreenState extends State<SetupScreen> {
     });
     
     if(Platform.isAndroid) {
-      _viewModel.requestAndroidNotificationPermission();
+      widget.viewModel.requestAndroidNotificationPermission();
     }
   }
 
