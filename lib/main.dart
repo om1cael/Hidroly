@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hidroly/config/providers.dart';
+import 'package:hidroly/config/routes.dart';
 import 'package:hidroly/l10n/app_localizations.dart';
-import 'package:hidroly/ui/home/view/home_screen.dart';
 import 'package:hidroly/provider/day_provider.dart';
 import 'package:hidroly/provider/settings_provider.dart';
 import 'package:hidroly/data/services/notifications/notification_service.dart';
@@ -83,13 +83,13 @@ class _MainAppState extends State<MainApp> with WidgetsBindingObserver {
     return ValueListenableBuilder<ThemeMode>(
       valueListenable: MainApp.themeNotifier,
       builder: (_, theme, _) {
-        return MaterialApp(
+        return MaterialApp.router(
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
           themeMode: theme,
           theme: AppTheme.lightTheme,
           darkTheme: AppTheme.darkTheme,
-          home: const HomeScreen(),
+          routerConfig: Routes.routes,
         );
       }
     );
