@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hidroly/data/repository/summary_repository.dart';
 import 'package:hidroly/l10n/app_localizations.dart';
-import 'package:hidroly/pages/settings_page.dart';
+import 'package:hidroly/ui/settings/view/settings_screen.dart';
 import 'package:hidroly/ui/summary/view/summary_global_stats.dart';
 import 'package:hidroly/ui/summary/view/summary_weekly_intake_graphic.dart';
 import 'package:hidroly/ui/summary/view_models/summary_global_stats_view_model.dart';
@@ -51,7 +51,7 @@ class SummaryScreen extends StatelessWidget {
         IconButton(
           onPressed: () {
             Navigator.of(context).push(
-              MaterialPageRoute(builder: (_) => SettingsPage())
+              MaterialPageRoute(builder: (_) => SettingsScreen())
             );
           }, 
           icon: Icon(

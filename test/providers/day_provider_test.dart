@@ -12,6 +12,7 @@ class MockDayRepository extends Mock implements DayRepository {}
 void main() {
   AndroidFlutterLocalNotificationsPlugin.registerWith();
   TestWidgetsFlutterBinding.ensureInitialized();
+  // ignore: unused_local_variable
   late FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
 
   late DayProvider provider;
@@ -44,6 +45,7 @@ void main() {
     flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
 
     TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+      // ignore: body_might_complete_normally_nullable
       .setMockMethodCallHandler(channel, (MethodCall methodCall) async {
         if(methodCall.method == "cancelAll") {
           return true;

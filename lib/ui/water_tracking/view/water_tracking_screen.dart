@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:hidroly/controllers/home_controller.dart';
+import 'package:hidroly/ui/water_tracking/view_models/water_tracking_view_model.dart';
 import 'package:hidroly/domain/models/day.dart';
 import 'package:hidroly/l10n/app_localizations.dart';
-import 'package:hidroly/pages/settings_page.dart';
-import 'package:hidroly/pages/setup_page.dart';
+import 'package:hidroly/ui/settings/view/settings_screen.dart';
 import 'package:hidroly/provider/day_provider.dart';
 import 'package:hidroly/provider/settings_provider.dart';
 import 'package:hidroly/ui/core/theme/app_colors.dart';
@@ -22,19 +21,20 @@ class WaterTrackingScreen extends StatefulWidget {
 }
 
 class _WaterTrackingScreenState extends State<WaterTrackingScreen> {
-  final homeController = HomeController();
+  late final WaterTrackingViewModel _viewModel;
 
   @override
   void initState() {
     super.initState();
 
+    _viewModel = WaterTrackingViewModel(
+      dayProvider: context.read(),
+      customCupsProvider: context.read(),
+      dailyHistoryProvider: context.read(),
+    );
+
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      bool initialized = await homeController.initializeHome(context);
-      
-      if(!initialized && mounted) {
-        Navigator.of(context)
-          .pushReplacement(MaterialPageRoute(builder: (_) => SetupPage()));
-      }
+      await _viewModel.loadTrackingData();
     });
   }
 
@@ -95,7 +95,7 @@ class _WaterTrackingScreenState extends State<WaterTrackingScreen> {
           await _loadSelectedDay(provider, pickedDate);
 
           if(!mounted) return;
-          await homeController.loadDailyHistory(context, currentDay: provider.day);
+          await _viewModel.loadDailyHistory(currentDay: provider.day);
         },
         style: TextButton.styleFrom(
           padding: EdgeInsets.zero,
@@ -143,7 +143,7 @@ class _WaterTrackingScreenState extends State<WaterTrackingScreen> {
           onPressed: () async {
             await Navigator.of(context).push(
               MaterialPageRoute(
-                builder: (context) => const SettingsPage()
+                builder: (context) => const SettingsScreen()
               )
             );
           }, 

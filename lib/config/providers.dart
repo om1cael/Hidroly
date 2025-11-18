@@ -44,6 +44,6 @@ final class Providers {
     ChangeNotifierProxyProvider<DailyHistoryRepository, DailyHistoryProvider>(
       create: (context) => DailyHistoryProvider(), 
       update: (_, repository, provider) => provider!..setRepository(repository)
-    )
+    ),
   ];
 }

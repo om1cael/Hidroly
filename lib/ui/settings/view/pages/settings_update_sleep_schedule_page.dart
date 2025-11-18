@@ -4,12 +4,18 @@ import 'package:hidroly/domain/models/enum/settings.dart';
 import 'package:hidroly/l10n/app_localizations.dart';
 import 'package:hidroly/provider/settings_provider.dart';
 import 'package:hidroly/data/services/notifications/notification_service.dart';
+import 'package:hidroly/ui/settings/view_models/pages/settings_update_sleep_schedule_page_view_model.dart';
 import 'package:hidroly/widgets/common/icon_header.dart';
 import 'package:hidroly/widgets/common/notifications_time_input.dart';
 import 'package:provider/provider.dart';
 
 class SettingsUpdateSleepSchedulePage extends StatefulWidget {
-  const SettingsUpdateSleepSchedulePage({super.key});
+  final SettingsUpdateSleepSchedulePageViewModel viewModel;
+
+  const SettingsUpdateSleepSchedulePage({
+    super.key,
+    required this.viewModel,
+  });
 
   @override
   State<SettingsUpdateSleepSchedulePage> createState() => _SettingsUpdateSleepSchedulePageState();
@@ -103,25 +109,15 @@ class _SettingsUpdateSleepSchedulePageState extends State<SettingsUpdateSleepSch
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          final settingsProvider = context.read<SettingsProvider>();
-
-          await settingsProvider.updateTime(
-            Settings.wakeUpTime, 
-            wakeUpTime.value.hour, 
-            wakeUpTime.value.minute,
+          await widget.viewModel.updateSettings(
+            wakeUpTime.value,
+            sleepTime.value,
+            frequency.value,
           );
-
-          await settingsProvider.updateTime(
-            Settings.sleepTime, 
-            sleepTime.value.hour, 
-            sleepTime.value.minute,
-          );
-
-          await settingsProvider.updateFrequency(frequency.value.frequency);
 
           if(!context.mounted) return;
           final saved = await NotificationService().registerPeriodicNotificationTask(
-            context, 
+            context,
             wakeUpTime.value,
             sleepTime.value,
             frequencyInMinutes: frequency.value.frequency,
