@@ -16,7 +16,7 @@ dependencies:
     sdk: flutter
   flutter_svg: ^2.2.2
   go_router: ^17.0.0
-  haptic_feedback: ^0.5.1+1
+  haptic_feedback: ^0.6.2
   intl: any
   logger: ^2.6.2
   mocktail: ^1.0.4
