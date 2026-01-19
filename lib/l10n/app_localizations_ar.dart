@@ -9,322 +9,319 @@ class AppLocalizationsAr extends AppLocalizations {
   AppLocalizationsAr([String locale = 'ar']) : super(locale);
 
   @override
-  String get addAction => 'Add';
+  String get addAction => 'إضافة';
 
   @override
-  String get cancelAction => 'Cancel';
+  String get cancelAction => 'إلغاء';
 
   @override
-  String get deleteAction => 'Delete';
+  String get deleteAction => 'حذف';
 
   @override
-  String get doNotSaveLabel => 'Do not save';
+  String get doNotSaveLabel => 'عدم الحفظ';
 
   @override
-  String get editAction => 'Edit';
+  String get editAction => 'تعديل';
 
   @override
-  String get rearrangeAction => 'Rearrange';
+  String get rearrangeAction => 'إعادة ترتيب';
 
   @override
-  String get updateAction => 'Update';
+  String get updateAction => 'تحديث';
 
   @override
-  String get manageAction => 'Manage';
+  String get manageAction => 'إدارة';
 
   @override
-  String get bottomNavHomeLabel => 'Home';
+  String get bottomNavHomeLabel => 'الرئيسية';
 
   @override
-  String get bottomNavSummaryLabel => 'Summary';
+  String get bottomNavSummaryLabel => 'الملخص';
 
   @override
-  String get customCupButton => 'Custom';
+  String get customCupButton => 'مخصص';
 
   @override
-  String get customCupDialogTextFieldAmount => 'Amount';
+  String get customCupDialogTextFieldAmount => 'الكمية';
 
   @override
-  String get customCupDialogTitle => 'Add Custom Cup';
+  String get customCupDialogTitle => 'إضافة كوب مخصص';
 
   @override
-  String get editCustomCupDialogTitle => 'Edit custom cup';
+  String get editCustomCupDialogTitle => 'تعديل الكوب المخصص';
 
   @override
   String get editCustomCupFailed =>
-      'It was not possible to edit your cup. Please, report it on GitHub and reference code \'ECE01\'.';
+      'لم نتمكن من تعديل الكوب. يرجى الإبلاغ عن ذلك.';
 
   @override
-  String get editCustomCupSuccess => 'Cup edited successfully!';
+  String get editCustomCupSuccess => 'تم تعديل الكوب بنجاح!';
 
   @override
-  String get dailyGoal => 'Daily goal';
+  String get dailyGoal => 'الهدف اليومي';
 
   @override
-  String get dailyGoalUpdated => 'Daily goal saved successfully';
+  String get dailyGoalUpdated => 'تم حفظ الهدف اليومي بنجاح';
 
   @override
   String dayHistoryBottomSheetItemSubtitle(String time) {
-    return 'added $time';
+    return 'أُضيف $time';
   }
 
   @override
-  String get dayHistoryBottomSheetNoItems => 'Nothing here :(';
+  String get dayHistoryBottomSheetNoItems => 'لا يوجد شيء هنا :(';
 
   @override
-  String get dayHistoryBottomSheetTitle => 'Day history';
+  String get dayHistoryBottomSheetTitle => 'سجل اليوم';
 
   @override
-  String get dayLoadingFailed => 'Day not found';
+  String get dayLoadingFailed => 'لم يتم العثور على اليوم';
 
   @override
-  String get notificationTaskCreationFailed =>
-      'Failed to create the notification task';
+  String get notificationTaskCreationFailed => 'فشل إنشاء مهمة الإشعارات';
 
   @override
   String get pageNotAvailableDescription =>
-      'Sorry, this page isn\'t available yet :(';
+      'عذراً، هذه الصفحة غير متاحة حالياً :(';
 
   @override
-  String get pageNotAvailableTitle => 'Not Available';
+  String get pageNotAvailableTitle => 'غير متاح';
 
   @override
-  String get setupFailed =>
-      'An error occurred. Please create a GitHub issue and reference code \'SE01\'.';
+  String get setupFailed => 'حدث خطأ ما. يرجى المحاولة لاحقاً.';
 
   @override
-  String get sleepScheduleEditFailed => 'Could not save your sleep schedule';
+  String get sleepScheduleEditFailed => 'تعذر حفظ جدول النوم';
 
   @override
-  String get textFieldAmountError => 'Invalid Amount';
+  String get textFieldAmountError => 'الكمية غير صحيحة';
 
   @override
-  String get valueNotSupported => 'Value not supported';
+  String get valueNotSupported => 'القيمة غير مدعومة';
 
   @override
-  String get waterAddFailed => 'Oops! Couldn\'t add your water. Try again?';
+  String get waterAddFailed => 'عذراً! لم نتمكن من إضافة الماء. حاول مرة أخرى؟';
 
   @override
-  String get homePageTodayAppBarTitle => 'Today';
+  String get homePageTodayAppBarTitle => 'اليوم';
 
   @override
-  String get notificationSetupDescription =>
-      'Let\'s adjust notifications to match your day';
+  String get notificationSetupDescription => 'لنضبط الإشعارات لتناسب يومك';
 
   @override
-  String get notificationSetupTitle => 'Notifications';
+  String get notificationSetupTitle => 'الإشعارات';
 
   @override
-  String get notificationsSettingsSleep => 'You sleep at';
+  String get notificationsSettingsSleep => 'تنام في الساعة';
 
   @override
-  String get notificationsSettingsWakeUp => 'You wake up at';
+  String get notificationsSettingsWakeUp => 'تستيقظ في الساعة';
 
   @override
-  String get reminderNotificationBody => 'Keep your body happy, take a sip!';
+  String get reminderNotificationBody =>
+      'حافظ على صحة جسمك، اشرب قليلاً من الماء!';
 
   @override
-  String get reminderNotificationTitle => '💧 Time to hydrate!';
+  String get reminderNotificationTitle => '💧 وقت شرب الماء!';
 
   @override
-  String get progressCircleOf => 'of';
+  String get progressCircleOf => 'من';
 
   @override
-  String get settingsAboutSection => 'About';
+  String get settingsAboutSection => 'عن التطبيق';
 
   @override
-  String get settingsContribute => 'Contribute';
+  String get settingsContribute => 'المساهمة';
 
   @override
-  String get settingsContributeDescription => 'Access the GitHub repository';
+  String get settingsContributeDescription => 'زيارة صفحة المشروع';
 
   @override
-  String get settingsFeedback => 'Send feedback';
+  String get settingsFeedback => 'إرسال ملاحظات';
 
   @override
-  String get settingsFeedbackDescription => 'Share your thoughts with us';
+  String get settingsFeedbackDescription => 'شاركنا رأيك';
 
   @override
-  String get settingsGeneralSection => 'General';
+  String get settingsGeneralSection => 'عام';
 
   @override
-  String get settingsPageTitle => 'Settings';
+  String get settingsPageTitle => 'الإعدادات';
 
   @override
-  String get settingsSetCustomDailyGoal => 'Set a custom daily goal';
+  String get settingsSetCustomDailyGoal => 'تحديد هدف يومي مخصص';
 
   @override
-  String get settingsSleepSchedule => 'Edit sleep schedule';
+  String get settingsSleepSchedule => 'تعديل جدول النوم';
 
   @override
-  String get settingsSleepScheduleAppBar => 'Edit sleep schedule';
+  String get settingsSleepScheduleAppBar => 'تعديل جدول النوم';
 
   @override
   String get settingsSleepScheduleDescription =>
-      'Help us with a few details so we can update your sleep schedule';
+      'ساعدنا ببعض التفاصيل لتحديث جدول نومك';
 
   @override
-  String get settingsSleepScheduleTitle => 'Sleep Schedule';
+  String get settingsSleepScheduleTitle => 'جدول النوم';
 
   @override
-  String get settingsUnitSystem => 'Unit system';
+  String get settingsUnitSystem => 'نظام الوحدات';
 
   @override
-  String get settingsUpdateDailyGoalAppBar => 'Update Goal';
+  String get settingsUpdateDailyGoalAppBar => 'تحديث الهدف';
 
   @override
   String get settingsUpdateDailyGoalDescription =>
-      'Help us with a few details so we can update your goal';
+      'ساعدنا ببعض التفاصيل لتحديث هدفك';
 
   @override
-  String get settingsUpdateDailyGoalTitle => 'Daily Goal';
+  String get settingsUpdateDailyGoalTitle => 'الهدف اليومي';
 
   @override
-  String get settingsUpdateYourDailyGoal => 'Update your daily goal';
+  String get settingsUpdateYourDailyGoal => 'تحديث هدفك اليومي';
 
   @override
-  String get settingsYouSection => 'You';
+  String get settingsYouSection => 'أنت';
 
   @override
-  String get settingsNotificationsSection => 'Notifications';
+  String get settingsNotificationsSection => 'الإشعارات';
 
   @override
-  String get settingsNotificationsManageDescription => 'Toggle notifications';
+  String get settingsNotificationsManageDescription => 'تفعيل/إيقاف الإشعارات';
 
   @override
   String get settingsNotificationsSleepScheduleDescription =>
-      'Wake/sleep times & frequency';
+      'أوقات النوم والاستيقاظ والتكرار';
 
   @override
-  String get settingsNotificationsFrequency => 'Frequency';
+  String get settingsNotificationsFrequency => 'التكرار';
 
   @override
-  String get settingsTheme => 'Theme';
+  String get settingsTheme => 'المظهر';
 
   @override
-  String get settingsHapticFeedback => 'Haptic Feedback';
+  String get settingsHapticFeedback => 'الاهتزاز عند اللمس';
 
   @override
-  String get setupAgeTextFieldInvalidValue => 'Age between 10 and 120';
+  String get setupAgeTextFieldInvalidValue => 'العمر بين 10 و 120';
 
   @override
-  String get setupAgeTextFieldLabel => 'Your age';
+  String get setupAgeTextFieldLabel => 'عمرك';
 
   @override
-  String get setupDataText => 'Your data is stored on your device.';
+  String get setupDataText => 'بياناتك محفوظة على جهازك.';
 
   @override
-  String get setupUnitImperial => 'lb, fl oz';
+  String get setupUnitImperial => 'رطل، أونصة';
 
   @override
-  String get setupUnitMetric => 'kg, ml';
+  String get setupUnitMetric => 'كجم، مل';
 
   @override
   String setupWeightTextFieldInvalidWeight(String minWeight, String maxWeight) {
-    return 'Weight between $minWeight and $maxWeight';
+    return 'الوزن بين $minWeight و $maxWeight';
   }
 
   @override
-  String get setupWeightTextFieldLabel => 'Your weight';
+  String get setupWeightTextFieldLabel => 'وزنك';
 
   @override
   String get setupWelcomeSubtitle =>
-      'We just need to set things up. It will be quick and easy!';
+      'نحتاج فقط لضبط بعض الإعدادات. سيكون الأمر سريعاً وسهلاً!';
 
   @override
-  String get setupWelcomeTitle => 'Welcome';
+  String get setupWelcomeTitle => 'أهلاً بك';
 
   @override
-  String get flOzUnit => 'fl oz';
+  String get flOzUnit => 'أونصة';
 
   @override
-  String get imperial => 'Imperial';
+  String get imperial => 'إمبراطوري';
 
   @override
-  String get kgUnit => 'kg';
+  String get kgUnit => 'كجم';
 
   @override
-  String get lbUnit => 'lb';
+  String get lbUnit => 'رطل';
 
   @override
-  String get metric => 'Metric';
+  String get metric => 'متري';
 
   @override
-  String get mlUnit => 'ml';
+  String get mlUnit => 'مل';
 
   @override
   String minutes(String time) {
-    return '$time minutes';
+    return '$time دقيقة';
   }
 
   @override
   String hour(String time) {
-    return '$time hour';
+    return '$time ساعة';
   }
 
   @override
   String hours(String time) {
-    return '$time hours';
+    return '$time ساعات';
   }
 
   @override
-  String get globalStatisticsTitle => 'Global Statistics';
+  String get globalStatisticsTitle => 'الإحصائيات العامة';
 
   @override
-  String get globalStatisticsNoDataDescription =>
-      'Your data will appear here soon!';
+  String get globalStatisticsNoDataDescription => 'ستظهر بياناتك هنا قريباً!';
 
   @override
-  String get currentStreakStat => 'Current Streak';
+  String get currentStreakStat => 'الالتزام الحالي';
 
   @override
-  String get bestStreakStat => 'Best Streak';
+  String get bestStreakStat => 'أفضل التزام';
 
   @override
-  String get totalIntakeStat => 'Total Intake';
+  String get totalIntakeStat => 'مجموع الشرب';
 
   @override
-  String get averageIntakeStat => 'Avg. Intake';
+  String get averageIntakeStat => 'المعدل';
 
   @override
-  String get day => 'day';
+  String get day => 'يوم';
 
   @override
-  String get days => 'days';
+  String get days => 'أيام';
 
   @override
-  String get weeklyIntakeTitle => 'Weekly Intake';
+  String get weeklyIntakeTitle => 'الشرب الأسبوعي';
 
   @override
   String get weeklyIntakeNoData =>
-      'We\'re still working on your weekly intake chart. Come back soon to see it!';
+      'نعمل على تجهيز الرسم البياني الأسبوعي. عد قريباً لرؤيته!';
 
   @override
-  String get system => 'System';
+  String get system => 'النظام';
 
   @override
-  String get light => 'Light';
+  String get light => 'فاتح';
 
   @override
-  String get dark => 'Dark';
+  String get dark => 'داكن';
 
   @override
-  String get historyIconSemanticLabel => 'History';
+  String get historyIconSemanticLabel => 'السجل';
 
   @override
-  String get settingsIconSemanticLabel => 'Settings';
+  String get settingsIconSemanticLabel => 'الإعدادات';
 
   @override
-  String get addCupIconSemanticLabel => 'Add cup';
+  String get addCupIconSemanticLabel => 'إضافة كوب';
 
   @override
-  String get saveChangesIconSemanticLabel => 'Save changes';
+  String get saveChangesIconSemanticLabel => 'حفظ التغييرات';
 
   @override
-  String get goBackIconSemanticLabel => 'Go back';
+  String get goBackIconSemanticLabel => 'رجوع';
 
   @override
   String waterRemoveIconSemanticLabel(String amount) {
-    return 'Remove $amount';
+    return 'إزالة $amount';
   }
 }
