@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hidroly/features/setup/domain/unit_systems.dart';
+import 'package:hidroly/features/setup/ui/widgets/header_text.dart';
 
 class SetupView extends StatelessWidget {
   const SetupView({super.key});
@@ -14,18 +15,9 @@ class SetupView extends StatelessWidget {
           mainAxisAlignment: .center,
           crossAxisAlignment: .center,
           children: [
-            Column(
-              children: [
-                Text(
-                  'Welcome',
-                  style: Theme.of(context).textTheme.displayLarge,
-                ),
-                Text(
-                  'Let\'s set up your profile to personalize your daily water goal.',
-                  style: Theme.of(context).textTheme.bodyMedium,
-                  textAlign: .center,
-                ),
-              ],
+            HeaderText(
+              title: 'Welcome',
+              subtitle: 'Let\'s set up your profile to personalize your daily water goal.',
             ),
 
             Form(
