@@ -47,6 +47,7 @@ class SetupView extends StatelessWidget {
                   TextFormField(
                     decoration: InputDecoration(
                       label: Text('Weight'),
+                      suffixText: 'kg',
                       counterText: "",
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(24),
