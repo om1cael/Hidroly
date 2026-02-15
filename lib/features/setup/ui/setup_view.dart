@@ -14,13 +14,25 @@ class SetupView extends StatelessWidget {
           children: [
             Form(
               child: Column(
+                spacing: 16,
                 children: [
                   TextFormField(
                     decoration: InputDecoration(
                       label: Text('Age'),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(24),
-                      )
+                      ),
+                    ),
+                    keyboardType: TextInputType.number,
+                    autocorrect: false,
+                    maxLength: 3,
+                  ),
+                  TextFormField(
+                    decoration: InputDecoration(
+                      label: Text('Weight'),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(24),
+                      ),
                     ),
                     keyboardType: TextInputType.number,
                     autocorrect: false,
