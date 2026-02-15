@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hidroly/features/setup/domain/unit_systems.dart';
 
 class SetupView extends StatelessWidget {
   const SetupView({super.key});
@@ -55,6 +56,22 @@ class SetupView extends StatelessWidget {
                     autocorrect: false,
                     maxLength: 3,
                   ),
+                  SegmentedButton(
+                    segments: [
+                      ButtonSegment(
+                        label: Text('Metric'),
+                        value: UnitSystem.metric
+                      ),
+                      ButtonSegment(
+                        label: Text('Imperial'),
+                        value: UnitSystem.imperial
+                      ),
+                    ], 
+                    selected: {UnitSystem.metric},
+                    onSelectionChanged: (newSelection) {
+                      // TODO: Change selected segment
+                    },
+                  ),
                 ],
               )
             ),
@@ -62,6 +79,10 @@ class SetupView extends StatelessWidget {
             Text('Your data never leaves your device.')
           ],
         )
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: Icon(Icons.navigate_next),
       ),
     );
   }
