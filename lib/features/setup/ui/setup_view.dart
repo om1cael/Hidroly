@@ -58,6 +58,8 @@ class SetupView extends StatelessWidget {
                 ],
               )
             ),
+
+            Text('Your data never leaves your device.')
           ],
         )
       ),
