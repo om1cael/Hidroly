@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hidroly/core/themes.dart';
-import 'package:hidroly/features/setup/ui/setup_view.dart';
+import 'package:hidroly/features/setup/ui/view/setup_view.dart';
 
 void main() {
   runApp(const MainApp());

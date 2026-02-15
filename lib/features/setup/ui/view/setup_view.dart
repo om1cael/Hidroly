@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hidroly/features/setup/domain/unit_systems.dart';
-import 'package:hidroly/features/setup/ui/widgets/header_text.dart';
-import 'package:hidroly/features/setup/ui/widgets/number_input_form_field.dart';
+import 'package:hidroly/features/setup/ui/view/widgets/header_text.dart';
+import 'package:hidroly/features/setup/ui/view/widgets/number_input_form_field.dart';
 
 class SetupView extends StatelessWidget {
   const SetupView({super.key});
