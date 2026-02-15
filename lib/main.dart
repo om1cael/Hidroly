@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hidroly/core/themes.dart';
+import 'package:hidroly/features/setup/ui/setup_view.dart';
 
 void main() {
   runApp(const MainApp());
@@ -13,11 +14,7 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
       theme: Themes.lightTheme,
       darkTheme: Themes.darkTheme,
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
-        ),
-      ),
+      home: SetupView(),
     );
   }
 }
