@@ -20,7 +20,7 @@ class SetupView extends StatelessWidget {
                 spacing: 64,
                 crossAxisAlignment: .center,
                 children: [
-                  const Spacer(),
+                  const Spacer(flex: 2,),
 
                   HeaderText(
                     title: 'Welcome',
