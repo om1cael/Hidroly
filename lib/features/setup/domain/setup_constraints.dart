@@ -8,6 +8,8 @@ abstract final class SetupConstraints {
   static int get minWeightLb => (minWeightKg * 2.205).round();
   static int get maxWeightLb => (maxWeightKg * 2.205).round();
 
+  static const int minWaterSuggestionMl = 1200;
+
   static const int maxWaterSuggestionMl = 4000;
   static int get maxWaterSuggestionOz => (maxWaterSuggestionMl / 29.574).round();
 }
