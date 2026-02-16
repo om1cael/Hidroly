@@ -34,11 +34,13 @@ class SetupView extends StatelessWidget {
                         NumberInputFormField(
                           label: 'Age',
                           maxLength: 3,
+                          validator: (value) {},
                         ),
                         NumberInputFormField(
                           label: 'Weight',
                           suffix: 'kg',
                           maxLength: 3,
+                          validator: (value) {},
                         ),
                         SegmentedButton(
                           segments: [

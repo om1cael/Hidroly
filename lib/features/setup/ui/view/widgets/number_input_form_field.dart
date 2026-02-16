@@ -6,11 +6,14 @@ class NumberInputFormField extends StatelessWidget {
     required this.label,
     required this.maxLength,
     this.suffix,
+    required this.validator,
   });
 
   final String label;
   final String? suffix;
   final int maxLength;
+
+  final String? Function(String?) validator;
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +29,7 @@ class NumberInputFormField extends StatelessWidget {
       keyboardType: TextInputType.number,
       autocorrect: false,
       maxLength: maxLength,
+      validator: validator,
     );
   }
 }
