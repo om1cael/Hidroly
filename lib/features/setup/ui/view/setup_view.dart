@@ -52,6 +52,7 @@ class _SetupViewState extends ConsumerState<SetupView> {
                   ),
 
                   Form(
+                    key: formKey,
                     child: Column(
                       spacing: 24,
                       children: [
