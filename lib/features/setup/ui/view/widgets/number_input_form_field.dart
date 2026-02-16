@@ -27,6 +27,7 @@ class NumberInputFormField extends StatelessWidget {
         ),
       ),
       keyboardType: TextInputType.number,
+      autovalidateMode: AutovalidateMode.onUnfocus,
       autocorrect: false,
       maxLength: maxLength,
       validator: validator,
