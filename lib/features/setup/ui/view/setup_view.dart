@@ -47,7 +47,7 @@ class SetupView extends ConsumerWidget {
 
                             return ref
                               .read(setupViewModelProvider.notifier)
-                              .validateAge(value, 'Age must be between $minAge and $maxAge.');
+                              .validateAge(value, 'You must be between $minAge and $maxAge years old.');
                           },
                         ),
                         NumberInputFormField(
