@@ -7,11 +7,16 @@ import 'package:hidroly/features/setup/ui/view/widgets/header_text.dart';
 import 'package:hidroly/features/setup/ui/view/widgets/number_input_form_field.dart';
 import 'package:hidroly/features/setup/ui/view_model/setup_view_model.dart';
 
-class SetupView extends ConsumerWidget {
+class SetupView extends ConsumerStatefulWidget {
   const SetupView({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<SetupView> createState() => _SetupViewState();
+}
+
+class _SetupViewState extends ConsumerState<SetupView> {
+  @override
+  Widget build(BuildContext context) {
     final setupState = ref.watch(setupViewModelProvider);
     final unitSystem = setupState.unit.first;
 
