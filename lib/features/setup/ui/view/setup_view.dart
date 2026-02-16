@@ -15,6 +15,18 @@ class SetupView extends ConsumerStatefulWidget {
 }
 
 class _SetupViewState extends ConsumerState<SetupView> {
+  final ageTextController = TextEditingController();
+  final weightTextController = TextEditingController();
+  final formKey = GlobalKey<FormState>();
+
+  @override
+  void dispose() {
+    super.dispose();
+
+    ageTextController.dispose();
+    weightTextController.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     final setupState = ref.watch(setupViewModelProvider);
@@ -44,6 +56,7 @@ class _SetupViewState extends ConsumerState<SetupView> {
                       spacing: 24,
                       children: [
                         NumberInputFormField(
+                          controller: ageTextController,
                           label: 'Age',
                           maxLength: 3,
                           validator: (value) {
@@ -56,6 +69,7 @@ class _SetupViewState extends ConsumerState<SetupView> {
                           },
                         ),
                         NumberInputFormField(
+                          controller: weightTextController,
                           label: 'Weight',
                           suffix: unitSystem == UnitSystem.metric
                             ? 'kg'

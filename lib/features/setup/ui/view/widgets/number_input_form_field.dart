@@ -3,11 +3,14 @@ import 'package:flutter/material.dart';
 class NumberInputFormField extends StatelessWidget {
   const NumberInputFormField({
     super.key,
+    required this.controller,
     required this.label,
     required this.maxLength,
     this.suffix,
     required this.validator,
   });
+
+  final TextEditingController controller;
 
   final String label;
   final String? suffix;
@@ -26,6 +29,7 @@ class NumberInputFormField extends StatelessWidget {
           borderRadius: BorderRadius.circular(24),
         ),
       ),
+      controller: controller,
       keyboardType: TextInputType.number,
       autovalidateMode: AutovalidateMode.onUnfocus,
       autocorrect: false,
