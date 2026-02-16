@@ -9,16 +9,16 @@ abstract class SetupState with _$SetupState {
   const factory SetupState({
     required int age,
     required int weight,
-    required UnitSystem unit,
+    required Set<UnitSystem> unit,
   }) = _SetupState;
 }
 
 extension SetupStateX on SetupState {
-  int get minWeight => unit == UnitSystem.metric
+  int get minWeight => unit.first == UnitSystem.metric
      ? SetupConstraints.minWeightKg
      : SetupConstraints.minWeightLb;
 
-  int get maxWeight => unit == UnitSystem.metric
+  int get maxWeight => unit.first == UnitSystem.metric
      ? SetupConstraints.maxWeightKg
      : SetupConstraints.maxWeightLb;
 }

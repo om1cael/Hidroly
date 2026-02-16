@@ -73,9 +73,11 @@ class SetupView extends ConsumerWidget {
                               value: UnitSystem.imperial
                             ),
                           ], 
-                          selected: {UnitSystem.metric},
+                          selected: setupState.unit,
                           onSelectionChanged: (newSelection) {
-                            // TODO: Change selected segment
+                            ref
+                              .read(setupViewModelProvider.notifier)
+                              .setUnitSystem(newSelection.first);
                           },
                         ),
                       ],

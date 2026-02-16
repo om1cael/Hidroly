@@ -12,7 +12,13 @@ class SetupViewModel extends _$SetupViewModel {
     return SetupState(
       age: 0,
       weight: 0,
-      unit: UnitSystem.metric,
+      unit: {UnitSystem.metric},
+    );
+  }
+  
+  void setUnitSystem(UnitSystem selection) {
+    state = state.copyWith(
+      unit: {selection},
     );
   }
 

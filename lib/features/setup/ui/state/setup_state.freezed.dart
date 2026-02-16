@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$SetupState {
 
- int get age; int get weight; UnitSystem get unit;
+ int get age; int get weight; Set<UnitSystem> get unit;
 /// Create a copy of SetupState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,12 +25,12 @@ $SetupStateCopyWith<SetupState> get copyWith => _$SetupStateCopyWithImpl<SetupSt
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SetupState&&(identical(other.age, age) || other.age == age)&&(identical(other.weight, weight) || other.weight == weight)&&(identical(other.unit, unit) || other.unit == unit));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SetupState&&(identical(other.age, age) || other.age == age)&&(identical(other.weight, weight) || other.weight == weight)&&const DeepCollectionEquality().equals(other.unit, unit));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,age,weight,unit);
+int get hashCode => Object.hash(runtimeType,age,weight,const DeepCollectionEquality().hash(unit));
 
 @override
 String toString() {
@@ -45,7 +45,7 @@ abstract mixin class $SetupStateCopyWith<$Res>  {
   factory $SetupStateCopyWith(SetupState value, $Res Function(SetupState) _then) = _$SetupStateCopyWithImpl;
 @useResult
 $Res call({
- int age, int weight, UnitSystem unit
+ int age, int weight, Set<UnitSystem> unit
 });
 
 
@@ -67,7 +67,7 @@ class _$SetupStateCopyWithImpl<$Res>
 age: null == age ? _self.age : age // ignore: cast_nullable_to_non_nullable
 as int,weight: null == weight ? _self.weight : weight // ignore: cast_nullable_to_non_nullable
 as int,unit: null == unit ? _self.unit : unit // ignore: cast_nullable_to_non_nullable
-as UnitSystem,
+as Set<UnitSystem>,
   ));
 }
 
@@ -152,7 +152,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int age,  int weight,  UnitSystem unit)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int age,  int weight,  Set<UnitSystem> unit)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _SetupState() when $default != null:
 return $default(_that.age,_that.weight,_that.unit);case _:
@@ -173,7 +173,7 @@ return $default(_that.age,_that.weight,_that.unit);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int age,  int weight,  UnitSystem unit)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int age,  int weight,  Set<UnitSystem> unit)  $default,) {final _that = this;
 switch (_that) {
 case _SetupState():
 return $default(_that.age,_that.weight,_that.unit);case _:
@@ -193,7 +193,7 @@ return $default(_that.age,_that.weight,_that.unit);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int age,  int weight,  UnitSystem unit)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int age,  int weight,  Set<UnitSystem> unit)?  $default,) {final _that = this;
 switch (_that) {
 case _SetupState() when $default != null:
 return $default(_that.age,_that.weight,_that.unit);case _:
@@ -208,12 +208,18 @@ return $default(_that.age,_that.weight,_that.unit);case _:
 
 
 class _SetupState implements SetupState {
-  const _SetupState({required this.age, required this.weight, required this.unit});
+  const _SetupState({required this.age, required this.weight, required final  Set<UnitSystem> unit}): _unit = unit;
   
 
 @override final  int age;
 @override final  int weight;
-@override final  UnitSystem unit;
+ final  Set<UnitSystem> _unit;
+@override Set<UnitSystem> get unit {
+  if (_unit is EqualUnmodifiableSetView) return _unit;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableSetView(_unit);
+}
+
 
 /// Create a copy of SetupState
 /// with the given fields replaced by the non-null parameter values.
@@ -225,12 +231,12 @@ _$SetupStateCopyWith<_SetupState> get copyWith => __$SetupStateCopyWithImpl<_Set
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SetupState&&(identical(other.age, age) || other.age == age)&&(identical(other.weight, weight) || other.weight == weight)&&(identical(other.unit, unit) || other.unit == unit));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SetupState&&(identical(other.age, age) || other.age == age)&&(identical(other.weight, weight) || other.weight == weight)&&const DeepCollectionEquality().equals(other._unit, _unit));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,age,weight,unit);
+int get hashCode => Object.hash(runtimeType,age,weight,const DeepCollectionEquality().hash(_unit));
 
 @override
 String toString() {
@@ -245,7 +251,7 @@ abstract mixin class _$SetupStateCopyWith<$Res> implements $SetupStateCopyWith<$
   factory _$SetupStateCopyWith(_SetupState value, $Res Function(_SetupState) _then) = __$SetupStateCopyWithImpl;
 @override @useResult
 $Res call({
- int age, int weight, UnitSystem unit
+ int age, int weight, Set<UnitSystem> unit
 });
 
 
@@ -266,8 +272,8 @@ class __$SetupStateCopyWithImpl<$Res>
   return _then(_SetupState(
 age: null == age ? _self.age : age // ignore: cast_nullable_to_non_nullable
 as int,weight: null == weight ? _self.weight : weight // ignore: cast_nullable_to_non_nullable
-as int,unit: null == unit ? _self.unit : unit // ignore: cast_nullable_to_non_nullable
-as UnitSystem,
+as int,unit: null == unit ? _self._unit : unit // ignore: cast_nullable_to_non_nullable
+as Set<UnitSystem>,
   ));
 }
 
