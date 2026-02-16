@@ -1,3 +1,4 @@
+import 'package:hidroly/features/setup/domain/setup_constraints.dart';
 import 'package:hidroly/features/setup/domain/unit_systems.dart';
 import 'package:hidroly/features/setup/ui/state/setup_state.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -13,5 +14,15 @@ class SetupViewModel extends _$SetupViewModel {
       weight: 0,
       unit: UnitSystem.metric,
     );
+  }
+
+  String? validateAge(String? ageText, String errorText) {
+    if(ageText == null || ageText.isEmpty) return null;
+
+    final minAge = SetupConstraints.minAge;
+    final maxAge = SetupConstraints.maxAge;
+
+    int age = int.parse(ageText);
+    return (age < minAge || age > maxAge) ? errorText : null;
   }
 }

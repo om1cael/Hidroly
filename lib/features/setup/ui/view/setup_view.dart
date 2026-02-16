@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hidroly/features/setup/domain/setup_constraints.dart';
 import 'package:hidroly/features/setup/domain/unit_systems.dart';
 import 'package:hidroly/features/setup/ui/view/widgets/header_text.dart';
 import 'package:hidroly/features/setup/ui/view/widgets/number_input_form_field.dart';
+import 'package:hidroly/features/setup/ui/view_model/setup_view_model.dart';
 
-class SetupView extends StatelessWidget {
+class SetupView extends ConsumerWidget {
   const SetupView({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       body: SafeArea(
         minimum: EdgeInsets.all(48.0),
@@ -34,7 +37,14 @@ class SetupView extends StatelessWidget {
                         NumberInputFormField(
                           label: 'Age',
                           maxLength: 3,
-                          validator: (value) {},
+                          validator: (value) {
+                            final minAge = SetupConstraints.minAge;
+                            final maxAge = SetupConstraints.maxAge;
+
+                            return ref
+                              .read(setupViewModelProvider.notifier)
+                              .validateAge(value, 'Age must be between $minAge and $maxAge.');
+                          },
                         ),
                         NumberInputFormField(
                           label: 'Weight',
