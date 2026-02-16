@@ -13,6 +13,7 @@ class SetupView extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final setupState = ref.watch(setupViewModelProvider);
+    final unitSystem = setupState.unit.first;
 
     return Scaffold(
       body: SafeArea(
@@ -51,7 +52,9 @@ class SetupView extends ConsumerWidget {
                         ),
                         NumberInputFormField(
                           label: 'Weight',
-                          suffix: 'kg',
+                          suffix: unitSystem == UnitSystem.metric
+                            ? 'kg'
+                            : 'lbs',
                           maxLength: 3,
                           validator: (value) {
                             final minWeight = setupState.minWeight;
@@ -65,11 +68,11 @@ class SetupView extends ConsumerWidget {
                         SegmentedButton(
                           segments: [
                             ButtonSegment(
-                              label: Text('Metric'),
+                              label: Text('kg, ml'),
                               value: UnitSystem.metric
                             ),
                             ButtonSegment(
-                              label: Text('Imperial'),
+                              label: Text('lb, oz'),
                               value: UnitSystem.imperial
                             ),
                           ], 
