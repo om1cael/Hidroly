@@ -41,7 +41,7 @@ final class SetupViewModelProvider
   }
 }
 
-String _$setupViewModelHash() => r'c326b7e07bcd60c9d48acf2b8bd43f9704182e5f';
+String _$setupViewModelHash() => r'f06f40206b456b7d9912072b0022f5dc59956bb5';
 
 abstract class _$SetupViewModel extends $Notifier<SetupState> {
   SetupState build();
