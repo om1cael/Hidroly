@@ -10,6 +10,7 @@ abstract class SetupState with _$SetupState {
     required int age,
     required int weight,
     required Set<UnitSystem> unit,
+    @Default(false) bool dailyGoalClamped,
   }) = _SetupState;
 }
 
