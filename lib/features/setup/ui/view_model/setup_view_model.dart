@@ -25,4 +25,11 @@ class SetupViewModel extends _$SetupViewModel {
     int age = int.parse(ageText);
     return (age < minAge || age > maxAge) ? errorText : null;
   }
+
+  String? validateWeight(String? weighText, String errorText) {
+    if(weighText == null || weighText.isEmpty) return null;
+
+    int weight = int.parse(weighText);
+    return (weight < state.minWeight || weight > state.maxWeight) ? errorText : null;
+  }
 }

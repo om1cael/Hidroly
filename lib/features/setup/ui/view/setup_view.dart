@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hidroly/features/setup/domain/setup_constraints.dart';
 import 'package:hidroly/features/setup/domain/unit_systems.dart';
+import 'package:hidroly/features/setup/ui/state/setup_state.dart';
 import 'package:hidroly/features/setup/ui/view/widgets/header_text.dart';
 import 'package:hidroly/features/setup/ui/view/widgets/number_input_form_field.dart';
 import 'package:hidroly/features/setup/ui/view_model/setup_view_model.dart';
@@ -11,6 +12,8 @@ class SetupView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final setupState = ref.watch(setupViewModelProvider);
+
     return Scaffold(
       body: SafeArea(
         minimum: EdgeInsets.all(48.0),
@@ -50,7 +53,14 @@ class SetupView extends ConsumerWidget {
                           label: 'Weight',
                           suffix: 'kg',
                           maxLength: 3,
-                          validator: (value) {},
+                          validator: (value) {
+                            final minWeight = setupState.minWeight;
+                            final maxWeight = setupState.maxWeight;
+
+                            return ref
+                              .read(setupViewModelProvider.notifier)
+                              .validateWeight(value, 'Weight must be between $minWeight and $maxWeight.');
+                          },
                         ),
                         SegmentedButton(
                           segments: [
