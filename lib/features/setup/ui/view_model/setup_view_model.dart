@@ -22,8 +22,10 @@ class SetupViewModel extends _$SetupViewModel {
     );
   }
 
-  String? validateAge(String? ageText, String errorText) {
-    if(ageText == null || ageText.isEmpty) return null;
+  String? validateAge(String? ageText, String emptyErrorText, String errorText) {
+    if(ageText == null || ageText.isEmpty) {
+      return emptyErrorText;
+    }
 
     final minAge = SetupConstraints.minAge;
     final maxAge = SetupConstraints.maxAge;
@@ -34,8 +36,10 @@ class SetupViewModel extends _$SetupViewModel {
     return (age < minAge || age > maxAge) ? errorText : null;
   }
 
-  String? validateWeight(String? weighText, String errorText) {
-    if(weighText == null || weighText.isEmpty) return null;
+  String? validateWeight(String? weighText, String emptyErrorText, String errorText) {
+    if(weighText == null || weighText.isEmpty) {
+      return emptyErrorText;
+    }
 
     int? weight = int.tryParse(weighText);
     if(weight == null) return errorText;

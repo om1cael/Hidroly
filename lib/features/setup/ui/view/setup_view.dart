@@ -66,7 +66,11 @@ class _SetupViewState extends ConsumerState<SetupView> {
 
                             return ref
                               .read(setupViewModelProvider.notifier)
-                              .validateAge(value, 'You must be between $minAge and $maxAge years old.');
+                              .validateAge(
+                                value, 
+                                'You must input your age.',
+                                'You must be between $minAge and $maxAge years old.'
+                              );
                           },
                         ),
                         NumberInputFormField(
@@ -82,7 +86,11 @@ class _SetupViewState extends ConsumerState<SetupView> {
 
                             return ref
                               .read(setupViewModelProvider.notifier)
-                              .validateWeight(value, 'Weight must be between $minWeight and $maxWeight.');
+                              .validateWeight(
+                                value, 
+                                'You must input your weight.',
+                                'Weight must be between $minWeight and $maxWeight.'
+                              );
                           },
                         ),
                         SegmentedButton(
