@@ -1,5 +1,3 @@
-import 'package:hidroly/features/setup/domain/setup_constraints.dart';
-
 abstract final class HydrationCalculator {
   static int calculateGoal(int age, int weightKg) {
     int mlPerKg = 40;
@@ -12,10 +10,6 @@ abstract final class HydrationCalculator {
       mlPerKg = 25;
     }
 
-    final int dailyGoalRaw = mlPerKg * weightKg;
-    return dailyGoalRaw.clamp(
-      SetupConstraints.minWaterSuggestionMl,
-      SetupConstraints.maxWaterSuggestionMl,
-    );
+    return mlPerKg * weightKg;
   }
 }
