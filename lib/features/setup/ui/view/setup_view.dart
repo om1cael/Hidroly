@@ -32,6 +32,31 @@ class _SetupViewState extends ConsumerState<SetupView> {
     final setupState = ref.watch(setupViewModelProvider);
     final unitSystem = setupState.unit.first;
 
+    ref.listen(setupViewModelProvider, (previous, newState) async {
+      if(newState.dailyGoalClamped) {
+        // TODO: Support imperial
+        showDialog(
+          context: context, 
+          builder: (context) {
+            return AlertDialog(
+              title: Text('About your daily goal'),
+              content: Text(
+                'We\'ve set your daily goal to a maximum of ${SetupConstraints.maxWaterSuggestionMl} ml to keep things within our recommended range. For personalized advice, feel free to consult a healthcare professional.'
+              ),
+              actions: [
+                TextButton(
+                  onPressed: () => {
+                    // TODO: go to home page
+                  }, 
+                  child: Text('I understand')
+                ),
+              ],
+            );
+          }
+        );
+      }
+    });
+
     return Scaffold(
       body: SafeArea(
         minimum: EdgeInsets.all(48.0),
@@ -125,7 +150,16 @@ class _SetupViewState extends ConsumerState<SetupView> {
         )
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          if(formKey.currentState == null || !formKey.currentState!.validate()) return;
+          
+          int age = int.parse(ageTextController.text);
+          int weight = int.parse(weightTextController.text);
+
+          ref
+            .read(setupViewModelProvider.notifier)
+            .completeSetup(age, weight);
+        },
         child: Icon(Icons.navigate_next),
       ),
     );

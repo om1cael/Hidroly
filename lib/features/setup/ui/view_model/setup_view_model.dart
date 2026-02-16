@@ -1,3 +1,4 @@
+import 'package:hidroly/features/setup/domain/hydration_calculator.dart';
 import 'package:hidroly/features/setup/domain/setup_constraints.dart';
 import 'package:hidroly/features/setup/domain/unit_systems.dart';
 import 'package:hidroly/features/setup/ui/state/setup_state.dart';
@@ -14,6 +15,24 @@ class SetupViewModel extends _$SetupViewModel {
       weight: 0,
       unit: {UnitSystem.metric},
     );
+  }
+
+  // TODO: Convert from imperial if necessary
+  // TODO: Save to database (UseCase)
+  void completeSetup(int age, int weight) {
+    final dailyGoalRaw = HydrationCalculator.calculateGoal(age, weight);
+    int dailyGoal = 0;
+
+    if(dailyGoalRaw > SetupConstraints.maxWaterSuggestionMl) {
+      dailyGoal = dailyGoalRaw.clamp(
+        SetupConstraints.minWaterSuggestionMl, 
+        SetupConstraints.maxWaterSuggestionMl
+      );
+
+      state = state.copyWith(
+        dailyGoalClamped: true,
+      );
+    }
   }
   
   void setUnitSystem(UnitSystem selection) {
