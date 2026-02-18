@@ -1,0 +1,1 @@
+class InvalidWeightException implements Exception {}
