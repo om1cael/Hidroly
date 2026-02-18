@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hidroly/core/themes.dart';
+import 'package:hidroly/core/ui/themes.dart';
 import 'package:hidroly/features/setup/ui/view/setup_view.dart';
 
 void main() {
