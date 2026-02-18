@@ -1,5 +1,6 @@
 import 'package:drift/drift.dart';
 import 'package:hidroly/core/data/db/app_database.dart';
+import 'package:hidroly/core/data/mappers/day_mapper.dart';
 import 'package:hidroly/core/domain/entities/day.dart';
 import 'package:hidroly/core/domain/repositories/day_repository.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -24,5 +25,14 @@ class DayRepositoryImpl implements DayRepository {
         dailyGoal: Value(day.dailyGoal),
       ),
     );
+  }
+  
+  @override
+  Future<Day> read(int id) async {
+    final data = await (_database.select(_database.dayTable)
+      ..where((day) => day.id.equals(id)))
+      .getSingle();
+
+    return data.toEntity();
   }
 }
