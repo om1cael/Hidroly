@@ -1,4 +1,4 @@
-import 'package:hidroly/features/setup/domain/hydration_calculator.dart';
+import 'package:hidroly/features/setup/domain/entities/person.dart';
 import 'package:hidroly/features/setup/domain/setup_constraints.dart';
 import 'package:hidroly/features/setup/domain/unit_systems.dart';
 import 'package:hidroly/features/setup/ui/state/setup_state.dart';
@@ -20,7 +20,8 @@ class SetupViewModel extends _$SetupViewModel {
   // TODO: Convert from imperial if necessary
   // TODO: Save to database (UseCase)
   void completeSetup(int age, int weight) {
-    final dailyGoalRaw = HydrationCalculator.calculateGoal(age, weight);
+    final person = Person(age: age, weightKg: weight);
+    final dailyGoalRaw = person.calculateHydrationGoalMl();
     int dailyGoal = 0;
 
     if(dailyGoalRaw > SetupConstraints.maxWaterSuggestionMl) {
