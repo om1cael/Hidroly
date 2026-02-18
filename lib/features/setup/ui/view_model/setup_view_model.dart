@@ -1,7 +1,7 @@
 import 'package:hidroly/features/setup/domain/entities/person.dart';
 import 'package:hidroly/features/setup/domain/setup_constraints.dart';
 import 'package:hidroly/features/setup/domain/unit_systems.dart';
-import 'package:hidroly/features/setup/domain/usecases/save_daily_goal_use_case.dart';
+import 'package:hidroly/features/setup/domain/usecases/complete_setup_use_case.dart';
 import 'package:hidroly/features/setup/domain/value_objects/weight.dart';
 import 'package:hidroly/features/setup/ui/state/setup_state.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -21,23 +21,15 @@ class SetupViewModel extends _$SetupViewModel {
 
   void completeSetup(int age, int weightValue) {
     Weight weight = _getWeight(weightValue);
- 
     final person = Person(age: age, weight: weight);
-    final dailyGoalRaw = person.calculateHydrationGoalMl();
-    int dailyGoal = 0;
+    final useCase = CompleteSetupUseCase();
 
-    if(dailyGoalRaw > SetupConstraints.maxWaterSuggestionMl) {
-      dailyGoal = dailyGoalRaw.clamp(
-        SetupConstraints.minWaterSuggestionMl, 
-        SetupConstraints.maxWaterSuggestionMl
-      );
+    int rawDailyGoal = person.calculateHydrationGoalMl();
+    int dailyGoal = useCase.execute(person);
 
-      state = state.copyWith(
-        dailyGoalClamped: true,
-      );
+    if(rawDailyGoal > dailyGoal) {
+      state = state.copyWith(dailyGoalClamped: true);
     }
-
-    SaveDailyGoalUseCase.execute(dailyGoal);
   }
 
   Weight _getWeight(int weightValue) {
@@ -46,6 +38,7 @@ class SetupViewModel extends _$SetupViewModel {
     if(state.unit.first == UnitSystem.imperial) {
       weight = Weight.fromLb(weightValue);
     }
+
     return weight;
   }
   
