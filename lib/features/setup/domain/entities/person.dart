@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:hidroly/features/setup/domain/value_objects/weight.dart';
 
 part 'person.freezed.dart';
 
@@ -6,23 +7,26 @@ part 'person.freezed.dart';
 class Person with _$Person {
   const Person({
     required this.age,
-    required this.weightKg,
+    required this.weight,
   });
 
   @override final int age;
-  @override final int weightKg;
+  @override final Weight weight;
 
   int calculateHydrationGoalMl() {
-    int mlPerKg = 40;
+    int mlPerKg = _getMlPerKg();
+    return mlPerKg * weight.kg;
+  }
 
-    if(age >= 18 && age < 55) {
-      mlPerKg = 35;
-    } else if(age >= 55 && age <= 65) {
-      mlPerKg = 30;
-    } else if(age >= 66) {
-      mlPerKg = 25;
+  int _getMlPerKg() {
+    if(age < 18) {
+      return 40;
+    } else if(age < 55) {
+      return 35;
+    } else if(age <= 65) {
+      return 30;
     }
 
-    return mlPerKg * weightKg;
+    return 25;
   }
 }

@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Person {
 
- int get age; int get weightKg;
+ int get age; Weight get weight;
 /// Create a copy of Person
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $PersonCopyWith<Person> get copyWith => _$PersonCopyWithImpl<Person>(this as Per
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Person&&(identical(other.age, age) || other.age == age)&&(identical(other.weightKg, weightKg) || other.weightKg == weightKg));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Person&&(identical(other.age, age) || other.age == age)&&(identical(other.weight, weight) || other.weight == weight));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,age,weightKg);
+int get hashCode => Object.hash(runtimeType,age,weight);
 
 @override
 String toString() {
-  return 'Person(age: $age, weightKg: $weightKg)';
+  return 'Person(age: $age, weight: $weight)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $PersonCopyWith<$Res>  {
   factory $PersonCopyWith(Person value, $Res Function(Person) _then) = _$PersonCopyWithImpl;
 @useResult
 $Res call({
- int age, int weightKg
+ int age, Weight weight
 });
 
 
@@ -62,11 +62,11 @@ class _$PersonCopyWithImpl<$Res>
 
 /// Create a copy of Person
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? age = null,Object? weightKg = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? age = null,Object? weight = null,}) {
   return _then(Person(
 age: null == age ? _self.age : age // ignore: cast_nullable_to_non_nullable
-as int,weightKg: null == weightKg ? _self.weightKg : weightKg // ignore: cast_nullable_to_non_nullable
-as int,
+as int,weight: null == weight ? _self.weight : weight // ignore: cast_nullable_to_non_nullable
+as Weight,
   ));
 }
 

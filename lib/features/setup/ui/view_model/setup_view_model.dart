@@ -1,6 +1,7 @@
 import 'package:hidroly/features/setup/domain/entities/person.dart';
 import 'package:hidroly/features/setup/domain/setup_constraints.dart';
 import 'package:hidroly/features/setup/domain/unit_systems.dart';
+import 'package:hidroly/features/setup/domain/value_objects/weight.dart';
 import 'package:hidroly/features/setup/ui/state/setup_state.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -19,8 +20,14 @@ class SetupViewModel extends _$SetupViewModel {
 
   // TODO: Convert from imperial if necessary
   // TODO: Save to database (UseCase)
-  void completeSetup(int age, int weight) {
-    final person = Person(age: age, weightKg: weight);
+  void completeSetup(int age, int weightValue) {
+    Weight weight = Weight(kg: weightValue);
+
+    if(state.unit.first == UnitSystem.imperial) {
+      weight = Weight.fromLb(weightValue);
+    }
+ 
+    final person = Person(age: age, weight: weight);
     final dailyGoalRaw = person.calculateHydrationGoalMl();
     int dailyGoal = 0;
 
@@ -34,6 +41,8 @@ class SetupViewModel extends _$SetupViewModel {
         dailyGoalClamped: true,
       );
     }
+
+    print('Daily goal is $dailyGoalRaw');
   }
   
   void setUnitSystem(UnitSystem selection) {
