@@ -7,6 +7,7 @@ environment:
   sdk: ^3.11.0
 
 dependencies:
+  drift: ^2.31.0
   flutter:
     sdk: flutter
   flutter_riverpod: ^3.2.1
