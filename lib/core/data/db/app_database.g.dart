@@ -42,7 +42,8 @@ class $DayTableTable extends DayTable
     aliasedName,
     false,
     type: DriftSqlType.int,
-    requiredDuringInsert: true,
+    requiredDuringInsert: false,
+    defaultValue: Constant(0),
   );
   static const VerificationMeta _createdAtMeta = const VerificationMeta(
     'createdAt',
@@ -53,7 +54,8 @@ class $DayTableTable extends DayTable
     aliasedName,
     false,
     type: DriftSqlType.dateTime,
-    requiredDuringInsert: true,
+    requiredDuringInsert: false,
+    defaultValue: currentDate,
   );
   @override
   List<GeneratedColumn> get $columns => [
@@ -93,16 +95,12 @@ class $DayTableTable extends DayTable
           _currentAmountMeta,
         ),
       );
-    } else if (isInserting) {
-      context.missing(_currentAmountMeta);
     }
     if (data.containsKey('created_at')) {
       context.handle(
         _createdAtMeta,
         createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta),
       );
-    } else if (isInserting) {
-      context.missing(_createdAtMeta);
     }
     return context;
   }
@@ -250,11 +248,9 @@ class DayTableCompanion extends UpdateCompanion<DayTableData> {
   DayTableCompanion.insert({
     this.id = const Value.absent(),
     required int dailyGoal,
-    required int currentAmount,
-    required DateTime createdAt,
-  }) : dailyGoal = Value(dailyGoal),
-       currentAmount = Value(currentAmount),
-       createdAt = Value(createdAt);
+    this.currentAmount = const Value.absent(),
+    this.createdAt = const Value.absent(),
+  }) : dailyGoal = Value(dailyGoal);
   static Insertable<DayTableData> custom({
     Expression<int>? id,
     Expression<int>? dailyGoal,
@@ -328,8 +324,8 @@ typedef $$DayTableTableCreateCompanionBuilder =
     DayTableCompanion Function({
       Value<int> id,
       required int dailyGoal,
-      required int currentAmount,
-      required DateTime createdAt,
+      Value<int> currentAmount,
+      Value<DateTime> createdAt,
     });
 typedef $$DayTableTableUpdateCompanionBuilder =
     DayTableCompanion Function({
@@ -468,8 +464,8 @@ class $$DayTableTableTableManager
               ({
                 Value<int> id = const Value.absent(),
                 required int dailyGoal,
-                required int currentAmount,
-                required DateTime createdAt,
+                Value<int> currentAmount = const Value.absent(),
+                Value<DateTime> createdAt = const Value.absent(),
               }) => DayTableCompanion.insert(
                 id: id,
                 dailyGoal: dailyGoal,
