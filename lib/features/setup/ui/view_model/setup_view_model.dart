@@ -18,7 +18,6 @@ class SetupViewModel extends _$SetupViewModel {
     );
   }
 
-  // TODO: Convert from imperial if necessary
   // TODO: Save to database (UseCase)
   void completeSetup(int age, int weightValue) {
     Weight weight = Weight(kg: weightValue);
@@ -41,8 +40,6 @@ class SetupViewModel extends _$SetupViewModel {
         dailyGoalClamped: true,
       );
     }
-
-    print('Daily goal is $dailyGoalRaw');
   }
   
   void setUnitSystem(UnitSystem selection) {
