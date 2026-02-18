@@ -8,5 +8,6 @@ abstract class Day with _$Day {
     @Default(0) int id,
     required int dailyGoal,
     @Default(0) int currentAmount,
+    required DateTime createdAt,
   }) = _day;
 }

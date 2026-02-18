@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Day {
 
- int get id; int get dailyGoal; int get currentAmount;
+ int get id; int get dailyGoal; int get currentAmount; DateTime get createdAt;
 /// Create a copy of Day
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $DayCopyWith<Day> get copyWith => _$DayCopyWithImpl<Day>(this as Day, _$identity
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Day&&(identical(other.id, id) || other.id == id)&&(identical(other.dailyGoal, dailyGoal) || other.dailyGoal == dailyGoal)&&(identical(other.currentAmount, currentAmount) || other.currentAmount == currentAmount));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Day&&(identical(other.id, id) || other.id == id)&&(identical(other.dailyGoal, dailyGoal) || other.dailyGoal == dailyGoal)&&(identical(other.currentAmount, currentAmount) || other.currentAmount == currentAmount)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,id,dailyGoal,currentAmount);
+int get hashCode => Object.hash(runtimeType,id,dailyGoal,currentAmount,createdAt);
 
 @override
 String toString() {
-  return 'Day(id: $id, dailyGoal: $dailyGoal, currentAmount: $currentAmount)';
+  return 'Day(id: $id, dailyGoal: $dailyGoal, currentAmount: $currentAmount, createdAt: $createdAt)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $DayCopyWith<$Res>  {
   factory $DayCopyWith(Day value, $Res Function(Day) _then) = _$DayCopyWithImpl;
 @useResult
 $Res call({
- int id, int dailyGoal, int currentAmount
+ int id, int dailyGoal, int currentAmount, DateTime createdAt
 });
 
 
@@ -62,12 +62,13 @@ class _$DayCopyWithImpl<$Res>
 
 /// Create a copy of Day
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? dailyGoal = null,Object? currentAmount = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? dailyGoal = null,Object? currentAmount = null,Object? createdAt = null,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,dailyGoal: null == dailyGoal ? _self.dailyGoal : dailyGoal // ignore: cast_nullable_to_non_nullable
 as int,currentAmount: null == currentAmount ? _self.currentAmount : currentAmount // ignore: cast_nullable_to_non_nullable
-as int,
+as int,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
+as DateTime,
   ));
 }
 
@@ -152,10 +153,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  int dailyGoal,  int currentAmount)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  int dailyGoal,  int currentAmount,  DateTime createdAt)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _day() when $default != null:
-return $default(_that.id,_that.dailyGoal,_that.currentAmount);case _:
+return $default(_that.id,_that.dailyGoal,_that.currentAmount,_that.createdAt);case _:
   return orElse();
 
 }
@@ -173,10 +174,10 @@ return $default(_that.id,_that.dailyGoal,_that.currentAmount);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  int dailyGoal,  int currentAmount)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  int dailyGoal,  int currentAmount,  DateTime createdAt)  $default,) {final _that = this;
 switch (_that) {
 case _day():
-return $default(_that.id,_that.dailyGoal,_that.currentAmount);case _:
+return $default(_that.id,_that.dailyGoal,_that.currentAmount,_that.createdAt);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -193,10 +194,10 @@ return $default(_that.id,_that.dailyGoal,_that.currentAmount);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  int dailyGoal,  int currentAmount)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  int dailyGoal,  int currentAmount,  DateTime createdAt)?  $default,) {final _that = this;
 switch (_that) {
 case _day() when $default != null:
-return $default(_that.id,_that.dailyGoal,_that.currentAmount);case _:
+return $default(_that.id,_that.dailyGoal,_that.currentAmount,_that.createdAt);case _:
   return null;
 
 }
@@ -208,12 +209,13 @@ return $default(_that.id,_that.dailyGoal,_that.currentAmount);case _:
 
 
 class _day implements Day {
-  const _day({this.id = 0, required this.dailyGoal, this.currentAmount = 0});
+  const _day({this.id = 0, required this.dailyGoal, this.currentAmount = 0, required this.createdAt});
   
 
 @override@JsonKey() final  int id;
 @override final  int dailyGoal;
 @override@JsonKey() final  int currentAmount;
+@override final  DateTime createdAt;
 
 /// Create a copy of Day
 /// with the given fields replaced by the non-null parameter values.
@@ -225,16 +227,16 @@ _$dayCopyWith<_day> get copyWith => __$dayCopyWithImpl<_day>(this, _$identity);
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _day&&(identical(other.id, id) || other.id == id)&&(identical(other.dailyGoal, dailyGoal) || other.dailyGoal == dailyGoal)&&(identical(other.currentAmount, currentAmount) || other.currentAmount == currentAmount));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _day&&(identical(other.id, id) || other.id == id)&&(identical(other.dailyGoal, dailyGoal) || other.dailyGoal == dailyGoal)&&(identical(other.currentAmount, currentAmount) || other.currentAmount == currentAmount)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,id,dailyGoal,currentAmount);
+int get hashCode => Object.hash(runtimeType,id,dailyGoal,currentAmount,createdAt);
 
 @override
 String toString() {
-  return 'Day(id: $id, dailyGoal: $dailyGoal, currentAmount: $currentAmount)';
+  return 'Day(id: $id, dailyGoal: $dailyGoal, currentAmount: $currentAmount, createdAt: $createdAt)';
 }
 
 
@@ -245,7 +247,7 @@ abstract mixin class _$dayCopyWith<$Res> implements $DayCopyWith<$Res> {
   factory _$dayCopyWith(_day value, $Res Function(_day) _then) = __$dayCopyWithImpl;
 @override @useResult
 $Res call({
- int id, int dailyGoal, int currentAmount
+ int id, int dailyGoal, int currentAmount, DateTime createdAt
 });
 
 
@@ -262,12 +264,13 @@ class __$dayCopyWithImpl<$Res>
 
 /// Create a copy of Day
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? dailyGoal = null,Object? currentAmount = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? dailyGoal = null,Object? currentAmount = null,Object? createdAt = null,}) {
   return _then(_day(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,dailyGoal: null == dailyGoal ? _self.dailyGoal : dailyGoal // ignore: cast_nullable_to_non_nullable
 as int,currentAmount: null == currentAmount ? _self.currentAmount : currentAmount // ignore: cast_nullable_to_non_nullable
-as int,
+as int,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
+as DateTime,
   ));
 }
 
