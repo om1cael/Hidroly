@@ -183,12 +183,14 @@ class _SetupViewState extends ConsumerState<SetupView> {
                 .read(setupViewModelProvider.notifier)
                 .completeSetup(age, weight);
           },
-        child: setupState.isLoading
-          ? Transform.scale(
-            scale: .8,
-            child: CircularProgressIndicator()
-          )
-          : Icon(Icons.navigate_next),
+        child: setupState.setupResult == .success
+          ? Icon(Icons.check)
+          : setupState.isLoading
+            ? Transform.scale(
+              scale: .8,
+              child: CircularProgressIndicator()
+            )
+            : Icon(Icons.navigate_next),
       ),
     );
   }
