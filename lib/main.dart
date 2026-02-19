@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hidroly/core/ui/themes.dart';
+import 'package:hidroly/core/ui/themes/themes.dart';
 import 'package:hidroly/features/setup/ui/view/setup_view.dart';
 
 Future<void> main() async {
