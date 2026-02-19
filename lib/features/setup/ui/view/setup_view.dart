@@ -47,7 +47,9 @@ class _SetupViewState extends ConsumerState<SetupView> {
                 ),
                 actions: [
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
                     child: Text('I understand')
                   ),
                 ],
