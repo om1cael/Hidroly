@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:hidroly/features/setup/domain/entities/person.dart';
 import 'package:hidroly/features/setup/domain/exceptions/invalid_input_exception.dart';
 import 'package:hidroly/features/setup/domain/unit_systems.dart';
@@ -35,10 +37,11 @@ class SetupViewModel extends _$SetupViewModel {
         setupStage: .success,
       );
     } on Exception catch (e) {
-      // TODO: Catch error and show user-friendly message
       state = state.copyWith(
         setupStage: .error,
       );
+
+      log(e.toString(), error: e);
     }
   }
   
@@ -84,7 +87,7 @@ class SetupViewModel extends _$SetupViewModel {
     Weight weight;
 
     state.unit.first == UnitSystem.metric
-      ? weight = Weight(kg: weightValue)
+      ? weight = Weight.kg(weightValue)
       : weight = Weight.fromLb(weightValue);
 
     return weight;

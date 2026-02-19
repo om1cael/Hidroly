@@ -37,26 +37,25 @@ class _SetupViewState extends ConsumerState<SetupView> {
     ref.listen(setupViewModelProvider, (previous, newState) async {
       if((previous == null || previous.setupStage != .success) && newState.setupStage == .success) {
         if(newState.dailyGoalClamped) {
-          // TODO: Support imperial
           showDialog(
             context: context, 
             builder: (context) {
               return AlertDialog(
                 title: Text('About your daily goal'),
                 content: Text(
-                  'We\'ve set your daily goal to a maximum of ${SetupConstraints.maxWaterSuggestionMl} ml to keep things within our recommended range. For personalized advice, feel free to consult a healthcare professional.'
+                  'We\'ve set your daily goal to a maximum of ${SetupConstraints.maxWaterSuggestionMl} ${_getWaterUnitText(setupState.unit.first)} to keep things within our recommended range. For personalized advice, feel free to consult a healthcare professional.'
                 ),
                 actions: [
                   TextButton(
-                    onPressed: () => {
-                      // TODO: go to home page
-                    }, 
+                    onPressed: () {},
                     child: Text('I understand')
                   ),
                 ],
               );
             }
-          );
+          ).then((_) {
+            // TODO: go to home page
+          });
         }
       } else if(newState.setupStage == SetupStage.error) {
         showDialog(
@@ -197,5 +196,11 @@ class _SetupViewState extends ConsumerState<SetupView> {
             : Icon(Icons.navigate_next),
       ),
     );
+  }
+
+  String _getWaterUnitText(UnitSystem unit) {
+    return unit == UnitSystem.metric
+      ? 'ml'
+      : 'oz';
   }
 }
