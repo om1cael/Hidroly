@@ -1,4 +1,3 @@
-import 'package:hidroly/core/data/repositories/day_repository_impl.dart';
 import 'package:hidroly/features/setup/domain/entities/person.dart';
 import 'package:hidroly/features/setup/domain/setup_constraints.dart';
 import 'package:hidroly/features/setup/domain/unit_systems.dart';
@@ -21,18 +20,15 @@ class SetupViewModel extends _$SetupViewModel {
   }
 
   void completeSetup(int age, int weightValue) async {
-    final dayRepository = ref.watch(dayRepositoryProvider);
-
     Weight weight = _getWeight(weightValue);
     final person = Person(age: age, weight: weight);
-    final useCase = CompleteSetupUseCase(dayRepository);
 
-    int rawDailyGoal = person.calculateHydrationGoalMl();
-    int dailyGoal = await useCase.execute(person);
+    final setupResult = await ref.read(completeSetupUseCaseProvider)
+      .execute(person);
 
-    if(rawDailyGoal > dailyGoal) {
-      state = state.copyWith(dailyGoalClamped: true);
-    }
+    state = state.copyWith(
+      dailyGoalClamped: setupResult.rawDailyGoal > setupResult.clampedGoal,
+    );
   }
 
   Weight _getWeight(int weightValue) {

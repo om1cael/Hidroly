@@ -5,9 +5,11 @@ import 'tables/day_table.dart';
 
 part 'app_database.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 AppDatabase appDatabase(Ref ref) {
-  return AppDatabase();
+  final db = AppDatabase();
+  ref.onDispose(db.close);
+  return db;
 }
 
 @DriftDatabase(tables: [DayTable])
