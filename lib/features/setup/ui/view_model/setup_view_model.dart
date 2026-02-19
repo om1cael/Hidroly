@@ -95,12 +95,8 @@ class SetupViewModel extends _$SetupViewModel {
   }
 
   Weight _getWeight(int weightValue) {
-    Weight weight;
-
-    state.unit.first == UnitSystem.metric
-      ? weight = Weight.kg(weightValue)
-      : weight = Weight.fromLb(weightValue);
-
-    return weight;
+    return state.unit.first == UnitSystem.metric
+      ? Weight.kg(weightValue)
+      : Weight.fromLb(weightValue);
   }
 }
