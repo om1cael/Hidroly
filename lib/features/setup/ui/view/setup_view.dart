@@ -169,7 +169,7 @@ class _SetupViewState extends ConsumerState<SetupView> {
         )
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: setupState.isLoading
+        onPressed: (setupState.isLoading || setupState.setupResult == .success)
           ? null
           : () {
               if(formKey.currentState == null || !formKey.currentState!.validate()) {
