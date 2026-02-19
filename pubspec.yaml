@@ -28,4 +28,6 @@ dev_dependencies:
   drift_dev: ^2.31.0
 
 flutter:
+  assets:
+    - assets/translations/
   uses-material-design: true
