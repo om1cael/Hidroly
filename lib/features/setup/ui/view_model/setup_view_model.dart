@@ -19,6 +19,8 @@ class SetupViewModel extends _$SetupViewModel {
   }
 
   Future<void> completeSetup(int age, int weightValue) async {
+    if(state.isLoading || state.setupResult == .success) return;
+
     Weight weight = _getWeight(weightValue);
     final person = Person(age: age, weight: weight);
 
@@ -31,11 +33,13 @@ class SetupViewModel extends _$SetupViewModel {
       state = state.copyWith(
         dailyGoalClamped: setupResult.rawDailyGoal > setupResult.clampedGoal,
         setupResult: SetupResult.success,
+        isLoading: false,
       );
     } on Exception catch (e) {
+      // TODO: Catch error and show user-friendly message
       state = state.copyWith(
         setupResult: SetupResult.error,
-        errorText: e.toString(),
+        isLoading: false,
       );
     }
   }

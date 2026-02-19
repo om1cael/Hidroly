@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hidroly/features/setup/domain/setup_constraints.dart';
+import 'package:hidroly/features/setup/domain/setup_result.dart';
 import 'package:hidroly/features/setup/domain/unit_systems.dart';
 import 'package:hidroly/features/setup/ui/state/setup_state.dart';
 import 'package:hidroly/features/setup/ui/view/widgets/header_text.dart';
@@ -33,22 +34,40 @@ class _SetupViewState extends ConsumerState<SetupView> {
     final unitSystem = setupState.unit.first;
 
     ref.listen(setupViewModelProvider, (previous, newState) async {
-      if(newState.dailyGoalClamped) {
-        // TODO: Support imperial
+      if(newState.setupResult == SetupResult.success) {
+        if(newState.dailyGoalClamped) {
+          // TODO: Support imperial
+          showDialog(
+            context: context, 
+            builder: (context) {
+              return AlertDialog(
+                title: Text('About your daily goal'),
+                content: Text(
+                  'We\'ve set your daily goal to a maximum of ${SetupConstraints.maxWaterSuggestionMl} ml to keep things within our recommended range. For personalized advice, feel free to consult a healthcare professional.'
+                ),
+                actions: [
+                  TextButton(
+                    onPressed: () => {
+                      // TODO: go to home page
+                    }, 
+                    child: Text('I understand')
+                  ),
+                ],
+              );
+            }
+          );
+        }
+      } else if(newState.setupResult == SetupResult.error) {
         showDialog(
           context: context, 
           builder: (context) {
             return AlertDialog(
-              title: Text('About your daily goal'),
-              content: Text(
-                'We\'ve set your daily goal to a maximum of ${SetupConstraints.maxWaterSuggestionMl} ml to keep things within our recommended range. For personalized advice, feel free to consult a healthcare professional.'
-              ),
+              title: Text('An error occurred'),
+              content: Text('Oops. An error occurred while saving your informations.'),
               actions: [
                 TextButton(
-                  onPressed: () => {
-                    // TODO: go to home page
-                  }, 
-                  child: Text('I understand')
+                  onPressed: Navigator.of(context).pop, 
+                  child: Text('Ok'),
                 ),
               ],
             );
