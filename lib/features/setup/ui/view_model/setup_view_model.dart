@@ -18,7 +18,7 @@ class SetupViewModel extends _$SetupViewModel {
   }
 
   Future<void> completeSetup(int age, int weightValue) async {
-    if(state.setupStage == .processing || state.setupStage == .success) return;
+    if(state.setupStage != .idle) return;
 
     Weight weight = _getWeight(weightValue);
     final person = Person(age: age, weight: weight);
