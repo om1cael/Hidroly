@@ -7,8 +7,6 @@ part 'setup_state.freezed.dart';
 @freezed
 abstract class SetupState with _$SetupState {
   const factory SetupState({
-    required int age,
-    required int weight,
     required Set<UnitSystem> unit,
     @Default(false) bool dailyGoalClamped,
   }) = _SetupState;

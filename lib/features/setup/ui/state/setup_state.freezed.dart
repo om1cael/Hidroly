@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$SetupState {
 
- int get age; int get weight; Set<UnitSystem> get unit; bool get dailyGoalClamped;
+ Set<UnitSystem> get unit; bool get dailyGoalClamped;
 /// Create a copy of SetupState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $SetupStateCopyWith<SetupState> get copyWith => _$SetupStateCopyWithImpl<SetupSt
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SetupState&&(identical(other.age, age) || other.age == age)&&(identical(other.weight, weight) || other.weight == weight)&&const DeepCollectionEquality().equals(other.unit, unit)&&(identical(other.dailyGoalClamped, dailyGoalClamped) || other.dailyGoalClamped == dailyGoalClamped));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SetupState&&const DeepCollectionEquality().equals(other.unit, unit)&&(identical(other.dailyGoalClamped, dailyGoalClamped) || other.dailyGoalClamped == dailyGoalClamped));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,age,weight,const DeepCollectionEquality().hash(unit),dailyGoalClamped);
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(unit),dailyGoalClamped);
 
 @override
 String toString() {
-  return 'SetupState(age: $age, weight: $weight, unit: $unit, dailyGoalClamped: $dailyGoalClamped)';
+  return 'SetupState(unit: $unit, dailyGoalClamped: $dailyGoalClamped)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $SetupStateCopyWith<$Res>  {
   factory $SetupStateCopyWith(SetupState value, $Res Function(SetupState) _then) = _$SetupStateCopyWithImpl;
 @useResult
 $Res call({
- int age, int weight, Set<UnitSystem> unit, bool dailyGoalClamped
+ Set<UnitSystem> unit, bool dailyGoalClamped
 });
 
 
@@ -62,11 +62,9 @@ class _$SetupStateCopyWithImpl<$Res>
 
 /// Create a copy of SetupState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? age = null,Object? weight = null,Object? unit = null,Object? dailyGoalClamped = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? unit = null,Object? dailyGoalClamped = null,}) {
   return _then(_self.copyWith(
-age: null == age ? _self.age : age // ignore: cast_nullable_to_non_nullable
-as int,weight: null == weight ? _self.weight : weight // ignore: cast_nullable_to_non_nullable
-as int,unit: null == unit ? _self.unit : unit // ignore: cast_nullable_to_non_nullable
+unit: null == unit ? _self.unit : unit // ignore: cast_nullable_to_non_nullable
 as Set<UnitSystem>,dailyGoalClamped: null == dailyGoalClamped ? _self.dailyGoalClamped : dailyGoalClamped // ignore: cast_nullable_to_non_nullable
 as bool,
   ));
@@ -153,10 +151,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int age,  int weight,  Set<UnitSystem> unit,  bool dailyGoalClamped)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( Set<UnitSystem> unit,  bool dailyGoalClamped)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _SetupState() when $default != null:
-return $default(_that.age,_that.weight,_that.unit,_that.dailyGoalClamped);case _:
+return $default(_that.unit,_that.dailyGoalClamped);case _:
   return orElse();
 
 }
@@ -174,10 +172,10 @@ return $default(_that.age,_that.weight,_that.unit,_that.dailyGoalClamped);case _
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int age,  int weight,  Set<UnitSystem> unit,  bool dailyGoalClamped)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( Set<UnitSystem> unit,  bool dailyGoalClamped)  $default,) {final _that = this;
 switch (_that) {
 case _SetupState():
-return $default(_that.age,_that.weight,_that.unit,_that.dailyGoalClamped);case _:
+return $default(_that.unit,_that.dailyGoalClamped);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -194,10 +192,10 @@ return $default(_that.age,_that.weight,_that.unit,_that.dailyGoalClamped);case _
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int age,  int weight,  Set<UnitSystem> unit,  bool dailyGoalClamped)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( Set<UnitSystem> unit,  bool dailyGoalClamped)?  $default,) {final _that = this;
 switch (_that) {
 case _SetupState() when $default != null:
-return $default(_that.age,_that.weight,_that.unit,_that.dailyGoalClamped);case _:
+return $default(_that.unit,_that.dailyGoalClamped);case _:
   return null;
 
 }
@@ -209,11 +207,9 @@ return $default(_that.age,_that.weight,_that.unit,_that.dailyGoalClamped);case _
 
 
 class _SetupState implements SetupState {
-  const _SetupState({required this.age, required this.weight, required final  Set<UnitSystem> unit, this.dailyGoalClamped = false}): _unit = unit;
+  const _SetupState({required final  Set<UnitSystem> unit, this.dailyGoalClamped = false}): _unit = unit;
   
 
-@override final  int age;
-@override final  int weight;
  final  Set<UnitSystem> _unit;
 @override Set<UnitSystem> get unit {
   if (_unit is EqualUnmodifiableSetView) return _unit;
@@ -233,16 +229,16 @@ _$SetupStateCopyWith<_SetupState> get copyWith => __$SetupStateCopyWithImpl<_Set
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SetupState&&(identical(other.age, age) || other.age == age)&&(identical(other.weight, weight) || other.weight == weight)&&const DeepCollectionEquality().equals(other._unit, _unit)&&(identical(other.dailyGoalClamped, dailyGoalClamped) || other.dailyGoalClamped == dailyGoalClamped));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SetupState&&const DeepCollectionEquality().equals(other._unit, _unit)&&(identical(other.dailyGoalClamped, dailyGoalClamped) || other.dailyGoalClamped == dailyGoalClamped));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,age,weight,const DeepCollectionEquality().hash(_unit),dailyGoalClamped);
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_unit),dailyGoalClamped);
 
 @override
 String toString() {
-  return 'SetupState(age: $age, weight: $weight, unit: $unit, dailyGoalClamped: $dailyGoalClamped)';
+  return 'SetupState(unit: $unit, dailyGoalClamped: $dailyGoalClamped)';
 }
 
 
@@ -253,7 +249,7 @@ abstract mixin class _$SetupStateCopyWith<$Res> implements $SetupStateCopyWith<$
   factory _$SetupStateCopyWith(_SetupState value, $Res Function(_SetupState) _then) = __$SetupStateCopyWithImpl;
 @override @useResult
 $Res call({
- int age, int weight, Set<UnitSystem> unit, bool dailyGoalClamped
+ Set<UnitSystem> unit, bool dailyGoalClamped
 });
 
 
@@ -270,11 +266,9 @@ class __$SetupStateCopyWithImpl<$Res>
 
 /// Create a copy of SetupState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? age = null,Object? weight = null,Object? unit = null,Object? dailyGoalClamped = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? unit = null,Object? dailyGoalClamped = null,}) {
   return _then(_SetupState(
-age: null == age ? _self.age : age // ignore: cast_nullable_to_non_nullable
-as int,weight: null == weight ? _self.weight : weight // ignore: cast_nullable_to_non_nullable
-as int,unit: null == unit ? _self._unit : unit // ignore: cast_nullable_to_non_nullable
+unit: null == unit ? _self._unit : unit // ignore: cast_nullable_to_non_nullable
 as Set<UnitSystem>,dailyGoalClamped: null == dailyGoalClamped ? _self.dailyGoalClamped : dailyGoalClamped // ignore: cast_nullable_to_non_nullable
 as bool,
   ));
