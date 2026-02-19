@@ -1,1 +1,0 @@
-enum SetupResult { idle, success, error }

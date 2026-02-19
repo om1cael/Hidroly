@@ -1,0 +1,1 @@
+enum SetupStage { idle, processing, success, error }

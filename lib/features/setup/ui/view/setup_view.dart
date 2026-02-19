@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hidroly/features/setup/domain/setup_constraints.dart';
-import 'package:hidroly/features/setup/domain/setup_result.dart';
+import 'package:hidroly/features/setup/domain/setup_stage.dart';
 import 'package:hidroly/features/setup/domain/unit_systems.dart';
 import 'package:hidroly/features/setup/ui/state/setup_state.dart';
 import 'package:hidroly/features/setup/ui/view/widgets/header_text.dart';
@@ -34,7 +34,7 @@ class _SetupViewState extends ConsumerState<SetupView> {
     final unitSystem = setupState.unit.first;
 
     ref.listen(setupViewModelProvider, (previous, newState) async {
-      if(newState.setupResult == SetupResult.success) {
+      if(newState.setupStage == SetupStage.success) {
         if(newState.dailyGoalClamped) {
           // TODO: Support imperial
           showDialog(
@@ -57,7 +57,7 @@ class _SetupViewState extends ConsumerState<SetupView> {
             }
           );
         }
-      } else if(newState.setupResult == SetupResult.error) {
+      } else if(newState.setupStage == SetupStage.error) {
         showDialog(
           context: context, 
           builder: (context) {
@@ -169,7 +169,7 @@ class _SetupViewState extends ConsumerState<SetupView> {
         )
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: (setupState.isLoading || setupState.setupResult == .success)
+        onPressed: (setupState.isLoading || setupState.setupStage == .success)
           ? null
           : () {
               if(formKey.currentState == null || !formKey.currentState!.validate()) {
@@ -183,9 +183,9 @@ class _SetupViewState extends ConsumerState<SetupView> {
                 .read(setupViewModelProvider.notifier)
                 .completeSetup(age, weight);
           },
-        child: setupState.setupResult == .success
+        child: setupState.setupStage == .success
           ? Icon(Icons.check)
-          : setupState.isLoading
+          : setupState.setupStage == .processing
             ? Transform.scale(
               scale: .8,
               child: CircularProgressIndicator()

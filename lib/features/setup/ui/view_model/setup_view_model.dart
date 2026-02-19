@@ -1,6 +1,5 @@
 import 'package:hidroly/features/setup/domain/entities/person.dart';
 import 'package:hidroly/features/setup/domain/setup_constraints.dart';
-import 'package:hidroly/features/setup/domain/setup_result.dart';
 import 'package:hidroly/features/setup/domain/unit_systems.dart';
 import 'package:hidroly/features/setup/domain/usecases/complete_setup_use_case.dart';
 import 'package:hidroly/features/setup/domain/value_objects/weight.dart';
@@ -19,27 +18,25 @@ class SetupViewModel extends _$SetupViewModel {
   }
 
   Future<void> completeSetup(int age, int weightValue) async {
-    if(state.isLoading || state.setupResult == .success) return;
+    if(state.setupStage == .processing || state.setupStage == .success) return;
 
     Weight weight = _getWeight(weightValue);
     final person = Person(age: age, weight: weight);
 
     try {
-      state = state.copyWith(isLoading: true);
+      state = state.copyWith(setupStage: .processing);
 
       final setupResult = await ref.read(completeSetupUseCaseProvider)
         .execute(person);
 
       state = state.copyWith(
         dailyGoalClamped: setupResult.rawDailyGoal > setupResult.clampedGoal,
-        setupResult: SetupResult.success,
-        isLoading: false,
+        setupStage: .success,
       );
     } on Exception catch (e) {
       // TODO: Catch error and show user-friendly message
       state = state.copyWith(
-        setupResult: SetupResult.error,
-        isLoading: false,
+        setupStage: .error,
       );
     }
   }
