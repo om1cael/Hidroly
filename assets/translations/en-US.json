@@ -1,3 +1,20 @@
 {
-    "welcome": "Welcome"
+    "welcome": "Welcome",
+    "setupSubtitle": "Let's set up your profile to personalize your daily water goal.",
+    "age": "Age",
+    "weight": "Weight",
+    "dailyGoalDisclaimerTitle": "About your daily goal",
+    "dailyGoalDisclaimerContent": "We've set your daily goal to a maximum of {suggestedAmount} to keep things within our recommended range. For personalized advice, feel free to consult a healthcare professional.",
+    "understand": "I understand",
+    "errorOccurred": "An error occurred",
+    "setupError": "Oops. An error occurred while saving your informations.",
+    "ok": "Ok",
+    "inputRequired": "You must input your {requiredInput}",
+    "ageInputRequirement": "You must be between {minAge} and {maxAge} years old",
+    "weightInputRequirement": "You must weight between {minWeight} and {maxWeight}",
+    "kg": "kg",
+    "ml": "ml",
+    "lb": "lb",
+    "oz": "oz",
+    "dataPrivacy": "Your data never leaves your device."
 }

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hidroly/features/setup/domain/setup_constraints.dart';
@@ -41,16 +42,18 @@ class _SetupViewState extends ConsumerState<SetupView> {
             context: context, 
             builder: (context) {
               return AlertDialog(
-                title: Text('About your daily goal'),
+                title: Text('dailyGoalDisclaimerTitle'.tr()),
                 content: Text(
-                  'We\'ve set your daily goal to a maximum of ${_getWaterSuggestionUnitText(setupState.unit.first)} to keep things within our recommended range. For personalized advice, feel free to consult a healthcare professional.'
+                  'dailyGoalDisclaimerContent'.tr(
+                    namedArgs: {'suggestedAmount': _getWaterSuggestionUnitText(setupState.unit.first)}
+                  ),
                 ),
                 actions: [
                   TextButton(
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
-                    child: Text('I understand')
+                    child: Text('understand'.tr())
                   ),
                 ],
               );
@@ -64,12 +67,12 @@ class _SetupViewState extends ConsumerState<SetupView> {
           context: context, 
           builder: (context) {
             return AlertDialog(
-              title: Text('An error occurred'),
-              content: Text('Oops. An error occurred while saving your informations.'),
+              title: Text('errorOccurred'.tr()),
+              content: Text('setupError'.tr()),
               actions: [
                 TextButton(
                   onPressed: Navigator.of(context).pop, 
-                  child: Text('Ok'),
+                  child: Text('ok'.tr()),
                 ),
               ],
             );
@@ -93,8 +96,8 @@ class _SetupViewState extends ConsumerState<SetupView> {
                   const Spacer(flex: 2,),
 
                   HeaderText(
-                    title: 'Welcome',
-                    subtitle: 'Let\'s set up your profile to personalize your daily water goal.',
+                    title: 'welcome'.tr(),
+                    subtitle: 'setupSubtitle'.tr(),
                   ),
 
                   Form(
@@ -104,7 +107,7 @@ class _SetupViewState extends ConsumerState<SetupView> {
                       children: [
                         NumberInputFormField(
                           controller: ageTextController,
-                          label: 'Age',
+                          label: 'age'.tr(),
                           maxLength: 3,
                           validator: (value) {
                             final minAge = Age.minAge;
@@ -115,19 +118,21 @@ class _SetupViewState extends ConsumerState<SetupView> {
                             
                             switch(validationResult) {
                               case .noInput:
-                                return 'You must input your age';
+                                return 'inputRequired'.tr(namedArgs: {'requiredInput': 'age'.tr().toLowerCase()});
                               case .outOfBoundaries:
-                                return 'You must be between $minAge and $maxAge years old';
+                                return 'ageInputRequirement'.tr(
+                                  namedArgs: {'minAge': minAge.toString(), 'maxAge': maxAge.toString()},
+                                );
                               default: return null;
                             }
                           },
                         ),
                         NumberInputFormField(
                           controller: weightTextController,
-                          label: 'Weight',
+                          label: 'weight'.tr(),
                           suffix: unitSystem == UnitSystem.metric
-                            ? 'kg'
-                            : 'lbs',
+                            ? 'kg'.tr()
+                            : 'lb'.tr(),
                           maxLength: 3,
                           validator: (value) {
                             final minWeight = Weight.minWeight;
@@ -138,9 +143,11 @@ class _SetupViewState extends ConsumerState<SetupView> {
                             
                             switch(validationResult) {
                               case .noInput:
-                                return 'You must input your weight';
+                                return 'inputRequired'.tr(namedArgs: {'requiredInput': 'weight'.tr().toLowerCase()});
                               case .outOfBoundaries:
-                                return 'You must weight between $minWeight and $maxWeight';
+                                return 'weightInputRequirement'.tr(
+                                  namedArgs: {'minWeight': minWeight.toString(), 'maxWeight': maxWeight.toString()},
+                                );
                               default: return null;
                             }
                           },
@@ -148,11 +155,11 @@ class _SetupViewState extends ConsumerState<SetupView> {
                         SegmentedButton(
                           segments: [
                             ButtonSegment(
-                              label: Text('kg, ml'),
+                              label: Text('${'kg'.tr()}, ${'ml'.tr()}'),
                               value: UnitSystem.metric
                             ),
                             ButtonSegment(
-                              label: Text('lb, oz'),
+                              label: Text('${'lb'.tr()}, ${'oz'.tr()}'),
                               value: UnitSystem.imperial
                             ),
                           ], 
@@ -167,7 +174,7 @@ class _SetupViewState extends ConsumerState<SetupView> {
                     )
                   ),
 
-                  Text('Your data never leaves your device.'),
+                  Text('dataPrivacy'.tr()),
 
                   const Spacer(),
                 ],
@@ -202,7 +209,7 @@ class _SetupViewState extends ConsumerState<SetupView> {
 
   String _getWaterSuggestionUnitText(UnitSystem unit) {
     return unit == UnitSystem.metric
-      ? '${SetupConstraints.maxWaterSuggestionMl} ml'
-      : '${SetupConstraints.maxWaterSuggestionOz} oz';
+      ? '${SetupConstraints.maxWaterSuggestionMl} ${'ml'.tr()}'
+      : '${SetupConstraints.maxWaterSuggestionOz} ${'oz'.tr()}';
   }
 }
