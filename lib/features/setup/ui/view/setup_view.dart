@@ -35,7 +35,7 @@ class _SetupViewState extends ConsumerState<SetupView> {
     final unitSystem = setupState.unit.first;
 
     ref.listen(setupViewModelProvider, (previous, newState) async {
-      if(newState.setupStage == SetupStage.success) {
+      if((previous == null || previous.setupStage != .success) && newState.setupStage == .success) {
         if(newState.dailyGoalClamped) {
           // TODO: Support imperial
           showDialog(
