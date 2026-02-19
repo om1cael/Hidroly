@@ -22,10 +22,11 @@ class SetupViewModel extends _$SetupViewModel {
     );
   }
 
-  Future<void> completeSetup() async {
+  Future<void> completeSetup(String ageText, String weightText) async {
     if(state.setupStage != .idle) return;
 
     try {
+      updatePerson(ageText, weightText);
       final person = state.person;
 
       state = state.copyWith(setupStage: .processing);
@@ -44,6 +45,18 @@ class SetupViewModel extends _$SetupViewModel {
       log(e.toString(), error: e);
     }
   }
+
+  void updatePerson(String ageText, String weightText) {
+    int ageValue = int.tryParse(ageText) ?? 0;
+    int weightValue = int.tryParse(weightText) ?? 0;
+
+    final person = Person(
+      age: Age(ageValue), 
+      weight: _getWeight(weightValue),
+    );
+
+    state = state.copyWith(person: person);
+  }
   
   void setUnitSystem(UnitSystem selection) {
     state = state.copyWith(
@@ -58,9 +71,8 @@ class SetupViewModel extends _$SetupViewModel {
 
     try {
       final ageValue = int.tryParse(ageText) ?? 0;
-      final age = Age(ageValue);
+      Age(ageValue);
 
-      state = state.copyWith(person: Person(age: age, weight: state.person.weight));
       return .success;
     } on InvalidInputException {
       return .outOfBoundaries;
@@ -74,9 +86,8 @@ class SetupViewModel extends _$SetupViewModel {
 
     try {
       final weightValue = int.tryParse(weighText) ?? 0;
-      final weight = _getWeight(weightValue);
+      _getWeight(weightValue);
 
-      state = state.copyWith(person: Person(age: state.person.age, weight: weight));
       return .success;
     } on InvalidInputException {
       return .outOfBoundaries;
