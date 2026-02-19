@@ -13,22 +13,28 @@ class SetupViewModel extends _$SetupViewModel {
   @override 
   SetupState build() {
     return SetupState(
-      age: 0,
-      weight: 0,
       unit: {UnitSystem.metric},
     );
   }
 
-  void completeSetup(int age, int weightValue) async {
+  Future<void> completeSetup(int age, int weightValue) async {
     Weight weight = _getWeight(weightValue);
     final person = Person(age: age, weight: weight);
 
-    final setupResult = await ref.read(completeSetupUseCaseProvider)
-      .execute(person);
+    try {
+      state = state.copyWith(
+        isLoading: true,
+      );
 
-    state = state.copyWith(
-      dailyGoalClamped: setupResult.rawDailyGoal > setupResult.clampedGoal,
-    );
+      final setupResult = await ref.read(completeSetupUseCaseProvider)
+        .execute(person);
+
+      state = state.copyWith(
+        dailyGoalClamped: setupResult.rawDailyGoal > setupResult.clampedGoal,
+      );
+    } on Exception catch (e) {
+      print(e);
+    }
   }
 
   Weight _getWeight(int weightValue) {

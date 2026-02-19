@@ -9,6 +9,7 @@ abstract class SetupState with _$SetupState {
   const factory SetupState({
     required Set<UnitSystem> unit,
     @Default(false) bool dailyGoalClamped,
+    @Default(false) bool isLoading,
   }) = _SetupState;
 }
 

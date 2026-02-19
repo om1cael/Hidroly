@@ -150,17 +150,26 @@ class _SetupViewState extends ConsumerState<SetupView> {
         )
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          if(formKey.currentState == null || !formKey.currentState!.validate()) return;
-          
-          int age = int.parse(ageTextController.text);
-          int weight = int.parse(weightTextController.text);
+        onPressed: setupState.isLoading
+          ? null
+          : () {
+              if(formKey.currentState == null || !formKey.currentState!.validate()) {
+                return;
+              }
+              
+              int age = int.parse(ageTextController.text);
+              int weight = int.parse(weightTextController.text);
 
-          ref
-            .read(setupViewModelProvider.notifier)
-            .completeSetup(age, weight);
-        },
-        child: Icon(Icons.navigate_next),
+              ref
+                .read(setupViewModelProvider.notifier)
+                .completeSetup(age, weight);
+          },
+        child: setupState.isLoading
+          ? Transform.scale(
+            scale: .8,
+            child: CircularProgressIndicator()
+          )
+          : Icon(Icons.navigate_next),
       ),
     );
   }
