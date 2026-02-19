@@ -1,6 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hidroly/features/setup/domain/entities/person.dart';
-import 'package:hidroly/features/setup/domain/setup_constraints.dart';
 import 'package:hidroly/features/setup/domain/setup_stage.dart';
 import 'package:hidroly/features/setup/domain/unit_systems.dart';
 
@@ -15,14 +14,4 @@ abstract class SetupState with _$SetupState {
     String? errorText,
     @Default(false) bool dailyGoalClamped,
   }) = _SetupState;
-}
-
-extension SetupStateX on SetupState {
-  int get minWeight => unit.first == UnitSystem.metric
-     ? SetupConstraints.minWeightKg
-     : SetupConstraints.minWeightLb;
-
-  int get maxWeight => unit.first == UnitSystem.metric
-     ? SetupConstraints.maxWeightKg
-     : SetupConstraints.maxWeightLb;
 }
