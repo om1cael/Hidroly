@@ -9,6 +9,7 @@ environment:
 dependencies:
   drift: ^2.31.0
   drift_flutter: ^0.2.8
+  easy_localization: ^3.0.8
   flutter:
     sdk: flutter
   flutter_riverpod: ^3.2.1
