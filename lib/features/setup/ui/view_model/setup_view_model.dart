@@ -1,5 +1,6 @@
 import 'package:hidroly/features/setup/domain/entities/person.dart';
 import 'package:hidroly/features/setup/domain/setup_constraints.dart';
+import 'package:hidroly/features/setup/domain/setup_result.dart';
 import 'package:hidroly/features/setup/domain/unit_systems.dart';
 import 'package:hidroly/features/setup/domain/usecases/complete_setup_use_case.dart';
 import 'package:hidroly/features/setup/domain/value_objects/weight.dart';
@@ -22,18 +23,20 @@ class SetupViewModel extends _$SetupViewModel {
     final person = Person(age: age, weight: weight);
 
     try {
-      state = state.copyWith(
-        isLoading: true,
-      );
+      state = state.copyWith(isLoading: true);
 
       final setupResult = await ref.read(completeSetupUseCaseProvider)
         .execute(person);
 
       state = state.copyWith(
         dailyGoalClamped: setupResult.rawDailyGoal > setupResult.clampedGoal,
+        setupResult: SetupResult.success,
       );
     } on Exception catch (e) {
-      print(e);
+      state = state.copyWith(
+        setupResult: SetupResult.error,
+        errorText: e.toString(),
+      );
     }
   }
 

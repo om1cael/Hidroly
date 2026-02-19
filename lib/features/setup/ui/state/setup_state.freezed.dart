@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$SetupState {
 
- Set<UnitSystem> get unit; bool get dailyGoalClamped; bool get isLoading;
+ SetupResult get setupResult; Set<UnitSystem> get unit; String? get errorText; bool get dailyGoalClamped; bool get isLoading;
 /// Create a copy of SetupState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $SetupStateCopyWith<SetupState> get copyWith => _$SetupStateCopyWithImpl<SetupSt
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SetupState&&const DeepCollectionEquality().equals(other.unit, unit)&&(identical(other.dailyGoalClamped, dailyGoalClamped) || other.dailyGoalClamped == dailyGoalClamped)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SetupState&&(identical(other.setupResult, setupResult) || other.setupResult == setupResult)&&const DeepCollectionEquality().equals(other.unit, unit)&&(identical(other.errorText, errorText) || other.errorText == errorText)&&(identical(other.dailyGoalClamped, dailyGoalClamped) || other.dailyGoalClamped == dailyGoalClamped)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(unit),dailyGoalClamped,isLoading);
+int get hashCode => Object.hash(runtimeType,setupResult,const DeepCollectionEquality().hash(unit),errorText,dailyGoalClamped,isLoading);
 
 @override
 String toString() {
-  return 'SetupState(unit: $unit, dailyGoalClamped: $dailyGoalClamped, isLoading: $isLoading)';
+  return 'SetupState(setupResult: $setupResult, unit: $unit, errorText: $errorText, dailyGoalClamped: $dailyGoalClamped, isLoading: $isLoading)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $SetupStateCopyWith<$Res>  {
   factory $SetupStateCopyWith(SetupState value, $Res Function(SetupState) _then) = _$SetupStateCopyWithImpl;
 @useResult
 $Res call({
- Set<UnitSystem> unit, bool dailyGoalClamped, bool isLoading
+ SetupResult setupResult, Set<UnitSystem> unit, String? errorText, bool dailyGoalClamped, bool isLoading
 });
 
 
@@ -62,10 +62,12 @@ class _$SetupStateCopyWithImpl<$Res>
 
 /// Create a copy of SetupState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? unit = null,Object? dailyGoalClamped = null,Object? isLoading = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? setupResult = null,Object? unit = null,Object? errorText = freezed,Object? dailyGoalClamped = null,Object? isLoading = null,}) {
   return _then(_self.copyWith(
-unit: null == unit ? _self.unit : unit // ignore: cast_nullable_to_non_nullable
-as Set<UnitSystem>,dailyGoalClamped: null == dailyGoalClamped ? _self.dailyGoalClamped : dailyGoalClamped // ignore: cast_nullable_to_non_nullable
+setupResult: null == setupResult ? _self.setupResult : setupResult // ignore: cast_nullable_to_non_nullable
+as SetupResult,unit: null == unit ? _self.unit : unit // ignore: cast_nullable_to_non_nullable
+as Set<UnitSystem>,errorText: freezed == errorText ? _self.errorText : errorText // ignore: cast_nullable_to_non_nullable
+as String?,dailyGoalClamped: null == dailyGoalClamped ? _self.dailyGoalClamped : dailyGoalClamped // ignore: cast_nullable_to_non_nullable
 as bool,isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
 as bool,
   ));
@@ -152,10 +154,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( Set<UnitSystem> unit,  bool dailyGoalClamped,  bool isLoading)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( SetupResult setupResult,  Set<UnitSystem> unit,  String? errorText,  bool dailyGoalClamped,  bool isLoading)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _SetupState() when $default != null:
-return $default(_that.unit,_that.dailyGoalClamped,_that.isLoading);case _:
+return $default(_that.setupResult,_that.unit,_that.errorText,_that.dailyGoalClamped,_that.isLoading);case _:
   return orElse();
 
 }
@@ -173,10 +175,10 @@ return $default(_that.unit,_that.dailyGoalClamped,_that.isLoading);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( Set<UnitSystem> unit,  bool dailyGoalClamped,  bool isLoading)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( SetupResult setupResult,  Set<UnitSystem> unit,  String? errorText,  bool dailyGoalClamped,  bool isLoading)  $default,) {final _that = this;
 switch (_that) {
 case _SetupState():
-return $default(_that.unit,_that.dailyGoalClamped,_that.isLoading);case _:
+return $default(_that.setupResult,_that.unit,_that.errorText,_that.dailyGoalClamped,_that.isLoading);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -193,10 +195,10 @@ return $default(_that.unit,_that.dailyGoalClamped,_that.isLoading);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( Set<UnitSystem> unit,  bool dailyGoalClamped,  bool isLoading)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( SetupResult setupResult,  Set<UnitSystem> unit,  String? errorText,  bool dailyGoalClamped,  bool isLoading)?  $default,) {final _that = this;
 switch (_that) {
 case _SetupState() when $default != null:
-return $default(_that.unit,_that.dailyGoalClamped,_that.isLoading);case _:
+return $default(_that.setupResult,_that.unit,_that.errorText,_that.dailyGoalClamped,_that.isLoading);case _:
   return null;
 
 }
@@ -208,9 +210,10 @@ return $default(_that.unit,_that.dailyGoalClamped,_that.isLoading);case _:
 
 
 class _SetupState implements SetupState {
-  const _SetupState({required final  Set<UnitSystem> unit, this.dailyGoalClamped = false, this.isLoading = false}): _unit = unit;
+  const _SetupState({this.setupResult = SetupResult.idle, required final  Set<UnitSystem> unit, this.errorText, this.dailyGoalClamped = false, this.isLoading = false}): _unit = unit;
   
 
+@override@JsonKey() final  SetupResult setupResult;
  final  Set<UnitSystem> _unit;
 @override Set<UnitSystem> get unit {
   if (_unit is EqualUnmodifiableSetView) return _unit;
@@ -218,6 +221,7 @@ class _SetupState implements SetupState {
   return EqualUnmodifiableSetView(_unit);
 }
 
+@override final  String? errorText;
 @override@JsonKey() final  bool dailyGoalClamped;
 @override@JsonKey() final  bool isLoading;
 
@@ -231,16 +235,16 @@ _$SetupStateCopyWith<_SetupState> get copyWith => __$SetupStateCopyWithImpl<_Set
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SetupState&&const DeepCollectionEquality().equals(other._unit, _unit)&&(identical(other.dailyGoalClamped, dailyGoalClamped) || other.dailyGoalClamped == dailyGoalClamped)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SetupState&&(identical(other.setupResult, setupResult) || other.setupResult == setupResult)&&const DeepCollectionEquality().equals(other._unit, _unit)&&(identical(other.errorText, errorText) || other.errorText == errorText)&&(identical(other.dailyGoalClamped, dailyGoalClamped) || other.dailyGoalClamped == dailyGoalClamped)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_unit),dailyGoalClamped,isLoading);
+int get hashCode => Object.hash(runtimeType,setupResult,const DeepCollectionEquality().hash(_unit),errorText,dailyGoalClamped,isLoading);
 
 @override
 String toString() {
-  return 'SetupState(unit: $unit, dailyGoalClamped: $dailyGoalClamped, isLoading: $isLoading)';
+  return 'SetupState(setupResult: $setupResult, unit: $unit, errorText: $errorText, dailyGoalClamped: $dailyGoalClamped, isLoading: $isLoading)';
 }
 
 
@@ -251,7 +255,7 @@ abstract mixin class _$SetupStateCopyWith<$Res> implements $SetupStateCopyWith<$
   factory _$SetupStateCopyWith(_SetupState value, $Res Function(_SetupState) _then) = __$SetupStateCopyWithImpl;
 @override @useResult
 $Res call({
- Set<UnitSystem> unit, bool dailyGoalClamped, bool isLoading
+ SetupResult setupResult, Set<UnitSystem> unit, String? errorText, bool dailyGoalClamped, bool isLoading
 });
 
 
@@ -268,10 +272,12 @@ class __$SetupStateCopyWithImpl<$Res>
 
 /// Create a copy of SetupState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? unit = null,Object? dailyGoalClamped = null,Object? isLoading = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? setupResult = null,Object? unit = null,Object? errorText = freezed,Object? dailyGoalClamped = null,Object? isLoading = null,}) {
   return _then(_SetupState(
-unit: null == unit ? _self._unit : unit // ignore: cast_nullable_to_non_nullable
-as Set<UnitSystem>,dailyGoalClamped: null == dailyGoalClamped ? _self.dailyGoalClamped : dailyGoalClamped // ignore: cast_nullable_to_non_nullable
+setupResult: null == setupResult ? _self.setupResult : setupResult // ignore: cast_nullable_to_non_nullable
+as SetupResult,unit: null == unit ? _self._unit : unit // ignore: cast_nullable_to_non_nullable
+as Set<UnitSystem>,errorText: freezed == errorText ? _self.errorText : errorText // ignore: cast_nullable_to_non_nullable
+as String?,dailyGoalClamped: null == dailyGoalClamped ? _self.dailyGoalClamped : dailyGoalClamped // ignore: cast_nullable_to_non_nullable
 as bool,isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
 as bool,
   ));
