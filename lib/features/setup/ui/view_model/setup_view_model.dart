@@ -27,7 +27,7 @@ class SetupViewModel extends _$SetupViewModel {
 
       Age age = Age(ageValue);
       Weight weight = _getWeight(weightValue);
-      
+
       final person = Person(age: age, weight: weight);
 
       state = state.copyWith(setupStage: .processing);
@@ -47,11 +47,11 @@ class SetupViewModel extends _$SetupViewModel {
   }
 
   Weight _getWeight(int weightValue) {
-    Weight weight = Weight(kg: weightValue);
-    
-    if(state.unit.first == UnitSystem.imperial) {
-      weight = Weight.fromLb(weightValue);
-    }
+    Weight weight;
+
+    state.unit.first == UnitSystem.metric
+      ? weight = Weight(kg: weightValue)
+      : weight = Weight.fromLb(weightValue);
 
     return weight;
   }
