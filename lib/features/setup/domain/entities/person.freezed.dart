@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Person {
 
- int get age; Weight get weight;
+ Age get age; Weight get weight;
 /// Create a copy of Person
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -45,7 +45,7 @@ abstract mixin class $PersonCopyWith<$Res>  {
   factory $PersonCopyWith(Person value, $Res Function(Person) _then) = _$PersonCopyWithImpl;
 @useResult
 $Res call({
- int age, Weight weight
+ Age age, Weight weight
 });
 
 
@@ -65,7 +65,7 @@ class _$PersonCopyWithImpl<$Res>
 @pragma('vm:prefer-inline') @override $Res call({Object? age = null,Object? weight = null,}) {
   return _then(Person(
 age: null == age ? _self.age : age // ignore: cast_nullable_to_non_nullable
-as int,weight: null == weight ? _self.weight : weight // ignore: cast_nullable_to_non_nullable
+as Age,weight: null == weight ? _self.weight : weight // ignore: cast_nullable_to_non_nullable
 as Weight,
   ));
 }

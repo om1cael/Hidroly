@@ -2,6 +2,7 @@ import 'package:hidroly/features/setup/domain/entities/person.dart';
 import 'package:hidroly/features/setup/domain/setup_constraints.dart';
 import 'package:hidroly/features/setup/domain/unit_systems.dart';
 import 'package:hidroly/features/setup/domain/usecases/complete_setup_use_case.dart';
+import 'package:hidroly/features/setup/domain/value_objects/age.dart';
 import 'package:hidroly/features/setup/domain/value_objects/weight.dart';
 import 'package:hidroly/features/setup/ui/state/setup_state.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -21,10 +22,12 @@ class SetupViewModel extends _$SetupViewModel {
     if(state.setupStage != .idle) return;
 
     try {
-      int age = int.tryParse(ageText) ?? 0;
+      int ageValue = int.tryParse(ageText) ?? 0;
       int weightValue = int.tryParse(weightText) ?? 0;
 
+      Age age = Age(ageValue);
       Weight weight = _getWeight(weightValue);
+      
       final person = Person(age: age, weight: weight);
 
       state = state.copyWith(setupStage: .processing);
