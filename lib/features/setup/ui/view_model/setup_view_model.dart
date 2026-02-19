@@ -15,7 +15,7 @@ class SetupViewModel extends _$SetupViewModel {
   @override 
   SetupState build() {
     return SetupState(
-      person: Person(age: Age(13), weight: Weight(kg: 60)),
+      person: Person(age: Age(18), weight: Weight(kg: 65)),
       unit: {UnitSystem.metric},
     );
   }
@@ -47,16 +47,6 @@ class SetupViewModel extends _$SetupViewModel {
       );
     }
   }
-
-  Weight _getWeight(int weightValue) {
-    Weight weight;
-
-    state.unit.first == UnitSystem.metric
-      ? weight = Weight(kg: weightValue)
-      : weight = Weight.fromLb(weightValue);
-
-    return weight;
-  }
   
   void setUnitSystem(UnitSystem selection) {
     state = state.copyWith(
@@ -80,14 +70,29 @@ class SetupViewModel extends _$SetupViewModel {
     }
   }
 
-  String? validateWeight(String? weighText, String emptyErrorText, String errorText) {
+  InputStatus validateWeight(String? weighText) {
     if(weighText == null || weighText.isEmpty) {
-      return emptyErrorText;
+      return .noInput;
     }
 
-    int? weight = int.tryParse(weighText);
-    if(weight == null) return errorText;
+    try {
+      final weightValue = int.tryParse(weighText) ?? 0;
+      final weight = _getWeight(weightValue);
 
-    return (weight < state.minWeight || weight > state.maxWeight) ? errorText : null;
+      state = state.copyWith(person: Person(age: state.person.age, weight: weight));
+      return .success;
+    } on InvalidInputException {
+      return .outOfBoundaries;
+    }
+  }
+
+  Weight _getWeight(int weightValue) {
+    Weight weight;
+
+    state.unit.first == UnitSystem.metric
+      ? weight = Weight(kg: weightValue)
+      : weight = Weight.fromLb(weightValue);
+
+    return weight;
   }
 }

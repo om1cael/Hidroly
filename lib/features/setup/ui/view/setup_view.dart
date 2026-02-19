@@ -4,7 +4,7 @@ import 'package:hidroly/features/setup/domain/setup_constraints.dart';
 import 'package:hidroly/features/setup/domain/setup_stage.dart';
 import 'package:hidroly/features/setup/domain/unit_systems.dart';
 import 'package:hidroly/features/setup/domain/value_objects/age.dart';
-import 'package:hidroly/features/setup/ui/state/setup_state.dart';
+import 'package:hidroly/features/setup/domain/value_objects/weight.dart';
 import 'package:hidroly/features/setup/ui/view/widgets/header_text.dart';
 import 'package:hidroly/features/setup/ui/view/widgets/number_input_form_field.dart';
 import 'package:hidroly/features/setup/ui/view_model/setup_view_model.dart';
@@ -129,16 +129,19 @@ class _SetupViewState extends ConsumerState<SetupView> {
                             : 'lbs',
                           maxLength: 3,
                           validator: (value) {
-                            final minWeight = setupState.minWeight;
-                            final maxWeight = setupState.maxWeight;
+                            final minWeight = Weight.minWeight;
+                            final maxWeight = Weight.maxWeight;
 
-                            return ref
-                              .read(setupViewModelProvider.notifier)
-                              .validateWeight(
-                                value, 
-                                'You must input your weight.',
-                                'Weight must be between $minWeight and $maxWeight.'
-                              );
+                            final validationResult = ref.read(setupViewModelProvider.notifier)
+                              .validateWeight(value);
+                            
+                            switch(validationResult) {
+                              case .noInput:
+                                return 'You must input your weight';
+                              case .outOfBoundaries:
+                                return 'You must weight between $minWeight and $maxWeight';
+                              default: return null;
+                            }
                           },
                         ),
                         SegmentedButton(
