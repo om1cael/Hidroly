@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hidroly/features/setup/domain/setup_constraints.dart';
 import 'package:hidroly/features/setup/domain/setup_stage.dart';
 import 'package:hidroly/features/setup/domain/unit_systems.dart';
+import 'package:hidroly/features/setup/domain/value_objects/age.dart';
 import 'package:hidroly/features/setup/ui/state/setup_state.dart';
 import 'package:hidroly/features/setup/ui/view/widgets/header_text.dart';
 import 'package:hidroly/features/setup/ui/view/widgets/number_input_form_field.dart';
@@ -105,16 +106,19 @@ class _SetupViewState extends ConsumerState<SetupView> {
                           label: 'Age',
                           maxLength: 3,
                           validator: (value) {
-                            final minAge = SetupConstraints.minAge;
-                            final maxAge = SetupConstraints.maxAge;
+                            final minAge = Age.minAge;
+                            final maxAge = Age.maxAge;
 
-                            return ref
-                              .read(setupViewModelProvider.notifier)
-                              .validateAge(
-                                value, 
-                                'You must input your age.',
-                                'You must be between $minAge and $maxAge years old.'
-                              );
+                            final validationResult = ref.read(setupViewModelProvider.notifier)
+                              .validateAge(value);
+                            
+                            switch(validationResult) {
+                              case .noInput:
+                                return 'You must input your age';
+                              case .outOfBoundaries:
+                                return 'You must be between $minAge and $maxAge years old';
+                              default: return null;
+                            }
                           },
                         ),
                         NumberInputFormField(

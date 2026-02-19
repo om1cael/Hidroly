@@ -1,9 +1,10 @@
 import 'package:hidroly/features/setup/domain/entities/person.dart';
-import 'package:hidroly/features/setup/domain/setup_constraints.dart';
+import 'package:hidroly/features/setup/domain/exceptions/invalid_input_exception.dart';
 import 'package:hidroly/features/setup/domain/unit_systems.dart';
 import 'package:hidroly/features/setup/domain/usecases/complete_setup_use_case.dart';
 import 'package:hidroly/features/setup/domain/value_objects/age.dart';
 import 'package:hidroly/features/setup/domain/value_objects/weight.dart';
+import 'package:hidroly/features/setup/ui/enums/input_status.dart';
 import 'package:hidroly/features/setup/ui/state/setup_state.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -14,6 +15,7 @@ class SetupViewModel extends _$SetupViewModel {
   @override 
   SetupState build() {
     return SetupState(
+      person: Person(age: Age(13), weight: Weight(kg: 60)),
       unit: {UnitSystem.metric},
     );
   }
@@ -62,18 +64,20 @@ class SetupViewModel extends _$SetupViewModel {
     );
   }
 
-  String? validateAge(String? ageText, String emptyErrorText, String errorText) {
+  InputStatus validateAge(String? ageText) {
     if(ageText == null || ageText.isEmpty) {
-      return emptyErrorText;
+      return .noInput;
     }
 
-    final minAge = SetupConstraints.minAge;
-    final maxAge = SetupConstraints.maxAge;
+    try {
+      final ageValue = int.tryParse(ageText) ?? 0;
+      final age = Age(ageValue);
 
-    int? age = int.tryParse(ageText);
-    if(age == null) return errorText;
-
-    return (age < minAge || age > maxAge) ? errorText : null;
+      state = state.copyWith(person: Person(age: age, weight: state.person.weight));
+      return .success;
+    } on InvalidInputException {
+      return .outOfBoundaries;
+    }
   }
 
   String? validateWeight(String? weighText, String emptyErrorText, String errorText) {
