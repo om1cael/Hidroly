@@ -185,7 +185,7 @@ class _SetupViewState extends ConsumerState<SetupView> {
 
               ref
                 .read(setupViewModelProvider.notifier)
-                .completeSetup(ageTextController.text, weightTextController.text);
+                .completeSetup();
           },
         child: setupState.setupStage == .success
           ? Icon(Icons.check)

@@ -20,17 +20,11 @@ class SetupViewModel extends _$SetupViewModel {
     );
   }
 
-  Future<void> completeSetup(String ageText, String weightText) async {
+  Future<void> completeSetup() async {
     if(state.setupStage != .idle) return;
 
     try {
-      int ageValue = int.tryParse(ageText) ?? 0;
-      int weightValue = int.tryParse(weightText) ?? 0;
-
-      Age age = Age(ageValue);
-      Weight weight = _getWeight(weightValue);
-
-      final person = Person(age: age, weight: weight);
+      final person = state.person;
 
       state = state.copyWith(setupStage: .processing);
       final setupResult = await ref.read(completeSetupUseCaseProvider)
