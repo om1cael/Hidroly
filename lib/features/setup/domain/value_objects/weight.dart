@@ -1,4 +1,4 @@
-import 'package:hidroly/features/setup/domain/exceptions/invalid_weight_exception.dart';
+import 'package:hidroly/features/setup/domain/exceptions/invalid_input_exception.dart';
 
 class Weight {
   final int kg;
@@ -10,7 +10,7 @@ class Weight {
 
   factory Weight.kg(int kg) {
     if(kg < minWeight || kg > maxWeight) {
-      throw InvalidWeightException();
+      throw InvalidInputException();
     }
 
     return Weight(kg: kg);
