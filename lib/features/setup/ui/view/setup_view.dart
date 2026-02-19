@@ -43,7 +43,7 @@ class _SetupViewState extends ConsumerState<SetupView> {
               return AlertDialog(
                 title: Text('About your daily goal'),
                 content: Text(
-                  'We\'ve set your daily goal to a maximum of ${SetupConstraints.maxWaterSuggestionMl} ${_getWaterUnitText(setupState.unit.first)} to keep things within our recommended range. For personalized advice, feel free to consult a healthcare professional.'
+                  'We\'ve set your daily goal to a maximum of ${_getWaterSuggestionUnitText(setupState.unit.first)} to keep things within our recommended range. For personalized advice, feel free to consult a healthcare professional.'
                 ),
                 actions: [
                   TextButton(
@@ -198,9 +198,9 @@ class _SetupViewState extends ConsumerState<SetupView> {
     );
   }
 
-  String _getWaterUnitText(UnitSystem unit) {
+  String _getWaterSuggestionUnitText(UnitSystem unit) {
     return unit == UnitSystem.metric
-      ? 'ml'
-      : 'oz';
+      ? '${SetupConstraints.maxWaterSuggestionMl} ml'
+      : '${SetupConstraints.maxWaterSuggestionOz} oz';
   }
 }
