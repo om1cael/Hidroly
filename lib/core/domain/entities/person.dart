@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:hidroly/features/setup/domain/value_objects/age.dart';
-import 'package:hidroly/features/setup/domain/value_objects/weight.dart';
+import 'package:hidroly/core/domain/value_objects/age.dart';
+import 'package:hidroly/core/domain/value_objects/weight.dart';
 
 part 'person.freezed.dart';
 

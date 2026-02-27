@@ -1,4 +1,4 @@
-import 'package:hidroly/features/setup/domain/exceptions/invalid_input_exception.dart';
+import 'package:hidroly/core/domain/exceptions/invalid_input_exception.dart';
 
 class Weight {
   final int kg;

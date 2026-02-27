@@ -1,8 +1,8 @@
 import 'package:hidroly/core/data/repositories/day_repository_impl.dart';
 import 'package:hidroly/core/domain/entities/day.dart';
+import 'package:hidroly/core/domain/entities/person.dart';
 import 'package:hidroly/core/domain/repositories/day_repository.dart';
-import 'package:hidroly/features/setup/domain/entities/person.dart';
-import 'package:hidroly/features/setup/domain/setup_constraints.dart';
+import 'package:hidroly/core/domain/hydration_constraints.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'complete_setup_use_case.g.dart';
@@ -21,8 +21,8 @@ class CompleteSetupUseCase {
   Future<({int rawDailyGoal, int clampedGoal})> execute(Person person) async {
     final rawDailyGoal = person.calculateHydrationGoalMl();
     final clampedGoal = rawDailyGoal.clamp(
-      SetupConstraints.minWaterSuggestionMl, 
-      SetupConstraints.maxWaterSuggestionMl,
+      HydrationConstraints.minWaterSuggestionMl, 
+      HydrationConstraints.maxWaterSuggestionMl,
     );
 
     final day = Day(

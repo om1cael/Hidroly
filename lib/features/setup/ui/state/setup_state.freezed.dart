@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$SetupState {
 
- Person get person; SetupStage get setupStage; Set<UnitSystem> get unit; String? get errorText; bool get dailyGoalClamped;
+ ProcessStage get stage; bool get dailyGoalClamped;
 /// Create a copy of SetupState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $SetupStateCopyWith<SetupState> get copyWith => _$SetupStateCopyWithImpl<SetupSt
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SetupState&&(identical(other.person, person) || other.person == person)&&(identical(other.setupStage, setupStage) || other.setupStage == setupStage)&&const DeepCollectionEquality().equals(other.unit, unit)&&(identical(other.errorText, errorText) || other.errorText == errorText)&&(identical(other.dailyGoalClamped, dailyGoalClamped) || other.dailyGoalClamped == dailyGoalClamped));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SetupState&&(identical(other.stage, stage) || other.stage == stage)&&(identical(other.dailyGoalClamped, dailyGoalClamped) || other.dailyGoalClamped == dailyGoalClamped));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,person,setupStage,const DeepCollectionEquality().hash(unit),errorText,dailyGoalClamped);
+int get hashCode => Object.hash(runtimeType,stage,dailyGoalClamped);
 
 @override
 String toString() {
-  return 'SetupState(person: $person, setupStage: $setupStage, unit: $unit, errorText: $errorText, dailyGoalClamped: $dailyGoalClamped)';
+  return 'SetupState(stage: $stage, dailyGoalClamped: $dailyGoalClamped)';
 }
 
 
@@ -45,11 +45,11 @@ abstract mixin class $SetupStateCopyWith<$Res>  {
   factory $SetupStateCopyWith(SetupState value, $Res Function(SetupState) _then) = _$SetupStateCopyWithImpl;
 @useResult
 $Res call({
- Person person, SetupStage setupStage, Set<UnitSystem> unit, String? errorText, bool dailyGoalClamped
+ ProcessStage stage, bool dailyGoalClamped
 });
 
 
-$PersonCopyWith<$Res> get person;
+
 
 }
 /// @nodoc
@@ -62,26 +62,14 @@ class _$SetupStateCopyWithImpl<$Res>
 
 /// Create a copy of SetupState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? person = null,Object? setupStage = null,Object? unit = null,Object? errorText = freezed,Object? dailyGoalClamped = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? stage = null,Object? dailyGoalClamped = null,}) {
   return _then(_self.copyWith(
-person: null == person ? _self.person : person // ignore: cast_nullable_to_non_nullable
-as Person,setupStage: null == setupStage ? _self.setupStage : setupStage // ignore: cast_nullable_to_non_nullable
-as SetupStage,unit: null == unit ? _self.unit : unit // ignore: cast_nullable_to_non_nullable
-as Set<UnitSystem>,errorText: freezed == errorText ? _self.errorText : errorText // ignore: cast_nullable_to_non_nullable
-as String?,dailyGoalClamped: null == dailyGoalClamped ? _self.dailyGoalClamped : dailyGoalClamped // ignore: cast_nullable_to_non_nullable
+stage: null == stage ? _self.stage : stage // ignore: cast_nullable_to_non_nullable
+as ProcessStage,dailyGoalClamped: null == dailyGoalClamped ? _self.dailyGoalClamped : dailyGoalClamped // ignore: cast_nullable_to_non_nullable
 as bool,
   ));
 }
-/// Create a copy of SetupState
-/// with the given fields replaced by the non-null parameter values.
-@override
-@pragma('vm:prefer-inline')
-$PersonCopyWith<$Res> get person {
-  
-  return $PersonCopyWith<$Res>(_self.person, (value) {
-    return _then(_self.copyWith(person: value));
-  });
-}
+
 }
 
 
@@ -163,10 +151,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( Person person,  SetupStage setupStage,  Set<UnitSystem> unit,  String? errorText,  bool dailyGoalClamped)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( ProcessStage stage,  bool dailyGoalClamped)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _SetupState() when $default != null:
-return $default(_that.person,_that.setupStage,_that.unit,_that.errorText,_that.dailyGoalClamped);case _:
+return $default(_that.stage,_that.dailyGoalClamped);case _:
   return orElse();
 
 }
@@ -184,10 +172,10 @@ return $default(_that.person,_that.setupStage,_that.unit,_that.errorText,_that.d
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( Person person,  SetupStage setupStage,  Set<UnitSystem> unit,  String? errorText,  bool dailyGoalClamped)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( ProcessStage stage,  bool dailyGoalClamped)  $default,) {final _that = this;
 switch (_that) {
 case _SetupState():
-return $default(_that.person,_that.setupStage,_that.unit,_that.errorText,_that.dailyGoalClamped);case _:
+return $default(_that.stage,_that.dailyGoalClamped);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -204,10 +192,10 @@ return $default(_that.person,_that.setupStage,_that.unit,_that.errorText,_that.d
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( Person person,  SetupStage setupStage,  Set<UnitSystem> unit,  String? errorText,  bool dailyGoalClamped)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( ProcessStage stage,  bool dailyGoalClamped)?  $default,) {final _that = this;
 switch (_that) {
 case _SetupState() when $default != null:
-return $default(_that.person,_that.setupStage,_that.unit,_that.errorText,_that.dailyGoalClamped);case _:
+return $default(_that.stage,_that.dailyGoalClamped);case _:
   return null;
 
 }
@@ -219,19 +207,10 @@ return $default(_that.person,_that.setupStage,_that.unit,_that.errorText,_that.d
 
 
 class _SetupState implements SetupState {
-  const _SetupState({required this.person, this.setupStage = SetupStage.idle, required final  Set<UnitSystem> unit, this.errorText, this.dailyGoalClamped = false}): _unit = unit;
+  const _SetupState({this.stage = ProcessStage.idle, this.dailyGoalClamped = false});
   
 
-@override final  Person person;
-@override@JsonKey() final  SetupStage setupStage;
- final  Set<UnitSystem> _unit;
-@override Set<UnitSystem> get unit {
-  if (_unit is EqualUnmodifiableSetView) return _unit;
-  // ignore: implicit_dynamic_type
-  return EqualUnmodifiableSetView(_unit);
-}
-
-@override final  String? errorText;
+@override@JsonKey() final  ProcessStage stage;
 @override@JsonKey() final  bool dailyGoalClamped;
 
 /// Create a copy of SetupState
@@ -244,16 +223,16 @@ _$SetupStateCopyWith<_SetupState> get copyWith => __$SetupStateCopyWithImpl<_Set
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SetupState&&(identical(other.person, person) || other.person == person)&&(identical(other.setupStage, setupStage) || other.setupStage == setupStage)&&const DeepCollectionEquality().equals(other._unit, _unit)&&(identical(other.errorText, errorText) || other.errorText == errorText)&&(identical(other.dailyGoalClamped, dailyGoalClamped) || other.dailyGoalClamped == dailyGoalClamped));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SetupState&&(identical(other.stage, stage) || other.stage == stage)&&(identical(other.dailyGoalClamped, dailyGoalClamped) || other.dailyGoalClamped == dailyGoalClamped));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,person,setupStage,const DeepCollectionEquality().hash(_unit),errorText,dailyGoalClamped);
+int get hashCode => Object.hash(runtimeType,stage,dailyGoalClamped);
 
 @override
 String toString() {
-  return 'SetupState(person: $person, setupStage: $setupStage, unit: $unit, errorText: $errorText, dailyGoalClamped: $dailyGoalClamped)';
+  return 'SetupState(stage: $stage, dailyGoalClamped: $dailyGoalClamped)';
 }
 
 
@@ -264,11 +243,11 @@ abstract mixin class _$SetupStateCopyWith<$Res> implements $SetupStateCopyWith<$
   factory _$SetupStateCopyWith(_SetupState value, $Res Function(_SetupState) _then) = __$SetupStateCopyWithImpl;
 @override @useResult
 $Res call({
- Person person, SetupStage setupStage, Set<UnitSystem> unit, String? errorText, bool dailyGoalClamped
+ ProcessStage stage, bool dailyGoalClamped
 });
 
 
-@override $PersonCopyWith<$Res> get person;
+
 
 }
 /// @nodoc
@@ -281,27 +260,15 @@ class __$SetupStateCopyWithImpl<$Res>
 
 /// Create a copy of SetupState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? person = null,Object? setupStage = null,Object? unit = null,Object? errorText = freezed,Object? dailyGoalClamped = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? stage = null,Object? dailyGoalClamped = null,}) {
   return _then(_SetupState(
-person: null == person ? _self.person : person // ignore: cast_nullable_to_non_nullable
-as Person,setupStage: null == setupStage ? _self.setupStage : setupStage // ignore: cast_nullable_to_non_nullable
-as SetupStage,unit: null == unit ? _self._unit : unit // ignore: cast_nullable_to_non_nullable
-as Set<UnitSystem>,errorText: freezed == errorText ? _self.errorText : errorText // ignore: cast_nullable_to_non_nullable
-as String?,dailyGoalClamped: null == dailyGoalClamped ? _self.dailyGoalClamped : dailyGoalClamped // ignore: cast_nullable_to_non_nullable
+stage: null == stage ? _self.stage : stage // ignore: cast_nullable_to_non_nullable
+as ProcessStage,dailyGoalClamped: null == dailyGoalClamped ? _self.dailyGoalClamped : dailyGoalClamped // ignore: cast_nullable_to_non_nullable
 as bool,
   ));
 }
 
-/// Create a copy of SetupState
-/// with the given fields replaced by the non-null parameter values.
-@override
-@pragma('vm:prefer-inline')
-$PersonCopyWith<$Res> get person {
-  
-  return $PersonCopyWith<$Res>(_self.person, (value) {
-    return _then(_self.copyWith(person: value));
-  });
-}
+
 }
 
 // dart format on

@@ -1,13 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hidroly/features/setup/domain/setup_constraints.dart';
-import 'package:hidroly/features/setup/domain/setup_stage.dart';
-import 'package:hidroly/features/setup/domain/unit_systems.dart';
-import 'package:hidroly/features/setup/domain/value_objects/age.dart';
-import 'package:hidroly/features/setup/domain/value_objects/weight.dart';
+import 'package:hidroly/core/ui/view/hydration_form_view.dart';
+import 'package:hidroly/core/ui/view_model/hydration_form_view_model.dart';
+import 'package:hidroly/core/domain/hydration_constraints.dart';
+import 'package:hidroly/core/domain/enums/unit_systems.dart';
 import 'package:hidroly/features/setup/ui/view/widgets/header_text.dart';
-import 'package:hidroly/features/setup/ui/view/widgets/number_input_form_field.dart';
 import 'package:hidroly/features/setup/ui/view_model/setup_view_model.dart';
 
 class SetupView extends ConsumerStatefulWidget {
@@ -32,11 +30,11 @@ class _SetupViewState extends ConsumerState<SetupView> {
 
   @override
   Widget build(BuildContext context) {
-    final setupState = ref.watch(setupViewModelProvider);
-    final unitSystem = setupState.unit.first;
+    final state = ref.watch(setupViewModelProvider);
+    final unitSystem = ref.watch(hydrationFormViewModelProvider).unit;
 
     ref.listen(setupViewModelProvider, (previous, newState) async {
-      if((previous == null || previous.setupStage != .success) && newState.setupStage == .success) {
+      if((previous == null || previous.stage != .success) && newState.stage == .success) {
         if(newState.dailyGoalClamped) {
           showDialog(
             context: context, 
@@ -45,7 +43,7 @@ class _SetupViewState extends ConsumerState<SetupView> {
                 title: Text('dailyGoalDisclaimerTitle'.tr()),
                 content: Text(
                   'dailyGoalDisclaimerContent'.tr(
-                    namedArgs: {'suggestedAmount': _getWaterSuggestionUnitText(setupState.unit.first)}
+                    namedArgs: {'suggestedAmount': _getWaterSuggestionUnitText(unitSystem.first)}
                   ),
                 ),
                 actions: [
@@ -62,7 +60,7 @@ class _SetupViewState extends ConsumerState<SetupView> {
             // TODO: go to home page
           });
         }
-      } else if(newState.setupStage == SetupStage.error) {
+      } else if(newState.stage == .error) {
         showDialog(
           context: context, 
           builder: (context) {
@@ -100,78 +98,10 @@ class _SetupViewState extends ConsumerState<SetupView> {
                     subtitle: 'setupSubtitle'.tr(),
                   ),
 
-                  Form(
-                    key: formKey,
-                    child: Column(
-                      spacing: 24,
-                      children: [
-                        NumberInputFormField(
-                          controller: ageTextController,
-                          label: 'age'.tr(),
-                          maxLength: 3,
-                          validator: (value) {
-                            final minAge = Age.minAge;
-                            final maxAge = Age.maxAge;
-
-                            final validationResult = ref.read(setupViewModelProvider.notifier)
-                              .validateAge(value);
-                            
-                            switch(validationResult) {
-                              case .noInput:
-                                return 'inputRequired'.tr(namedArgs: {'requiredInput': 'age'.tr().toLowerCase()});
-                              case .outOfBoundaries:
-                                return 'ageInputRequirement'.tr(
-                                  namedArgs: {'minAge': minAge.toString(), 'maxAge': maxAge.toString()},
-                                );
-                              default: return null;
-                            }
-                          },
-                        ),
-                        NumberInputFormField(
-                          controller: weightTextController,
-                          label: 'weight'.tr(),
-                          suffix: unitSystem == UnitSystem.metric
-                            ? 'kg'.tr()
-                            : 'lb'.tr(),
-                          maxLength: 3,
-                          validator: (value) {
-                            final minWeight = Weight.minWeight;
-                            final maxWeight = Weight.maxWeight;
-
-                            final validationResult = ref.read(setupViewModelProvider.notifier)
-                              .validateWeight(value);
-                            
-                            switch(validationResult) {
-                              case .noInput:
-                                return 'inputRequired'.tr(namedArgs: {'requiredInput': 'weight'.tr().toLowerCase()});
-                              case .outOfBoundaries:
-                                return 'weightInputRequirement'.tr(
-                                  namedArgs: {'minWeight': minWeight.toString(), 'maxWeight': maxWeight.toString()},
-                                );
-                              default: return null;
-                            }
-                          },
-                        ),
-                        SegmentedButton(
-                          segments: [
-                            ButtonSegment(
-                              label: Text('${'kg'.tr()}, ${'ml'.tr()}'),
-                              value: UnitSystem.metric
-                            ),
-                            ButtonSegment(
-                              label: Text('${'lb'.tr()}, ${'oz'.tr()}'),
-                              value: UnitSystem.imperial
-                            ),
-                          ], 
-                          selected: setupState.unit,
-                          onSelectionChanged: (newSelection) {
-                            ref
-                              .read(setupViewModelProvider.notifier)
-                              .setUnitSystem(newSelection.first);
-                          },
-                        ),
-                      ],
-                    )
+                  HydrationFormView(
+                    formKey: formKey, 
+                    ageTextController: ageTextController, 
+                    weightTextController: weightTextController
                   ),
 
                   Text('dataPrivacy'.tr()),
@@ -184,7 +114,7 @@ class _SetupViewState extends ConsumerState<SetupView> {
         )
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: (setupState.setupStage != .idle)
+        onPressed: (state.stage != .idle)
           ? null
           : () {
               if(formKey.currentState == null || !formKey.currentState!.validate()) {
@@ -195,9 +125,9 @@ class _SetupViewState extends ConsumerState<SetupView> {
                 .read(setupViewModelProvider.notifier)
                 .completeSetup(ageTextController.text, weightTextController.text);
           },
-        child: setupState.setupStage == .success
+        child: state.stage == .success
           ? Icon(Icons.check)
-          : setupState.setupStage == .processing
+          : state.stage == .processing
             ? Transform.scale(
               scale: .8,
               child: CircularProgressIndicator()
@@ -209,7 +139,7 @@ class _SetupViewState extends ConsumerState<SetupView> {
 
   String _getWaterSuggestionUnitText(UnitSystem unit) {
     return unit == UnitSystem.metric
-      ? '${SetupConstraints.maxWaterSuggestionMl} ${'ml'.tr()}'
-      : '${SetupConstraints.maxWaterSuggestionOz} ${'oz'.tr()}';
+      ? '${HydrationConstraints.maxWaterSuggestionMl} ${'ml'.tr()}'
+      : '${HydrationConstraints.maxWaterSuggestionOz} ${'oz'.tr()}';
   }
 }
