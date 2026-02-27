@@ -7,7 +7,7 @@ import 'package:hidroly/core/domain/value_objects/weight.dart';
 import 'package:hidroly/core/ui/view_model/hydration_form_view_model.dart';
 import 'package:hidroly/features/setup/ui/view/widgets/number_input_form_field.dart';
 
-class HydrationFormView extends ConsumerStatefulWidget {
+class HydrationFormView extends ConsumerWidget {
   const HydrationFormView({
     super.key, 
     required this.formKey,
@@ -20,21 +20,16 @@ class HydrationFormView extends ConsumerStatefulWidget {
   final TextEditingController weightTextController;
 
   @override
-  ConsumerState<HydrationFormView> createState() => _HydrationFormViewState();
-}
-
-class _HydrationFormViewState extends ConsumerState<HydrationFormView> {
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final unitSystem = ref.watch(hydrationFormViewModelProvider).unit;
 
     return Form(
-      key: widget.formKey,
+      key: formKey,
       child: Column(
         spacing: 24,
         children: [
           NumberInputFormField(
-            controller: widget.ageTextController,
+            controller: ageTextController,
             label: 'age'.tr(),
             maxLength: 3,
             validator: (value) {
@@ -56,7 +51,7 @@ class _HydrationFormViewState extends ConsumerState<HydrationFormView> {
             },
           ),
           NumberInputFormField(
-            controller: widget.weightTextController,
+            controller: weightTextController,
             label: 'weight'.tr(),
             suffix: unitSystem.first == UnitSystem.metric
               ? 'kg'.tr()
