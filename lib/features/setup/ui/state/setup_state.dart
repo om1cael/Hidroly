@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:hidroly/core/domain/process_stage.dart';
+import 'package:hidroly/core/domain/enums/process_stage.dart';
 
 part 'setup_state.freezed.dart';
 
