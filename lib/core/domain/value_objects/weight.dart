@@ -3,7 +3,7 @@ import 'package:hidroly/core/domain/exceptions/invalid_input_exception.dart';
 class Weight {
   final int kg;
 
-  const Weight({required this.kg});
+  const Weight._internal(this.kg);
   
   static final int minWeight = 35;
   static final int maxWeight = 150;
@@ -13,7 +13,7 @@ class Weight {
       throw InvalidInputException();
     }
 
-    return Weight(kg: kg);
+    return Weight._internal(kg);
   }
 
   factory Weight.fromLb(int lb) {
