@@ -58,8 +58,8 @@ class HydrationFormView extends ConsumerWidget {
               : 'lb'.tr(),
             maxLength: 3,
             validator: (value) {
-              final minWeight = Weight.minWeight;
-              final maxWeight = Weight.maxWeight;
+              final minWeight = Weight.minWeightFor(unitSystem.first);
+              final maxWeight = Weight.maxWeightFor(unitSystem.first);
 
               final validationResult = ref.read(hydrationFormViewModelProvider.notifier)
                 .validateWeight(value);
