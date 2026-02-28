@@ -82,41 +82,42 @@ class _SetupViewState extends ConsumerState<SetupView> {
     return Scaffold(
       body: SafeArea(
         minimum: EdgeInsets.all(48.0),
-        child: CustomScrollView(
-          physics: ClampingScrollPhysics(),
-          slivers: [
-            SliverFillRemaining(
-              hasScrollBody: false,
-              child: Column(
-                spacing: 64,
-                crossAxisAlignment: .center,
-                children: [
-                  const Spacer(flex: 2,),
+        child: (state.stage != .idle && state.stage != .error)
+          ? Center(child: CircularProgressIndicator())
+          : CustomScrollView(
+              physics: ClampingScrollPhysics(),
+              slivers: [
+                SliverFillRemaining(
+                  hasScrollBody: false,
+                  child: Column(
+                    spacing: 64,
+                    crossAxisAlignment: .center,
+                    children: [
+                      const Spacer(flex: 2,),
 
-                  HeaderText(
-                    title: 'welcome'.tr(),
-                    subtitle: 'setupSubtitle'.tr(),
+                      HeaderText(
+                        title: 'welcome'.tr(),
+                        subtitle: 'setupSubtitle'.tr(),
+                      ),
+
+                      HydrationFormView(
+                        formKey: formKey, 
+                        ageTextController: ageTextController, 
+                        weightTextController: weightTextController
+                      ),
+
+                      Text('dataPrivacy'.tr()),
+
+                      const Spacer(),
+                    ],
                   ),
-
-                  HydrationFormView(
-                    formKey: formKey, 
-                    ageTextController: ageTextController, 
-                    weightTextController: weightTextController
-                  ),
-
-                  Text('dataPrivacy'.tr()),
-
-                  const Spacer(),
-                ],
-              ),
-            )
+                )
           ],
         )
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: (state.stage != .idle)
-          ? null
-          : () {
+      floatingActionButton: state.stage == .idle
+        ? FloatingActionButton(
+            onPressed: () {
               if(formKey.currentState == null || !formKey.currentState!.validate()) {
                 return;
               }
@@ -124,16 +125,10 @@ class _SetupViewState extends ConsumerState<SetupView> {
               ref
                 .read(setupViewModelProvider.notifier)
                 .completeSetup(ageTextController.text, weightTextController.text);
-          },
-        child: state.stage == .success
-          ? Icon(Icons.check)
-          : state.stage == .processing
-            ? Transform.scale(
-              scale: .8,
-              child: CircularProgressIndicator()
-            )
-            : Icon(Icons.navigate_next),
-      ),
+            },
+            child: Icon(Icons.navigate_next),
+          )
+        : null
     );
   }
 
