@@ -1,4 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:hidroly/core/domain/entities/hydration_goal.dart';
+import 'package:hidroly/core/domain/hydration_constraints.dart';
 import 'package:hidroly/core/domain/value_objects/age.dart';
 import 'package:hidroly/core/domain/value_objects/weight.dart';
 
@@ -14,9 +16,16 @@ class Person with _$Person {
   @override final Age age;
   @override final Weight weight;
 
-  int calculateHydrationGoalMl() {
+  HydrationGoal calculateHydrationGoalMl() {
     int mlPerKg = _getMlPerKg();
-    return mlPerKg * weight.kg;
+
+    int rawDailyGoal = mlPerKg * weight.kg;
+    final clampedGoal = rawDailyGoal.clamp(
+      HydrationConstraints.minWaterSuggestionMl, 
+      HydrationConstraints.maxWaterSuggestionMl,
+    );
+
+    return HydrationGoal(rawDailyGoal: rawDailyGoal, clampedGoal: clampedGoal);
   }
 
   int _getMlPerKg() {
