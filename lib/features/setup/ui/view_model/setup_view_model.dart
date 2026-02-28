@@ -25,7 +25,7 @@ class SetupViewModel extends _$SetupViewModel {
         .execute(person);
 
       state = state.copyWith(
-        dailyGoalClamped: setupResult.rawDailyGoal > setupResult.clampedGoal,
+        dailyGoalClamped: setupResult.isClamped,
         stage: .success,
       );
     } on Exception catch (e) {
