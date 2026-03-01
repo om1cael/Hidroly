@@ -15,6 +15,7 @@ dependencies:
   flutter_riverpod: ^3.2.1
   freezed: ^3.2.5
   freezed_annotation: ^3.1.0
+  mocktail: ^1.0.4
   path_provider: ^2.1.5
   riverpod: ^3.2.1
   riverpod_annotation: ^4.0.2
