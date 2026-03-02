@@ -7,9 +7,17 @@ environment:
   sdk: ^3.11.0
 
 dependencies:
+  drift: ^2.31.0
+  drift_flutter: ^0.2.8
+  easy_localization: ^3.0.8
   flutter:
     sdk: flutter
   flutter_riverpod: ^3.2.1
+  freezed: ^3.2.5
+  freezed_annotation: ^3.1.0
+  mocktail: ^1.0.4
+  path_provider: ^2.1.5
+  riverpod: ^3.2.1
   riverpod_annotation: ^4.0.2
 
 dev_dependencies:
@@ -18,6 +26,10 @@ dev_dependencies:
   flutter_lints: ^6.0.0
   riverpod_generator: ^4.0.3
   build_runner: ^2.11.1
+  drift_dev: ^2.31.0
+  test: ^1.29.0
 
 flutter:
+  assets:
+    - assets/translations/
   uses-material-design: true

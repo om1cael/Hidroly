@@ -1,0 +1,1 @@
+enum ProcessStage { idle, processing, success, error }

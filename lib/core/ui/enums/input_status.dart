@@ -1,0 +1,1 @@
+enum InputStatus { noInput, outOfBoundaries, success }
