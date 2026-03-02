@@ -14,7 +14,7 @@ import 'package:mocktail/mocktail.dart';
 
 import '../../../../testing/usecases/mock_complete_setup_use_case.dart';
 
-class FakeSetupViewModel extends SetupViewModel {
+class ErrorSetupViewModel extends SetupViewModel {
   @override
   SetupState build() => SetupState(stage: .error);
 }
@@ -87,7 +87,7 @@ void main() {
     test('Does not complete setup if stage is not idle', () async {
       final container = ProviderContainer.test(
         overrides: [
-          setupViewModelProvider.overrideWith(() => FakeSetupViewModel()),
+          setupViewModelProvider.overrideWith(() => ErrorSetupViewModel()),
           completeSetupUseCaseProvider.overrideWithValue(MockCompleteSetupUseCase()),
         ]
       );
