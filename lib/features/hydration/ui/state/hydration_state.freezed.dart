@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$HydrationState {
 
- Day get day;
+ Day get day; UnitSystem get unitSystem;
 /// Create a copy of HydrationState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $HydrationStateCopyWith<HydrationState> get copyWith => _$HydrationStateCopyWith
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is HydrationState&&(identical(other.day, day) || other.day == day));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is HydrationState&&(identical(other.day, day) || other.day == day)&&(identical(other.unitSystem, unitSystem) || other.unitSystem == unitSystem));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,day);
+int get hashCode => Object.hash(runtimeType,day,unitSystem);
 
 @override
 String toString() {
-  return 'HydrationState(day: $day)';
+  return 'HydrationState(day: $day, unitSystem: $unitSystem)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $HydrationStateCopyWith<$Res>  {
   factory $HydrationStateCopyWith(HydrationState value, $Res Function(HydrationState) _then) = _$HydrationStateCopyWithImpl;
 @useResult
 $Res call({
- Day day
+ Day day, UnitSystem unitSystem
 });
 
 
@@ -62,10 +62,11 @@ class _$HydrationStateCopyWithImpl<$Res>
 
 /// Create a copy of HydrationState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? day = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? day = null,Object? unitSystem = null,}) {
   return _then(_self.copyWith(
 day: null == day ? _self.day : day // ignore: cast_nullable_to_non_nullable
-as Day,
+as Day,unitSystem: null == unitSystem ? _self.unitSystem : unitSystem // ignore: cast_nullable_to_non_nullable
+as UnitSystem,
   ));
 }
 /// Create a copy of HydrationState
@@ -159,10 +160,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( Day day)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( Day day,  UnitSystem unitSystem)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _HydrationState() when $default != null:
-return $default(_that.day);case _:
+return $default(_that.day,_that.unitSystem);case _:
   return orElse();
 
 }
@@ -180,10 +181,10 @@ return $default(_that.day);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( Day day)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( Day day,  UnitSystem unitSystem)  $default,) {final _that = this;
 switch (_that) {
 case _HydrationState():
-return $default(_that.day);case _:
+return $default(_that.day,_that.unitSystem);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -200,10 +201,10 @@ return $default(_that.day);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( Day day)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( Day day,  UnitSystem unitSystem)?  $default,) {final _that = this;
 switch (_that) {
 case _HydrationState() when $default != null:
-return $default(_that.day);case _:
+return $default(_that.day,_that.unitSystem);case _:
   return null;
 
 }
@@ -215,10 +216,11 @@ return $default(_that.day);case _:
 
 
 class _HydrationState implements HydrationState {
-  const _HydrationState({required this.day});
+  const _HydrationState({required this.day, this.unitSystem = UnitSystem.metric});
   
 
 @override final  Day day;
+@override@JsonKey() final  UnitSystem unitSystem;
 
 /// Create a copy of HydrationState
 /// with the given fields replaced by the non-null parameter values.
@@ -230,16 +232,16 @@ _$HydrationStateCopyWith<_HydrationState> get copyWith => __$HydrationStateCopyW
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _HydrationState&&(identical(other.day, day) || other.day == day));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _HydrationState&&(identical(other.day, day) || other.day == day)&&(identical(other.unitSystem, unitSystem) || other.unitSystem == unitSystem));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,day);
+int get hashCode => Object.hash(runtimeType,day,unitSystem);
 
 @override
 String toString() {
-  return 'HydrationState(day: $day)';
+  return 'HydrationState(day: $day, unitSystem: $unitSystem)';
 }
 
 
@@ -250,7 +252,7 @@ abstract mixin class _$HydrationStateCopyWith<$Res> implements $HydrationStateCo
   factory _$HydrationStateCopyWith(_HydrationState value, $Res Function(_HydrationState) _then) = __$HydrationStateCopyWithImpl;
 @override @useResult
 $Res call({
- Day day
+ Day day, UnitSystem unitSystem
 });
 
 
@@ -267,10 +269,11 @@ class __$HydrationStateCopyWithImpl<$Res>
 
 /// Create a copy of HydrationState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? day = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? day = null,Object? unitSystem = null,}) {
   return _then(_HydrationState(
 day: null == day ? _self.day : day // ignore: cast_nullable_to_non_nullable
-as Day,
+as Day,unitSystem: null == unitSystem ? _self.unitSystem : unitSystem // ignore: cast_nullable_to_non_nullable
+as UnitSystem,
   ));
 }
 
