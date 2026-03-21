@@ -20,18 +20,18 @@ Future<void> main() async {
   );
 }
 
-class MainApp extends StatelessWidget {
+class MainApp extends ConsumerWidget {
   const MainApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return MaterialApp.router(
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,
       locale: context.locale,
       theme: Themes.lightTheme,
       darkTheme: Themes.darkTheme,
-      routerConfig: router,
+      routerConfig: ref.watch(routerProvider),
     );
   }
 }
