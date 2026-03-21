@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hidroly/core/domain/enums/unit_systems.dart';
 import 'package:hidroly/features/hydration/ui/view_model/hydration_view_model.dart';
 
 class HydrationView extends ConsumerWidget {
@@ -38,8 +39,8 @@ class HydrationView extends ConsumerWidget {
                           mainAxisAlignment: .center,
                           crossAxisAlignment: .center,
                           children: [
-                            Text('${data.day.currentAmount} ${'ml'.tr()}', style: Theme.of(context).textTheme.headlineLarge),
-                            Text('${'of'.tr()} ${data.day.dailyGoal} ${'ml'.tr()}', style: Theme.of(context).textTheme.bodyLarge,),
+                            Text('${data.day.currentAmount} ${getUnitText(data.unitSystem)}', style: Theme.of(context).textTheme.headlineLarge),
+                            Text('${'of'.tr()} ${data.day.dailyGoal} ${getUnitText(data.unitSystem)}', style: Theme.of(context).textTheme.bodyLarge,),
                           ],
                         )
                       ],
@@ -54,5 +55,11 @@ class HydrationView extends ConsumerWidget {
         )
       ),
     );
+  }
+
+  String getUnitText(UnitSystem unitSystem) {
+    return unitSystem == UnitSystem.metric
+      ? 'ml'.tr()
+      : 'oz'.tr();
   }
 }

@@ -3,8 +3,10 @@ import 'package:hidroly/core/domain/repositories/settings_repository.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+part 'settings_repository_impl.g.dart';
+
 @riverpod
-SettingsRepository settingsRepository() {
+SettingsRepository settingsRepository(Ref ref) {
   return SettingsRepositoryImpl();
 }
 
@@ -14,7 +16,7 @@ class SettingsRepositoryImpl implements SettingsRepository {
   final unitSystemKey = 'unitSystem';
 
   @override
-  void saveUnitSystem(UnitSystem unitSystem) async {
+  Future<void> saveUnitSystem(UnitSystem unitSystem) async {
     await sharedPreferences.setInt(unitSystemKey, unitSystem.index);
   }
 
