@@ -28,11 +28,11 @@ class DayRepositoryImpl implements DayRepository {
   }
   
   @override
-  Future<Day> read(int id) async {
+  Future<Day?> read(int id) async {
     final data = await (_database.select(_database.dayTable)
       ..where((day) => day.id.equals(id)))
-      .getSingle();
+      .getSingleOrNull();
 
-    return data.toEntity();
+    return data?.toEntity();
   }
 }
