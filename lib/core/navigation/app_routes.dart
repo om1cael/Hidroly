@@ -1,7 +1,7 @@
 import 'package:go_router/go_router.dart';
 import 'package:hidroly/core/data/repositories/day_repository_impl.dart';
-import 'package:hidroly/features/home/view/home_view.dart';
-import 'package:hidroly/features/hydration/view/hydration_view.dart';
+import 'package:hidroly/features/home/ui/view/home_view.dart';
+import 'package:hidroly/features/hydration/ui/view/hydration_view.dart';
 import 'package:hidroly/features/setup/ui/view/setup_view.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 

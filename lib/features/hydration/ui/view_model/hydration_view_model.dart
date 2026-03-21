@@ -1,5 +1,5 @@
 import 'package:hidroly/core/data/repositories/day_repository_impl.dart';
-import 'package:hidroly/features/hydration/state/hydration_state.dart';
+import 'package:hidroly/features/hydration/ui/state/hydration_state.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'hydration_view_model.g.dart';
