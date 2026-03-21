@@ -4,6 +4,7 @@ import 'package:hidroly/features/hydration/view/hydration_view.dart';
 import 'package:hidroly/features/setup/ui/view/setup_view.dart';
 
 final router = GoRouter(
+  initialLocation: '/setup',
   routes: [
     GoRoute(path: '/setup', builder: (_, _) => SetupView()),
     StatefulShellRoute.indexedStack(
@@ -11,7 +12,7 @@ final router = GoRouter(
       branches: [
         StatefulShellBranch(
           routes: [
-            GoRoute(path: '/hydration', builder: (_, _) => HydrationView()),
+            GoRoute(path: '/', builder: (_, _) => HydrationView()),
           ],
         ),
       ],

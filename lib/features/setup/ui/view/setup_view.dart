@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hidroly/core/ui/view/hydration_form_view.dart';
 import 'package:hidroly/core/ui/view_model/hydration_form_view_model.dart';
 import 'package:hidroly/core/domain/hydration_constraints.dart';
@@ -36,7 +37,7 @@ class _SetupViewState extends ConsumerState<SetupView> {
     ref.listen(setupViewModelProvider, (previous, newState) async {
       if((previous == null || previous.stage != .success) && newState.stage == .success) {
         if(newState.dailyGoalClamped) {
-          showDialog(
+          await showDialog(
             context: context, 
             builder: (context) {
               return AlertDialog(
@@ -56,9 +57,11 @@ class _SetupViewState extends ConsumerState<SetupView> {
                 ],
               );
             }
-          ).then((_) {
-            // TODO: go to home page
-          });
+          );
+
+          if(context.mounted) {
+            context.go('/');
+          }
         }
       } else if(newState.stage == .error) {
         showDialog(
