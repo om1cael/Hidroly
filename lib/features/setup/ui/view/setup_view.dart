@@ -58,10 +58,10 @@ class _SetupViewState extends ConsumerState<SetupView> {
               );
             }
           );
-
-          if(context.mounted) {
-            context.go('/');
-          }
+        }
+        
+        if(context.mounted) {
+          context.go('/');
         }
       } else if(newState.stage == .error) {
         showDialog(

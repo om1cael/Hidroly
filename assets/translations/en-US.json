@@ -16,5 +16,7 @@
     "ml": "ml",
     "lb": "lb",
     "oz": "oz",
-    "dataPrivacy": "Your data never leaves your device."
+    "dataPrivacy": "Your data never leaves your device.",
+    "home": "Home",
+    "summary": "Summary"
 }
