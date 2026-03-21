@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hidroly/features/hydration/view_model/hydration_view_model.dart';
 
-class HydrationView extends StatelessWidget {
+class HydrationView extends ConsumerWidget {
   const HydrationView({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(hydrationViewModelProvider);
+
     return Scaffold(
       body: SafeArea(
         child: Center(
@@ -12,32 +16,38 @@ class HydrationView extends StatelessWidget {
             mainAxisAlignment: .center,
             crossAxisAlignment: .center,
             children: [
-              SizedBox(
-                height: 280,
-                width: 280,
-                child: Stack(
-                  alignment: .xy(0, 0),
-                  children: [
-                    SizedBox.expand(
-                      child: CircularProgressIndicator(
-                        value: .5,
-                        strokeWidth: 16,
-                        strokeCap: .round,
-                        backgroundColor: Theme.of(context).colorScheme.surfaceContainer,
-                        color: Theme.of(context).colorScheme.primary,
-                      ),
-                    ),
-                    Column(
-                      mainAxisAlignment: .center,
-                      crossAxisAlignment: .center,
+              state.when(
+                data: (data) {
+                  return SizedBox(
+                    height: 280,
+                    width: 280,
+                    child: Stack(
+                      alignment: .xy(0, 0),
                       children: [
-                        Text('1200ml', style: Theme.of(context).textTheme.headlineLarge),
-                        Text('of 2000ml', style: Theme.of(context).textTheme.bodyLarge,),
+                        SizedBox.expand(
+                          child: CircularProgressIndicator(
+                            value: (data.day.currentAmount / data.day.dailyGoal).clamp(0, 1),
+                            strokeWidth: 16,
+                            strokeCap: .round,
+                            backgroundColor: Theme.of(context).colorScheme.surfaceContainer,
+                            color: Theme.of(context).colorScheme.primary,
+                          ),
+                        ),
+                        Column(
+                          mainAxisAlignment: .center,
+                          crossAxisAlignment: .center,
+                          children: [
+                            Text('${data.day.currentAmount} ml', style: Theme.of(context).textTheme.headlineLarge),
+                            Text('of ${data.day.dailyGoal} ml', style: Theme.of(context).textTheme.bodyLarge,),
+                          ],
+                        )
                       ],
-                    )
-                  ],
-                ),
-              )
+                    ),
+                  );
+                }, 
+                error: (_, _) => Placeholder(), 
+                loading: () => CircularProgressIndicator(),
+              ),
             ],
           ),
         )
