@@ -90,7 +90,7 @@ class _HydrationViewState extends ConsumerState<HydrationView> {
                   },
                   onCreatePressed: () async {
                     if(_formKey.currentState == null || !_formKey.currentState!.validate()) return;
-                    // todo: create cup
+                    ref.read(hydrationViewModelProvider.notifier).createCup(_cupTextController.text);
                   },
                 ),
               ),

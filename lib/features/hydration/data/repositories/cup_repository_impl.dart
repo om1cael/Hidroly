@@ -3,18 +3,27 @@ import 'package:hidroly/core/data/db/app_database.dart';
 import 'package:hidroly/features/hydration/data/mappers/cup_mapper.dart';
 import 'package:hidroly/features/hydration/domain/entities/cup.dart';
 import 'package:hidroly/features/hydration/domain/repositories/cup_repository.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-class CupsRepositoryImpl implements CupRepository {
+part 'cup_repository_impl.g.dart';
+
+@riverpod
+CupRepository cupRepository(Ref ref) {
+  final appDatabase = ref.watch(appDatabaseProvider);
+  return CupRepositoryImpl(appDatabase);
+}
+
+class CupRepositoryImpl implements CupRepository {
   final AppDatabase _database;
 
-  const CupsRepositoryImpl(this._database);
+  const CupRepositoryImpl(this._database);
 
   @override
-  Future<int> save(Cup cup) async {
+  Future<int> save(int dayId, int value) async {
     return await _database.into(_database.cupsTable).insert(
       CupsTableCompanion(
-        day: Value(cup.dayId),
-        amount: Value(cup.amount),
+        day: Value(dayId),
+        amount: Value(value),
       ),
     );
   }

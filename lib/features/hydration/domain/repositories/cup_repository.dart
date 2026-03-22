@@ -1,6 +1,6 @@
 import 'package:hidroly/features/hydration/domain/entities/cup.dart';
 
 abstract class CupRepository {
-  Future<int> save(Cup cup);
+  Future<int> save(int dayId, int value);
   Future<Cup?> read(int id);
 }
