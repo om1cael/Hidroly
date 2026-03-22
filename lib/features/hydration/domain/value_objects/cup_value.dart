@@ -22,7 +22,7 @@ class CupValue {
 
   factory CupValue.fromOz(int value) {
     int ml = (value * 29.574).round();
-    return CupValue._internal(ml);
+    return CupValue.ml(ml);
   }
 
   static int minValueFor(UnitSystem unit) => unit == UnitSystem.metric
