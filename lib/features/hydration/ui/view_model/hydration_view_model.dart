@@ -15,12 +15,14 @@ class HydrationViewModel extends _$HydrationViewModel {
   @override
   Future<HydrationState> build() async {
     final dayRepository = ref.watch(dayRepositoryProvider);
+    final cupRepository = ref.watch(cupRepositoryProvider);
     final settingsRepository = ref.watch(settingsRepositoryProvider);
 
     final day = await dayRepository.read(1);
+    final cups = await cupRepository.readAll(day!.id);
     final unitSystem = await settingsRepository.readUnitSystem();
 
-    return HydrationState(day: day!, unitSystem: unitSystem);
+    return HydrationState(day: day, unitSystem: unitSystem, cups: cups);
   }
 
   Future<void> createCup(String value) async {

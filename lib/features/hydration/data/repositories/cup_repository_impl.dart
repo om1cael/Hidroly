@@ -36,4 +36,13 @@ class CupRepositoryImpl implements CupRepository {
     
     return data?.toEntity();
   }
+  
+  @override
+  Future<List<Cup>> readAll(int dayId) async {
+    final data = await (_database.select(_database.cupsTable)
+      ..where((cup) => cup.day.equals(dayId)))
+      .get();
+    
+    return [for(final cup in data) cup.toEntity()];
+  }
 }

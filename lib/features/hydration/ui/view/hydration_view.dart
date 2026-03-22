@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hidroly/core/domain/enums/unit_systems.dart';
 import 'package:hidroly/features/hydration/domain/value_objects/cup_value.dart';
+import 'package:hidroly/features/hydration/ui/view/components/cup_button.dart';
 import 'package:hidroly/features/hydration/ui/view/components/cup_creation_form.dart';
 import 'package:hidroly/features/hydration/ui/view/components/hydration_progress_indicator.dart';
 import 'package:hidroly/features/hydration/ui/view_model/hydration_view_model.dart';
@@ -38,18 +39,38 @@ class _HydrationViewState extends ConsumerState<HydrationView> {
     return state.when(
       data: (data) => Scaffold(
         body: SafeArea(
+          minimum: EdgeInsets.all(24.0),
           child: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Column(
-                  spacing: 32,
+                  spacing: 48,
                   children: [
                     HydrationProgressIndicator(
                       currentAmount: _getValueBasedOnUnit(data.unitSystem, data.day.currentAmount),
                       dailyGoal: _getValueBasedOnUnit(data.unitSystem, data.day.dailyGoal),
                       unitText: _getUnitText(data.unitSystem),
+                    ),
+
+                    SizedBox(
+                      height: 36,
+                      child: ListView.separated(
+                        scrollDirection: .horizontal,
+                        shrinkWrap: true,
+                        itemCount: data.cups.length,
+                        itemBuilder: (_, index) {
+                          final cup = data.cups[index];
+                      
+                          return CupButton(
+                            amount: cup.amount,
+                            unit: _getUnitText(data.unitSystem),
+                            onPressed: () {},
+                          );
+                        },
+                        separatorBuilder: (_, _) => SizedBox(width: 12),
+                      ),
                     ),
                   ],
                 ),
@@ -90,7 +111,14 @@ class _HydrationViewState extends ConsumerState<HydrationView> {
                   },
                   onCreatePressed: () async {
                     if(_formKey.currentState == null || !_formKey.currentState!.validate()) return;
-                    ref.read(hydrationViewModelProvider.notifier).createCup(_cupTextController.text);
+                    
+                    await ref
+                      .read(hydrationViewModelProvider.notifier)
+                      .createCup(_cupTextController.text);
+                    
+                    if(context.mounted) {
+                      Navigator.of(context).pop();
+                    }
                   },
                 ),
               ),
@@ -99,7 +127,7 @@ class _HydrationViewState extends ConsumerState<HydrationView> {
           child: const Icon(Icons.add),
         ),
       ),
-      error: (_, _) => const Scaffold(body: Center(child: Placeholder())),
+      error: (_, error) => Scaffold(body: Center(child: Text(error.toString()))),
       loading: () => const Scaffold(body: Center(child: CircularProgressIndicator())),
     );
   }
