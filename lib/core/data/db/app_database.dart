@@ -1,6 +1,6 @@
 import 'package:drift/drift.dart';
 import 'package:drift_flutter/drift_flutter.dart';
-import 'package:hidroly/core/data/db/tables/cups_table.dart';
+import 'package:hidroly/features/hydration/data/tables/cups_table.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'tables/day_table.dart';
 
