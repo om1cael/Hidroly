@@ -23,6 +23,10 @@ class CupCreationForm extends StatelessWidget {
   final VoidCallback onCreatePressed;
   final String? Function(String?) validator;
 
+  List<int> get _presets => unitSystem == .metric
+    ? [200, 350, 500]
+    : [8, 12, 16];
+
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -48,9 +52,9 @@ class CupCreationForm extends StatelessWidget {
       
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [100, 200, 300].map((ml) => ActionChip(
-              label: Text('$ml ml'),
-              onPressed: () => controller.text = ml.toString(),
+            children: _presets.map((value) => ActionChip(
+              label: Text('$value ${unitSystem.unitLabel}'),
+              onPressed: () => controller.text = value.toString(),
             )).toList(),
           ),
           
