@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Day {
 
- int get id; int get dailyGoal; int get currentAmount; DateTime get createdAt;
+ int get id; Water get dailyGoal; Water get currentAmount; DateTime get createdAt;
 /// Create a copy of Day
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -45,7 +45,7 @@ abstract mixin class $DayCopyWith<$Res>  {
   factory $DayCopyWith(Day value, $Res Function(Day) _then) = _$DayCopyWithImpl;
 @useResult
 $Res call({
- int id, int dailyGoal, int currentAmount, DateTime createdAt
+ int id, Water dailyGoal, Water currentAmount, DateTime createdAt
 });
 
 
@@ -66,8 +66,8 @@ class _$DayCopyWithImpl<$Res>
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,dailyGoal: null == dailyGoal ? _self.dailyGoal : dailyGoal // ignore: cast_nullable_to_non_nullable
-as int,currentAmount: null == currentAmount ? _self.currentAmount : currentAmount // ignore: cast_nullable_to_non_nullable
-as int,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
+as Water,currentAmount: null == currentAmount ? _self.currentAmount : currentAmount // ignore: cast_nullable_to_non_nullable
+as Water,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as DateTime,
   ));
 }
@@ -153,7 +153,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  int dailyGoal,  int currentAmount,  DateTime createdAt)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  Water dailyGoal,  Water currentAmount,  DateTime createdAt)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _day() when $default != null:
 return $default(_that.id,_that.dailyGoal,_that.currentAmount,_that.createdAt);case _:
@@ -174,7 +174,7 @@ return $default(_that.id,_that.dailyGoal,_that.currentAmount,_that.createdAt);ca
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  int dailyGoal,  int currentAmount,  DateTime createdAt)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  Water dailyGoal,  Water currentAmount,  DateTime createdAt)  $default,) {final _that = this;
 switch (_that) {
 case _day():
 return $default(_that.id,_that.dailyGoal,_that.currentAmount,_that.createdAt);case _:
@@ -194,7 +194,7 @@ return $default(_that.id,_that.dailyGoal,_that.currentAmount,_that.createdAt);ca
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  int dailyGoal,  int currentAmount,  DateTime createdAt)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  Water dailyGoal,  Water currentAmount,  DateTime createdAt)?  $default,) {final _that = this;
 switch (_that) {
 case _day() when $default != null:
 return $default(_that.id,_that.dailyGoal,_that.currentAmount,_that.createdAt);case _:
@@ -209,12 +209,12 @@ return $default(_that.id,_that.dailyGoal,_that.currentAmount,_that.createdAt);ca
 
 
 class _day implements Day {
-  const _day({this.id = 0, required this.dailyGoal, this.currentAmount = 0, required this.createdAt});
+  const _day({this.id = 0, required this.dailyGoal, this.currentAmount = const Water(0), required this.createdAt});
   
 
 @override@JsonKey() final  int id;
-@override final  int dailyGoal;
-@override@JsonKey() final  int currentAmount;
+@override final  Water dailyGoal;
+@override@JsonKey() final  Water currentAmount;
 @override final  DateTime createdAt;
 
 /// Create a copy of Day
@@ -247,7 +247,7 @@ abstract mixin class _$dayCopyWith<$Res> implements $DayCopyWith<$Res> {
   factory _$dayCopyWith(_day value, $Res Function(_day) _then) = __$dayCopyWithImpl;
 @override @useResult
 $Res call({
- int id, int dailyGoal, int currentAmount, DateTime createdAt
+ int id, Water dailyGoal, Water currentAmount, DateTime createdAt
 });
 
 
@@ -268,8 +268,8 @@ class __$dayCopyWithImpl<$Res>
   return _then(_day(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,dailyGoal: null == dailyGoal ? _self.dailyGoal : dailyGoal // ignore: cast_nullable_to_non_nullable
-as int,currentAmount: null == currentAmount ? _self.currentAmount : currentAmount // ignore: cast_nullable_to_non_nullable
-as int,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
+as Water,currentAmount: null == currentAmount ? _self.currentAmount : currentAmount // ignore: cast_nullable_to_non_nullable
+as Water,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as DateTime,
   ));
 }

@@ -1,7 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hidroly/core/domain/enums/unit_systems.dart';
 import 'package:hidroly/features/hydration/domain/value_objects/cup_value.dart';
 import 'package:hidroly/features/hydration/ui/extensions/unit_system_ui_extension.dart';
 import 'package:hidroly/features/hydration/ui/view/components/cup_button.dart';
@@ -50,8 +49,8 @@ class _HydrationViewState extends ConsumerState<HydrationView> {
                   spacing: 48,
                   children: [
                     HydrationProgressIndicator(
-                      currentAmount: _getValueBasedOnUnit(data.unitSystem, data.day.currentAmount),
-                      dailyGoal: _getValueBasedOnUnit(data.unitSystem, data.day.dailyGoal),
+                      currentAmount: data.day.currentAmount.valueIn(data.unitSystem),
+                      dailyGoal: data.day.dailyGoal.valueIn(data.unitSystem),
                       unitText: data.unitSystem.unitLabel,
                     ),
 
@@ -131,11 +130,5 @@ class _HydrationViewState extends ConsumerState<HydrationView> {
       error: (_, error) => Scaffold(body: Center(child: Text(error.toString()))),
       loading: () => const Scaffold(body: Center(child: CircularProgressIndicator())),
     );
-  }
-
-  int _getValueBasedOnUnit(UnitSystem unitSystem, int value) {
-    return unitSystem == UnitSystem.metric
-        ? value
-        : (value / 29.574).round();
   }
 }

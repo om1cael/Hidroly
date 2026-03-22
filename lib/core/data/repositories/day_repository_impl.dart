@@ -22,7 +22,7 @@ class DayRepositoryImpl implements DayRepository {
   Future<int> save(Day day) async {
     return await _database.into(_database.dayTable).insert(
       DayTableCompanion(
-        dailyGoal: Value(day.dailyGoal),
+        dailyGoal: Value(day.dailyGoal.ml),
       ),
     );
   }

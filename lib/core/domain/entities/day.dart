@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:hidroly/features/hydration/domain/value_objects/water.dart';
 
 part 'day.freezed.dart';
 
@@ -6,8 +7,8 @@ part 'day.freezed.dart';
 abstract class Day with _$Day {  
   const factory Day({
     @Default(0) int id,
-    required int dailyGoal,
-    @Default(0) int currentAmount,
+    required Water dailyGoal,
+    @Default(Water(0)) Water currentAmount,
     required DateTime createdAt,
   }) = _day;
 }
