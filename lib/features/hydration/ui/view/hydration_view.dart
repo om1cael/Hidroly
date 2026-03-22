@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hidroly/core/domain/enums/unit_systems.dart';
 import 'package:hidroly/features/hydration/domain/value_objects/cup_value.dart';
+import 'package:hidroly/features/hydration/ui/extensions/unit_system_ui_extension.dart';
 import 'package:hidroly/features/hydration/ui/view/components/cup_button.dart';
 import 'package:hidroly/features/hydration/ui/view/components/cup_creation_form.dart';
 import 'package:hidroly/features/hydration/ui/view/components/hydration_progress_indicator.dart';
@@ -51,7 +52,7 @@ class _HydrationViewState extends ConsumerState<HydrationView> {
                     HydrationProgressIndicator(
                       currentAmount: _getValueBasedOnUnit(data.unitSystem, data.day.currentAmount),
                       dailyGoal: _getValueBasedOnUnit(data.unitSystem, data.day.dailyGoal),
-                      unitText: _getUnitText(data.unitSystem),
+                      unitText: data.unitSystem.unitLabel,
                     ),
 
                     SizedBox(
@@ -65,7 +66,7 @@ class _HydrationViewState extends ConsumerState<HydrationView> {
                       
                           return CupButton(
                             amount: cup.amount,
-                            unit: _getUnitText(data.unitSystem),
+                            unit: data.unitSystem.unitLabel,
                             onPressed: () {},
                           );
                         },
@@ -95,7 +96,7 @@ class _HydrationViewState extends ConsumerState<HydrationView> {
                 child: CupCreationForm(
                   formKey: _formKey,
                   controller: _cupTextController,
-                  unitSystem: _getUnitText(data.unitSystem),
+                  unitSystem: data.unitSystem,
                   validator: (value) {
                     final status = ref
                       .read(hydrationViewModelProvider.notifier)
@@ -136,9 +137,5 @@ class _HydrationViewState extends ConsumerState<HydrationView> {
     return unitSystem == UnitSystem.metric
         ? value
         : (value / 29.574).round();
-  }
-
-  String _getUnitText(UnitSystem unitSystem) {
-    return unitSystem == UnitSystem.metric ? 'ml'.tr() : 'oz'.tr();
   }
 }

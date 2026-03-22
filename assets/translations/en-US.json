@@ -23,5 +23,6 @@
     "cupCreationTitle": "Create a new cup",
     "create": "Create",
     "cupValue": "Cup value",
-    "inputRequirement": "Please, enter a value between {minValue} and {maxValue}"
+    "inputRequirement": "Please, enter a value between {minValue} and {maxValue}",
+    "cupInputHint": "e.g. {amount}"
 }

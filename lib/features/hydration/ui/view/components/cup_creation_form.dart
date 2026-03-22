@@ -1,6 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:hidroly/core/domain/enums/unit_systems.dart';
 import 'package:hidroly/core/ui/components/number_input_form_field.dart';
+import 'package:hidroly/features/hydration/domain/value_objects/cup_value.dart';
+import 'package:hidroly/features/hydration/ui/extensions/unit_system_ui_extension.dart';
 
 class CupCreationForm extends StatelessWidget {
   const CupCreationForm({
@@ -15,7 +18,7 @@ class CupCreationForm extends StatelessWidget {
   final TextEditingController controller;
   final GlobalKey<FormState> formKey;
 
-  final String unitSystem;
+  final UnitSystem unitSystem;
 
   final VoidCallback onCreatePressed;
   final String? Function(String?) validator;
@@ -35,8 +38,8 @@ class CupCreationForm extends StatelessWidget {
             controller: controller, 
             label: '', 
             maxLength: 3,
-            hintText: 'e.g. 200',
-            suffix: unitSystem, 
+            hintText: 'cupInputHint'.tr(namedArgs: {'amount': CupValue.maxValueFor(unitSystem).toString()}),
+            suffix: unitSystem.unitLabel, 
             validator: validator,
             autoFocus: true,
           ),
