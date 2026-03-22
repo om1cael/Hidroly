@@ -2,56 +2,115 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hidroly/core/domain/enums/unit_systems.dart';
+import 'package:hidroly/features/hydration/domain/value_objects/cup_value.dart';
+import 'package:hidroly/features/hydration/ui/view/components/cup_creation_form.dart';
 import 'package:hidroly/features/hydration/ui/view/components/hydration_progress_indicator.dart';
 import 'package:hidroly/features/hydration/ui/view_model/hydration_view_model.dart';
 
-// TODO: add cups
-class HydrationView extends ConsumerWidget {
+class HydrationView extends ConsumerStatefulWidget {
   const HydrationView({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<HydrationView> createState() => _HydrationViewState();
+}
+
+class _HydrationViewState extends ConsumerState<HydrationView> {
+  late final TextEditingController _cupTextController;
+  late final GlobalKey<FormState> _formKey;
+
+  @override
+  void initState() {
+    super.initState();
+    _cupTextController = TextEditingController();
+    _formKey = GlobalKey<FormState>();
+  }
+
+  @override
+  void dispose() {
+    _cupTextController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final state = ref.watch(hydrationViewModelProvider);
 
-    return Scaffold(
-      body: SafeArea(
-        child: Center(
-          child: Column(
-            mainAxisAlignment: .center,
-            crossAxisAlignment: .center,
-            children: [
-              state.when(
-                data: (data) {
-                  return Column(
-                    spacing: 32,
-                    children: [
-                      HydrationProgressIndicator(
-                        currentAmount: getValueBasedOnUnit(data.unitSystem, data.day.currentAmount), 
-                        dailyGoal: getValueBasedOnUnit(data.unitSystem, data.day.dailyGoal), 
-                        unitText: getUnitText(data.unitSystem),
-                      ),
-                    ],
-                  );
-                }, 
-                error: (_, _) => Placeholder(), 
-                loading: () => CircularProgressIndicator(),
-              ),
-            ],
+    return state.when(
+      data: (data) => Scaffold(
+        body: SafeArea(
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Column(
+                  spacing: 32,
+                  children: [
+                    HydrationProgressIndicator(
+                      currentAmount: _getValueBasedOnUnit(data.unitSystem, data.day.currentAmount),
+                      dailyGoal: _getValueBasedOnUnit(data.unitSystem, data.day.dailyGoal),
+                      unitText: _getUnitText(data.unitSystem),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
-        )
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () async {
+            _cupTextController.clear();
+            
+            showModalBottomSheet(
+              context: context,
+              isScrollControlled: true,
+              builder: (context) => Padding(
+                padding: EdgeInsets.only(
+                  bottom: MediaQuery.of(context).viewInsets.bottom,
+                  left: 20,
+                  right: 20,
+                  top: 20,
+                ),
+                child: CupCreationForm(
+                  formKey: _formKey,
+                  controller: _cupTextController,
+                  unitSystem: _getUnitText(data.unitSystem),
+                  validator: (value) {
+                    final status = ref
+                      .read(hydrationViewModelProvider.notifier)
+                      .validateCupValue(value);
+                    
+                    switch(status) {
+                      case .noInput:
+                        return 'inputRequired'.tr(namedArgs: {'requiredInput': 'cupValue'.tr().toLowerCase()});
+                      case .outOfBoundaries:
+                        return 'inputRequirement'.tr(namedArgs: {'minValue': CupValue.minValueFor(data.unitSystem).toString(), 'maxValue': CupValue.maxValueFor(data.unitSystem).toString()});
+                      default: return null;
+                    }
+                  },
+                  onCreatePressed: () async {
+                    if(_formKey.currentState == null || !_formKey.currentState!.validate()) return;
+                    // todo: create cup
+                  },
+                ),
+              ),
+            );
+          },
+          child: const Icon(Icons.add),
+        ),
       ),
+      error: (_, _) => const Scaffold(body: Center(child: Placeholder())),
+      loading: () => const Scaffold(body: Center(child: CircularProgressIndicator())),
     );
   }
 
-  int getValueBasedOnUnit(UnitSystem unitSystem, int value) {
-    return unitSystem == .metric
-      ? value
-      : (value / 29.574).round();
+  int _getValueBasedOnUnit(UnitSystem unitSystem, int value) {
+    return unitSystem == UnitSystem.metric
+        ? value
+        : (value / 29.574).round();
   }
 
-  String getUnitText(UnitSystem unitSystem) {
-    return unitSystem == .metric
-      ? 'ml'.tr()
-      : 'oz'.tr();
+  String _getUnitText(UnitSystem unitSystem) {
+    return unitSystem == UnitSystem.metric ? 'ml'.tr() : 'oz'.tr();
   }
 }

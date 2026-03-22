@@ -5,7 +5,7 @@ import 'package:hidroly/core/domain/enums/unit_systems.dart';
 import 'package:hidroly/core/domain/value_objects/age.dart';
 import 'package:hidroly/core/domain/value_objects/weight.dart';
 import 'package:hidroly/core/ui/view_model/hydration_form_view_model.dart';
-import 'package:hidroly/features/setup/ui/view/widgets/number_input_form_field.dart';
+import 'package:hidroly/core/ui/components/number_input_form_field.dart';
 
 class HydrationFormView extends ConsumerWidget {
   const HydrationFormView({

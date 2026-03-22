@@ -19,5 +19,9 @@
     "dataPrivacy": "Your data never leaves your device.",
     "home": "Home",
     "summary": "Summary",
-    "of": "of"
+    "of": "of",
+    "cupCreationTitle": "Create a new cup",
+    "create": "Create",
+    "cupValue": "Cup value",
+    "inputRequirement": "Please, enter a value between {minValue} and {maxValue}"
 }

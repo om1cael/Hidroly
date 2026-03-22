@@ -8,7 +8,7 @@ import 'package:hidroly/core/domain/value_objects/weight.dart';
 import 'package:hidroly/features/setup/domain/usecases/complete_setup_use_case.dart';
 import 'package:hidroly/features/setup/ui/state/setup_state.dart';
 import 'package:hidroly/features/setup/ui/view/setup_view.dart';
-import 'package:hidroly/features/setup/ui/view/widgets/number_input_form_field.dart';
+import 'package:hidroly/core/ui/components/number_input_form_field.dart';
 import 'package:hidroly/features/setup/ui/view_model/setup_view_model.dart';
 import 'package:mocktail/mocktail.dart';
 import '../../../../testing/usecases/mock_complete_setup_use_case.dart';
