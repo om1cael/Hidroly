@@ -37,7 +37,7 @@ class CupCreationForm extends StatelessWidget {
           NumberInputFormField(
             controller: controller, 
             label: '', 
-            maxLength: 3,
+            maxLength: 4,
             hintText: 'cupInputHint'.tr(namedArgs: {'amount': CupValue.maxValueFor(unitSystem).toString()}),
             suffix: unitSystem.unitLabel, 
             validator: validator,
