@@ -5,7 +5,6 @@ import 'package:hidroly/core/domain/enums/unit_systems.dart';
 import 'package:hidroly/features/hydration/ui/view/components/hydration_progress_indicator.dart';
 import 'package:hidroly/features/hydration/ui/view_model/hydration_view_model.dart';
 
-// TODO: convert hydration data to imperial when necessary
 // TODO: add cups
 class HydrationView extends ConsumerWidget {
   const HydrationView({super.key});
@@ -23,10 +22,15 @@ class HydrationView extends ConsumerWidget {
             children: [
               state.when(
                 data: (data) {
-                  return HydrationProgressIndicator(
-                    currentAmount: getValueBasedOnUnit(data.unitSystem, data.day.currentAmount), 
-                    dailyGoal: getValueBasedOnUnit(data.unitSystem, data.day.dailyGoal), 
-                    unitText: getUnitText(data.unitSystem),
+                  return Column(
+                    spacing: 32,
+                    children: [
+                      HydrationProgressIndicator(
+                        currentAmount: getValueBasedOnUnit(data.unitSystem, data.day.currentAmount), 
+                        dailyGoal: getValueBasedOnUnit(data.unitSystem, data.day.dailyGoal), 
+                        unitText: getUnitText(data.unitSystem),
+                      ),
+                    ],
                   );
                 }, 
                 error: (_, _) => Placeholder(), 
