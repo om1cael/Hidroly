@@ -66,7 +66,7 @@ class _HydrationViewState extends ConsumerState<HydrationView> {
                           return CupButton(
                             amount: cup.amount,
                             unit: data.unitSystem.unitLabel,
-                            onPressed: () {},
+                            onPressed: () => ref.read(hydrationViewModelProvider.notifier).addWater(cup.amount),
                           );
                         },
                         separatorBuilder: (_, _) => SizedBox(width: 12),

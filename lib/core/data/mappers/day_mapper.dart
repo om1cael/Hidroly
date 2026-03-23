@@ -7,7 +7,7 @@ extension DayTableDataX on DayTableData {
     return Day(
       id: id,
       dailyGoal: Water(dailyGoal),
-      currentAmount: Water(0), 
+      currentAmount: Water(currentAmount), 
       createdAt: createdAt
     );
   }
