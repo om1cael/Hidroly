@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hidroly/features/hydration/domain/value_objects/cup_value.dart';
 import 'package:hidroly/features/hydration/ui/extensions/unit_system_ui_extension.dart';
+import 'package:hidroly/features/hydration/ui/state/hydration_state.dart';
 import 'package:hidroly/features/hydration/ui/view/components/cup_button.dart';
 import 'package:hidroly/features/hydration/ui/view/components/cup_creation_form.dart';
 import 'package:hidroly/features/hydration/ui/view/components/hydration_progress_indicator.dart';
@@ -79,56 +80,58 @@ class _HydrationViewState extends ConsumerState<HydrationView> {
           ),
         ),
         floatingActionButton: FloatingActionButton(
-          onPressed: () async {
-            _cupTextController.clear();
-            
-            showModalBottomSheet(
-              context: context,
-              isScrollControlled: true,
-              builder: (context) => Padding(
-                padding: EdgeInsets.only(
-                  bottom: MediaQuery.of(context).viewInsets.bottom,
-                  left: 20,
-                  right: 20,
-                  top: 20,
-                ),
-                child: CupCreationForm(
-                  formKey: _formKey,
-                  controller: _cupTextController,
-                  unitSystem: data.unitSystem,
-                  validator: (value) {
-                    final status = ref
-                      .read(hydrationViewModelProvider.notifier)
-                      .validateCupValue(value);
-                    
-                    switch(status) {
-                      case .noInput:
-                        return 'inputRequired'.tr(namedArgs: {'requiredInput': 'cupValue'.tr().toLowerCase()});
-                      case .outOfBoundaries:
-                        return 'inputRequirement'.tr(namedArgs: {'minValue': CupValue.minValueFor(data.unitSystem).toString(), 'maxValue': CupValue.maxValueFor(data.unitSystem).toString()});
-                      default: return null;
-                    }
-                  },
-                  onCreatePressed: () async {
-                    if(_formKey.currentState == null || !_formKey.currentState!.validate()) return;
-                    
-                    await ref
-                      .read(hydrationViewModelProvider.notifier)
-                      .createCup(_cupTextController.text);
-                    
-                    if(context.mounted) {
-                      Navigator.of(context).pop();
-                    }
-                  },
-                ),
-              ),
-            );
-          },
+          onPressed: () => showCupCreationModal(context, data),
           child: const Icon(Icons.add),
         ),
       ),
       error: (_, error) => Scaffold(body: Center(child: Text(error.toString()))),
       loading: () => const Scaffold(body: Center(child: CircularProgressIndicator())),
+    );
+  }
+
+  void showCupCreationModal(BuildContext context, HydrationState data) {
+    _cupTextController.clear();
+    
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      builder: (context) => Padding(
+        padding: EdgeInsets.only(
+          bottom: MediaQuery.of(context).viewInsets.bottom,
+          left: 20,
+          right: 20,
+          top: 20,
+        ),
+        child: CupCreationForm(
+          formKey: _formKey,
+          controller: _cupTextController,
+          unitSystem: data.unitSystem,
+          validator: (value) {
+            final status = ref
+              .read(hydrationViewModelProvider.notifier)
+              .validateCupValue(value);
+            
+            switch(status) {
+              case .noInput:
+                return 'inputRequired'.tr(namedArgs: {'requiredInput': 'cupValue'.tr().toLowerCase()});
+              case .outOfBoundaries:
+                return 'inputRequirement'.tr(namedArgs: {'minValue': CupValue.minValueFor(data.unitSystem).toString(), 'maxValue': CupValue.maxValueFor(data.unitSystem).toString()});
+              default: return null;
+            }
+          },
+          onCreatePressed: () async {
+            if(_formKey.currentState == null || !_formKey.currentState!.validate()) return;
+            
+            await ref
+              .read(hydrationViewModelProvider.notifier)
+              .createCup(_cupTextController.text);
+            
+            if(context.mounted) {
+              Navigator.of(context).pop();
+            }
+          },
+        ),
+      ),
     );
   }
 }
