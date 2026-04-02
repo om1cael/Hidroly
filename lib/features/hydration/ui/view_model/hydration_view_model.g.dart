@@ -34,7 +34,7 @@ final class HydrationViewModelProvider
 }
 
 String _$hydrationViewModelHash() =>
-    r'cae917aafae2c86cd8f11ec1390591f47a4e97ed';
+    r'7de6b6a7eb96950e49aa5503e1d4771ed8e1b6d8';
 
 abstract class _$HydrationViewModel extends $AsyncNotifier<HydrationState> {
   FutureOr<HydrationState> build();

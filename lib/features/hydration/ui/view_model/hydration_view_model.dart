@@ -44,6 +44,13 @@ class HydrationViewModel extends _$HydrationViewModel {
     ref.invalidateSelf();
   }
 
+  Future<void> removeWater(int historyItemId, int amount) async {
+    final hydrationRepository = ref.read(hydrationRepositoryProvider);
+
+    await hydrationRepository.removeWater(state.requireValue.day.id, historyItemId, amount);
+    ref.invalidateSelf();
+  }
+
   InputStatus validateCupValue(String? cupValueText) {
     if(cupValueText == null || cupValueText.isEmpty) {
       return .noInput;

@@ -5,6 +5,7 @@ import 'package:hidroly/features/hydration/domain/value_objects/water.dart';
 extension CupsTableDataX on CupsTableData {
   Cup toEntity() {
     return Cup(
+      id: id,
       dayId: day, 
       amount: Water(amount), 
       createdAt: createdAt

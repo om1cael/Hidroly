@@ -39,4 +39,26 @@ class HydrationRepositoryImpl implements HydrationRepository {
         ));
     });
   }
+  
+  @override
+  Future<void> removeWater(int dayId, int historyItemId, int amount) async {
+    await _database.transaction(() async {
+      final day = await (_database.select(_database.dayTable)
+        ..where((day) => day.id.equals(dayId)))
+        .getSingle();
+
+      final newCurrentAmount = day.currentAmount - amount;
+      if(newCurrentAmount < 0) return;
+
+      await (_database.update(_database.dayTable)
+        ..where((day) => day.id.equals(dayId)))
+        .write(DayTableCompanion(
+          currentAmount: Value(newCurrentAmount)
+      ));
+
+      await (_database.delete(_database.historyItemsTable)
+        ..where((item) => item.id.equals(historyItemId)))
+        .go();
+    });
+  }
 }

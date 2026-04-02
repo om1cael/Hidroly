@@ -5,6 +5,7 @@ import 'package:hidroly/features/hydration/domain/value_objects/water.dart';
 extension HistoryITemTableDataX on HistoryItemsTableData {
   HistoryItem toEntity() {
     return HistoryItem(
+      id: id,
       dayId: day, 
       amount: Water(amount), 
       createdAt: createdAt
