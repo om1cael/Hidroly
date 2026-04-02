@@ -1,16 +1,21 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hidroly/features/hydration/ui/extensions/unit_system_ui_extension.dart';
+import 'package:hidroly/features/hydration/ui/view/components/history_item_card.dart';
 import 'package:hidroly/features/hydration/ui/view_model/hydration_view_model.dart';
 
-class HistoryModal extends ConsumerWidget {
-  const HistoryModal({
-    super.key,
-  });
+class HistoryModal extends ConsumerStatefulWidget {
+  const HistoryModal({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<HistoryModal> createState() => _HistoryModalState();
+}
+
+class _HistoryModalState extends ConsumerState<HistoryModal> {
+  // A Key agora fica guardada no State e não morre no rebuild
+  final GlobalKey<AnimatedListState> _animatedListKey = GlobalKey<AnimatedListState>();
+
+  @override
+  Widget build(BuildContext context) {
     final stateModal = ref.watch(hydrationViewModelProvider);
 
     return stateModal.when(
@@ -26,40 +31,27 @@ class HistoryModal extends ConsumerWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text('History', style: Theme.of(context).textTheme.titleLarge,),
-            SizedBox(height: 12,),
+            Text(
+              'History',
+              style: Theme.of(context).textTheme.titleLarge,
+            ),
+            const SizedBox(height: 12),
             Expanded(
-              child: ListView.separated(
-                itemCount: data.history.length,
+              child: AnimatedList.separated(
+                key: _animatedListKey,
+                initialItemCount: data.history.length,
                 shrinkWrap: true,
-                itemBuilder: (_, index) {
+                itemBuilder: (context, index, animation) {
                   final historyItem = data.history[index];
-              
-                  return Card.filled(
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
-                    child: ListTile(
-                      leading: CircleAvatar(
-                        child: Icon(Icons.water_drop),
-                      ),
-                      title: Text('historyItemTitle'.tr(
-                        namedArgs: {
-                          'amount': historyItem.amount.valueIn(data.unitSystem).toString(),
-                          'unitLabel': data.unitSystem.unitLabel,
-                        }
-                      )),
-                      subtitle: Text('historyItemSubtitle'.tr(
-                        namedArgs: {
-                          'time': DateFormat.jm().format(historyItem.createdAt),
-                        },
-                      )),
-                      trailing: IconButton(
-                        onPressed: () => ref.read(hydrationViewModelProvider.notifier).removeWater(historyItem.id, historyItem.amount.ml), 
-                        icon: Icon(Icons.delete),
-                      ),
-                    ),
+
+                  return HistoryItemCard(
+                    historyItem: historyItem,
+                    unitSystem: data.unitSystem,
+                    animatedListKey: _animatedListKey,
                   );
                 },
-                separatorBuilder: (_, _) => SizedBox(height: 6,),
+                separatorBuilder: (_, _, _) => SizedBox(height: 6,),
+                removedSeparatorBuilder: (_, _, _) => SizedBox(height: 6,), 
               ),
             ),
           ],
