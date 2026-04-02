@@ -24,12 +24,18 @@ class HydrationProgressIndicator extends StatelessWidget {
         alignment: Alignment.center,
         children: [
           SizedBox.expand(
-            child: CircularProgressIndicator(
-              value: progress,
-              strokeWidth: 16,
-              strokeCap: StrokeCap.round,
-              backgroundColor: Theme.of(context).colorScheme.surfaceContainer,
-              color: Theme.of(context).colorScheme.primary,
+            child: TweenAnimationBuilder<double>(
+              tween: Tween<double>(begin: 0, end: progress),
+              duration: const Duration(milliseconds: 500),
+              builder: (_, value, _) {
+                return CircularProgressIndicator(
+                  value: value,
+                  strokeWidth: 16,
+                  strokeCap: StrokeCap.round,
+                  backgroundColor: Theme.of(context).colorScheme.surfaceContainer,
+                  color: Theme.of(context).colorScheme.primary,
+                );
+              },
             ),
           ),
           Column(
