@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hidroly/features/hydration/ui/view/components/history_item_card.dart';
@@ -66,8 +67,8 @@ class _HistoryModalState extends ConsumerState<HistoryModal> {
                         padding: const EdgeInsets.only(left: 16, right: 16),
                         child: Column(
                           children: [
-                            Text('Let\'s fill it up!', style: Theme.of(context).textTheme.titleLarge,),
-                            Text('It looks like you haven\'t tracked any water today. Ready to start?', textAlign: .center,)
+                            Text('emptyHistoryTitle'.tr(), style: Theme.of(context).textTheme.titleLarge,),
+                            Text('emptyHistorySubtitle'.tr(), textAlign: .center,)
                           ],
                         ),
                       )

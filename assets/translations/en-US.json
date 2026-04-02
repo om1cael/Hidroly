@@ -26,5 +26,7 @@
     "inputRequirement": "Please, enter a value between {minValue} and {maxValue}",
     "cupInputHint": "e.g. {amount}",
     "historyItemTitle": "{amount} {unitLabel}",
-    "historyItemSubtitle": "at {time}"
+    "historyItemSubtitle": "at {time}",
+    "emptyHistoryTitle": "Let's fill it up!",
+    "emptyHistorySubtitle": "It looks like you haven't tracked any water today. Ready to start?"
 }
