@@ -11,5 +11,5 @@ class HistoryItemsTable extends Table {
   )();
   
   IntColumn get amount => integer()();
-  DateTimeColumn get createdAt => dateTime().withDefault(currentDate)();
+  DateTimeColumn get createdAt => dateTime().withDefault(currentDateAndTime)();
 }

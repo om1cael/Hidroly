@@ -24,5 +24,7 @@
     "create": "Create",
     "cupValue": "Cup value",
     "inputRequirement": "Please, enter a value between {minValue} and {maxValue}",
-    "cupInputHint": "e.g. {amount}"
+    "cupInputHint": "e.g. {amount}",
+    "historyItemTitle": "{amount} {unitLabel}",
+    "historyItemSubtitle": "at {time}"
 }

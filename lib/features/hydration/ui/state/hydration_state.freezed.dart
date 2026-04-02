@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$HydrationState {
 
- Day get day; List<Cup> get cups; UnitSystem get unitSystem;
+ Day get day; List<Cup> get cups; List<HistoryItem> get history; UnitSystem get unitSystem;
 /// Create a copy of HydrationState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $HydrationStateCopyWith<HydrationState> get copyWith => _$HydrationStateCopyWith
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is HydrationState&&(identical(other.day, day) || other.day == day)&&const DeepCollectionEquality().equals(other.cups, cups)&&(identical(other.unitSystem, unitSystem) || other.unitSystem == unitSystem));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is HydrationState&&(identical(other.day, day) || other.day == day)&&const DeepCollectionEquality().equals(other.cups, cups)&&const DeepCollectionEquality().equals(other.history, history)&&(identical(other.unitSystem, unitSystem) || other.unitSystem == unitSystem));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,day,const DeepCollectionEquality().hash(cups),unitSystem);
+int get hashCode => Object.hash(runtimeType,day,const DeepCollectionEquality().hash(cups),const DeepCollectionEquality().hash(history),unitSystem);
 
 @override
 String toString() {
-  return 'HydrationState(day: $day, cups: $cups, unitSystem: $unitSystem)';
+  return 'HydrationState(day: $day, cups: $cups, history: $history, unitSystem: $unitSystem)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $HydrationStateCopyWith<$Res>  {
   factory $HydrationStateCopyWith(HydrationState value, $Res Function(HydrationState) _then) = _$HydrationStateCopyWithImpl;
 @useResult
 $Res call({
- Day day, List<Cup> cups, UnitSystem unitSystem
+ Day day, List<Cup> cups, List<HistoryItem> history, UnitSystem unitSystem
 });
 
 
@@ -62,11 +62,12 @@ class _$HydrationStateCopyWithImpl<$Res>
 
 /// Create a copy of HydrationState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? day = null,Object? cups = null,Object? unitSystem = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? day = null,Object? cups = null,Object? history = null,Object? unitSystem = null,}) {
   return _then(_self.copyWith(
 day: null == day ? _self.day : day // ignore: cast_nullable_to_non_nullable
 as Day,cups: null == cups ? _self.cups : cups // ignore: cast_nullable_to_non_nullable
-as List<Cup>,unitSystem: null == unitSystem ? _self.unitSystem : unitSystem // ignore: cast_nullable_to_non_nullable
+as List<Cup>,history: null == history ? _self.history : history // ignore: cast_nullable_to_non_nullable
+as List<HistoryItem>,unitSystem: null == unitSystem ? _self.unitSystem : unitSystem // ignore: cast_nullable_to_non_nullable
 as UnitSystem,
   ));
 }
@@ -161,10 +162,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( Day day,  List<Cup> cups,  UnitSystem unitSystem)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( Day day,  List<Cup> cups,  List<HistoryItem> history,  UnitSystem unitSystem)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _HydrationState() when $default != null:
-return $default(_that.day,_that.cups,_that.unitSystem);case _:
+return $default(_that.day,_that.cups,_that.history,_that.unitSystem);case _:
   return orElse();
 
 }
@@ -182,10 +183,10 @@ return $default(_that.day,_that.cups,_that.unitSystem);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( Day day,  List<Cup> cups,  UnitSystem unitSystem)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( Day day,  List<Cup> cups,  List<HistoryItem> history,  UnitSystem unitSystem)  $default,) {final _that = this;
 switch (_that) {
 case _HydrationState():
-return $default(_that.day,_that.cups,_that.unitSystem);case _:
+return $default(_that.day,_that.cups,_that.history,_that.unitSystem);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -202,10 +203,10 @@ return $default(_that.day,_that.cups,_that.unitSystem);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( Day day,  List<Cup> cups,  UnitSystem unitSystem)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( Day day,  List<Cup> cups,  List<HistoryItem> history,  UnitSystem unitSystem)?  $default,) {final _that = this;
 switch (_that) {
 case _HydrationState() when $default != null:
-return $default(_that.day,_that.cups,_that.unitSystem);case _:
+return $default(_that.day,_that.cups,_that.history,_that.unitSystem);case _:
   return null;
 
 }
@@ -217,7 +218,7 @@ return $default(_that.day,_that.cups,_that.unitSystem);case _:
 
 
 class _HydrationState implements HydrationState {
-  const _HydrationState({required this.day, required final  List<Cup> cups, this.unitSystem = UnitSystem.metric}): _cups = cups;
+  const _HydrationState({required this.day, required final  List<Cup> cups, required final  List<HistoryItem> history, this.unitSystem = UnitSystem.metric}): _cups = cups,_history = history;
   
 
 @override final  Day day;
@@ -226,6 +227,13 @@ class _HydrationState implements HydrationState {
   if (_cups is EqualUnmodifiableListView) return _cups;
   // ignore: implicit_dynamic_type
   return EqualUnmodifiableListView(_cups);
+}
+
+ final  List<HistoryItem> _history;
+@override List<HistoryItem> get history {
+  if (_history is EqualUnmodifiableListView) return _history;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_history);
 }
 
 @override@JsonKey() final  UnitSystem unitSystem;
@@ -240,16 +248,16 @@ _$HydrationStateCopyWith<_HydrationState> get copyWith => __$HydrationStateCopyW
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _HydrationState&&(identical(other.day, day) || other.day == day)&&const DeepCollectionEquality().equals(other._cups, _cups)&&(identical(other.unitSystem, unitSystem) || other.unitSystem == unitSystem));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _HydrationState&&(identical(other.day, day) || other.day == day)&&const DeepCollectionEquality().equals(other._cups, _cups)&&const DeepCollectionEquality().equals(other._history, _history)&&(identical(other.unitSystem, unitSystem) || other.unitSystem == unitSystem));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,day,const DeepCollectionEquality().hash(_cups),unitSystem);
+int get hashCode => Object.hash(runtimeType,day,const DeepCollectionEquality().hash(_cups),const DeepCollectionEquality().hash(_history),unitSystem);
 
 @override
 String toString() {
-  return 'HydrationState(day: $day, cups: $cups, unitSystem: $unitSystem)';
+  return 'HydrationState(day: $day, cups: $cups, history: $history, unitSystem: $unitSystem)';
 }
 
 
@@ -260,7 +268,7 @@ abstract mixin class _$HydrationStateCopyWith<$Res> implements $HydrationStateCo
   factory _$HydrationStateCopyWith(_HydrationState value, $Res Function(_HydrationState) _then) = __$HydrationStateCopyWithImpl;
 @override @useResult
 $Res call({
- Day day, List<Cup> cups, UnitSystem unitSystem
+ Day day, List<Cup> cups, List<HistoryItem> history, UnitSystem unitSystem
 });
 
 
@@ -277,11 +285,12 @@ class __$HydrationStateCopyWithImpl<$Res>
 
 /// Create a copy of HydrationState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? day = null,Object? cups = null,Object? unitSystem = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? day = null,Object? cups = null,Object? history = null,Object? unitSystem = null,}) {
   return _then(_HydrationState(
 day: null == day ? _self.day : day // ignore: cast_nullable_to_non_nullable
 as Day,cups: null == cups ? _self._cups : cups // ignore: cast_nullable_to_non_nullable
-as List<Cup>,unitSystem: null == unitSystem ? _self.unitSystem : unitSystem // ignore: cast_nullable_to_non_nullable
+as List<Cup>,history: null == history ? _self._history : history // ignore: cast_nullable_to_non_nullable
+as List<HistoryItem>,unitSystem: null == unitSystem ? _self.unitSystem : unitSystem // ignore: cast_nullable_to_non_nullable
 as UnitSystem,
   ));
 }

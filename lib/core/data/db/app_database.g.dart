@@ -656,7 +656,7 @@ class $HistoryItemsTableTable extends HistoryItemsTable
     false,
     type: DriftSqlType.dateTime,
     requiredDuringInsert: false,
-    defaultValue: currentDate,
+    defaultValue: currentDateAndTime,
   );
   @override
   List<GeneratedColumn> get $columns => [id, day, amount, createdAt];

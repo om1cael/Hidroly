@@ -39,6 +39,64 @@ class _HydrationViewState extends ConsumerState<HydrationView> {
 
     return state.when(
       data: (data) => Scaffold(
+        appBar: AppBar(
+          actions: [
+            IconButton(
+              onPressed: () {
+                showModalBottomSheet(
+                  context: context,
+                  builder: (context) => Padding(
+                    padding: EdgeInsets.only(
+                      bottom: MediaQuery.of(context).viewInsets.bottom + 20,
+                      left: 20,
+                      right: 20,
+                      top: 20,
+                    ),
+                    child: Column(
+                      crossAxisAlignment: .center,
+                      children: [
+                        Text('History', style: Theme.of(context).textTheme.titleLarge,),
+                        SizedBox(height: 12,),
+                        Expanded(
+                          child: ListView.separated(
+                            itemCount: data.history.length,
+                            shrinkWrap: true,
+                            itemBuilder: (_, index) {
+                              final historyItem = data.history[index];
+                          
+                              return Card.filled(
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadiusGeometry.circular(24)),
+                                child: ListTile(
+                                  leading: CircleAvatar(
+                                    child: Icon(Icons.water_drop),
+                                  ),
+                                  title: Text('historyItemTitle'.tr(
+                                    namedArgs: {
+                                      'amount': historyItem.amount.valueIn(data.unitSystem).toString(),
+                                      'unitLabel': data.unitSystem.unitLabel,
+                                    },
+                                  )),
+                                  subtitle: Text('historyItemSubtitle'.tr(
+                                    namedArgs: {
+                                      'time': DateFormat.jm().format(historyItem.createdAt),
+                                    },
+                                  )),
+                                  trailing: Icon(Icons.delete),
+                                ),
+                              );
+                            },
+                            separatorBuilder: (_, _) => SizedBox(height: 8,),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              }, 
+              icon: Icon(Icons.history),
+            ),
+          ],
+        ),
         body: SafeArea(
           minimum: EdgeInsets.all(24.0),
           child: Center(

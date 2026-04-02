@@ -4,6 +4,7 @@ import 'package:hidroly/core/domain/enums/unit_systems.dart';
 import 'package:hidroly/core/domain/exceptions/invalid_input_exception.dart';
 import 'package:hidroly/core/ui/enums/input_status.dart';
 import 'package:hidroly/features/hydration/data/repositories/cup_repository_impl.dart';
+import 'package:hidroly/features/hydration/data/repositories/history_item_repository_impl.dart';
 import 'package:hidroly/features/hydration/data/repositories/hydration_repository_impl.dart';
 import 'package:hidroly/features/hydration/domain/value_objects/cup_value.dart';
 import 'package:hidroly/features/hydration/ui/state/hydration_state.dart';
@@ -16,14 +17,16 @@ class HydrationViewModel extends _$HydrationViewModel {
   @override
   Future<HydrationState> build() async {
     final dayRepository = ref.watch(dayRepositoryProvider);
+    final historyRepository = ref.watch(historyItemRepositoryProvider);
     final cupRepository = ref.watch(cupRepositoryProvider);
     final settingsRepository = ref.watch(settingsRepositoryProvider);
 
     final day = await dayRepository.read(1);
-    final cups = await cupRepository.readAll(day!.id);
+    final history = await historyRepository.readAll(day!.id);
+    final cups = await cupRepository.readAll(day.id);
     final unitSystem = await settingsRepository.readUnitSystem();
 
-    return HydrationState(day: day, unitSystem: unitSystem, cups: cups);
+    return HydrationState(day: day, history: history, unitSystem: unitSystem, cups: cups);
   }
 
   Future<void> createCup(String value) async {

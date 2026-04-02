@@ -2,6 +2,15 @@ import 'package:hidroly/core/data/db/app_database.dart';
 import 'package:hidroly/features/hydration/data/mappers/history_item_mapper.dart';
 import 'package:hidroly/features/hydration/domain/entities/history_item.dart';
 import 'package:hidroly/features/hydration/domain/repositories/history_item_repository.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
+
+part 'history_item_repository_impl.g.dart';
+
+@riverpod
+HistoryItemRepository historyItemRepository(Ref ref) {
+  final appDatabase = ref.watch(appDatabaseProvider);
+  return HistoryItemRepositoryImpl(appDatabase);
+}
 
 class HistoryItemRepositoryImpl implements HistoryItemRepository {
   final AppDatabase _database;
