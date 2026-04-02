@@ -17,13 +17,20 @@ class HydrationRepositoryImpl implements HydrationRepository {
   const HydrationRepositoryImpl(this._database);
   
   @override
-  Future<void> addWater(int dayId, int amount) async {
+  Future<void> addWater(int dayId, int waterAmount) async {
     await _database.transaction(() async {
       final day = await (_database.select(_database.dayTable)
         ..where((day) => day.id.equals(dayId)))
         .getSingle();
       
-      final newCurrentAmount = day.currentAmount + amount;
+      final newCurrentAmount = day.currentAmount + waterAmount;
+
+      await _database.into(_database.historyItemsTable).insert(
+        HistoryItemsTableCompanion(
+          day: Value(day.id),
+          amount: Value(waterAmount),
+        )
+      );
 
       await (_database.update(_database.dayTable)
         ..where((day) => day.id.equals(dayId)))
