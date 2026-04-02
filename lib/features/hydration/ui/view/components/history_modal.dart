@@ -11,7 +11,6 @@ class HistoryModal extends ConsumerStatefulWidget {
 }
 
 class _HistoryModalState extends ConsumerState<HistoryModal> {
-  // A Key agora fica guardada no State e não morre no rebuild
   final GlobalKey<AnimatedListState> _animatedListKey = GlobalKey<AnimatedListState>();
 
   @override
@@ -36,24 +35,45 @@ class _HistoryModalState extends ConsumerState<HistoryModal> {
               style: Theme.of(context).textTheme.titleLarge,
             ),
             const SizedBox(height: 12),
-            Expanded(
-              child: AnimatedList.separated(
-                key: _animatedListKey,
-                initialItemCount: data.history.length,
-                shrinkWrap: true,
-                itemBuilder: (context, index, animation) {
-                  final historyItem = data.history[index];
+            
+            if (data.history.isNotEmpty) 
+              Expanded(
+                child: AnimatedList.separated(
+                  key: _animatedListKey,
+                  initialItemCount: data.history.length,
+                  shrinkWrap: true,
+                  itemBuilder: (context, index, animation) {
+                    final historyItem = data.history[index];
 
-                  return HistoryItemCard(
-                    historyItem: historyItem,
-                    unitSystem: data.unitSystem,
-                    animatedListKey: _animatedListKey,
-                  );
-                },
-                separatorBuilder: (_, _, _) => SizedBox(height: 6,),
-                removedSeparatorBuilder: (_, _, _) => SizedBox(height: 6,), 
-              ),
-            ),
+                    return HistoryItemCard(
+                      historyItem: historyItem,
+                      unitSystem: data.unitSystem,
+                      animatedListKey: _animatedListKey,
+                    );
+                  },
+                  separatorBuilder: (_, _, _) => SizedBox(height: 6,),
+                  removedSeparatorBuilder: (_, _, _) => SizedBox(height: 6,), 
+                ),
+              ) else Expanded(
+                child: Column(
+                    mainAxisAlignment: .center,
+                    crossAxisAlignment: .stretch,
+                    spacing: 6,
+                    children: [
+                      Icon(Icons.air, size: 64,),
+                      
+                      Padding(
+                        padding: const EdgeInsets.only(left: 16, right: 16),
+                        child: Column(
+                          children: [
+                            Text('Let\'s fill it up!', style: Theme.of(context).textTheme.titleLarge,),
+                            Text('It looks like you haven\'t tracked any water today. Ready to start?', textAlign: .center,)
+                          ],
+                        ),
+                      )
+                    ],
+                ),
+              )
           ],
         ),
       ),
