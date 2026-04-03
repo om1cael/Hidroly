@@ -17,6 +17,9 @@ class HydrationView extends ConsumerStatefulWidget {
   ConsumerState<HydrationView> createState() => _HydrationViewState();
 }
 
+// TODO: Load current day
+// TODO: Create new day if necessary
+// TODO: Make it possible to select a day using the date picker
 class _HydrationViewState extends ConsumerState<HydrationView> {
   late final TextEditingController _cupTextController;
   late final GlobalKey<FormState> _formKey;
@@ -41,6 +44,18 @@ class _HydrationViewState extends ConsumerState<HydrationView> {
     return state.when(
       data: (data) => Scaffold(
         appBar: AppBar(
+          title: TextButton(
+            onPressed: () {}, 
+            child: Row(
+              mainAxisSize: .min,
+              crossAxisAlignment: .center,
+              mainAxisAlignment: .center,
+              children: [
+                Text('Today', style: Theme.of(context).textTheme.titleLarge,),
+                Icon(Icons.arrow_drop_down, size: 24,),
+              ],
+            ),
+          ),
           actions: [
             IconButton(
               onPressed: () => showModalBottomSheet(context: context, builder: (_) => HistoryModal()),
