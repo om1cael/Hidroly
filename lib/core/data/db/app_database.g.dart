@@ -55,7 +55,7 @@ class $DayTableTable extends DayTable
     false,
     type: DriftSqlType.dateTime,
     requiredDuringInsert: false,
-    defaultValue: currentDate,
+    defaultValue: currentDateAndTime,
   );
   @override
   List<GeneratedColumn> get $columns => [
@@ -328,18 +328,6 @@ class $CupsTableTable extends CupsTable
       'PRIMARY KEY AUTOINCREMENT',
     ),
   );
-  static const VerificationMeta _dayMeta = const VerificationMeta('day');
-  @override
-  late final GeneratedColumn<int> day = GeneratedColumn<int>(
-    'day',
-    aliasedName,
-    false,
-    type: DriftSqlType.int,
-    requiredDuringInsert: true,
-    defaultConstraints: GeneratedColumn.constraintIsAlways(
-      'REFERENCES day_table (id) ON UPDATE CASCADE ON DELETE CASCADE',
-    ),
-  );
   static const VerificationMeta _amountMeta = const VerificationMeta('amount');
   @override
   late final GeneratedColumn<int> amount = GeneratedColumn<int>(
@@ -362,7 +350,7 @@ class $CupsTableTable extends CupsTable
     defaultValue: currentDate,
   );
   @override
-  List<GeneratedColumn> get $columns => [id, day, amount, createdAt];
+  List<GeneratedColumn> get $columns => [id, amount, createdAt];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
@@ -377,14 +365,6 @@ class $CupsTableTable extends CupsTable
     final data = instance.toColumns(true);
     if (data.containsKey('id')) {
       context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
-    }
-    if (data.containsKey('day')) {
-      context.handle(
-        _dayMeta,
-        day.isAcceptableOrUnknown(data['day']!, _dayMeta),
-      );
-    } else if (isInserting) {
-      context.missing(_dayMeta);
     }
     if (data.containsKey('amount')) {
       context.handle(
@@ -413,10 +393,6 @@ class $CupsTableTable extends CupsTable
         DriftSqlType.int,
         data['${effectivePrefix}id'],
       )!,
-      day: attachedDatabase.typeMapping.read(
-        DriftSqlType.int,
-        data['${effectivePrefix}day'],
-      )!,
       amount: attachedDatabase.typeMapping.read(
         DriftSqlType.int,
         data['${effectivePrefix}amount'],
@@ -436,12 +412,10 @@ class $CupsTableTable extends CupsTable
 
 class CupsTableData extends DataClass implements Insertable<CupsTableData> {
   final int id;
-  final int day;
   final int amount;
   final DateTime createdAt;
   const CupsTableData({
     required this.id,
-    required this.day,
     required this.amount,
     required this.createdAt,
   });
@@ -449,7 +423,6 @@ class CupsTableData extends DataClass implements Insertable<CupsTableData> {
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     map['id'] = Variable<int>(id);
-    map['day'] = Variable<int>(day);
     map['amount'] = Variable<int>(amount);
     map['created_at'] = Variable<DateTime>(createdAt);
     return map;
@@ -458,7 +431,6 @@ class CupsTableData extends DataClass implements Insertable<CupsTableData> {
   CupsTableCompanion toCompanion(bool nullToAbsent) {
     return CupsTableCompanion(
       id: Value(id),
-      day: Value(day),
       amount: Value(amount),
       createdAt: Value(createdAt),
     );
@@ -471,7 +443,6 @@ class CupsTableData extends DataClass implements Insertable<CupsTableData> {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return CupsTableData(
       id: serializer.fromJson<int>(json['id']),
-      day: serializer.fromJson<int>(json['day']),
       amount: serializer.fromJson<int>(json['amount']),
       createdAt: serializer.fromJson<DateTime>(json['createdAt']),
     );
@@ -481,27 +452,20 @@ class CupsTableData extends DataClass implements Insertable<CupsTableData> {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
       'id': serializer.toJson<int>(id),
-      'day': serializer.toJson<int>(day),
       'amount': serializer.toJson<int>(amount),
       'createdAt': serializer.toJson<DateTime>(createdAt),
     };
   }
 
-  CupsTableData copyWith({
-    int? id,
-    int? day,
-    int? amount,
-    DateTime? createdAt,
-  }) => CupsTableData(
-    id: id ?? this.id,
-    day: day ?? this.day,
-    amount: amount ?? this.amount,
-    createdAt: createdAt ?? this.createdAt,
-  );
+  CupsTableData copyWith({int? id, int? amount, DateTime? createdAt}) =>
+      CupsTableData(
+        id: id ?? this.id,
+        amount: amount ?? this.amount,
+        createdAt: createdAt ?? this.createdAt,
+      );
   CupsTableData copyWithCompanion(CupsTableCompanion data) {
     return CupsTableData(
       id: data.id.present ? data.id.value : this.id,
-      day: data.day.present ? data.day.value : this.day,
       amount: data.amount.present ? data.amount.value : this.amount,
       createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
     );
@@ -511,7 +475,6 @@ class CupsTableData extends DataClass implements Insertable<CupsTableData> {
   String toString() {
     return (StringBuffer('CupsTableData(')
           ..write('id: $id, ')
-          ..write('day: $day, ')
           ..write('amount: $amount, ')
           ..write('createdAt: $createdAt')
           ..write(')'))
@@ -519,44 +482,37 @@ class CupsTableData extends DataClass implements Insertable<CupsTableData> {
   }
 
   @override
-  int get hashCode => Object.hash(id, day, amount, createdAt);
+  int get hashCode => Object.hash(id, amount, createdAt);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
       (other is CupsTableData &&
           other.id == this.id &&
-          other.day == this.day &&
           other.amount == this.amount &&
           other.createdAt == this.createdAt);
 }
 
 class CupsTableCompanion extends UpdateCompanion<CupsTableData> {
   final Value<int> id;
-  final Value<int> day;
   final Value<int> amount;
   final Value<DateTime> createdAt;
   const CupsTableCompanion({
     this.id = const Value.absent(),
-    this.day = const Value.absent(),
     this.amount = const Value.absent(),
     this.createdAt = const Value.absent(),
   });
   CupsTableCompanion.insert({
     this.id = const Value.absent(),
-    required int day,
     required int amount,
     this.createdAt = const Value.absent(),
-  }) : day = Value(day),
-       amount = Value(amount);
+  }) : amount = Value(amount);
   static Insertable<CupsTableData> custom({
     Expression<int>? id,
-    Expression<int>? day,
     Expression<int>? amount,
     Expression<DateTime>? createdAt,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
-      if (day != null) 'day': day,
       if (amount != null) 'amount': amount,
       if (createdAt != null) 'created_at': createdAt,
     });
@@ -564,13 +520,11 @@ class CupsTableCompanion extends UpdateCompanion<CupsTableData> {
 
   CupsTableCompanion copyWith({
     Value<int>? id,
-    Value<int>? day,
     Value<int>? amount,
     Value<DateTime>? createdAt,
   }) {
     return CupsTableCompanion(
       id: id ?? this.id,
-      day: day ?? this.day,
       amount: amount ?? this.amount,
       createdAt: createdAt ?? this.createdAt,
     );
@@ -581,9 +535,6 @@ class CupsTableCompanion extends UpdateCompanion<CupsTableData> {
     final map = <String, Expression>{};
     if (id.present) {
       map['id'] = Variable<int>(id.value);
-    }
-    if (day.present) {
-      map['day'] = Variable<int>(day.value);
     }
     if (amount.present) {
       map['amount'] = Variable<int>(amount.value);
@@ -598,7 +549,6 @@ class CupsTableCompanion extends UpdateCompanion<CupsTableData> {
   String toString() {
     return (StringBuffer('CupsTableCompanion(')
           ..write('id: $id, ')
-          ..write('day: $day, ')
           ..write('amount: $amount, ')
           ..write('createdAt: $createdAt')
           ..write(')'))
@@ -928,20 +878,6 @@ abstract class _$AppDatabase extends GeneratedDatabase {
         'day_table',
         limitUpdateKind: UpdateKind.delete,
       ),
-      result: [TableUpdate('cups_table', kind: UpdateKind.delete)],
-    ),
-    WritePropagation(
-      on: TableUpdateQuery.onTableName(
-        'day_table',
-        limitUpdateKind: UpdateKind.update,
-      ),
-      result: [TableUpdate('cups_table', kind: UpdateKind.update)],
-    ),
-    WritePropagation(
-      on: TableUpdateQuery.onTableName(
-        'day_table',
-        limitUpdateKind: UpdateKind.delete,
-      ),
       result: [TableUpdate('history_items_table', kind: UpdateKind.delete)],
     ),
     WritePropagation(
@@ -972,24 +908,6 @@ typedef $$DayTableTableUpdateCompanionBuilder =
 final class $$DayTableTableReferences
     extends BaseReferences<_$AppDatabase, $DayTableTable, DayTableData> {
   $$DayTableTableReferences(super.$_db, super.$_table, super.$_typedResult);
-
-  static MultiTypedResultKey<$CupsTableTable, List<CupsTableData>>
-  _cupsTableRefsTable(_$AppDatabase db) => MultiTypedResultKey.fromTable(
-    db.cupsTable,
-    aliasName: $_aliasNameGenerator(db.dayTable.id, db.cupsTable.day),
-  );
-
-  $$CupsTableTableProcessedTableManager get cupsTableRefs {
-    final manager = $$CupsTableTableTableManager(
-      $_db,
-      $_db.cupsTable,
-    ).filter((f) => f.day.id.sqlEquals($_itemColumn<int>('id')!));
-
-    final cache = $_typedResult.readTableOrNull(_cupsTableRefsTable($_db));
-    return ProcessedTableManager(
-      manager.$state.copyWith(prefetchedData: cache),
-    );
-  }
 
   static MultiTypedResultKey<
     $HistoryItemsTableTable,
@@ -1047,31 +965,6 @@ class $$DayTableTableFilterComposer
     column: $table.createdAt,
     builder: (column) => ColumnFilters(column),
   );
-
-  Expression<bool> cupsTableRefs(
-    Expression<bool> Function($$CupsTableTableFilterComposer f) f,
-  ) {
-    final $$CupsTableTableFilterComposer composer = $composerBuilder(
-      composer: this,
-      getCurrentColumn: (t) => t.id,
-      referencedTable: $db.cupsTable,
-      getReferencedColumn: (t) => t.day,
-      builder:
-          (
-            joinBuilder, {
-            $addJoinBuilderToRootComposer,
-            $removeJoinBuilderFromRootComposer,
-          }) => $$CupsTableTableFilterComposer(
-            $db: $db,
-            $table: $db.cupsTable,
-            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-            joinBuilder: joinBuilder,
-            $removeJoinBuilderFromRootComposer:
-                $removeJoinBuilderFromRootComposer,
-          ),
-    );
-    return f(composer);
-  }
 
   Expression<bool> historyItemsTableRefs(
     Expression<bool> Function($$HistoryItemsTableTableFilterComposer f) f,
@@ -1152,31 +1045,6 @@ class $$DayTableTableAnnotationComposer
   GeneratedColumn<DateTime> get createdAt =>
       $composableBuilder(column: $table.createdAt, builder: (column) => column);
 
-  Expression<T> cupsTableRefs<T extends Object>(
-    Expression<T> Function($$CupsTableTableAnnotationComposer a) f,
-  ) {
-    final $$CupsTableTableAnnotationComposer composer = $composerBuilder(
-      composer: this,
-      getCurrentColumn: (t) => t.id,
-      referencedTable: $db.cupsTable,
-      getReferencedColumn: (t) => t.day,
-      builder:
-          (
-            joinBuilder, {
-            $addJoinBuilderToRootComposer,
-            $removeJoinBuilderFromRootComposer,
-          }) => $$CupsTableTableAnnotationComposer(
-            $db: $db,
-            $table: $db.cupsTable,
-            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-            joinBuilder: joinBuilder,
-            $removeJoinBuilderFromRootComposer:
-                $removeJoinBuilderFromRootComposer,
-          ),
-    );
-    return f(composer);
-  }
-
   Expression<T> historyItemsTableRefs<T extends Object>(
     Expression<T> Function($$HistoryItemsTableTableAnnotationComposer a) f,
   ) {
@@ -1217,10 +1085,7 @@ class $$DayTableTableTableManager
           $$DayTableTableUpdateCompanionBuilder,
           (DayTableData, $$DayTableTableReferences),
           DayTableData,
-          PrefetchHooks Function({
-            bool cupsTableRefs,
-            bool historyItemsTableRefs,
-          })
+          PrefetchHooks Function({bool historyItemsTableRefs})
         > {
   $$DayTableTableTableManager(_$AppDatabase db, $DayTableTable table)
     : super(
@@ -1265,63 +1130,37 @@ class $$DayTableTableTableManager
                 ),
               )
               .toList(),
-          prefetchHooksCallback:
-              ({cupsTableRefs = false, historyItemsTableRefs = false}) {
-                return PrefetchHooks(
-                  db: db,
-                  explicitlyWatchedTables: [
-                    if (cupsTableRefs) db.cupsTable,
-                    if (historyItemsTableRefs) db.historyItemsTable,
-                  ],
-                  addJoins: null,
-                  getPrefetchedDataCallback: (items) async {
-                    return [
-                      if (cupsTableRefs)
-                        await $_getPrefetchedData<
-                          DayTableData,
-                          $DayTableTable,
-                          CupsTableData
-                        >(
-                          currentTable: table,
-                          referencedTable: $$DayTableTableReferences
-                              ._cupsTableRefsTable(db),
-                          managerFromTypedResult: (p0) =>
-                              $$DayTableTableReferences(
-                                db,
-                                table,
-                                p0,
-                              ).cupsTableRefs,
-                          referencedItemsForCurrentItem:
-                              (item, referencedItems) => referencedItems.where(
-                                (e) => e.day == item.id,
-                              ),
-                          typedResults: items,
-                        ),
-                      if (historyItemsTableRefs)
-                        await $_getPrefetchedData<
-                          DayTableData,
-                          $DayTableTable,
-                          HistoryItemsTableData
-                        >(
-                          currentTable: table,
-                          referencedTable: $$DayTableTableReferences
-                              ._historyItemsTableRefsTable(db),
-                          managerFromTypedResult: (p0) =>
-                              $$DayTableTableReferences(
-                                db,
-                                table,
-                                p0,
-                              ).historyItemsTableRefs,
-                          referencedItemsForCurrentItem:
-                              (item, referencedItems) => referencedItems.where(
-                                (e) => e.day == item.id,
-                              ),
-                          typedResults: items,
-                        ),
-                    ];
-                  },
-                );
+          prefetchHooksCallback: ({historyItemsTableRefs = false}) {
+            return PrefetchHooks(
+              db: db,
+              explicitlyWatchedTables: [
+                if (historyItemsTableRefs) db.historyItemsTable,
+              ],
+              addJoins: null,
+              getPrefetchedDataCallback: (items) async {
+                return [
+                  if (historyItemsTableRefs)
+                    await $_getPrefetchedData<
+                      DayTableData,
+                      $DayTableTable,
+                      HistoryItemsTableData
+                    >(
+                      currentTable: table,
+                      referencedTable: $$DayTableTableReferences
+                          ._historyItemsTableRefsTable(db),
+                      managerFromTypedResult: (p0) => $$DayTableTableReferences(
+                        db,
+                        table,
+                        p0,
+                      ).historyItemsTableRefs,
+                      referencedItemsForCurrentItem: (item, referencedItems) =>
+                          referencedItems.where((e) => e.day == item.id),
+                      typedResults: items,
+                    ),
+                ];
               },
+            );
+          },
         ),
       );
 }
@@ -1338,45 +1177,20 @@ typedef $$DayTableTableProcessedTableManager =
       $$DayTableTableUpdateCompanionBuilder,
       (DayTableData, $$DayTableTableReferences),
       DayTableData,
-      PrefetchHooks Function({bool cupsTableRefs, bool historyItemsTableRefs})
+      PrefetchHooks Function({bool historyItemsTableRefs})
     >;
 typedef $$CupsTableTableCreateCompanionBuilder =
     CupsTableCompanion Function({
       Value<int> id,
-      required int day,
       required int amount,
       Value<DateTime> createdAt,
     });
 typedef $$CupsTableTableUpdateCompanionBuilder =
     CupsTableCompanion Function({
       Value<int> id,
-      Value<int> day,
       Value<int> amount,
       Value<DateTime> createdAt,
     });
-
-final class $$CupsTableTableReferences
-    extends BaseReferences<_$AppDatabase, $CupsTableTable, CupsTableData> {
-  $$CupsTableTableReferences(super.$_db, super.$_table, super.$_typedResult);
-
-  static $DayTableTable _dayTable(_$AppDatabase db) => db.dayTable.createAlias(
-    $_aliasNameGenerator(db.cupsTable.day, db.dayTable.id),
-  );
-
-  $$DayTableTableProcessedTableManager get day {
-    final $_column = $_itemColumn<int>('day')!;
-
-    final manager = $$DayTableTableTableManager(
-      $_db,
-      $_db.dayTable,
-    ).filter((f) => f.id.sqlEquals($_column));
-    final item = $_typedResult.readTableOrNull(_dayTable($_db));
-    if (item == null) return manager;
-    return ProcessedTableManager(
-      manager.$state.copyWith(prefetchedData: [item]),
-    );
-  }
-}
 
 class $$CupsTableTableFilterComposer
     extends Composer<_$AppDatabase, $CupsTableTable> {
@@ -1401,29 +1215,6 @@ class $$CupsTableTableFilterComposer
     column: $table.createdAt,
     builder: (column) => ColumnFilters(column),
   );
-
-  $$DayTableTableFilterComposer get day {
-    final $$DayTableTableFilterComposer composer = $composerBuilder(
-      composer: this,
-      getCurrentColumn: (t) => t.day,
-      referencedTable: $db.dayTable,
-      getReferencedColumn: (t) => t.id,
-      builder:
-          (
-            joinBuilder, {
-            $addJoinBuilderToRootComposer,
-            $removeJoinBuilderFromRootComposer,
-          }) => $$DayTableTableFilterComposer(
-            $db: $db,
-            $table: $db.dayTable,
-            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-            joinBuilder: joinBuilder,
-            $removeJoinBuilderFromRootComposer:
-                $removeJoinBuilderFromRootComposer,
-          ),
-    );
-    return composer;
-  }
 }
 
 class $$CupsTableTableOrderingComposer
@@ -1449,29 +1240,6 @@ class $$CupsTableTableOrderingComposer
     column: $table.createdAt,
     builder: (column) => ColumnOrderings(column),
   );
-
-  $$DayTableTableOrderingComposer get day {
-    final $$DayTableTableOrderingComposer composer = $composerBuilder(
-      composer: this,
-      getCurrentColumn: (t) => t.day,
-      referencedTable: $db.dayTable,
-      getReferencedColumn: (t) => t.id,
-      builder:
-          (
-            joinBuilder, {
-            $addJoinBuilderToRootComposer,
-            $removeJoinBuilderFromRootComposer,
-          }) => $$DayTableTableOrderingComposer(
-            $db: $db,
-            $table: $db.dayTable,
-            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-            joinBuilder: joinBuilder,
-            $removeJoinBuilderFromRootComposer:
-                $removeJoinBuilderFromRootComposer,
-          ),
-    );
-    return composer;
-  }
 }
 
 class $$CupsTableTableAnnotationComposer
@@ -1491,29 +1259,6 @@ class $$CupsTableTableAnnotationComposer
 
   GeneratedColumn<DateTime> get createdAt =>
       $composableBuilder(column: $table.createdAt, builder: (column) => column);
-
-  $$DayTableTableAnnotationComposer get day {
-    final $$DayTableTableAnnotationComposer composer = $composerBuilder(
-      composer: this,
-      getCurrentColumn: (t) => t.day,
-      referencedTable: $db.dayTable,
-      getReferencedColumn: (t) => t.id,
-      builder:
-          (
-            joinBuilder, {
-            $addJoinBuilderToRootComposer,
-            $removeJoinBuilderFromRootComposer,
-          }) => $$DayTableTableAnnotationComposer(
-            $db: $db,
-            $table: $db.dayTable,
-            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-            joinBuilder: joinBuilder,
-            $removeJoinBuilderFromRootComposer:
-                $removeJoinBuilderFromRootComposer,
-          ),
-    );
-    return composer;
-  }
 }
 
 class $$CupsTableTableTableManager
@@ -1527,9 +1272,12 @@ class $$CupsTableTableTableManager
           $$CupsTableTableAnnotationComposer,
           $$CupsTableTableCreateCompanionBuilder,
           $$CupsTableTableUpdateCompanionBuilder,
-          (CupsTableData, $$CupsTableTableReferences),
+          (
+            CupsTableData,
+            BaseReferences<_$AppDatabase, $CupsTableTable, CupsTableData>,
+          ),
           CupsTableData,
-          PrefetchHooks Function({bool day})
+          PrefetchHooks Function()
         > {
   $$CupsTableTableTableManager(_$AppDatabase db, $CupsTableTable table)
     : super(
@@ -1545,76 +1293,27 @@ class $$CupsTableTableTableManager
           updateCompanionCallback:
               ({
                 Value<int> id = const Value.absent(),
-                Value<int> day = const Value.absent(),
                 Value<int> amount = const Value.absent(),
                 Value<DateTime> createdAt = const Value.absent(),
               }) => CupsTableCompanion(
                 id: id,
-                day: day,
                 amount: amount,
                 createdAt: createdAt,
               ),
           createCompanionCallback:
               ({
                 Value<int> id = const Value.absent(),
-                required int day,
                 required int amount,
                 Value<DateTime> createdAt = const Value.absent(),
               }) => CupsTableCompanion.insert(
                 id: id,
-                day: day,
                 amount: amount,
                 createdAt: createdAt,
               ),
           withReferenceMapper: (p0) => p0
-              .map(
-                (e) => (
-                  e.readTable(table),
-                  $$CupsTableTableReferences(db, table, e),
-                ),
-              )
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
               .toList(),
-          prefetchHooksCallback: ({day = false}) {
-            return PrefetchHooks(
-              db: db,
-              explicitlyWatchedTables: [],
-              addJoins:
-                  <
-                    T extends TableManagerState<
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic
-                    >
-                  >(state) {
-                    if (day) {
-                      state =
-                          state.withJoin(
-                                currentTable: table,
-                                currentColumn: table.day,
-                                referencedTable: $$CupsTableTableReferences
-                                    ._dayTable(db),
-                                referencedColumn: $$CupsTableTableReferences
-                                    ._dayTable(db)
-                                    .id,
-                              )
-                              as T;
-                    }
-
-                    return state;
-                  },
-              getPrefetchedDataCallback: (items) async {
-                return [];
-              },
-            );
-          },
+          prefetchHooksCallback: null,
         ),
       );
 }
@@ -1629,9 +1328,12 @@ typedef $$CupsTableTableProcessedTableManager =
       $$CupsTableTableAnnotationComposer,
       $$CupsTableTableCreateCompanionBuilder,
       $$CupsTableTableUpdateCompanionBuilder,
-      (CupsTableData, $$CupsTableTableReferences),
+      (
+        CupsTableData,
+        BaseReferences<_$AppDatabase, $CupsTableTable, CupsTableData>,
+      ),
       CupsTableData,
-      PrefetchHooks Function({bool day})
+      PrefetchHooks Function()
     >;
 typedef $$HistoryItemsTableTableCreateCompanionBuilder =
     HistoryItemsTableCompanion Function({

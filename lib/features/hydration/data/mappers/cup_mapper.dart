@@ -6,7 +6,6 @@ extension CupsTableDataX on CupsTableData {
   Cup toEntity() {
     return Cup(
       id: id,
-      dayId: day, 
       amount: Water(amount), 
       createdAt: createdAt
     );

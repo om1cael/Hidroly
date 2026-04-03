@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Cup {
 
- int get id; int get dayId; Water get amount; DateTime get createdAt;
+ int get id; Water get amount; DateTime get createdAt;
 /// Create a copy of Cup
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $CupCopyWith<Cup> get copyWith => _$CupCopyWithImpl<Cup>(this as Cup, _$identity
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Cup&&(identical(other.id, id) || other.id == id)&&(identical(other.dayId, dayId) || other.dayId == dayId)&&(identical(other.amount, amount) || other.amount == amount)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Cup&&(identical(other.id, id) || other.id == id)&&(identical(other.amount, amount) || other.amount == amount)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,id,dayId,amount,createdAt);
+int get hashCode => Object.hash(runtimeType,id,amount,createdAt);
 
 @override
 String toString() {
-  return 'Cup(id: $id, dayId: $dayId, amount: $amount, createdAt: $createdAt)';
+  return 'Cup(id: $id, amount: $amount, createdAt: $createdAt)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $CupCopyWith<$Res>  {
   factory $CupCopyWith(Cup value, $Res Function(Cup) _then) = _$CupCopyWithImpl;
 @useResult
 $Res call({
- int id, int dayId, Water amount, DateTime createdAt
+ int id, Water amount, DateTime createdAt
 });
 
 
@@ -62,10 +62,9 @@ class _$CupCopyWithImpl<$Res>
 
 /// Create a copy of Cup
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? dayId = null,Object? amount = null,Object? createdAt = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? amount = null,Object? createdAt = null,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as int,dayId: null == dayId ? _self.dayId : dayId // ignore: cast_nullable_to_non_nullable
 as int,amount: null == amount ? _self.amount : amount // ignore: cast_nullable_to_non_nullable
 as Water,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as DateTime,
@@ -153,10 +152,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  int dayId,  Water amount,  DateTime createdAt)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  Water amount,  DateTime createdAt)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _cup() when $default != null:
-return $default(_that.id,_that.dayId,_that.amount,_that.createdAt);case _:
+return $default(_that.id,_that.amount,_that.createdAt);case _:
   return orElse();
 
 }
@@ -174,10 +173,10 @@ return $default(_that.id,_that.dayId,_that.amount,_that.createdAt);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  int dayId,  Water amount,  DateTime createdAt)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  Water amount,  DateTime createdAt)  $default,) {final _that = this;
 switch (_that) {
 case _cup():
-return $default(_that.id,_that.dayId,_that.amount,_that.createdAt);case _:
+return $default(_that.id,_that.amount,_that.createdAt);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -194,10 +193,10 @@ return $default(_that.id,_that.dayId,_that.amount,_that.createdAt);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  int dayId,  Water amount,  DateTime createdAt)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  Water amount,  DateTime createdAt)?  $default,) {final _that = this;
 switch (_that) {
 case _cup() when $default != null:
-return $default(_that.id,_that.dayId,_that.amount,_that.createdAt);case _:
+return $default(_that.id,_that.amount,_that.createdAt);case _:
   return null;
 
 }
@@ -209,11 +208,10 @@ return $default(_that.id,_that.dayId,_that.amount,_that.createdAt);case _:
 
 
 class _cup implements Cup {
-  const _cup({this.id = 0, required this.dayId, required this.amount, required this.createdAt});
+  const _cup({this.id = 0, required this.amount, required this.createdAt});
   
 
 @override@JsonKey() final  int id;
-@override final  int dayId;
 @override final  Water amount;
 @override final  DateTime createdAt;
 
@@ -227,16 +225,16 @@ _$cupCopyWith<_cup> get copyWith => __$cupCopyWithImpl<_cup>(this, _$identity);
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _cup&&(identical(other.id, id) || other.id == id)&&(identical(other.dayId, dayId) || other.dayId == dayId)&&(identical(other.amount, amount) || other.amount == amount)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _cup&&(identical(other.id, id) || other.id == id)&&(identical(other.amount, amount) || other.amount == amount)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,id,dayId,amount,createdAt);
+int get hashCode => Object.hash(runtimeType,id,amount,createdAt);
 
 @override
 String toString() {
-  return 'Cup(id: $id, dayId: $dayId, amount: $amount, createdAt: $createdAt)';
+  return 'Cup(id: $id, amount: $amount, createdAt: $createdAt)';
 }
 
 
@@ -247,7 +245,7 @@ abstract mixin class _$cupCopyWith<$Res> implements $CupCopyWith<$Res> {
   factory _$cupCopyWith(_cup value, $Res Function(_cup) _then) = __$cupCopyWithImpl;
 @override @useResult
 $Res call({
- int id, int dayId, Water amount, DateTime createdAt
+ int id, Water amount, DateTime createdAt
 });
 
 
@@ -264,10 +262,9 @@ class __$cupCopyWithImpl<$Res>
 
 /// Create a copy of Cup
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? dayId = null,Object? amount = null,Object? createdAt = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? amount = null,Object? createdAt = null,}) {
   return _then(_cup(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as int,dayId: null == dayId ? _self.dayId : dayId // ignore: cast_nullable_to_non_nullable
 as int,amount: null == amount ? _self.amount : amount // ignore: cast_nullable_to_non_nullable
 as Water,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as DateTime,

@@ -35,4 +35,32 @@ class DayRepositoryImpl implements DayRepository {
 
     return data?.toEntity();
   }
+  
+  @override
+  Future<Day> readOrCreateByDate(DateTime date) async {
+    final start = DateTime(date.year, date.month, date.day);
+    final end = start.add(const Duration(days: 1));
+
+    final data = await (_database.select(_database.dayTable)
+      ..where((day) => day.createdAt.isBiggerOrEqualValue(start) & day.createdAt.isSmallerOrEqualValue(end)))
+      .getSingleOrNull();
+    
+    if(data != null) return data.toEntity();
+
+    final firstDay = await (_database.select(_database.dayTable)
+      ..where((day) => day.id.equals(1)))
+      .getSingle();
+
+    final id = await _database.into(_database.dayTable).insert(
+      DayTableCompanion(
+        dailyGoal: Value(firstDay.dailyGoal),
+      )
+    );
+
+    final newDay = await (_database.select(_database.dayTable)
+      ..where((day) => day.id.equals(id)))
+      .getSingle();
+    
+    return newDay.toEntity();
+  }
 }

@@ -7,7 +7,6 @@ part 'cup.freezed.dart';
 abstract class Cup with _$Cup {
   const factory Cup({
     @Default(0) int id,
-    required int dayId,
     required Water amount,
     required DateTime createdAt,
   }) = _cup;

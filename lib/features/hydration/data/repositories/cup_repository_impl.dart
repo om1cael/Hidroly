@@ -19,10 +19,9 @@ class CupRepositoryImpl implements CupRepository {
   const CupRepositoryImpl(this._database);
 
   @override
-  Future<int> save(int dayId, int value) async {
+  Future<int> save(int value) async {
     return await _database.into(_database.cupsTable).insert(
       CupsTableCompanion(
-        day: Value(dayId),
         amount: Value(value),
       ),
     );
@@ -38,11 +37,8 @@ class CupRepositoryImpl implements CupRepository {
   }
   
   @override
-  Future<List<Cup>> readAll(int dayId) async {
-    final data = await (_database.select(_database.cupsTable)
-      ..where((cup) => cup.day.equals(dayId)))
-      .get();
-    
+  Future<List<Cup>> readAll() async {
+    final data = await (_database.select(_database.cupsTable)).get();
     return [for(final cup in data) cup.toEntity()];
   }
 }

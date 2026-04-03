@@ -21,9 +21,9 @@ class HydrationViewModel extends _$HydrationViewModel {
     final cupRepository = ref.watch(cupRepositoryProvider);
     final settingsRepository = ref.watch(settingsRepositoryProvider);
 
-    final day = await dayRepository.read(1);
-    final history = await historyRepository.readAll(day!.id);
-    final cups = await cupRepository.readAll(day.id);
+    final day = await dayRepository.readOrCreateByDate(DateTime.now());
+    final history = await historyRepository.readAll(day.id);
+    final cups = await cupRepository.readAll();
     final unitSystem = await settingsRepository.readUnitSystem();
 
     return HydrationState(day: day, history: history, unitSystem: unitSystem, cups: cups);
@@ -33,7 +33,7 @@ class HydrationViewModel extends _$HydrationViewModel {
     final cupRepository = ref.read(cupRepositoryProvider);
     final cupValue = _getCupValue(int.parse(value));
 
-    await cupRepository.save(state.requireValue.day.id, cupValue.value);
+    await cupRepository.save(cupValue.value);
     ref.invalidateSelf();
   }
 
