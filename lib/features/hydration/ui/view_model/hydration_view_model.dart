@@ -12,6 +12,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'hydration_view_model.g.dart';
 
+// TODO: break build into smaller providers
 @riverpod
 class HydrationViewModel extends _$HydrationViewModel {
   @override

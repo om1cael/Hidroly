@@ -17,8 +17,6 @@ class HydrationView extends ConsumerStatefulWidget {
   ConsumerState<HydrationView> createState() => _HydrationViewState();
 }
 
-// TODO: Load current day
-// TODO: Create new day if necessary
 // TODO: Make it possible to select a day using the date picker
 class _HydrationViewState extends ConsumerState<HydrationView> {
   late final TextEditingController _cupTextController;
