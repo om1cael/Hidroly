@@ -1,5 +1,6 @@
 import 'package:hidroly/core/data/repositories/day_repository_impl.dart';
 import 'package:hidroly/core/data/repositories/settings_repository_impl.dart';
+import 'package:hidroly/core/domain/entities/day.dart';
 import 'package:hidroly/core/domain/enums/unit_systems.dart';
 import 'package:hidroly/core/domain/exceptions/invalid_input_exception.dart';
 import 'package:hidroly/core/ui/enums/input_status.dart';
@@ -17,12 +18,14 @@ part 'hydration_view_model.g.dart';
 class HydrationViewModel extends _$HydrationViewModel {
   @override
   Future<HydrationState> build() async {
+    final selectedDate = ref.watch(selectedDateProvider);
+
     final dayRepository = ref.watch(dayRepositoryProvider);
     final historyRepository = ref.watch(historyItemRepositoryProvider);
     final cupRepository = ref.watch(cupRepositoryProvider);
     final settingsRepository = ref.watch(settingsRepositoryProvider);
 
-    final day = await dayRepository.readOrCreateByDate(DateTime.now());
+    final day = await dayRepository.readOrCreateByDate(selectedDate);
     final history = await historyRepository.readAll(day.id);
     final cups = await cupRepository.readAll();
     final unitSystem = await settingsRepository.readUnitSystem();
@@ -36,6 +39,17 @@ class HydrationViewModel extends _$HydrationViewModel {
 
     await cupRepository.save(cupValue.value);
     ref.invalidateSelf();
+  }
+
+  Future<void> loadByDate(DateTime date) async {
+    ref.read(selectedDateProvider.notifier).update(date);
+  }
+
+  Future<Day> getFirstDay() async {
+    final dayRepository = ref.read(dayRepositoryProvider);
+    final day = await dayRepository.read(1);
+
+    return day!;
   }
 
   Future<void> addWater(int amount) async {
@@ -72,4 +86,12 @@ class HydrationViewModel extends _$HydrationViewModel {
       ? CupValue.ml(cupValue)
       : CupValue.fromOz(cupValue);
   }
+}
+
+@riverpod
+class SelectedDate extends _$SelectedDate {
+  @override
+  DateTime build() => DateTime.now();
+
+  void update(DateTime date) => state = date;
 }

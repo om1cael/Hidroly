@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hidroly/features/hydration/domain/value_objects/cup_value.dart';
+import 'package:hidroly/features/hydration/ui/extensions/date_time_formatting.dart';
 import 'package:hidroly/features/hydration/ui/extensions/unit_system_ui_extension.dart';
 import 'package:hidroly/features/hydration/ui/state/hydration_state.dart';
 import 'package:hidroly/features/hydration/ui/view/components/cup_button.dart';
@@ -43,13 +44,29 @@ class _HydrationViewState extends ConsumerState<HydrationView> {
       data: (data) => Scaffold(
         appBar: AppBar(
           title: TextButton(
-            onPressed: () {}, 
+            onPressed: () async {
+              final firstDay = await 
+                ref.read(hydrationViewModelProvider.notifier).getFirstDay();
+
+              if(!context.mounted) return;
+
+              final selectedDate = await showDatePicker(
+                context: context, 
+                firstDate: firstDay.createdAt, 
+                lastDate: DateTime.now(),
+                initialDate: DateTime.now(),
+              );
+
+              if(selectedDate != null) {
+                ref.read(hydrationViewModelProvider.notifier).loadByDate(selectedDate);
+              }
+            }, 
             child: Row(
               mainAxisSize: .min,
               crossAxisAlignment: .center,
               mainAxisAlignment: .center,
               children: [
-                Text('Today', style: Theme.of(context).textTheme.titleLarge,),
+                Text(state.requireValue.day.createdAt.toRelativeDate(), style: Theme.of(context).textTheme.titleLarge,),
                 Icon(Icons.arrow_drop_down, size: 24,),
               ],
             ),

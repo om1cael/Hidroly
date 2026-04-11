@@ -61,11 +61,12 @@ class _HistoryModalState extends ConsumerState<HistoryModal> {
                     crossAxisAlignment: .stretch,
                     spacing: 6,
                     children: [
-                      Icon(Icons.air, size: 64,),
+                      const Icon(Icons.air, size: 64,),
                       
                       Padding(
                         padding: const EdgeInsets.only(left: 16, right: 16),
                         child: Column(
+                          spacing: 2,
                           children: [
                             Text('emptyHistoryTitle'.tr(), style: Theme.of(context).textTheme.titleLarge,),
                             Text('emptyHistorySubtitle'.tr(), textAlign: .center,)
