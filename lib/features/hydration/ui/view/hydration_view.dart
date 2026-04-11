@@ -18,7 +18,6 @@ class HydrationView extends ConsumerStatefulWidget {
   ConsumerState<HydrationView> createState() => _HydrationViewState();
 }
 
-// TODO: Make it possible to select a day using the date picker
 class _HydrationViewState extends ConsumerState<HydrationView> {
   late final TextEditingController _cupTextController;
   late final GlobalKey<FormState> _formKey;
@@ -44,23 +43,7 @@ class _HydrationViewState extends ConsumerState<HydrationView> {
       data: (data) => Scaffold(
         appBar: AppBar(
           title: TextButton(
-            onPressed: () async {
-              final firstDay = await 
-                ref.read(hydrationViewModelProvider.notifier).getFirstDay();
-
-              if(!context.mounted) return;
-
-              final selectedDate = await showDatePicker(
-                context: context, 
-                firstDate: firstDay.createdAt, 
-                lastDate: DateTime.now(),
-                initialDate: DateTime.now(),
-              );
-
-              if(selectedDate != null) {
-                ref.read(hydrationViewModelProvider.notifier).loadByDate(selectedDate);
-              }
-            }, 
+            onPressed: _loadDay,
             child: Row(
               mainAxisSize: .min,
               crossAxisAlignment: .center,
@@ -126,6 +109,24 @@ class _HydrationViewState extends ConsumerState<HydrationView> {
       error: (_, error) => Scaffold(body: Center(child: Text(error.toString()))),
       loading: () => const Scaffold(body: Center(child: CircularProgressIndicator())),
     );
+  }
+
+  void _loadDay() async {
+    final firstDay = await 
+      ref.read(hydrationViewModelProvider.notifier).getFirstDay();
+
+    if(!mounted) return;
+
+    final selectedDate = await showDatePicker(
+      context: context, 
+      firstDate: firstDay.createdAt, 
+      lastDate: DateTime.now(),
+      initialDate: DateTime.now(),
+    );
+
+    if(selectedDate != null) {
+      ref.read(hydrationViewModelProvider.notifier).loadByDate(selectedDate);
+    }
   }
 
   void showCupCreationModal(BuildContext context, HydrationState data) {
