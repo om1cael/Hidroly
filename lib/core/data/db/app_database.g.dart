@@ -55,6 +55,7 @@ class $DayTableTable extends DayTable
     false,
     type: DriftSqlType.dateTime,
     requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways('UNIQUE'),
     defaultValue: currentDateAndTime,
   );
   @override
