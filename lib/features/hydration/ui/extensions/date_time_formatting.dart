@@ -8,9 +8,9 @@ extension DateTimeFormatting on DateTime {
     final dateToCheck = DateTime(year, month, day);
 
     if (dateToCheck == today) {
-      return "Today";
+      return 'today'.tr();
     } else if (dateToCheck == yesterday) {
-      return "Yesterday";
+      return 'yesterday'.tr();
     } else {
       return DateFormat.yMMMMd().format(this);
     }

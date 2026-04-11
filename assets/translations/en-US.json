@@ -28,5 +28,7 @@
     "historyItemTitle": "{amount} {unitLabel}",
     "historyItemSubtitle": "at {time}",
     "emptyHistoryTitle": "Let's fill it up!",
-    "emptyHistorySubtitle": "It looks like you haven't tracked any water today. Ready to start?"
+    "emptyHistorySubtitle": "It looks like you haven't tracked any water today. Ready to start?",
+    "today": "Today",
+    "yesterday": "Yesterday"
 }
