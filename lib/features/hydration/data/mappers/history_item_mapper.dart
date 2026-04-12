@@ -7,7 +7,7 @@ extension HistoryITemTableDataX on HistoryItemsTableData {
     return HistoryItem(
       id: id,
       dayId: day, 
-      amount: Water(amount), 
+      amount: Water.ml(amount), 
       createdAt: createdAt
     );
   }

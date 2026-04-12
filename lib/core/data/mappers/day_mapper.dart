@@ -6,8 +6,8 @@ extension DayTableDataX on DayTableData {
   Day toEntity() {
     return Day(
       id: id,
-      dailyGoal: Water(dailyGoal),
-      currentAmount: Water(currentAmount), 
+      dailyGoal: Water.ml(dailyGoal),
+      currentAmount: Water.ml(currentAmount), 
       createdAt: createdAt
     );
   }

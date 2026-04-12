@@ -33,7 +33,7 @@ void main() {
       // Setup day with ID 1
       await provider
         .read(dayRepositoryProvider)
-        .save(Day(dailyGoal: Water(2000), createdAt: DateTime(2026, 1, 1)));
+        .save(Day(dailyGoal: Water.ml(2000), createdAt: DateTime(2026, 1, 1)));
 
       final initialDb = await db.select(db.dayTable).get();
 
@@ -50,7 +50,7 @@ void main() {
       final date = DateTime(2026, 6, 6, 12, 0, 0);
       final dateAlt = DateTime(2026, 6, 6, 21, 0, 0);
 
-      final dayObject = Day(dailyGoal: Water(2000), createdAt: date);
+      final dayObject = Day(dailyGoal: Water.ml(2000), createdAt: date);
       
       final rowId = await provider.read(dayRepositoryProvider).save(dayObject);
       final day = await provider

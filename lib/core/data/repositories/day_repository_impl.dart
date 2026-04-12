@@ -60,7 +60,7 @@ class DayRepositoryImpl implements DayRepository {
 
     final rowId = await save(
       Day(
-        dailyGoal: Water(firstDay.dailyGoal), 
+        dailyGoal: Water.ml(firstDay.dailyGoal), 
         createdAt: DateTime.now(),
       )
     );

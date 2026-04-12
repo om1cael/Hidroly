@@ -29,7 +29,7 @@ class CompleteSetupUseCase {
     final dailyGoal = person.calculateHydrationGoalMl();
 
     final day = Day(
-      dailyGoal: Water(dailyGoal.clampedGoal), 
+      dailyGoal: Water.ml(dailyGoal.clampedGoal), 
       createdAt: DateTime.now(),
     );
 

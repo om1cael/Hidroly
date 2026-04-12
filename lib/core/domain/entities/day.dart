@@ -8,7 +8,7 @@ abstract class Day with _$Day {
   const factory Day({
     @Default(0) int id,
     required Water dailyGoal,
-    @Default(Water(0)) Water currentAmount,
+    @Default(Water.zero()) Water currentAmount,
     required DateTime createdAt,
   }) = _day;
 }

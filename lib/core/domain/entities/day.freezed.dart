@@ -209,7 +209,7 @@ return $default(_that.id,_that.dailyGoal,_that.currentAmount,_that.createdAt);ca
 
 
 class _day implements Day {
-  const _day({this.id = 0, required this.dailyGoal, this.currentAmount = const Water(0), required this.createdAt});
+  const _day({this.id = 0, required this.dailyGoal, this.currentAmount = const Water.zero(), required this.createdAt});
   
 
 @override@JsonKey() final  int id;
