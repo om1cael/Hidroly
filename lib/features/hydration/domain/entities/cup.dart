@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:hidroly/features/hydration/domain/value_objects/water.dart';
+import 'package:hidroly/features/hydration/domain/value_objects/cup_value.dart';
 
 part 'cup.freezed.dart';
 
@@ -7,7 +7,7 @@ part 'cup.freezed.dart';
 abstract class Cup with _$Cup {
   const factory Cup({
     @Default(0) int id,
-    required Water amount,
+    required CupValue amount,
     required DateTime createdAt,
   }) = _cup;
 }
