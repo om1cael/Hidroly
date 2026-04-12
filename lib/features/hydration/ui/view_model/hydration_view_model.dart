@@ -49,7 +49,7 @@ class HydrationViewModel extends _$HydrationViewModel {
     final dayRepository = ref.read(dayRepositoryProvider);
     final day = await dayRepository.read(1);
 
-    return day!;
+    return day;
   }
 
   Future<void> addWater(int amount) async {

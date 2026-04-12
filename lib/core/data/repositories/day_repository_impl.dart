@@ -37,6 +37,12 @@ class DayRepositoryImpl implements DayRepository {
 
     return data.toEntity();
   }
+
+  @override
+  Future<List<Day>> readAll() async {
+    final dayTableDataList = await (_database.select(_database.dayTable).get());
+    return [for(final day in dayTableDataList) day.toEntity()];
+  }
   
   @override
   Future<Day> readOrCreateByDate(DateTime date) async {

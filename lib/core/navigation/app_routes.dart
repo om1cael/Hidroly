@@ -13,7 +13,8 @@ GoRouter router(Ref ref) {
 
   return GoRouter(
     redirect: (context, state) async {
-      final setupCompleted = await dayRepository.read(1) != null;
+      final dayList = await dayRepository.readAll();
+      final setupCompleted = dayList.isNotEmpty;
 
       if(!setupCompleted && state.matchedLocation != '/setup') {
         return '/setup';
