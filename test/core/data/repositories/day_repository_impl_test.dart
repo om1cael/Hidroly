@@ -14,12 +14,38 @@ void main() {
 
     provider = ProviderContainer.test(
       overrides: [
-        appDatabaseProvider.overrideWith((ref) => appDatabase),
+        appDatabaseProvider.overrideWith((ref) {
+          ref.onDispose(appDatabase.close);
+          return appDatabase;
+        }),
       ]
     );
   });
 
+  tearDown(() async {
+    provider.dispose();
+  });
+
   group('Day Repository Tests', () {
+    test('Should create day if it does not exists', () async {
+      final db = provider.read(appDatabaseProvider);
+
+      // Setup day with ID 1
+      await provider
+        .read(dayRepositoryProvider)
+        .save(Day(dailyGoal: Water(2000), createdAt: DateTime(2026, 1, 1)));
+
+      final initialDb = await db.select(db.dayTable).get();
+
+      await provider
+        .read(dayRepositoryProvider)
+        .readOrCreateByDate(DateTime.now());
+
+      final finalDb = await db.select(db.dayTable).get();
+
+      expect(initialDb.length, isNot(finalDb.length));
+    });
+
     test('Should not create day if it already exists', () async {
       final date = DateTime(2026, 6, 6, 12, 0, 0);
       final dateAlt = DateTime(2026, 6, 6, 21, 0, 0);

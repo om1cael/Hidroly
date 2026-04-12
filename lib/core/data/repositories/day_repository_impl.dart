@@ -49,7 +49,7 @@ class DayRepositoryImpl implements DayRepository {
     if(data != null) return data.toEntity();
 
     final firstDay = await (_database.select(_database.dayTable)
-      ..where((day) => day.id.equals(1)))
+      ..limit(1))
       .getSingle();
 
     final rowId = await save(
