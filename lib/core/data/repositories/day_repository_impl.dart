@@ -3,6 +3,7 @@ import 'package:hidroly/core/data/db/app_database.dart';
 import 'package:hidroly/core/data/mappers/day_mapper.dart';
 import 'package:hidroly/core/domain/entities/day.dart';
 import 'package:hidroly/core/domain/repositories/day_repository.dart';
+import 'package:hidroly/features/hydration/domain/value_objects/water.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'day_repository_impl.g.dart';
@@ -23,26 +24,26 @@ class DayRepositoryImpl implements DayRepository {
     return await _database.into(_database.dayTable).insert(
       DayTableCompanion(
         dailyGoal: Value(day.dailyGoal.ml),
+        createdAt: Value(normalize(day.createdAt))
       ),
     );
   }
   
   @override
-  Future<Day?> read(int id) async {
+  Future<Day> read(int id) async {
     final data = await (_database.select(_database.dayTable)
       ..where((day) => day.id.equals(id)))
-      .getSingleOrNull();
+      .getSingle();
 
-    return data?.toEntity();
+    return data.toEntity();
   }
   
   @override
   Future<Day> readOrCreateByDate(DateTime date) async {
-    final start = DateTime(date.year, date.month, date.day);
-    final end = start.add(const Duration(days: 1));
+    final normalizedDate = normalize(date);
 
     final data = await (_database.select(_database.dayTable)
-      ..where((day) => day.createdAt.isBiggerOrEqualValue(start) & day.createdAt.isSmallerOrEqualValue(end)))
+      ..where((day) => day.createdAt.equals(normalizedDate)))
       .getSingleOrNull();
     
     if(data != null) return data.toEntity();
@@ -51,16 +52,16 @@ class DayRepositoryImpl implements DayRepository {
       ..where((day) => day.id.equals(1)))
       .getSingle();
 
-    final id = await _database.into(_database.dayTable).insert(
-      DayTableCompanion(
-        dailyGoal: Value(firstDay.dailyGoal),
+    final rowId = await save(
+      Day(
+        dailyGoal: Water(firstDay.dailyGoal), 
+        createdAt: DateTime.now(),
       )
     );
 
-    final newDay = await (_database.select(_database.dayTable)
-      ..where((day) => day.id.equals(id)))
-      .getSingle();
-    
-    return newDay.toEntity();
+    return await read(rowId);
   }
+
+  DateTime normalize(DateTime date) =>
+    DateTime(date.year, date.month, date.day);
 }

@@ -54,9 +54,7 @@ class $DayTableTable extends DayTable
     aliasedName,
     false,
     type: DriftSqlType.dateTime,
-    requiredDuringInsert: false,
-    defaultConstraints: GeneratedColumn.constraintIsAlways('UNIQUE'),
-    defaultValue: currentDateAndTime,
+    requiredDuringInsert: true,
   );
   @override
   List<GeneratedColumn> get $columns => [
@@ -102,6 +100,8 @@ class $DayTableTable extends DayTable
         _createdAtMeta,
         createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta),
       );
+    } else if (isInserting) {
+      context.missing(_createdAtMeta);
     }
     return context;
   }
@@ -250,8 +250,9 @@ class DayTableCompanion extends UpdateCompanion<DayTableData> {
     this.id = const Value.absent(),
     required int dailyGoal,
     this.currentAmount = const Value.absent(),
-    this.createdAt = const Value.absent(),
-  }) : dailyGoal = Value(dailyGoal);
+    required DateTime createdAt,
+  }) : dailyGoal = Value(dailyGoal),
+       createdAt = Value(createdAt);
   static Insertable<DayTableData> custom({
     Expression<int>? id,
     Expression<int>? dailyGoal,
@@ -896,7 +897,7 @@ typedef $$DayTableTableCreateCompanionBuilder =
       Value<int> id,
       required int dailyGoal,
       Value<int> currentAmount,
-      Value<DateTime> createdAt,
+      required DateTime createdAt,
     });
 typedef $$DayTableTableUpdateCompanionBuilder =
     DayTableCompanion Function({
@@ -1116,7 +1117,7 @@ class $$DayTableTableTableManager
                 Value<int> id = const Value.absent(),
                 required int dailyGoal,
                 Value<int> currentAmount = const Value.absent(),
-                Value<DateTime> createdAt = const Value.absent(),
+                required DateTime createdAt,
               }) => DayTableCompanion.insert(
                 id: id,
                 dailyGoal: dailyGoal,
