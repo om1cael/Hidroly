@@ -19,7 +19,7 @@ dependencies:
   haptic_feedback: ^0.5.1+1
   intl: any
   logger: ^2.6.2
-  mocktail: ^1.0.4
+  mocktail: ^1.0.5
   path: ^1.9.1
   provider: ^6.1.5
   shared_preferences: ^2.5.3
