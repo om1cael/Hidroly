@@ -42,6 +42,8 @@ class HistoryItemCard extends ConsumerWidget {
             final historyList = ref.read(hydrationViewModelProvider).requireValue.history;
             final index = historyList.indexOf(historyItem);
 
+            if(index == -1) return;
+
             animatedListKey.currentState?.removeItem(
               index,
               (context, animation) {
