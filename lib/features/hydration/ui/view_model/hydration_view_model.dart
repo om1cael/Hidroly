@@ -9,6 +9,7 @@ import 'package:hidroly/features/hydration/data/repositories/history_item_reposi
 import 'package:hidroly/features/hydration/data/repositories/hydration_repository_impl.dart';
 import 'package:hidroly/features/hydration/domain/value_objects/cup_value.dart';
 import 'package:hidroly/features/hydration/ui/state/hydration_state.dart';
+import 'package:result_dart/result_dart.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'hydration_view_model.g.dart';
@@ -39,6 +40,16 @@ class HydrationViewModel extends _$HydrationViewModel {
 
     await cupRepository.save(cupValue.value);
     ref.invalidateSelf();
+  }
+
+  Future<void> deleteCup(int id) async {
+    final cupRepository = ref.read(cupRepositoryProvider);
+
+    final result = await cupRepository.delete(id);
+    
+    if(result is Success) {
+      ref.invalidateSelf();
+    }
   }
 
   Future<void> loadByDate(DateTime date) async {

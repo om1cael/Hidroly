@@ -86,10 +86,35 @@ class _HydrationViewState extends ConsumerState<HydrationView> {
                         itemBuilder: (_, index) {
                           final cup = data.cups[index];
                       
-                          return CupButton(
-                            amount: cup.amount.toWater().valueIn(data.unitSystem),
-                            unit: data.unitSystem.unitLabel,
-                            onPressed: () => ref.read(hydrationViewModelProvider.notifier).addWater(cup.amount.value),
+                          return InkWell(
+                            onLongPress: () => showModalBottomSheet(
+                              showDragHandle: true,
+                              context: context, 
+                              builder: (_) {
+                                return SafeArea(
+                                  minimum: EdgeInsets.all(8),
+                                  child: Column(
+                                    mainAxisSize: .min,
+                                    children: [
+                                      ListTile(
+                                        leading: CircleAvatar(backgroundColor: Colors.redAccent, child: Icon(Icons.delete)),
+                                        title: Text('delete'.tr()),
+                                        onTap: () async {
+                                          Navigator.pop(context);
+                                          await ref.read(hydrationViewModelProvider.notifier).deleteCup(cup.id);
+                                        },
+                                        shape: RoundedRectangleBorder(borderRadius: BorderRadiusGeometry.circular(24))
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              }
+                            ),
+                            child: CupButton(
+                              amount: cup.amount.toWater().valueIn(data.unitSystem),
+                              unit: data.unitSystem.unitLabel,
+                              onPressed: () => ref.read(hydrationViewModelProvider.notifier).addWater(cup.amount.value),
+                            ),
                           );
                         },
                         separatorBuilder: (_, _) => SizedBox(width: 12),

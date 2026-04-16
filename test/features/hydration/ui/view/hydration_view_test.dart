@@ -110,5 +110,23 @@ void main() {
 
       expect(find.byType(CupCreationForm), findsNothing);
     });
+
+    testWidgets('Should delete cup', (tester) async {
+      await container.read(cupRepositoryProvider).save(500);
+
+      await tester.pumpWidget(createTestWidget());
+      await tester.pumpAndSettle();
+
+      await tester.longPress(find.byType(CupButton));
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.byIcon(Icons.delete).last);
+      
+      await tester.runAsync(() => Future.delayed(Duration.zero));
+
+      await tester.pumpAndSettle();
+
+      expect(find.byType(CupButton), findsNothing);
+    });
   });
 }

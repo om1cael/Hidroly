@@ -1,8 +1,10 @@
 import 'package:drift/drift.dart';
 import 'package:hidroly/core/data/db/app_database.dart';
+import 'package:hidroly/core/domain/exceptions/entity_not_found_exception.dart';
 import 'package:hidroly/features/hydration/data/mappers/cup_mapper.dart';
 import 'package:hidroly/features/hydration/domain/entities/cup.dart';
 import 'package:hidroly/features/hydration/domain/repositories/cup_repository.dart';
+import 'package:result_dart/result_dart.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'cup_repository_impl.g.dart';
@@ -40,5 +42,16 @@ class CupRepositoryImpl implements CupRepository {
   Future<List<Cup>> readAll() async {
     final data = await (_database.select(_database.cupsTable)).get();
     return [for(final cup in data) cup.toEntity()];
+  }
+  
+  @override
+  Future<Result<int>> delete(int id) async {
+    try {
+      return Success(await (_database.delete(_database.cupsTable)
+        ..where((item) => item.id.equals(id)))
+        .go());
+    } catch (_) {
+      return Failure(EntityNotFoundException());
+    }
   }
 }
