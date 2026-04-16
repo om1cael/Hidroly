@@ -16,5 +16,20 @@
     "ml": "ml",
     "lb": "lb",
     "oz": "oz",
-    "dataPrivacy": "Your data never leaves your device."
+    "dataPrivacy": "Your data never leaves your device.",
+    "home": "Home",
+    "summary": "Summary",
+    "of": "of",
+    "cupCreationTitle": "Create a new cup",
+    "create": "Create",
+    "cupValue": "Cup value",
+    "inputRequirement": "Please, enter a value between {minValue} and {maxValue}",
+    "cupInputHint": "e.g. {amount}",
+    "historyItemTitle": "{amount} {unitLabel}",
+    "historyItemSubtitle": "at {time}",
+    "emptyHistoryTitle": "Let's fill it up!",
+    "emptyHistorySubtitle": "It looks like you haven't tracked any water today. Ready to start?",
+    "today": "Today",
+    "yesterday": "Yesterday",
+    "delete": "Delete"
 }

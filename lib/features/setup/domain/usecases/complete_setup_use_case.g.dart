@@ -55,4 +55,4 @@ final class CompleteSetupUseCaseProvider
 }
 
 String _$completeSetupUseCaseHash() =>
-    r'a3054423344aab1bfaed57b70e01011f2d9f92bb';
+    r'79959a40f3bb0d5ac15a99d2ee744984dd5158cb';

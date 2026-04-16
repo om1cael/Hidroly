@@ -19,10 +19,14 @@ class SetupViewModel extends _$SetupViewModel {
       final person = ref
         .read(hydrationFormViewModelProvider.notifier)
         .mapToPerson(ageText, weightText);
+      
+      final unitSystem = ref
+        .read(hydrationFormViewModelProvider)
+        .unit.first;
 
       state = state.copyWith(stage: .processing);
       final setupResult = await ref.read(completeSetupUseCaseProvider)
-        .execute(person);
+        .execute(person, unitSystem);
 
       state = state.copyWith(
         dailyGoalClamped: setupResult.isClamped,

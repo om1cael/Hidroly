@@ -1,0 +1,107 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+
+part of 'hydration_view_model.dart';
+
+// **************************************************************************
+// RiverpodGenerator
+// **************************************************************************
+
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
+
+@ProviderFor(HydrationViewModel)
+final hydrationViewModelProvider = HydrationViewModelProvider._();
+
+final class HydrationViewModelProvider
+    extends $AsyncNotifierProvider<HydrationViewModel, HydrationState> {
+  HydrationViewModelProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'hydrationViewModelProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$hydrationViewModelHash();
+
+  @$internal
+  @override
+  HydrationViewModel create() => HydrationViewModel();
+}
+
+String _$hydrationViewModelHash() =>
+    r'020e14d3217c12b6f06741220d315c61f6714ab5';
+
+abstract class _$HydrationViewModel extends $AsyncNotifier<HydrationState> {
+  FutureOr<HydrationState> build();
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final ref = this.ref as $Ref<AsyncValue<HydrationState>, HydrationState>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<AsyncValue<HydrationState>, HydrationState>,
+              AsyncValue<HydrationState>,
+              Object?,
+              Object?
+            >;
+    element.handleCreate(ref, build);
+  }
+}
+
+@ProviderFor(SelectedDate)
+final selectedDateProvider = SelectedDateProvider._();
+
+final class SelectedDateProvider
+    extends $NotifierProvider<SelectedDate, DateTime> {
+  SelectedDateProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'selectedDateProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$selectedDateHash();
+
+  @$internal
+  @override
+  SelectedDate create() => SelectedDate();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(DateTime value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<DateTime>(value),
+    );
+  }
+}
+
+String _$selectedDateHash() => r'587eebf9e6a68e26118fe99ebcf13d6a94f2ff77';
+
+abstract class _$SelectedDate extends $Notifier<DateTime> {
+  DateTime build();
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final ref = this.ref as $Ref<DateTime, DateTime>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<DateTime, DateTime>,
+              DateTime,
+              Object?,
+              Object?
+            >;
+    element.handleCreate(ref, build);
+  }
+}

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hidroly/core/ui/view/hydration_form_view.dart';
-import 'package:hidroly/features/setup/ui/view/widgets/number_input_form_field.dart';
+import 'package:hidroly/core/ui/components/number_input_form_field.dart';
 
 void main() {
   late TextEditingController ageTextController;

@@ -5,6 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:hidroly/core/domain/entities/hydration_goal.dart';
 import 'package:hidroly/core/domain/entities/person.dart';
 import 'package:hidroly/core/domain/enums/process_stage.dart';
+import 'package:hidroly/core/domain/enums/unit_systems.dart';
 import 'package:hidroly/core/domain/value_objects/age.dart';
 import 'package:hidroly/core/domain/value_objects/weight.dart';
 import 'package:hidroly/features/setup/domain/usecases/complete_setup_use_case.dart';
@@ -22,6 +23,7 @@ class ErrorSetupViewModel extends SetupViewModel {
 void main() {
   setUpAll(() {
     registerFallbackValue(Person(age: Age(25), weight: Weight.kg(75)));
+    registerFallbackValue(UnitSystem.metric);
   });
 
   group('Setup View Model Tests', () {
@@ -37,7 +39,7 @@ void main() {
       final hydrationGoal = Person(age: Age(25), weight: Weight.kg(150))
         .calculateHydrationGoalMl();
       
-      when(() => mockUseCase.execute(any()))
+      when(() => mockUseCase.execute(any(), any()))
         .thenAnswer((_) async => hydrationGoal);
       
       await container.read(setupViewModelProvider.notifier).completeSetup("25", "150");
@@ -58,7 +60,7 @@ void main() {
       final hydrationGoal = Person(age: Age(25), weight: Weight.kg(65))
         .calculateHydrationGoalMl();
       
-      when(() => mockUseCase.execute(any()))
+      when(() => mockUseCase.execute(any(), any()))
         .thenAnswer((_) async => hydrationGoal);
       
       await container.read(setupViewModelProvider.notifier).completeSetup("25", "65");
@@ -76,7 +78,7 @@ void main() {
 
       final mockUseCase = container.read(completeSetupUseCaseProvider);
       
-      when(() => mockUseCase.execute(any()))
+      when(() => mockUseCase.execute(any(), any()))
         .thenThrow(Exception());
       
       await container.read(setupViewModelProvider.notifier).completeSetup("25", "65");
@@ -95,7 +97,7 @@ void main() {
       final mockUseCase = container.read(completeSetupUseCaseProvider);
       final viewModel = container.read(setupViewModelProvider.notifier);
 
-      when(() => mockUseCase.execute(any()))
+      when(() => mockUseCase.execute(any(), any()))
         .thenAnswer((_) => Completer<HydrationGoal>().future);
 
       viewModel.completeSetup("18", "65");
