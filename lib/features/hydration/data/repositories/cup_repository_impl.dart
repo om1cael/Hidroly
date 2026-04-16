@@ -1,6 +1,6 @@
 import 'package:drift/drift.dart';
 import 'package:hidroly/core/data/db/app_database.dart';
-import 'package:hidroly/core/domain/exceptions/entity_not_found_exception.dart';
+import 'package:hidroly/core/domain/exceptions/database_operation_exception.dart';
 import 'package:hidroly/features/hydration/data/mappers/cup_mapper.dart';
 import 'package:hidroly/features/hydration/domain/entities/cup.dart';
 import 'package:hidroly/features/hydration/domain/repositories/cup_repository.dart';
@@ -50,8 +50,8 @@ class CupRepositoryImpl implements CupRepository {
       return Success(await (_database.delete(_database.cupsTable)
         ..where((item) => item.id.equals(id)))
         .go());
-    } catch (_) {
-      return Failure(EntityNotFoundException());
+    } catch (e) {
+      return Failure(DatabaseOperationException());
     }
   }
 }

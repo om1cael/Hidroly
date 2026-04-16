@@ -1,0 +1,1 @@
+class DatabaseOperationException implements Exception {}
