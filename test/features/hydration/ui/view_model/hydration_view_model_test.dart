@@ -36,7 +36,7 @@ void main() {
 
   tearDown(() => container.dispose());
 
-  group('HydrationViewModel Tests', () {
+  group('Hydration View Model Tests', () {
     
     test('Initial build loads data correctly', () async {
       final state = await container.read(hydrationViewModelProvider.future);
