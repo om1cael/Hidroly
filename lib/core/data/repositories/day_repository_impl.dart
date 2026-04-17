@@ -40,7 +40,11 @@ class DayRepositoryImpl implements DayRepository {
 
   @override
   Future<List<Day>> readAll() async {
-    final dayTableDataList = await (_database.select(_database.dayTable).get());
+    final dayTableDataList = await (_database
+      .select(_database.dayTable)
+      ..orderBy([(u) => OrderingTerm(expression: u.createdAt, mode: .desc)]))
+      .get();
+    
     return [for(final day in dayTableDataList) day.toEntity()];
   }
   
