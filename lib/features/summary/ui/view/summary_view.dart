@@ -45,7 +45,7 @@ class _SummaryViewState extends ConsumerState<SummaryView> {
               ListTile(
                 leading: CircleAvatar(backgroundColor: Colors.redAccent, child: Icon(Icons.whatshot,)),
                 title: Text('Streak'),
-                subtitle: Text('50 days'),
+                subtitle: Text(data.streak.toString() + ' days'),
                 shape: RoundedRectangleBorder(borderRadius: BorderRadiusGeometry.circular(24)),
                 tileColor: Theme.of(context).colorScheme.surfaceContainer,
               ),
