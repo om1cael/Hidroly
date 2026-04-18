@@ -30,7 +30,7 @@ class MainApp extends ConsumerWidget {
     final themeState = ref.watch(themeProviderProvider);
     
     return themeState.when(
-        data: (theme) => MaterialApp.router(
+      data: (theme) => MaterialApp.router(
         localizationsDelegates: context.localizationDelegates,
         supportedLocales: context.supportedLocales,
         locale: context.locale,

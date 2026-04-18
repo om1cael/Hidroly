@@ -1,7 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hidroly/core/domain/enums/unit_systems.dart';
 import 'package:hidroly/core/providers/theme_provider.dart';
+import 'package:hidroly/core/ui/extensions/unit_system_ui_extension.dart';
 import 'package:hidroly/features/settings/ui/extensions/theme_mode_ui_extension.dart';
 import 'package:hidroly/features/settings/ui/view_model/settings_view_model.dart';
 
@@ -87,19 +89,19 @@ class SettingsView extends ConsumerWidget {
                       leading: CircleAvatar(child: Icon(Icons.language),),
                     ),
                     ListTile(
-                      title: Text('Unit System'),
-                      subtitle: Text('Metric'),
+                      title: Text('unitSystem'.tr()),
+                      subtitle: Text(data.unitSystem.label),
                       leading: CircleAvatar(child: Icon(Icons.straighten),),
                       trailing: MenuAnchor(
                         controller: MenuController(),
                         menuChildren: <MenuItemButton>[
                           MenuItemButton(
-                            child: Text('Metric (kg, ml)'),
-                            onPressed: () {},
+                            child: Text('metric'.tr()),
+                            onPressed: () => ref.read(settingsViewModelProvider.notifier).setUnitSystem(UnitSystem.metric),
                           ),
                           MenuItemButton(
-                            child: Text('Imperial (lb, oz)'),
-                            onPressed: () {},
+                            child: Text('imperial'.tr()),
+                            onPressed: () => ref.read(settingsViewModelProvider.notifier).setUnitSystem(UnitSystem.imperial),
                           ),
                         ],
                         builder: (_, controller, _) {

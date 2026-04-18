@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$SettingsState {
 
- ThemeMode get theme;
+ ThemeMode get theme; UnitSystem get unitSystem;
 /// Create a copy of SettingsState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $SettingsStateCopyWith<SettingsState> get copyWith => _$SettingsStateCopyWithImp
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SettingsState&&(identical(other.theme, theme) || other.theme == theme));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SettingsState&&(identical(other.theme, theme) || other.theme == theme)&&(identical(other.unitSystem, unitSystem) || other.unitSystem == unitSystem));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,theme);
+int get hashCode => Object.hash(runtimeType,theme,unitSystem);
 
 @override
 String toString() {
-  return 'SettingsState(theme: $theme)';
+  return 'SettingsState(theme: $theme, unitSystem: $unitSystem)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $SettingsStateCopyWith<$Res>  {
   factory $SettingsStateCopyWith(SettingsState value, $Res Function(SettingsState) _then) = _$SettingsStateCopyWithImpl;
 @useResult
 $Res call({
- ThemeMode theme
+ ThemeMode theme, UnitSystem unitSystem
 });
 
 
@@ -62,10 +62,11 @@ class _$SettingsStateCopyWithImpl<$Res>
 
 /// Create a copy of SettingsState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? theme = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? theme = null,Object? unitSystem = null,}) {
   return _then(_self.copyWith(
 theme: null == theme ? _self.theme : theme // ignore: cast_nullable_to_non_nullable
-as ThemeMode,
+as ThemeMode,unitSystem: null == unitSystem ? _self.unitSystem : unitSystem // ignore: cast_nullable_to_non_nullable
+as UnitSystem,
   ));
 }
 
@@ -150,10 +151,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( ThemeMode theme)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( ThemeMode theme,  UnitSystem unitSystem)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _SettingsState() when $default != null:
-return $default(_that.theme);case _:
+return $default(_that.theme,_that.unitSystem);case _:
   return orElse();
 
 }
@@ -171,10 +172,10 @@ return $default(_that.theme);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( ThemeMode theme)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( ThemeMode theme,  UnitSystem unitSystem)  $default,) {final _that = this;
 switch (_that) {
 case _SettingsState():
-return $default(_that.theme);case _:
+return $default(_that.theme,_that.unitSystem);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -191,10 +192,10 @@ return $default(_that.theme);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( ThemeMode theme)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( ThemeMode theme,  UnitSystem unitSystem)?  $default,) {final _that = this;
 switch (_that) {
 case _SettingsState() when $default != null:
-return $default(_that.theme);case _:
+return $default(_that.theme,_that.unitSystem);case _:
   return null;
 
 }
@@ -206,10 +207,11 @@ return $default(_that.theme);case _:
 
 
 class _SettingsState implements SettingsState {
-  const _SettingsState({this.theme = ThemeMode.system});
+  const _SettingsState({this.theme = ThemeMode.system, this.unitSystem = UnitSystem.metric});
   
 
 @override@JsonKey() final  ThemeMode theme;
+@override@JsonKey() final  UnitSystem unitSystem;
 
 /// Create a copy of SettingsState
 /// with the given fields replaced by the non-null parameter values.
@@ -221,16 +223,16 @@ _$SettingsStateCopyWith<_SettingsState> get copyWith => __$SettingsStateCopyWith
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SettingsState&&(identical(other.theme, theme) || other.theme == theme));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SettingsState&&(identical(other.theme, theme) || other.theme == theme)&&(identical(other.unitSystem, unitSystem) || other.unitSystem == unitSystem));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,theme);
+int get hashCode => Object.hash(runtimeType,theme,unitSystem);
 
 @override
 String toString() {
-  return 'SettingsState(theme: $theme)';
+  return 'SettingsState(theme: $theme, unitSystem: $unitSystem)';
 }
 
 
@@ -241,7 +243,7 @@ abstract mixin class _$SettingsStateCopyWith<$Res> implements $SettingsStateCopy
   factory _$SettingsStateCopyWith(_SettingsState value, $Res Function(_SettingsState) _then) = __$SettingsStateCopyWithImpl;
 @override @useResult
 $Res call({
- ThemeMode theme
+ ThemeMode theme, UnitSystem unitSystem
 });
 
 
@@ -258,10 +260,11 @@ class __$SettingsStateCopyWithImpl<$Res>
 
 /// Create a copy of SettingsState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? theme = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? theme = null,Object? unitSystem = null,}) {
   return _then(_SettingsState(
 theme: null == theme ? _self.theme : theme // ignore: cast_nullable_to_non_nullable
-as ThemeMode,
+as ThemeMode,unitSystem: null == unitSystem ? _self.unitSystem : unitSystem // ignore: cast_nullable_to_non_nullable
+as UnitSystem,
   ));
 }
 
