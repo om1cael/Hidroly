@@ -5,6 +5,7 @@ import 'package:hidroly/features/summary/domain/usecases/get_monthly_chart_data_
 import 'package:hidroly/features/summary/domain/usecases/get_streak_usecase.dart';
 import 'package:hidroly/features/summary/domain/usecases/get_total_drunk_usecase.dart';
 import 'package:hidroly/features/summary/domain/usecases/get_weekly_chart_data_usecase.dart';
+import 'package:hidroly/features/summary/domain/usecases/get_yearly_chart_data_usecase.dart';
 import 'package:hidroly/features/summary/ui/enums/chart_selection.dart';
 import 'package:hidroly/features/summary/ui/state/summary_state.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -43,7 +44,11 @@ class SummaryViewModel extends _$SummaryViewModel {
         case .monthly:
           chartData = await ref.read(getMonthlyChartDataUseCaseProvider).execute();
           break;
-        default: chartData = await ref.read(getWeeklyChartDataUseCaseProvider).execute();
+        case .yearly:
+          chartData = await ref.read(getYearlyChartDataUsecaseProvider).execute();
+          break;
+        default: 
+          chartData = await ref.read(getWeeklyChartDataUseCaseProvider).execute();
       }
 
       return currentState.copyWith(

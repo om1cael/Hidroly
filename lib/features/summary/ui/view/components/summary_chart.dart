@@ -39,7 +39,7 @@ class SummaryChart extends StatelessWidget {
               );
             },
             child: Chart(
-              key: ValueKey(data.length),
+              key: ValueKey(data.hashCode),
               data: data,
               variables: {
                 'period': Variable(
