@@ -33,7 +33,7 @@ final class SummaryViewModelProvider
   SummaryViewModel create() => SummaryViewModel();
 }
 
-String _$summaryViewModelHash() => r'00588b2e0a56721ee9e7e0649ec704a274f49fb2';
+String _$summaryViewModelHash() => r'5e3c0931f4099867833a4481accc58464f114095';
 
 abstract class _$SummaryViewModel extends $AsyncNotifier<SummaryState> {
   FutureOr<SummaryState> build();

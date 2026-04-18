@@ -47,6 +47,17 @@ class DayRepositoryImpl implements DayRepository {
     
     return [for(final day in dayTableDataList) day.toEntity()];
   }
+
+  @override
+  Future<List<Day>> readByRange(DateTime start, DateTime end) async {
+    final dayTableDataList = await (_database
+      .select(_database.dayTable)
+      ..orderBy([(u) => OrderingTerm(expression: u.createdAt, mode: .asc)])
+      ..where((day) => day.createdAt.isBiggerOrEqualValue(start) & day.createdAt.isSmallerOrEqualValue(end)))
+      .get();
+    
+    return [for(final day in dayTableDataList) day.toEntity()];
+  }
   
   @override
   Future<Day> readOrCreateByDate(DateTime date) async {
