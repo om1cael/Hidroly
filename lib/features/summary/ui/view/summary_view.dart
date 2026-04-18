@@ -27,60 +27,66 @@ class _SummaryViewState extends ConsumerState<SummaryView> {
           ],
         ),
         body: SafeArea(
-          child: SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.all(18.0),
-              child: Column(
-                spacing: 12,
-                crossAxisAlignment: .center,
-                children: [
-                  ListTile(
-                    leading: CircleAvatar(child: Icon(Icons.local_drink)),
-                    title: Text('totalDrunk'.tr()),
-                    subtitle: Text('${data.totalDrunk.valueIn(data.unitSystem)} ${data.unitSystem.unitLabel}'),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadiusGeometry.circular(24)),
-                    tileColor: Theme.of(context).colorScheme.surfaceContainer,
-                  ),
-                  ListTile(
-                    leading: CircleAvatar(child: Icon(Icons.water_drop)),
-                    title: Text('dailyAverage'.tr()),
-                    subtitle: Text('${data.dailyAverage.valueIn(data.unitSystem)} ${data.unitSystem.unitLabel}'),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadiusGeometry.circular(24)),
-                    tileColor: Theme.of(context).colorScheme.surfaceContainer,
-                  ),
-                  ListTile(
-                    leading: CircleAvatar(backgroundColor: data.streak >= 1 ? Colors.redAccent : null, child: Icon(Icons.whatshot,)),
-                    title: Text('streak'.tr()),
-                    subtitle: Text('day'.plural(data.streak)),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadiusGeometry.circular(24)),
-                    tileColor: Theme.of(context).colorScheme.surfaceContainer,
-                  ),
-            
-                  SizedBox(height: 24,),
-                  SegmentedButton(
-                    segments: [
-                      ButtonSegment(
-                        value: ChartSelection.weekly,
-                        label: Text('weekly'.tr())
-                      ),
-                      ButtonSegment(
-                        value: ChartSelection.monthly,
-                        label: Text('monthly'.tr())
-                      ),
-                      ButtonSegment(
-                        value: ChartSelection.yearly,
-                        label: Text('yearly'.tr())
-                      ),
-                    ], 
-                    onSelectionChanged: (chartSelection) {
-                      ref.read(summaryViewModelProvider.notifier)
-                        .updateChartSelection(chartSelection.first);
-                    },
-                    selected: {data.chartSelection},
-                  ),
-            
-                  SummaryChart(data: data.chartData)
-                ],
+          child: RefreshIndicator(
+            onRefresh: () async {
+              ref.invalidate(summaryViewModelProvider);
+            },
+            child: SingleChildScrollView(
+              physics: AlwaysScrollableScrollPhysics(),
+              child: Padding(
+                padding: const EdgeInsets.all(18.0),
+                child: Column(
+                  spacing: 12,
+                  crossAxisAlignment: .center,
+                  children: [
+                    ListTile(
+                      leading: CircleAvatar(child: Icon(Icons.local_drink)),
+                      title: Text('totalDrunk'.tr()),
+                      subtitle: Text('${data.totalDrunk.valueIn(data.unitSystem)} ${data.unitSystem.unitLabel}'),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadiusGeometry.circular(24)),
+                      tileColor: Theme.of(context).colorScheme.surfaceContainer,
+                    ),
+                    ListTile(
+                      leading: CircleAvatar(child: Icon(Icons.water_drop)),
+                      title: Text('dailyAverage'.tr()),
+                      subtitle: Text('${data.dailyAverage.valueIn(data.unitSystem)} ${data.unitSystem.unitLabel}'),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadiusGeometry.circular(24)),
+                      tileColor: Theme.of(context).colorScheme.surfaceContainer,
+                    ),
+                    ListTile(
+                      leading: CircleAvatar(backgroundColor: data.streak >= 1 ? Colors.redAccent : null, child: Icon(Icons.whatshot,)),
+                      title: Text('streak'.tr()),
+                      subtitle: Text('day'.plural(data.streak)),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadiusGeometry.circular(24)),
+                      tileColor: Theme.of(context).colorScheme.surfaceContainer,
+                    ),
+              
+                    SizedBox(height: 24,),
+                    SegmentedButton(
+                      segments: [
+                        ButtonSegment(
+                          value: ChartSelection.weekly,
+                          label: Text('weekly'.tr())
+                        ),
+                        ButtonSegment(
+                          value: ChartSelection.monthly,
+                          label: Text('monthly'.tr())
+                        ),
+                        ButtonSegment(
+                          value: ChartSelection.yearly,
+                          label: Text('yearly'.tr())
+                        ),
+                      ], 
+                      onSelectionChanged: (chartSelection) {
+                        ref.read(summaryViewModelProvider.notifier)
+                          .updateChartSelection(chartSelection.first);
+                      },
+                      selected: {data.chartSelection},
+                    ),
+              
+                    SummaryChart(data: data.chartData)
+                  ],
+                ),
               ),
             ),
           ),
