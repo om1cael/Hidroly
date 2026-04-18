@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hidroly/core/domain/enums/unit_systems.dart';
 import 'package:hidroly/features/hydration/domain/entities/history_item.dart';
-import 'package:hidroly/features/hydration/ui/extensions/unit_system_ui_extension.dart';
+import 'package:hidroly/core/ui/extensions/unit_system_ui_extension.dart';
 import 'package:hidroly/features/hydration/ui/view_model/hydration_view_model.dart';
 
 class HistoryItemCard extends ConsumerWidget {
