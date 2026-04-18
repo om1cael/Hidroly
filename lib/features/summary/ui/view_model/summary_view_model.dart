@@ -16,15 +16,17 @@ part 'summary_view_model.g.dart';
 class SummaryViewModel extends _$SummaryViewModel {
   @override
   Future<SummaryState> build() async {
-    final (totalDrunk, dailyAverage, streak, weeklyChartData) = await (
+    final (totalDrunk, dailyAverage, streak) = await (
       ref.read(getTotalDrunkUseCaseProvider).execute(),
       ref.read(getDailyAverageUseCaseProvider).execute(),
       ref.read(getStreakUseCaseProvider).execute(),
-      ref.read(getWeeklyChartDataUseCaseProvider).execute(),
     ).wait;
 
     final unitSystem = 
       await ref.watch(settingsRepositoryProvider).readUnitSystem();
+    
+    final weeklyChartData = 
+      await ref.read(getWeeklyChartDataUseCaseProvider).execute(unitSystem);
     
     return SummaryState(
       totalDrunk: Water.ml(totalDrunk),
@@ -38,17 +40,19 @@ class SummaryViewModel extends _$SummaryViewModel {
   void updateChartSelection(ChartSelection chartSelection) async {
     state = await AsyncValue.guard(() async {
       final currentState = state.requireValue;
+      final unitSystem = currentState.unitSystem;
+
       List<Map<String, dynamic>> chartData;
 
       switch(chartSelection) {
         case .monthly:
-          chartData = await ref.read(getMonthlyChartDataUseCaseProvider).execute();
+          chartData = await ref.read(getMonthlyChartDataUseCaseProvider).execute(unitSystem);
           break;
         case .yearly:
-          chartData = await ref.read(getYearlyChartDataUsecaseProvider).execute();
+          chartData = await ref.read(getYearlyChartDataUsecaseProvider).execute(unitSystem);
           break;
         default: 
-          chartData = await ref.read(getWeeklyChartDataUseCaseProvider).execute();
+          chartData = await ref.read(getWeeklyChartDataUseCaseProvider).execute(unitSystem);
       }
 
       return currentState.copyWith(

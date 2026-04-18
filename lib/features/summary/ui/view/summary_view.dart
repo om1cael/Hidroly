@@ -85,7 +85,7 @@ class _SummaryViewState extends ConsumerState<SummaryView> {
         ),
       ),
       error: (_, _) => const Placeholder(),
-      loading: () => CircularProgressIndicator(),
+      loading: () => Center(child: CircularProgressIndicator(),),
     );
   }
 }

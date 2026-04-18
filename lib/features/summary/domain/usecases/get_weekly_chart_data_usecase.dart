@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:hidroly/core/data/repositories/day_repository_impl.dart';
+import 'package:hidroly/core/domain/enums/unit_systems.dart';
 import 'package:hidroly/core/domain/repositories/day_repository.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -16,7 +17,7 @@ class GetWeeklyChartDataUseCase {
 
   const GetWeeklyChartDataUseCase(this._dayRepository);
   
-  Future<List<Map<String, dynamic>>> execute() async {
+  Future<List<Map<String, dynamic>>> execute(UnitSystem unitSystem) async {
     final today = DateTime.now();
     final normalizedToday = DateTime(today.year, today.month, today.day);
 
@@ -29,7 +30,7 @@ class GetWeeklyChartDataUseCase {
       final day = days[index];
       final weekDayAbbr = _getLocalizedDayAbbr(day.createdAt);
 
-      return {'period': weekDayAbbr, 'amount': day.currentAmount.ml};
+      return {'period': weekDayAbbr, 'amount': day.currentAmount.valueIn(unitSystem)};
     });
   }
 
