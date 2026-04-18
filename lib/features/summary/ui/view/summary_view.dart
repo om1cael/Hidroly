@@ -60,8 +60,9 @@ class _SummaryViewState extends ConsumerState<SummaryView> {
                       shape: RoundedRectangleBorder(borderRadius: BorderRadiusGeometry.circular(24)),
                       tileColor: Theme.of(context).colorScheme.surfaceContainer,
                     ),
-              
-                    SizedBox(height: 24,),
+
+                    SizedBox(height: 8,),
+
                     SegmentedButton(
                       segments: [
                         ButtonSegment(
