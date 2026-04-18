@@ -19,7 +19,7 @@ class _SummaryViewState extends ConsumerState<SummaryView> {
     return state.when(
       data: (data) => Scaffold(
         appBar: AppBar(
-          title: Text('Summary'),
+          title: Text('summary'.tr()),
           actions: [
             IconButton(onPressed: () {}, icon: Icon(Icons.settings))
           ],
