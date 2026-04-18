@@ -40,5 +40,8 @@
         "one": "{} day",
         "many": "{} days",
         "other": "{} days"
-    }
+    },
+    "weekly": "Weekly",
+    "monthly": "Monthly",
+    "yearly": "Yearly"
 }
