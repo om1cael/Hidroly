@@ -31,5 +31,14 @@
     "emptyHistorySubtitle": "It looks like you haven't tracked any water today. Ready to start?",
     "today": "Today",
     "yesterday": "Yesterday",
-    "delete": "Delete"
+    "delete": "Delete",
+    "totalDrunk": "Total Drunk",
+    "dailyAverage": "Daily Average",
+    "streak": "Streak",
+    "day": {
+        "zero": "{} days",
+        "one": "{} day",
+        "many": "{} days",
+        "other": "{} days"
+    }
 }

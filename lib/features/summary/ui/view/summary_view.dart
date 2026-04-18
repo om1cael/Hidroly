@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hidroly/core/ui/extensions/unit_system_ui_extension.dart';
@@ -32,22 +33,22 @@ class _SummaryViewState extends ConsumerState<SummaryView> {
               children: [
                 ListTile(
                   leading: CircleAvatar(child: Icon(Icons.local_drink)),
-                  title: Text('Total Drunk'),
+                  title: Text('totalDrunk'.tr()),
                   subtitle: Text('${data.totalDrunk.valueIn(data.unitSystem)} ${data.unitSystem.unitLabel}'),
                   shape: RoundedRectangleBorder(borderRadius: BorderRadiusGeometry.circular(24)),
                   tileColor: Theme.of(context).colorScheme.surfaceContainer,
                 ),
                 ListTile(
                   leading: CircleAvatar(child: Icon(Icons.water_drop)),
-                  title: Text('Daily Average'),
+                  title: Text('dailyAverage'.tr()),
                   subtitle: Text('${data.dailyAverage.valueIn(data.unitSystem)} ${data.unitSystem.unitLabel}'),
                   shape: RoundedRectangleBorder(borderRadius: BorderRadiusGeometry.circular(24)),
                   tileColor: Theme.of(context).colorScheme.surfaceContainer,
                 ),
                 ListTile(
                   leading: CircleAvatar(backgroundColor: Colors.redAccent, child: Icon(Icons.whatshot,)),
-                  title: Text('Streak'),
-                  subtitle: Text('${data.streak.toString()} days'),
+                  title: Text('streak'.tr()),
+                  subtitle: Text('day'.plural(data.streak)),
                   shape: RoundedRectangleBorder(borderRadius: BorderRadiusGeometry.circular(24)),
                   tileColor: Theme.of(context).colorScheme.surfaceContainer,
                 ),
