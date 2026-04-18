@@ -1,4 +1,5 @@
 import 'package:collection/collection.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:hidroly/core/data/repositories/day_repository_impl.dart';
 import 'package:hidroly/core/domain/entities/day.dart';
 import 'package:hidroly/core/domain/repositories/day_repository.dart';
@@ -34,8 +35,13 @@ class GetYearlyChartDataUsecase {
       final days = entry.value;
 
       final monthSum = days.fold(0, (prev, currentDay) => prev + currentDay.currentAmount.ml);
+      final monthAbbr = _getLocalizedMonthAbbr(DateTime(2026, month, 1));
 
-      return {'period': month.toString(), 'amount': monthSum};
+      return {'period': monthAbbr, 'amount': monthSum};
     }).toList();
+  }
+
+  String _getLocalizedMonthAbbr(DateTime date) {
+    return DateFormat.LLL().format(date);
   }
 }
