@@ -47,6 +47,7 @@ class SummaryChart extends StatelessWidget {
                 ),
                 'amount': Variable(
                   accessor: (data) => (data as Map)['amount'] as num,
+                  scale: LinearScale(min: 0),
                 ),
               },
               marks: [
