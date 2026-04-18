@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hidroly/core/data/repositories/settings_repository_impl.dart';
+import 'package:hidroly/core/providers/theme_provider.dart';
 
-class SettingsView extends StatelessWidget {
+class SettingsView extends ConsumerWidget {
   const SettingsView({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Settings'),
@@ -48,15 +51,15 @@ class SettingsView extends StatelessWidget {
                       menuChildren: <MenuItemButton>[
                         MenuItemButton(
                           child: Text('System'),
-                          onPressed: () {},
+                          onPressed: () => ref.read(themeProviderProvider.notifier).setTheme(ThemeMode.system),
                         ),
                         MenuItemButton(
                           child: Text('Light'),
-                          onPressed: () {},
+                          onPressed: () => ref.read(themeProviderProvider.notifier).setTheme(ThemeMode.light),
                         ),
                         MenuItemButton(
                           child: Text('Dark'),
-                          onPressed: () {},
+                          onPressed: () => ref.read(themeProviderProvider.notifier).setTheme(ThemeMode.dark),
                         ),
                       ],
                       builder: (_, controller, _) {
