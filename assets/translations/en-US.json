@@ -43,5 +43,9 @@
     },
     "weekly": "Weekly",
     "monthly": "Monthly",
-    "yearly": "Yearly"
+    "yearly": "Yearly",
+    "theme": "Theme",
+    "system": "System",
+    "light": "Light",
+    "dark": "Dark"
 }
