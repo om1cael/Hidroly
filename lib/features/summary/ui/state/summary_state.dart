@@ -13,5 +13,6 @@ abstract class SummaryState with _$SummaryState {
     @Default(0) int streak,
     @Default(UnitSystem.metric) UnitSystem unitSystem,
     @Default(ChartSelection.weekly) ChartSelection chartSelection,
+    required List<Map<String, dynamic>> chartData,
   }) = _SummaryState;
 }

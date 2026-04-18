@@ -43,10 +43,10 @@ class SummaryChart extends StatelessWidget {
               data: data,
               variables: {
                 'period': Variable(
-                  accessor: (Map map) => map['period'] as String,
+                  accessor: (data) => (data as Map)['period'] as String,
                 ),
                 'amount': Variable(
-                  accessor: (Map map) => map['amount'] as num,
+                  accessor: (data) => (data as Map)['amount'] as num,
                 ),
               },
               marks: [

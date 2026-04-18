@@ -3,6 +3,7 @@ import 'package:hidroly/features/hydration/domain/value_objects/water.dart';
 import 'package:hidroly/features/summary/domain/usecases/get_daily_average_usecase.dart';
 import 'package:hidroly/features/summary/domain/usecases/get_streak_usecase.dart';
 import 'package:hidroly/features/summary/domain/usecases/get_total_drunk_usecase.dart';
+import 'package:hidroly/features/summary/domain/usecases/get_weekly_chart_data_usecase.dart';
 import 'package:hidroly/features/summary/ui/enums/chart_selection.dart';
 import 'package:hidroly/features/summary/ui/state/summary_state.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -13,20 +14,22 @@ part 'summary_view_model.g.dart';
 class SummaryViewModel extends _$SummaryViewModel {
   @override
   Future<SummaryState> build() async {
-    final results = await Future.wait([
+    final (totalDrunk, dailyAverage, streak, weeklyChartData) = await (
       ref.read(getTotalDrunkUseCaseProvider).execute(),
       ref.read(getDailyAverageUseCaseProvider).execute(),
       ref.read(getStreakUseCaseProvider).execute(),
-    ]);
+      ref.read(getWeeklyChartDataUseCaseProvider).execute(),
+    ).wait;
 
     final unitSystem = 
       await ref.watch(settingsRepositoryProvider).readUnitSystem();
     
     return SummaryState(
-      totalDrunk: Water.ml(results[0]),
-      dailyAverage: Water.ml(results[1]),
-      streak: results[2],
+      totalDrunk: Water.ml(totalDrunk),
+      dailyAverage: Water.ml(dailyAverage),
+      streak: streak,
       unitSystem: unitSystem,
+      chartData: weeklyChartData,
     );
   }
 

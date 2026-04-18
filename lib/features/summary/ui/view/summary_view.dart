@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hidroly/core/ui/extensions/unit_system_ui_extension.dart';
 import 'package:hidroly/features/summary/ui/enums/chart_selection.dart';
+import 'package:hidroly/features/summary/ui/view/components/summary_chart.dart';
 import 'package:hidroly/features/summary/ui/view_model/summary_view_model.dart';
 
 class SummaryView extends ConsumerStatefulWidget {
@@ -77,7 +78,7 @@ class _SummaryViewState extends ConsumerState<SummaryView> {
                   selected: {data.chartSelection},
                 ),
 
-
+                SummaryChart(data: data.chartData)
               ],
             ),
           ),
