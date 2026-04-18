@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$SummaryState {
 
- int get totalDrunk; int get dailyAverage; int get streak;
+ Water get totalDrunk; Water get dailyAverage; int get streak; UnitSystem get unitSystem;
 /// Create a copy of SummaryState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $SummaryStateCopyWith<SummaryState> get copyWith => _$SummaryStateCopyWithImpl<S
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SummaryState&&(identical(other.totalDrunk, totalDrunk) || other.totalDrunk == totalDrunk)&&(identical(other.dailyAverage, dailyAverage) || other.dailyAverage == dailyAverage)&&(identical(other.streak, streak) || other.streak == streak));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SummaryState&&(identical(other.totalDrunk, totalDrunk) || other.totalDrunk == totalDrunk)&&(identical(other.dailyAverage, dailyAverage) || other.dailyAverage == dailyAverage)&&(identical(other.streak, streak) || other.streak == streak)&&(identical(other.unitSystem, unitSystem) || other.unitSystem == unitSystem));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,totalDrunk,dailyAverage,streak);
+int get hashCode => Object.hash(runtimeType,totalDrunk,dailyAverage,streak,unitSystem);
 
 @override
 String toString() {
-  return 'SummaryState(totalDrunk: $totalDrunk, dailyAverage: $dailyAverage, streak: $streak)';
+  return 'SummaryState(totalDrunk: $totalDrunk, dailyAverage: $dailyAverage, streak: $streak, unitSystem: $unitSystem)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $SummaryStateCopyWith<$Res>  {
   factory $SummaryStateCopyWith(SummaryState value, $Res Function(SummaryState) _then) = _$SummaryStateCopyWithImpl;
 @useResult
 $Res call({
- int totalDrunk, int dailyAverage, int streak
+ Water totalDrunk, Water dailyAverage, int streak, UnitSystem unitSystem
 });
 
 
@@ -62,12 +62,13 @@ class _$SummaryStateCopyWithImpl<$Res>
 
 /// Create a copy of SummaryState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? totalDrunk = null,Object? dailyAverage = null,Object? streak = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? totalDrunk = null,Object? dailyAverage = null,Object? streak = null,Object? unitSystem = null,}) {
   return _then(_self.copyWith(
 totalDrunk: null == totalDrunk ? _self.totalDrunk : totalDrunk // ignore: cast_nullable_to_non_nullable
-as int,dailyAverage: null == dailyAverage ? _self.dailyAverage : dailyAverage // ignore: cast_nullable_to_non_nullable
-as int,streak: null == streak ? _self.streak : streak // ignore: cast_nullable_to_non_nullable
-as int,
+as Water,dailyAverage: null == dailyAverage ? _self.dailyAverage : dailyAverage // ignore: cast_nullable_to_non_nullable
+as Water,streak: null == streak ? _self.streak : streak // ignore: cast_nullable_to_non_nullable
+as int,unitSystem: null == unitSystem ? _self.unitSystem : unitSystem // ignore: cast_nullable_to_non_nullable
+as UnitSystem,
   ));
 }
 
@@ -152,10 +153,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int totalDrunk,  int dailyAverage,  int streak)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( Water totalDrunk,  Water dailyAverage,  int streak,  UnitSystem unitSystem)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _SummaryState() when $default != null:
-return $default(_that.totalDrunk,_that.dailyAverage,_that.streak);case _:
+return $default(_that.totalDrunk,_that.dailyAverage,_that.streak,_that.unitSystem);case _:
   return orElse();
 
 }
@@ -173,10 +174,10 @@ return $default(_that.totalDrunk,_that.dailyAverage,_that.streak);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int totalDrunk,  int dailyAverage,  int streak)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( Water totalDrunk,  Water dailyAverage,  int streak,  UnitSystem unitSystem)  $default,) {final _that = this;
 switch (_that) {
 case _SummaryState():
-return $default(_that.totalDrunk,_that.dailyAverage,_that.streak);case _:
+return $default(_that.totalDrunk,_that.dailyAverage,_that.streak,_that.unitSystem);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -193,10 +194,10 @@ return $default(_that.totalDrunk,_that.dailyAverage,_that.streak);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int totalDrunk,  int dailyAverage,  int streak)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( Water totalDrunk,  Water dailyAverage,  int streak,  UnitSystem unitSystem)?  $default,) {final _that = this;
 switch (_that) {
 case _SummaryState() when $default != null:
-return $default(_that.totalDrunk,_that.dailyAverage,_that.streak);case _:
+return $default(_that.totalDrunk,_that.dailyAverage,_that.streak,_that.unitSystem);case _:
   return null;
 
 }
@@ -208,12 +209,13 @@ return $default(_that.totalDrunk,_that.dailyAverage,_that.streak);case _:
 
 
 class _SummaryState implements SummaryState {
-  const _SummaryState({this.totalDrunk = 0, this.dailyAverage = 0, this.streak = 0});
+  const _SummaryState({this.totalDrunk = const Water.zero(), this.dailyAverage = const Water.zero(), this.streak = 0, this.unitSystem = UnitSystem.metric});
   
 
-@override@JsonKey() final  int totalDrunk;
-@override@JsonKey() final  int dailyAverage;
+@override@JsonKey() final  Water totalDrunk;
+@override@JsonKey() final  Water dailyAverage;
 @override@JsonKey() final  int streak;
+@override@JsonKey() final  UnitSystem unitSystem;
 
 /// Create a copy of SummaryState
 /// with the given fields replaced by the non-null parameter values.
@@ -225,16 +227,16 @@ _$SummaryStateCopyWith<_SummaryState> get copyWith => __$SummaryStateCopyWithImp
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SummaryState&&(identical(other.totalDrunk, totalDrunk) || other.totalDrunk == totalDrunk)&&(identical(other.dailyAverage, dailyAverage) || other.dailyAverage == dailyAverage)&&(identical(other.streak, streak) || other.streak == streak));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SummaryState&&(identical(other.totalDrunk, totalDrunk) || other.totalDrunk == totalDrunk)&&(identical(other.dailyAverage, dailyAverage) || other.dailyAverage == dailyAverage)&&(identical(other.streak, streak) || other.streak == streak)&&(identical(other.unitSystem, unitSystem) || other.unitSystem == unitSystem));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,totalDrunk,dailyAverage,streak);
+int get hashCode => Object.hash(runtimeType,totalDrunk,dailyAverage,streak,unitSystem);
 
 @override
 String toString() {
-  return 'SummaryState(totalDrunk: $totalDrunk, dailyAverage: $dailyAverage, streak: $streak)';
+  return 'SummaryState(totalDrunk: $totalDrunk, dailyAverage: $dailyAverage, streak: $streak, unitSystem: $unitSystem)';
 }
 
 
@@ -245,7 +247,7 @@ abstract mixin class _$SummaryStateCopyWith<$Res> implements $SummaryStateCopyWi
   factory _$SummaryStateCopyWith(_SummaryState value, $Res Function(_SummaryState) _then) = __$SummaryStateCopyWithImpl;
 @override @useResult
 $Res call({
- int totalDrunk, int dailyAverage, int streak
+ Water totalDrunk, Water dailyAverage, int streak, UnitSystem unitSystem
 });
 
 
@@ -262,12 +264,13 @@ class __$SummaryStateCopyWithImpl<$Res>
 
 /// Create a copy of SummaryState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? totalDrunk = null,Object? dailyAverage = null,Object? streak = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? totalDrunk = null,Object? dailyAverage = null,Object? streak = null,Object? unitSystem = null,}) {
   return _then(_SummaryState(
 totalDrunk: null == totalDrunk ? _self.totalDrunk : totalDrunk // ignore: cast_nullable_to_non_nullable
-as int,dailyAverage: null == dailyAverage ? _self.dailyAverage : dailyAverage // ignore: cast_nullable_to_non_nullable
-as int,streak: null == streak ? _self.streak : streak // ignore: cast_nullable_to_non_nullable
-as int,
+as Water,dailyAverage: null == dailyAverage ? _self.dailyAverage : dailyAverage // ignore: cast_nullable_to_non_nullable
+as Water,streak: null == streak ? _self.streak : streak // ignore: cast_nullable_to_non_nullable
+as int,unitSystem: null == unitSystem ? _self.unitSystem : unitSystem // ignore: cast_nullable_to_non_nullable
+as UnitSystem,
   ));
 }
 
