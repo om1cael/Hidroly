@@ -20,7 +20,7 @@ class SummaryChart extends StatelessWidget {
           borderRadius: BorderRadius.circular(24.0)
         ),
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(24.0),
           child: AnimatedSwitcher(
             duration: const Duration(milliseconds: 140),
             transitionBuilder: (Widget child, Animation<double> animation) {
@@ -58,8 +58,24 @@ class SummaryChart extends StatelessWidget {
                 ),
               ],
               axes: [
-                Defaults.horizontalAxis,
-                Defaults.verticalAxis,
+                AxisGuide(
+                  line: PaintStyle(
+                    strokeColor: Theme.of(context).colorScheme.onSurface
+                  ),
+                  label: LabelStyle(
+                    textStyle: TextStyle(color: Theme.of(context).textTheme.labelLarge!.color, fontSize: 12),
+                    offset: Offset(0, 8)
+                  ),
+                ),
+                AxisGuide(
+                  label: LabelStyle(
+                    textStyle: TextStyle(color: Theme.of(context).textTheme.labelLarge!.color, fontSize: 12),
+                    offset: Offset(-8, 0)
+                  ),
+                  grid: PaintStyle(
+                    strokeColor: Colors.white.withAlpha(60),
+                  )
+                ),
               ],
             ),
           ),
