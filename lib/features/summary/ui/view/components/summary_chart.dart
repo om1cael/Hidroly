@@ -1,0 +1,70 @@
+import 'package:flutter/material.dart';
+import 'package:graphic/graphic.dart';
+
+class SummaryChart extends StatelessWidget {
+  const SummaryChart({
+    super.key,
+    required this.data,
+  });
+
+  final List<dynamic> data;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 300,
+      width: 600,
+      child: Container(
+        decoration: BoxDecoration(
+          color: Theme.of(context).colorScheme.surfaceContainer,
+          borderRadius: BorderRadius.circular(24.0)
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: AnimatedSwitcher(
+            duration: const Duration(milliseconds: 140),
+            transitionBuilder: (Widget child, Animation<double> animation) {
+              return FadeTransition(
+                opacity: animation,
+                child: SlideTransition(
+                  position: Tween<Offset>(
+                    begin: const Offset(0, 0),
+                    end: Offset.zero,
+                  ).animate(CurvedAnimation(
+                    parent: animation,
+                    curve: Curves.easeInOut,
+                  )),
+                  child: child,
+                ),
+              );
+            },
+            child: Chart(
+              key: ValueKey(data.length),
+              data: data,
+              variables: {
+                'period': Variable(
+                  accessor: (Map map) => map['period'] as String,
+                ),
+                'amount': Variable(
+                  accessor: (Map map) => map['amount'] as num,
+                ),
+              },
+              marks: [
+                IntervalMark(
+                  color: ColorEncode(
+                    value: Theme.of(context).colorScheme.primary),
+                    shape: ShapeEncode(value: RectShape(borderRadius: BorderRadius.circular(24))
+                  ),
+                ),
+              ],
+              axes: [
+                Defaults.horizontalAxis,
+                Defaults.verticalAxis,
+              ],
+            ),
+          ),
+        ),
+      )
+    );
+  }
+}

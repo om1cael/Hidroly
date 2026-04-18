@@ -76,6 +76,8 @@ class _SummaryViewState extends ConsumerState<SummaryView> {
                   },
                   selected: {data.chartSelection},
                 ),
+
+
               ],
             ),
           ),
