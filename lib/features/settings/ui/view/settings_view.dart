@@ -20,108 +20,112 @@ class SettingsView extends ConsumerWidget {
           title: Text('Settings'),
         ),
         body: SafeArea(
-          minimum: EdgeInsets.all(16),
-          child: Column(
-            spacing: 6,
-            mainAxisAlignment: .center,
-            crossAxisAlignment: .start,
-            children: [
-              Center(
+          child: Center(
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
                 child: Column(
-                  spacing: 4,
+                  spacing: 6,
                   children: [
-                    Text(
-                      'Hidroly', 
-                      style: Theme.of(context).textTheme.headlineLarge!.copyWith(fontWeight: .bold),
-                      textAlign: .center,
+                    Center(
+                      child: Column(
+                        spacing: 4,
+                        children: [
+                          Text(
+                            'Hidroly', 
+                            style: Theme.of(context).textTheme.headlineLarge!.copyWith(fontWeight: .bold),
+                            textAlign: .center,
+                          ),
+                          ElevatedButton.icon(
+                            onPressed: () {}, 
+                            label: Text('Buy me a coffee'),
+                            icon: Icon(Icons.favorite),
+                          ),
+                        ],
+                      ),
                     ),
-                    ElevatedButton.icon(
-                      onPressed: () {}, 
-                      label: Text('Buy me a coffee'),
-                      icon: Icon(Icons.favorite),
-                    ),
+                    
+                    SizedBox(height: 24,),
+                
+                    Card(
+                      child: Column(
+                        children: [
+                          ListTile(
+                            leading: CircleAvatar(child: Icon(Icons.style),),
+                            title: Text('theme'.tr()),
+                            subtitle: Text(data.theme.label()),
+                            trailing: MenuAnchor(
+                              controller: MenuController(),
+                              menuChildren: <MenuItemButton>[
+                                MenuItemButton(
+                                  child: Text('system'.tr()),
+                                  onPressed: () => ref.read(settingsViewModelProvider.notifier).setTheme(ThemeMode.system),
+                                ),
+                                MenuItemButton(
+                                  child: Text('light'.tr()),
+                                  onPressed: () => ref.read(settingsViewModelProvider.notifier).setTheme(ThemeMode.light),
+                                ),
+                                MenuItemButton(
+                                  child: Text('dark'.tr()),
+                                  onPressed: () => ref.read(settingsViewModelProvider.notifier).setTheme(ThemeMode.dark),
+                                ),
+                              ],
+                              builder: (_, controller, _) {
+                                return IconButton(
+                                  onPressed: () {
+                                    controller.isOpen
+                                    ? controller.close()
+                                    : controller.open();
+                                  }, 
+                                  icon: controller.isOpen
+                                    ? Icon(Icons.arrow_drop_up)
+                                    : Icon(Icons.arrow_drop_down),
+                                );
+                              },
+                            ),
+                          ),
+                          ListTile(
+                            title: Text('Language'),
+                            subtitle: Text('English (US)'),
+                            leading: CircleAvatar(child: Icon(Icons.language),),
+                          ),
+                          ListTile(
+                            title: Text('unitSystem'.tr()),
+                            subtitle: Text(data.unitSystem.label),
+                            leading: CircleAvatar(child: Icon(Icons.straighten),),
+                            trailing: MenuAnchor(
+                              controller: MenuController(),
+                              menuChildren: <MenuItemButton>[
+                                MenuItemButton(
+                                  child: Text('metric'.tr()),
+                                  onPressed: () => ref.read(settingsViewModelProvider.notifier).setUnitSystem(UnitSystem.metric),
+                                ),
+                                MenuItemButton(
+                                  child: Text('imperial'.tr()),
+                                  onPressed: () => ref.read(settingsViewModelProvider.notifier).setUnitSystem(UnitSystem.imperial),
+                                ),
+                              ],
+                              builder: (_, controller, _) {
+                                return IconButton(
+                                  onPressed: () {
+                                    controller.isOpen
+                                    ? controller.close()
+                                    : controller.open();
+                                  }, 
+                                  icon: controller.isOpen
+                                    ? Icon(Icons.arrow_drop_up)
+                                    : Icon(Icons.arrow_drop_down),
+                                );
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
                   ],
                 ),
               ),
-              
-              SizedBox(height: 24,),
-
-              Card(
-                child: Column(
-                  children: [
-                    ListTile(
-                      leading: CircleAvatar(child: Icon(Icons.style),),
-                      title: Text('theme'.tr()),
-                      subtitle: Text(data.theme.label()),
-                      trailing: MenuAnchor(
-                        controller: MenuController(),
-                        menuChildren: <MenuItemButton>[
-                          MenuItemButton(
-                            child: Text('system'.tr()),
-                            onPressed: () => ref.read(settingsViewModelProvider.notifier).setTheme(ThemeMode.system),
-                          ),
-                          MenuItemButton(
-                            child: Text('light'.tr()),
-                            onPressed: () => ref.read(settingsViewModelProvider.notifier).setTheme(ThemeMode.light),
-                          ),
-                          MenuItemButton(
-                            child: Text('dark'.tr()),
-                            onPressed: () => ref.read(settingsViewModelProvider.notifier).setTheme(ThemeMode.dark),
-                          ),
-                        ],
-                        builder: (_, controller, _) {
-                          return IconButton(
-                            onPressed: () {
-                              controller.isOpen
-                              ? controller.close()
-                              : controller.open();
-                            }, 
-                            icon: controller.isOpen
-                              ? Icon(Icons.arrow_drop_up)
-                              : Icon(Icons.arrow_drop_down),
-                          );
-                        },
-                      ),
-                    ),
-                    ListTile(
-                      title: Text('Language'),
-                      subtitle: Text('English (US)'),
-                      leading: CircleAvatar(child: Icon(Icons.language),),
-                    ),
-                    ListTile(
-                      title: Text('unitSystem'.tr()),
-                      subtitle: Text(data.unitSystem.label),
-                      leading: CircleAvatar(child: Icon(Icons.straighten),),
-                      trailing: MenuAnchor(
-                        controller: MenuController(),
-                        menuChildren: <MenuItemButton>[
-                          MenuItemButton(
-                            child: Text('metric'.tr()),
-                            onPressed: () => ref.read(settingsViewModelProvider.notifier).setUnitSystem(UnitSystem.metric),
-                          ),
-                          MenuItemButton(
-                            child: Text('imperial'.tr()),
-                            onPressed: () => ref.read(settingsViewModelProvider.notifier).setUnitSystem(UnitSystem.imperial),
-                          ),
-                        ],
-                        builder: (_, controller, _) {
-                          return IconButton(
-                            onPressed: () {
-                              controller.isOpen
-                              ? controller.close()
-                              : controller.open();
-                            }, 
-                            icon: controller.isOpen
-                              ? Icon(Icons.arrow_drop_up)
-                              : Icon(Icons.arrow_drop_down),
-                          );
-                        },
-                      ),
-                    ),
-                  ],
-                ),
-              )
-            ],
+            ),
           )
         ),
       ), 
