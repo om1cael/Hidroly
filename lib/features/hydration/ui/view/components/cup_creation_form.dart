@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hidroly/core/domain/enums/unit_systems.dart';
 import 'package:hidroly/core/ui/components/number_input_form_field.dart';
 import 'package:hidroly/features/hydration/domain/value_objects/cup_value.dart';
-import 'package:hidroly/features/hydration/ui/extensions/unit_system_ui_extension.dart';
+import 'package:hidroly/core/ui/extensions/unit_system_ui_extension.dart';
 
 class CupCreationForm extends StatelessWidget {
   const CupCreationForm({
