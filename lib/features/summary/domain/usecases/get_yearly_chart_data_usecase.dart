@@ -20,8 +20,8 @@ class GetYearlyChartDataUsecase {
 
   const GetYearlyChartDataUsecase(this._dayRepository);
   
-  Future<List<Map<String, dynamic>>> execute(UnitSystem unitSystem) async {
-    final today = DateTime.now();
+  Future<List<Map<String, dynamic>>> execute(UnitSystem unitSystem, {DateTime? baseDate}) async {
+    final today = baseDate ?? DateTime.now();
     final normalizedToday = DateTime(today.year, today.month, today.day);
 
     final firstYearDay = DateTime(today.year, 1, 1);
