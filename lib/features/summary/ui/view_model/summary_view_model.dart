@@ -1,6 +1,7 @@
 import 'package:hidroly/core/data/repositories/settings_repository_impl.dart';
 import 'package:hidroly/features/hydration/domain/value_objects/water.dart';
 import 'package:hidroly/features/summary/domain/usecases/get_daily_average_usecase.dart';
+import 'package:hidroly/features/summary/domain/usecases/get_monthly_chart_data_usecase.dart';
 import 'package:hidroly/features/summary/domain/usecases/get_streak_usecase.dart';
 import 'package:hidroly/features/summary/domain/usecases/get_total_drunk_usecase.dart';
 import 'package:hidroly/features/summary/domain/usecases/get_weekly_chart_data_usecase.dart';
@@ -34,8 +35,21 @@ class SummaryViewModel extends _$SummaryViewModel {
   }
 
   void updateChartSelection(ChartSelection chartSelection) async {
-    state = state.whenData((currentState) {
-      return currentState.copyWith(chartSelection: chartSelection);
+    state = await AsyncValue.guard(() async {
+      final currentState = state.requireValue;
+      List<Map<String, dynamic>> chartData;
+
+      switch(chartSelection) {
+        case .monthly:
+          chartData = await ref.read(getMonthlyChartDataUseCaseProvider).execute();
+          break;
+        default: chartData = await ref.read(getWeeklyChartDataUseCaseProvider).execute();
+      }
+
+      return currentState.copyWith(
+        chartSelection: chartSelection,
+        chartData: chartData,
+      );
     });
   }
 }

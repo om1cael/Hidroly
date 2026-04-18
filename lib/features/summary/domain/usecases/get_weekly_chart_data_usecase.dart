@@ -26,7 +26,6 @@ class GetWeeklyChartDataUseCase {
     
     return List.generate(days.length, (index) {
       final day = days[index];
-      print(day);
       return {'period': day.createdAt.day.toString(), 'amount': day.currentAmount.ml};
     });
   }
