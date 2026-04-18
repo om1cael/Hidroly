@@ -3,6 +3,7 @@ import 'package:hidroly/features/hydration/domain/value_objects/water.dart';
 import 'package:hidroly/features/summary/domain/usecases/get_daily_average_usecase.dart';
 import 'package:hidroly/features/summary/domain/usecases/get_streak_usecase.dart';
 import 'package:hidroly/features/summary/domain/usecases/get_total_drunk_usecase.dart';
+import 'package:hidroly/features/summary/ui/enums/chart_selection.dart';
 import 'package:hidroly/features/summary/ui/state/summary_state.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -27,5 +28,11 @@ class SummaryViewModel extends _$SummaryViewModel {
       streak: results[2],
       unitSystem: unitSystem,
     );
+  }
+
+  void updateChartSelection(ChartSelection chartSelection) async {
+    state = state.whenData((currentState) {
+      return currentState.copyWith(chartSelection: chartSelection);
+    });
   }
 }

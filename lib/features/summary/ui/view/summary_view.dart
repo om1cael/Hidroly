@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hidroly/core/ui/extensions/unit_system_ui_extension.dart';
+import 'package:hidroly/features/summary/ui/enums/chart_selection.dart';
 import 'package:hidroly/features/summary/ui/view_model/summary_view_model.dart';
 
 class SummaryView extends ConsumerStatefulWidget {
@@ -29,7 +30,7 @@ class _SummaryViewState extends ConsumerState<SummaryView> {
             padding: const EdgeInsets.all(18.0),
             child: Column(
               spacing: 12,
-              crossAxisAlignment: .start,
+              crossAxisAlignment: .center,
               children: [
                 ListTile(
                   leading: CircleAvatar(child: Icon(Icons.local_drink)),
@@ -51,6 +52,29 @@ class _SummaryViewState extends ConsumerState<SummaryView> {
                   subtitle: Text('day'.plural(data.streak)),
                   shape: RoundedRectangleBorder(borderRadius: BorderRadiusGeometry.circular(24)),
                   tileColor: Theme.of(context).colorScheme.surfaceContainer,
+                ),
+
+                SizedBox(height: 24,),
+                SegmentedButton(
+                  segments: [
+                    ButtonSegment(
+                      value: ChartSelection.weekly,
+                      label: Text('Weekly')
+                    ),
+                    ButtonSegment(
+                      value: ChartSelection.monthly,
+                      label: Text('Monthly')
+                    ),
+                    ButtonSegment(
+                      value: ChartSelection.yearly,
+                      label: Text('Yearly')
+                    ),
+                  ], 
+                  onSelectionChanged: (chartSelection) {
+                    ref.read(summaryViewModelProvider.notifier)
+                      .updateChartSelection(chartSelection.first);
+                  },
+                  selected: {data.chartSelection},
                 ),
               ],
             ),

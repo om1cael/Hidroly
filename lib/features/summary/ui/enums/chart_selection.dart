@@ -1,0 +1,1 @@
+enum ChartSelection { weekly, monthly, yearly }
