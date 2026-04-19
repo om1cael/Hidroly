@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hidroly/features/hydration/domain/value_objects/cup_value.dart';
 import 'package:hidroly/features/hydration/ui/extensions/date_time_formatting.dart';
 import 'package:hidroly/core/ui/extensions/unit_system_ui_extension.dart';
@@ -58,6 +59,10 @@ class _HydrationViewState extends ConsumerState<HydrationView> {
             IconButton(
               onPressed: () => showModalBottomSheet(context: context, builder: (_) => HistoryModal()),
               icon: Icon(Icons.history),
+            ),
+            IconButton(
+              onPressed: () => context.push('/settings'),
+              icon: Icon(Icons.settings),
             ),
           ],
         ),

@@ -1,8 +1,8 @@
 import 'package:hidroly/core/data/repositories/day_repository_impl.dart';
-import 'package:hidroly/core/data/repositories/settings_repository_impl.dart';
 import 'package:hidroly/core/domain/entities/day.dart';
 import 'package:hidroly/core/domain/enums/unit_systems.dart';
 import 'package:hidroly/core/domain/exceptions/invalid_input_exception.dart';
+import 'package:hidroly/core/providers/unit_system_provider.dart';
 import 'package:hidroly/core/ui/enums/input_status.dart';
 import 'package:hidroly/features/hydration/data/repositories/cup_repository_impl.dart';
 import 'package:hidroly/features/hydration/data/repositories/history_item_repository_impl.dart';
@@ -24,12 +24,11 @@ class HydrationViewModel extends _$HydrationViewModel {
     final dayRepository = ref.watch(dayRepositoryProvider);
     final historyRepository = ref.watch(historyItemRepositoryProvider);
     final cupRepository = ref.watch(cupRepositoryProvider);
-    final settingsRepository = ref.watch(settingsRepositoryProvider);
+    final unitSystem = await ref.watch(unitSystemProviderProvider.future);
 
     final day = await dayRepository.readOrCreateByDate(selectedDate);
     final history = await historyRepository.readAll(day.id);
     final cups = await cupRepository.readAll();
-    final unitSystem = await settingsRepository.readUnitSystem();
 
     return HydrationState(day: day, history: history, unitSystem: unitSystem, cups: cups);
   }

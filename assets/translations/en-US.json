@@ -43,5 +43,14 @@
     },
     "weekly": "Weekly",
     "monthly": "Monthly",
-    "yearly": "Yearly"
+    "yearly": "Yearly",
+    "settings": "Settings",
+    "theme": "Theme",
+    "system": "System",
+    "light": "Light",
+    "dark": "Dark",
+    "unitSystem": "Unit System",
+    "metric": "Metric (ml, kg)",
+    "imperial": "Imperial (lb, oz)",
+    "buyMeACoffee": "Buy me a coffee"
 }

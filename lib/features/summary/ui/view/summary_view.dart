@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hidroly/core/ui/extensions/unit_system_ui_extension.dart';
 import 'package:hidroly/features/summary/ui/enums/chart_selection.dart';
 import 'package:hidroly/features/summary/ui/view/components/summary_chart.dart';
@@ -23,7 +24,7 @@ class _SummaryViewState extends ConsumerState<SummaryView> {
         appBar: AppBar(
           title: Text('summary'.tr()),
           actions: [
-            IconButton(onPressed: () {}, icon: Icon(Icons.settings))
+            IconButton(onPressed: () => context.push('/settings'), icon: Icon(Icons.settings))
           ],
         ),
         body: SafeArea(
