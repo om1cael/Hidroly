@@ -55,12 +55,13 @@ extension MigrationStatePatterns on MigrationState {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Initial value)?  initial,TResult Function( _Processing value)?  processing,TResult Function( _Error value)?  error,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Initial value)?  initial,TResult Function( _Processing value)?  processing,TResult Function( _Done value)?  done,TResult Function( _Error value)?  error,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial(_that);case _Processing() when processing != null:
-return processing(_that);case _Error() when error != null:
+return processing(_that);case _Done() when done != null:
+return done(_that);case _Error() when error != null:
 return error(_that);case _:
   return orElse();
 
@@ -79,12 +80,13 @@ return error(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Initial value)  initial,required TResult Function( _Processing value)  processing,required TResult Function( _Error value)  error,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Initial value)  initial,required TResult Function( _Processing value)  processing,required TResult Function( _Done value)  done,required TResult Function( _Error value)  error,}){
 final _that = this;
 switch (_that) {
 case _Initial():
 return initial(_that);case _Processing():
-return processing(_that);case _Error():
+return processing(_that);case _Done():
+return done(_that);case _Error():
 return error(_that);case _:
   throw StateError('Unexpected subclass');
 
@@ -102,12 +104,13 @@ return error(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Initial value)?  initial,TResult? Function( _Processing value)?  processing,TResult? Function( _Error value)?  error,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Initial value)?  initial,TResult? Function( _Processing value)?  processing,TResult? Function( _Done value)?  done,TResult? Function( _Error value)?  error,}){
 final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial(_that);case _Processing() when processing != null:
-return processing(_that);case _Error() when error != null:
+return processing(_that);case _Done() when done != null:
+return done(_that);case _Error() when error != null:
 return error(_that);case _:
   return null;
 
@@ -125,11 +128,12 @@ return error(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function( double progress)?  processing,TResult Function( String error)?  error,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function( double progress)?  processing,TResult Function()?  done,TResult Function( String error)?  error,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial();case _Processing() when processing != null:
-return processing(_that.progress);case _Error() when error != null:
+return processing(_that.progress);case _Done() when done != null:
+return done();case _Error() when error != null:
 return error(_that.error);case _:
   return orElse();
 
@@ -148,11 +152,12 @@ return error(_that.error);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function( double progress)  processing,required TResult Function( String error)  error,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function( double progress)  processing,required TResult Function()  done,required TResult Function( String error)  error,}) {final _that = this;
 switch (_that) {
 case _Initial():
 return initial();case _Processing():
-return processing(_that.progress);case _Error():
+return processing(_that.progress);case _Done():
+return done();case _Error():
 return error(_that.error);case _:
   throw StateError('Unexpected subclass');
 
@@ -170,11 +175,12 @@ return error(_that.error);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function( double progress)?  processing,TResult? Function( String error)?  error,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function( double progress)?  processing,TResult? Function()?  done,TResult? Function( String error)?  error,}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial();case _Processing() when processing != null:
-return processing(_that.progress);case _Error() when error != null:
+return processing(_that.progress);case _Done() when done != null:
+return done();case _Error() when error != null:
 return error(_that.error);case _:
   return null;
 
@@ -280,6 +286,38 @@ as double,
 
 
 }
+
+/// @nodoc
+
+
+class _Done implements MigrationState {
+   _Done();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Done);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'MigrationState.done()';
+}
+
+
+}
+
+
+
 
 /// @nodoc
 
