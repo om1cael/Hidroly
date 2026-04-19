@@ -42,7 +42,7 @@ final class MigrationViewModelProvider
 }
 
 String _$migrationViewModelHash() =>
-    r'924da433ff36220c87acc63a698bd55a8cd37239';
+    r'30c89925d03e9f087da59fe9572bf19de31ecadc';
 
 abstract class _$MigrationViewModel extends $Notifier<MigrationState> {
   MigrationState build();

@@ -6,7 +6,7 @@ part 'migration_state.freezed.dart';
 abstract class MigrationState with _$MigrationState {
   factory MigrationState.initial() = _Initial;
   
-  factory MigrationState.processing({required double progress}) = _Processing;
+  factory MigrationState.processing() = _Processing;
 
   factory MigrationState.done() = _Done;
 

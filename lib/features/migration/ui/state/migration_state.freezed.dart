@@ -128,11 +128,11 @@ return error(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function( double progress)?  processing,TResult Function()?  done,TResult Function( String error)?  error,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  processing,TResult Function()?  done,TResult Function( String error)?  error,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial();case _Processing() when processing != null:
-return processing(_that.progress);case _Done() when done != null:
+return processing();case _Done() when done != null:
 return done();case _Error() when error != null:
 return error(_that.error);case _:
   return orElse();
@@ -152,11 +152,11 @@ return error(_that.error);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function( double progress)  processing,required TResult Function()  done,required TResult Function( String error)  error,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  processing,required TResult Function()  done,required TResult Function( String error)  error,}) {final _that = this;
 switch (_that) {
 case _Initial():
 return initial();case _Processing():
-return processing(_that.progress);case _Done():
+return processing();case _Done():
 return done();case _Error():
 return error(_that.error);case _:
   throw StateError('Unexpected subclass');
@@ -175,11 +175,11 @@ return error(_that.error);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function( double progress)?  processing,TResult? Function()?  done,TResult? Function( String error)?  error,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  processing,TResult? Function()?  done,TResult? Function( String error)?  error,}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial();case _Processing() when processing != null:
-return processing(_that.progress);case _Done() when done != null:
+return processing();case _Done() when done != null:
 return done();case _Error() when error != null:
 return error(_that.error);case _:
   return null;
@@ -225,67 +225,33 @@ String toString() {
 
 
 class _Processing implements MigrationState {
-   _Processing({required this.progress});
+   _Processing();
   
 
- final  double progress;
 
-/// Create a copy of MigrationState
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-_$ProcessingCopyWith<_Processing> get copyWith => __$ProcessingCopyWithImpl<_Processing>(this, _$identity);
+
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Processing&&(identical(other.progress, progress) || other.progress == progress));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Processing);
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,progress);
+int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'MigrationState.processing(progress: $progress)';
+  return 'MigrationState.processing()';
 }
 
 
 }
 
-/// @nodoc
-abstract mixin class _$ProcessingCopyWith<$Res> implements $MigrationStateCopyWith<$Res> {
-  factory _$ProcessingCopyWith(_Processing value, $Res Function(_Processing) _then) = __$ProcessingCopyWithImpl;
-@useResult
-$Res call({
- double progress
-});
 
 
-
-
-}
-/// @nodoc
-class __$ProcessingCopyWithImpl<$Res>
-    implements _$ProcessingCopyWith<$Res> {
-  __$ProcessingCopyWithImpl(this._self, this._then);
-
-  final _Processing _self;
-  final $Res Function(_Processing) _then;
-
-/// Create a copy of MigrationState
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? progress = null,}) {
-  return _then(_Processing(
-progress: null == progress ? _self.progress : progress // ignore: cast_nullable_to_non_nullable
-as double,
-  ));
-}
-
-
-}
 
 /// @nodoc
 

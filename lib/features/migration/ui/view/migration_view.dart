@@ -74,7 +74,7 @@ class MigrationView extends ConsumerWidget {
                 )
               ],
             ),
-            processing: (progress) => Column(
+            processing: () => Column(
               spacing: 32,
               mainAxisAlignment: .center,
               crossAxisAlignment: .center,
@@ -101,7 +101,7 @@ class MigrationView extends ConsumerWidget {
                   spacing: 12,
                   children: [
                     Text('Copying your data...'),
-                    LinearProgressIndicator(value: progress,),
+                    LinearProgressIndicator(),
                   ],
                 )
               ],
