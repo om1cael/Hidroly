@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -30,9 +31,9 @@ class MigrationView extends ConsumerWidget {
             
                     SizedBox(height: 8,),
             
-                    Text('Migration', textAlign: .center, style: Theme.of(context).textTheme.headlineLarge,),
+                    Text('migration'.tr(), textAlign: .center, style: Theme.of(context).textTheme.headlineLarge,),
                     Text(
-                      'We found app data from a previous version. Do you want to migrate your entire history and cups?',
+                      'oldAppDataFound'.tr(),
                       textAlign: .center,
                       style: Theme.of(context).textTheme.bodyMedium,
                     ),
@@ -49,22 +50,22 @@ class MigrationView extends ConsumerWidget {
                           context: context, 
                           builder: (_) {
                             return AlertDialog(
-                              title: Text('Are you sure?'),
-                              content: Text('Your data will be backed up, but you may still lose it during this process. The migration will only happen once.'),
+                              title: Text('areYouSure'.tr()),
+                              content: Text('migrationWarning'.tr()),
                               actions: [
-                                TextButton(onPressed: () => Navigator.pop(context), child: Text('No')),
+                                TextButton(onPressed: () => Navigator.pop(context), child: Text('no'.tr())),
                                 FilledButton(
                                   onPressed: () {
                                     Navigator.pop(context);
                                     ref.read(migrationViewModelProvider.notifier).startMigration();
                                   }, 
-                                  child: Text('Proceed with it')),
+                                  child: Text('proceed'.tr())),
                               ],
                             );
                           }
                         );
                       }, 
-                      child: Text('Yes')
+                      child: Text('yes'.tr())
                     ),
                     TextButton(
                       onPressed: () async {
@@ -72,10 +73,10 @@ class MigrationView extends ConsumerWidget {
                           context: context, 
                           builder: (_) {
                             return AlertDialog(
-                              title: Text('Are you sure?'),
-                              content: Text('You will not be able to migrate your data in the future.'),
+                              title: Text('areYouSure'.tr()),
+                              content: Text('futureMigrationWarning'.tr()),
                               actions: [
-                                TextButton(onPressed: () => Navigator.pop(context), child: Text('No')),
+                                TextButton(onPressed: () => Navigator.pop(context), child: Text('no'.tr())),
                                 FilledButton(
                                   onPressed: () async {
                                     Navigator.pop(context);
@@ -84,13 +85,13 @@ class MigrationView extends ConsumerWidget {
                                     if(!context.mounted) return;
                                     context.go('/setup');
                                   }, 
-                                  child: Text('Proceed with it')),
+                                  child: Text('proceed'.tr())),
                               ],
                             );
                           }
                         );
                       },
-                      child: Text('No, I want to start from scratch')
+                      child: Text('scratchButton'.tr())
                     ),
                   ],
                 )
@@ -110,9 +111,9 @@ class MigrationView extends ConsumerWidget {
 
                     SizedBox(height: 12,),
                     
-                    Text('Processing', textAlign: .center, style: Theme.of(context).textTheme.headlineLarge,),
+                    Text('processing'.tr(), textAlign: .center, style: Theme.of(context).textTheme.headlineLarge,),
                     Text(
-                      'Don\'t worry, it may take some time.',
+                      'timeNeeded'.tr(),
                       textAlign: .center,
                       style: Theme.of(context).textTheme.bodyMedium,
                     ),
@@ -122,7 +123,7 @@ class MigrationView extends ConsumerWidget {
                 Column(
                   spacing: 12,
                   children: [
-                    Text('Copying your data...'),
+                    Text('copyingData'.tr()),
                     LinearProgressIndicator(),
                   ],
                 )
@@ -143,9 +144,9 @@ class MigrationView extends ConsumerWidget {
 
                     SizedBox(height: 12,),
                     
-                    Text('Done', textAlign: .center, style: Theme.of(context).textTheme.headlineLarge,),
+                    Text('done'.tr(), textAlign: .center, style: Theme.of(context).textTheme.headlineLarge,),
                     Text(
-                      'Your data has been migrated. Enjoy, and welcome again!',
+                      'migrationSuccess'.tr(),
                       textAlign: .center,
                       style: Theme.of(context).textTheme.bodyMedium,
                     ),
@@ -156,7 +157,7 @@ class MigrationView extends ConsumerWidget {
                   onPressed: () {
                     context.go('/');
                   }, 
-                  child: Text('Let\'s go!')
+                  child: Text('letsGo'.tr())
                 ),
               ],
             ),
@@ -175,9 +176,9 @@ class MigrationView extends ConsumerWidget {
             
                     SizedBox(height: 8,),
             
-                    Text('Sorry', textAlign: .center, style: Theme.of(context).textTheme.headlineLarge,),
+                    Text('sorry'.tr(), textAlign: .center, style: Theme.of(context).textTheme.headlineLarge,),
                     Text(
-                      'An error happened during the migration. Feel free to report the error below on the project\'s repository.',
+                      'migrationError'.tr(),
                       textAlign: .center,
                       style: Theme.of(context).textTheme.bodyMedium,
                     ),
@@ -209,22 +210,22 @@ class MigrationView extends ConsumerWidget {
                           context: context, 
                           builder: (_) {
                             return AlertDialog(
-                              title: Text('Are you sure?'),
-                              content: Text('This isn\'t guaranteed to work. If it doesn\'t work again, you can report the error and wait for a fix. Your data will not be lost.'),
+                              title: Text('areYouSure'.tr()),
+                              content: Text('migrationErrorRetry'.tr()),
                               actions: [
-                                TextButton(onPressed: () => Navigator.pop(context), child: Text('No')),
+                                TextButton(onPressed: () => Navigator.pop(context), child: Text('no'.tr())),
                                 FilledButton(
                                   onPressed: () {
                                     Navigator.pop(context);
                                     ref.read(migrationViewModelProvider.notifier).startMigration();
                                   }, 
-                                  child: Text('Proceed with it')),
+                                  child: Text('proceed'.tr())),
                               ],
                             );
                           }
                         );
                       }, 
-                      child: Text('Try again')
+                      child: Text('tryAgain'.tr())
                     ),
                     TextButton(
                       onPressed: () async {
@@ -232,10 +233,10 @@ class MigrationView extends ConsumerWidget {
                           context: context, 
                           builder: (_) {
                             return AlertDialog(
-                              title: Text('Are you sure?'),
-                              content: Text('You will not be able to migrate your data in the future.'),
+                              title: Text('areYouSure'.tr()),
+                              content: Text('futureMigrationWarning'.tr()),
                               actions: [
-                                TextButton(onPressed: () => Navigator.pop(context), child: Text('No')),
+                                TextButton(onPressed: () => Navigator.pop(context), child: Text('no'.tr())),
                                 FilledButton(
                                   onPressed: () async {
                                     Navigator.pop(context);
@@ -244,13 +245,13 @@ class MigrationView extends ConsumerWidget {
                                     if(!context.mounted) return;
                                     context.go('/setup');
                                   }, 
-                                  child: Text('Proceed with it')),
+                                  child: Text('proceed'.tr())),
                               ],
                             );
                           }
                         );
                       },
-                      child: Text('I don\'t want to migrate anymore')
+                      child: Text('scratchButton'.tr())
                     ),
                   ],
                 )
