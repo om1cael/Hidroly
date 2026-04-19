@@ -50,7 +50,7 @@ class SettingsView extends ConsumerWidget {
                                 );
                               }
                             }, 
-                            label: Text('BuyMeACoffee'.tr()),
+                            label: Text('buyMeACoffee'.tr()),
                             icon: Icon(Icons.favorite),
                           ),
                         ],
