@@ -1,4 +1,3 @@
-import 'package:hidroly/core/data/repositories/settings_repository_impl.dart';
 import 'package:hidroly/core/providers/unit_system_provider.dart';
 import 'package:hidroly/features/hydration/domain/value_objects/water.dart';
 import 'package:hidroly/features/summary/domain/usecases/get_daily_average_usecase.dart';

@@ -1,5 +1,4 @@
 import 'package:hidroly/core/data/repositories/day_repository_impl.dart';
-import 'package:hidroly/core/data/repositories/settings_repository_impl.dart';
 import 'package:hidroly/core/domain/entities/day.dart';
 import 'package:hidroly/core/domain/enums/unit_systems.dart';
 import 'package:hidroly/core/domain/exceptions/invalid_input_exception.dart';

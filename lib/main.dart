@@ -1,7 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hidroly/core/data/repositories/settings_repository_impl.dart';
 import 'package:hidroly/core/navigation/app_routes.dart';
 import 'package:hidroly/core/providers/theme_provider.dart';
 import 'package:hidroly/core/ui/themes/themes.dart';
