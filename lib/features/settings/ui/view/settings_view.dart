@@ -1,7 +1,9 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hidroly/features/settings/ui/view/components/general_section.dart';
 import 'package:hidroly/features/settings/ui/view_model/settings_view_model.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SettingsView extends ConsumerWidget {
   const SettingsView({super.key});
@@ -33,8 +35,22 @@ class SettingsView extends ConsumerWidget {
                             textAlign: .center,
                           ),
                           ElevatedButton.icon(
-                            onPressed: () {}, 
-                            label: Text('Buy me a coffee'),
+                            onPressed: () async {
+                              try {
+                                await launchUrl(Uri.parse('https://github.com/sponsors/om1cael'));
+                              } catch (_) {
+                                if(!context.mounted) return;
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text('errorOccurred'.tr(), textAlign: .center,),
+                                    behavior: .floating,
+                                    width: 250,
+                                    backgroundColor: Theme.of(context).colorScheme.primary,
+                                  ),
+                                );
+                              }
+                            }, 
+                            label: Text('BuyMeACoffee'.tr()),
                             icon: Icon(Icons.favorite),
                           ),
                         ],
