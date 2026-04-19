@@ -69,13 +69,14 @@ class DayRepositoryImpl implements DayRepository {
     
     if(data != null) return data.toEntity();
 
-    final firstDay = await (_database.select(_database.dayTable)
+    final latestDay = await (_database.select(_database.dayTable)
+      ..orderBy([(u) => OrderingTerm(expression: u.id, mode: .desc)])
       ..limit(1))
       .getSingle();
 
     final rowId = await save(
       Day(
-        dailyGoal: Water.ml(firstDay.dailyGoal), 
+        dailyGoal: Water.ml(latestDay.dailyGoal), 
         createdAt: date,
       )
     );
