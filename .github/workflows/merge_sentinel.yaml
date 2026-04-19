@@ -1,0 +1,29 @@
+name: Merge Sentinel
+
+on:
+  pull_request:
+    branches: [main, v2-rewrite]
+  push:
+    branches: [main, v2-rewrite]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Get Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          cache: true
+      
+      - name: Install dependencies
+        run: flutter pub get
+      
+      - name: Analyze code
+        run: flutter analyze
+      
+      - name: Run tests
+        run: flutter test
