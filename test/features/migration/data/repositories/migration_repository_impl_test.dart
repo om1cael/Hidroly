@@ -97,5 +97,19 @@ void main() {
       expect(dbHistory.first.amount, 500);
       expect(dbHistory.last.amount, 750);
     });
+
+    test('Should ignore invalid date without crashing', () async {
+      final oldDb = await createOldDatabase();
+
+      await oldDb.runCustom("INSERT INTO days VALUES (1, 2000, 500, 'invalid_date')");
+      await oldDb.runCustom("INSERT INTO days VALUES (2, 2000, 1200, '2026-04-19T15:01:35.318820Z')");
+
+      await repository.migrate(externalDb: oldDb);
+
+      final dbDays = await appDatabase.select(appDatabase.dayTable).get();
+
+      expect(dbDays.length, 1);
+      expect(dbDays.first.id, 2);
+    });
   });
 }

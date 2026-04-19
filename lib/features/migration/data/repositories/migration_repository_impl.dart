@@ -39,7 +39,9 @@ class MigrationRepositoryImpl implements MigrationRepository {
       await _appDatabase.batch((batch) {
         for(final day in days) {
           final date = day['date'] as String;
-          DateTime dateTime = DateTime.parse(date);
+          DateTime? dateTime = DateTime.tryParse(date);
+          if(dateTime == null) continue;
+
           final normalizedDateTime = DateTime(dateTime.year, dateTime.month, dateTime.day);
 
           batch.insert(
