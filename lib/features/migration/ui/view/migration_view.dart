@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hidroly/features/migration/ui/state/migration_state.dart';
 import 'package:hidroly/features/migration/ui/view_model/migration_view_model.dart';
 
@@ -49,7 +50,7 @@ class MigrationView extends ConsumerWidget {
                           builder: (_) {
                             return AlertDialog(
                               title: Text('Are you sure?'),
-                              content: Text('Your data will be backed up, but you may still lose it during this process. The migration can only happen once.'),
+                              content: Text('Your data will be backed up, but you may still lose it during this process. The migration will only happen once.'),
                               actions: [
                                 TextButton(onPressed: () => Navigator.pop(context), child: Text('No')),
                                 FilledButton(
@@ -105,7 +106,39 @@ class MigrationView extends ConsumerWidget {
                 )
               ],
             ), 
-            done: () => Placeholder(),
+            done: () => Column(
+              mainAxisAlignment: .center,
+              crossAxisAlignment: .center,
+              spacing: 16,
+              children: [    
+                Column(
+                  crossAxisAlignment: .stretch,
+                  children: [
+                    const CircleAvatar(
+                      radius: 48,
+                      child: Icon(Icons.done, size: 64,)
+                    ), 
+
+                    SizedBox(height: 12,),
+                    
+                    Text('Done', textAlign: .center, style: Theme.of(context).textTheme.headlineLarge,),
+                    Text(
+                      'Your data has been migrated. Enjoy, and welcome!',
+                      textAlign: .center,
+                      style: Theme.of(context).textTheme.bodyMedium,
+                    ),
+                  ],
+                ),
+
+                FilledButton(
+                  onPressed: () {
+                    // save flag?
+                    context.go('/');
+                  }, 
+                  child: Text('Let\'s go!')
+                ),
+              ],
+            ),
             error: (error) => Text(error),
           ),
         )
