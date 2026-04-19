@@ -22,11 +22,16 @@ class MigrationRepositoryImpl implements MigrationRepository {
   const MigrationRepositoryImpl(this._appDatabase);
 
   @override
-  Future<void> migrate() async {
-    File? oldDb = await getOldDatabase();
-    if(oldDb == null) return;
+  Future<void> migrate({QueryExecutor? externalDb, String? pathOverride}) async {
+    QueryExecutor? tempExecutor = externalDb;
 
-    final queryExecutor = NativeDatabase(oldDb);
+    if(tempExecutor == null) {
+      File? oldDb = await getOldDatabase(path: pathOverride);
+      if(oldDb == null) return;
+      tempExecutor = NativeDatabase(oldDb);
+    }
+
+    final queryExecutor = tempExecutor;
     queryExecutor.ensureOpen(_FakeUser());
 
     await _appDatabase.transaction(() async {
@@ -64,21 +69,29 @@ class MigrationRepositoryImpl implements MigrationRepository {
       });
 
       final history = await queryExecutor.runSelect('SELECT * FROM daily_history', []);
+      
+      final dayList = await _appDatabase.select(_appDatabase.dayTable).get();
+      final validDayIds = dayList.map((day) => day.id).toSet();
+
       await _appDatabase.batch((batch) {
         for(final historyItem in history) {
           final date = historyItem['dateTime'] as String;
           DateTime dateTime = DateTime.parse(date);
 
-          batch.insert(
-            _appDatabase.historyItemsTable,
-            HistoryItemsTableCompanion.insert(
-              id: Value(historyItem['id'] as int),
-              day: historyItem['dayId'] as int, 
-              amount: historyItem['amount'] as int,
-              createdAt: Value(dateTime),
-            ),
-            mode: .insertOrIgnore,
-          );
+          final dayId = historyItem['dayId'] as int;
+
+          if(validDayIds.contains(dayId)) {
+            batch.insert(
+              _appDatabase.historyItemsTable,
+              HistoryItemsTableCompanion.insert(
+                id: Value(historyItem['id'] as int),
+                day: dayId, 
+                amount: historyItem['amount'] as int,
+                createdAt: Value(dateTime),
+              ),
+              mode: .insertOrIgnore,
+            );
+          }
         }
       });
     });
