@@ -81,6 +81,18 @@ class MigrationRepositoryImpl implements MigrationRepository {
       });
     });
   }
+
+  @override
+  Future<void> markDatabaseAsBackup() async {
+    final file = await getOldDatabase();
+    if(file == null) return;
+
+    final path = file.path;
+    final lastSeparator = path.lastIndexOf(Platform.pathSeparator);
+    final newPath = join(path.substring(0, lastSeparator + 1), 'hidroly.db.bk');
+
+    await file.rename(newPath);
+  }
   
   @override
   Future<File?> getOldDatabase() async {

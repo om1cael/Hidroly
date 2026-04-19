@@ -19,4 +19,10 @@ class MigrationViewModel extends _$MigrationViewModel{
       state = MigrationState.error(error: e.toString());
     }
   }
+
+  Future<void> ignoreMigration() async {
+    await ref
+      .read(migrationRepositoryProvider)
+      .markDatabaseAsBackup();
+  }
 }

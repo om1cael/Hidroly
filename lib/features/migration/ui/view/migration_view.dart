@@ -67,7 +67,29 @@ class MigrationView extends ConsumerWidget {
                       child: Text('Yes')
                     ),
                     TextButton(
-                      onPressed: () {}, // TODO: Set flag or rename db file and go to setup
+                      onPressed: () async {
+                        showDialog(
+                          context: context, 
+                          builder: (_) {
+                            return AlertDialog(
+                              title: Text('Are you sure?'),
+                              content: Text('You will not be able to migrate your data in the future.'),
+                              actions: [
+                                TextButton(onPressed: () => Navigator.pop(context), child: Text('No')),
+                                FilledButton(
+                                  onPressed: () async {
+                                    Navigator.pop(context);
+                                    ref.read(migrationViewModelProvider.notifier).ignoreMigration();
+
+                                    if(!context.mounted) return;
+                                    context.go('/setup');
+                                  }, 
+                                  child: Text('Proceed with it')),
+                              ],
+                            );
+                          }
+                        );
+                      },
                       child: Text('No, I want to start from scratch')
                     ),
                   ],
@@ -123,7 +145,7 @@ class MigrationView extends ConsumerWidget {
                     
                     Text('Done', textAlign: .center, style: Theme.of(context).textTheme.headlineLarge,),
                     Text(
-                      'Your data has been migrated. Enjoy, and welcome!',
+                      'Your data has been migrated. Enjoy, and welcome again!',
                       textAlign: .center,
                       style: Theme.of(context).textTheme.bodyMedium,
                     ),
