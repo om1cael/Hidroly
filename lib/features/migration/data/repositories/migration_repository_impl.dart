@@ -30,7 +30,7 @@ class MigrationRepositoryImpl implements MigrationRepository {
     queryExecutor.ensureOpen(_FakeUser());
 
     await _appDatabase.transaction(() async {
-      final days = await queryExecutor.runSelect('SELECT * FROM days', []);
+      final days = await queryExecutor.runSelect('SELECT * FROM days ORDER BY id DESC', []);
       await _appDatabase.batch((batch) {
         for(final day in days) {
           final date = day['date'] as String;
@@ -44,7 +44,8 @@ class MigrationRepositoryImpl implements MigrationRepository {
               dailyGoal: day['dailyGoal'] as int,
               currentAmount: Value(day['currentAmount'] as int),
               createdAt: normalizedDateTime,
-            )
+            ),
+            mode: .insertOrIgnore,
           );
         }
       });
@@ -76,6 +77,7 @@ class MigrationRepositoryImpl implements MigrationRepository {
               amount: historyItem['amount'] as int,
               createdAt: Value(dateTime),
             ),
+            mode: .insertOrIgnore,
           );
         }
       });
