@@ -123,6 +123,7 @@ void main() {
       await tester.tap(find.byIcon(Icons.delete).last);
       
       await tester.runAsync(() => Future.delayed(Duration.zero));
+      await tester.runAsync(() => Future.delayed(Duration.zero));
 
       await tester.pumpAndSettle();
 
