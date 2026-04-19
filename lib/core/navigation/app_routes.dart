@@ -2,6 +2,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hidroly/core/data/repositories/day_repository_impl.dart';
 import 'package:hidroly/features/home/ui/view/home_view.dart';
 import 'package:hidroly/features/hydration/ui/view/hydration_view.dart';
+import 'package:hidroly/features/migration/ui/view/migration_view.dart';
 import 'package:hidroly/features/settings/ui/view/settings_view.dart';
 import 'package:hidroly/features/setup/ui/view/setup_view.dart';
 import 'package:hidroly/features/summary/ui/view/summary_view.dart';
@@ -26,11 +27,13 @@ GoRouter router(Ref ref) {
         return '/';
       }
 
-      return null;
+      // TODO: Return null after completing this migration feature!
+      return '/migration';
     },
     routes: [
       GoRoute(path: '/setup', builder: (_, _) => SetupView()),
       GoRoute(path: '/settings', builder: (_, _) => SettingsView()),
+      GoRoute(path: '/migration', builder: (_, _) => MigrationView()),
       StatefulShellRoute.indexedStack(
         builder: (context, state, navigationShell) => HomeView(navigationShell: navigationShell),
         branches: [
