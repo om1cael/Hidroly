@@ -15,7 +15,7 @@ class SettingsView extends ConsumerWidget {
     return state.when(
       data: (data) => Scaffold(
         appBar: AppBar(
-          title: Text('Settings'),
+          title: Text('settings'.tr()),
         ),
         body: SafeArea(
           child: Center(
