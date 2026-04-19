@@ -55,6 +55,7 @@ class $DayTableTable extends DayTable
     false,
     type: DriftSqlType.dateTime,
     requiredDuringInsert: true,
+    defaultConstraints: GeneratedColumn.constraintIsAlways('UNIQUE'),
   );
   @override
   List<GeneratedColumn> get $columns => [

@@ -1,7 +1,7 @@
 name: hidroly
 description: "A new Flutter project."
 publish_to: 'none'
-version: 0.1.0+1
+version: 2.0.0+10
 
 environment:
   sdk: ^3.11.0
@@ -19,6 +19,7 @@ dependencies:
   go_router: ^17.1.0
   graphic: ^2.7.0
   mocktail: ^1.0.4
+  path: ^1.9.1
   path_provider: ^2.1.5
   result_dart: ^2.2.0
   riverpod: ^3.2.1
