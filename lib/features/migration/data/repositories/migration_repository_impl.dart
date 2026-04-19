@@ -95,9 +95,9 @@ class MigrationRepositoryImpl implements MigrationRepository {
   }
   
   @override
-  Future<File?> getOldDatabase() async {
+  Future<File?> getOldDatabase({ String? path }) async {
     try {
-      final dbPath = join((await getApplicationDocumentsDirectory()).parent.path, 'databases');
+      final dbPath = path ?? join((await getApplicationDocumentsDirectory()).parent.path, 'databases');
       File oldDbFile = File.fromUri(Uri.parse(join(dbPath, 'hidroly.db')));
 
       if(!(await oldDbFile.exists())) {
