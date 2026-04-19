@@ -36,7 +36,24 @@ class MigrationView extends StatelessWidget {
                 mainAxisAlignment: .center,
                 crossAxisAlignment: .stretch,
                 children: [
-                  FilledButton(onPressed: () {}, child: Text('Yes')),
+                  FilledButton(
+                    onPressed: () {
+                      showDialog(
+                        context: context, 
+                        builder: (_) {
+                          return AlertDialog(
+                            title: Text('Are you sure?'),
+                            content: Text('Your data will be backed up, but you may still lose it during this process. The migration can only happen once.'),
+                            actions: [
+                              TextButton(onPressed: () => Navigator.pop(context), child: Text('No')),
+                              FilledButton(onPressed: () => Navigator.pop(context), child: Text('Proceed with it')),
+                            ],
+                          );
+                        }
+                      );
+                    }, 
+                    child: Text('Yes')
+                  ),
                   TextButton(
                     onPressed: () {}, // TODO: Set flag or rename db file and go to setup
                     child: Text('No, I want to start from scratch')
