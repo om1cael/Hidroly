@@ -3,7 +3,10 @@ import 'package:hidroly/core/data/repositories/backup_repository_impl.dart';
 import 'package:hidroly/core/domain/enums/unit_systems.dart';
 import 'package:hidroly/core/providers/theme_provider.dart';
 import 'package:hidroly/core/providers/unit_system_provider.dart';
+import 'package:hidroly/features/hydration/ui/view_model/hydration_view_model.dart';
 import 'package:hidroly/features/settings/ui/state/settings_state.dart';
+import 'package:hidroly/features/summary/ui/view_model/summary_view_model.dart';
+import 'package:result_dart/result_dart.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'settings_view_model.g.dart';
@@ -31,5 +34,16 @@ class SettingsViewModel extends _$SettingsViewModel {
 
   Future<void> exportData() async {
     await ref.read(backupRepositoryProvider).exportData();
+  }
+
+  Future<Result<void>> importData() async {
+    final result = await ref.read(backupRepositoryProvider).importData();
+    
+    if(result is Success) {
+      ref.invalidate(hydrationViewModelProvider);
+      ref.invalidate(summaryViewModelProvider);
+    }
+
+    return result;
   }
 }

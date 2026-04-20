@@ -1,9 +1,14 @@
 import 'dart:convert';
+import 'dart:ffi';
 
+import 'package:drift/drift.dart';
 import 'package:hidroly/core/data/db/app_database.dart';
+import 'package:hidroly/core/domain/exceptions/invalid_input_exception.dart';
+import 'package:hidroly/core/domain/exceptions/unsupported_database_exception.dart';
 import 'package:hidroly/core/domain/interfaces/file_service.dart';
 import 'package:hidroly/core/domain/repositories/backup_repository.dart';
 import 'package:hidroly/infra/backup/backup_file_service.dart';
+import 'package:result_dart/result_dart.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'backup_repository_impl.g.dart';
@@ -43,7 +48,7 @@ class BackupRepositoryImpl implements BackupRepository {
     final date = DateTime.now().toIso8601String();
 
     final exportMap = {
-      "database": _appDatabase.schemaVersion,
+      "database": _appDatabase.schemaVersion + 1,
       "date": date,
       "payload": {
         "days": daysJson,
@@ -59,8 +64,70 @@ class BackupRepositoryImpl implements BackupRepository {
   }
 
   @override
-  Future<void> importData(String path) {
-    // TODO: implement importData
-    throw UnimplementedError();
+  Future<Result<void>> importData() async {
+    try {
+      final content = await _fileService.readSingleFile();
+      final json = jsonDecode(content);
+      
+      if(json['database'] != _appDatabase.schemaVersion) {
+        return Failure(UnsupportedDatabaseException('The backup\'s database version is different'));
+      }
+
+      await _appDatabase.transaction(() async {
+        await Future.wait([
+          _appDatabase.delete(_appDatabase.dayTable).go(),
+          _appDatabase.delete(_appDatabase.historyItemsTable).go(),
+          _appDatabase.delete(_appDatabase.cupsTable).go(),
+        ]);
+
+        
+        await _appDatabase.batch((batch) {
+          for(final day in json['payload']['days']) {
+            batch.insert(
+              _appDatabase.dayTable, 
+              DayTableCompanion.insert(
+                id: Value(day['id'] as int),
+                dailyGoal: day['dailyGoal'] as int, 
+                currentAmount: Value(day['currentAmount'] as int),
+                createdAt: DateTime.fromMillisecondsSinceEpoch(day['createdAt'] as int),
+              ),
+            );
+          }
+        });
+
+        await _appDatabase.batch((batch) {
+          for(final historyItem in json['payload']['history']) {
+            batch.insert(
+              _appDatabase.historyItemsTable, 
+              HistoryItemsTableCompanion.insert(
+                id: Value(historyItem['id'] as int),
+                day: historyItem['day'] as int,
+                amount: historyItem['amount'] as int,
+                createdAt: Value(DateTime.fromMillisecondsSinceEpoch(historyItem['createdAt'] as int)),
+              ),
+            );
+          }
+        });
+
+        await _appDatabase.batch((batch) {
+          for(final cup in json['payload']['cups']) {
+            batch.insert(
+              _appDatabase.cupsTable, 
+              CupsTableCompanion.insert(
+                id: Value(cup['id'] as int),
+                amount: cup['amount'] as int,
+                createdAt: Value(DateTime.fromMillisecondsSinceEpoch(cup['createdAt'] as int)),
+              ),
+            );
+          }
+        });
+      });
+
+      return Success(Void);
+    } on FormatException catch (_) {
+      return Failure(InvalidInputException('The JSON file is probably invalid'));
+    } catch(e) {
+      return Failure(Exception('Unknown error'));
+    }
   }
 }

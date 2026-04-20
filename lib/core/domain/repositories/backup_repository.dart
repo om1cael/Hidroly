@@ -1,4 +1,6 @@
+import 'package:result_dart/result_dart.dart';
+
 abstract class BackupRepository {
   Future<void> exportData();
-  Future<void> importData(String path);
+  Future<Result<void>> importData();
 }

@@ -71,5 +71,7 @@
     "sorry": "Sorry",
     "migrationError": "An error happened during the migration. Feel free to report the error below on the project's repository.",
     "migrationErrorRetry": "This isn't guaranteed to work. If it doesn't work again, you can report the error and wait for a fix. Your data will not be lost.",
-    "tryAgain": "Try again"
+    "tryAgain": "Try again",
+    "importDatabaseUnsupported": "The backup's database version is different",
+    "importInvalidJson": "The JSON file is probably invalid"
 }
