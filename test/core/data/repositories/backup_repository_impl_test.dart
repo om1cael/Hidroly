@@ -88,6 +88,9 @@ void main() {
 
       expect(result, isA<Failure>());
       expect(() => result.getOrThrow(), throwsA(isA<UnsupportedDatabaseException>()));
+
+      final days = await appDatabase.select(appDatabase.dayTable).get();
+      expect(days, isEmpty);
     });
 
     test('Should not crash if JSON is invalid', () async {
