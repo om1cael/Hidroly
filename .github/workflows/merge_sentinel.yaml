@@ -3,6 +3,12 @@ name: Merge Sentinel
 on:
   pull_request:
     branches: [main, v2-rewrite]
+    paths:
+      - 'lib/**'
+      - 'test/**'
+      - 'testing/**'
+      - 'android/**'
+      - '.github/workflows/**'
 
 jobs:
   guard:
