@@ -13,7 +13,7 @@ FileService backupFileService(Ref ref) {
 
 class BackupFileService implements FileService {
   @override
-  Future<String?> saveSingleFile(String fileName, String content) async {
+  Future<String> saveSingleFile(String fileName, String content) async {
     final fileBytes = utf8.encode(content);
 
     final outputFile = await FilePicker.saveFile(
@@ -21,6 +21,6 @@ class BackupFileService implements FileService {
       fileName: fileName,
     );
 
-    return outputFile;
+    return outputFile!;
   }
 }

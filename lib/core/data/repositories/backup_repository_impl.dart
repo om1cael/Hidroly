@@ -23,7 +23,7 @@ class BackupRepositoryImpl implements BackupRepository {
   const BackupRepositoryImpl(this._appDatabase, this._fileService);
   
   @override
-  Future<bool> exportData() async {
+  Future<void> exportData() async {
     final days = await _appDatabase
       .select(_appDatabase.dayTable)
       .get();
@@ -55,8 +55,7 @@ class BackupRepositoryImpl implements BackupRepository {
     final exportJson = jsonEncode(exportMap);
     final fileName = "hidroly_backup_$date.json";
 
-    final outputFile = await _fileService.saveSingleFile(fileName, exportJson);
-    return outputFile != null;
+    await _fileService.saveSingleFile(fileName, exportJson);
   }
 
   @override

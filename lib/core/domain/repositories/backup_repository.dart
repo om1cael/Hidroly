@@ -1,4 +1,4 @@
 abstract class BackupRepository {
-  Future<bool> exportData();
+  Future<void> exportData();
   Future<void> importData(String path);
 }

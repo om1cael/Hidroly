@@ -1,3 +1,3 @@
 abstract class FileService {
-  Future<String?> saveSingleFile(String fileName, String content);
+  Future<void> saveSingleFile(String fileName, String content);
 }

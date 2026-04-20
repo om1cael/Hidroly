@@ -18,15 +18,14 @@ class SettingsBackupSection extends ConsumerWidget {
             title: Text('Export data'),
             subtitle: Text('Backup your days, history, and cups'),
             onTap: () async {
-              final hasBeenExported =
+              try {
                 await ref.read(settingsViewModelProvider.notifier).exportData();
-              
-              if(!context.mounted) return;
 
-              if(hasBeenExported) {
-                context.showSnackBar('Your data has been exported successfully');
-              } else {
-                context.showSnackBar('Failed to export your data');
+                if(!context.mounted) return;
+
+                context.showSnackBar('All set! Your hydration history is safe.');
+              } catch (_) {
+                context.showSnackBar('Oops! Something went wrong.');
               }
             },
           ),

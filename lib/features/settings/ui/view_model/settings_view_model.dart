@@ -29,7 +29,7 @@ class SettingsViewModel extends _$SettingsViewModel {
     ref.read(unitSystemProviderProvider.notifier).setUnitSystem(unitSystem);
   }
 
-  Future<bool> exportData() async {
-    return await ref.read(backupRepositoryProvider).exportData();
+  Future<void> exportData() async {
+    await ref.read(backupRepositoryProvider).exportData();
   }
 }
