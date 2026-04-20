@@ -6,7 +6,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:hidroly/core/data/db/app_database.dart';
 import 'package:hidroly/core/data/repositories/backup_repository_impl.dart';
 import 'package:hidroly/core/domain/enums/backup_status.dart';
-import 'package:hidroly/core/domain/exceptions/invalid_input_exception.dart';
 import 'package:hidroly/core/domain/exceptions/unsupported_database_exception.dart';
 import 'package:hidroly/core/domain/interfaces/file_service.dart';
 import 'package:hidroly/core/domain/repositories/backup_repository.dart';
