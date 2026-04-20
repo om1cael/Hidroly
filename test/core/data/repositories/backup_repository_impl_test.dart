@@ -47,7 +47,7 @@ void main() {
     });
 
     test('Should not crash if some tables are empty', () async {
-      appDatabase.into(appDatabase.dayTable).insert(
+      await appDatabase.into(appDatabase.dayTable).insert(
         DayTableCompanion(
           id: Value(1),
           dailyGoal: Value(2000),
