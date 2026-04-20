@@ -2,7 +2,9 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
+import 'package:hidroly/core/domain/exceptions/invalid_input_exception.dart';
 import 'package:hidroly/core/domain/interfaces/file_service.dart';
+import 'package:result_dart/result_dart.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'backup_file_service.g.dart';
@@ -14,15 +16,21 @@ FileService backupFileService(Ref ref) {
 
 class BackupFileService implements FileService {
   @override
-  Future<String?> saveSingleFile(String fileName, String content) async {
-    final fileBytes = utf8.encode(content);
-
-    final outputFile = await FilePicker.saveFile(
-      bytes: fileBytes,
-      fileName: fileName,
-    );
-
-    return outputFile!;
+  Future<Result<String>> saveSingleFile(String fileName, String content) async {
+    try {
+      final fileBytes = utf8.encode(content);
+      
+      final outputFile = await FilePicker.saveFile(
+        bytes: fileBytes,
+        fileName: fileName,
+      );
+      
+      return outputFile != null
+        ? Success(outputFile)
+        : Success('');
+    } on Exception catch (e) {
+      return Failure(Exception(e.toString()));
+    }
   }
   
   @override
@@ -33,13 +41,15 @@ class BackupFileService implements FileService {
       allowedExtensions: ['json'],
     );
 
-    if(pickResult != null && pickResult.isSinglePick) {
+    if(pickResult == null) return '';
+
+    if(pickResult.isSinglePick) {
       final file = File(pickResult.files.single.path!);
       final fileContent = await file.readAsString();
 
       return fileContent;
     }
 
-    throw Exception();
+    return '';
   }
 }

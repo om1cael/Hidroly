@@ -65,13 +65,18 @@ class BackupRepositoryImpl implements BackupRepository {
       final outputFile = 
         await _fileService.saveSingleFile(fileName, exportJson);
       
-      if(outputFile == null) {
-        return Success(ExportStatus.cancelled);
-      }
+      return outputFile.fold(
+        (content) {
+          if(content == '') {
+            return Success(ExportStatus.cancelled);
+          }
 
-      return Success(ExportStatus.success);
+          return Success(ExportStatus.success);
+        }, 
+        (failure) => Failure(failure),
+      );
     } catch (e) {
-      return Failure(Exception(e));
+      return Failure(Exception(e.toString()));
     }
   }
 
@@ -137,9 +142,9 @@ class BackupRepositoryImpl implements BackupRepository {
 
       return Success(Void);
     } on FormatException catch (e) {
-      return Failure(InvalidInputException('The JSON file is probably invalid: $e'));
+      return Failure(InvalidInputException('The JSON file is probably invalid: ${e.toString()}'));
     } catch(e) {
-      return Failure(Exception(e));
+      return Failure(Exception(e.toString()));
     }
   }
 }
