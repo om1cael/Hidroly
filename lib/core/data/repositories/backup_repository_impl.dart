@@ -9,7 +9,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'backup_repository_impl.g.dart';
 
 @riverpod
-BackupRepository backupRepositor(Ref ref) {
+BackupRepository backupRepository(Ref ref) {
   final appDatabase = ref.watch(appDatabaseProvider);
   final fileService = ref.watch(backupFileServiceProvider);
 
@@ -56,7 +56,7 @@ class BackupRepositoryImpl implements BackupRepository {
     final fileName = "hidroly_backup_$date.json";
 
     final outputFile = await _fileService.saveSingleFile(fileName, exportJson);
-    return outputFile == null;
+    return outputFile != null;
   }
 
   @override

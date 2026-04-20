@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hidroly/core/data/repositories/backup_repository_impl.dart';
 import 'package:hidroly/core/domain/enums/unit_systems.dart';
 import 'package:hidroly/core/providers/theme_provider.dart';
 import 'package:hidroly/core/providers/unit_system_provider.dart';
@@ -26,5 +27,9 @@ class SettingsViewModel extends _$SettingsViewModel {
 
   void setUnitSystem(UnitSystem unitSystem) {
     ref.read(unitSystemProviderProvider.notifier).setUnitSystem(unitSystem);
+  }
+
+  Future<bool> exportData() async {
+    return await ref.read(backupRepositoryProvider).exportData();
   }
 }

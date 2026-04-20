@@ -9,10 +9,10 @@ part of 'backup_repository_impl.dart';
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, type=warning
 
-@ProviderFor(backupRepositor)
-final backupRepositorProvider = BackupRepositorProvider._();
+@ProviderFor(backupRepository)
+final backupRepositoryProvider = BackupRepositoryProvider._();
 
-final class BackupRepositorProvider
+final class BackupRepositoryProvider
     extends
         $FunctionalProvider<
           BackupRepository,
@@ -20,19 +20,19 @@ final class BackupRepositorProvider
           BackupRepository
         >
     with $Provider<BackupRepository> {
-  BackupRepositorProvider._()
+  BackupRepositoryProvider._()
     : super(
         from: null,
         argument: null,
         retry: null,
-        name: r'backupRepositorProvider',
+        name: r'backupRepositoryProvider',
         isAutoDispose: true,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
 
   @override
-  String debugGetCreateSourceHash() => _$backupRepositorHash();
+  String debugGetCreateSourceHash() => _$backupRepositoryHash();
 
   @$internal
   @override
@@ -41,7 +41,7 @@ final class BackupRepositorProvider
 
   @override
   BackupRepository create(Ref ref) {
-    return backupRepositor(ref);
+    return backupRepository(ref);
   }
 
   /// {@macro riverpod.override_with_value}
@@ -53,4 +53,4 @@ final class BackupRepositorProvider
   }
 }
 
-String _$backupRepositorHash() => r'ce0f70577a786fb38bd5e2edaf266b06052a414e';
+String _$backupRepositoryHash() => r'698b9d1014c775ffbf1102c5bdea7baaaa2d2cb1';
