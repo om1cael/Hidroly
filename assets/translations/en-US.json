@@ -72,6 +72,12 @@
     "migrationError": "An error happened during the migration. Feel free to report the error below on the project's repository.",
     "migrationErrorRetry": "This isn't guaranteed to work. If it doesn't work again, you can report the error and wait for a fix. Your data will not be lost.",
     "tryAgain": "Try again",
+    "exportData": "Export data",
+    "exportDesc": "Backup your days, history, and cups",
+    "importData": "Import data",
+    "importDesc": "Restore your days, history, and cups",
+    "exportSuccessful": "All set! Your hydration history is safe.",
+    "importSuccessful": "Everything is back in place!",
     "importDatabaseUnsupported": "The backup's database version is different",
     "importInvalidJson": "The JSON file is probably invalid"
 }

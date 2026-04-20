@@ -18,30 +18,32 @@ class SettingsBackupSection extends ConsumerWidget {
         children: [
           ListTile(
             leading: CircleAvatar(child: Icon(Icons.backup),),
-            title: Text('Export data'),
-            subtitle: Text('Backup your days, history, and cups'),
+            title: Text('exportData'.tr()),
+            subtitle: Text('exportDesc'.tr()),
             onTap: () async {
-              try {
-                await ref.read(settingsViewModelProvider.notifier).exportData();
+                final exportResult = 
+                  await ref.read(settingsViewModelProvider.notifier).exportData();
 
-                if(!context.mounted) return;
-
-                context.showSnackBar('All set! Your hydration history is safe.');
-              } catch (_) {
-                context.showSnackBar('Oops! Something went wrong.');
-              }
+                exportResult.fold(
+                  (status) {
+                    if(status == .success) {
+                      context.showSnackBar('exportSuccessful'.tr());
+                    }
+                  },
+                  (failure) => context.showSnackBar('errorOccurred'.tr(), true),
+                );
             },
           ),
           ListTile(
             leading: CircleAvatar(child: Icon(Icons.settings_backup_restore),),
-            title: Text('Import data'),
-            subtitle: Text('Restore your days, history, and cups'),
+            title: Text('importData'.tr()),
+            subtitle: Text('importDesc'.tr()),
             onTap: () async {
               final result =
                 await ref.read(settingsViewModelProvider.notifier).importData();
               
               result.fold(
-                (success) => context.showSnackBar('Your data has been imported!'), 
+                (success) => context.showSnackBar('importSuccessful'.tr()), 
                 (failure) {
                   final message = switch(failure) {
                     UnsupportedDatabaseException() => 'importDatabaseUnsupported'.tr(),
