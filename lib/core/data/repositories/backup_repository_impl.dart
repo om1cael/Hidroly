@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:ffi';
 
 import 'package:drift/drift.dart';
 import 'package:hidroly/core/data/db/app_database.dart';
