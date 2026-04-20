@@ -150,7 +150,7 @@ class BackupRepositoryImpl implements BackupRepository {
       return Success(BackupStatus.success);
     } on FormatException catch (e) {
       return Failure(InvalidInputException('The JSON file is probably invalid: ${e.toString()}'));
-    } on Exception catch(e) {
+    } catch(e) {
       return Failure(Exception(e.toString()));
     }
   }
