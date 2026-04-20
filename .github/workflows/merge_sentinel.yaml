@@ -3,11 +3,18 @@ name: Merge Sentinel
 on:
   pull_request:
     branches: [main, v2-rewrite]
-  push:
-    branches: [main, v2-rewrite]
+    paths:
+      - 'lib/**'
+      - 'test/**'
+      - 'testing/**'
+      - 'android/**'
+      - 'pubspec.lock'
+      - 'pubspec.yaml'
+      - '.github/workflows/**'
 
 jobs:
-  test:
+  guard:
+    name: Guard
     runs-on: ubuntu-latest
 
     steps:
