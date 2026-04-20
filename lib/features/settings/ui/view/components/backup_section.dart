@@ -43,7 +43,11 @@ class SettingsBackupSection extends ConsumerWidget {
                 await ref.read(settingsViewModelProvider.notifier).importData();
               
               result.fold(
-                (success) => context.showSnackBar('importSuccessful'.tr()), 
+                (status) {
+                  if(status == .success) {
+                    context.showSnackBar('importSuccessful'.tr());
+                  }
+                }, 
                 (failure) {
                   final message = switch(failure) {
                     UnsupportedDatabaseException() => 'importDatabaseUnsupported'.tr(),

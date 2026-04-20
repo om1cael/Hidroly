@@ -33,7 +33,7 @@ final class SettingsViewModelProvider
   SettingsViewModel create() => SettingsViewModel();
 }
 
-String _$settingsViewModelHash() => r'3641a108eaecb9784c23f6e1751b2ee2a3b32c53';
+String _$settingsViewModelHash() => r'a6f987e815ba9e27857eb2bb8d576843884da032';
 
 abstract class _$SettingsViewModel extends $AsyncNotifier<SettingsState> {
   FutureOr<SettingsState> build();

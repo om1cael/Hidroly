@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
-import 'package:hidroly/core/domain/exceptions/invalid_input_exception.dart';
+import 'package:flutter/services.dart';
 import 'package:hidroly/core/domain/interfaces/file_service.dart';
 import 'package:result_dart/result_dart.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -34,22 +34,22 @@ class BackupFileService implements FileService {
   }
   
   @override
-  Future<String> readSingleFile() async {
-    final pickResult = await FilePicker.pickFiles(
-      allowMultiple: false,
-      type: .custom,
-      allowedExtensions: ['json'],
-    );
+  Future<Result<String>> readSingleFile() async {
+    try {
+      final pickResult = await FilePicker.pickFiles(
+        allowMultiple: false,
+        type: .custom,
+        allowedExtensions: ['json'],
+      );
+      
+      if(pickResult == null) return Success('');
 
-    if(pickResult == null) return '';
-
-    if(pickResult.isSinglePick) {
       final file = File(pickResult.files.single.path!);
       final fileContent = await file.readAsString();
-
-      return fileContent;
+      
+      return Success(fileContent);
+    } on Exception catch (e) {
+      return Failure(Exception(e.toString()));
     }
-
-    return '';
   }
 }

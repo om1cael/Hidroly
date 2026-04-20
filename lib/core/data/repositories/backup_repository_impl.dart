@@ -3,7 +3,7 @@ import 'dart:ffi';
 
 import 'package:drift/drift.dart';
 import 'package:hidroly/core/data/db/app_database.dart';
-import 'package:hidroly/core/domain/enums/export_status.dart';
+import 'package:hidroly/core/domain/enums/backup_status.dart';
 import 'package:hidroly/core/domain/exceptions/invalid_input_exception.dart';
 import 'package:hidroly/core/domain/exceptions/unsupported_database_exception.dart';
 import 'package:hidroly/core/domain/interfaces/file_service.dart';
@@ -29,7 +29,7 @@ class BackupRepositoryImpl implements BackupRepository {
   const BackupRepositoryImpl(this._appDatabase, this._fileService);
   
   @override
-  Future<Result<ExportStatus>> exportData() async {
+  Future<Result<BackupStatus>> exportData() async {
     try {
       final days = await _appDatabase
         .select(_appDatabase.dayTable)
@@ -68,22 +68,30 @@ class BackupRepositoryImpl implements BackupRepository {
       return outputFile.fold(
         (content) {
           if(content == '') {
-            return Success(ExportStatus.cancelled);
+            return Success(BackupStatus.cancelled);
           }
 
-          return Success(ExportStatus.success);
+          return Success(BackupStatus.success);
         }, 
         (failure) => Failure(failure),
       );
-    } catch (e) {
+    }  catch (e) {
       return Failure(Exception(e.toString()));
     }
   }
 
   @override
-  Future<Result<void>> importData() async {
+  Future<Result<BackupStatus>> importData() async {
     try {
-      final content = await _fileService.readSingleFile();
+      final contentResult = await _fileService.readSingleFile();
+      
+      final content = contentResult.fold(
+        (success) => success, 
+        (failure) => throw failure,
+      );
+
+      if(content == '') return Success(BackupStatus.cancelled);
+
       final json = jsonDecode(content);
       
       if(json['database'] != _appDatabase.schemaVersion) {
@@ -140,10 +148,10 @@ class BackupRepositoryImpl implements BackupRepository {
         });
       });
 
-      return Success(Void);
+      return Success(BackupStatus.success);
     } on FormatException catch (e) {
       return Failure(InvalidInputException('The JSON file is probably invalid: ${e.toString()}'));
-    } catch(e) {
+    } on Exception catch(e) {
       return Failure(Exception(e.toString()));
     }
   }
