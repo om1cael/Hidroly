@@ -38,7 +38,6 @@ class SettingsViewModel extends _$SettingsViewModel {
   }
 
   Future<Result<BackupStatus>> importData() async {
-    
     final result = await ref.read(backupRepositoryProvider).importData();
     
     if(result is Success) {
