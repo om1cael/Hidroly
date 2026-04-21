@@ -1,4 +1,5 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:hidroly/core/domain/interfaces/notification_service.dart';
 
 @pragma('vm:entry-point')
 void notificationActionTapResponse(NotificationResponse notificationResponse) {
@@ -6,10 +7,11 @@ void notificationActionTapResponse(NotificationResponse notificationResponse) {
   // TODO: Handle actions
 }
 
-class NotificationService {
+class LocalNotificationService implements NotificationService {
   final flutterLocalNotificationsPlugin =
     FlutterLocalNotificationsPlugin();
 
+  @override
   Future<void> initialize() async {    
     // TODO: Change icon
     const androidInitializationSettings = 
@@ -24,6 +26,7 @@ class NotificationService {
     );
   }
 
+  @override
   Future<void> showNotification() async {
     final androidNotificationDetails =
       AndroidNotificationDetails(
@@ -45,6 +48,7 @@ class NotificationService {
     );
   }
 
+  @override
   void askForPermission() {
     flutterLocalNotificationsPlugin.resolvePlatformSpecificImplementation<
       AndroidFlutterLocalNotificationsPlugin>()!.requestNotificationsPermission();
