@@ -89,5 +89,6 @@
         "other": "{} hours"
     },
     "reminders": "Reminders",
-    "remindersSubtitle": "Choose the best times for your routine."
+    "remindersSubtitle": "Choose the best times for your routine.",
+    "remindersPermissionRequest": "To help you stay hydrated, we need your permission to send reminders. We'll only notify you at the times you've chosen."
 }

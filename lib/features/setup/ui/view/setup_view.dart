@@ -67,6 +67,27 @@ class _SetupViewState extends ConsumerState<SetupView> {
             context.go('/');
           }
         },
+        notifications: () {
+          showDialog(
+            context: context, 
+            builder: (_) {
+              return AlertDialog(
+                title: Text('reminders'.tr()),
+                content: Text('remindersPermissionRequest'.tr()),
+                actions: [
+                  TextButton(onPressed: () => Navigator.of(context).pop(), child: Text('no'.tr())),
+                  FilledButton(
+                    onPressed: () {
+                      ref.read(setupViewModelProvider.notifier).requestNotificationPermission();
+                      Navigator.of(context).pop();
+                    }, 
+                    child: Text('ok'.tr()),
+                  ),
+                ],
+              );
+            }
+          );
+        },
         error: (_) => {
           showDialog(
             context: context, 

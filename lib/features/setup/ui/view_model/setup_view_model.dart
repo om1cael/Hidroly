@@ -1,3 +1,4 @@
+import 'package:hidroly/core/providers/local_notification_service_provider.dart';
 import 'package:hidroly/core/ui/view_model/hydration_form_view_model.dart';
 import 'package:hidroly/features/setup/domain/usecases/complete_setup_use_case.dart';
 import 'package:hidroly/features/setup/ui/state/setup_state.dart';
@@ -33,5 +34,9 @@ class SetupViewModel extends _$SetupViewModel {
     } on Exception catch (e) {
       state = SetupState.error(e.toString());
     }
+  }
+
+  void requestNotificationPermission() {
+    ref.read(localNotificationServiceProvider).askForPermission();
   }
 }
