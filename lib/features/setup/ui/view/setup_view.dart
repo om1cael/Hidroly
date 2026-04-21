@@ -171,6 +171,7 @@ class _SetupViewState extends ConsumerState<SetupView> {
               child: CustomScrollView(
                 slivers: [
                   SliverFillRemaining(
+                    hasScrollBody: false,
                     child: Column(
                       mainAxisAlignment: .center,
                       crossAxisAlignment: .center,
