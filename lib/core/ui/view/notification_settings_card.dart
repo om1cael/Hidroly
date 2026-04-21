@@ -20,11 +20,17 @@ class NotificationSettingsCard extends ConsumerWidget {
             subtitle: Text(DateFormat.jm().format(DateTime(2026, 1, 1, state.wakeUpTime.hour, state.wakeUpTime.minute))),
             leading: CircleAvatar(child: Icon(Icons.wb_sunny)),
             trailing: Icon(Icons.chevron_right),
-            onTap: () {
-              showTimePicker(
+            onTap: () async {
+              final wakeUpTime = await showTimePicker(
                 context: context, 
-                initialTime: TimeOfDay(hour: 8, minute: 0),
+                initialTime: state.wakeUpTime,
               );
+
+              if(wakeUpTime == null) return;
+
+              ref
+                .read(notificationSettingsCardViewModelProvider.notifier)
+                .setWakeUpTime(wakeUpTime);
             },
           ),
           ListTile(
@@ -32,11 +38,17 @@ class NotificationSettingsCard extends ConsumerWidget {
             subtitle: Text(DateFormat.jm().format(DateTime(2026, 1, 1, state.sleepTime.hour, state.sleepTime.minute))),
             leading: CircleAvatar(child: Icon(Icons.bedtime),),
             trailing: Icon(Icons.chevron_right),
-            onTap: () {
-              showTimePicker(
+            onTap: () async {
+              final sleepTime = await showTimePicker(
                 context: context, 
-                initialTime: TimeOfDay(hour: 20, minute: 0),
+                initialTime: state.sleepTime,
               );
+
+              if(sleepTime == null) return;
+
+              ref
+                .read(notificationSettingsCardViewModelProvider.notifier)
+                .setSleepTime(sleepTime);
             },
           ),
           ListTile(
