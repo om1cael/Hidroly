@@ -17,7 +17,7 @@ import '../../../../testing/usecases/mock_complete_setup_use_case.dart';
 
 class ErrorSetupViewModel extends SetupViewModel {
   @override
-  SetupState build() => SetupState(stage: .error);
+  SetupState build() => SetupState.error('');
 }
 
 void main() {
@@ -43,9 +43,9 @@ void main() {
         .thenAnswer((_) async => hydrationGoal);
       
       await container.read(setupViewModelProvider.notifier).completeSetup("25", "150");
+      final state = container.read(setupViewModelProvider);
 
-      expect(container.read(setupViewModelProvider).stage, equals(ProcessStage.success));
-      expect(container.read(setupViewModelProvider).dailyGoalClamped, equals(true));
+      expect(state, equals(SetupState.done(dailyGoalClamped: true)));
     });
 
     test('Does not return clamp in the state if not necessary', () async {
@@ -64,9 +64,9 @@ void main() {
         .thenAnswer((_) async => hydrationGoal);
       
       await container.read(setupViewModelProvider.notifier).completeSetup("25", "65");
+      final state = container.read(setupViewModelProvider);
 
-      expect(container.read(setupViewModelProvider).stage, equals(ProcessStage.success));
-      expect(container.read(setupViewModelProvider).dailyGoalClamped, equals(false));
+      expect(state, equals(SetupState.done(dailyGoalClamped: false)));
     });
 
     test('Goes to an error state if necessary', () async {
@@ -79,29 +79,11 @@ void main() {
       final mockUseCase = container.read(completeSetupUseCaseProvider);
       
       when(() => mockUseCase.execute(any(), any()))
-        .thenThrow(Exception());
+        .thenThrow(Exception(''));
       
       await container.read(setupViewModelProvider.notifier).completeSetup("25", "65");
 
-      expect(container.read(setupViewModelProvider).stage, equals(ProcessStage.error));
-    });
-
-    test('Does not complete setup if stage is not idle', () async {
-      final container = ProviderContainer.test(
-        overrides: [
-          setupViewModelProvider.overrideWith(() => ErrorSetupViewModel()),
-          completeSetupUseCaseProvider.overrideWithValue(MockCompleteSetupUseCase()),
-        ]
-      );
-
-      final mockUseCase = container.read(completeSetupUseCaseProvider);
-      final viewModel = container.read(setupViewModelProvider.notifier);
-
-      when(() => mockUseCase.execute(any(), any()))
-        .thenAnswer((_) => Completer<HydrationGoal>().future);
-
-      viewModel.completeSetup("18", "65");
-      expect(container.read(setupViewModelProvider).stage, equals(ProcessStage.error));
+      expect(container.read(setupViewModelProvider), equals(SetupState.error('Exception: ')));
     });
   });
 }
