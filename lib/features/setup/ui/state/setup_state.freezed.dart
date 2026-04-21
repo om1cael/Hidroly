@@ -14,62 +14,30 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$SetupState {
 
- ProcessStage get stage; bool get dailyGoalClamped;
-/// Create a copy of SetupState
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-$SetupStateCopyWith<SetupState> get copyWith => _$SetupStateCopyWithImpl<SetupState>(this as SetupState, _$identity);
+
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SetupState&&(identical(other.stage, stage) || other.stage == stage)&&(identical(other.dailyGoalClamped, dailyGoalClamped) || other.dailyGoalClamped == dailyGoalClamped));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SetupState);
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,stage,dailyGoalClamped);
+int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'SetupState(stage: $stage, dailyGoalClamped: $dailyGoalClamped)';
+  return 'SetupState()';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $SetupStateCopyWith<$Res>  {
-  factory $SetupStateCopyWith(SetupState value, $Res Function(SetupState) _then) = _$SetupStateCopyWithImpl;
-@useResult
-$Res call({
- ProcessStage stage, bool dailyGoalClamped
-});
-
-
-
-
-}
-/// @nodoc
-class _$SetupStateCopyWithImpl<$Res>
-    implements $SetupStateCopyWith<$Res> {
-  _$SetupStateCopyWithImpl(this._self, this._then);
-
-  final SetupState _self;
-  final $Res Function(SetupState) _then;
-
-/// Create a copy of SetupState
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? stage = null,Object? dailyGoalClamped = null,}) {
-  return _then(_self.copyWith(
-stage: null == stage ? _self.stage : stage // ignore: cast_nullable_to_non_nullable
-as ProcessStage,dailyGoalClamped: null == dailyGoalClamped ? _self.dailyGoalClamped : dailyGoalClamped // ignore: cast_nullable_to_non_nullable
-as bool,
-  ));
-}
-
+class $SetupStateCopyWith<$Res>  {
+$SetupStateCopyWith(SetupState _, $Res Function(SetupState) __);
 }
 
 
@@ -87,11 +55,15 @@ extension SetupStatePatterns on SetupState {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _SetupState value)?  $default,{required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Profile value)?  profile,TResult Function( _Notifications value)?  notifications,TResult Function( _Processing value)?  processing,TResult Function( _Done value)?  done,TResult Function( _Error value)?  error,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
-case _SetupState() when $default != null:
-return $default(_that);case _:
+case _Profile() when profile != null:
+return profile(_that);case _Notifications() when notifications != null:
+return notifications(_that);case _Processing() when processing != null:
+return processing(_that);case _Done() when done != null:
+return done(_that);case _Error() when error != null:
+return error(_that);case _:
   return orElse();
 
 }
@@ -109,11 +81,15 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _SetupState value)  $default,){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Profile value)  profile,required TResult Function( _Notifications value)  notifications,required TResult Function( _Processing value)  processing,required TResult Function( _Done value)  done,required TResult Function( _Error value)  error,}){
 final _that = this;
 switch (_that) {
-case _SetupState():
-return $default(_that);case _:
+case _Profile():
+return profile(_that);case _Notifications():
+return notifications(_that);case _Processing():
+return processing(_that);case _Done():
+return done(_that);case _Error():
+return error(_that);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -130,11 +106,15 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _SetupState value)?  $default,){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Profile value)?  profile,TResult? Function( _Notifications value)?  notifications,TResult? Function( _Processing value)?  processing,TResult? Function( _Done value)?  done,TResult? Function( _Error value)?  error,}){
 final _that = this;
 switch (_that) {
-case _SetupState() when $default != null:
-return $default(_that);case _:
+case _Profile() when profile != null:
+return profile(_that);case _Notifications() when notifications != null:
+return notifications(_that);case _Processing() when processing != null:
+return processing(_that);case _Done() when done != null:
+return done(_that);case _Error() when error != null:
+return error(_that);case _:
   return null;
 
 }
@@ -151,10 +131,14 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( ProcessStage stage,  bool dailyGoalClamped)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  profile,TResult Function()?  notifications,TResult Function()?  processing,TResult Function( bool dailyGoalClamped)?  done,TResult Function( String error)?  error,required TResult orElse(),}) {final _that = this;
 switch (_that) {
-case _SetupState() when $default != null:
-return $default(_that.stage,_that.dailyGoalClamped);case _:
+case _Profile() when profile != null:
+return profile();case _Notifications() when notifications != null:
+return notifications();case _Processing() when processing != null:
+return processing();case _Done() when done != null:
+return done(_that.dailyGoalClamped);case _Error() when error != null:
+return error(_that.error);case _:
   return orElse();
 
 }
@@ -172,10 +156,14 @@ return $default(_that.stage,_that.dailyGoalClamped);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( ProcessStage stage,  bool dailyGoalClamped)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  profile,required TResult Function()  notifications,required TResult Function()  processing,required TResult Function( bool dailyGoalClamped)  done,required TResult Function( String error)  error,}) {final _that = this;
 switch (_that) {
-case _SetupState():
-return $default(_that.stage,_that.dailyGoalClamped);case _:
+case _Profile():
+return profile();case _Notifications():
+return notifications();case _Processing():
+return processing();case _Done():
+return done(_that.dailyGoalClamped);case _Error():
+return error(_that.error);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -192,10 +180,14 @@ return $default(_that.stage,_that.dailyGoalClamped);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( ProcessStage stage,  bool dailyGoalClamped)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  profile,TResult? Function()?  notifications,TResult? Function()?  processing,TResult? Function( bool dailyGoalClamped)?  done,TResult? Function( String error)?  error,}) {final _that = this;
 switch (_that) {
-case _SetupState() when $default != null:
-return $default(_that.stage,_that.dailyGoalClamped);case _:
+case _Profile() when profile != null:
+return profile();case _Notifications() when notifications != null:
+return notifications();case _Processing() when processing != null:
+return processing();case _Done() when done != null:
+return done(_that.dailyGoalClamped);case _Error() when error != null:
+return error(_that.error);case _:
   return null;
 
 }
@@ -206,44 +198,139 @@ return $default(_that.stage,_that.dailyGoalClamped);case _:
 /// @nodoc
 
 
-class _SetupState implements SetupState {
-  const _SetupState({this.stage = ProcessStage.idle, this.dailyGoalClamped = false});
+class _Profile implements SetupState {
+  const _Profile();
   
 
-@override@JsonKey() final  ProcessStage stage;
-@override@JsonKey() final  bool dailyGoalClamped;
 
-/// Create a copy of SetupState
-/// with the given fields replaced by the non-null parameter values.
-@override @JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-_$SetupStateCopyWith<_SetupState> get copyWith => __$SetupStateCopyWithImpl<_SetupState>(this, _$identity);
+
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SetupState&&(identical(other.stage, stage) || other.stage == stage)&&(identical(other.dailyGoalClamped, dailyGoalClamped) || other.dailyGoalClamped == dailyGoalClamped));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Profile);
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,stage,dailyGoalClamped);
+int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'SetupState(stage: $stage, dailyGoalClamped: $dailyGoalClamped)';
+  return 'SetupState.profile()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+
+
+class _Notifications implements SetupState {
+  const _Notifications();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Notifications);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'SetupState.notifications()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+
+
+class _Processing implements SetupState {
+  const _Processing();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Processing);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'SetupState.processing()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+
+
+class _Done implements SetupState {
+  const _Done({this.dailyGoalClamped = false});
+  
+
+@JsonKey() final  bool dailyGoalClamped;
+
+/// Create a copy of SetupState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$DoneCopyWith<_Done> get copyWith => __$DoneCopyWithImpl<_Done>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Done&&(identical(other.dailyGoalClamped, dailyGoalClamped) || other.dailyGoalClamped == dailyGoalClamped));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,dailyGoalClamped);
+
+@override
+String toString() {
+  return 'SetupState.done(dailyGoalClamped: $dailyGoalClamped)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class _$SetupStateCopyWith<$Res> implements $SetupStateCopyWith<$Res> {
-  factory _$SetupStateCopyWith(_SetupState value, $Res Function(_SetupState) _then) = __$SetupStateCopyWithImpl;
-@override @useResult
+abstract mixin class _$DoneCopyWith<$Res> implements $SetupStateCopyWith<$Res> {
+  factory _$DoneCopyWith(_Done value, $Res Function(_Done) _then) = __$DoneCopyWithImpl;
+@useResult
 $Res call({
- ProcessStage stage, bool dailyGoalClamped
+ bool dailyGoalClamped
 });
 
 
@@ -251,20 +338,85 @@ $Res call({
 
 }
 /// @nodoc
-class __$SetupStateCopyWithImpl<$Res>
-    implements _$SetupStateCopyWith<$Res> {
-  __$SetupStateCopyWithImpl(this._self, this._then);
+class __$DoneCopyWithImpl<$Res>
+    implements _$DoneCopyWith<$Res> {
+  __$DoneCopyWithImpl(this._self, this._then);
 
-  final _SetupState _self;
-  final $Res Function(_SetupState) _then;
+  final _Done _self;
+  final $Res Function(_Done) _then;
 
 /// Create a copy of SetupState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? stage = null,Object? dailyGoalClamped = null,}) {
-  return _then(_SetupState(
-stage: null == stage ? _self.stage : stage // ignore: cast_nullable_to_non_nullable
-as ProcessStage,dailyGoalClamped: null == dailyGoalClamped ? _self.dailyGoalClamped : dailyGoalClamped // ignore: cast_nullable_to_non_nullable
+@pragma('vm:prefer-inline') $Res call({Object? dailyGoalClamped = null,}) {
+  return _then(_Done(
+dailyGoalClamped: null == dailyGoalClamped ? _self.dailyGoalClamped : dailyGoalClamped // ignore: cast_nullable_to_non_nullable
 as bool,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class _Error implements SetupState {
+  const _Error(this.error);
+  
+
+ final  String error;
+
+/// Create a copy of SetupState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$ErrorCopyWith<_Error> get copyWith => __$ErrorCopyWithImpl<_Error>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Error&&(identical(other.error, error) || other.error == error));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,error);
+
+@override
+String toString() {
+  return 'SetupState.error(error: $error)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$ErrorCopyWith<$Res> implements $SetupStateCopyWith<$Res> {
+  factory _$ErrorCopyWith(_Error value, $Res Function(_Error) _then) = __$ErrorCopyWithImpl;
+@useResult
+$Res call({
+ String error
+});
+
+
+
+
+}
+/// @nodoc
+class __$ErrorCopyWithImpl<$Res>
+    implements _$ErrorCopyWith<$Res> {
+  __$ErrorCopyWithImpl(this._self, this._then);
+
+  final _Error _self;
+  final $Res Function(_Error) _then;
+
+/// Create a copy of SetupState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? error = null,}) {
+  return _then(_Error(
+null == error ? _self.error : error // ignore: cast_nullable_to_non_nullable
+as String,
   ));
 }
 

@@ -10,11 +10,9 @@ part 'setup_view_model.g.dart';
 @riverpod
 class SetupViewModel extends _$SetupViewModel {
   @override 
-  SetupState build() => SetupState();
+  SetupState build() => SetupState.profile();
 
   Future<void> completeSetup(String ageText, String weightText) async {
-    if(state.stage != .idle) return;
-
     try {      
       final person = ref
         .read(hydrationFormViewModelProvider.notifier)
@@ -24,17 +22,14 @@ class SetupViewModel extends _$SetupViewModel {
         .read(hydrationFormViewModelProvider)
         .unit.first;
 
-      state = state.copyWith(stage: .processing);
+      state = SetupState.processing();
+
       final setupResult = await ref.read(completeSetupUseCaseProvider)
         .execute(person, unitSystem);
 
-      state = state.copyWith(
-        dailyGoalClamped: setupResult.isClamped,
-        stage: .success,
-      );
+      state = SetupState.done(dailyGoalClamped: setupResult.isClamped);
     } on Exception catch (e) {
-      state = state.copyWith(stage: .error);
-      log(e.toString(), error: e);
+      state = SetupState.error(e.toString());
     }
   }
 }
