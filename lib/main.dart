@@ -12,6 +12,9 @@ Future<void> main() async {
   
   await LocalNotificationService().initialize();
 
+  // TODO: Don't call showNotification on main
+  await LocalNotificationService().showNotification();
+
   runApp(
     EasyLocalization(
       supportedLocales: [Locale('en', 'US')],

@@ -3,7 +3,6 @@ import 'package:hidroly/core/domain/interfaces/notification_service.dart';
 
 @pragma('vm:entry-point')
 void notificationActionTapResponse(NotificationResponse notificationResponse) {
-  print(notificationResponse.actionId);
   // TODO: Handle actions
 }
 
