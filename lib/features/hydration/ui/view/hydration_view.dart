@@ -67,68 +67,78 @@ class _HydrationViewState extends ConsumerState<HydrationView> {
           ],
         ),
         body: SafeArea(
-          minimum: EdgeInsets.all(24.0),
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Column(
-                  spacing: 48,
-                  children: [
-                    HydrationProgressIndicator(
-                      currentAmount: data.day.currentAmount.valueIn(data.unitSystem),
-                      dailyGoal: data.day.dailyGoal.valueIn(data.unitSystem),
-                      unitText: data.unitSystem.unitLabel,
-                    ),
-
-                    SizedBox(
-                      height: 36,
-                      child: ListView.separated(
-                        scrollDirection: .horizontal,
-                        shrinkWrap: true,
-                        itemCount: data.cups.length,
-                        itemBuilder: (_, index) {
-                          final cup = data.cups[index];
-                      
-                          return InkWell(
-                            onLongPress: () => showModalBottomSheet(
-                              showDragHandle: true,
-                              context: context, 
-                              builder: (_) {
-                                return SafeArea(
-                                  minimum: EdgeInsets.all(8),
-                                  child: Column(
-                                    mainAxisSize: .min,
-                                    children: [
-                                      ListTile(
-                                        leading: CircleAvatar(backgroundColor: Colors.redAccent, child: Icon(Icons.delete)),
-                                        title: Text('delete'.tr()),
-                                        onTap: () async {
-                                          Navigator.pop(context);
-                                          await ref.read(hydrationViewModelProvider.notifier).deleteCup(cup.id);
-                                        },
-                                        shape: RoundedRectangleBorder(borderRadius: BorderRadiusGeometry.circular(24))
-                                      ),
-                                    ],
-                                  ),
-                                );
-                              }
+          child: CustomScrollView(
+            physics: ClampingScrollPhysics(),
+            slivers: [
+              SliverFillRemaining(
+                hasScrollBody: false,
+                child: Center(
+                  child: Padding(
+                    padding: const EdgeInsets.all(32.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Column(
+                          spacing: 48,
+                          children: [
+                            HydrationProgressIndicator(
+                              currentAmount: data.day.currentAmount.valueIn(data.unitSystem),
+                              dailyGoal: data.day.dailyGoal.valueIn(data.unitSystem),
+                              unitText: data.unitSystem.unitLabel,
                             ),
-                            child: CupButton(
-                              amount: cup.amount.toWater().valueIn(data.unitSystem),
-                              unit: data.unitSystem.unitLabel,
-                              onPressed: () => ref.read(hydrationViewModelProvider.notifier).addWater(cup.amount.value),
+                                
+                            SizedBox(
+                              height: 36,
+                              child: ListView.separated(
+                                scrollDirection: .horizontal,
+                                shrinkWrap: true,
+                                itemCount: data.cups.length,
+                                itemBuilder: (_, index) {
+                                  final cup = data.cups[index];
+                              
+                                  return InkWell(
+                                    onLongPress: () => showModalBottomSheet(
+                                      showDragHandle: true,
+                                      context: context, 
+                                      builder: (_) {
+                                        return SafeArea(
+                                          minimum: EdgeInsets.all(8),
+                                          child: Column(
+                                            mainAxisSize: .min,
+                                            children: [
+                                              ListTile(
+                                                leading: CircleAvatar(backgroundColor: Colors.redAccent, child: Icon(Icons.delete)),
+                                                title: Text('delete'.tr()),
+                                                onTap: () async {
+                                                  Navigator.pop(context);
+                                                  await ref.read(hydrationViewModelProvider.notifier).deleteCup(cup.id);
+                                                },
+                                                shape: RoundedRectangleBorder(borderRadius: BorderRadiusGeometry.circular(24))
+                                              ),
+                                            ],
+                                          ),
+                                        );
+                                      }
+                                    ),
+                                    child: CupButton(
+                                      amount: cup.amount.toWater().valueIn(data.unitSystem),
+                                      unit: data.unitSystem.unitLabel,
+                                      onPressed: () => ref.read(hydrationViewModelProvider.notifier).addWater(cup.amount.value),
+                                    ),
+                                  );
+                                },
+                                separatorBuilder: (_, _) => SizedBox(width: 12),
+                              ),
                             ),
-                          );
-                        },
-                        separatorBuilder: (_, _) => SizedBox(width: 12),
-                      ),
+                          ],
+                        ),
+                      ],
                     ),
-                  ],
+                  ),
                 ),
-              ],
-            ),
+              )
+            ]
           ),
         ),
         floatingActionButton: FloatingActionButton(
