@@ -1,5 +1,6 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hidroly/core/data/repositories/day_repository_impl.dart';
 import 'package:hidroly/core/domain/interfaces/notification_service.dart';
 import 'package:hidroly/features/hydration/data/repositories/hydration_repository_impl.dart';
 
@@ -16,8 +17,12 @@ void notificationActionTapResponse(NotificationResponse notificationResponse) as
   final cup = cupMap[notificationResponse.actionId];
 
   if(cup != null) {
+    final latestDay = await providerContainer
+      .read(dayRepositoryProvider)
+      .readLatest();
+
     await providerContainer.read(hydrationRepositoryProvider)
-      .addWater(1, cup);
+      .addWater(latestDay.id, cup);
   }
 
   providerContainer.dispose();
