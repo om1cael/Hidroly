@@ -4,9 +4,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hidroly/core/ui/view_model/notification_settings_card_view_model.dart';
 
 class NotificationSettingsCard extends ConsumerWidget {
-  NotificationSettingsCard({super.key});
+  NotificationSettingsCard({super.key, this.persistByDefault = true});
 
   final availableFrequencies = [1, 2, 3];
+  final bool persistByDefault;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -33,7 +34,7 @@ class NotificationSettingsCard extends ConsumerWidget {
 
                 ref
                   .read(notificationSettingsCardViewModelProvider.notifier)
-                  .setWakeUpTime(wakeUpTime);
+                  .setWakeUpTime(wakeUpTime, persistByDefault);
               },
             ),
             ListTile(
@@ -51,7 +52,7 @@ class NotificationSettingsCard extends ConsumerWidget {
 
                 ref
                   .read(notificationSettingsCardViewModelProvider.notifier)
-                  .setSleepTime(sleepTime);
+                  .setSleepTime(sleepTime, persistByDefault);
               },
             ),
             ListTile(
@@ -78,7 +79,7 @@ class NotificationSettingsCard extends ConsumerWidget {
 
                                 ref
                                   .read(notificationSettingsCardViewModelProvider.notifier)
-                                  .setNotificationFrequency(value);
+                                  .setNotificationFrequency(value, persistByDefault);
                                 
                                 Navigator.of(context).pop();
                               }, 
