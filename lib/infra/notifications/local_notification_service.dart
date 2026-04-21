@@ -59,7 +59,7 @@ class LocalNotificationService implements NotificationService {
         priority: .high,
         actions: <AndroidNotificationAction>[
           AndroidNotificationAction('water_standard', unitSystem == .metric ? '200 ml' : '7 oz'),
-          AndroidNotificationAction('water_medium', unitSystem == .metric ? '350 ml' : '12 oz'),
+          AndroidNotificationAction('water_medium', unitSystem == .metric ? '300 ml' : '10 oz'),
           AndroidNotificationAction('water_bottle', unitSystem == .metric ? '500 ml' : '17 oz'),
         ],
       );
