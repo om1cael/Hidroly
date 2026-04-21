@@ -4,10 +4,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hidroly/core/navigation/app_routes.dart';
 import 'package:hidroly/core/providers/theme_provider.dart';
 import 'package:hidroly/core/ui/themes/themes.dart';
+import 'package:hidroly/infra/notifications/notification_service.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
+  
+  await NotificationService().initialize();
 
   runApp(
     EasyLocalization(
