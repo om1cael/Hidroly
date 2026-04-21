@@ -71,6 +71,7 @@ class NotificationSettingsCard extends ConsumerWidget {
                           error: (_, _) => Text('errorOccurred'.tr()), 
                           loading: () => Center(child: CircularProgressIndicator(),),
                           data: (data) => SafeArea(
+                            minimum: EdgeInsets.all(6),
                             child: RadioGroup<int>(
                               groupValue: data.notificationFrequency,
                               onChanged: (value) {
