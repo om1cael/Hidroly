@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:hidroly/core/ui/view_model/hydration_form_view_model.dart';
 import 'package:hidroly/features/setup/domain/usecases/complete_setup_use_case.dart';
 import 'package:hidroly/features/setup/ui/state/setup_state.dart';
@@ -11,6 +9,10 @@ part 'setup_view_model.g.dart';
 class SetupViewModel extends _$SetupViewModel {
   @override 
   SetupState build() => SetupState.profile();
+
+  void goToNotificationsStage() {
+    state = SetupState.notifications();
+  }
 
   Future<void> completeSetup(String ageText, String weightText) async {
     try {      

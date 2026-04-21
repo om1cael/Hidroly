@@ -87,5 +87,7 @@
         "one": "{} hour",
         "many": "{} hours",
         "other": "{} hours"
-    }
+    },
+    "reminders": "Reminders",
+    "remindersSubtitle": "Choose the best times for your routine."
 }
