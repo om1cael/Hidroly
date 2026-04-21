@@ -186,7 +186,7 @@ class _SetupViewState extends ConsumerState<SetupView> {
                             Text('notificationsAdjust'.tr(), style: Theme.of(context).textTheme.titleLarge, textAlign: .center,)
                           ],
                         ),
-                        SizedBox(height: 16,),
+                        SizedBox(),
                         NotificationSettingsCard(),
                         Card(
                           child: Padding(
