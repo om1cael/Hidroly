@@ -28,19 +28,19 @@ class NotificationSettingsCardViewModel extends _$NotificationSettingsCardViewMo
     ]);
   }
 
-  void setWakeUpTime(TimeOfDay wakeUpTime, [bool persist = false]) async {
+  void setWakeUpTime(TimeOfDay wakeUpTime, [bool persist = true]) async {
     state = await AsyncValue.guard(() async => state.requireValue.copyWith(wakeUpTime: wakeUpTime));
 
     if(persist) saveSettings();
   }
 
-  void setSleepTime(TimeOfDay sleepTime, [bool persist = false]) async {
+  void setSleepTime(TimeOfDay sleepTime, [bool persist = true]) async {
     state = await AsyncValue.guard(() async => state.requireValue.copyWith(sleepTime: sleepTime));
 
     if(persist) saveSettings();
   }
 
-  void setNotificationFrequency(int frequency, [bool persist = false]) async {
+  void setNotificationFrequency(int frequency, [bool persist = true]) async {
     state = await AsyncValue.guard(() async => state.requireValue.copyWith(notificationFrequency: frequency));
 
     if(persist) saveSettings();
