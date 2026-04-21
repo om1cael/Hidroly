@@ -19,7 +19,7 @@ class NotificationSettingsCard extends ConsumerWidget {
         child: Column(
           children: [
             ListTile(
-              title: Text('I wake up at'),
+              title: Text('notificationDayBeginsAt'.tr()),
               subtitle: Text(DateFormat.jm().format(DateTime(2026, 4, 21, data.wakeUpTime.hour, data.wakeUpTime.minute))),
               leading: CircleAvatar(child: Icon(Icons.wb_sunny)),
               trailing: Icon(Icons.chevron_right),
@@ -37,7 +37,7 @@ class NotificationSettingsCard extends ConsumerWidget {
               },
             ),
             ListTile(
-              title: Text('I go to sleep at'),
+              title: Text('notificationOffToBedAt'.tr()),
               subtitle: Text(DateFormat.jm().format(DateTime(2026, 4, 21, data.sleepTime.hour, data.sleepTime.minute))),
               leading: CircleAvatar(child: Icon(Icons.bedtime),),
               trailing: Icon(Icons.chevron_right),
@@ -55,8 +55,8 @@ class NotificationSettingsCard extends ConsumerWidget {
               },
             ),
             ListTile(
-              title: Text('Remind me each'),
-              subtitle: Text('${data.notificationFrequency} hours'),
+              title: Text('notificationRemindEvery'.tr()),
+              subtitle: Text('hour'.plural(data.notificationFrequency)),
               leading: CircleAvatar(child: Icon(Icons.repeat),),
               trailing: Icon(Icons.chevron_right),
               onTap: () {
@@ -87,7 +87,7 @@ class NotificationSettingsCard extends ConsumerWidget {
                                 children: [
                                   for(final frequency in availableFrequencies)
                                     ListTile(
-                                      title: Text('$frequency hours'),
+                                      title: Text('hour'.plural(frequency)),
                                       leading: Radio<int>(value: frequency,)
                                     ),
                                 ],

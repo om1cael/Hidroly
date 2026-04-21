@@ -79,5 +79,13 @@
     "exportSuccessful": "All set! Your hydration history is safe.",
     "importSuccessful": "Everything is back in place!",
     "importDatabaseUnsupported": "The backup's database version is different",
-    "importInvalidJson": "The JSON file is probably invalid"
+    "importInvalidJson": "The JSON file is probably invalid",
+    "notificationDayBeginsAt": "My day begins at",
+    "notificationOffToBedAt": "I'm off to bed at",
+    "notificationRemindEvery": "Remind me every",
+    "hour": {
+        "one": "{} hour",
+        "many": "{} hours",
+        "other": "{} hours"
+    }
 }
