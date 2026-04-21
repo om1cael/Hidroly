@@ -72,8 +72,8 @@ class _SetupViewState extends ConsumerState<SetupView> {
             context: context, 
             builder: (_) {
               return AlertDialog(
-                title: Text('reminders'.tr()),
-                content: Text('remindersPermissionRequest'.tr()),
+                title: Text('notifications'.tr()),
+                content: Text('notificationPermissionRequest'.tr()),
                 actions: [
                   TextButton(onPressed: () => Navigator.of(context).pop(), child: Text('no'.tr())),
                   FilledButton(
@@ -169,29 +169,36 @@ class _SetupViewState extends ConsumerState<SetupView> {
               key: ValueKey(2),
               padding: const EdgeInsets.all(24.0),
               child: CustomScrollView(
-                physics: ClampingScrollPhysics(),
                 slivers: [
                   SliverFillRemaining(
-                    hasScrollBody: false,
                     child: Column(
-                      spacing: 64,
+                      mainAxisAlignment: .center,
                       crossAxisAlignment: .center,
+                      spacing: 32,
                       children: [
-                        const Spacer(flex: 2,),
-          
-                        HeaderText(
-                          title: 'reminders'.tr(),
-                          subtitle: 'remindersSubtitle'.tr(),
+                        Column(
+                          mainAxisAlignment: .center,
+                          crossAxisAlignment: .center,
+                          spacing: 24,
+                          children: [
+                            CircleAvatar(radius: 64, child: Icon(Icons.edit_notifications, size: 64,)),
+                            Text('notificationsAdjust'.tr(), style: Theme.of(context).textTheme.titleLarge, textAlign: .center,)
+                          ],
                         ),
-              
+                        SizedBox(height: 16,),
                         NotificationSettingsCard(),
-              
-                        Text('dataPrivacy'.tr()),
-              
-                        const Spacer(),
+                        Card(
+                          child: Padding(
+                            padding: const EdgeInsets.all(12.0),
+                            child: Text(
+                              'hydrationHint'.tr(), 
+                              textAlign: .center,
+                            ),
+                          ),
+                        )
                       ],
                     ),
-                  )
+                  ),
                 ],
               ),
             ),

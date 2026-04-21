@@ -89,8 +89,7 @@
         "other": "{} hours"
     },
     "notifications": "Notifications",
-    "notificationsSubtitle": "Choose the best times for your routine.",
-    "notificationPermissionRequest": "To help you stay hydrated, we need your permission to send notifications. We'll only notify you at the times you've chosen.",
     "notificationsAdjust": "Adjust it to your routine",
+    "notificationPermissionRequest": "To help you stay hydrated, we need your permission to send notifications. We'll only notify you at the times you've chosen.",
     "hydrationHint": "Staying hydrated during your active hours improves focus and energy levels."
 }
