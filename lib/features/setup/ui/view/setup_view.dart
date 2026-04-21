@@ -6,7 +6,7 @@ import 'package:hidroly/core/ui/view/hydration_form_view.dart';
 import 'package:hidroly/core/ui/view_model/hydration_form_view_model.dart';
 import 'package:hidroly/core/domain/hydration_constraints.dart';
 import 'package:hidroly/core/domain/enums/unit_systems.dart';
-import 'package:hidroly/features/setup/ui/view/widgets/header_text.dart';
+import 'package:hidroly/features/setup/ui/view/components/header_text.dart';
 import 'package:hidroly/features/setup/ui/view_model/setup_view_model.dart';
 
 class SetupView extends ConsumerStatefulWidget {
