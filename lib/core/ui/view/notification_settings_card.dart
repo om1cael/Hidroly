@@ -17,7 +17,7 @@ class NotificationSettingsCard extends ConsumerWidget {
         children: [
           ListTile(
             title: Text('I wake up at'),
-            subtitle: Text(DateFormat.jm().format(DateTime(2026, 1, 1, state.wakeUpTime.hour, state.wakeUpTime.minute))),
+            subtitle: Text(DateFormat.jm().format(DateTime(2026, 4, 21, state.wakeUpTime.hour, state.wakeUpTime.minute))),
             leading: CircleAvatar(child: Icon(Icons.wb_sunny)),
             trailing: Icon(Icons.chevron_right),
             onTap: () async {
@@ -35,7 +35,7 @@ class NotificationSettingsCard extends ConsumerWidget {
           ),
           ListTile(
             title: Text('I go to sleep at'),
-            subtitle: Text(DateFormat.jm().format(DateTime(2026, 1, 1, state.sleepTime.hour, state.sleepTime.minute))),
+            subtitle: Text(DateFormat.jm().format(DateTime(2026, 4, 21, state.sleepTime.hour, state.sleepTime.minute))),
             leading: CircleAvatar(child: Icon(Icons.bedtime),),
             trailing: Icon(Icons.chevron_right),
             onTap: () async {

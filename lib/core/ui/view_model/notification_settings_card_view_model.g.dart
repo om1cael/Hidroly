@@ -49,7 +49,7 @@ final class NotificationSettingsCardViewModelProvider
 }
 
 String _$notificationSettingsCardViewModelHash() =>
-    r'ace46a98eb5172992097ead93a060c316e17671f';
+    r'35346ad38eaac13e6632835bb74ddf72f82995b2';
 
 abstract class _$NotificationSettingsCardViewModel
     extends $Notifier<NotificationSettingsState> {
