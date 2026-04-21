@@ -15,7 +15,7 @@ final notificationSettingsCardViewModelProvider =
 
 final class NotificationSettingsCardViewModelProvider
     extends
-        $NotifierProvider<
+        $AsyncNotifierProvider<
           NotificationSettingsCardViewModel,
           NotificationSettingsState
         > {
@@ -38,32 +38,31 @@ final class NotificationSettingsCardViewModelProvider
   @override
   NotificationSettingsCardViewModel create() =>
       NotificationSettingsCardViewModel();
-
-  /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(NotificationSettingsState value) {
-    return $ProviderOverride(
-      origin: this,
-      providerOverride: $SyncValueProvider<NotificationSettingsState>(value),
-    );
-  }
 }
 
 String _$notificationSettingsCardViewModelHash() =>
-    r'35346ad38eaac13e6632835bb74ddf72f82995b2';
+    r'fc274ea620a5ebeb6f5e7f2e1d383a2ce0528323';
 
 abstract class _$NotificationSettingsCardViewModel
-    extends $Notifier<NotificationSettingsState> {
-  NotificationSettingsState build();
+    extends $AsyncNotifier<NotificationSettingsState> {
+  FutureOr<NotificationSettingsState> build();
   @$mustCallSuper
   @override
   void runBuild() {
     final ref =
-        this.ref as $Ref<NotificationSettingsState, NotificationSettingsState>;
+        this.ref
+            as $Ref<
+              AsyncValue<NotificationSettingsState>,
+              NotificationSettingsState
+            >;
     final element =
         ref.element
             as $ClassProviderElement<
-              AnyNotifier<NotificationSettingsState, NotificationSettingsState>,
-              NotificationSettingsState,
+              AnyNotifier<
+                AsyncValue<NotificationSettingsState>,
+                NotificationSettingsState
+              >,
+              AsyncValue<NotificationSettingsState>,
               Object?,
               Object?
             >;

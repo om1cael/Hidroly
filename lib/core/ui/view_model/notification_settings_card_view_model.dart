@@ -8,32 +8,40 @@ part 'notification_settings_card_view_model.g.dart';
 @riverpod
 class NotificationSettingsCardViewModel extends _$NotificationSettingsCardViewModel {
   @override
-  NotificationSettingsState build() => NotificationSettingsState();
+  Future<NotificationSettingsState> build() async {
+    final settingsRepository = ref.read(settingsRepositoryProvider);
+
+    return NotificationSettingsState(
+      wakeUpTime: await settingsRepository.readWakeUpTime(),
+      sleepTime: await settingsRepository.readSleepTime(),
+      notificationFrequency: await settingsRepository.readNotificationFrequency(),
+    );
+  }
 
   void saveSettings() async {
     final settingsRepository = ref.read(settingsRepositoryProvider);
 
     await Future.wait([
-      settingsRepository.saveWakeUpTime(state.wakeUpTime),
-      settingsRepository.saveSleepTime(state.sleepTime),
-      settingsRepository.saveNotificationFrequency(state.notificationFrequency),
+      settingsRepository.saveWakeUpTime(state.requireValue.wakeUpTime),
+      settingsRepository.saveSleepTime(state.requireValue.sleepTime),
+      settingsRepository.saveNotificationFrequency(state.requireValue.notificationFrequency),
     ]);
   }
 
-  void setWakeUpTime(TimeOfDay wakeUpTime, [bool persist = false]) {
-    state = state.copyWith(wakeUpTime: wakeUpTime);
+  void setWakeUpTime(TimeOfDay wakeUpTime, [bool persist = false]) async {
+    state = await AsyncValue.guard(() async => state.requireValue.copyWith(wakeUpTime: wakeUpTime));
 
     if(persist) saveSettings();
   }
 
-  void setSleepTime(TimeOfDay sleepTime, [bool persist = false]) {
-    state = state.copyWith(sleepTime: sleepTime);
+  void setSleepTime(TimeOfDay sleepTime, [bool persist = false]) async {
+    state = await AsyncValue.guard(() async => state.requireValue.copyWith(sleepTime: sleepTime));
 
     if(persist) saveSettings();
   }
 
-  void setNotificationFrequency(int frequency, [bool persist = false]) {
-    state = state.copyWith(notificationFrequency: frequency);
+  void setNotificationFrequency(int frequency, [bool persist = false]) async {
+    state = await AsyncValue.guard(() async => state.requireValue.copyWith(notificationFrequency: frequency));
 
     if(persist) saveSettings();
   }
