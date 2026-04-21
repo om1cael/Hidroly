@@ -19,6 +19,8 @@ void notificationActionTapResponse(NotificationResponse notificationResponse) as
     await providerContainer.read(hydrationRepositoryProvider)
       .addWater(1, cup);
   }
+
+  providerContainer.dispose();
 }
 
 class LocalNotificationService implements NotificationService {
