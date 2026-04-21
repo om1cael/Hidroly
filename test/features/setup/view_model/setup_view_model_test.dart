@@ -1,10 +1,6 @@
-import 'dart:async';
-
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:hidroly/core/domain/entities/hydration_goal.dart';
 import 'package:hidroly/core/domain/entities/person.dart';
-import 'package:hidroly/core/domain/enums/process_stage.dart';
 import 'package:hidroly/core/domain/enums/unit_systems.dart';
 import 'package:hidroly/core/domain/value_objects/age.dart';
 import 'package:hidroly/core/domain/value_objects/weight.dart';
