@@ -79,6 +79,8 @@ class NotificationSettingsCard extends ConsumerWidget {
                                 ref
                                   .read(notificationSettingsCardViewModelProvider.notifier)
                                   .setNotificationFrequency(value);
+                                
+                                Navigator.of(context).pop();
                               }, 
                               child: Column(
                                 mainAxisSize: .min,
