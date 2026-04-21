@@ -1,6 +1,7 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hidroly/core/data/repositories/day_repository_impl.dart';
+import 'package:hidroly/core/domain/enums/unit_systems.dart';
 import 'package:hidroly/core/domain/interfaces/notification_service.dart';
 import 'package:hidroly/features/hydration/data/repositories/hydration_repository_impl.dart';
 
@@ -48,7 +49,7 @@ class LocalNotificationService implements NotificationService {
   }
 
   @override
-  Future<void> showNotification() async {
+  Future<void> showNotification(UnitSystem unitSystem) async {
     final androidNotificationDetails =
       AndroidNotificationDetails(
         'h_reminder', 
@@ -57,9 +58,9 @@ class LocalNotificationService implements NotificationService {
         importance: .high,
         priority: .high,
         actions: <AndroidNotificationAction>[
-          AndroidNotificationAction('water_standard', '200 ml'),
-          AndroidNotificationAction('water_medium', '300 ml'),
-          AndroidNotificationAction('water_bottle', '500 ml'),
+          AndroidNotificationAction('water_standard', unitSystem == .metric ? '200 ml' : '7 oz'),
+          AndroidNotificationAction('water_medium', unitSystem == .metric ? '350 ml' : '12 oz'),
+          AndroidNotificationAction('water_bottle', unitSystem == .metric ? '500 ml' : '17 oz'),
         ],
       );
     
