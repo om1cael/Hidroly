@@ -50,6 +50,8 @@ class LocalNotificationService implements NotificationService {
 
   @override
   Future<void> showNotification(UnitSystem unitSystem) async {
+    await flutterLocalNotificationsPlugin.cancelAll();
+
     final androidNotificationDetails =
       AndroidNotificationDetails(
         'h_reminder', 
