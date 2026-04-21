@@ -1,9 +1,32 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hidroly/core/data/repositories/day_repository_impl.dart';
+import 'package:hidroly/core/domain/enums/unit_systems.dart';
 import 'package:hidroly/core/domain/interfaces/notification_service.dart';
+import 'package:hidroly/features/hydration/data/repositories/hydration_repository_impl.dart';
 
 @pragma('vm:entry-point')
-void notificationActionTapResponse(NotificationResponse notificationResponse) {
-  // TODO: Handle actions
+void notificationActionTapResponse(NotificationResponse notificationResponse) async {
+  final providerContainer = ProviderContainer();
+
+  final cupMap = {
+    'water_standard': 200,
+    'water_medium': 300,
+    'water_bottle': 500,
+  };
+
+  final cup = cupMap[notificationResponse.actionId];
+
+  if(cup != null) {
+    final latestDay = await providerContainer
+      .read(dayRepositoryProvider)
+      .readLatest();
+
+    await providerContainer.read(hydrationRepositoryProvider)
+      .addWater(latestDay.id, cup);
+  }
+
+  providerContainer.dispose();
 }
 
 class LocalNotificationService implements NotificationService {
@@ -26,7 +49,9 @@ class LocalNotificationService implements NotificationService {
   }
 
   @override
-  Future<void> showNotification() async {
+  Future<void> showNotification(UnitSystem unitSystem) async {
+    await flutterLocalNotificationsPlugin.cancelAll();
+
     final androidNotificationDetails =
       AndroidNotificationDetails(
         'h_reminder', 
@@ -34,6 +59,11 @@ class LocalNotificationService implements NotificationService {
         channelDescription: 'Receive reminders to drink water',
         importance: .high,
         priority: .high,
+        actions: <AndroidNotificationAction>[
+          AndroidNotificationAction('water_standard', unitSystem == .metric ? '200 ml' : '7 oz'),
+          AndroidNotificationAction('water_medium', unitSystem == .metric ? '300 ml' : '10 oz'),
+          AndroidNotificationAction('water_bottle', unitSystem == .metric ? '500 ml' : '17 oz'),
+        ],
       );
     
     final notificationDetails =
