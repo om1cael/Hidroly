@@ -1,9 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hidroly/core/ui/view/notification_settings_card.dart';
 import 'package:hidroly/features/settings/ui/view/components/backup_section.dart';
 import 'package:hidroly/features/settings/ui/view/components/general_section.dart';
+import 'package:hidroly/features/settings/ui/view/components/you_section.dart';
 import 'package:hidroly/features/settings/ui/view_model/settings_view_model.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -62,7 +62,7 @@ class SettingsView extends ConsumerWidget {
                     SizedBox(height: 24,),
                 
                     SettingsGeneralSection(data: data),
-                    NotificationSettingsCard(),
+                    SettingsYouSection(),
                     SettingsBackupSection(),
                   ],
                 ),
