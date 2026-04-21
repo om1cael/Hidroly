@@ -1,5 +1,4 @@
-import 'dart:developer';
-
+import 'package:hidroly/core/providers/local_notification_service_provider.dart';
 import 'package:hidroly/core/ui/view_model/hydration_form_view_model.dart';
 import 'package:hidroly/features/setup/domain/usecases/complete_setup_use_case.dart';
 import 'package:hidroly/features/setup/ui/state/setup_state.dart';
@@ -10,11 +9,13 @@ part 'setup_view_model.g.dart';
 @riverpod
 class SetupViewModel extends _$SetupViewModel {
   @override 
-  SetupState build() => SetupState();
+  SetupState build() => SetupState.profile();
+
+  void goToNotificationsStage() {
+    state = SetupState.notifications();
+  }
 
   Future<void> completeSetup(String ageText, String weightText) async {
-    if(state.stage != .idle) return;
-
     try {      
       final person = ref
         .read(hydrationFormViewModelProvider.notifier)
@@ -24,17 +25,18 @@ class SetupViewModel extends _$SetupViewModel {
         .read(hydrationFormViewModelProvider)
         .unit.first;
 
-      state = state.copyWith(stage: .processing);
+      state = SetupState.processing();
+
       final setupResult = await ref.read(completeSetupUseCaseProvider)
         .execute(person, unitSystem);
 
-      state = state.copyWith(
-        dailyGoalClamped: setupResult.isClamped,
-        stage: .success,
-      );
+      state = SetupState.done(dailyGoalClamped: setupResult.isClamped);
     } on Exception catch (e) {
-      state = state.copyWith(stage: .error);
-      log(e.toString(), error: e);
+      state = SetupState.error(e.toString());
     }
+  }
+
+  void requestNotificationPermission() {
+    ref.read(localNotificationServiceProvider).askForPermission();
   }
 }

@@ -79,5 +79,17 @@
     "exportSuccessful": "All set! Your hydration history is safe.",
     "importSuccessful": "Everything is back in place!",
     "importDatabaseUnsupported": "The backup's database version is different",
-    "importInvalidJson": "The JSON file is probably invalid"
+    "importInvalidJson": "The JSON file is probably invalid",
+    "notificationDayBeginsAt": "My day begins at",
+    "notificationOffToBedAt": "I'm off to bed at",
+    "notificationRemindEvery": "Remind me every",
+    "hour": {
+        "one": "{} hour",
+        "many": "{} hours",
+        "other": "{} hours"
+    },
+    "notifications": "Notifications",
+    "notificationsAdjust": "Adjust it to your routine",
+    "notificationPermissionRequest": "To help you stay hydrated, we need your permission to send notifications. We'll only notify you at the times you've chosen.",
+    "hydrationHint": "Staying hydrated during your active hours improves focus and energy levels."
 }

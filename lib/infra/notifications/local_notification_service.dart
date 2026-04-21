@@ -1,9 +1,9 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hidroly/core/data/repositories/day_repository_impl.dart';
 import 'package:hidroly/core/domain/enums/unit_systems.dart';
 import 'package:hidroly/core/domain/interfaces/notification_service.dart';
 import 'package:hidroly/features/hydration/data/repositories/hydration_repository_impl.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 @pragma('vm:entry-point')
 void notificationActionTapResponse(NotificationResponse notificationResponse) async {
