@@ -1,5 +1,11 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
+@pragma('vm:entry-point')
+void notificationActionTapResponse(NotificationResponse notificationResponse) {
+  print(notificationResponse.actionId);
+  // TODO: Handle actions
+}
+
 class NotificationService {
   final flutterLocalNotificationsPlugin =
     FlutterLocalNotificationsPlugin();
@@ -39,8 +45,8 @@ class NotificationService {
     );
   }
 
-  @pragma('vm:entry-point')
-  static notificationActionTapResponse(NotificationResponse notificationResponse) {
-    // TODO: Handle actions
+  void askForPermission() {
+    flutterLocalNotificationsPlugin.resolvePlatformSpecificImplementation<
+      AndroidFlutterLocalNotificationsPlugin>()!.requestNotificationsPermission();
   }
 }
