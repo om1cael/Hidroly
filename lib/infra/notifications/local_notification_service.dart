@@ -4,6 +4,18 @@ import 'package:hidroly/core/domain/enums/unit_systems.dart';
 import 'package:hidroly/core/domain/interfaces/notification_service.dart';
 import 'package:hidroly/features/hydration/data/repositories/hydration_repository_impl.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:workmanager/workmanager.dart';
+
+@pragma('vm:entry-point')
+void callbackDispatcher() {
+  Workmanager().executeTask((task, inputData) async {
+    if(task != 'notification') {
+      return Future.value(true);
+    }
+    
+    return Future.value(true);
+  });
+}
 
 @pragma('vm:entry-point')
 void notificationActionTapResponse(NotificationResponse notificationResponse) async {
