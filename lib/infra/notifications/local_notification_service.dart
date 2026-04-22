@@ -1,7 +1,10 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:hidroly/core/data/repositories/day_repository_impl.dart';
+import 'package:hidroly/core/data/repositories/settings_repository_impl.dart';
 import 'package:hidroly/core/domain/enums/unit_systems.dart';
 import 'package:hidroly/core/domain/interfaces/notification_service.dart';
+import 'package:hidroly/core/providers/local_notification_service_provider.dart';
 import 'package:hidroly/features/hydration/data/repositories/hydration_repository_impl.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:workmanager/workmanager.dart';
@@ -9,10 +12,30 @@ import 'package:workmanager/workmanager.dart';
 @pragma('vm:entry-point')
 void callbackDispatcher() {
   Workmanager().executeTask((task, inputData) async {
-    if(task != 'notification') {
-      return Future.value(true);
-    }
+    if(task != 'send_notification') return Future.value(true);
+    final providerContainer = ProviderContainer();
+
+    final notificationService = providerContainer.read(localNotificationServiceProvider);
+    final settingsRepository = providerContainer.read(settingsRepositoryProvider);
     
+    final now = TimeOfDay.now();
+    final wakeUpTime = await settingsRepository.readWakeUpTime();
+    final sleepTime = await settingsRepository.readSleepTime();
+    final unitSystem = await settingsRepository.readUnitSystem();
+
+    await notificationService.initialize();
+    
+    bool isNotificationAllowed = notificationService.isNotificationAllowed(
+      now, 
+      wakeUpTime, 
+      sleepTime,
+    );
+
+    if(isNotificationAllowed) {
+      notificationService.showNotification(unitSystem);
+    }
+
+    providerContainer.dispose();
     return Future.value(true);
   });
 }
@@ -88,10 +111,32 @@ class LocalNotificationService implements NotificationService {
       notificationDetails: notificationDetails,
     );
   }
+  
+  @override
+  void setUpScheduler(int frequency) {
+    Workmanager().registerPeriodicTask(
+      'notification', 
+      'send_notification',
+      frequency: Duration(hours: frequency),
+      existingWorkPolicy: .replace,
+    );
+  }
 
   @override
   void askForPermission() {
     flutterLocalNotificationsPlugin.resolvePlatformSpecificImplementation<
       AndroidFlutterLocalNotificationsPlugin>()!.requestNotificationsPermission();
+  }
+
+  @override
+  bool isNotificationAllowed(TimeOfDay now, TimeOfDay wakeUpTime, TimeOfDay sleepTime) {
+    bool isNotificationAllowed = 
+      (now.isAtSameTimeAs(wakeUpTime) || now.isAfter(wakeUpTime)) && now.isBefore(sleepTime);
+
+    if(sleepTime.hour < wakeUpTime.hour || (sleepTime.hour == wakeUpTime.hour) && (sleepTime.minute < wakeUpTime.minute)) {
+      isNotificationAllowed = now.isAfter(wakeUpTime) || now.isBefore(sleepTime);
+    }
+
+    return isNotificationAllowed;
   }
 }

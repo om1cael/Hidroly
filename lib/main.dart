@@ -1,11 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hidroly/core/domain/enums/unit_systems.dart';
 import 'package:hidroly/core/navigation/app_routes.dart';
 import 'package:hidroly/core/providers/theme_provider.dart';
 import 'package:hidroly/core/ui/themes/themes.dart';
 import 'package:hidroly/infra/notifications/local_notification_service.dart';
+
 import 'package:workmanager/workmanager.dart';
 
 Future<void> main() async {
@@ -14,9 +14,6 @@ Future<void> main() async {
 
   await EasyLocalization.ensureInitialized();
   await LocalNotificationService().initialize();
-
-  // TODO: Don't call showNotification on main
-  await LocalNotificationService().showNotification(UnitSystem.metric);
 
   runApp(
     EasyLocalization(
