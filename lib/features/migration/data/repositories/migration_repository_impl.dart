@@ -3,6 +3,10 @@ import 'dart:io';
 import 'package:drift/drift.dart';
 import 'package:drift/native.dart';
 import 'package:hidroly/core/data/db/app_database.dart';
+import 'package:hidroly/core/data/repositories/settings_repository_impl.dart';
+import 'package:hidroly/core/domain/interfaces/notification_service.dart';
+import 'package:hidroly/core/domain/repositories/settings_repository.dart';
+import 'package:hidroly/core/providers/local_notification_service_provider.dart';
 import 'package:hidroly/features/migration/domain/repositories/migration_repository.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
@@ -13,13 +17,22 @@ part 'migration_repository_impl.g.dart';
 @riverpod
 MigrationRepository migrationRepository(Ref ref) {
   final appDatabase = ref.watch(appDatabaseProvider);
-  return MigrationRepositoryImpl(appDatabase);
+  final settingsRepository = ref.watch(settingsRepositoryProvider);
+  final notificationService = ref.watch(localNotificationServiceProvider);
+
+  return MigrationRepositoryImpl(appDatabase, settingsRepository, notificationService);
 }
 
 class MigrationRepositoryImpl implements MigrationRepository {
   final AppDatabase _appDatabase;
+  final SettingsRepository _settingsRepository;
+  final NotificationService _notificationService;
 
-  const MigrationRepositoryImpl(this._appDatabase);
+  const MigrationRepositoryImpl(
+    this._appDatabase, 
+    this._settingsRepository,
+    this._notificationService,
+  );
 
   @override
   Future<void> migrate({QueryExecutor? externalDb, String? pathOverride}) async {
@@ -97,6 +110,8 @@ class MigrationRepositoryImpl implements MigrationRepository {
         }
       });
     });
+
+    await migrateNotificationSetup();
   }
 
   @override
@@ -125,6 +140,14 @@ class MigrationRepositoryImpl implements MigrationRepository {
     } on UnsupportedError catch (_) {
       return null;
     }
+  }
+  
+  @override
+  Future<void> migrateNotificationSetup() async {
+    final defaultFrequency = 2;
+
+    await _settingsRepository.saveNotificationFrequency(defaultFrequency);
+    _notificationService.setUpScheduler(defaultFrequency);
   }
 }
 

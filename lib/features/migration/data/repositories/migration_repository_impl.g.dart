@@ -55,4 +55,4 @@ final class MigrationRepositoryProvider
 }
 
 String _$migrationRepositoryHash() =>
-    r'3a8ae608a3941f56e86ad1df5ee32f7142f6f45d';
+    r'1f930bccd573819806ba48b263ace81245dd09cd';

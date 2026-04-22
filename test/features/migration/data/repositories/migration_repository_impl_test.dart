@@ -3,7 +3,9 @@ import 'dart:io';
 import 'package:drift/native.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hidroly/core/data/db/app_database.dart';
+import 'package:hidroly/core/data/repositories/settings_repository_impl.dart';
 import 'package:hidroly/features/migration/data/repositories/migration_repository_impl.dart';
+import 'package:hidroly/infra/notifications/local_notification_service.dart';
 
 import '../../../../../testing/fake_sql_user.dart';
 
@@ -15,7 +17,7 @@ void main() {
     appDatabase = AppDatabase(NativeDatabase.memory(setup: (db) {
       db.execute('PRAGMA foreign_keys = ON;');
     }));
-    repository = MigrationRepositoryImpl(appDatabase);
+    repository = MigrationRepositoryImpl(appDatabase, SettingsRepositoryImpl(), LocalNotificationService());
   });
 
   tearDown(() async {
