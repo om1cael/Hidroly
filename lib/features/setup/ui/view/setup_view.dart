@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hidroly/core/ui/view/hydration_form_view.dart';
-import 'package:hidroly/core/ui/view/notification_settings_card.dart';
 import 'package:hidroly/core/ui/view/notification_settings_view.dart';
 import 'package:hidroly/core/ui/view_model/hydration_form_view_model.dart';
 import 'package:hidroly/core/domain/hydration_constraints.dart';
