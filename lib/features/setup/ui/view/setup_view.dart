@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hidroly/core/ui/view/hydration_form_view.dart';
 import 'package:hidroly/core/ui/view/notification_settings_card.dart';
+import 'package:hidroly/core/ui/view/notification_settings_view.dart';
 import 'package:hidroly/core/ui/view_model/hydration_form_view_model.dart';
 import 'package:hidroly/core/domain/hydration_constraints.dart';
 import 'package:hidroly/core/domain/enums/unit_systems.dart';
@@ -168,40 +169,7 @@ class _SetupViewState extends ConsumerState<SetupView> {
             notifications: () => Padding(
               key: ValueKey(2),
               padding: const EdgeInsets.all(24.0),
-              child: CustomScrollView(
-                slivers: [
-                  SliverFillRemaining(
-                    hasScrollBody: false,
-                    child: Column(
-                      mainAxisAlignment: .center,
-                      crossAxisAlignment: .center,
-                      spacing: 32,
-                      children: [
-                        Column(
-                          mainAxisAlignment: .center,
-                          crossAxisAlignment: .center,
-                          spacing: 24,
-                          children: [
-                            CircleAvatar(radius: 64, child: Icon(Icons.edit_notifications, size: 64,)),
-                            Text('notificationsAdjust'.tr(), style: Theme.of(context).textTheme.titleLarge, textAlign: .center,)
-                          ],
-                        ),
-                        SizedBox(),
-                        NotificationSettingsCard(),
-                        Card(
-                          child: Padding(
-                            padding: const EdgeInsets.all(12.0),
-                            child: Text(
-                              'hydrationHint'.tr(), 
-                              textAlign: .center,
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                ],
-              ),
+              child: NotificationSettingsView(),
             ),
             processing: () => Center(child: CircularProgressIndicator(),), 
             done: (_) => Center(child: CircularProgressIndicator(),),
