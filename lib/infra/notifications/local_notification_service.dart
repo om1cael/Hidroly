@@ -15,6 +15,7 @@ void callbackDispatcher() {
     if(task != 'send_notification') return Future.value(true);
     final providerContainer = ProviderContainer();
 
+    final dayRepository = providerContainer.read(dayRepositoryProvider);
     final notificationService = providerContainer.read(localNotificationServiceProvider);
     final settingsRepository = providerContainer.read(settingsRepositoryProvider);
     
@@ -22,6 +23,11 @@ void callbackDispatcher() {
     final wakeUpTime = await settingsRepository.readWakeUpTime();
     final sleepTime = await settingsRepository.readSleepTime();
     final unitSystem = await settingsRepository.readUnitSystem();
+
+    final latestDay = await dayRepository.readLatest();
+    if(latestDay.currentAmount.ml >= latestDay.dailyGoal.ml) {
+      return Future.value(true);
+    }
 
     await notificationService.initialize();
     
