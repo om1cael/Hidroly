@@ -4,7 +4,7 @@ import 'package:hidroly/features/home/ui/view/home_view.dart';
 import 'package:hidroly/features/hydration/ui/view/hydration_view.dart';
 import 'package:hidroly/features/migration/data/repositories/migration_repository_impl.dart';
 import 'package:hidroly/features/migration/ui/view/migration_view.dart';
-import 'package:hidroly/features/settings/ui/view/settings_notifications_view.dart';
+import 'package:hidroly/core/ui/view/notification_settings_view.dart';
 import 'package:hidroly/features/settings/ui/view/settings_view.dart';
 import 'package:hidroly/features/setup/ui/view/setup_view.dart';
 import 'package:hidroly/features/summary/ui/view/summary_view.dart';
@@ -39,7 +39,7 @@ GoRouter router(Ref ref) {
     routes: [
       GoRoute(path: '/setup', builder: (_, _) => SetupView()),
       GoRoute(path: '/settings', builder: (_, _) => SettingsView()),
-      GoRoute(path: '/settings/notifications', builder: (_, _) => SettingsNotificationsView()),
+      GoRoute(path: '/settings/notifications', builder: (_, _) => NotificationSettingsView()),
       GoRoute(path: '/migration', builder: (_, _) => MigrationView()),
       StatefulShellRoute.indexedStack(
         builder: (context, state, navigationShell) => HomeView(navigationShell: navigationShell),

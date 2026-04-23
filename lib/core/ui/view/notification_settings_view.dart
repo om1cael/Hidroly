@@ -2,8 +2,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:hidroly/core/ui/view/notification_settings_card.dart';
 
-class SettingsNotificationsView extends StatelessWidget {
-  const SettingsNotificationsView({super.key});
+class NotificationSettingsView extends StatelessWidget {
+  const NotificationSettingsView({super.key});
 
   @override
   Widget build(BuildContext context) {
