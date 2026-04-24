@@ -5,10 +5,23 @@ plugins {
     id("dev.flutter.flutter-gradle-plugin")
 }
 
+val keystoreProperties = Properties()
+val keystorePropertiesFile = rootProject.file("key.properties")
+val hasKeystore = keystorePropertiesFile.exists()
+
+if (hasKeystore) {
+    keystoreProperties.load(FileInputStream(keystorePropertiesFile))
+}
+
 android {
     namespace = "com.om1cael.hidroly"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
+
+    dependenciesInfo {
+        includeInApk = false
+        includeInBundle = false
+    }
 
     compileOptions {
         isCoreLibraryDesugaringEnabled = true
@@ -31,11 +44,33 @@ android {
         versionName = flutter.versionName
     }
 
+    if (hasKeystore) {
+        signingConfigs {
+            create("release") {
+                keyAlias = keystoreProperties["keyAlias"] as String
+                keyPassword = keystoreProperties["keyPassword"] as String
+                storeFile = keystoreProperties["storeFile"]?.let { file(it) }
+                storePassword = keystoreProperties["storePassword"] as String
+            }
+        }
+    }
+
     buildTypes {
         release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
-            signingConfig = signingConfigs.getByName("debug")
+            if (hasKeystore) {
+                signingConfig = signingConfigs.getByName("release")
+            }
+        }
+    }
+
+    flavorDimensions += "release"
+
+    productFlavors {
+        create("fdroid") {
+            dimension = "release"
+        }
+        create("default") {
+            dimension = "release"
         }
     }
 }
@@ -47,4 +82,30 @@ dependencies {
 
 flutter {
     source = "../.."
+}
+
+val abiCodes = mapOf(
+    "armeabi-v7a" to 2,
+    "arm64-v8a" to 3
+)
+
+android.applicationVariants.configureEach {
+    if(flavorName == "fdroid") {
+        val variant = this
+        variant.outputs.forEach { output ->
+            val abiVersionCode = abiCodes[output.filters.find { it.filterType == "ABI" }?.identifier]
+            if (abiVersionCode != null) {
+                (output as ApkVariantOutputImpl).versionCodeOverride = variant.versionCode * 10 + abiVersionCode
+            }
+        }
+    } else {
+        outputs.all {
+            val outputImpl = this as com.android.build.gradle.internal.api.ApkVariantOutputImpl
+            val abiFilter = outputImpl.getFilter(com.android.build.OutputFile.ABI)
+            val abiVersionCode = abiFilter?.let { abiCodes[it] }
+            if (abiVersionCode != null) {
+                outputImpl.versionCodeOverride = versionCode * 10 + abiVersionCode
+            }
+        }
+    }
 }
