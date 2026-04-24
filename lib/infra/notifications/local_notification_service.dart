@@ -81,7 +81,7 @@ class LocalNotificationService implements NotificationService {
   Future<void> initialize() async {    
     // TODO: Change icon
     const androidInitializationSettings = 
-      AndroidInitializationSettings('@mipmap/ic_launcher');
+      AndroidInitializationSettings('@drawable/ic_notification');
 
     final initializationSettings =
       InitializationSettings(android: androidInitializationSettings);
