@@ -1,3 +1,7 @@
+import java.util.Properties
+import java.io.FileInputStream
+import com.android.build.gradle.internal.api.ApkVariantOutputImpl
+
 plugins {
     id("com.android.application")
     id("kotlin-android")
