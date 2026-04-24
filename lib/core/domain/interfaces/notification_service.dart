@@ -3,8 +3,8 @@ import 'package:hidroly/core/domain/enums/unit_systems.dart';
 
 abstract class NotificationService {
   Future<void> initialize();
-  Future<void> showNotification(UnitSystem unitSystem);
-  void setUpScheduler(int frequency);
+  Future<void> showNotification(String title, String body, UnitSystem unitSystem);
+  void setUpScheduler(String title, String body, int frequency);
   void askForPermission();
   bool isNotificationAllowed(TimeOfDay now, TimeOfDay wakeUpTime, TimeOfDay sleepTime);
 }

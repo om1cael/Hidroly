@@ -91,5 +91,7 @@
     "notifications": "Notifications",
     "notificationsAdjust": "Adjust it to your routine",
     "notificationPermissionRequest": "To help you stay hydrated, we need your permission to send notifications. We'll only notify you at the times you've chosen.",
-    "hydrationHint": "Staying hydrated during your active hours improves focus and energy levels."
+    "hydrationHint": "Staying hydrated during your active hours improves focus and energy levels.",
+    "notificationTitle": "Stay Hydrated",
+    "notificationBody": "Keep your hydration habit going. Log your latest glass!"
 }

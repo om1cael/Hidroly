@@ -15,6 +15,9 @@ void callbackDispatcher() {
     if(task != 'send_notification') return Future.value(true);
     final providerContainer = ProviderContainer();
 
+    final title = inputData!['title'];
+    final body = inputData['body'];
+
     final dayRepository = providerContainer.read(dayRepositoryProvider);
     final notificationService = providerContainer.read(localNotificationServiceProvider);
     final settingsRepository = providerContainer.read(settingsRepositoryProvider);
@@ -38,7 +41,7 @@ void callbackDispatcher() {
     );
 
     if(isNotificationAllowed) {
-      notificationService.showNotification(unitSystem);
+      notificationService.showNotification(title, body, unitSystem);
     }
 
     providerContainer.dispose();
@@ -90,7 +93,11 @@ class LocalNotificationService implements NotificationService {
   }
 
   @override
-  Future<void> showNotification(UnitSystem unitSystem) async {
+  Future<void> showNotification(
+    String title,
+    String body,
+    UnitSystem unitSystem
+  ) async {
     await flutterLocalNotificationsPlugin.cancelAll();
 
     final androidNotificationDetails =
@@ -112,19 +119,23 @@ class LocalNotificationService implements NotificationService {
     
     await flutterLocalNotificationsPlugin.show(
       id: 0,
-      title: 'Drink water',
-      body: 'It is time to drink water',
+      title: title,
+      body: body,
       notificationDetails: notificationDetails,
     );
   }
   
   @override
-  void setUpScheduler(int frequency) {
+  void setUpScheduler(String title, String body, int frequency) {
     Workmanager().registerPeriodicTask(
       'notification', 
       'send_notification',
       frequency: Duration(hours: frequency),
       existingWorkPolicy: .replace,
+      inputData: {
+        'title': title,
+        'body': body,
+      }
     );
   }
 

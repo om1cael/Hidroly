@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hidroly/core/data/repositories/settings_repository_impl.dart';
 import 'package:hidroly/core/providers/local_notification_service_provider.dart';
+import 'package:hidroly/core/providers/translation_provider.dart';
 import 'package:hidroly/core/ui/state/notification_settings_state.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -21,6 +22,7 @@ class NotificationSettingsCardViewModel extends _$NotificationSettingsCardViewMo
 
   void saveSettings() async {
     final settingsRepository = ref.read(settingsRepositoryProvider);
+    final translationProvider = ref.read(translationProviderProvider);
 
     await Future.wait([
       settingsRepository.saveWakeUpTime(state.requireValue.wakeUpTime),
@@ -28,9 +30,15 @@ class NotificationSettingsCardViewModel extends _$NotificationSettingsCardViewMo
       settingsRepository.saveNotificationFrequency(state.requireValue.notificationFrequency),
     ]);
 
+    final notificationTitle = 
+      translationProvider.translate('notificationTitle');
+    
+    final notificationBody =
+      translationProvider.translate('notificationBody');
+
     ref
       .read(localNotificationServiceProvider)
-      .setUpScheduler(state.requireValue.notificationFrequency);
+      .setUpScheduler(notificationTitle, notificationBody, state.requireValue.notificationFrequency);
   }
 
   void setWakeUpTime(TimeOfDay wakeUpTime, [bool persist = true]) async {

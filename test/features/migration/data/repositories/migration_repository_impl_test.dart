@@ -6,6 +6,7 @@ import 'package:hidroly/core/data/db/app_database.dart';
 import 'package:hidroly/core/data/repositories/settings_repository_impl.dart';
 import 'package:hidroly/core/domain/repositories/settings_repository.dart';
 import 'package:hidroly/core/providers/local_notification_service_provider.dart';
+import 'package:hidroly/core/providers/translation_provider.dart';
 import 'package:hidroly/features/migration/data/repositories/migration_repository_impl.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:shared_preferences_platform_interface/in_memory_shared_preferences_async.dart';
@@ -39,8 +40,9 @@ void main() {
 
     settingsRepository = container.read(settingsRepositoryProvider);
     final notificationService = container.read(localNotificationServiceProvider);
+    final translationProvider = container.read(translationProviderProvider);
 
-    repository = MigrationRepositoryImpl(appDatabase, settingsRepository, notificationService);
+    repository = MigrationRepositoryImpl(appDatabase, settingsRepository, notificationService, translationProvider);
   });
 
   tearDown(() async {
