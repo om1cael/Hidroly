@@ -64,5 +64,24 @@ void main() {
       expect(day, isNotNull);
       expect(queryDay.id, equals(day.id));
     });
+
+    test('Should get more recent day on readLatest', () async {
+      final latestDayDailyGoal = 2500;
+
+      await provider
+        .read(dayRepositoryProvider)
+        .save(Day(dailyGoal: Water.ml(3000), createdAt: DateTime(2026, 1, 1)));
+      
+      await provider
+        .read(dayRepositoryProvider)
+        .save(Day(dailyGoal: Water.ml(latestDayDailyGoal), createdAt: DateTime(2026, 1, 2)));
+      
+      final latestDay = await provider
+        .read(dayRepositoryProvider)
+        .readLatest();
+      
+      expect(latestDay.id, 2);
+      expect(latestDay.dailyGoal.ml, latestDayDailyGoal);
+    });
   });
 }

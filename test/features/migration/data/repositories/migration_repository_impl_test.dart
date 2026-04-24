@@ -3,19 +3,46 @@ import 'dart:io';
 import 'package:drift/native.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hidroly/core/data/db/app_database.dart';
+import 'package:hidroly/core/data/repositories/settings_repository_impl.dart';
+import 'package:hidroly/core/domain/repositories/settings_repository.dart';
+import 'package:hidroly/core/providers/local_notification_service_provider.dart';
+import 'package:hidroly/core/providers/translation_provider.dart';
 import 'package:hidroly/features/migration/data/repositories/migration_repository_impl.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:shared_preferences_platform_interface/in_memory_shared_preferences_async.dart';
+import 'package:shared_preferences_platform_interface/shared_preferences_async_platform_interface.dart';
 
 import '../../../../../testing/fake_sql_user.dart';
+import '../../../../../testing/infra/mock_notification_service.dart';
 
 void main() {
   late MigrationRepositoryImpl repository;
+  late SettingsRepository settingsRepository;
   late AppDatabase appDatabase;
 
+  late ProviderContainer container;
+
+  setUpAll(() {
+    TestWidgetsFlutterBinding.ensureInitialized();
+  });
+
   setUp(() {
+    SharedPreferencesAsyncPlatform.instance = InMemorySharedPreferencesAsync.empty();
+
+    container = ProviderContainer.test(
+      overrides: [
+        localNotificationServiceProvider.overrideWithValue(MockNotificationService()),
+      ]
+    );
     appDatabase = AppDatabase(NativeDatabase.memory(setup: (db) {
       db.execute('PRAGMA foreign_keys = ON;');
     }));
-    repository = MigrationRepositoryImpl(appDatabase);
+
+    settingsRepository = container.read(settingsRepositoryProvider);
+    final notificationService = container.read(localNotificationServiceProvider);
+    final translationProvider = container.read(translationProviderProvider);
+
+    repository = MigrationRepositoryImpl(appDatabase, settingsRepository, notificationService, translationProvider);
   });
 
   tearDown(() async {
@@ -110,6 +137,18 @@ void main() {
 
       expect(dbDays.length, 1);
       expect(dbDays.first.id, 2);
+    });
+
+    test('Should update notification frequency', () async {
+      settingsRepository.saveNotificationFrequency(120);
+      
+      final startFrequency = await settingsRepository.readNotificationFrequency();
+      expect(startFrequency, 120);
+
+      await repository.migrateNotificationSetup();
+      
+      final endFrequency = await settingsRepository.readNotificationFrequency();
+      expect(endFrequency, 2);
     });
   });
 }

@@ -5,20 +5,22 @@ import 'package:hidroly/core/domain/entities/person.dart';
 import 'package:hidroly/core/domain/enums/unit_systems.dart';
 import 'package:hidroly/core/domain/value_objects/age.dart';
 import 'package:hidroly/core/domain/value_objects/weight.dart';
+import 'package:hidroly/core/providers/local_notification_service_provider.dart';
 import 'package:hidroly/features/setup/domain/usecases/complete_setup_use_case.dart';
 import 'package:hidroly/features/setup/ui/state/setup_state.dart';
 import 'package:hidroly/features/setup/ui/view/setup_view.dart';
 import 'package:hidroly/core/ui/components/number_input_form_field.dart';
 import 'package:hidroly/features/setup/ui/view_model/setup_view_model.dart';
 import 'package:mocktail/mocktail.dart';
+import '../../../../testing/infra/mock_notification_service.dart';
 import '../../../../testing/usecases/mock_complete_setup_use_case.dart';
 
 class FakeSetupViewModel extends SetupViewModel {
-  @override SetupState build() => SetupState(stage: .idle);
+  @override SetupState build() => SetupState.profile();
 }
 
 class FakeProcessingSetupViewModel extends FakeSetupViewModel {
-  @override SetupState build() => SetupState(stage: .processing);
+  @override SetupState build() => SetupState.processing();
 }
 
 void main() {
@@ -80,17 +82,28 @@ void main() {
 
     testWidgets('Shows dialog if clamped', (tester) async {
       final mockUseCase = MockCompleteSetupUseCase();
+      final mockNotificationService = MockNotificationService();
+
       when(() => mockUseCase.execute(any(), any()))
           .thenAnswer((_) async => Person(age: Age(18), weight: Weight.kg(150)).calculateHydrationGoalMl());
       
       await loadScreen(tester, ProviderContainer(
         overrides: [
           completeSetupUseCaseProvider.overrideWithValue(mockUseCase),
+          localNotificationServiceProvider.overrideWithValue(mockNotificationService),
         ],
       ));
 
       await tester.enterText(find.widgetWithText(NumberInputFormField, 'age'), '18');
       await tester.enterText(find.widgetWithText(NumberInputFormField, 'weight'), '150');
+      await tester.tap(find.byType(FloatingActionButton));
+
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.byType(FilledButton));
+
+      await tester.pumpAndSettle();
+
       await tester.tap(find.byType(FloatingActionButton));
 
       await tester.pump();
