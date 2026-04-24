@@ -1,0 +1,34 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "hidroly",
+            "request": "launch",
+            "type": "dart",
+            "args": [
+                "--flavor",
+                "default"
+            ]
+        },
+        {
+            "name": "hidroly (profile mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile",
+            "args": [
+                "--flavor",
+                "default"
+            ]
+        },
+        {
+            "name": "hidroly (release mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release",
+            "args": [
+                "--flavor",
+                "default"
+            ]
+        }
+    ]
+}
