@@ -56,7 +56,7 @@ android {
     }
 
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_17.toString()
+        jvmTarget = "17"
     }
 
     defaultConfig {
@@ -70,15 +70,13 @@ android {
         versionName = flutter.versionName
     }
 
-    if (hasKeystore) {
-        signingConfigs {
-            if (canSign) {
-                create("release") {
-                    keyAlias = keyAliasVar
-                    keyPassword = keyPasswordVar
-                    storeFile = storeFileVar
-                    storePassword = storePasswordVar
-                }
+    signingConfigs {
+        if (canSign) {
+            create("release") {
+                keyAlias = keyAliasVar
+                keyPassword = keyPasswordVar
+                storeFile = storeFileVar
+                storePassword = storePasswordVar
             }
         }
     }
