@@ -1,5 +1,5 @@
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:hidroly/core/data/repositories/day_repository_impl.dart';
 import 'package:hidroly/core/data/repositories/settings_repository_impl.dart';
 import 'package:hidroly/core/domain/enums/unit_systems.dart';
@@ -50,7 +50,7 @@ void callbackDispatcher() {
 }
 
 @pragma('vm:entry-point')
-void notificationActionTapResponse(NotificationResponse notificationResponse) async {
+Future<void> onActionReceivedMethod(ReceivedAction receivedAction) async {
   final providerContainer = ProviderContainer();
 
   final cupMap = {
@@ -58,8 +58,7 @@ void notificationActionTapResponse(NotificationResponse notificationResponse) as
     'water_medium': 300,
     'water_bottle': 500,
   };
-
-  final cup = cupMap[notificationResponse.actionId];
+  final cup = cupMap[receivedAction.buttonKeyPressed];
 
   if(cup != null) {
     final latestDay = await providerContainer
@@ -74,21 +73,22 @@ void notificationActionTapResponse(NotificationResponse notificationResponse) as
 }
 
 class LocalNotificationService implements NotificationService {
-  final flutterLocalNotificationsPlugin =
-    FlutterLocalNotificationsPlugin();
-
   @override
-  Future<void> initialize() async {    
-    // TODO: Change icon
-    const androidInitializationSettings = 
-      AndroidInitializationSettings('@drawable/ic_notification');
+  Future<void> initialize() async {
+    await AwesomeNotifications().initialize(
+      'resource://drawable/ic_notification',
+      [
+        NotificationChannel(
+          channelKey: 'reminders',
+          channelName: 'Reminders',
+          channelDescription: 'Receive reminders to drink water',
+          importance: NotificationImportance.High,
+        )
+      ],
+    );
 
-    final initializationSettings =
-      InitializationSettings(android: androidInitializationSettings);
-    
-    await flutterLocalNotificationsPlugin.initialize(
-      settings: initializationSettings,
-      onDidReceiveBackgroundNotificationResponse: notificationActionTapResponse,
+    AwesomeNotifications().setListeners(
+      onActionReceivedMethod: onActionReceivedMethod,
     );
   }
 
@@ -98,39 +98,38 @@ class LocalNotificationService implements NotificationService {
     String body,
     UnitSystem unitSystem
   ) async {
-    await flutterLocalNotificationsPlugin.cancelAll();
-
-    final androidNotificationDetails =
-      AndroidNotificationDetails(
-        'h_reminder', 
-        'Reminders',
-        channelDescription: 'Receive reminders to drink water',
-        importance: .high,
-        priority: .high,
-        actions: <AndroidNotificationAction>[
-          AndroidNotificationAction('water_standard', unitSystem == .metric ? '200 ml' : '7 oz'),
-          AndroidNotificationAction('water_medium', unitSystem == .metric ? '300 ml' : '10 oz'),
-          AndroidNotificationAction('water_bottle', unitSystem == .metric ? '500 ml' : '17 oz'),
-        ],
-      );
-    
-    final notificationDetails =
-      NotificationDetails(android: androidNotificationDetails);
-    
-    await flutterLocalNotificationsPlugin.show(
-      id: 0,
-      title: title,
-      body: body,
-      notificationDetails: notificationDetails,
+    await AwesomeNotifications().createNotification(
+      content: NotificationContent(
+        id: 0, 
+        channelKey: 'reminders',
+        title: title,
+        body: body,
+      ),
+      actionButtons: <NotificationActionButton>[
+        NotificationActionButton(
+          key: 'water_standard', 
+          label: unitSystem == .metric ? '200 ml' : '7 oz',
+          actionType: .SilentBackgroundAction,
+        ),
+        NotificationActionButton(
+          key: 'water_medium', 
+          label: unitSystem == .metric ? '300 ml' : '10 oz',
+          actionType: .SilentBackgroundAction,
+        ),
+        NotificationActionButton(
+          key: 'water_bottle', 
+          label: unitSystem == .metric ? '500 ml' : '17 oz',
+          actionType: .SilentBackgroundAction,
+        ),
+      ],
     );
   }
   
   @override
   void setUpScheduler(String title, String body, int frequency) {
-    Workmanager().registerPeriodicTask(
+    Workmanager().registerOneOffTask(
       'notification', 
       'send_notification',
-      frequency: Duration(hours: frequency),
       existingWorkPolicy: .replace,
       inputData: {
         'title': title,
@@ -141,8 +140,7 @@ class LocalNotificationService implements NotificationService {
 
   @override
   void askForPermission() {
-    flutterLocalNotificationsPlugin.resolvePlatformSpecificImplementation<
-      AndroidFlutterLocalNotificationsPlugin>()!.requestNotificationsPermission();
+    AwesomeNotifications().requestPermissionToSendNotifications();
   }
 
   @override

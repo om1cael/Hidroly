@@ -7,6 +7,7 @@ environment:
   sdk: ^3.11.0
 
 dependencies:
+  awesome_notifications: ^0.11.0
   collection: ^1.19.1
   drift: ^2.31.0
   drift_flutter: ^0.2.8
@@ -14,7 +15,6 @@ dependencies:
   file_picker: ^11.0.2
   flutter:
     sdk: flutter
-  flutter_local_notifications: ^21.0.0
   flutter_riverpod: ^3.2.1
   freezed: ^3.2.5
   freezed_annotation: ^3.1.0
