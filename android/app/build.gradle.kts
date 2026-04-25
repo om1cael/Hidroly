@@ -11,11 +11,33 @@ plugins {
 
 val keystoreProperties = Properties()
 val keystorePropertiesFile = rootProject.file("key.properties")
-val hasKeystore = keystorePropertiesFile.exists()
 
-if (hasKeystore) {
+val keyAliasVar = if (keystorePropertiesFile.exists()) {
     keystoreProperties.load(FileInputStream(keystorePropertiesFile))
+    keystoreProperties["keyAlias"] as String
+} else {
+    System.getenv("KEY_ALIAS") ?: ""
 }
+
+val keyPasswordVar = if (keystorePropertiesFile.exists()) {
+    keystoreProperties["keyPassword"] as String
+} else {
+    System.getenv("KEY_PASSWORD") ?: ""
+}
+
+val storePasswordVar = if (keystorePropertiesFile.exists()) {
+    keystoreProperties["storePassword"] as String
+} else {
+    System.getenv("KEYSTORE_PASSWORD") ?: ""
+}
+
+val storeFileVar = if (keystorePropertiesFile.exists()) {
+    keystoreProperties["storeFile"]?.let { file(it) }
+} else {
+    file("upload-keystore.jks") 
+}
+
+val canSign = keyAliasVar.isNotEmpty() && keyPasswordVar.isNotEmpty()
 
 android {
     namespace = "com.om1cael.hidroly"
@@ -50,18 +72,20 @@ android {
 
     if (hasKeystore) {
         signingConfigs {
-            create("release") {
-                keyAlias = keystoreProperties["keyAlias"] as String
-                keyPassword = keystoreProperties["keyPassword"] as String
-                storeFile = keystoreProperties["storeFile"]?.let { file(it) }
-                storePassword = keystoreProperties["storePassword"] as String
+            if (canSign) {
+                create("release") {
+                    keyAlias = keyAliasVar
+                    keyPassword = keyPasswordVar
+                    storeFile = storeFileVar
+                    storePassword = storePasswordVar
+                }
             }
         }
     }
 
     buildTypes {
         release {
-            if (hasKeystore) {
+            if (canSign) {
                 signingConfig = signingConfigs.getByName("release")
             }
         }
