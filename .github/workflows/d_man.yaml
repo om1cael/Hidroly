@@ -53,5 +53,3 @@ jobs:
             build/app/outputs/flutter-apk/app-armeabi-v7a-default-release.apk
             build/app/outputs/flutter-apk/app-arm64-v8a-fdroid-release.apk
             build/app/outputs/flutter-apk/app-armeabi-v7a-fdroid-release.apk
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
