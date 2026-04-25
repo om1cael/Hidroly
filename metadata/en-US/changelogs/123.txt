@@ -1,0 +1,6 @@
+• Complete rewrite with modern architecture.
+• Updated UI to Material 3.
+• Added monthly and yearly charts to the summary page.
+• Added support for adding water directly from notifications.
+• New backup system: export and import data as JSON.
+• Automatic data migration from v1.

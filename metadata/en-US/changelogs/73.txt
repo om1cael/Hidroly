@@ -1,0 +1,5 @@
+• Track progress with the new summary page.
+• Rearrange cups.
+• Haptic feedback
+• Improved accessibility
+• Notifications dismiss after logging water.
