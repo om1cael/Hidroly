@@ -48,6 +48,6 @@ jobs:
       - name: Create Release
         uses: softprops/action-gh-release@v3
         with:
-          files:
-            - build/app/outputs/flutter-apk/app-default-release.apk
-            - build/app/outputs/flutter-apk/app-fdroid-release.apk
+          files: |
+            build/app/outputs/flutter-apk/app-default-release.apk
+            build/app/outputs/flutter-apk/app-fdroid-release.apk
