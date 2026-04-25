@@ -39,6 +39,10 @@ jobs:
       - name: Get Keystore
         run: echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > android/app/upload-keystore.jks
       
+
+      - name: Install Dependencies
+        run: flutter pub get
+      
       - name: Patch dartjni
         run: |
           JNI_CMAKE=$(find $HOME/.pub-cache/hosted/pub.dev -path "*/jni-*/src/CMakeLists.txt" | head -n 1)
@@ -49,9 +53,6 @@ jobs:
             echo "Error: jni CMakeLists.txt not found in expected location."
             exit 1
           fi
-
-      - name: Install Dependencies
-        run: flutter pub get
       
       - name: Generate Code
         run: dart run build_runner build --delete-conflicting-outputs
