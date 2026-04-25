@@ -1,4 +1,4 @@
-name: D-Man
+name: "D-Man"
 
 on:
   push:
@@ -10,6 +10,13 @@ jobs:
     name: Deploy
     runs-on: ubuntu-latest
     steps:
+      - name: Protocol
+        run: |
+          echo "-------------------------------------------------------"
+          echo "Prepare for unforeseen consequences..."
+          echo "The right code in the wrong branch can make all the difference."
+          echo "-------------------------------------------------------"
+
       - uses: actions/checkout@v6
 
       - name: Java Setup
@@ -18,11 +25,12 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
       
-      - name: Flutter Setup
+      - name: Get Flutter Version
         uses: kuhnroyal/flutter-fvm-config-action/config@v3
         id: fvm-config-action
 
-      - uses: subosito/flutter-action@v2
+      - name: Flutter Setup
+        uses: subosito/flutter-action@v2
         with:
           flutter-version: ${{ steps.fvm-config-action.outputs.FLUTTER_VERSION }}
           channel: ${{ steps.fvm-config-action.outputs.FLUTTER_CHANNEL }}
@@ -47,6 +55,7 @@ jobs:
 
       - name: Create Release
         uses: softprops/action-gh-release@v3
+        generate_release_notes: true
         with:
           files: |
             build/app/outputs/flutter-apk/app-arm64-v8a-default-release.apk
