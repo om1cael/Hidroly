@@ -22,7 +22,7 @@ jobs:
 
       - uses: actions/checkout@v6
         with:
-          - path: /tmp/build/com.om1cael.hidroly
+          path: /tmp/build/com.om1cael.hidroly
 
       - name: Java Setup
         uses: actions/setup-java@v5
