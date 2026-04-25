@@ -16,7 +16,7 @@ jobs:
         uses: actions/setup-java@v5
         with:
           distribution: 'temurin'
-          java-version: '25'
+          java-version: '17'
       
       - name: Flutter Setup
         uses: kuhnroyal/flutter-fvm-config-action/config@v3
