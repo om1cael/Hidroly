@@ -9,16 +9,14 @@ jobs:
   deploy:
     name: Deploy
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: /tmp/build/com.om1cael.hidroly
     steps:
-      - name: Protocol
+      - name: Create working directory
         run: |
           echo "-------------------------------------------------------"
           echo "Prepare for unforeseen consequences..."
           echo "The right code in the wrong branch can make all the difference."
           echo "-------------------------------------------------------"
+          mkdir -p /tmp/build/com.om1cael.hidroly
 
       - uses: actions/checkout@v6
         with:
@@ -46,9 +44,11 @@ jobs:
       
       - name: Install Dependencies
         run: flutter pub get
+        working-directory: /tmp/build/com.om1cael.hidroly
       
       - name: Generate Code
         run: dart run build_runner build --delete-conflicting-outputs
+        working-directory: /tmp/build/com.om1cael.hidroly
       
       - name: Build APKs
         run: flutter build apk --flavor default --release --split-per-abi  && flutter build apk --flavor fdroid --release --split-per-abi
@@ -57,6 +57,7 @@ jobs:
           KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
           KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
           KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+        working-directory: /tmp/build/com.om1cael.hidroly
 
       - name: Create Release
         uses: softprops/action-gh-release@v3
