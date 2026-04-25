@@ -127,10 +127,11 @@ class LocalNotificationService implements NotificationService {
   
   @override
   void setUpScheduler(String title, String body, int frequency) {
-    Workmanager().registerOneOffTask(
+    Workmanager().registerPeriodicTask(
       'notification', 
       'send_notification',
       existingWorkPolicy: .replace,
+      frequency: Duration(hours: frequency),
       inputData: {
         'title': title,
         'body': body,
