@@ -1,0 +1,18 @@
+Hidroly is a friendly, open-source water reminder designed for those who want to build healthy habits without the clutter. Built with a beautiful Material 3 interface, it offers a clean and modern experience that fits perfectly on your device and an intuitive flow.
+
+<b>Smart and Personalized</b>
+Don't worry about the math. Hidroly calculates your ideal daily intake based on your weight and age, creating a personalized goal just for you. Whether you prefer metric or imperial units, the app adapts to your lifestyle.
+
+<b>Intelligent Reminders</b>
+Receive timely notifications throughout the day to keep you on track. The best part? Hidroly respects your rest. Reminders are automatically paused during your sleep hours, ensuring you only get notified when it matters.
+
+<b>Total Control in Your Hands</b>
+Log your water intake with custom cup sizes that match your routine. Made a mistake? No problem. You have full control to delete past entries and review your history whenever you need.
+
+<b>Insights to Keep You Motivated</b>
+Visualize your progress through sleek charts and summaries. Track your weekly, monthly, and yearly trends, monitor your streaks, and see your averages to understand your hydration habits at a glance.
+
+<b>Privacy by Design</b>
+Your data is yours alone. Hidroly works entirely offline and stores all information locally on your device. No accounts, no tracking, and no unnecessary noise. Just you and your hydration goals.
+
+Download Hidroly and start reaching your goals today!

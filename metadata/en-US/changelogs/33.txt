@@ -1,0 +1,6 @@
+* 💧 The water progress circle is now animated and changes color as you get closer to your goal.
+* 🕘 History entries are now animated when you remove water.
+* 🧪 You can now add a custom cup just once without saving it permanently.
+* 🛠️ Cup buttons got a fresh look with the new water_drop icon.
+* 📱 App size optimized with improved support for different devices (32-bit & 64-bit).
+* 🔧 Small tweaks and cleanup under the hood to make everything run better.
