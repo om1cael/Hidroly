@@ -16,10 +16,9 @@
 </ul>
 
 ## Screenshots
-| | | |
-| :---: | :---: | :---: |
-| <img src="https://github.com/user-attachments/assets/6f7bb9a9-d856-4edd-a4c4-8820d6b739e6" width="250" /> | <img src="https://github.com/user-attachments/assets/a2003a40-73f1-448f-ae43-fd0de0d42794" width="250" /> | <img src="https://github.com/user-attachments/assets/ba4b2637-f82d-4d94-be21-1117b3890da7" width="250" /> |
-| <img src="https://github.com/user-attachments/assets/4bc9b66f-280e-45cd-ba8e-ffc673bce235" width="250" /> | <img src="https://github.com/user-attachments/assets/18ddecf2-83cf-4e34-95f7-e4e632ee17cd" width="250" /> | <img width="250" alt="6" src="https://github.com/user-attachments/assets/6c3069e8-e4e4-4206-93e8-2449e95d0a0c" /> |
+| <img src="./metadata/en-US/images/phoneScreenshots/1.png" />        | <img src="./metadata/en-US/images/phoneScreenshots/2.png" />     | <img src="./metadata/en-US/images/phoneScreenshots/3.png" />        |
+|----------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------|
+| <img src="./metadata/en-US/images/phoneScreenshots/4.png" />      | <img src="./metadata/en-US/images/phoneScreenshots/5.png" /> | <img src="./metadata/en-US/images/phoneScreenshots/6.png" />
 
 ## Features
 * 💧 **Smart Hydration Tracking**: Intelligent daily goals based on your profile.
