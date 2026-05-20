@@ -135,3 +135,7 @@ android.applicationVariants.configureEach {
         }
     }
 }
+
+afterEvaluate {
+    apply(from = "../no-build-id.gradle")
+}
