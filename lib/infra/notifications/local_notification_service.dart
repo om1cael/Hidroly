@@ -27,7 +27,7 @@ void callbackDispatcher() {
     final sleepTime = await settingsRepository.readSleepTime();
     final unitSystem = await settingsRepository.readUnitSystem();
 
-    final latestDay = await dayRepository.readLatest();
+    final latestDay = await dayRepository.readOrCreateByDate(DateTime.now());
     if(latestDay.currentAmount.ml >= latestDay.dailyGoal.ml) {
       return Future.value(true);
     }
@@ -63,7 +63,7 @@ Future<void> onActionReceivedMethod(ReceivedAction receivedAction) async {
   if(cup != null) {
     final latestDay = await providerContainer
       .read(dayRepositoryProvider)
-      .readLatest();
+      .readOrCreateByDate(DateTime.now());
 
     await providerContainer.read(hydrationRepositoryProvider)
       .addWater(latestDay.id, cup);
@@ -127,7 +127,11 @@ class LocalNotificationService implements NotificationService {
   
   @override
   void setUpScheduler(String title, String body, int frequency) {
-    Workmanager().registerPeriodicTask(
+    Workmanager().registerOneOffTask('notification', 'send_notification',       inputData: {
+        'title': title,
+        'body': body,
+      });
+    /*Workmanager().registerPeriodicTask(
       'notification', 
       'send_notification',
       existingWorkPolicy: .replace,
@@ -136,7 +140,7 @@ class LocalNotificationService implements NotificationService {
         'title': title,
         'body': body,
       }
-    );
+    );*/
   }
 
   @override
