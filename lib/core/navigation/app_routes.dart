@@ -22,7 +22,7 @@ GoRouter router(Ref ref) {
       final isMigrationNeeded = await ref.read(migrationRepositoryProvider).getOldDatabase() != null;
       final setupCompleted = dayList.isNotEmpty;
 
-      if(isMigrationNeeded) {
+      if(isMigrationNeeded) {        
         if(state.matchedLocation != '/migration') {
           return '/migration';
         }
