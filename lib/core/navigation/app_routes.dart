@@ -23,7 +23,7 @@ GoRouter router(Ref ref) {
       final setupCompleted = dayList.isNotEmpty;
 
       if(isMigrationNeeded) {
-        if (state.matchedLocation != '/migration') {
+        if(state.matchedLocation != '/migration') {
           return '/migration';
         }
 
@@ -31,7 +31,7 @@ GoRouter router(Ref ref) {
       }
 
       if(!setupCompleted) {
-        if (state.matchedLocation != '/setup') {
+        if(state.matchedLocation != '/setup') {
           return '/setup';
         }
 
