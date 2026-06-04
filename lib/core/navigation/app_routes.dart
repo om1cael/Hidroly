@@ -22,15 +22,23 @@ GoRouter router(Ref ref) {
       final isMigrationNeeded = await ref.read(migrationRepositoryProvider).getOldDatabase() != null;
       final setupCompleted = dayList.isNotEmpty;
 
-      if(isMigrationNeeded && !setupCompleted && state.matchedLocation != '/migration') {
-        return '/migration';
+      if(isMigrationNeeded) {
+        if (state.matchedLocation != '/migration') {
+          return '/migration';
+        }
+
+        return null;
       }
 
-      if(!setupCompleted && state.matchedLocation != '/setup') {
-        return '/setup';
-      }
+      if(!setupCompleted) {
+        if (state.matchedLocation != '/setup') {
+          return '/setup';
+        }
 
-      if(setupCompleted && state.matchedLocation == '/setup') {
+        return null;
+      }
+      
+      if(state.matchedLocation == '/setup' || state.matchedLocation == '/migration') {
         return '/';
       }
 
