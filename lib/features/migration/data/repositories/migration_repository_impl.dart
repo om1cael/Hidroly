@@ -51,71 +51,77 @@ class MigrationRepositoryImpl implements MigrationRepository {
     final queryExecutor = tempExecutor;
     queryExecutor.ensureOpen(_FakeUser());
 
-    await _appDatabase.transaction(() async {
-      final days = await queryExecutor.runSelect('SELECT * FROM days ORDER BY id DESC', []);
-      await _appDatabase.batch((batch) {
-        for(final day in days) {
-          final date = day['date'] as String;
-          DateTime? dateTime = DateTime.tryParse(date);
-          if(dateTime == null) continue;
+    final dayCount = await _appDatabase.dayTable.count().getSingle();
 
-          final normalizedDateTime = DateTime(dateTime.year, dateTime.month, dateTime.day);
-
-          batch.insert(
-            _appDatabase.dayTable, 
-            DayTableCompanion.insert(
-              id: Value(day['id'] as int),
-              dailyGoal: day['dailyGoal'] as int,
-              currentAmount: Value(day['currentAmount'] as int),
-              createdAt: normalizedDateTime,
-            ),
-            mode: .insertOrIgnore,
-          );
-        }
-      });
-
-      final cups = await queryExecutor.runSelect('SELECT * FROM custom_cups', []);
-      await _appDatabase.batch((batch) {
-        for(final cup in cups) {
-          batch.insert(
-            _appDatabase.cupsTable,
-            CupsTableCompanion.insert(
-              id: Value(cup['id'] as int),
-              amount: cup['amount'] as int,
-            ),
-          );
-        }
-      });
-
-      final history = await queryExecutor.runSelect('SELECT * FROM daily_history', []);
+    if(dayCount == 0) {
+      await _appDatabase.transaction(() async {
+        final days = await queryExecutor.runSelect('SELECT * FROM days ORDER BY id DESC', []);
+        await _appDatabase.batch((batch) {
+          for(final day in days) {
+            final date = day['date'] as String;
+            DateTime? dateTime = DateTime.tryParse(date);
+            if(dateTime == null) continue;
       
-      final dayList = await _appDatabase.select(_appDatabase.dayTable).get();
-      final validDayIds = dayList.map((day) => day.id).toSet();
-
-      await _appDatabase.batch((batch) {
-        for(final historyItem in history) {
-          final date = historyItem['dateTime'] as String;
-          DateTime dateTime = DateTime.parse(date);
-
-          final dayId = historyItem['dayId'] as int;
-
-          if(validDayIds.contains(dayId)) {
+            final normalizedDateTime = DateTime(dateTime.year, dateTime.month, dateTime.day);
+      
             batch.insert(
-              _appDatabase.historyItemsTable,
-              HistoryItemsTableCompanion.insert(
-                id: Value(historyItem['id'] as int),
-                day: dayId, 
-                amount: historyItem['amount'] as int,
-                createdAt: Value(dateTime),
+              _appDatabase.dayTable, 
+              DayTableCompanion.insert(
+                id: Value(day['id'] as int),
+                dailyGoal: day['dailyGoal'] as int,
+                currentAmount: Value(day['currentAmount'] as int),
+                createdAt: normalizedDateTime,
               ),
               mode: .insertOrIgnore,
             );
           }
-        }
+        });
+      
+        final cups = await queryExecutor.runSelect('SELECT * FROM custom_cups', []);
+        await _appDatabase.batch((batch) {
+          for(final cup in cups) {
+            batch.insert(
+              _appDatabase.cupsTable,
+              CupsTableCompanion.insert(
+                id: Value(cup['id'] as int),
+                amount: cup['amount'] as int,
+              ),
+            );
+          }
+        });
+      
+        final history = await queryExecutor.runSelect('SELECT * FROM daily_history', []);
+        
+        final dayList = await _appDatabase.select(_appDatabase.dayTable).get();
+        final validDayIds = dayList.map((day) => day.id).toSet();
+      
+        await _appDatabase.batch((batch) {
+          for(final historyItem in history) {
+            final date = historyItem['dateTime'] as String;
+            DateTime dateTime = DateTime.parse(date);
+      
+            final dayId = historyItem['dayId'] as int;
+      
+            if(validDayIds.contains(dayId)) {
+              batch.insert(
+                _appDatabase.historyItemsTable,
+                HistoryItemsTableCompanion.insert(
+                  id: Value(historyItem['id'] as int),
+                  day: dayId, 
+                  amount: historyItem['amount'] as int,
+                  createdAt: Value(dateTime),
+                ),
+                mode: .insertOrIgnore,
+              );
+            }
+          }
+        });
       });
-    });
 
-    await migrateNotificationSetup();
+      await migrateNotificationSetup();
+      return;
+    }
+
     await markDatabaseAsBackup();
   }
 
