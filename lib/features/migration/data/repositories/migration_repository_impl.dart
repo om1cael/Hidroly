@@ -119,7 +119,6 @@ class MigrationRepositoryImpl implements MigrationRepository {
       });
 
       await migrateNotificationSetup();
-      return;
     }
 
     await markDatabaseAsBackup();
