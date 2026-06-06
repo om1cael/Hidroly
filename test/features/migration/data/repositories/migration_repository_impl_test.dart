@@ -15,6 +15,15 @@ import 'package:shared_preferences_platform_interface/shared_preferences_async_p
 import '../../../../../testing/fake_sql_user.dart';
 import '../../../../../testing/infra/mock_notification_service.dart';
 
+class MigrationRepositoryImplSpy extends MigrationRepositoryImpl {
+  MigrationRepositoryImplSpy(super.appDatabase, super.settingsRepository, super.notificationService, super.translationProvider);
+
+  @override
+  Future<void> markDatabaseAsBackup() async {
+    return;
+  }
+}
+
 void main() {
   late MigrationRepositoryImpl repository;
   late SettingsRepository settingsRepository;
@@ -42,7 +51,7 @@ void main() {
     final notificationService = container.read(localNotificationServiceProvider);
     final translationProvider = container.read(translationProviderProvider);
 
-    repository = MigrationRepositoryImpl(appDatabase, settingsRepository, notificationService, translationProvider);
+    repository = MigrationRepositoryImplSpy(appDatabase, settingsRepository, notificationService, translationProvider);
   });
 
   tearDown(() async {
