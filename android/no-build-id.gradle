@@ -1,5 +1,10 @@
 // MIT License - Copyright (c) 2026 Simple Badminton Contributors
 
+interface InjectedExecOps {
+    @Inject
+    ExecOperations getExecOps()
+}
+
 def home = System.getenv("ANDROID_HOME") ?: ""
 println "[no-build-id] ANDROID_HOME environment variable value: ${home}"
 def objcopy = null
@@ -25,14 +30,16 @@ if (!objcopy) {
     return
 }
 final String oc = objcopy
+
 tasks.matching { it.name.startsWith("merge") && it.name.endsWith("NativeLibs") }
     .configureEach { t ->
         t.doLast {
+            def injected = project.objects.newInstance(InjectedExecOps)
             t.outputs.files.each { dir ->
                 if (!(dir instanceof File) || !dir.isDirectory()) return
                 dir.eachFileRecurse { f ->
                     if (!f.name.endsWith('.so')) return
-                    project.exec { commandLine oc, '--remove-section', '.note.gnu.build-id', f.absolutePath }
+                    injected.execOps.exec { commandLine oc, '--remove-section', '.note.gnu.build-id', f.absolutePath }
                     println "[no-build-id] stripped Build ID: ${f.name}"
                 }
             }
