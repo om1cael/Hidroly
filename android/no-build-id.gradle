@@ -32,7 +32,7 @@ tasks.matching { it.name.startsWith("merge") && it.name.endsWith("NativeLibs") }
                 if (!(dir instanceof File) || !dir.isDirectory()) return
                 dir.eachFileRecurse { f ->
                     if (!f.name.endsWith('.so')) return
-                    exec { commandLine oc, '--remove-section', '.note.gnu.build-id', f.absolutePath }
+                    project.exec { commandLine oc, '--remove-section', '.note.gnu.build-id', f.absolutePath }
                     println "[no-build-id] stripped Build ID: ${f.name}"
                 }
             }
