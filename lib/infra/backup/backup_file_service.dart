@@ -25,7 +25,7 @@ class BackupFileService implements FileService {
       );
       
       return outputFile != null
-        ? Success(outputFile)
+        ? Success(outputFile.path)
         : Success('');
     } on Exception catch (e) {
       return Failure(Exception(e.toString()));
@@ -35,15 +35,14 @@ class BackupFileService implements FileService {
   @override
   Future<Result<String>> readSingleFile() async {
     try {
-      final pickResult = await FilePicker.pickFiles(
-        allowMultiple: false,
+      final pickResult = await FilePicker.pickFile(
         type: .custom,
         allowedExtensions: ['json'],
       );
       
       if(pickResult == null) return Success('');
 
-      final file = File(pickResult.files.single.path!);
+      final file = File(pickResult.path!);
       final fileContent = await file.readAsString();
       
       return Success(fileContent);
