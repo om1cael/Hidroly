@@ -1,6 +1,7 @@
-import java.util.Properties
 import java.io.FileInputStream
-import com.android.build.gradle.internal.api.ApkVariantOutputImpl
+import java.util.Properties
+import com.android.build.api.variant.FilterConfiguration.FilterType.ABI
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     id("com.android.application")
@@ -34,7 +35,7 @@ val storePasswordVar = if (keystorePropertiesFile.exists()) {
 val storeFileVar = if (keystorePropertiesFile.exists()) {
     keystoreProperties["storeFile"]?.let { file(it) }
 } else {
-    file("upload-keystore.jks") 
+    file("upload-keystore.jks")
 }
 
 val canSign = keyAliasVar.isNotEmpty() && keyPasswordVar.isNotEmpty()
@@ -55,15 +56,8 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
 
-    kotlinOptions {
-        jvmTarget = "17"
-    }
-
     defaultConfig {
-        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId = "com.om1cael.hidroly"
-        // You can update the following values to match your application needs.
-        // For more information, see: https://flutter.dev/to/review-gradle-config.
         minSdk = flutter.minSdkVersion
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
@@ -95,12 +89,18 @@ android {
         create("fdroid") {
             dimension = "release"
         }
+
         create("default") {
             dimension = "release"
         }
     }
 }
 
+kotlin {
+    compilerOptions {
+        jvmTarget = JvmTarget.fromTarget("17")
+    }
+}
 
 dependencies {
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.4")
@@ -115,22 +115,20 @@ val abiCodes = mapOf(
     "arm64-v8a" to 3
 )
 
-android.applicationVariants.configureEach {
-    if(flavorName == "fdroid") {
-        val variant = this
+androidComponents {
+    onVariants { variant ->
         variant.outputs.forEach { output ->
-            val abiVersionCode = abiCodes[output.filters.find { it.filterType == "ABI" }?.identifier]
+            val abi = output.filters
+                .find { it.filterType == ABI }
+                ?.identifier
+
+            val abiVersionCode = abiCodes[abi]
+
             if (abiVersionCode != null) {
-                (output as ApkVariantOutputImpl).versionCodeOverride = variant.versionCode * 10 + abiVersionCode
-            }
-        }
-    } else {
-        outputs.all {
-            val outputImpl = this as com.android.build.gradle.internal.api.ApkVariantOutputImpl
-            val abiFilter = outputImpl.getFilter(com.android.build.OutputFile.ABI)
-            val abiVersionCode = abiFilter?.let { abiCodes[it] }
-            if (abiVersionCode != null) {
-                outputImpl.versionCodeOverride = versionCode * 10 + abiVersionCode
+                val baseVersionCode = output.versionCode.get()
+                output.versionCode.set(
+                    baseVersionCode * 10 + abiVersionCode
+                )
             }
         }
     }

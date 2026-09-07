@@ -64,7 +64,7 @@ class BackupRepositoryImpl implements BackupRepository {
       final outputFile = 
         await _fileService.saveSingleFile(fileName, exportJson);
       
-      return outputFile.fold(
+      return await outputFile.fold(
         (content) {
           if(content == '') {
             return Success(BackupStatus.cancelled);
