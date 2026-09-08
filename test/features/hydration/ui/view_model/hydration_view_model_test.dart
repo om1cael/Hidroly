@@ -1,4 +1,5 @@
 import 'package:drift/native.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hidroly/core/data/db/app_database.dart';
 import 'package:hidroly/core/data/repositories/day_repository_impl.dart';
@@ -6,11 +7,15 @@ import 'package:hidroly/core/domain/entities/day.dart';
 import 'package:hidroly/core/ui/enums/input_status.dart';
 import 'package:hidroly/features/hydration/domain/value_objects/water.dart';
 import 'package:hidroly/features/hydration/ui/view_model/hydration_view_model.dart';
+import 'package:hidroly/infra/health_connect/health_connect_service.dart';
 import 'package:riverpod/riverpod.dart';
 import 'package:shared_preferences_platform_interface/in_memory_shared_preferences_async.dart';
 import 'package:shared_preferences_platform_interface/shared_preferences_async_platform_interface.dart';
 
+import '../../../../../testing/fake_health_service.dart';
+
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   late ProviderContainer container;
 
   setUp(() async {
@@ -25,6 +30,9 @@ void main() {
         appDatabaseProvider.overrideWith((ref) {
           ref.onDispose(appDatabase.close);
           return appDatabase;
+        }),
+        healthConnectServiceProvider.overrideWith((ref) {
+          return FakeHealthService();
         }),
       ],
     );

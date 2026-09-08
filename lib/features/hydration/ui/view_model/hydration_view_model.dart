@@ -7,6 +7,7 @@ import 'package:hidroly/core/ui/enums/input_status.dart';
 import 'package:hidroly/features/hydration/data/repositories/cup_repository_impl.dart';
 import 'package:hidroly/features/hydration/data/repositories/history_item_repository_impl.dart';
 import 'package:hidroly/features/hydration/data/repositories/hydration_repository_impl.dart';
+import 'package:hidroly/features/hydration/domain/usecases/add_water_usecase.dart';
 import 'package:hidroly/features/hydration/domain/value_objects/cup_value.dart';
 import 'package:hidroly/features/hydration/ui/state/hydration_state.dart';
 import 'package:result_dart/result_dart.dart';
@@ -63,9 +64,10 @@ class HydrationViewModel extends _$HydrationViewModel {
   }
 
   Future<void> addWater(int amount) async {
-    final hydrationRepository = ref.read(hydrationRepositoryProvider);
-
-    await hydrationRepository.addWater(state.requireValue.day.id, amount);
+    await ref
+      .read(addWaterUsecaseProvider)
+      .execute(state.requireValue.day, amount);
+    
     ref.invalidateSelf();
   }
 
