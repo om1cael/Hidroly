@@ -32,7 +32,7 @@ class HealthConnectSettingsView extends StatelessWidget {
                           children: [
                             Text('Health Connect', style: Theme.of(context).textTheme.titleLarge,),
                             Text(
-                              'Hidroly can sync your data with Health Connect, so you can use them', 
+                              'Hidroly can sync your data with Health Connect, so you can view and use them in other devices and apps', 
                               style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Theme.of(context).colorScheme.onSurfaceVariant),
                               textAlign: .center,
                             ),

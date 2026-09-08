@@ -18,7 +18,10 @@ class HealthConnectSettingsCardView extends ConsumerWidget {
           children: [
             ListTile(
               title: Text('Enable'),
-              subtitle: Text('Future data will be synced', style: Theme.of(context).textTheme.bodySmall,),
+              subtitle: Text(
+                data.enabled ? 'Data will be synced' : 'No data being sync', 
+                style: Theme.of(context).textTheme.bodySmall,
+              ),
               leading: CircleAvatar(child: Icon(Icons.power_settings_new)),
               trailing: Switch(
                 value: data.enabled, 
