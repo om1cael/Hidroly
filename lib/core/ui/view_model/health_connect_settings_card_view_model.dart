@@ -1,5 +1,6 @@
 import 'package:hidroly/core/data/repositories/settings_repository_impl.dart';
 import 'package:hidroly/core/ui/state/health_connect_settings_state.dart';
+import 'package:hidroly/infra/health_connect/health_connect_service.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'health_connect_settings_card_view_model.g.dart';
@@ -18,5 +19,13 @@ class HealthConnectSettingsCardViewModel extends _$HealthConnectSettingsCardView
   void changeSyncState(bool enabled) async {
     state = await AsyncValue.guard(() async => state.requireValue.copyWith(enabled: enabled));
     await ref.read(settingsRepositoryProvider).saveHealthConnect(state.requireValue.enabled);
+
+    if(enabled) handleSyncEnable();
+  }
+
+  void handleSyncEnable() async {
+    await ref
+      .read(healthConnectServiceProvider)
+      .askForReadWritePermission();
   }
 }

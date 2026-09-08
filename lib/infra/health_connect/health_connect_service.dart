@@ -20,12 +20,15 @@ class HealthConnectService implements AggregateHealthService {
   }
 
   @override
-  Future<void> writeHydrationData(double waterAmount, DateTime recordTime) async {
+  Future<void> askForReadWritePermission() async {
     final types = [HealthDataType.WATER];
-    final permissions = [HealthDataAccess.WRITE];
+    final permissions = [HealthDataAccess.READ_WRITE];
     
     await healthInstance.requestAuthorization(types, permissions: permissions);
+  }
 
+  @override
+  Future<void> writeHydrationData(double waterAmount, DateTime recordTime) async {
     await healthInstance.writeHealthData(
       value: waterAmount, 
       type: HealthDataType.WATER,
