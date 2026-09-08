@@ -20,6 +20,13 @@ class SettingsYouSection extends ConsumerWidget {
             trailing: Icon(Icons.chevron_right),
             onTap: () => context.push('/settings/notifications'),
           ),
+          ListTile(
+            title: Text('Health Connect'),
+            subtitle: Text('Sync your hydration data'),
+            leading: CircleAvatar(child: Icon(Icons.monitor_heart),),
+            trailing: Icon(Icons.chevron_right),
+            onTap: () => context.push('/settings/health-connect'),
+          ),
         ],
       ),
     );
