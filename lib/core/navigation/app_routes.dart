@@ -1,5 +1,6 @@
 import 'package:go_router/go_router.dart';
 import 'package:hidroly/core/data/repositories/day_repository_impl.dart';
+import 'package:hidroly/core/ui/view/health_connect_settings_view.dart';
 import 'package:hidroly/core/ui/view/privacy_policy_view.dart';
 import 'package:hidroly/features/home/ui/view/home_view.dart';
 import 'package:hidroly/features/hydration/ui/view/hydration_view.dart';
@@ -60,7 +61,7 @@ GoRouter router(Ref ref) {
         branches: [
           StatefulShellBranch(
             routes: [
-              GoRoute(path: '/', builder: (_, _) => HydrationView()),
+              GoRoute(path: '/', builder: (_, _) => HealthConnectSettingsView()),
             ],
           ),
           StatefulShellBranch(
