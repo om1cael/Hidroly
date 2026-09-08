@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hidroly/core/ui/view/health_connect_settings_view.dart';
 import 'package:hidroly/core/ui/view/hydration_form_view.dart';
 import 'package:hidroly/core/ui/view/notification_settings_view.dart';
 import 'package:hidroly/core/ui/view_model/hydration_form_view_model.dart';
@@ -170,6 +171,7 @@ class _SetupViewState extends ConsumerState<SetupView> {
               padding: const EdgeInsets.all(24.0),
               child: NotificationSettingsView(),
             ),
+            healthConnect: () => HealthConnectSettingsView(),
             processing: () => Center(child: CircularProgressIndicator(),), 
             done: (_) => Center(child: CircularProgressIndicator(),),
             error: (_) => Center(child: Text('errorOccurred'.tr()),),
@@ -193,7 +195,15 @@ class _SetupViewState extends ConsumerState<SetupView> {
           onPressed: () {
             ref
               .read(setupViewModelProvider.notifier)
-              .completeSetup(ageTextController.text, weightTextController.text);
+              .goToHealthConnectStage();
+          },
+          child: Icon(Icons.navigate_next),
+        ),
+        healthConnect: () => FloatingActionButton(
+          onPressed: () {
+              ref
+                .read(setupViewModelProvider.notifier)
+                .completeSetup(ageTextController.text, weightTextController.text);
           },
           child: Icon(Icons.done),
         ),
