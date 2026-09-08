@@ -10,6 +10,23 @@ class HealthConnectSettingsCardView extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(healthConnectSettingsCardViewModelProvider);
 
+    ref.listen(healthConnectSettingsCardViewModelProvider, (previous, next) {
+      if(next.value == null) return;
+      
+      if(!next.requireValue.enabled) {
+        showDialog(
+          context: context, 
+          builder: (context) => AlertDialog(
+            title: Text('Important'),
+            content: Text('You need to close the app to apply this change, or go to the Health Connect settings and revoke the permission.\n\nAfter you do it, the data will not be synced with Health Connect anymore.'),
+            actions: [
+              TextButton(onPressed: () => Navigator.of(context).pop(), child: Text('ok'.tr()))
+            ],
+          )
+        );
+      }
+    });
+
     return state.when(
       error: (_, _) => Text('errorOccurred'.tr()), 
       loading: () => Center(child: CircularProgressIndicator(),),
@@ -30,8 +47,6 @@ class HealthConnectSettingsCardView extends ConsumerWidget {
                     .changeSyncState(value);
                 }
               ),
-              onTap: () async {
-              },
             ),
           ],
         ),

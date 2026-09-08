@@ -36,4 +36,9 @@ class HealthConnectService implements AggregateHealthService {
       endTime: recordTime.add(Duration(seconds: 1))
     );
   }
+
+  @override
+  Future<void> revokePermissions() async {
+    await healthInstance.revokePermissions();
+  }
 }

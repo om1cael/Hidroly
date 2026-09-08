@@ -20,12 +20,22 @@ class HealthConnectSettingsCardViewModel extends _$HealthConnectSettingsCardView
     state = await AsyncValue.guard(() async => state.requireValue.copyWith(enabled: enabled));
     await ref.read(settingsRepositoryProvider).saveHealthConnect(state.requireValue.enabled);
 
-    if(enabled) handleSyncEnable();
+    if(enabled) {
+      handleSyncEnable();
+    } else {
+      handleSyncDisabled();
+    }
   }
 
   void handleSyncEnable() async {
     await ref
       .read(healthConnectServiceProvider)
       .askForReadWritePermission();
+  }
+
+  void handleSyncDisabled() async {
+    await ref
+      .read(healthConnectServiceProvider)
+      .revokePermissions();
   }
 }

@@ -41,7 +41,7 @@ final class HealthConnectSettingsCardViewModelProvider
 }
 
 String _$healthConnectSettingsCardViewModelHash() =>
-    r'9d1f0e38a4c934de59f25fc1c5eb45f0a910a958';
+    r'eab760462b80080c4f648b4ecb9c1c52fe4270e0';
 
 abstract class _$HealthConnectSettingsCardViewModel
     extends $AsyncNotifier<HealthConnectSettingsState> {
