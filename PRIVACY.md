@@ -31,5 +31,7 @@ As an open-source project, our source code is available for public audit to ensu
 ### 5. Changes to This Policy
 We may update our Privacy Policy from time to time. These changes will typically reflect new app features or changes to supported integrations.
 
+You can view all updates [here](https://github.com/om1cael/Hidroly/commits/main/PRIVACY.md).
+
 ### 6. Contact
 If you have any questions, feel free to open an issue on our official repository.
