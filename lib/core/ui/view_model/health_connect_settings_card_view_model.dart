@@ -24,8 +24,6 @@ class HealthConnectSettingsCardViewModel extends _$HealthConnectSettingsCardView
     } else {
       await handleSyncDisabled();
     }
-
-    ref.invalidateSelf();
   }
 
   Future<void> handleSyncEnable() async {
@@ -36,11 +34,15 @@ class HealthConnectSettingsCardViewModel extends _$HealthConnectSettingsCardView
     if(!success) {
       state = await AsyncValue.guard(() async => state.requireValue.copyWith(askForAppSettingsRedirect: true));
     }
+
+    ref.invalidateSelf();
   }
 
   Future<void> handleSyncDisabled() async {
     await ref
       .read(healthConnectServiceProvider)
       .revokePermissions();
+
+    state = await AsyncValue.guard(() async => state.requireValue.copyWith(enabled: false));
   }
 }
