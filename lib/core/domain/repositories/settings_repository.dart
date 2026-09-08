@@ -7,11 +7,9 @@ abstract class SettingsRepository {
   Future<void> saveWakeUpTime(TimeOfDay wakeUpTime);
   Future<void> saveSleepTime(TimeOfDay sleepTime);
   Future<void> saveNotificationFrequency(int frequency);
-  Future<void> saveHealthConnect(bool enabled);
   Future<UnitSystem> readUnitSystem();
   Future<ThemeMode> readTheme();
   Future<TimeOfDay> readWakeUpTime();
   Future<TimeOfDay> readSleepTime();
   Future<int> readNotificationFrequency();
-  Future<bool> readHealthConnect();
 }

@@ -19,7 +19,6 @@ class SettingsRepositoryImpl implements SettingsRepository {
   final wakeUpTimeKey = 'wakeUpTime';
   final sleepTimeKey = 'sleepTime';
   final notificationFrequencyKey = 'frequency';
-  final healthConnectKey = 'healthConnect';
 
   @override
   Future<void> saveUnitSystem(UnitSystem unitSystem) async {
@@ -46,11 +45,6 @@ class SettingsRepositoryImpl implements SettingsRepository {
   @override
   Future<void> saveNotificationFrequency(int frequency) async {
     await sharedPreferences.setInt(notificationFrequencyKey, frequency);
-  }
-
-  @override
-  Future<void> saveHealthConnect(bool enabled) async {
-    await sharedPreferences.setBool(healthConnectKey, enabled);
   }
 
   @override
@@ -93,10 +87,5 @@ class SettingsRepositoryImpl implements SettingsRepository {
   @override
   Future<int> readNotificationFrequency() async {
     return await sharedPreferences.getInt(notificationFrequencyKey) ?? 2;
-  }
-
-  @override
-  Future<bool> readHealthConnect() async {
-    return await sharedPreferences.getBool(healthConnectKey) ?? false;
   }
 }

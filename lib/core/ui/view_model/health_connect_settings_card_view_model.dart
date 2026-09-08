@@ -9,31 +9,30 @@ part 'health_connect_settings_card_view_model.g.dart';
 class HealthConnectSettingsCardViewModel extends _$HealthConnectSettingsCardViewModel {
   @override
   Future<HealthConnectSettingsState> build() async {
-    final settingsRepository = ref.read(settingsRepositoryProvider);
+    final healthConnectService = ref.read(healthConnectServiceProvider);
 
     return HealthConnectSettingsState(
-      enabled: await settingsRepository.readHealthConnect()
+      enabled: await healthConnectService.hasPermissions()
     );
   }
 
   void changeSyncState(bool enabled) async {
-    state = await AsyncValue.guard(() async => state.requireValue.copyWith(enabled: enabled));
-    await ref.read(settingsRepositoryProvider).saveHealthConnect(state.requireValue.enabled);
-
     if(enabled) {
-      handleSyncEnable();
+      await handleSyncEnable();
     } else {
-      handleSyncDisabled();
+      await handleSyncDisabled();
     }
+
+    ref.invalidateSelf();
   }
 
-  void handleSyncEnable() async {
+  Future<void> handleSyncEnable() async {
     await ref
       .read(healthConnectServiceProvider)
       .askForReadWritePermission();
   }
 
-  void handleSyncDisabled() async {
+  Future<void> handleSyncDisabled() async {
     await ref
       .read(healthConnectServiceProvider)
       .revokePermissions();

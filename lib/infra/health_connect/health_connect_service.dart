@@ -13,6 +13,9 @@ class HealthConnectService implements AggregateHealthService {
   Health healthInstance;
 
   HealthConnectService(this.healthInstance);
+
+  final types = [HealthDataType.WATER];
+  final permissions = [HealthDataAccess.READ_WRITE];
   
   @override
   Future<void> initialize() async {
@@ -20,10 +23,7 @@ class HealthConnectService implements AggregateHealthService {
   }
 
   @override
-  Future<void> askForReadWritePermission() async {
-    final types = [HealthDataType.WATER];
-    final permissions = [HealthDataAccess.READ_WRITE];
-    
+  Future<void> askForReadWritePermission() async {    
     await healthInstance.requestAuthorization(types, permissions: permissions);
   }
 
@@ -40,5 +40,10 @@ class HealthConnectService implements AggregateHealthService {
   @override
   Future<void> revokePermissions() async {
     await healthInstance.revokePermissions();
+  }
+
+  @override
+  Future<bool> hasPermissions() async {
+    return await healthInstance.hasPermissions(types, permissions: permissions) ?? false;
   }
 }
