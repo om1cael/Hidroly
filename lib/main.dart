@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hidroly/core/navigation/app_routes.dart';
 import 'package:hidroly/core/providers/theme_provider.dart';
 import 'package:hidroly/core/ui/themes/themes.dart';
+import 'package:hidroly/infra/health_connect/health_connect_service.dart';
 import 'package:hidroly/infra/notifications/local_notification_service.dart';
 
 import 'package:workmanager/workmanager.dart';
@@ -53,6 +54,8 @@ class _MainAppState extends ConsumerState<MainApp> {
       if(requested && mounted) {
         ref.read(routerProvider).go('/privacy-policy');
       }
+
+      await ref.read(healthConnectServiceProvider).initialize();
     });
   }
 

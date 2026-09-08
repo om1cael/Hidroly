@@ -2,8 +2,10 @@ import 'package:health/health.dart';
 import 'package:hidroly/core/domain/interfaces/aggregate_health_service.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
+part 'health_connect_service.g.dart';
+
 @riverpod
-AggregateHealthService healthConnectService() {
+AggregateHealthService healthConnectService(Ref ref) {
   return HealthConnectService(Health());
 }
 
