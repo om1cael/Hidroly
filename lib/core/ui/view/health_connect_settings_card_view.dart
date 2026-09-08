@@ -11,9 +11,9 @@ class HealthConnectSettingsCardView extends ConsumerWidget {
     final state = ref.watch(healthConnectSettingsCardViewModelProvider);
 
     ref.listen(healthConnectSettingsCardViewModelProvider, (previous, next) {
-      if(next.value == null) return;
+      if(previous == null || next.value == null) return;
       
-      if(!next.requireValue.enabled) {
+      if((previous.hasValue && previous.requireValue.enabled) && !next.requireValue.enabled) {
         showDialog(
           context: context, 
           builder: (context) => AlertDialog(

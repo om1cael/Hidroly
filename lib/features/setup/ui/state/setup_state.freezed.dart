@@ -55,12 +55,13 @@ extension SetupStatePatterns on SetupState {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Profile value)?  profile,TResult Function( _Notifications value)?  notifications,TResult Function( _Processing value)?  processing,TResult Function( _Done value)?  done,TResult Function( _Error value)?  error,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Profile value)?  profile,TResult Function( _Notifications value)?  notifications,TResult Function( _HealthConnect value)?  healthConnect,TResult Function( _Processing value)?  processing,TResult Function( _Done value)?  done,TResult Function( _Error value)?  error,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case _Profile() when profile != null:
 return profile(_that);case _Notifications() when notifications != null:
-return notifications(_that);case _Processing() when processing != null:
+return notifications(_that);case _HealthConnect() when healthConnect != null:
+return healthConnect(_that);case _Processing() when processing != null:
 return processing(_that);case _Done() when done != null:
 return done(_that);case _Error() when error != null:
 return error(_that);case _:
@@ -81,12 +82,13 @@ return error(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Profile value)  profile,required TResult Function( _Notifications value)  notifications,required TResult Function( _Processing value)  processing,required TResult Function( _Done value)  done,required TResult Function( _Error value)  error,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Profile value)  profile,required TResult Function( _Notifications value)  notifications,required TResult Function( _HealthConnect value)  healthConnect,required TResult Function( _Processing value)  processing,required TResult Function( _Done value)  done,required TResult Function( _Error value)  error,}){
 final _that = this;
 switch (_that) {
 case _Profile():
 return profile(_that);case _Notifications():
-return notifications(_that);case _Processing():
+return notifications(_that);case _HealthConnect():
+return healthConnect(_that);case _Processing():
 return processing(_that);case _Done():
 return done(_that);case _Error():
 return error(_that);case _:
@@ -106,12 +108,13 @@ return error(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Profile value)?  profile,TResult? Function( _Notifications value)?  notifications,TResult? Function( _Processing value)?  processing,TResult? Function( _Done value)?  done,TResult? Function( _Error value)?  error,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Profile value)?  profile,TResult? Function( _Notifications value)?  notifications,TResult? Function( _HealthConnect value)?  healthConnect,TResult? Function( _Processing value)?  processing,TResult? Function( _Done value)?  done,TResult? Function( _Error value)?  error,}){
 final _that = this;
 switch (_that) {
 case _Profile() when profile != null:
 return profile(_that);case _Notifications() when notifications != null:
-return notifications(_that);case _Processing() when processing != null:
+return notifications(_that);case _HealthConnect() when healthConnect != null:
+return healthConnect(_that);case _Processing() when processing != null:
 return processing(_that);case _Done() when done != null:
 return done(_that);case _Error() when error != null:
 return error(_that);case _:
@@ -131,11 +134,12 @@ return error(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  profile,TResult Function()?  notifications,TResult Function()?  processing,TResult Function( bool dailyGoalClamped)?  done,TResult Function( String error)?  error,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  profile,TResult Function()?  notifications,TResult Function()?  healthConnect,TResult Function()?  processing,TResult Function( bool dailyGoalClamped)?  done,TResult Function( String error)?  error,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Profile() when profile != null:
 return profile();case _Notifications() when notifications != null:
-return notifications();case _Processing() when processing != null:
+return notifications();case _HealthConnect() when healthConnect != null:
+return healthConnect();case _Processing() when processing != null:
 return processing();case _Done() when done != null:
 return done(_that.dailyGoalClamped);case _Error() when error != null:
 return error(_that.error);case _:
@@ -156,11 +160,12 @@ return error(_that.error);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  profile,required TResult Function()  notifications,required TResult Function()  processing,required TResult Function( bool dailyGoalClamped)  done,required TResult Function( String error)  error,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  profile,required TResult Function()  notifications,required TResult Function()  healthConnect,required TResult Function()  processing,required TResult Function( bool dailyGoalClamped)  done,required TResult Function( String error)  error,}) {final _that = this;
 switch (_that) {
 case _Profile():
 return profile();case _Notifications():
-return notifications();case _Processing():
+return notifications();case _HealthConnect():
+return healthConnect();case _Processing():
 return processing();case _Done():
 return done(_that.dailyGoalClamped);case _Error():
 return error(_that.error);case _:
@@ -180,11 +185,12 @@ return error(_that.error);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  profile,TResult? Function()?  notifications,TResult? Function()?  processing,TResult? Function( bool dailyGoalClamped)?  done,TResult? Function( String error)?  error,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  profile,TResult? Function()?  notifications,TResult? Function()?  healthConnect,TResult? Function()?  processing,TResult? Function( bool dailyGoalClamped)?  done,TResult? Function( String error)?  error,}) {final _that = this;
 switch (_that) {
 case _Profile() when profile != null:
 return profile();case _Notifications() when notifications != null:
-return notifications();case _Processing() when processing != null:
+return notifications();case _HealthConnect() when healthConnect != null:
+return healthConnect();case _Processing() when processing != null:
 return processing();case _Done() when done != null:
 return done(_that.dailyGoalClamped);case _Error() when error != null:
 return error(_that.error);case _:
@@ -251,6 +257,38 @@ int get hashCode => runtimeType.hashCode;
 @override
 String toString() {
   return 'SetupState.notifications()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+
+
+class _HealthConnect implements SetupState {
+  const _HealthConnect();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _HealthConnect);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'SetupState.healthConnect()';
 }
 
 
