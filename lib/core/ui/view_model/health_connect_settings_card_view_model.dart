@@ -17,6 +17,8 @@ class HealthConnectSettingsCardViewModel extends _$HealthConnectSettingsCardView
   }
 
   void changeSyncState(bool enabled) async {
+    state = await AsyncValue.guard(() async => state.requireValue.copyWith(askForAppSettingsRedirect: false));
+
     if(enabled) {
       await handleSyncEnable();
     } else {
