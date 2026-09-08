@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hidroly/core/ui/view/health_connect_settings_card_view.dart';
 
 class HealthConnectSettingsView extends StatelessWidget {
@@ -11,7 +12,7 @@ class HealthConnectSettingsView extends StatelessWidget {
       appBar: AppBar(),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(24.0),
           child: CustomScrollView(
             physics: ClampingScrollPhysics(),
             slivers: [
@@ -41,15 +42,10 @@ class HealthConnectSettingsView extends StatelessWidget {
                       ],
                     ),
                     HealthConnectSettingsCardView(),
-                    Card(
-                      child: Padding(
-                        padding: const EdgeInsets.all(12.0),
-                        child: Text(
-                          'Hidroly keeps your data in your device. If you use a third-party app to view the synced health data, make sure to read their privacy policy.', 
-                          textAlign: .center,
-                        ),
-                      ),
-                    )
+                    TextButton(
+                      onPressed: () => context.push("/privacy-policy"), 
+                      child: Text("Privacy Policy")
+                    ),
                   ],
                 ),
               ),
