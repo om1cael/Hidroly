@@ -1,5 +1,6 @@
 import 'package:go_router/go_router.dart';
 import 'package:hidroly/core/data/repositories/day_repository_impl.dart';
+import 'package:hidroly/core/ui/view/privacy_policy_view.dart';
 import 'package:hidroly/features/home/ui/view/home_view.dart';
 import 'package:hidroly/features/hydration/ui/view/hydration_view.dart';
 import 'package:hidroly/features/migration/data/repositories/migration_repository_impl.dart';
@@ -21,6 +22,10 @@ GoRouter router(Ref ref) {
       final dayList = await dayRepository.readAll();
       final isMigrationNeeded = await ref.read(migrationRepositoryProvider).getOldDatabase() != null;
       final setupCompleted = dayList.isNotEmpty;
+      
+      if(state.matchedLocation == "/privacy-policy") {
+        return null;
+      }
 
       if(isMigrationNeeded) {
         if(state.matchedLocation != '/migration') {
@@ -49,6 +54,7 @@ GoRouter router(Ref ref) {
       GoRoute(path: '/settings', builder: (_, _) => SettingsView()),
       GoRoute(path: '/settings/notifications', builder: (_, _) => NotificationSettingsView()),
       GoRoute(path: '/migration', builder: (_, _) => MigrationView()),
+      GoRoute(path: '/privacy-policy', builder: (_, _) => PrivacyPolicyView()),
       StatefulShellRoute.indexedStack(
         builder: (context, state, navigationShell) => HomeView(navigationShell: navigationShell),
         branches: [
