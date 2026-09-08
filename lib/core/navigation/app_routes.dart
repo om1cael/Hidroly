@@ -54,6 +54,7 @@ GoRouter router(Ref ref) {
       GoRoute(path: '/setup', builder: (_, _) => SetupView()),
       GoRoute(path: '/settings', builder: (_, _) => SettingsView()),
       GoRoute(path: '/settings/notifications', builder: (_, _) => NotificationSettingsView()),
+      GoRoute(path: '/settings/health-connect', builder: (_, _) => HealthConnectSettingsView()),
       GoRoute(path: '/migration', builder: (_, _) => MigrationView()),
       GoRoute(path: '/privacy-policy', builder: (_, _) => PrivacyPolicyView()),
       StatefulShellRoute.indexedStack(
@@ -61,7 +62,7 @@ GoRouter router(Ref ref) {
         branches: [
           StatefulShellBranch(
             routes: [
-              GoRoute(path: '/', builder: (_, _) => HealthConnectSettingsView()),
+              GoRoute(path: '/', builder: (_, _) => HydrationView()),
             ],
           ),
           StatefulShellBranch(
