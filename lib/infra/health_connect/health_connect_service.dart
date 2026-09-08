@@ -23,8 +23,8 @@ class HealthConnectService implements AggregateHealthService {
   }
 
   @override
-  Future<void> askForReadWritePermission() async {    
-    await healthInstance.requestAuthorization(types, permissions: permissions);
+  Future<bool> askForReadWritePermission() async {    
+    return await healthInstance.requestAuthorization(types, permissions: permissions);
   }
 
   @override

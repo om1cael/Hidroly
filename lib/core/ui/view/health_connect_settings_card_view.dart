@@ -25,6 +25,19 @@ class HealthConnectSettingsCardView extends ConsumerWidget {
           )
         );
       }
+
+      if((previous.hasValue && !previous.requireValue.askForAppSettingsRedirect) && next.requireValue.askForAppSettingsRedirect) {
+        showDialog(
+          context: context, 
+          builder: (context) => AlertDialog(
+            title: Text('Enable Health Connect access'),
+            content: Text('You can give Hidroly access to by going to Connected Apps in Health Connect settings.'),
+            actions: [
+              TextButton(onPressed: () => Navigator.of(context).pop(), child: Text('ok'.tr()))
+            ],
+          )
+        );
+      }
     });
 
     return state.when(

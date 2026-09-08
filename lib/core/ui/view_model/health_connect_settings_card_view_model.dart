@@ -27,9 +27,13 @@ class HealthConnectSettingsCardViewModel extends _$HealthConnectSettingsCardView
   }
 
   Future<void> handleSyncEnable() async {
-    await ref
+    bool success = await ref
       .read(healthConnectServiceProvider)
       .askForReadWritePermission();
+    
+    if(!success) {
+      state = await AsyncValue.guard(() async => state.requireValue.copyWith(askForAppSettingsRedirect: true));
+    }
   }
 
   Future<void> handleSyncDisabled() async {
