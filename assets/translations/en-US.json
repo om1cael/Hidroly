@@ -93,5 +93,15 @@
     "notificationPermissionRequest": "To help you stay hydrated, we need your permission to send notifications. We'll only notify you at the times you've chosen.",
     "hydrationHint": "Staying hydrated during your active hours improves focus and energy levels.",
     "notificationTitle": "Stay Hydrated",
-    "notificationBody": "Keep your hydration habit going. Log your latest glass!"
+    "notificationBody": "Keep your hydration habit going. Log your latest glass!",
+    "important": "Important",
+    "enable": "Enable",
+    "healthConnect": "Health Connect",
+    "healthConnectDescription": "Hidroly can send your hydration data to Health Connect so you can view your progress alongside your other health metrics",
+    "healthConnectDisable": "Restart the app to apply the change and stop syncing with Health Connect. You can also revoke access in Health Connect settings.",
+    "healthConnectEnableFailTitle": "Enable Health Connect access",
+    "healthConnectEnableFail": "You can give Hidroly access to by going to Connected Apps in Health Connect settings.",
+    "healthConnectSyncOn": "Data will be synced",
+    "healthConnectSyncOff": "No data being sync",
+    "privacyPolicy": "Privacy Policy"
 }

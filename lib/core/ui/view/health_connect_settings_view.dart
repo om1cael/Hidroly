@@ -31,9 +31,9 @@ class HealthConnectSettingsView extends StatelessWidget {
                         CircleAvatar(radius: 64, child: Icon(Icons.monitor_heart, size: 64,)),
                         Column(
                           children: [
-                            Text('Health Connect', style: Theme.of(context).textTheme.titleLarge,),
+                            Text('healthConnect'.tr(), style: Theme.of(context).textTheme.titleLarge,),
                             Text(
-                              'Hidroly can send your hydration data to Health Connect so you can view your progress alongside your other health metrics', 
+                              'healthConnectDescription'.tr(), 
                               style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Theme.of(context).colorScheme.onSurfaceVariant),
                               textAlign: .center,
                             ),
@@ -44,7 +44,7 @@ class HealthConnectSettingsView extends StatelessWidget {
                     HealthConnectSettingsCardView(),
                     TextButton(
                       onPressed: () => context.push("/privacy-policy"), 
-                      child: Text("Privacy Policy")
+                      child: Text("privacyPolicy".tr())
                     ),
                   ],
                 ),

@@ -17,10 +17,10 @@ class HealthConnectSettingsCardView extends ConsumerWidget {
         showDialog(
           context: context, 
           builder: (context) => AlertDialog(
-            title: Text('Important'),
-            content: Text('You need to close the app to apply this change, or go to the Health Connect settings and revoke the permission.\n\nAfter you do it, the data will not be synced with Health Connect anymore.'),
+            title: Text('important'.tr()),
+            content: Text('healthConnectDisable'.tr()),
             actions: [
-              TextButton(onPressed: () => Navigator.of(context).pop(), child: Text('ok'.tr()))
+              TextButton(onPressed: () => Navigator.of(context).pop(), child: Text('understand'.tr()))
             ],
           )
         );
@@ -30,8 +30,8 @@ class HealthConnectSettingsCardView extends ConsumerWidget {
         showDialog(
           context: context, 
           builder: (context) => AlertDialog(
-            title: Text('Enable Health Connect access'),
-            content: Text('You can give Hidroly access to by going to Connected Apps in Health Connect settings.'),
+            title: Text('healthConnectEnableFailTitle'.tr()),
+            content: Text('healthConnectEnableFail'.tr()),
             actions: [
               TextButton(onPressed: () => Navigator.of(context).pop(), child: Text('ok'.tr()))
             ],
@@ -47,9 +47,9 @@ class HealthConnectSettingsCardView extends ConsumerWidget {
         child: Column(
           children: [
             ListTile(
-              title: Text('Enable'),
+              title: Text('enable'.tr()),
               subtitle: Text(
-                data.enabled ? 'Data will be synced' : 'No data being sync', 
+                data.enabled ? 'healthConnectSyncOn'.tr() : 'healthConnectSyncOff'.tr(), 
                 style: Theme.of(context).textTheme.bodySmall,
               ),
               leading: CircleAvatar(child: Icon(Icons.power_settings_new)),
