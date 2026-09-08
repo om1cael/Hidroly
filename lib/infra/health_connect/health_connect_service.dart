@@ -28,8 +28,9 @@ class HealthConnectService implements AggregateHealthService {
 
     await healthInstance.writeHealthData(
       value: waterAmount, 
-      type: HealthDataType.WATER, 
-      startTime: DateTime.now()
+      type: HealthDataType.WATER,
+      startTime: recordTime,
+      endTime: recordTime.add(Duration(seconds: 1))
     );
   }
 }
