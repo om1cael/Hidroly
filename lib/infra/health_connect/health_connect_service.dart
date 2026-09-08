@@ -15,7 +15,7 @@ class HealthConnectService implements AggregateHealthService {
   HealthConnectService(this.healthInstance);
 
   final types = [HealthDataType.WATER];
-  final permissions = [HealthDataAccess.READ_WRITE];
+  final permissions = [HealthDataAccess.WRITE];
   
   @override
   Future<void> initialize() async {
