@@ -39,15 +39,22 @@ jobs:
       - name: Get Keystore
         run: echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > android/app/upload-keystore.jks
       
-
       - name: Install Dependencies
         run: flutter pub get
       
       - name: Generate Code
         run: dart run build_runner build --delete-conflicting-outputs
       
-      - name: Build APKs
-        run: flutter build apk --flavor default --release --split-per-abi  && flutter build apk --flavor fdroid --release --split-per-abi
+      - name: Build default APK
+        run: flutter build apk --flavor default --release --split-per-abi
+        env:
+          KEYSTORE_PATH: "upload-keystore.jks"
+          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+
+      - name: Build F-Droid APK
+        run: flutter build apk --flavor fdroid --release --split-per-abi -P force-version-code-ignoring-abi=true
         env:
           KEYSTORE_PATH: "upload-keystore.jks"
           KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
