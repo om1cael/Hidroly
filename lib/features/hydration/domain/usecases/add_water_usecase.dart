@@ -25,7 +25,7 @@ class AddWaterUsecase {
   );
 
   Future<void> execute(Day day, int amount) async {
-    await _hydrationRepository.addWater(day.id, amount);
+    final id = await _hydrationRepository.addWater(day.id, amount);
     
     final now = DateTime.now();
     final amountInLiters = (amount / 1000);
@@ -33,6 +33,7 @@ class AddWaterUsecase {
     await _aggregateHealthService.writeHydrationData(
       double.parse(amountInLiters.toString()), 
       DateTime(day.createdAt.year, day.createdAt.month, day.createdAt.day, now.hour, now.minute, now.second),
+      id.toString()
     );
   }
 }
