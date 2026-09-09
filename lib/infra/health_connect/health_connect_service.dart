@@ -28,12 +28,13 @@ class HealthConnectService implements AggregateHealthService {
   }
 
   @override
-  Future<void> writeHydrationData(double waterAmount, DateTime recordTime) async {
+  Future<void> writeHydrationData(double waterAmount, DateTime recordTime, String id) async {
     await healthInstance.writeHealthData(
       value: waterAmount, 
       type: HealthDataType.WATER,
       startTime: recordTime,
       endTime: recordTime.add(Duration(seconds: 1)),
+      clientRecordId: id,
     );
   }
 
