@@ -6,6 +6,7 @@ part 'health_connect_settings_state.freezed.dart';
 abstract class HealthConnectSettingsState with _$HealthConnectSettingsState {
   const factory HealthConnectSettingsState({
     @Default(false) bool enabled,
-    @Default(false) bool askForAppSettingsRedirect
+    @Default(false) bool askForAppSettingsRedirect,
+    @Default(false) bool isExporting,
   }) = _HealthConnectSettingsState;
 }

@@ -4,7 +4,12 @@ import 'package:go_router/go_router.dart';
 import 'package:hidroly/core/ui/view/health_connect_settings_card_view.dart';
 
 class HealthConnectSettingsView extends StatelessWidget {
-  const HealthConnectSettingsView({super.key});
+  final bool showExportButton;
+
+  const HealthConnectSettingsView({
+    super.key,
+    this.showExportButton = true,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +46,7 @@ class HealthConnectSettingsView extends StatelessWidget {
                         )
                       ],
                     ),
-                    HealthConnectSettingsCardView(),
+                    HealthConnectSettingsCardView(showExportButton: showExportButton,),
                     TextButton(
                       onPressed: () => context.push("/privacy-policy"), 
                       child: Text("privacyPolicy".tr())

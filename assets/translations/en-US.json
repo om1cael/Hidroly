@@ -103,5 +103,8 @@
     "healthConnectEnableFail": "You can give Hidroly access to by going to Connected Apps in Health Connect settings.",
     "healthConnectSyncOn": "Data will be synced",
     "healthConnectSyncOff": "No data being sync",
+    "healthConnectSendHistory": "Send history",
+    "healthConnectSendHistoryDescription": "Export past entries to Health Connect",
+    "healthConnectExportSuccessful": "Your history has been exported to Health Connect",
     "privacyPolicy": "Privacy Policy"
 }

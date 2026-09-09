@@ -171,7 +171,7 @@ class _SetupViewState extends ConsumerState<SetupView> {
               padding: const EdgeInsets.all(24.0),
               child: NotificationSettingsView(),
             ),
-            healthConnect: () => HealthConnectSettingsView(),
+            healthConnect: () => HealthConnectSettingsView(showExportButton: false,),
             processing: () => Center(child: CircularProgressIndicator(),), 
             done: (_) => Center(child: CircularProgressIndicator(),),
             error: (_) => Center(child: Text('errorOccurred'.tr()),),
