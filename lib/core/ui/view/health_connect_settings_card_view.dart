@@ -61,6 +61,18 @@ class HealthConnectSettingsCardView extends ConsumerWidget {
                 }
               ),
             ),
+            ListTile(
+              title: Text('Send history'),
+              subtitle: Text(
+                'Export past entries to Health Connect',
+                style: TextStyle(
+                  fontSize: 12
+                ),
+              ),
+              leading: CircleAvatar(child: Icon(Icons.upload)),
+              onTap: () {},
+              enabled: data.enabled,
+            ),
           ],
         ),
       ),
