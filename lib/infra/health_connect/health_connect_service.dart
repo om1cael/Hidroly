@@ -33,7 +33,15 @@ class HealthConnectService implements AggregateHealthService {
       value: waterAmount, 
       type: HealthDataType.WATER,
       startTime: recordTime,
-      endTime: recordTime.add(Duration(seconds: 1))
+      endTime: recordTime.add(Duration(seconds: 1)),
+    );
+  }
+
+  @override
+  Future<void> deleteHydrationData(String clientRecordId) async {
+    await healthInstance.deleteByClientRecordId(
+      dataTypeKey: HealthDataType.WATER, 
+      clientRecordId: clientRecordId
     );
   }
 
@@ -46,4 +54,5 @@ class HealthConnectService implements AggregateHealthService {
   Future<bool> hasPermissions() async {
     return await healthInstance.hasPermissions(types, permissions: permissions) ?? false;
   }
+
 }
