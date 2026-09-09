@@ -5,7 +5,12 @@ import 'package:hidroly/core/ui/extensions/snack_bar_extension.dart';
 import 'package:hidroly/core/ui/view_model/health_connect_settings_card_view_model.dart';
 
 class HealthConnectSettingsCardView extends ConsumerWidget {
-  const HealthConnectSettingsCardView({super.key});
+  final bool showExportButton;
+
+  const HealthConnectSettingsCardView({
+    super.key,
+    this.showExportButton = true,
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -62,31 +67,33 @@ class HealthConnectSettingsCardView extends ConsumerWidget {
                 }
               ),
             ),
-            ListTile(
-              title: Text('healthConnectSendHistory'.tr()),
-              subtitle: data.isExporting
-                ? LinearProgressIndicator()
-                : Text(
-                'healthConnectSendHistoryDescription'.tr(),
-                style: TextStyle(
-                  fontSize: 12
+            
+            if(showExportButton)
+              ListTile(
+                title: Text('healthConnectSendHistory'.tr()),
+                subtitle: data.isExporting
+                  ? LinearProgressIndicator()
+                  : Text(
+                  'healthConnectSendHistoryDescription'.tr(),
+                  style: TextStyle(
+                    fontSize: 12
+                  ),
                 ),
+                leading: CircleAvatar(child: Icon(Icons.upload)),
+                onTap: () async {
+                  try {
+                    await ref
+                      .read(healthConnectSettingsCardViewModelProvider.notifier)
+                      .exportEntries();
+                    
+                    if(!context.mounted) return;
+                    context.showSnackBar('healthConnectExportSuccessful'.tr());
+                  } catch (_) {
+                    context.showSnackBar('errorOccurred'.tr());
+                  }
+                },
+                enabled: data.enabled,
               ),
-              leading: CircleAvatar(child: Icon(Icons.upload)),
-              onTap: () async {
-                try {
-                  await ref
-                    .read(healthConnectSettingsCardViewModelProvider.notifier)
-                    .exportEntries();
-                  
-                  if(!context.mounted) return;
-                  context.showSnackBar('healthConnectExportSuccessful'.tr());
-                } catch (_) {
-                  context.showSnackBar('errorOccurred'.tr());
-                }
-              },
-              enabled: data.enabled,
-            ),
           ],
         ),
       ),
