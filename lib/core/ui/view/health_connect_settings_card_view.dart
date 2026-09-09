@@ -63,18 +63,27 @@ class HealthConnectSettingsCardView extends ConsumerWidget {
               ),
             ),
             ListTile(
-              title: Text('Send history'),
-              subtitle: Text(
-                'Export past entries to Health Connect',
+              title: Text('healthConnectSendHistory'.tr()),
+              subtitle: data.isExporting
+                ? LinearProgressIndicator()
+                : Text(
+                'healthConnectSendHistoryDescription'.tr(),
                 style: TextStyle(
                   fontSize: 12
                 ),
               ),
               leading: CircleAvatar(child: Icon(Icons.upload)),
-              onTap: () {
-                ref
-                  .read(healthConnectSettingsCardViewModelProvider.notifier)
-                  .exportEntries();
+              onTap: () async {
+                try {
+                  await ref
+                    .read(healthConnectSettingsCardViewModelProvider.notifier)
+                    .exportEntries();
+                  
+                  if(!context.mounted) return;
+                  context.showSnackBar('healthConnectExportSuccessful'.tr());
+                } catch (_) {
+                  context.showSnackBar('errorOccurred'.tr());
+                }
               },
               enabled: data.enabled,
             ),
