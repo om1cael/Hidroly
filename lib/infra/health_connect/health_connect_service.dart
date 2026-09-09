@@ -35,6 +35,7 @@ class HealthConnectService implements AggregateHealthService {
       startTime: recordTime,
       endTime: recordTime.add(Duration(seconds: 1)),
       clientRecordId: id,
+      clientRecordVersion: 1,
     );
   }
 
@@ -42,7 +43,7 @@ class HealthConnectService implements AggregateHealthService {
   Future<void> deleteHydrationData(String clientRecordId) async {
     await healthInstance.deleteByClientRecordId(
       dataTypeKey: HealthDataType.WATER, 
-      clientRecordId: clientRecordId
+      clientRecordId: clientRecordId,
     );
   }
 
