@@ -97,7 +97,7 @@
     "important": "Important",
     "enable": "Enable",
     "healthConnect": "Health Connect",
-    "healthConnectDescription": "Hidroly can send your hydration data to Health Connect so you can view your progress alongside your other health metrics",
+    "healthConnectDescription": "Centralize your health data in Health Connect so you can view it across your other health apps. Hidroly sends your water intake completely offline, without ever reading your other records.",
     "healthConnectDisable": "Restart the app to apply the change and stop syncing with Health Connect. You can also revoke access in Health Connect settings.",
     "healthConnectEnableFailTitle": "Enable Health Connect access",
     "healthConnectEnableFail": "You can give Hidroly access to by going to Connected Apps in Health Connect settings.",

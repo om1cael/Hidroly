@@ -34,7 +34,7 @@ class HealthConnectSettingsView extends StatelessWidget {
                             Text('healthConnect'.tr(), style: Theme.of(context).textTheme.titleLarge,),
                             Text(
                               'healthConnectDescription'.tr(), 
-                              style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Theme.of(context).colorScheme.onSurfaceVariant),
+                              style: Theme.of(context).textTheme.bodySmall!.copyWith(color: Theme.of(context).colorScheme.onSurfaceVariant),
                               textAlign: .center,
                             ),
                           ],
