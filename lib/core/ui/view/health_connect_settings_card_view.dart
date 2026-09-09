@@ -70,7 +70,9 @@ class HealthConnectSettingsCardView extends ConsumerWidget {
                 ),
               ),
               leading: CircleAvatar(child: Icon(Icons.upload)),
-              onTap: () {},
+              onTap: () => ref
+                .read(healthConnectSettingsCardViewModelProvider.notifier)
+                .exportEntries(),
               enabled: data.enabled,
             ),
           ],
