@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hidroly/core/ui/extensions/snack_bar_extension.dart';
 import 'package:hidroly/core/ui/view_model/health_connect_settings_card_view_model.dart';
 
 class HealthConnectSettingsCardView extends ConsumerWidget {
@@ -70,9 +71,11 @@ class HealthConnectSettingsCardView extends ConsumerWidget {
                 ),
               ),
               leading: CircleAvatar(child: Icon(Icons.upload)),
-              onTap: () => ref
-                .read(healthConnectSettingsCardViewModelProvider.notifier)
-                .exportEntries(),
+              onTap: () {
+                ref
+                  .read(healthConnectSettingsCardViewModelProvider.notifier)
+                  .exportEntries();
+              },
               enabled: data.enabled,
             ),
           ],

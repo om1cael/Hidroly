@@ -1,3 +1,4 @@
+import 'package:hidroly/core/ui/state/health_connect_backfill_state.dart';
 import 'package:hidroly/core/ui/state/health_connect_settings_state.dart';
 import 'package:hidroly/features/hydration/data/repositories/history_item_repository_impl.dart';
 import 'package:hidroly/infra/health_connect/health_connect_service.dart';
@@ -52,12 +53,20 @@ class HealthConnectSettingsCardViewModel extends _$HealthConnectSettingsCardView
     
     final healthConnectService = ref.read(healthConnectServiceProvider);
 
-    for(final item in historyItems) {
-      await healthConnectService.writeHydrationData(
-        double.parse(item.amount.ml.toString()), 
-        item.createdAt, 
-        item.id.toString()
-      );
+    try {
+      state = await AsyncValue.guard(() async => state.requireValue.copyWith(backfillState: HealthConnectBackfillState.processing()));
+
+      for(final item in historyItems) {
+        await healthConnectService.writeHydrationData(
+          double.parse(item.amount.ml.toString()), 
+          item.createdAt, 
+          item.id.toString()
+        );
+      }
+
+      state = await AsyncValue.guard(() async => state.requireValue.copyWith(backfillState: HealthConnectBackfillState.idle()));
+    } on Exception catch (_) {
+      state = await AsyncValue.guard(() async => state.requireValue.copyWith(backfillState: HealthConnectBackfillState.error()));
     }
   }
 }
