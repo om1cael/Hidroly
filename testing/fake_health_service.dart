@@ -22,7 +22,12 @@ class FakeHealthService implements AggregateHealthService{
   }
 
   @override
-  Future<void> writeHydrationData(double waterAmount, DateTime recordTime) {
+  Future<void> writeHydrationData(double waterAmount, DateTime recordTime, String id) {
+    return Future.value();
+  }
+
+  @override
+  Future<void> deleteHydrationData(String clientRecordId) {
     return Future.value();
   }
 }
