@@ -22,8 +22,8 @@ class FakeHealthService implements AggregateHealthService{
   }
 
   @override
-  Future<void> writeHydrationData(double waterAmount, DateTime recordTime, String id) {
-    return Future.value();
+  Future<bool> writeHydrationData(double waterAmount, DateTime recordTime, String id) {
+    return Future.value(true);
   }
 
   @override
