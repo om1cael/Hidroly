@@ -28,10 +28,9 @@ class AddWaterUsecase {
     final id = await _hydrationRepository.addWater(day.id, amount);
     
     final now = DateTime.now();
-    final amountInLiters = (amount / 1000);
     
     await _aggregateHealthService.writeHydrationData(
-      double.parse(amountInLiters.toString()), 
+      double.parse(amount.toString()), 
       DateTime(day.createdAt.year, day.createdAt.month, day.createdAt.day, now.hour, now.minute, now.second),
       id.toString()
     );
