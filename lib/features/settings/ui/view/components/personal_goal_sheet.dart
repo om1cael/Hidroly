@@ -23,6 +23,28 @@ class _PersonalGoalSheetState extends ConsumerState<PersonalGoalSheet> {
   Widget build(BuildContext context) {
     final state = ref.watch(personalGoalSheetViewModelProvider);
 
+    ref.listen(personalGoalSheetViewModelProvider, (previous, next) {
+      if(previous == null || previous.value == null || next.value == null) return;
+
+      if(!previous.value!.goalOutsideBoundaries && next.value!.goalOutsideBoundaries) {
+        showDialog(
+          context: context, 
+          builder: (_) {
+            return AlertDialog(
+              title: Text('Wait'),
+              content: Text('That\'s a lot of water! This target is above our recommended limit. Make sure to check with a doctor to find what works best for you.'),
+              actions: [
+                TextButton(
+                  onPressed: Navigator.of(context).pop, 
+                  child: Text('ok'.tr())
+                ),
+              ],
+            );
+          }
+        );
+      }
+    });
+
     return SafeArea(
       child: Padding(
         padding: EdgeInsets.only(
@@ -55,7 +77,7 @@ class _PersonalGoalSheetState extends ConsumerState<PersonalGoalSheet> {
                   controller: textController, 
                   label: 'Goal', 
                   suffix: data.unitSystem.unitLabel,
-                  maxLength: 3,
+                  maxLength: 4,
                   validator: (value) {
                     final status = ref.read(personalGoalSheetViewModelProvider.notifier)
                       .validateGoal(value);
