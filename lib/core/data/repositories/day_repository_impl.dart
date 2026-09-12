@@ -28,6 +28,17 @@ class DayRepositoryImpl implements DayRepository {
       ),
     );
   }
+
+  @override
+  Future<bool> update(Day day) async {
+    return await _database.update(_database.dayTable)
+      .replace(DayTableData(
+        id: day.id, 
+        dailyGoal: day.dailyGoal.ml, 
+        currentAmount: day.currentAmount.ml, 
+        createdAt: day.createdAt
+      ));
+  }
   
   @override
   Future<Day> read(int id) async {
