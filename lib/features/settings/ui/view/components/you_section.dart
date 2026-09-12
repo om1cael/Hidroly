@@ -14,6 +14,12 @@ class SettingsYouSection extends ConsumerWidget {
       child: Column(
         children: [
           ListTile(
+            title: Text('Personal goal'),
+            subtitle: Text('Set your preferred daily goal'),
+            leading: CircleAvatar(child: Icon(Icons.person),),
+            onTap: () => context.push('/settings/health-connect'),
+          ),
+          ListTile(
             title: Text('notifications'.tr()),
             subtitle: Text('notificationsAdjust'.tr()),
             leading: CircleAvatar(child: Icon(Icons.notifications),),
