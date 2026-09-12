@@ -17,6 +17,11 @@ class Water {
     return Water._internal(value);
   }
 
+  factory Water.fromOz(int value) {
+    int ml = (value * 29.574).round();
+    return Water.ml(ml);
+  }
+
   int valueIn(UnitSystem unitSystem) => 
     unitSystem == UnitSystem.metric
       ? ml

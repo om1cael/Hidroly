@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hidroly/core/domain/enums/unit_systems.dart';
-import 'package:hidroly/features/hydration/domain/value_objects/water.dart';
+import 'package:hidroly/core/domain/value_objects/water.dart';
 import 'package:hidroly/features/summary/ui/enums/chart_selection.dart';
 
 part 'summary_state.freezed.dart';

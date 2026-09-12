@@ -2,7 +2,7 @@ import 'package:drift/native.dart';
 import 'package:hidroly/core/data/db/app_database.dart';
 import 'package:hidroly/core/data/repositories/day_repository_impl.dart';
 import 'package:hidroly/core/domain/entities/day.dart';
-import 'package:hidroly/features/hydration/domain/value_objects/water.dart';
+import 'package:hidroly/core/domain/value_objects/water.dart';
 import 'package:riverpod/riverpod.dart';
 import 'package:test/test.dart';
 
