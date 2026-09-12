@@ -1,7 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hidroly/core/domain/hydration_constraints.dart';
 import 'package:hidroly/core/domain/value_objects/goal.dart';
 import 'package:hidroly/core/ui/components/number_input_form_field.dart';
 import 'package:hidroly/core/ui/extensions/snack_bar_extension.dart';
