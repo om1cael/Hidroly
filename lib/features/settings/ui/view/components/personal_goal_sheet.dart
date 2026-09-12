@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hidroly/core/domain/hydration_constraints.dart';
 import 'package:hidroly/core/ui/components/number_input_form_field.dart';
+import 'package:hidroly/core/ui/extensions/snack_bar_extension.dart';
 import 'package:hidroly/core/ui/extensions/unit_system_ui_extension.dart';
 import 'package:hidroly/features/settings/ui/view_model/personal_goal_sheet_view_model.dart';
 
@@ -31,8 +32,8 @@ class _PersonalGoalSheetState extends ConsumerState<PersonalGoalSheet> {
           context: context, 
           builder: (_) {
             return AlertDialog(
-              title: Text('Wait'),
-              content: Text('That\'s a lot of water! This target is above our recommended limit. Make sure to check with a doctor to find what works best for you.'),
+              title: Text('important'.tr()),
+              content: Text('This target is above our recommended limit. Make sure to check with a doctor to find what works best for you.'),
               actions: [
                 TextButton(
                   onPressed: Navigator.of(context).pop, 
@@ -99,9 +100,14 @@ class _PersonalGoalSheetState extends ConsumerState<PersonalGoalSheet> {
                       final valid = formKey.currentState!.validate();
                       if(!valid) return;
 
+                      Navigator.of(context).pop();
+
                       final goal = int.parse(textController.text);
                       await ref.read(personalGoalSheetViewModelProvider.notifier)
                         .save(goal);
+                      
+                      if(!context.mounted) return;
+                      context.showSnackBar("The goal has been saved");
                     }, 
                     child: const Text('Save')
                   ),

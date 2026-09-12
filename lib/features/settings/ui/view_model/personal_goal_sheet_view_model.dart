@@ -5,7 +5,7 @@ import 'package:hidroly/core/domain/hydration_constraints.dart';
 import 'package:hidroly/core/domain/value_objects/goal.dart';
 import 'package:hidroly/core/domain/value_objects/water.dart';
 import 'package:hidroly/core/ui/enums/input_status.dart';
-import 'package:hidroly/features/hydration/data/repositories/hydration_repository_impl.dart';
+import 'package:hidroly/features/hydration/ui/view_model/hydration_view_model.dart';
 import 'package:hidroly/features/settings/ui/state/personal_goal_sheet_state.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -37,7 +37,8 @@ class PersonalGoalSheetViewModel extends _$PersonalGoalSheetViewModel {
       dailyGoal: Water.ml(goal.ml)
     );
 
-    await dayRepository.save(updatedDay);
+    ref.invalidate(hydrationViewModelProvider);
+    await dayRepository.update(updatedDay);
   }
 
   InputStatus validateGoal(String? content) {

@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$PersonalGoalSheetState {
 
- UnitSystem get unitSystem; bool get goalOutsideBoundaries; bool get isSaving;
+ UnitSystem get unitSystem; bool get goalOutsideBoundaries;
 /// Create a copy of PersonalGoalSheetState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $PersonalGoalSheetStateCopyWith<PersonalGoalSheetState> get copyWith => _$Person
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is PersonalGoalSheetState&&(identical(other.unitSystem, unitSystem) || other.unitSystem == unitSystem)&&(identical(other.goalOutsideBoundaries, goalOutsideBoundaries) || other.goalOutsideBoundaries == goalOutsideBoundaries)&&(identical(other.isSaving, isSaving) || other.isSaving == isSaving));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is PersonalGoalSheetState&&(identical(other.unitSystem, unitSystem) || other.unitSystem == unitSystem)&&(identical(other.goalOutsideBoundaries, goalOutsideBoundaries) || other.goalOutsideBoundaries == goalOutsideBoundaries));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,unitSystem,goalOutsideBoundaries,isSaving);
+int get hashCode => Object.hash(runtimeType,unitSystem,goalOutsideBoundaries);
 
 @override
 String toString() {
-  return 'PersonalGoalSheetState(unitSystem: $unitSystem, goalOutsideBoundaries: $goalOutsideBoundaries, isSaving: $isSaving)';
+  return 'PersonalGoalSheetState(unitSystem: $unitSystem, goalOutsideBoundaries: $goalOutsideBoundaries)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $PersonalGoalSheetStateCopyWith<$Res>  {
   factory $PersonalGoalSheetStateCopyWith(PersonalGoalSheetState value, $Res Function(PersonalGoalSheetState) _then) = _$PersonalGoalSheetStateCopyWithImpl;
 @useResult
 $Res call({
- UnitSystem unitSystem, bool goalOutsideBoundaries, bool isSaving
+ UnitSystem unitSystem, bool goalOutsideBoundaries
 });
 
 
@@ -62,11 +62,10 @@ class _$PersonalGoalSheetStateCopyWithImpl<$Res>
 
 /// Create a copy of PersonalGoalSheetState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? unitSystem = null,Object? goalOutsideBoundaries = null,Object? isSaving = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? unitSystem = null,Object? goalOutsideBoundaries = null,}) {
   return _then(_self.copyWith(
 unitSystem: null == unitSystem ? _self.unitSystem : unitSystem // ignore: cast_nullable_to_non_nullable
 as UnitSystem,goalOutsideBoundaries: null == goalOutsideBoundaries ? _self.goalOutsideBoundaries : goalOutsideBoundaries // ignore: cast_nullable_to_non_nullable
-as bool,isSaving: null == isSaving ? _self.isSaving : isSaving // ignore: cast_nullable_to_non_nullable
 as bool,
   ));
 }
@@ -152,10 +151,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( UnitSystem unitSystem,  bool goalOutsideBoundaries,  bool isSaving)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( UnitSystem unitSystem,  bool goalOutsideBoundaries)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _PersonalGoalSheetState() when $default != null:
-return $default(_that.unitSystem,_that.goalOutsideBoundaries,_that.isSaving);case _:
+return $default(_that.unitSystem,_that.goalOutsideBoundaries);case _:
   return orElse();
 
 }
@@ -173,10 +172,10 @@ return $default(_that.unitSystem,_that.goalOutsideBoundaries,_that.isSaving);cas
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( UnitSystem unitSystem,  bool goalOutsideBoundaries,  bool isSaving)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( UnitSystem unitSystem,  bool goalOutsideBoundaries)  $default,) {final _that = this;
 switch (_that) {
 case _PersonalGoalSheetState():
-return $default(_that.unitSystem,_that.goalOutsideBoundaries,_that.isSaving);case _:
+return $default(_that.unitSystem,_that.goalOutsideBoundaries);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -193,10 +192,10 @@ return $default(_that.unitSystem,_that.goalOutsideBoundaries,_that.isSaving);cas
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( UnitSystem unitSystem,  bool goalOutsideBoundaries,  bool isSaving)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( UnitSystem unitSystem,  bool goalOutsideBoundaries)?  $default,) {final _that = this;
 switch (_that) {
 case _PersonalGoalSheetState() when $default != null:
-return $default(_that.unitSystem,_that.goalOutsideBoundaries,_that.isSaving);case _:
+return $default(_that.unitSystem,_that.goalOutsideBoundaries);case _:
   return null;
 
 }
@@ -208,12 +207,11 @@ return $default(_that.unitSystem,_that.goalOutsideBoundaries,_that.isSaving);cas
 
 
 class _PersonalGoalSheetState implements PersonalGoalSheetState {
-  const _PersonalGoalSheetState({this.unitSystem = UnitSystem.metric, this.goalOutsideBoundaries = false, this.isSaving = false});
+  const _PersonalGoalSheetState({this.unitSystem = UnitSystem.metric, this.goalOutsideBoundaries = false});
   
 
 @override@JsonKey() final  UnitSystem unitSystem;
 @override@JsonKey() final  bool goalOutsideBoundaries;
-@override@JsonKey() final  bool isSaving;
 
 /// Create a copy of PersonalGoalSheetState
 /// with the given fields replaced by the non-null parameter values.
@@ -225,16 +223,16 @@ _$PersonalGoalSheetStateCopyWith<_PersonalGoalSheetState> get copyWith => __$Per
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PersonalGoalSheetState&&(identical(other.unitSystem, unitSystem) || other.unitSystem == unitSystem)&&(identical(other.goalOutsideBoundaries, goalOutsideBoundaries) || other.goalOutsideBoundaries == goalOutsideBoundaries)&&(identical(other.isSaving, isSaving) || other.isSaving == isSaving));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PersonalGoalSheetState&&(identical(other.unitSystem, unitSystem) || other.unitSystem == unitSystem)&&(identical(other.goalOutsideBoundaries, goalOutsideBoundaries) || other.goalOutsideBoundaries == goalOutsideBoundaries));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,unitSystem,goalOutsideBoundaries,isSaving);
+int get hashCode => Object.hash(runtimeType,unitSystem,goalOutsideBoundaries);
 
 @override
 String toString() {
-  return 'PersonalGoalSheetState(unitSystem: $unitSystem, goalOutsideBoundaries: $goalOutsideBoundaries, isSaving: $isSaving)';
+  return 'PersonalGoalSheetState(unitSystem: $unitSystem, goalOutsideBoundaries: $goalOutsideBoundaries)';
 }
 
 
@@ -245,7 +243,7 @@ abstract mixin class _$PersonalGoalSheetStateCopyWith<$Res> implements $Personal
   factory _$PersonalGoalSheetStateCopyWith(_PersonalGoalSheetState value, $Res Function(_PersonalGoalSheetState) _then) = __$PersonalGoalSheetStateCopyWithImpl;
 @override @useResult
 $Res call({
- UnitSystem unitSystem, bool goalOutsideBoundaries, bool isSaving
+ UnitSystem unitSystem, bool goalOutsideBoundaries
 });
 
 
@@ -262,11 +260,10 @@ class __$PersonalGoalSheetStateCopyWithImpl<$Res>
 
 /// Create a copy of PersonalGoalSheetState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? unitSystem = null,Object? goalOutsideBoundaries = null,Object? isSaving = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? unitSystem = null,Object? goalOutsideBoundaries = null,}) {
   return _then(_PersonalGoalSheetState(
 unitSystem: null == unitSystem ? _self.unitSystem : unitSystem // ignore: cast_nullable_to_non_nullable
 as UnitSystem,goalOutsideBoundaries: null == goalOutsideBoundaries ? _self.goalOutsideBoundaries : goalOutsideBoundaries // ignore: cast_nullable_to_non_nullable
-as bool,isSaving: null == isSaving ? _self.isSaving : isSaving // ignore: cast_nullable_to_non_nullable
 as bool,
   ));
 }
