@@ -56,7 +56,16 @@ class _PersonalGoalSheetState extends ConsumerState<PersonalGoalSheet> {
                   suffix: data.unitSystem.unitLabel,
                   maxLength: 3,
                   validator: (value) {
-                    return;
+                    final status = ref.read(personalGoalSheetViewModelProvider.notifier)
+                      .validateGoal(value);
+                    
+                    switch(status) {
+                      case .noInput:
+                        return 'inputRequired'.tr(namedArgs: { 'requiredInput': 'goal'.tr().toLowerCase() });
+                      case .outOfBoundaries:
+                        return "invalidInput".tr();
+                      default: null;
+                    }
                   }
                 ),
           
