@@ -1,4 +1,7 @@
 abstract final class HydrationConstraints {
+  static const int minAllowedWaterMl = 500;
+  static const int maxAllowedWaterMl = 6_000;
+
   static const int minWaterSuggestionMl = 1200;
 
   static const int maxWaterSuggestionMl = 4000;

@@ -1,6 +1,7 @@
 import 'package:hidroly/core/data/repositories/settings_repository_impl.dart';
 import 'package:hidroly/core/domain/enums/unit_systems.dart';
 import 'package:hidroly/core/domain/hydration_constraints.dart';
+import 'package:hidroly/core/domain/value_objects/goal.dart';
 import 'package:hidroly/core/domain/value_objects/water.dart';
 import 'package:hidroly/core/ui/enums/input_status.dart';
 import 'package:hidroly/features/settings/ui/state/personal_goal_sheet_state.dart';
@@ -35,9 +36,9 @@ class PersonalGoalSheetViewModel extends _$PersonalGoalSheetViewModel {
     return .success;
   }
 
-  Water _getGoalValue(int value) {
+  Goal _getGoalValue(int value) {
     return state.requireValue.unitSystem == UnitSystem.metric
-      ? Water.ml(value)
-      : Water.fromOz(value);
+      ? Goal.ml(value)
+      : Goal.fromOz(value);
   }
 }

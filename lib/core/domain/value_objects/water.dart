@@ -7,7 +7,7 @@ class Water {
   const Water.zero() : ml = 0; 
   const Water._internal(this.ml);
 
-  static final int minValue = 1;
+  static final int minValue = 0;
 
   factory Water.ml(int value) {
     if(value < minValue) {

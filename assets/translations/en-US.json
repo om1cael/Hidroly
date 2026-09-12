@@ -108,6 +108,5 @@
     "healthConnectSendHistoryDescription": "Export past entries to Health Connect",
     "healthConnectExportSuccessful": "Your history has been exported to Health Connect",
     "privacyPolicy": "Privacy Policy",
-    "goal": "Goal",
-    "invalidInput": "The value you entered is not valid."
+    "goal": "Goal"
 }
