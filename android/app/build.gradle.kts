@@ -121,14 +121,22 @@ androidComponents {
             val abi = output.filters
                 .find { it.filterType == ABI }
                 ?.identifier
-
+            
+            val flavor = variant.productFlavors
+                .firstOrNull()
+                ?.second
+            
             val abiVersionCode = abiCodes[abi]
 
             if (abiVersionCode != null) {
                 val baseVersionCode = output.versionCode.get()
-                output.versionCode.set(
+                val versionCode = if (flavor == "fdroid") {
                     baseVersionCode * 10 + abiVersionCode
-                )
+                } else {
+                    3000 + (baseVersionCode * 10 + abiVersionCode)
+                }
+
+                output.versionCode.set(versionCode)
             }
         }
     }
