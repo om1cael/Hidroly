@@ -73,8 +73,13 @@ class _PersonalGoalSheetState extends ConsumerState<PersonalGoalSheet> {
                 SizedBox(
                   width: double.infinity,
                   child: FilledButton.tonal(
-                    onPressed: () {
-                      formKey.currentState!.validate();
+                    onPressed: () async {
+                      final valid = formKey.currentState!.validate();
+                      if(!valid) return;
+
+                      final goal = int.parse(textController.text);
+                      await ref.read(personalGoalSheetViewModelProvider.notifier)
+                        .save(goal);
                     }, 
                     child: const Text('Save')
                   ),
