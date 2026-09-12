@@ -2,7 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:hidroly/core/domain/entities/day.dart';
 import 'package:hidroly/core/domain/enums/unit_systems.dart';
 import 'package:hidroly/core/domain/repositories/day_repository.dart';
-import 'package:hidroly/features/hydration/domain/value_objects/water.dart';
+import 'package:hidroly/core/domain/value_objects/water.dart';
 import 'package:hidroly/features/summary/domain/usecases/get_weekly_chart_data_usecase.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:test/test.dart';

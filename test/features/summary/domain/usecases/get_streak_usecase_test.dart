@@ -1,5 +1,5 @@
 import 'package:hidroly/core/domain/entities/day.dart';
-import 'package:hidroly/features/hydration/domain/value_objects/water.dart';
+import 'package:hidroly/core/domain/value_objects/water.dart';
 import 'package:hidroly/features/summary/domain/usecases/get_streak_usecase.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:test/test.dart';

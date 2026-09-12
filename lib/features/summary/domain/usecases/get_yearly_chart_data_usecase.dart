@@ -4,7 +4,7 @@ import 'package:hidroly/core/data/repositories/day_repository_impl.dart';
 import 'package:hidroly/core/domain/entities/day.dart';
 import 'package:hidroly/core/domain/enums/unit_systems.dart';
 import 'package:hidroly/core/domain/repositories/day_repository.dart';
-import 'package:hidroly/features/hydration/domain/value_objects/water.dart';
+import 'package:hidroly/core/domain/value_objects/water.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'get_yearly_chart_data_usecase.g.dart';

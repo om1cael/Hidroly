@@ -3,7 +3,7 @@ import 'package:hidroly/core/data/db/app_database.dart';
 import 'package:hidroly/core/data/mappers/day_mapper.dart';
 import 'package:hidroly/core/domain/entities/day.dart';
 import 'package:hidroly/core/domain/repositories/day_repository.dart';
-import 'package:hidroly/features/hydration/domain/value_objects/water.dart';
+import 'package:hidroly/core/domain/value_objects/water.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'day_repository_impl.g.dart';

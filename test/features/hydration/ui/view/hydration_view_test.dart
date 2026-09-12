@@ -6,7 +6,7 @@ import 'package:hidroly/core/data/db/app_database.dart';
 import 'package:hidroly/core/data/repositories/day_repository_impl.dart';
 import 'package:hidroly/core/domain/entities/day.dart';
 import 'package:hidroly/features/hydration/data/repositories/cup_repository_impl.dart';
-import 'package:hidroly/features/hydration/domain/value_objects/water.dart';
+import 'package:hidroly/core/domain/value_objects/water.dart';
 import 'package:hidroly/features/hydration/ui/view/components/cup_creation_form.dart';
 import 'package:hidroly/features/hydration/ui/view/hydration_view.dart';
 import 'package:hidroly/features/hydration/ui/view/components/cup_button.dart';
