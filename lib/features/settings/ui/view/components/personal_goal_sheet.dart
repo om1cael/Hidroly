@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hidroly/core/domain/hydration_constraints.dart';
+import 'package:hidroly/core/domain/value_objects/goal.dart';
 import 'package:hidroly/core/ui/components/number_input_form_field.dart';
 import 'package:hidroly/core/ui/extensions/snack_bar_extension.dart';
 import 'package:hidroly/core/ui/extensions/unit_system_ui_extension.dart';
@@ -87,7 +88,7 @@ class _PersonalGoalSheetState extends ConsumerState<PersonalGoalSheet> {
                       case .noInput:
                         return 'inputRequired'.tr(namedArgs: { 'requiredInput': 'goal'.tr().toLowerCase() });
                       case .outOfBoundaries:
-                        return "inputRequirement".tr(namedArgs: { 'minValue': HydrationConstraints.minAllowedWaterMl.toString(), 'maxValue': HydrationConstraints.maxAllowedWaterMl.toString() });
+                        return "inputRequirement".tr(namedArgs: { 'minValue': Goal.minValueFor(state.requireValue.unitSystem).toString(), 'maxValue': Goal.maxValueFor(state.requireValue.unitSystem).toString() });
                       default: return null;
                     }
                   }

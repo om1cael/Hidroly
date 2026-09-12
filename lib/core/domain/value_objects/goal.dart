@@ -25,4 +25,12 @@ class Goal {
     unitSystem == UnitSystem.metric
       ? ml
       : (ml / 29.574).round();
+  
+  static int minValueFor(UnitSystem unit) => unit == UnitSystem.metric
+    ? HydrationConstraints.minAllowedWaterMl
+    : HydrationConstraints.minAllowedWaterOz;
+  
+  static int maxValueFor(UnitSystem unit) => unit == UnitSystem.metric
+    ? HydrationConstraints.maxAllowedWaterMl
+    : HydrationConstraints.maxAllowedWaterOz;
 }
