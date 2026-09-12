@@ -15,8 +15,8 @@ class SettingsYouSection extends ConsumerWidget {
       child: Column(
         children: [
           ListTile(
-            title: Text('Personal goal'),
-            subtitle: Text('Set your preferred daily goal'),
+            title: Text('personalGoal'.tr()),
+            subtitle: Text('personalGoalSettingsExplain'.tr()),
             leading: CircleAvatar(child: Icon(Icons.person),),
             onTap: () async {
               return showModalBottomSheet(

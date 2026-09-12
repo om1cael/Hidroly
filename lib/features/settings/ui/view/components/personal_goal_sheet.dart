@@ -33,7 +33,7 @@ class _PersonalGoalSheetState extends ConsumerState<PersonalGoalSheet> {
           builder: (_) {
             return AlertDialog(
               title: Text('important'.tr()),
-              content: Text('This target is above our recommended limit. Make sure to check with a doctor to find what works best for you.'),
+              content: Text('goalTargetAboveLimit'.tr()),
               actions: [
                 TextButton(
                   onPressed: Navigator.of(context).pop, 
@@ -64,11 +64,11 @@ class _PersonalGoalSheetState extends ConsumerState<PersonalGoalSheet> {
                 Column(
                   children: [
                     Text(
-                      'Personal Goal',
+                      'personalGoal'.tr(),
                       style: Theme.of(context).textTheme.titleLarge,
                     ),
                     Text(
-                      'This goal will be used for every day from now on.',
+                      'personalGoalExplain'.tr(),
                       style: Theme.of(context).textTheme.bodySmall,
                     ),
                   ],
@@ -76,7 +76,7 @@ class _PersonalGoalSheetState extends ConsumerState<PersonalGoalSheet> {
           
                 NumberInputFormField(
                   controller: textController, 
-                  label: 'Goal', 
+                  label: 'goal'.tr(), 
                   suffix: data.unitSystem.unitLabel,
                   maxLength: 4,
                   validator: (value) {
@@ -107,9 +107,9 @@ class _PersonalGoalSheetState extends ConsumerState<PersonalGoalSheet> {
                         .save(goal);
                       
                       if(!context.mounted) return;
-                      context.showSnackBar("The goal has been saved");
+                      context.showSnackBar("goalSaved".tr());
                     }, 
-                    child: const Text('Save')
+                    child: Text('save'.tr())
                   ),
                 ),
               ],

@@ -108,5 +108,11 @@
     "healthConnectSendHistoryDescription": "Export past entries to Health Connect",
     "healthConnectExportSuccessful": "Your history has been exported to Health Connect",
     "privacyPolicy": "Privacy Policy",
-    "goal": "Goal"
+    "personalGoal": "Personal Goal",
+    "personalGoalSettingsExplain": "Set your preferred daily goal",
+    "personalGoalExplain": "This goal will be used for every day from now on.",
+    "goal": "Goal",
+    "goalTargetAboveLimit": "This target is above our recommended limit. Make sure to check with a doctor to find what works best for you.",
+    "goalSaved": "The goal has been saved",
+    "save": "Save"
 }
