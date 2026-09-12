@@ -133,7 +133,7 @@ androidComponents {
                 val versionCode = if (flavor == "fdroid") {
                     baseVersionCode * 10 + abiVersionCode
                 } else {
-                    3000 + (baseVersionCode * 10 + abiVersionCode)
+                    30000 + (baseVersionCode * 10 + abiVersionCode)
                 }
 
                 output.versionCode.set(versionCode)
