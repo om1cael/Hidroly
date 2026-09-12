@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hidroly/features/settings/ui/view/components/personal_goal_sheet.dart';
 
 class SettingsYouSection extends ConsumerWidget {
   const SettingsYouSection({
@@ -17,7 +18,15 @@ class SettingsYouSection extends ConsumerWidget {
             title: Text('Personal goal'),
             subtitle: Text('Set your preferred daily goal'),
             leading: CircleAvatar(child: Icon(Icons.person),),
-            onTap: () => context.push('/settings/health-connect'),
+            onTap: () async {
+              return showModalBottomSheet(
+                isScrollControlled: true,
+                context: context, 
+                builder: (_) {
+                  return PersonalGoalSheet();
+                }
+              );
+            },
           ),
           ListTile(
             title: Text('notifications'.tr()),
