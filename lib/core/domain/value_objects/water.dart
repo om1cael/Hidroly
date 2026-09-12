@@ -7,7 +7,7 @@ class Water {
   const Water.zero() : ml = 0; 
   const Water._internal(this.ml);
 
-  static final int minValue = 0;
+  static final int minValue = 1;
 
   factory Water.ml(int value) {
     if(value < minValue) {
@@ -15,6 +15,11 @@ class Water {
     }
 
     return Water._internal(value);
+  }
+
+  factory Water.fromOz(int value) {
+    int ml = (value * 29.574).round();
+    return Water.ml(ml);
   }
 
   int valueIn(UnitSystem unitSystem) => 
