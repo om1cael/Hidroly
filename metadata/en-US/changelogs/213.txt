@@ -1,0 +1,3 @@
+* Automatically sync water intake with Android's Health Connect.
+* Set and adjust your personal daily water intake target.
+* Added support for more languages.
