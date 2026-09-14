@@ -6,6 +6,7 @@ part 'setup_state.freezed.dart';
 abstract class SetupState with _$SetupState {
   const factory SetupState.profile() = _Profile;
   const factory SetupState.notifications() = _Notifications;
+  const factory SetupState.healthConnect() = _HealthConnect;
   const factory SetupState.processing() = _Processing;
   const factory SetupState.done({@Default(false) bool dailyGoalClamped}) = _Done;
   const factory SetupState.error(String error) = _Error;

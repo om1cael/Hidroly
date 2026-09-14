@@ -6,7 +6,7 @@ import 'package:hidroly/core/domain/entities/day.dart';
 import 'package:hidroly/features/hydration/data/repositories/history_item_repository_impl.dart';
 import 'package:hidroly/features/hydration/data/repositories/hydration_repository_impl.dart';
 import 'package:hidroly/features/hydration/domain/entities/history_item.dart';
-import 'package:hidroly/features/hydration/domain/value_objects/water.dart';
+import 'package:hidroly/core/domain/value_objects/water.dart';
 import 'package:riverpod/riverpod.dart';
 
 void main() {

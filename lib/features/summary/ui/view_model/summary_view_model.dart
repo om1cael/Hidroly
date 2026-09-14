@@ -1,5 +1,5 @@
 import 'package:hidroly/core/providers/unit_system_provider.dart';
-import 'package:hidroly/features/hydration/domain/value_objects/water.dart';
+import 'package:hidroly/core/domain/value_objects/water.dart';
 import 'package:hidroly/features/summary/domain/usecases/get_daily_average_usecase.dart';
 import 'package:hidroly/features/summary/domain/usecases/get_monthly_chart_data_usecase.dart';
 import 'package:hidroly/features/summary/domain/usecases/get_streak_usecase.dart';

@@ -1,9 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hidroly/core/navigation/app_routes.dart';
 import 'package:hidroly/core/providers/theme_provider.dart';
 import 'package:hidroly/core/ui/themes/themes.dart';
+import 'package:hidroly/infra/health_connect/health_connect_service.dart';
 import 'package:hidroly/infra/notifications/local_notification_service.dart';
 
 import 'package:workmanager/workmanager.dart';
@@ -27,11 +29,38 @@ Future<void> main() async {
   );
 }
 
-class MainApp extends ConsumerWidget {
+class MainApp extends ConsumerStatefulWidget {
   const MainApp({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<MainApp> createState() => _MainAppState();
+}
+
+class _MainAppState extends ConsumerState<MainApp> {
+  final _channel = MethodChannel('com.om1cael.hidroly/privacy-policy');
+
+  @override
+  void initState() {
+    super.initState();
+
+    _channel.setMethodCallHandler((call) async {
+      if (call.method == 'onPrivacyPolicyRequested' && mounted) {
+        ref.read(routerProvider).push('/privacy-policy');
+      }
+    });
+
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      final requested = await _channel.invokeMethod("handlePrivacyPolicyRequested") ?? false;
+      if(requested && mounted) {
+        ref.read(routerProvider).go('/privacy-policy');
+      }
+
+      await ref.read(healthConnectServiceProvider).initialize();
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final themeState = ref.watch(themeProviderProvider);
     
     return themeState.when(

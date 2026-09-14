@@ -15,6 +15,10 @@ class SetupViewModel extends _$SetupViewModel {
     state = SetupState.notifications();
   }
 
+  void goToHealthConnectStage() {
+    state = SetupState.healthConnect();
+  }
+
   Future<void> completeSetup(String ageText, String weightText) async {
     try {      
       final person = ref

@@ -108,6 +108,10 @@ void main() {
 
       await tester.pump();
 
+      await tester.tap(find.byType(FloatingActionButton));
+
+      await tester.pump();
+
       expect(find.byType(AlertDialog), findsOne);
       expect(find.text('dailyGoalDisclaimerTitle'), findsOne);
     });

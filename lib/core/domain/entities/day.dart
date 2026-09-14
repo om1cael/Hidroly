@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:hidroly/features/hydration/domain/value_objects/water.dart';
+import 'package:hidroly/core/domain/value_objects/water.dart';
 
 part 'day.freezed.dart';
 

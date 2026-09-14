@@ -3,7 +3,7 @@ import 'package:hidroly/core/data/db/app_database.dart';
 import 'package:hidroly/core/data/mappers/day_mapper.dart';
 import 'package:hidroly/core/domain/entities/day.dart';
 import 'package:hidroly/core/domain/repositories/day_repository.dart';
-import 'package:hidroly/features/hydration/domain/value_objects/water.dart';
+import 'package:hidroly/core/domain/value_objects/water.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'day_repository_impl.g.dart';
@@ -27,6 +27,17 @@ class DayRepositoryImpl implements DayRepository {
         createdAt: Value(normalize(day.createdAt))
       ),
     );
+  }
+
+  @override
+  Future<bool> update(Day day) async {
+    return await _database.update(_database.dayTable)
+      .replace(DayTableData(
+        id: day.id, 
+        dailyGoal: day.dailyGoal.ml, 
+        currentAmount: day.currentAmount.ml, 
+        createdAt: day.createdAt
+      ));
   }
   
   @override

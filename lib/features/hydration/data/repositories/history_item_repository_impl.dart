@@ -25,4 +25,12 @@ class HistoryItemRepositoryImpl implements HistoryItemRepository {
     
     return [for(final item in data) item.toEntity()];
   }
+
+  @override
+  Future<List<HistoryItem>> readFromAllDays() async {
+    final data = await (_database.select(_database.historyItemsTable)
+      .get());
+    
+    return [for(final item in data) item.toEntity()];
+  }
 }
