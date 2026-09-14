@@ -33,6 +33,7 @@
 * 📈 **Summary**: Weekly, monthly and yearly chart, total intake, average intake and streak indicators.
 * 🌍 **Unit System Support**: Switch between the Metric and Imperial systems.
 * ⚡ **Offline**: Fast perfomance, with the bonus of no data being sent over the Internet.
+* 🔗 **Health Connect Integration**: Seamlessly sync water intake data to Android's Health Connect, sharing records securely and offline with other health apps.
 
 ## Getting Started
 You'll need at least 8GB (16 recommended) of RAM to build and run this project.
