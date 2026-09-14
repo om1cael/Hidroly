@@ -11,6 +11,11 @@
 </div>
 
 ## Table of Contents
+> [!NOTE]
+> This app is currently in maintenance mode. Critical bugs will still be fixed, but new features are not planned.
+>
+> A lot of open-source, privacy-oriented hydration apps have been created in recent times. You may want to take a look at [HydroTracker](https://github.com/Econ01/HydroTracker) or [Neer](https://github.com/criticalAY/Neer).
+
 <ul>
   <li><a href="#screenshots">Screenshots</a></li>
   <li><a href="#features">Features</a></li>
