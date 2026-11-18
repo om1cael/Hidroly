@@ -64,33 +64,36 @@ void callbackDispatcher() {
 Future<void> onActionReceivedMethod(ReceivedAction receivedAction) async {
   final providerContainer = ProviderContainer();
 
-  final cupMap = {
-    'water_standard': 200,
-    'water_medium': 300,
-    'water_bottle': 500,
-  };
-  int? waterAmount = cupMap[receivedAction.buttonKeyPressed];
+  try {
+    final cupMap = {
+      'water_standard': 200,
+      'water_medium': 300,
+      'water_bottle': 500,
+    };
+    int? waterAmount = cupMap[receivedAction.buttonKeyPressed];
 
-  if (receivedAction.buttonKeyPressed == 'water_custom') {
-    final unitSystem = await providerContainer
-        .read(settingsRepositoryProvider)
-        .readUnitSystem();
-    waterAmount = waterAmountFromNotificationInput(
-      receivedAction.buttonKeyInput,
-      unitSystem,
-    );
+    if (receivedAction.buttonKeyPressed == 'water_custom') {
+      final unitSystem = await providerContainer
+          .read(settingsRepositoryProvider)
+          .readUnitSystem();
+      waterAmount = waterAmountFromNotificationInput(
+        receivedAction.buttonKeyInput,
+        unitSystem,
+      );
+    }
+
+    if (waterAmount != null) {
+      final latestDay = await providerContainer
+          .read(dayRepositoryProvider)
+          .readOrCreateByDate(DateTime.now());
+
+      await providerContainer
+          .read(hydrationRepositoryProvider)
+          .addWater(latestDay.id, waterAmount);
+    }
+  } finally {
+    providerContainer.dispose();
   }
-
-  if(waterAmount != null && waterAmount > 0) {
-    final latestDay = await providerContainer
-      .read(dayRepositoryProvider)
-      .readOrCreateByDate(DateTime.now());
-
-    await providerContainer.read(hydrationRepositoryProvider)
-      .addWater(latestDay.id, waterAmount);
-  }
-
-  providerContainer.dispose();
 }
 
 class LocalNotificationService implements NotificationService {
