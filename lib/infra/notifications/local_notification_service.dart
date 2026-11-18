@@ -9,6 +9,17 @@ import 'package:hidroly/features/hydration/data/repositories/hydration_repositor
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:workmanager/workmanager.dart';
 
+/// Parses the amount entered in a notification and converts it to milliliters.
+/// Imperial input is interpreted as fluid ounces; metric input as milliliters.
+int? waterAmountFromNotificationInput(String input, UnitSystem unitSystem) {
+  final amount = double.tryParse(input.trim().replaceAll(',', '.'));
+  if (amount == null || !amount.isFinite || amount <= 0) return null;
+
+  return unitSystem == UnitSystem.metric
+      ? amount.round()
+      : (amount * 29.574).round();
+}
+
 @pragma('vm:entry-point')
 void callbackDispatcher() {
   Workmanager().executeTask((task, inputData) async {
@@ -53,23 +64,36 @@ void callbackDispatcher() {
 Future<void> onActionReceivedMethod(ReceivedAction receivedAction) async {
   final providerContainer = ProviderContainer();
 
-  final cupMap = {
-    'water_standard': 200,
-    'water_medium': 300,
-    'water_bottle': 500,
-  };
-  final cup = cupMap[receivedAction.buttonKeyPressed];
+  try {
+    final cupMap = {
+      'water_standard': 200,
+      'water_medium': 300,
+      'water_bottle': 500,
+    };
+    int? waterAmount = cupMap[receivedAction.buttonKeyPressed];
 
-  if(cup != null) {
-    final latestDay = await providerContainer
-      .read(dayRepositoryProvider)
-      .readOrCreateByDate(DateTime.now());
+    if (receivedAction.buttonKeyPressed == 'water_custom') {
+      final unitSystem = await providerContainer
+          .read(settingsRepositoryProvider)
+          .readUnitSystem();
+      waterAmount = waterAmountFromNotificationInput(
+        receivedAction.buttonKeyInput,
+        unitSystem,
+      );
+    }
 
-    await providerContainer.read(hydrationRepositoryProvider)
-      .addWater(latestDay.id, cup);
+    if (waterAmount != null) {
+      final latestDay = await providerContainer
+          .read(dayRepositoryProvider)
+          .readOrCreateByDate(DateTime.now());
+
+      await providerContainer
+          .read(hydrationRepositoryProvider)
+          .addWater(latestDay.id, waterAmount);
+    }
+  } finally {
+    providerContainer.dispose();
   }
-
-  providerContainer.dispose();
 }
 
 class LocalNotificationService implements NotificationService {
@@ -120,6 +144,12 @@ class LocalNotificationService implements NotificationService {
           key: 'water_bottle', 
           label: unitSystem == .metric ? '500 ml' : '17 oz',
           actionType: .SilentBackgroundAction,
+        ),
+        NotificationActionButton(
+          key: 'water_custom',
+          label: 'Custom',
+          requireInputText: true,
+          actionType: .SilentAction,
         ),
       ],
     );
