@@ -1,7 +1,7 @@
 import 'package:hidroly/core/domain/entities/person.dart';
 import 'package:hidroly/core/domain/value_objects/age.dart';
 import 'package:hidroly/core/domain/value_objects/weight.dart';
-import 'package:test/test.dart';
+import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('Person Entity Tests', () {

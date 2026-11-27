@@ -2,7 +2,7 @@ import 'package:hidroly/core/domain/entities/day.dart';
 import 'package:hidroly/core/domain/value_objects/water.dart';
 import 'package:hidroly/features/summary/domain/usecases/get_streak_usecase.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:test/test.dart';
+import 'package:flutter_test/flutter_test.dart';
 
 import '../../../../../testing/repositories/mock_day_repository.dart';
 

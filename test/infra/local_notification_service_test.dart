@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hidroly/core/domain/enums/unit_systems.dart';
+import 'package:flutter_test/flutter_test.dart';
 import 'package:hidroly/infra/notifications/local_notification_service.dart';
-import 'package:test/test.dart';
 
 void main() {
   late LocalNotificationService service;
