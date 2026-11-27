@@ -2,12 +2,14 @@ import 'package:hidroly/core/data/repositories/day_repository_impl.dart';
 import 'package:hidroly/core/domain/entities/day.dart';
 import 'package:hidroly/core/domain/enums/unit_systems.dart';
 import 'package:hidroly/core/domain/exceptions/invalid_input_exception.dart';
+import 'package:hidroly/core/domain/value_objects/water.dart';
 import 'package:hidroly/core/providers/unit_system_provider.dart';
 import 'package:hidroly/core/ui/enums/input_status.dart';
 import 'package:hidroly/features/hydration/data/repositories/cup_repository_impl.dart';
 import 'package:hidroly/features/hydration/data/repositories/history_item_repository_impl.dart';
 import 'package:hidroly/features/hydration/domain/usecases/add_water_usecase.dart';
 import 'package:hidroly/features/hydration/domain/usecases/remove_water_usecase.dart';
+import 'package:hidroly/features/hydration/domain/usecases/update_history_item_usecase.dart';
 import 'package:hidroly/features/hydration/domain/value_objects/cup_value.dart';
 import 'package:hidroly/features/hydration/ui/state/hydration_state.dart';
 import 'package:result_dart/result_dart.dart';
@@ -31,7 +33,12 @@ class HydrationViewModel extends _$HydrationViewModel {
     final history = await historyRepository.readAll(day.id);
     final cups = await cupRepository.readAll();
 
-    return HydrationState(day: day, history: history, unitSystem: unitSystem, cups: cups);
+    return HydrationState(
+      day: day,
+      history: history,
+      unitSystem: unitSystem,
+      cups: cups,
+    );
   }
 
   Future<void> createCup(String value) async {
@@ -46,8 +53,8 @@ class HydrationViewModel extends _$HydrationViewModel {
     final cupRepository = ref.read(cupRepositoryProvider);
 
     final result = await cupRepository.delete(id);
-    
-    if(result is Success) {
+
+    if (result is Success) {
       ref.invalidateSelf();
     }
   }
@@ -65,22 +72,47 @@ class HydrationViewModel extends _$HydrationViewModel {
 
   Future<void> addWater(int amount) async {
     await ref
-      .read(addWaterUsecaseProvider)
-      .execute(state.requireValue.day, amount);
-    
+        .read(addWaterUsecaseProvider)
+        .execute(state.requireValue.day, amount);
+
     ref.invalidateSelf();
   }
 
   Future<void> removeWater(int historyItemId, int amount) async {
     await ref
-      .read(removeWaterUsecaseProvider)
-      .execute(state.requireValue.day.id, historyItemId, amount);
-    
+        .read(removeWaterUsecaseProvider)
+        .execute(state.requireValue.day.id, historyItemId, amount);
+
     ref.invalidateSelf();
   }
 
+  Future<void> updateHistoryItem(
+    int historyItemId,
+    int amountInUnit,
+    DateTime createdAt,
+  ) async {
+    final hydrationState = state.requireValue;
+    final historyItem = hydrationState.history.firstWhere(
+      (item) => item.id == historyItemId,
+    );
+    final amountMl =
+        amountInUnit == historyItem.amount.valueIn(hydrationState.unitSystem)
+        ? historyItem.amount.ml
+        : hydrationState.unitSystem == UnitSystem.metric
+        ? Water.ml(amountInUnit).ml
+        : Water.fromOz(amountInUnit).ml;
+
+    try {
+      await ref
+          .read(updateHistoryItemUsecaseProvider)
+          .execute(hydrationState.day.id, historyItemId, amountMl, createdAt);
+    } finally {
+      ref.invalidateSelf();
+    }
+  }
+
   InputStatus validateCupValue(String? cupValueText) {
-    if(cupValueText == null || cupValueText.isEmpty) {
+    if (cupValueText == null || cupValueText.isEmpty) {
       return .noInput;
     }
 
@@ -96,8 +128,8 @@ class HydrationViewModel extends _$HydrationViewModel {
 
   CupValue _getCupValue(int cupValue) {
     return state.requireValue.unitSystem == UnitSystem.metric
-      ? CupValue.ml(cupValue)
-      : CupValue.fromOz(cupValue);
+        ? CupValue.ml(cupValue)
+        : CupValue.fromOz(cupValue);
   }
 }
 
