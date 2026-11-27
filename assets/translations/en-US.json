@@ -120,5 +120,6 @@
     "goal": "Goal",
     "goalTargetAboveLimit": "This target is above our recommended limit. Make sure to check with a doctor to find what works best for you.",
     "goalSaved": "The goal has been saved",
-    "save": "Save"
+    "save": "Save",
+    "history": "History"
 }

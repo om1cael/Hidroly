@@ -32,7 +32,7 @@ class _HistoryModalState extends ConsumerState<HistoryModal> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
-              'History',
+              'history'.tr(),
               style: Theme.of(context).textTheme.titleLarge,
             ),
             const SizedBox(height: 12),
