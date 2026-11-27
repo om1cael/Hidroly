@@ -5,7 +5,7 @@ import 'package:hidroly/core/domain/repositories/day_repository.dart';
 import 'package:hidroly/core/domain/value_objects/water.dart';
 import 'package:hidroly/features/summary/domain/usecases/get_weekly_chart_data_usecase.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:test/test.dart';
+import 'package:flutter_test/flutter_test.dart';
 
 import '../../../../../testing/repositories/mock_day_repository.dart';
 

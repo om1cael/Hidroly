@@ -1,6 +1,6 @@
 import 'package:hidroly/core/domain/exceptions/invalid_input_exception.dart';
 import 'package:hidroly/features/hydration/domain/value_objects/cup_value.dart';
-import 'package:test/test.dart';
+import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group("Cup Value tests", () {
