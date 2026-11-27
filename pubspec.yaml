@@ -25,8 +25,8 @@ dependencies:
   path: ^1.9.1
   path_provider: ^2.1.5
   result_dart: ^2.2.0
-  riverpod: 3.5.0
-  riverpod_annotation: 3.0.3
+  riverpod: 3.2.1
+  riverpod_annotation: 4.0.2
   shared_preferences: ^2.5.4
   shared_preferences_platform_interface: ^2.4.2
   url_launcher: ^6.3.2
@@ -36,7 +36,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^6.0.0
-  riverpod_generator: 3.0.3
+  riverpod_generator: 4.0.3
   build_runner: ^2.11.1
   drift_dev: ^2.31.0
 
