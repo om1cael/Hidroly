@@ -15,52 +15,85 @@ class HydrationRepositoryImpl implements HydrationRepository {
   final AppDatabase _database;
 
   const HydrationRepositoryImpl(this._database);
-  
+
   @override
   Future<int> addWater(int dayId, int waterAmount) async {
     return await _database.transaction(() async {
-      final day = await (_database.select(_database.dayTable)
-        ..where((day) => day.id.equals(dayId)))
-        .getSingle();
-      
+      final day = await (_database.select(
+        _database.dayTable,
+      )..where((day) => day.id.equals(dayId))).getSingle();
+
       final newCurrentAmount = day.currentAmount + waterAmount;
 
-      final historyItemId = await _database.into(_database.historyItemsTable).insert(
-        HistoryItemsTableCompanion(
-          day: Value(day.id),
-          amount: Value(waterAmount),
-        )
-      );
+      final historyItemId = await _database
+          .into(_database.historyItemsTable)
+          .insert(
+            HistoryItemsTableCompanion(
+              day: Value(day.id),
+              amount: Value(waterAmount),
+            ),
+          );
 
       await (_database.update(_database.dayTable)
-        ..where((day) => day.id.equals(dayId)))
-        .write(DayTableCompanion(
-          currentAmount: Value(newCurrentAmount),
-        ));
-      
+            ..where((day) => day.id.equals(dayId)))
+          .write(DayTableCompanion(currentAmount: Value(newCurrentAmount)));
+
       return historyItemId;
     });
   }
-  
+
   @override
   Future<void> removeWater(int dayId, int historyItemId, int amount) async {
     await _database.transaction(() async {
-      final day = await (_database.select(_database.dayTable)
-        ..where((day) => day.id.equals(dayId)))
-        .getSingle();
+      final day = await (_database.select(
+        _database.dayTable,
+      )..where((day) => day.id.equals(dayId))).getSingle();
 
       final newCurrentAmount = day.currentAmount - amount;
-      if(newCurrentAmount < 0) return;
+      if (newCurrentAmount < 0) return;
 
       await (_database.update(_database.dayTable)
-        ..where((day) => day.id.equals(dayId)))
-        .write(DayTableCompanion(
-          currentAmount: Value(newCurrentAmount)
-      ));
+            ..where((day) => day.id.equals(dayId)))
+          .write(DayTableCompanion(currentAmount: Value(newCurrentAmount)));
 
-      await (_database.delete(_database.historyItemsTable)
-        ..where((item) => item.id.equals(historyItemId)))
-        .go();
+      await (_database.delete(
+        _database.historyItemsTable,
+      )..where((item) => item.id.equals(historyItemId))).go();
+    });
+  }
+
+  @override
+  Future<void> updateHistoryItem(
+    int dayId,
+    int historyItemId,
+    int amountMl,
+    DateTime createdAt,
+  ) async {
+    await _database.transaction(() async {
+      final day = await (_database.select(
+        _database.dayTable,
+      )..where((day) => day.id.equals(dayId))).getSingle();
+      final historyItem =
+          await (_database.select(_database.historyItemsTable)..where(
+                (item) =>
+                    item.id.equals(historyItemId) & item.day.equals(dayId),
+              ))
+              .getSingle();
+      final updatedDayAmount =
+          day.currentAmount - historyItem.amount + amountMl;
+
+      await (_database.update(_database.dayTable)
+            ..where((day) => day.id.equals(dayId)))
+          .write(DayTableCompanion(currentAmount: Value(updatedDayAmount)));
+
+      await (_database.update(
+        _database.historyItemsTable,
+      )..where((item) => item.id.equals(historyItemId))).write(
+        HistoryItemsTableCompanion(
+          amount: Value(amountMl),
+          createdAt: Value(createdAt),
+        ),
+      );
     });
   }
 }
