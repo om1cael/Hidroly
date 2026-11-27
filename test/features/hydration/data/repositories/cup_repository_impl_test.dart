@@ -3,7 +3,7 @@ import 'package:hidroly/core/data/db/app_database.dart';
 import 'package:hidroly/features/hydration/data/repositories/cup_repository_impl.dart';
 import 'package:hidroly/features/hydration/domain/entities/cup.dart';
 import 'package:riverpod/riverpod.dart';
-import 'package:test/test.dart';
+import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   late ProviderContainer container;
