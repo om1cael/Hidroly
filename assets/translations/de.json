@@ -100,7 +100,7 @@
     "notificationPermissionRequest": "Damit du ausreichend Flüssigkeit zu dir nimmst, benötigen wir deine Erlaubnis, Benachrichtigungen zu senden. Wir benachrichtigen dich nur zu den von dir gewählten Zeiten.",
     "hydrationHint": "Ausreichende Flüssigkeitszufuhr während deiner aktiven Stunden verbessert die Konzentration und steigert dein Energieniveau.",
     "notificationTitle": "Trinke ausreichend",
-    "notificationBody": "Behalte deine Trinkgewohnheiten bei. Trage dein neuestes Getränk ein!"
+    "notificationBody": "Behalte deine Trinkgewohnheiten bei. Trage dein neuestes Getränk ein!",
     "important": "Wichtig",
     "enable": "Aktivieren",
     "healthConnect": "Health Connect",
@@ -121,5 +121,5 @@
     "goal": "Ziel",
     "goalTargetAboveLimit": "Dieses Ziel liegt über unserem empfohlenen Grenzwert. Lass dich von einem Arzt beraten, um herauszufinden, was am besten zu dir passt.",
     "goalSaved": "Das Ziel wurde gespeichert",
-    "save": "Speichern"
+    "history": "History"
 }
